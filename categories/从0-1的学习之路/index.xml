@@ -1,0 +1,528 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>从0-1的学习之路 on Expl0rer.Ct</title>
+        <link>http://localhost:1313/Expl0rer.Ct-s-Blog/categories/%E4%BB%8E0-1%E7%9A%84%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF/</link>
+        <description>Recent content in 从0-1的学习之路 on Expl0rer.Ct</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>Expl0rer.Ct</copyright>
+        <lastBuildDate>Thu, 31 Jul 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/Expl0rer.Ct-s-Blog/categories/%E4%BB%8E0-1%E7%9A%84%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>第一阶段（理论基础）</title>
+        <link>http://localhost:1313/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/</link>
+        <pubDate>Thu, 31 Jul 2025 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/</guid>
+        <description>&lt;img src="http://localhost:1313/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/luca.jpg" alt="Featured image of post 第一阶段（理论基础）" /&gt;&lt;p&gt;&lt;img src=&#34;http://localhost:1313/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/1.jpg&#34;
+	width=&#34;1151&#34;
+	height=&#34;3526&#34;
+	srcset=&#34;http://localhost:1313/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/1_hu_1e628be0bb5dc6b9.jpg 480w, http://localhost:1313/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/1_hu_95eb275c9ff6786d.jpg 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;学习思维导图&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;32&#34;
+		data-flex-basis=&#34;78px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;[TOC]&lt;/p&gt;
+&lt;h2 id=&#34;网络空间安全导论&#34;&gt;网络空间安全导论
+&lt;/h2&gt;&lt;h3 id=&#34;网络安全行业简介&#34;&gt;网络安全行业简介
+&lt;/h3&gt;&lt;p&gt;⽹络安全（Cyber Security）是指⽹络系统的硬件、软件及其系统中的数据受到保护，不因偶然&lt;/p&gt;
+&lt;p&gt;的或者恶意的原因⽽遭受到破坏、更改、泄露，系统连续可靠正常地运⾏，⽹络服务不中断。&lt;/p&gt;
+&lt;h4 id=&#34;起源与发展&#34;&gt;起源与发展
+&lt;/h4&gt;&lt;p&gt;互联网发展迅速。互联⽹（Internet）是⼀种全球性的计算机⽹络。 通过电⼦，⽆线和光纤⽹络等等⼀系列⼴泛的技术连接着全球各地的设备和⼈，它基于⼀组通⽤的协议相互连接，形成逻辑上的单⼀巨⼤国际⽹络。&lt;/p&gt;
+&lt;p&gt;互联⽹始于1969年的美国阿帕⽹（ARPANET），最初是为了军事研究⽬的⽽建⽴的。随后，互联⽹逐渐发展成为⼀个覆盖全球的、由各种⽹络相互连接⽽成的庞⼤⽹络。&lt;img src=&#34;http://localhost:1313/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/2.png&#34;
+	width=&#34;947&#34;
+	height=&#34;437&#34;
+	srcset=&#34;http://localhost:1313/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/2_hu_71d7ca9179106730.png 480w, http://localhost:1313/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/2_hu_84da7ef03db47129.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;216&#34;
+		data-flex-basis=&#34;520px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h4 id=&#34;&#34;&gt;
+&lt;/h4&gt;&lt;h3 id=&#34;网络安全意识与法律法规&#34;&gt;网络安全意识与法律法规
+&lt;/h3&gt;&lt;h4 id=&#34;法律法规&#34;&gt;法律法规
+&lt;/h4&gt;&lt;p&gt;必须了解下，不然容易迷失自我~~
+&lt;a class=&#34;link&#34; href=&#34;%e4%b8%ad%e5%8d%8e%e4%ba%ba%e6%b0%91%e5%85%b1%e5%92%8c%e5%9b%bd%e7%bd%91%e7%bb%9c%e5%ae%89%e5%85%a8%e6%b3%95.pdf&#34; &gt;中华人民共和国网络安全法.pdf&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;网络安全就业&#34;&gt;网络安全就业
+&lt;/h3&gt;&lt;h4 id=&#34;企业需求哪些岗位需求大薪资高&#34;&gt;企业需求（哪些岗位需求大、薪资高）
+&lt;/h4&gt;&lt;p&gt;&lt;img src=&#34;http://localhost:1313/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/3.png&#34;
+	width=&#34;682&#34;
+	height=&#34;310&#34;
+	srcset=&#34;http://localhost:1313/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/3_hu_ab6322c5ec49140f.png 480w, http://localhost:1313/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/3_hu_4ee7dcb2ae0448a4.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;220&#34;
+		data-flex-basis=&#34;528px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h4 id=&#34;岗位方向&#34;&gt;岗位方向
+&lt;/h4&gt;&lt;p&gt;&lt;img src=&#34;http://localhost:1313/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/4.png&#34;
+	width=&#34;627&#34;
+	height=&#34;650&#34;
+	srcset=&#34;http://localhost:1313/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/4_hu_1759bc6776181451.png 480w, http://localhost:1313/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/4_hu_401556be11a76614.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;96&#34;
+		data-flex-basis=&#34;231px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;网络安全管理概述&#34;&gt;网络安全管理概述
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;安全运营、运维、模型&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;等级保护&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;操作系统基础&#34;&gt;操作系统基础
+&lt;/h2&gt;&lt;p&gt;问：为什么没有鸿蒙系统呢？？因为鸿蒙系统的基层代码开发，使ta本质上属于Linux，即ta的系统内核时Linux的，所以按分类ta属于Linux系统。以下是我认为作为网安人有必要去了解的一些基本操作系统知识，要详细的话还得去上完整课才行，。&lt;/p&gt;
+&lt;h3 id=&#34;windows系统&#34;&gt;Windows系统
+&lt;/h3&gt;&lt;p&gt;windows的一些常规命令自己知道就好，在这里不一一介绍，在下文中提到的命令，如果没见过就自己去搜一搜哈。&lt;/p&gt;
+&lt;h4 id=&#34;windows用户与组管理&#34;&gt;Windows用户与组管理
+&lt;/h4&gt;&lt;p&gt;Windows是多用户操作系统，即同一时间内允许多个用户同时使用计算机。用户组是一系列用户的集合，组内的用户自动具备该组所设置的权限。常用用户：&lt;/p&gt;
+&lt;p&gt;system：本地机器上拥有最高权限的用户（为系统核心组件访问文件资源提供权限）&lt;/p&gt;
+&lt;p&gt;Administrator：默认系统管理员用户&lt;/p&gt;
+&lt;p&gt;常用组:&lt;/p&gt;
+&lt;p&gt;SYSTEM：最高权限的组&lt;/p&gt;
+&lt;p&gt;Administrators：管理员组（完全控制权）&lt;/p&gt;
+&lt;p&gt;Users：普通用户组&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/5.png&#34;
+	width=&#34;864&#34;
+	height=&#34;489&#34;
+	srcset=&#34;http://localhost:1313/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/5_hu_716a45c5dcc8cf06.png 480w, http://localhost:1313/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/5_hu_69e73c0d3e6cf786.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;176&#34;
+		data-flex-basis=&#34;424px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/6.png&#34;
+	width=&#34;986&#34;
+	height=&#34;234&#34;
+	srcset=&#34;http://localhost:1313/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/6_hu_a577c030999df982.png 480w, http://localhost:1313/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/6_hu_9e92463ea5c4a2c4.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;421&#34;
+		data-flex-basis=&#34;1011px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;诸如上述的效果可以通过这些指令：&lt;/p&gt;
+&lt;p&gt;查看用户指令：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-cmd&#34; data-lang=&#34;cmd&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;net user
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;查看用户信息：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-cmd&#34; data-lang=&#34;cmd&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;net user &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;用户名&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;新增用户：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-cmd&#34; data-lang=&#34;cmd&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;net user &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;用户名&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt; &amp;lt;密码&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt; /add
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;删除用户：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-cmd&#34; data-lang=&#34;cmd&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;net user &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;用户名&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt; /del    #del就是delete（删除）的缩写
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;新增用户组：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-cmd&#34; data-lang=&#34;cmd&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;net localgroup &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;组名&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt; /add
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;将指定用户添加到指定组：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-cmd&#34; data-lang=&#34;cmd&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;net localgroup &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;组名&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt; &amp;lt;用户名&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt; /add
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;其实还有很多，比如开电脑的“户”的whoami、查看主机名的hostname、查看网络连接是否正常的ping呀、目录dir、天天用的cd/d，这些都是基础，在此提一下就好。&lt;/p&gt;
+&lt;h4 id=&#34;windows防火墙&#34;&gt;Windows防火墙
+&lt;/h4&gt;&lt;p&gt;防火墙（firewall）是一项协助确保信息安全的设备，会依照特定的规则，允许或限制传输的数据通过。Windows defender防火墙顾名思义就是在Windows操作系统中系统自带的软件防火墙。它有助于提高计算机的安全性。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/7.png&#34;
+	width=&#34;1260&#34;
+	height=&#34;440&#34;
+	srcset=&#34;http://localhost:1313/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/7_hu_eb92813253433c06.png 480w, http://localhost:1313/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/7_hu_1d6eec79b32ad28b.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;286&#34;
+		data-flex-basis=&#34;687px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/8.png&#34;
+	width=&#34;995&#34;
+	height=&#34;445&#34;
+	srcset=&#34;http://localhost:1313/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/8_hu_93103677082f5847.png 480w, http://localhost:1313/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/8_hu_83c86bfd0ce209cf.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;223&#34;
+		data-flex-basis=&#34;536px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;入站规则：别人电脑访问自己电脑的规则，出站规则：自己电脑访问别人电脑的规则。&lt;/p&gt;
+&lt;h4 id=&#34;rdp远程桌面&#34;&gt;RDP远程桌面
+&lt;/h4&gt;&lt;p&gt;RDP远程桌面，即远程桌面协议（Remote Desktop Protocol），是一种由微软公司研发并内置于Windows操作系统中的网络通信协议。&lt;/p&gt;
+&lt;p&gt;RDP是一个多通道的协议，它允许用户通过网络连接到提供微软终端机服务的计算机，并在本地计算机上查看和操作远程计算机的桌面界面。通过RDP，用户可以远程登录到运行Windows操作系统的远程计算机，并像在本地计算机上一样使用远程计算机的资源和应用程序，这个其实类似我们如今todesk、向日葵远程等。&lt;/p&gt;
+&lt;blockquote class=&#34;alert alert-note&#34;&gt;
+    &lt;blockquote&gt;
+&lt;p&gt;市面上的远程链接软件如todesk都采用自研的混合传输协议，比较安全，而RDP连接没那么可靠，毕竟连接需要给出用户的密码和用户名，这相对有一定的风险。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;接下来使用一下RDP（有些家用版windows是没有RDP功能的，一般企业版多数有，主机没有RDP功能的就下两台虚拟机来实操一下咯）（指令在上文）：&lt;/p&gt;
+&lt;p&gt;1、准备一或二台虚拟机win用来远程连接，可以下载两台虚拟机，win7和win 2003，我这里用主机和win7好看些。&lt;/p&gt;
+&lt;p&gt;2、虚拟机/主机需要开启远程服务。&lt;/p&gt;
+&lt;p&gt;3、防火墙要允许远程服务通过。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/9.png&#34;
+	width=&#34;1635&#34;
+	height=&#34;921&#34;
+	srcset=&#34;http://localhost:1313/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/9_hu_d8c0a0c131b5d318.png 480w, http://localhost:1313/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/9_hu_9765eb407dfa6aa6.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;177&#34;
+		data-flex-basis=&#34;426px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;4、创建一个用户用来远程登录，当然用本身用户也可以。&lt;/p&gt;
+&lt;p&gt;5、在本地安全策略里的用户权限分配要将新建的用户加进去；在计算机管理里面的组里面的Administrators或者users里面添加刚刚新建的用户。&lt;/p&gt;
+&lt;p&gt;6、另外开启一台虚拟机win二号要在开始菜单搜索远程桌面连接输入win1号的IP地址进行连接（相反连接也行），在输入刚刚新建的用户信息即可。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/10.png&#34;
+	width=&#34;1170&#34;
+	height=&#34;535&#34;
+	srcset=&#34;http://localhost:1313/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/10_hu_5a1c1c01b9fb9475.png 480w, http://localhost:1313/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/10_hu_47d33292aef282f2.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;218&#34;
+		data-flex-basis=&#34;524px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;**前提：两台机子要相互ping通&lt;/p&gt;
+&lt;p&gt;我这里用win7和win2003、自己的win11来进行实验。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/11.png&#34;
+	width=&#34;1855&#34;
+	height=&#34;1001&#34;
+	srcset=&#34;http://localhost:1313/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/11_hu_ca1c4e9f483ccd9d.png 480w, http://localhost:1313/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/11_hu_56055bd4f642b672.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;185&#34;
+		data-flex-basis=&#34;444px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;linux系统&#34;&gt;Linux系统
+&lt;/h3&gt;&lt;p&gt;Linux贯穿网安行业，比较重要需要深入学习。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;h4 id=&#34;环境部署&#34;&gt;环境部署
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Linux系统环境搭建&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Linux SSH远程管理实践&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Linux防火墙配置&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;h4 id=&#34;linux常见分系统&#34;&gt;Linux常见分系统
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Debian/ReaHat&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Ubuntu/CentOS&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Kali（渗透真神）&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;h4 id=&#34;linux文件与目录管理&#34;&gt;Linux文件与目录管理
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;系统目录与重要系统文件&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;文件移动&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;文件内容编辑、过滤、查找&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;文件权限管理&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;h4 id=&#34;linux用户管理&#34;&gt;Linux用户管理
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;用户与用户组配置详解&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;用户及用户组常用命令&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;用户身份切换与授权&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;h4 id=&#34;linux进程与软件管理&#34;&gt;Linux进程与软件管理
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;进程概述&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;进程查看与控制&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;软件包管理（deb/rpm、apt/yum）&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;h4 id=&#34;shell基础与实践&#34;&gt;Shell基础与实践
+&lt;/h4&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;网络安全基础&#34;&gt;网络安全基础
+&lt;/h2&gt;&lt;h3 id=&#34;计算机网络&#34;&gt;计算机网络
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;计算机网络基础&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;OS与TCP网络模型&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;TCO与IP协议&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;交换机与路由器&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;虚拟专用网络&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;内网与外网&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;常见名词&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;DNS、域名、URL、CDN、代理&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;网络协议安全&#34;&gt;网络协议安全
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;HTTP与HHTPS&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Wireshark与Tcpdump&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Burpsuite工具&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;MITM中间人攻击&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;ARP欺诈攻击&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;僵尸网络与DDOS&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;web安全基础&#34;&gt;Web安全基础
+&lt;/h2&gt;&lt;h3 id=&#34;web基础&#34;&gt;Web基础
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;h4 id=&#34;web结构&#34;&gt;Web结构
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Web服务器与Web容器&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Web开放框架&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Web应用与发展里程&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;h4 id=&#34;web访问流程&#34;&gt;Web访问流程
+&lt;/h4&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;web前端&#34;&gt;Web前端
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;h4 id=&#34;html基础&#34;&gt;HTML基础
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;HTML简介与常用标记&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;h4 id=&#34;css样式&#34;&gt;CSS样式
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;CSS简介&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;h4 id=&#34;javascript&#34;&gt;JavaScript
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;JavaScript简介与常用函数&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;web后端&#34;&gt;Web后端
+&lt;/h3&gt;&lt;h4 id=&#34;php基础&#34;&gt;PHP基础
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;PHP简介与安装&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;PHP开发环境配置&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;PHP基础语法与函数&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;PHP循环与流程控制&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;PHP表单与Web操作&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;PHP文件上传&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;PHP类与对象&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;PHP魔术方法&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;PHPStudy与宝塔&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;python基础&#34;&gt;Python基础
+&lt;/h4&gt;&lt;p&gt;这里有重复，可倒回去看我所发的&amp;quot;Python学习&amp;rsquo;&amp;lsquo;的文章。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Python基础语法&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Python函数&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Python模块&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Python类与对象&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Python魔术方法&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;web安全问题&#34;&gt;Web安全问题
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;安全事件&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;OWASP TOP10&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;数据库安全基础&#34;&gt;数据库安全基础
+&lt;/h2&gt;&lt;h3 id=&#34;数据库简介&#34;&gt;数据库简介
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;数据库基础概念&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;常用数据库与管理工具&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;MySql数据库基本操作&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;数据库sql语言&#34;&gt;数据库SQL语言
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;SQL的CRUD（增强改查）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;分组查询、关联查询、子查询&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;后端语言SQL操作（PHP）&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;数据库安全加固&#34;&gt;数据库安全加固
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;SQL注入漏洞后门&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;数据库加固实操&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>
