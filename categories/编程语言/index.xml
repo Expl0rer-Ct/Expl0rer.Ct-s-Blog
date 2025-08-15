@@ -2572,7 +2572,27 @@ $$&lt;p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;得有print才能输出值啊，不然运行多少次电脑都不输出的。这节确实有点水因为书上讲比较繁琐，其实比较简单的，在这里简化了，会用就行。&lt;/p&gt;
-</description>
+&lt;h3 id=&#34;函数的递归&#34;&gt;函数的递归
+&lt;/h3&gt;&lt;h4 id=&#34;递归的定义&#34;&gt;递归的定义
+&lt;/h4&gt;&lt;p&gt;函数作为一种代码封装，可以被其他程序调用，当然，也可以被函数内部代码调用。这种函数定义中调用函数自身的方式称为递归。就像一个人站在装满镜子的房间中，看到的影像就是递归的结果。递归在数学和计算机应用上非常强大，能够非常简洁地解决重要问题。&lt;/p&gt;
+&lt;p&gt;按照自己的话说就是在调用函数时，内部又在调用函数本身，就函数里面有它自己，而里面的它的本身内部又有它自己&amp;hellip;&amp;hellip;。&lt;/p&gt;
+&lt;p&gt;数学上有一个经典例子称为阶乘：
+&lt;/p&gt;
+$$
+n! = n(n-1)(n-2)...(1)
+$$&lt;p&gt;
+为了实现这个程序，可以通过一个简单的循环累积去计算阶乘。观察5!的计算，如果去掉了5,那么就剩下计算4!，推广来看，n! - n(n-1)!。实际上，这个关系给出了另一种表达阶乘的方式：
+&lt;/p&gt;
+$$
+n! =
+\begin{cases}
+1 &amp; n = 0 \\
+n(n - 1)! &amp; \text{otherwise}
+\end{cases}
+$$&lt;p&gt;
+&lt;strong&gt;数学归纳法和递归都利用了递推原理，本质是相同的。&lt;/strong&gt;&lt;/p&gt;
+&lt;h4 id=&#34;递归的使用&#34;&gt;递归的使用
+&lt;/h4&gt;</description>
         </item>
         
     </channel>
