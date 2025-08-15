@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>CTF_writeup on Expl0rer.Ct</title>
-        <link>http://localhost:1313/Expl0rer.Ct-s-Blog/categories/ctf_writeup/</link>
+        <link>https://MISC-ct.github.io/Expl0rer.Ct-s-Blog/categories/ctf_writeup/</link>
         <description>Recent content in CTF_writeup on Expl0rer.Ct</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Expl0rer.Ct</copyright>
-        <lastBuildDate>Sun, 27 Jul 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/Expl0rer.Ct-s-Blog/categories/ctf_writeup/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 27 Jul 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://MISC-ct.github.io/Expl0rer.Ct-s-Blog/categories/ctf_writeup/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>CTF</title>
-        <link>http://localhost:1313/Expl0rer.Ct-s-Blog/p/ctf/</link>
+        <link>https://MISC-ct.github.io/Expl0rer.Ct-s-Blog/p/ctf/</link>
         <pubDate>Sun, 27 Jul 2025 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/Expl0rer.Ct-s-Blog/p/ctf/</guid>
+        <guid>https://MISC-ct.github.io/Expl0rer.Ct-s-Blog/p/ctf/</guid>
         <description></description>
         </item>
         

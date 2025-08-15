@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>从0-1的学习之路 on Expl0rer.Ct</title>
-        <link>http://localhost:1313/Expl0rer.Ct-s-Blog/categories/%E4%BB%8E0-1%E7%9A%84%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF/</link>
+        <link>https://MISC-ct.github.io/Expl0rer.Ct-s-Blog/categories/%E4%BB%8E0-1%E7%9A%84%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF/</link>
         <description>Recent content in 从0-1的学习之路 on Expl0rer.Ct</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Expl0rer.Ct</copyright>
-        <lastBuildDate>Thu, 31 Jul 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/Expl0rer.Ct-s-Blog/categories/%E4%BB%8E0-1%E7%9A%84%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 31 Jul 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://MISC-ct.github.io/Expl0rer.Ct-s-Blog/categories/%E4%BB%8E0-1%E7%9A%84%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>第一阶段（理论基础）</title>
-        <link>http://localhost:1313/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/</link>
+        <link>https://MISC-ct.github.io/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/</link>
         <pubDate>Thu, 31 Jul 2025 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/</guid>
-        <description>&lt;img src="http://localhost:1313/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/luca.jpg" alt="Featured image of post 第一阶段（理论基础）" /&gt;&lt;p&gt;&lt;img src=&#34;http://localhost:1313/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/1.jpg&#34;
+        <guid>https://MISC-ct.github.io/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/</guid>
+        <description>&lt;img src="https://MISC-ct.github.io/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/luca.jpg" alt="Featured image of post 第一阶段（理论基础）" /&gt;&lt;p&gt;&lt;img src=&#34;https://MISC-ct.github.io/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/1.jpg&#34;
 	width=&#34;1151&#34;
 	height=&#34;3526&#34;
-	srcset=&#34;http://localhost:1313/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/1_hu_1e628be0bb5dc6b9.jpg 480w, http://localhost:1313/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/1_hu_95eb275c9ff6786d.jpg 1024w&#34;
+	srcset=&#34;https://MISC-ct.github.io/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/1_hu_1e628be0bb5dc6b9.jpg 480w, https://MISC-ct.github.io/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/1_hu_95eb275c9ff6786d.jpg 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;学习思维导图&#34;
@@ -34,10 +34,10 @@
 &lt;p&gt;的或者恶意的原因⽽遭受到破坏、更改、泄露，系统连续可靠正常地运⾏，⽹络服务不中断。&lt;/p&gt;
 &lt;h4 id=&#34;起源与发展&#34;&gt;起源与发展
 &lt;/h4&gt;&lt;p&gt;互联网发展迅速。互联⽹（Internet）是⼀种全球性的计算机⽹络。 通过电⼦，⽆线和光纤⽹络等等⼀系列⼴泛的技术连接着全球各地的设备和⼈，它基于⼀组通⽤的协议相互连接，形成逻辑上的单⼀巨⼤国际⽹络。&lt;/p&gt;
-&lt;p&gt;互联⽹始于1969年的美国阿帕⽹（ARPANET），最初是为了军事研究⽬的⽽建⽴的。随后，互联⽹逐渐发展成为⼀个覆盖全球的、由各种⽹络相互连接⽽成的庞⼤⽹络。&lt;img src=&#34;http://localhost:1313/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/2.png&#34;
+&lt;p&gt;互联⽹始于1969年的美国阿帕⽹（ARPANET），最初是为了军事研究⽬的⽽建⽴的。随后，互联⽹逐渐发展成为⼀个覆盖全球的、由各种⽹络相互连接⽽成的庞⼤⽹络。&lt;img src=&#34;https://MISC-ct.github.io/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/2.png&#34;
 	width=&#34;947&#34;
 	height=&#34;437&#34;
-	srcset=&#34;http://localhost:1313/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/2_hu_71d7ca9179106730.png 480w, http://localhost:1313/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/2_hu_84da7ef03db47129.png 1024w&#34;
+	srcset=&#34;https://MISC-ct.github.io/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/2_hu_71d7ca9179106730.png 480w, https://MISC-ct.github.io/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/2_hu_84da7ef03db47129.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -53,10 +53,10 @@
 &lt;a class=&#34;link&#34; href=&#34;%e4%b8%ad%e5%8d%8e%e4%ba%ba%e6%b0%91%e5%85%b1%e5%92%8c%e5%9b%bd%e7%bd%91%e7%bb%9c%e5%ae%89%e5%85%a8%e6%b3%95.pdf&#34; &gt;中华人民共和国网络安全法.pdf&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&#34;网络安全就业&#34;&gt;网络安全就业
 &lt;/h3&gt;&lt;h4 id=&#34;企业需求哪些岗位需求大薪资高&#34;&gt;企业需求（哪些岗位需求大、薪资高）
-&lt;/h4&gt;&lt;p&gt;&lt;img src=&#34;http://localhost:1313/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/3.png&#34;
+&lt;/h4&gt;&lt;p&gt;&lt;img src=&#34;https://MISC-ct.github.io/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/3.png&#34;
 	width=&#34;682&#34;
 	height=&#34;310&#34;
-	srcset=&#34;http://localhost:1313/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/3_hu_ab6322c5ec49140f.png 480w, http://localhost:1313/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/3_hu_4ee7dcb2ae0448a4.png 1024w&#34;
+	srcset=&#34;https://MISC-ct.github.io/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/3_hu_ab6322c5ec49140f.png 480w, https://MISC-ct.github.io/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/3_hu_4ee7dcb2ae0448a4.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -66,10 +66,10 @@
 	
 &gt;&lt;/p&gt;
 &lt;h4 id=&#34;岗位方向&#34;&gt;岗位方向
-&lt;/h4&gt;&lt;p&gt;&lt;img src=&#34;http://localhost:1313/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/4.png&#34;
+&lt;/h4&gt;&lt;p&gt;&lt;img src=&#34;https://MISC-ct.github.io/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/4.png&#34;
 	width=&#34;627&#34;
 	height=&#34;650&#34;
-	srcset=&#34;http://localhost:1313/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/4_hu_1759bc6776181451.png 480w, http://localhost:1313/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/4_hu_401556be11a76614.png 1024w&#34;
+	srcset=&#34;https://MISC-ct.github.io/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/4_hu_1759bc6776181451.png 480w, https://MISC-ct.github.io/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/4_hu_401556be11a76614.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -99,10 +99,10 @@
 &lt;p&gt;SYSTEM：最高权限的组&lt;/p&gt;
 &lt;p&gt;Administrators：管理员组（完全控制权）&lt;/p&gt;
 &lt;p&gt;Users：普通用户组&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/5.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://MISC-ct.github.io/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/5.png&#34;
 	width=&#34;864&#34;
 	height=&#34;489&#34;
-	srcset=&#34;http://localhost:1313/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/5_hu_716a45c5dcc8cf06.png 480w, http://localhost:1313/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/5_hu_69e73c0d3e6cf786.png 1024w&#34;
+	srcset=&#34;https://MISC-ct.github.io/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/5_hu_716a45c5dcc8cf06.png 480w, https://MISC-ct.github.io/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/5_hu_69e73c0d3e6cf786.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -111,10 +111,10 @@
 		data-flex-basis=&#34;424px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/6.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://MISC-ct.github.io/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/6.png&#34;
 	width=&#34;986&#34;
 	height=&#34;234&#34;
-	srcset=&#34;http://localhost:1313/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/6_hu_a577c030999df982.png 480w, http://localhost:1313/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/6_hu_9e92463ea5c4a2c4.png 1024w&#34;
+	srcset=&#34;https://MISC-ct.github.io/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/6_hu_a577c030999df982.png 480w, https://MISC-ct.github.io/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/6_hu_9e92463ea5c4a2c4.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -181,10 +181,10 @@
 &lt;/div&gt;&lt;p&gt;其实还有很多，比如开电脑的“户”的whoami、查看主机名的hostname、查看网络连接是否正常的ping呀、目录dir、天天用的cd/d，这些都是基础，在此提一下就好。&lt;/p&gt;
 &lt;h4 id=&#34;windows防火墙&#34;&gt;Windows防火墙
 &lt;/h4&gt;&lt;p&gt;防火墙（firewall）是一项协助确保信息安全的设备，会依照特定的规则，允许或限制传输的数据通过。Windows defender防火墙顾名思义就是在Windows操作系统中系统自带的软件防火墙。它有助于提高计算机的安全性。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/7.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://MISC-ct.github.io/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/7.png&#34;
 	width=&#34;1260&#34;
 	height=&#34;440&#34;
-	srcset=&#34;http://localhost:1313/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/7_hu_eb92813253433c06.png 480w, http://localhost:1313/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/7_hu_1d6eec79b32ad28b.png 1024w&#34;
+	srcset=&#34;https://MISC-ct.github.io/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/7_hu_eb92813253433c06.png 480w, https://MISC-ct.github.io/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/7_hu_1d6eec79b32ad28b.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -193,10 +193,10 @@
 		data-flex-basis=&#34;687px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/8.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://MISC-ct.github.io/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/8.png&#34;
 	width=&#34;995&#34;
 	height=&#34;445&#34;
-	srcset=&#34;http://localhost:1313/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/8_hu_93103677082f5847.png 480w, http://localhost:1313/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/8_hu_83c86bfd0ce209cf.png 1024w&#34;
+	srcset=&#34;https://MISC-ct.github.io/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/8_hu_93103677082f5847.png 480w, https://MISC-ct.github.io/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/8_hu_83c86bfd0ce209cf.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -216,10 +216,10 @@
 &lt;p&gt;1、准备一或二台虚拟机win用来远程连接，可以下载两台虚拟机，win7和win 2003，我这里用主机和win7好看些。&lt;/p&gt;
 &lt;p&gt;2、虚拟机/主机需要开启远程服务。&lt;/p&gt;
 &lt;p&gt;3、防火墙要允许远程服务通过。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/9.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://MISC-ct.github.io/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/9.png&#34;
 	width=&#34;1635&#34;
 	height=&#34;921&#34;
-	srcset=&#34;http://localhost:1313/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/9_hu_d8c0a0c131b5d318.png 480w, http://localhost:1313/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/9_hu_9765eb407dfa6aa6.png 1024w&#34;
+	srcset=&#34;https://MISC-ct.github.io/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/9_hu_d8c0a0c131b5d318.png 480w, https://MISC-ct.github.io/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/9_hu_9765eb407dfa6aa6.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -231,10 +231,10 @@
 &lt;p&gt;4、创建一个用户用来远程登录，当然用本身用户也可以。&lt;/p&gt;
 &lt;p&gt;5、在本地安全策略里的用户权限分配要将新建的用户加进去；在计算机管理里面的组里面的Administrators或者users里面添加刚刚新建的用户。&lt;/p&gt;
 &lt;p&gt;6、另外开启一台虚拟机win二号要在开始菜单搜索远程桌面连接输入win1号的IP地址进行连接（相反连接也行），在输入刚刚新建的用户信息即可。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/10.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://MISC-ct.github.io/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/10.png&#34;
 	width=&#34;1170&#34;
 	height=&#34;535&#34;
-	srcset=&#34;http://localhost:1313/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/10_hu_5a1c1c01b9fb9475.png 480w, http://localhost:1313/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/10_hu_47d33292aef282f2.png 1024w&#34;
+	srcset=&#34;https://MISC-ct.github.io/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/10_hu_5a1c1c01b9fb9475.png 480w, https://MISC-ct.github.io/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/10_hu_47d33292aef282f2.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -245,10 +245,10 @@
 &gt;&lt;/p&gt;
 &lt;p&gt;**前提：两台机子要相互ping通&lt;/p&gt;
 &lt;p&gt;我这里用win7和win2003、自己的win11来进行实验。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/11.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://MISC-ct.github.io/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/11.png&#34;
 	width=&#34;1855&#34;
 	height=&#34;1001&#34;
-	srcset=&#34;http://localhost:1313/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/11_hu_ca1c4e9f483ccd9d.png 480w, http://localhost:1313/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/11_hu_56055bd4f642b672.png 1024w&#34;
+	srcset=&#34;https://MISC-ct.github.io/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/11_hu_ca1c4e9f483ccd9d.png 480w, https://MISC-ct.github.io/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/11_hu_56055bd4f642b672.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -258,14 +258,52 @@
 	
 &gt;&lt;/p&gt;
 &lt;h3 id=&#34;linux系统&#34;&gt;Linux系统
-&lt;/h3&gt;&lt;p&gt;Linux贯穿网安行业，比较重要需要深入学习。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
+&lt;/h3&gt;&lt;p&gt;林纳斯·本纳第克特·托瓦兹——linux之父概况著名的电脑程序员、黑客。Linux内核的发明人及该计划的合作者。托瓦兹利用个人时间及器材创造出了这套当今全球最流行的操作系统（作业系统）内核之一。&lt;/p&gt;
+&lt;p&gt;Kali、Ubuntu、Dibian、CentOS下载，主要用Kali&lt;a class=&#34;link&#34; href=&#34;https://www.kdocs.cn/l/cdCaZMyu1IL9&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;（关于Kali下载的问题汇总）&lt;/a&gt;，Kali也是贯穿网安行业的的一部虚拟机，里面打包了几百种工具，有渗透、运维、蓝红队工具、甚至可以扩展到CTF所用到的基于Linux的python脚本等，而且还有不错的扩展性，可以按照自己的需要去额外加装脚本、软件、工具等。&lt;/p&gt;
+&lt;p&gt;Debian：由志愿者开发的发行Linux的非商业项目。&lt;/p&gt;
+&lt;p&gt;Ubuntu：Debian项目构建的一个Linux发行版，专注于提供用户友好的桌面和服务器操作系统。&lt;/p&gt;
+&lt;p&gt;Kali：基于Debian的Linux发行版，预装了许多安全工具。&lt;/p&gt;
+&lt;p&gt;RedHat：红帽公司，产品包括RHEL、Fedora Core与CentOS。&lt;/p&gt;
+&lt;p&gt;CentOS：RHEL依照开放源代码规定释出的源码所编译而成。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://MISC-ct.github.io/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/12.png&#34;
+	width=&#34;670&#34;
+	height=&#34;449&#34;
+	srcset=&#34;https://MISC-ct.github.io/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/12_hu_3cb184acf76422e7.png 480w, https://MISC-ct.github.io/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/12_hu_6fc81928056b1f06.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Linux大家族&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;149&#34;
+		data-flex-basis=&#34;358px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;开源&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Linux是一个开源操作系统，源代码对用户开放，使用户可以自由获取、使用和修改。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;稳定&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Linux以其出色的稳定性而闻名。在大量的服务器应用中，稳定性是至关重要的因素。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;安全&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Linux具有良好的安全性。由于其开源性，Linux操作系统可以由全球的开发者社区进行审查和修复漏洞。这使得Linux具备快速响应和更新的能力，以应对不断变化的安全威胁。此外，Linux提供了强大的权限管理和安全工具，帮助管理员保护服务器免受潜在的威胁。&lt;/p&gt;
+&lt;blockquote class=&#34;alert alert-note&#34;&gt;
+    &lt;blockquote&gt;
+&lt;p&gt;发行版是指基于开源软件的操作系统的特定版本，经过整合、配置和打包后向用户发布的软件发行形式。它是将开源软件进行定制化和优化的结果，以便用户能够更方便地使用和管理操作系统。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
 &lt;h4 id=&#34;环境部署&#34;&gt;环境部署
-&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;Linux系统环境搭建&lt;/p&gt;
-&lt;/li&gt;
+&lt;/h4&gt;&lt;h5 id=&#34;linux系统环境搭建&#34;&gt;Linux系统环境搭建
+&lt;/h5&gt;&lt;p&gt;&lt;img src=&#34;https://MISC-ct.github.io/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/14.png&#34;
+	width=&#34;1845&#34;
+	height=&#34;980&#34;
+	srcset=&#34;https://MISC-ct.github.io/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/14_hu_6e64549c077333.png 480w, https://MISC-ct.github.io/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/14_hu_9fcc10a24576c843.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;188&#34;
+		data-flex-basis=&#34;451px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;Linux SSH远程管理实践&lt;/p&gt;
 &lt;/li&gt;
@@ -273,8 +311,6 @@
 &lt;p&gt;Linux防火墙配置&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
 &lt;h4 id=&#34;linux常见分系统&#34;&gt;Linux常见分系统
 &lt;/h4&gt;&lt;ul&gt;
 &lt;li&gt;
@@ -287,57 +323,59 @@
 &lt;p&gt;Kali（渗透真神）&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
 &lt;h4 id=&#34;linux文件与目录管理&#34;&gt;Linux文件与目录管理
-&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;系统目录与重要系统文件&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;文件移动&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;文件内容编辑、过滤、查找&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;文件权限管理&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
+&lt;/h4&gt;&lt;h5 id=&#34;系统目录与重要系统文件&#34;&gt;系统目录与重要系统文件
+&lt;/h5&gt;&lt;p&gt;&lt;img src=&#34;https://MISC-ct.github.io/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/13.png&#34;
+	width=&#34;1544&#34;
+	height=&#34;603&#34;
+	srcset=&#34;https://MISC-ct.github.io/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/13_hu_a3eff3c012c6e2eb.png 480w, https://MISC-ct.github.io/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/13_hu_5ae81c767f45d9ee.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;文件目录结构树状图&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;256&#34;
+		data-flex-basis=&#34;614px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h5 id=&#34;文件管理&#34;&gt;文件管理
+&lt;/h5&gt;&lt;p&gt;touch 文件名 ：创建文件&lt;/p&gt;
+&lt;p&gt;mkdir 目录名：创建目录 make dir&lt;/p&gt;
+&lt;p&gt;mkdir -p a/b ： 同时创建父子目录&lt;/p&gt;
+&lt;p&gt;cp：复制文件或目录copy&lt;/p&gt;
+&lt;p&gt;mv：移动文件或目录move&lt;/p&gt;
+&lt;p&gt;rm 文件或目录 ：删除文件或目录remove&lt;/p&gt;
+&lt;p&gt;rm -rf 文件夹 ：删除非空目录&lt;/p&gt;
+&lt;p&gt;cat查看文件内容&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://MISC-ct.github.io/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/15.png&#34;
+	width=&#34;729&#34;
+	height=&#34;195&#34;
+	srcset=&#34;https://MISC-ct.github.io/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/15_hu_ccbe07fca39e12aa.png 480w, https://MISC-ct.github.io/Expl0rer.Ct-s-Blog/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/15_hu_f45fcb3cc5efb03f.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;373&#34;
+		data-flex-basis=&#34;897px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;head查看文件头部内容&lt;/p&gt;
+&lt;p&gt;tail查看文件尾部内容&lt;/p&gt;
+&lt;p&gt;grep根据匹配规则搜索(查找文件内容)&lt;/p&gt;
+&lt;p&gt;grep -c &amp;ldquo;root&amp;rdquo; /etc/passwd&lt;/p&gt;
+&lt;p&gt;find按照条件查找文件&lt;/p&gt;
+&lt;p&gt;find /etc -name &amp;ldquo;network*&amp;rdquo;&lt;/p&gt;
 &lt;h4 id=&#34;linux用户管理&#34;&gt;Linux用户管理
-&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;用户与用户组配置详解&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
+&lt;/h4&gt;&lt;p&gt;用户与用户组配置详解&lt;/p&gt;
 &lt;p&gt;用户及用户组常用命令&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
 &lt;p&gt;用户身份切换与授权&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
 &lt;h4 id=&#34;linux进程与软件管理&#34;&gt;Linux进程与软件管理
-&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;进程概述&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
+&lt;/h4&gt;&lt;p&gt;进程概述&lt;/p&gt;
 &lt;p&gt;进程查看与控制&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
 &lt;p&gt;软件包管理（deb/rpm、apt/yum）&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
 &lt;h4 id=&#34;shell基础与实践&#34;&gt;Shell基础与实践
-&lt;/h4&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;网络安全基础&#34;&gt;网络安全基础
+&lt;/h4&gt;&lt;h2 id=&#34;网络安全基础&#34;&gt;网络安全基础
 &lt;/h2&gt;&lt;h3 id=&#34;计算机网络&#34;&gt;计算机网络
 &lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;
