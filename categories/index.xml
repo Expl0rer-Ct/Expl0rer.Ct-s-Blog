@@ -2,41 +2,41 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>Categories on Expl0rer.Ct</title>
-        <link>https://MISC-ct.github.io/Expl0rer.Ct-s-Blog/categories/</link>
+        <link>http://8.148.145.201/categories/</link>
         <description>Recent content in Categories on Expl0rer.Ct</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Expl0rer.Ct</copyright>
-        <lastBuildDate>Thu, 14 Aug 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://MISC-ct.github.io/Expl0rer.Ct-s-Blog/categories/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 14 Aug 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://8.148.145.201/categories/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>CTF</title>
-        <link>https://MISC-ct.github.io/Expl0rer.Ct-s-Blog/categories/ctf/</link>
+        <link>http://8.148.145.201/categories/ctf/</link>
         <pubDate>Thu, 14 Aug 2025 00:00:00 +0000</pubDate>
         
-        <guid>https://MISC-ct.github.io/Expl0rer.Ct-s-Blog/categories/ctf/</guid>
+        <guid>http://8.148.145.201/categories/ctf/</guid>
         <description></description>
         </item>
         <item>
         <title>从0-1的学习之路</title>
-        <link>https://MISC-ct.github.io/Expl0rer.Ct-s-Blog/categories/%E4%BB%8E0-1%E7%9A%84%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF/</link>
+        <link>http://8.148.145.201/categories/%E4%BB%8E0-1%E7%9A%84%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF/</link>
         <pubDate>Thu, 31 Jul 2025 00:00:00 +0000</pubDate>
         
-        <guid>https://MISC-ct.github.io/Expl0rer.Ct-s-Blog/categories/%E4%BB%8E0-1%E7%9A%84%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF/</guid>
+        <guid>http://8.148.145.201/categories/%E4%BB%8E0-1%E7%9A%84%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF/</guid>
         <description></description>
         </item>
         <item>
         <title>CTF_writeup</title>
-        <link>https://MISC-ct.github.io/Expl0rer.Ct-s-Blog/categories/ctf_writeup/</link>
+        <link>http://8.148.145.201/categories/ctf_writeup/</link>
         <pubDate>Sun, 27 Jul 2025 00:00:00 +0000</pubDate>
         
-        <guid>https://MISC-ct.github.io/Expl0rer.Ct-s-Blog/categories/ctf_writeup/</guid>
-        <description>&lt;img src="https://MISC-ct.github.io/Expl0rer.Ct-s-Blog/categories/ctf_writeup/x.jpg" alt="Featured image of post CTF_writeup" /&gt;</description>
+        <guid>http://8.148.145.201/categories/ctf_writeup/</guid>
+        <description>&lt;img src="http://8.148.145.201/categories/ctf_writeup/x.jpg" alt="Featured image of post CTF_writeup" /&gt;</description>
         </item>
         <item>
         <title>编程语言</title>
-        <link>https://MISC-ct.github.io/Expl0rer.Ct-s-Blog/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/</link>
+        <link>http://8.148.145.201/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/</link>
         <pubDate>Sun, 27 Jul 2025 00:00:00 +0000</pubDate>
         
-        <guid>https://MISC-ct.github.io/Expl0rer.Ct-s-Blog/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/</guid>
+        <guid>http://8.148.145.201/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/</guid>
         <description></description>
         </item>
         

@@ -2,10 +2,10 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>Tags on Expl0rer.Ct</title>
-        <link>https://MISC-ct.github.io/Expl0rer.Ct-s-Blog/tags/</link>
+        <link>http://8.148.145.201/tags/</link>
         <description>Recent content in Tags on Expl0rer.Ct</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
-        <copyright>Expl0rer.Ct</copyright><atom:link href="https://MISC-ct.github.io/Expl0rer.Ct-s-Blog/tags/index.xml" rel="self" type="application/rss+xml" />
+        <copyright>Expl0rer.Ct</copyright><atom:link href="http://8.148.145.201/tags/index.xml" rel="self" type="application/rss+xml" />
     </channel>
 </rss>
