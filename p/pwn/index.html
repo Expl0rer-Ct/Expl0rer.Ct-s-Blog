@@ -1,0 +1,2197 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="二进制漏洞与利用">
+<title>PWN</title>
+
+<link rel='canonical' href='http://8.148.145.201/p/pwn/'>
+
+<link rel="stylesheet" href="/scss/style.min.ece3f31a86e5b2aa3023dd10f622ec7577d26755fc967fa467af45bd753c34bc.css"><meta property='og:title' content="PWN">
+<meta property='og:description' content="二进制漏洞与利用">
+<meta property='og:url' content='http://8.148.145.201/p/pwn/'>
+<meta property='og:site_name' content='Expl0rer.Ct'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-08-21T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-08-21T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="PWN">
+<meta name="twitter:description" content="二进制漏洞与利用">
+    <link rel="shortcut icon" href="/favicon.ico" />
+<div class="loading">
+     
+    <div id="ghost">
+        <div id="red">
+            <div id="pupil"></div>
+            <div id="pupil1"></div>
+            <div id="eye"></div>
+            <div id="eye1"></div>
+            <div id="top0"></div>
+            <div id="top1"></div>
+            <div id="top2"></div>
+            <div id="top3"></div>
+            <div id="top4"></div>
+            <div id="st0"></div>
+            <div id="st1"></div>
+            <div id="st2"></div>
+            <div id="st3"></div>
+            <div id="st4"></div>
+            <div id="st5"></div>
+            <div id="an1"></div>
+            <div id="an2"></div>
+            <div id="an3"></div>
+            <div id="an4"></div>
+            <div id="an5"></div>
+            <div id="an6"></div>
+            <div id="an7"></div>
+            <div id="an8"></div>
+            <div id="an9"></div>
+            <div id="an10"></div>
+            <div id="an11"></div>
+            <div id="an12"></div>
+            <div id="an13"></div>
+            <div id="an14"></div>
+            <div id="an15"></div>
+            <div id="an16"></div>
+            <div id="an17"></div>
+            <div id="an18"></div>
+        </div>
+        <div id="shadow"></div>
+    </div>
+</div>
+
+<style>
+    .loading {
+        position: fixed;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 99;
+        background-color: #f5f5fa;
+        transition: opacity 0.5s ease;
+    }
+	
+      
+#ghost {
+  position: relative;
+  scale: 0.8;
+}
+
+#red {
+  animation: upNDown infinite 1s;
+  position: relative;
+  width: 140px;
+  height: 140px;
+  display: grid;
+  grid-template-columns: repeat(14, 1fr);
+  grid-template-rows: repeat(14, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  grid-template-areas:
+    "a1  a2  a3  a4  a5  top0  top0  top0  top0  a10 a11 a12 a13 a14"
+    "b1  b2  b3  top1 top1 top1 top1 top1 top1 top1 top1 b12 b13 b14"
+    "c1 c2 top2 top2 top2 top2 top2 top2 top2 top2 top2 top2 c13 c14"
+    "d1 top3 top3 top3 top3 top3 top3 top3 top3 top3 top3 top3 top3 d14"
+    "e1 top3 top3 top3 top3 top3 top3 top3 top3 top3 top3 top3 top3 e14"
+    "f1 top3 top3 top3 top3 top3 top3 top3 top3 top3 top3 top3 top3 f14"
+    "top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4"
+    "top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4"
+    "top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4"
+    "top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4"
+    "top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4"
+    "top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4"
+    "st0 st0 an4 st1 an7 st2 an10 an10 st3 an13 st4 an16 st5 st5"
+    "an1 an2 an3 an5 an6 an8 an9 an9 an11 an12 an14 an15 an17 an18";
+}
+
+@keyframes upNDown {
+  0%,
+  49% {
+    transform: translateY(0px);
+  }
+  50%,
+  100% {
+    transform: translateY(-10px);
+  }
+}
+
+#top0,
+#top1,
+#top2,
+#top3,
+#top4,
+#st0,
+#st1,
+#st2,
+#st3,
+#st4,
+#st5 {
+  background-color: red;
+}
+
+#top0 {
+  grid-area: top0;
+}
+
+#top1 {
+  grid-area: top1;
+}
+
+#top2 {
+  grid-area: top2;
+}
+
+#top3 {
+  grid-area: top3;
+}
+
+#top4 {
+  grid-area: top4;
+}
+
+#st0 {
+  grid-area: st0;
+}
+
+#st1 {
+  grid-area: st1;
+}
+
+#st2 {
+  grid-area: st2;
+}
+
+#st3 {
+  grid-area: st3;
+}
+
+#st4 {
+  grid-area: st4;
+}
+
+#st5 {
+  grid-area: st5;
+}
+
+#an1 {
+  grid-area: an1;
+  animation: flicker0 infinite 1s;
+}
+
+#an18 {
+  grid-area: an18;
+  animation: flicker0 infinite 1s;
+}
+
+#an2 {
+  grid-area: an2;
+  animation: flicker1 infinite 1s;
+}
+
+#an17 {
+  grid-area: an17;
+  animation: flicker1 infinite 1s;
+}
+
+#an3 {
+  grid-area: an3;
+  animation: flicker1 infinite 1s;
+}
+
+#an16 {
+  grid-area: an16;
+  animation: flicker1 infinite 1s;
+}
+
+#an4 {
+  grid-area: an4;
+  animation: flicker1 infinite 1s;
+}
+
+#an15 {
+  grid-area: an15;
+  animation: flicker1 infinite 1s;
+}
+
+#an6 {
+  grid-area: an6;
+  animation: flicker0 infinite 1s;
+}
+
+#an12 {
+  grid-area: an12;
+  animation: flicker0 infinite 1s;
+}
+
+#an7 {
+  grid-area: an7;
+  animation: flicker0 infinite 1s;
+}
+
+#an13 {
+  grid-area: an13;
+  animation: flicker0 infinite 1s;
+}
+
+#an9 {
+  grid-area: an9;
+  animation: flicker1 infinite 1s;
+}
+
+#an10 {
+  grid-area: an10;
+  animation: flicker1 infinite 1s;
+}
+
+#an8 {
+  grid-area: an8;
+  animation: flicker0 infinite 1s;
+}
+
+#an11 {
+  grid-area: an11;
+  animation: flicker0 infinite 1s;
+}
+
+@keyframes flicker0 {
+  0%,
+  49% {
+    background-color: red;
+  }
+  50%,
+  100% {
+    background-color: transparent;
+  }
+}
+
+@keyframes flicker1 {
+  0%,
+  49% {
+    background-color: transparent;
+  }
+  50%,
+  100% {
+    background-color: red;
+  }
+}
+
+#eye {
+  width: 40px;
+  height: 50px;
+  position: absolute;
+  top: 30px;
+  left: 10px;
+}
+
+#eye::before {
+  content: "";
+  background-color: white;
+  width: 20px;
+  height: 50px;
+  transform: translateX(10px);
+  display: block;
+  position: absolute;
+}
+
+#eye::after {
+  content: "";
+  background-color: white;
+  width: 40px;
+  height: 30px;
+  transform: translateY(10px);
+  display: block;
+  position: absolute;
+}
+
+#eye1 {
+  width: 40px;
+  height: 50px;
+  position: absolute;
+  top: 30px;
+  right: 30px;
+}
+
+#eye1::before {
+  content: "";
+  background-color: white;
+  width: 20px;
+  height: 50px;
+  transform: translateX(10px);
+  display: block;
+  position: absolute;
+}
+
+#eye1::after {
+  content: "";
+  background-color: white;
+  width: 40px;
+  height: 30px;
+  transform: translateY(10px);
+  display: block;
+  position: absolute;
+}
+
+#pupil {
+  width: 20px;
+  height: 20px;
+  background-color: blue;
+  position: absolute;
+  top: 50px;
+  left: 10px;
+  z-index: 1;
+  animation: eyesMovement infinite 6s;
+}
+
+#pupil1 {
+  width: 20px;
+  height: 20px;
+  background-color: blue;
+  position: absolute;
+  top: 50px;
+  right: 50px;
+  z-index: 1;
+  animation: eyesMovement infinite 6s;
+}
+
+@keyframes eyesMovement {
+  0%,
+  49% {
+    transform: translateX(0px);
+  }
+  50%,
+  99% {
+    transform: translateX(10px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}
+
+#shadow {
+  background-color: black;
+  width: 140px;
+  height: 140px;
+  position: absolute;
+  border-radius: 50%;
+  transform: rotateX(80deg);
+  filter: blur(20px);
+  top: 80%;
+  animation: shadowMovement infinite 1s;
+}
+
+@keyframes shadowMovement {
+  0%,
+  49% {
+    opacity: 0.5;
+  }
+  50%,
+  100% {
+    opacity: 0.2;
+  }
+}
+
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.pjax/2.0.1/jquery.pjax.min.js"></script>
+
+<script>	
+    function initLoading() {
+        let loading = document.querySelector(".loading");
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            setTimeout(() => {
+                loading.style.opacity = "0";
+                
+                setTimeout(() => {
+                    loading.style.display = "none";
+                }, 500);
+            }, 500); 
+        });
+    }
+
+    initLoading();
+</script>
+
+
+<link
+  rel="stylesheet"
+  href="https://cdn-font.hyperos.mi.com/font/css?family=MiSans:400:Chinese_Simplify,Latin&display=swap"
+/>
+
+
+
+<link rel="stylesheet" href="https://npm.elemecdn.com/lxgw-wenkai-screen-webfont@1.7.0/lxgwwenkaigbscreen.css" />
+
+<link rel="stylesheet" href="https://npm.elemecdn.com/lxgw-wenkai-screen-webfont@1.7.0/lxgwwenkaigbscreenr.css" />
+
+<link rel="stylesheet" href="https://npm.elemecdn.com/lxgw-wenkai-screen-webfont@1.7.0/lxgwwenkaiscreen.css" />
+
+<link rel="stylesheet" href="https://npm.elemecdn.com/lxgw-wenkai-screen-webfont@1.7.0/lxgwwenkaiscreenr.css" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_1a3c99934e119e1b.png" width="300"
+                            height="268" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🫡</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Expl0rer.Ct</a></h1>
+            <h2 class="site-description">吾将上下而求索</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://space.bilibili.com/695179979?spm_id_from=333.40138.0.0'
+                        target="_blank"
+                        title="Bilibili"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-brand-bilibili"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 10a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v6a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4v-6z" /><path d="M8 3l2 3" /><path d="M16 3l-2 3" /><path d="M9 13v-2" /><path d="M15 11v2" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://github.com/Expl0rer-Ct'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页 | Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E-about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于 | About</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档 | Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索 | Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E6%8A%80%E6%9C%AF%E9%93%BE%E6%8E%A5-links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>技术链接 | Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <!--
+tags: [temperature, hot, wheater, thermometer, forecast]
+category: Weather
+version: "1.73"
+unicode: "f236"
+-->
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="32"
+  height="32"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="#ff9500"
+  stroke-width="1"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  class="icon-tabler-sun-high"
+>
+  <path d="M14.828 14.828a4 4 0 1 0 -5.656 -5.656a4 4 0 0 0 5.656 5.656z" />
+  <path d="M6.343 17.657l-1.414 1.414" />
+  <path d="M6.343 6.343l-1.414 -1.414" />
+  <path d="M17.657 6.343l1.414 -1.414" />
+  <path d="M17.657 17.657l1.414 1.414" />
+  <path d="M4 12h-2" />
+  <path d="M12 4v-2" />
+  <path d="M20 12h2" />
+  <path d="M12 20v2" />
+</svg>
+
+                        <!--
+tags: [night, dark mode]
+category: Weather
+version: "1.21"
+unicode: "ece7"
+-->
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="32"
+  height="32"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="#8d6e63"
+  stroke-width="1"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  class="icon-tabler-moon-stars"
+>
+  <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+  <path d="M17 4a2 2 0 0 0 2 2a2 2 0 0 0 -2 2a2 2 0 0 0 -2 -2a2 2 0 0 0 2 -2" />
+  <path d="M19 11h2m-1 -1v2" />
+</svg>
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#pwn简介">PWN简介</a></li>
+    <li><a href="#第一节汇编语言基础">第一节：汇编语言基础</a>
+      <ol>
+        <li><a href="#寄存器">寄存器</a></li>
+        <li><a href="#cpu的寻址方式">CPU的寻址方式</a></li>
+        <li><a href="#汇编指令">汇编指令</a></li>
+        <li><a href="#数值上下限溢出">数值上下限/溢出</a></li>
+      </ol>
+    </li>
+    <li><a href="#linux基础">Linux基础</a>
+      <ol>
+        <li><a href="#操作系统">操作系统</a></li>
+        <li><a href="#数据存储">数据存储</a></li>
+        <li><a href="#文件描述符">文件描述符</a></li>
+        <li><a href="#栈stack">栈（stack）</a>
+          <ol>
+            <li><a href="#linux种的栈">Linux种的栈</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#调用约定">调用约定</a>
+      <ol>
+        <li><a href="#函数调用流程">函数调用流程</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/ctf_writeup/" style="background-color: #2a9d8f; color: #fff;">
+                CTF_writeup
+            </a>
+        
+            <a href="/categories/ctfpwn/" >
+                CTFpwn
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/pwn/">PWN</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            二进制漏洞与利用
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2025-08-21</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p><strong>前文：以下是我入门PWN的记录，欢迎各位前来观看，小弟领教！</strong></p>
+<h1 id="ctf是什么">CTF是什么？
+</h1><p>CTF（Capture The Flag）中文一般译作夺旗赛，在网络安全领域中指的是网络安全技术人员之间进行技术竞技的一种比赛形式。CTF起源于1996年DEFCON全球黑客大会，以代替之前黑客们通过互相发起真实攻击进行技术比拼的方式。发展至今，已经成为全球范围网络安全圈流行的竞赛形式。</p>
+<p>CTF比赛形式主要为<strong>线上解题（jeopardy）<strong>和</strong>线下攻防（Attack With Defence）</strong></p>
+<p>线上赛题目大致方向有WEB、RE、PWN、MISC、CRYPTO，解出flag交给服务器验证通过才得分。</p>
+<h2 id="pwn简介">PWN简介
+</h2><p>Pwn是什么？</p>
+<p>&ldquo;Pwn&quot;是一个黑客语法的俚语词，是指攻破设备或者系统。发音类似“砰”，对黑客而言，这就是成功实施黑客攻击的声音一研的一声，被“黑”的电脑或手机就被你操纵了。CTF中的PWN主要是针对于二进制漏洞挖掘与利用，通常情况下选手需要对于一个有漏洞的可执行文件进行分析，找到漏洞，然后利用漏洞读取远程服务器上的FLAG。</p>
+<p><strong>Pwn传统出题方向：glibc PWN：堆、栈、shellcode编写、iofile等。进阶：arm架构、loT、内核、vm、浏览器等。</strong></p>
+<p>实际生活中我们会遇到的pwn：</p>
+<p>泄露通信数据：心脏滴血（cve-2014-0160）</p>
+<p>Linux本地提权root：脏牛dirty cow（cve-2016-5195）</p>
+<p>Wannacry：永恒之蓝勒索病毒</p>
+<p><img src="/p/pwn/glibc-pwn.png"
+	width="2010"
+	height="731"
+	srcset="/p/pwn/glibc-pwn_hu_76ead02599234b1.png 480w, /p/pwn/glibc-pwn_hu_4c76d810cb42dfe6.png 1024w"
+	loading="lazy"
+	
+		alt="glibc学习路线"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="274"
+		data-flex-basis="659px"
+	
+></p>
+<blockquote class="alert alert-error">
+    <blockquote>
+<p>PWN入门劝退集&hellip;&hellip;</p></blockquote></blockquote>
+<h2 id="第一节汇编语言基础">第一节：汇编语言基础
+</h2><p>我自己在打ctf逆向和pwn，也时常搞不懂bit和byte，在这里我先把一些计算机内的量词回忆一下：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>名称</th>
+          <th>翻译</th>
+          <th>大小</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>bit</td>
+          <td>比特</td>
+          <td>1位（1b）</td>
+      </tr>
+      <tr>
+          <td>byte</td>
+          <td>字节</td>
+          <td>8位（1B）</td>
+      </tr>
+      <tr>
+          <td>word</td>
+          <td>字</td>
+          <td>16位</td>
+      </tr>
+      <tr>
+          <td>dword</td>
+          <td>双字</td>
+          <td>32位</td>
+      </tr>
+      <tr>
+          <td>qword</td>
+          <td>四字</td>
+          <td>64位</td>
+      </tr>
+  </tbody>
+</table></div>
+<p><strong>计算机寻址方式</strong></p>
+<p>在当前主流的操作系统中，都是以字节（B）为寻址单位进行寻址。</p>
+<p>意味着计算机访问的最小单位是一个字节（B）。</p>
+<p>类比于人口普查，普查员以每户（B)为单位统计，而不是访问到个人（b）。</p>
+<h3 id="寄存器">寄存器
+</h3><p>计算机的指令都是由CPU来执行。</p>
+<p>在计算机系统结构中，CPU和内存是分开的。</p>
+<p>寄存器存在于CPU中，是CPU的直接操作对象。</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>寄存器名称</th>
+          <th>作用</th>
+          <th>备注</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>RAX</td>
+          <td>通用寄存器</td>
+          <td>低32位：EAX；低16位：AX；低8位：AL</td>
+      </tr>
+      <tr>
+          <td>RBX</td>
+          <td>通用寄存器</td>
+          <td>低32位：EAX；低16位：AX；低8位：AL</td>
+      </tr>
+      <tr>
+          <td>RCX</td>
+          <td>通用寄存器</td>
+          <td>低32位：EAX；低16位：AX；低8位：AL</td>
+      </tr>
+      <tr>
+          <td>RDX</td>
+          <td>通用寄存器</td>
+          <td>低32位：EAX；低16位：AX；低8位：AL</td>
+      </tr>
+      <tr>
+          <td>RDI</td>
+          <td>通用寄存器</td>
+          <td>低32位：EDI</td>
+      </tr>
+      <tr>
+          <td>RSI</td>
+          <td>通用寄存器</td>
+          <td>低32位：EDI</td>
+      </tr>
+      <tr>
+          <td>R8</td>
+          <td>通用寄存器</td>
+          <td>低32位：EDI</td>
+      </tr>
+      <tr>
+          <td>R9</td>
+          <td>通用寄存器</td>
+          <td>低32位：EDI</td>
+      </tr>
+      <tr>
+          <td>R10</td>
+          <td>通用寄存器</td>
+          <td>低32位：EDI</td>
+      </tr>
+      <tr>
+          <td>R11</td>
+          <td>通用寄存器</td>
+          <td>低32位：EDI</td>
+      </tr>
+      <tr>
+          <td>R12</td>
+          <td>通用寄存器</td>
+          <td>低32位：EDI</td>
+      </tr>
+      <tr>
+          <td>R13</td>
+          <td>通用寄存器</td>
+          <td>低32位：EDI</td>
+      </tr>
+      <tr>
+          <td>R14</td>
+          <td>通用寄存器</td>
+          <td>低32位：EDI</td>
+      </tr>
+      <tr>
+          <td>R15</td>
+          <td>通用寄存器</td>
+          <td>低32位：EDI</td>
+      </tr>
+      <tr>
+          <td>RSP</td>
+          <td>栈顶指针</td>
+          <td>低32位：ESP</td>
+      </tr>
+      <tr>
+          <td>RBP</td>
+          <td>栈底指针</td>
+          <td>低32位：ESP</td>
+      </tr>
+      <tr>
+          <td>EFLAGS</td>
+          <td>标志寄存器</td>
+          <td>记录标志状态，包括AF、PF、SF、ZF、OF、CF等标识位</td>
+      </tr>
+      <tr>
+          <td>RIP</td>
+          <td>指令计数器</td>
+          <td>保存下一条将会执行的指令的地址</td>
+      </tr>
+  </tbody>
+</table></div>
+<p>上述的通用寄存器，通常用于参数传递以及算数运算等通用场合。</p>
+<p>RSP为栈顶指针，RBP为栈底指针，二者用于维护程序运行时的函数栈，在之后的调用约定一节会对其进行讲解。</p>
+<p>EFLAGS为标志位寄存器，用于存储CPU运行计算过程中的状态，如进位溢出等。</p>
+<p>RIP指针用于存储CPU下一条将会执行的指针，不能直接修改,正常情况下会每一次运行一条指令自增一条指令的长度，当发生跳转时才会以其他形式改变其值。</p>
+<h3 id="cpu的寻址方式">CPU的寻址方式
+</h3><p>学过C语言都知道指针，它是一个变量，它存储的是另一个变量的内存地址，而不是直接存储数据本身。这里解释的是比较含糊，详细的还请搜索引擎。</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>寻址方式</th>
+          <th>示例</th>
+          <th>实际访问</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>立即寻址</td>
+          <td>1234h</td>
+          <td>1234h这个数字本身</td>
+      </tr>
+      <tr>
+          <td>直接寻址</td>
+          <td>[1234h]</td>
+          <td>内存地址1234h</td>
+      </tr>
+      <tr>
+          <td>寄存器寻址</td>
+          <td>RAX</td>
+          <td>访问RAX寄存器</td>
+      </tr>
+      <tr>
+          <td>寄存器间接寻址</td>
+          <td>[RAX]</td>
+          <td>访问RAX寄存器存储的值的这一内存地址</td>
+      </tr>
+      <tr>
+          <td>变址寻址</td>
+          <td>[RAX+1234h]</td>
+          <td>访问RAX寄存器存储的值+1234h这一内存地址</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="汇编指令">汇编指令
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>指令类型</th>
+          <th>操作码</th>
+          <th>例子（Intel格式）</th>
+          <th>实际效果</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>数据传送指令</td>
+          <td><strong>mov</strong></td>
+          <td>mov rax rbx</td>
+          <td>rax = rbx</td>
+      </tr>
+      <tr>
+          <td>取地址指令</td>
+          <td>lea</td>
+          <td>lex rax [rbx]</td>
+          <td>rax =&amp;*rbx</td>
+      </tr>
+      <tr>
+          <td>算数运算指令+</td>
+          <td>add</td>
+          <td>add rax rbx</td>
+          <td>rax = rax + rbx</td>
+      </tr>
+      <tr>
+          <td>-</td>
+          <td>sub</td>
+          <td>sub rax rbx</td>
+          <td>rax = rax - rbx</td>
+      </tr>
+      <tr>
+          <td>逻辑运算指令</td>
+          <td>and</td>
+          <td>and rax rbx</td>
+          <td>rax = rax&amp;rbx</td>
+      </tr>
+      <tr>
+          <td></td>
+          <td>xor</td>
+          <td>xor rax rbx</td>
+          <td>rax = rax | rbx</td>
+      </tr>
+      <tr>
+          <td>函数调用指令</td>
+          <td><strong>call</strong></td>
+          <td>call 1234h</td>
+          <td>执行内存地址1234h处的函数</td>
+      </tr>
+      <tr>
+          <td>函数返回指令</td>
+          <td>ret</td>
+          <td>ret</td>
+          <td>函数返回</td>
+      </tr>
+      <tr>
+          <td>比较</td>
+          <td>cmp</td>
+          <td>cmp rax rbx</td>
+          <td>比较rax与rbx，结果保存在EFLAG寄存器</td>
+      </tr>
+      <tr>
+          <td>无条件跳转</td>
+          <td><strong>jmp</strong></td>
+          <td>jmp 1234h</td>
+          <td>eip = 1234h</td>
+      </tr>
+      <tr>
+          <td>栈操作指令</td>
+          <td>push</td>
+          <td>push rax</td>
+          <td>将rax存储的值压栈</td>
+      </tr>
+      <tr>
+          <td></td>
+          <td><strong>pop</strong></td>
+          <td>pop rax</td>
+          <td>将栈顶的值赋值给rax，rsp+=8</td>
+      </tr>
+  </tbody>
+</table></div>
+<p>不难发现两个操作数指令的目的寄存器都是第一个寄存器，刚开始看的话有些奇怪。</p>
+<p>细心的同学可能会注意到call和jmp指令看起来效果都一样，但是描述却有些不同，call的话是函数调用，需要一些函数地址的保存压栈参数传递的操作，而jmp指令类似于C、Python语言的函数中的if、else语句，只涉及跳转，不能作为函数调用来使用。</p>
+<p><strong>另外在pop时rsp为何是+8而不是-8。</strong></p>
+<blockquote class="alert alert-note">
+    <p>上述问题留到之后的<strong>调用约定</strong>中讲解&hellip;&hellip;</p></blockquote>
+<p>了解到上述汇编语言后，感觉生词特别多，这对我感觉也是，不过我建议还是学过C语言和有一点入门Python之后再去看汇编语言，不然会很坐牢的，因为：</p>
+<p>计算机在执行汇编代码时，只会顺序执行。</p>
+<p>通过<strong>call</strong>、<strong>jmp</strong>、<strong>ret</strong>这种指令来完成跳转，所以汇编指令代码的执行流并不像高级语言程序一样流程明确。（在学习了C语言的指针这块的知识点，这会让你学汇编比较有利的）</p>
+<blockquote class="alert alert-warn">
+    <blockquote>
+<p>汇编指令代码会经常跳转导致可读性差一些，但执行效果是和高级语言（C、Python语言）差不多的。</p></blockquote></blockquote>
+<p>给点表格太懵了，我列出些例子(assembly&ndash;C)来看看：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-nasm" data-lang="nasm"><span class="line"><span class="cl"><span class="nf">mov</span> <span class="nb">rax</span> <span class="mi">0</span>  <span class="c1">;int a = 0</span>
+</span></span><span class="line"><span class="cl"><span class="nf">label1</span>  <span class="c1">;标签1，标签标志作用，用于标记代码中的某个位置，方便程序跳转或引用，标签本身不执行任何操作，仅作为一个 “标记点”，配合跳转指令jmp、jne（例如C中的goto作用），实现程序流程的控制</span>
+</span></span><span class="line"><span class="cl"><span class="nf">inc</span> <span class="nb">rax</span>  <span class="c1">;a++、a = a + 1</span>
+</span></span><span class="line"><span class="cl"><span class="nf">loop</span>  <span class="c1">;循环体的跳转</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">cmp</span> <span class="nb">rax</span> <span class="mi">100</span>  <span class="c1">;比较rax和100</span>
+</span></span><span class="line"><span class="cl"><span class="nf">jge</span> <span class="nv">label2</span>  <span class="c1">;if a&gt;= 100, break；这里就是a大于或等于100，就跳转到label2标签下的函数，否则就是小于100（jmp）跳转到label1下。</span>
+</span></span><span class="line"><span class="cl"><span class="nf">jmp</span> <span class="nv">label1</span>  <span class="c1">;loop</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">label2</span>  <span class="c1">;标签2</span>
+</span></span><span class="line"><span class="cl"><span class="nf">mov</span> <span class="nb">rax</span> <span class="mi">0</span>  <span class="c1">;将寄存器rax的值设置为0,清零返回（return 0）</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>不难发现，汇编语言的类似条件语句的jmp、jge不像if、else那样会有个比较符号（&gt;=、&lt;、!=、==）这样明显区分的，而是jge默认有条件跳转——大于等于&gt;=则跳转，jmp则是强制跳转（而不是小于&lt;就跳转），这点需要记住咯。</p>
+<p>这里的jge是通过eflag寄存器中的标志位来判断的，而eflag的标志位是通过之前的cmp来设置的。</p>
+<p>loop的情况稍些复杂，这里单独为其解释下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-nasm" data-lang="nasm"><span class="line"><span class="cl"><span class="nf">mov</span> <span class="nb">rcx</span><span class="p">,</span> <span class="mi">5</span>    <span class="c1">; 设置循环次数为 5（rcx 作为计数器）</span>
+</span></span><span class="line"><span class="cl"><span class="nl">label_loop:</span>   <span class="c1">; 循环体开始标签</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">; 循环执行的操作（例如打印、计算等）</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">mov</span> <span class="nb">rax</span><span class="p">,</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">add</span> <span class="nb">rax</span><span class="p">,</span> <span class="mi">2</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">loop</span> <span class="nv">label_loop</span>  <span class="c1">; 计数器 rcx 减 1，若不为 0 则跳回 label_loop</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">; 循环结束后执行这里的代码</span>
+</span></span><span class="line"><span class="cl"><span class="nf">mov</span> <span class="nb">rbx</span><span class="p">,</span> <span class="mi">0</span> <span class="c1">;return 0</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>loop自带a- -、a =a -1的作用，所以rcx=5的话，那就循环执行5次，rcx=0就退出循环。</p>
+<p>好难啊，要长脑子了&hellip;&hellip;</p>
+<p>还是用C语言开开路吧：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdint.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint64_t</span> <span class="n">rcx</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>  <span class="c1">// 循环计数器初始值为5
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">uint64_t</span> <span class="n">rax</span><span class="p">;</span>      <span class="c1">//定义rax、rbx、rcx
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">uint64_t</span> <span class="n">rbx</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// for循环模拟loop指令：先判断计数器，不为0则执行循环体
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">for</span> <span class="p">(;</span> <span class="n">rcx</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">;</span> <span class="n">rcx</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">rax</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>       <span class="c1">// 对应 mov rax, 1
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">rax</span> <span class="o">+=</span> <span class="mi">2</span><span class="p">;</span>      <span class="c1">// 对应 add rax, 2
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">rbx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>  <span class="c1">// 循环结束后设置rbx为0；rbx其实在C语言中是没有用的，在汇编语言中就充当类似return 0的作用
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="数值上下限溢出">数值上下限/溢出
+</h3><p>计算机不能存储无限大的数，这个数的数值有一定上限和下限。在这里了解下就好，学C语言都知道的。</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th style="text-align: center">类型</th>
+          <th>存储空间大小</th>
+          <th>最小值（一一对应）</th>
+          <th>最大值（一一对应）</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: center">char</td>
+          <td>1个字节</td>
+          <td>-128 或 0</td>
+          <td>127 或 255</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">unsigned char</td>
+          <td>1个字节</td>
+          <td>0</td>
+          <td>255</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">signed char</td>
+          <td>1个字节</td>
+          <td>-128</td>
+          <td>127</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">int</td>
+          <td>2个或4个字节</td>
+          <td>-32 768 或 -2 147 483 648</td>
+          <td>32767 或 2 147 483 647</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">unsigned int</td>
+          <td>2个或4个字节</td>
+          <td>0</td>
+          <td>65535或4 294 967 295</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">short</td>
+          <td>2个字节</td>
+          <td>-32 768</td>
+          <td>32767</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">unsigned short</td>
+          <td>2个字节</td>
+          <td>0</td>
+          <td>65 535</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">long</td>
+          <td>4个字节</td>
+          <td>-2 147 483 648</td>
+          <td>4 294 967 295</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">unsigned long</td>
+          <td>4个字节</td>
+          <td>0</td>
+          <td>4 294 967 295</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">long long (C99)</td>
+          <td>8个字节</td>
+          <td>-9 223 372 036 854 775 808</td>
+          <td>9 223 372 036 854 775 807</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">unsigned long long</td>
+          <td>8个字节</td>
+          <td>0</td>
+          <td>18 446 744 073 709 551 615</td>
+      </tr>
+  </tbody>
+</table></div>
+<p><em>如果是unsigned 也就是无符号数，数据的每一位都是代表数据。如果是signed有符号数，那么数据的最高位会被当作符号位处理。0代表正数,1代表负数。</em></p>
+<hr>
+<p><strong>溢出</strong>（这些比较有辨识度，看到就知道是溢出就好）</p>
+<p>数值有上下限范围，那么就不可避免的会有溢出情况。以32位int为例，有以下四种溢出：</p>
+<p>无符号上溢：0xffffffff + 1变成0</p>
+<p>无符号下溢：0-1变成0xffffffff</p>
+<p>有符号上溢：有符号正数0x7fffffff +1 变成负数0x80000000</p>
+<p>无符号下溢：有符号数0x80000000 -1 变成正数0x7fffffff</p>
+<p>这就是整数溢出。通常来说原因就是两点：</p>
+<p>存储位数不够</p>
+<p>溢出到符号位</p>
+<blockquote class="alert alert-tip">
+    <blockquote>
+<p>整数溢出一般配合别的漏洞来使用。</p></blockquote></blockquote>
+<h2 id="linux基础">Linux基础
+</h2><p>这一章内容多是一些文字描述，也会有生活案例加以理解，图片较少，较为枯燥。</p>
+<p><img src="/p/pwn/1.png"
+	width="1011"
+	height="599"
+	srcset="/p/pwn/1_hu_f407604601a0a452.png 480w, /p/pwn/1_hu_f5a7b4b89149cb17.png 1024w"
+	loading="lazy"
+	
+		alt="Linux大家族"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="168"
+		data-flex-basis="405px"
+	
+></p>
+<p>保护层级：分为四个ring0-ring3。一般来说就两个：0为内核，3为用户。</p>
+<p>权限：用户分为多个组</p>
+<p>文件和目录等等的权限一般都是三个，即可读可写可执行，
+读：R，写：W，执行：X</p>
+<p>赋予一个可执行文件执行权限就是chmod +x filename</p>
+<h3 id="操作系统">操作系统
+</h3><p>在第一阶段学习中我们接触到了Linux操作系统的相关指令：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th style="text-align: center">名称</th>
+          <th style="text-align: center">作用</th>
+          <th style="text-align: center">示例（以Kali虚拟机为例）</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: center">ls</td>
+          <td style="text-align: center">列出当前目录文件</td>
+          <td style="text-align: center">ls</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">cd</td>
+          <td style="text-align: center">切换目录</td>
+          <td style="text-align: center">cd/home/ctf</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">pwd</td>
+          <td style="text-align: center">打印当前目录</td>
+          <td style="text-align: center">pwd</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">touch</td>
+          <td style="text-align: center">创建空白文件</td>
+          <td style="text-align: center">touch flag</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">mkdir</td>
+          <td style="text-align: center">创建目录</td>
+          <td style="text-align: center">mkdir /home/ctf</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">rmdir</td>
+          <td style="text-align: center">删除目录</td>
+          <td style="text-align: center">rmdir /home/ctf</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">rm</td>
+          <td style="text-align: center">删除文件</td>
+          <td style="text-align: center">rm flag</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">cp</td>
+          <td style="text-align: center">复制文件</td>
+          <td style="text-align: center">cp /home/ctf/flag /home/flag</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">mv</td>
+          <td style="text-align: center">移动文件</td>
+          <td style="text-align: center">mv flag /home/ctf/flag</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">cat</td>
+          <td style="text-align: center">输出文件内容</td>
+          <td style="text-align: center">cat flag</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">diff</td>
+          <td style="text-align: center">比较两个文件信息</td>
+          <td style="text-align: center">diff flag1 flag2</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">chmod</td>
+          <td style="text-align: center">切换执行权限</td>
+          <td style="text-align: center">chmod 777 elf1</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">locate</td>
+          <td style="text-align: center">查找文件</td>
+          <td style="text-align: center">locate flag</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="数据存储">数据存储
+</h3><p>计算机内部有两种数据的存储形式：<strong>大端序、小端序</strong>。</p>
+<p><strong>大端序</strong>：数据高位存储在计算机地址的低位，数据低位存储在地址的高位。</p>
+<p><strong>小端序</strong>：数据高位存储在计算机地址的高位，数据低位存储在地址的低位。</p>
+<blockquote class="alert alert-tip">
+    <blockquote>
+<p>大端序：高低低高</p>
+<p>小端序：高高低低</p></blockquote></blockquote>
+<p>这时我也看不懂，上例子！</p>
+<p>我们以一个数据：0x123456789abcdef；那么0为低地址，7为高地址。</p>
+<p>大端序存储：低位储存到计算机地址高位&hellip;</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>0</th>
+          <th>1</th>
+          <th>2</th>
+          <th>3</th>
+          <th>4</th>
+          <th>5</th>
+          <th>6</th>
+          <th>7</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>01</td>
+          <td>23</td>
+          <td>45</td>
+          <td>67</td>
+          <td>89</td>
+          <td>ab</td>
+          <td>cd</td>
+          <td>ef</td>
+      </tr>
+  </tbody>
+</table></div>
+<p>将此数据按照字符串输出，得到：\x01\x23\x45\x67\x89\xab\xcd\xef</p>
+<p>小端序存储：低位储存到计算机地址的低位&hellip;</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>0</th>
+          <th>1</th>
+          <th>2</th>
+          <th>3</th>
+          <th>4</th>
+          <th>5</th>
+          <th>6</th>
+          <th>7</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>ef</td>
+          <td>cd</td>
+          <td>Ab</td>
+          <td>89</td>
+          <td>67</td>
+          <td>45</td>
+          <td>23</td>
+          <td>01</td>
+      </tr>
+  </tbody>
+</table></div>
+<p>将此数据按照字符串输出，得到：\xef\xcd\xab\x89\x67\x45\x23\x01</p>
+<p>从上面这两种方式比较的话，可以知道，大端序符合人类的阅读习惯；但从存储逻辑、数学运算规律来看，小端序更正常。</p>
+<blockquote class="alert alert-note">
+    <blockquote>
+<p>Linux数据存储的格式为<strong>小端序</strong></p></blockquote></blockquote>
+<p>Linux是小端序储存，所以我们以字符串的形式输入一个数字时，要注意格式，比如输入0xdeadbeef这个数字。</p>
+<p>字符串输入就是“\xef\xbe\xad\xde”传入给程序。不过好在有<strong>pwntools</strong>，p32(0xdeadbeef)即可完成自动转换。</p>
+<h3 id="文件描述符">文件描述符
+</h3><p>Linux系统中，把一切都看做是文件，当进程打开现有文件或创建新文件时，内核向进程返回一个文件描述符，文件描述符就是内核为了高效管理已被打开的文件所创建的索引，用来指向被打开的文件，所有执行 I/O 操作的系统调用都会通过文件描述符。</p>
+<p>每个文件描述符会与一个打开的文件相对应，不同的文件描述符也可能指向同一个文件。</p>
+<p>相同的文件可以被不同的进程打开，也可以在同一个进程被多次打开。</p>
+<p>我们会在open、read、write这些常见函数中见到。</p>
+<p>0标准输入（stdin）、1标准输出（stdout）、2标准错误（stderr）read(0,buf,size）从stdin中读size个数据到buf中，write(1,buf,size)从buf中取size个数据到stdout中。</p>
+<h3 id="栈stack">栈（stack）
+</h3><p>学过数据结构都知道，这是一种储存方式：是一种遵循「后进先出（LIFO, Last In First Out）」原则的线性数据结构，类似于日常生活中堆叠的盘子 —— 最后放上去的盘子，会被最先取走。</p>
+<p><strong>栈的核心特性</strong>：
+操作受限：只能在栈的一端（通常称为「栈顶」）进行数据的插入（称为「入栈」或 push）和删除（称为「出栈」或 pop），另一端（「栈底」）固定不动。</p>
+<p><em><strong>由于函数调用顺序也是LIFO，所以我们能接触到的绝大多数系统，都是通过栈这一数据结构来维护函数调用关系。</strong></em></p>
+<p><strong>顺序访问</strong>：只能从<strong>栈顶</strong>开始依次访问元素，无法直接访问栈中间或栈底的元素。</p>
+<p>说得我都懵了，这啥？？通俗讲就是栈好比是一个薯片罐，只有一个罐口，把薯片装进去后，最后放的薯片总是被第一个拿出来，倒数第二个被放进去的，在后面被打开时都是第二个先被拿出来，这就是栈的顺序访问特点啦，而栈就是薯片罐这种存储器的名字。</p>
+<p>等会？这放到机器语言如C语言的话，不就是数组吗？为什么那么麻烦要发明这个栈呢？就是方便一些，一把普通菜刀能切水果、剁骨头，为什么要发明水果刀和大砍刀？原因就是方便。</p>
+<blockquote class="alert alert-note">
+    <blockquote>
+<p>栈其实就是一个“阉割版”的数组，只能在一头操作。</p></blockquote></blockquote>
+<h4 id="linux种的栈">Linux种的栈
+</h4><p>在linux系统中，系统为每一个进程都安排了一个栈，进程中每一个调用的函数都有自己独立的栈帧。</p>
+<p>在linux系统中，栈是由高地址向低地址<strong>生长</strong>（小端序）。</p>
+<h5 id="换句话说高地址为栈底低地址为栈顶那么为什么这么反直觉反人类的安排呢">换句话说,高地址为栈底，低地址为栈顶。那么为什么这么反直觉反人类的安排呢？
+</h5><p>我们接触到的一些算法，很多都是用栈来实现的，比如DFS。DFS会将发现的节点存储在栈中，然后访问的顺序就是LIFO。但是很多这种LIFO的算法都会以<em><strong>递归</strong></em>的形式实现。其实，递归的形式实现这些算法本质上来说也是利用栈结构，只不过他没有在程序中另外申请一个栈，而是用的函数调用栈。</p>
+<h5 id="为什么栈从高地址向低地址生长">为什么栈从高地址向低地址生长？
+</h5><p>有的说法是这么设计和小端序更配合（比如说访问一个数据的低字节）。</p>
+<p>这里我的认知有限，我也不能解答，过于理论化研究也是很牢的。这只能留到未来的自己去解答了，这里先标记一下以后再单独出一篇Blog文章来讲解。只能先死记一下咯/************。</p>
+<h2 id="调用约定">调用约定
+</h2><p>看标题就是关于函数调用的内容，在上一章汇编指令就有预示了，像call调用函数地址、jmp无条件跳转。</p>
+<p>再来回顾下栈的指令：</p>
+<p>pop出栈/弹栈，Pop指令的作用是弹栈，将栈顶的数据弹出到寄存器，然后栈顶指针向下移动一个单位。具体来说：如pop rax，作用就是mov rax [rsp]；add rsp 8（平衡栈指针：当手动修改栈指针后（如临时分配栈空间），用 add rsp, 8 恢复栈的对齐状态，确保后续操作符合 8 字节对齐要求）；</p>
+<p>push压栈，Push指令的作用就是压栈，将栈顶指针向上移动一个单位的距离，然后将一个寄存器的值存放在栈顶，具体来说：如push rax，其实际效果就是：sub rsp 8; mov [rsp] rax；</p>
+<blockquote class="alert alert-tip">
+    <blockquote>
+<p>add rsp 8的8怎么来的？在 x86-64 架构（64 位系统）中：
+寄存器（如 rsp、rax 等）是 64 位（8 字节）的。内存地址也是 64 位的，最小的可寻址单位是字节，但栈操作通常以<strong>8 字节为单位进行对齐</strong>（这是系统调用和函数调用的标准要求）。</p></blockquote></blockquote>
+<h3 id="函数调用流程">函数调用流程
+</h3><p>从一个实例出发,main调用func_b, func_b调用func_a。我们从main函数开始，逐步分析栈帧变化:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">func_a</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//do sth
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">func_b</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">dunc_a</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">c</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">func_b</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>当运行到call func b时main函数的栈帧。Rbp指向栈底,rsp指向栈底
+这段栈帧存放了一些main的局部变量。
+main函数要调用func b，main只需要call func b，
+也就是push rip；mov rip func b；</p>
+<p>那么此时跳转到func_b继续执行，func _b直接执行主逻辑吗？
+显然不是的，被调用函数还需要维护栈帧。</p>
+<p>具体来说，需要以下几步：</p>
+<p>push rbp；将调用函数的栈底指针保存。</p>
+<p>mov rbp rsp；将栈底指针指向现在的栈顶。</p>
+<p>sub rsp xxx；开辟被调用函数的栈帧，此时上一步的rbp就指向栈帧的底。</p>
+<p><img src="/p/pwn/2.png"
+	width="420"
+	height="654"
+	srcset="/p/pwn/2_hu_1c5004a635f7b9a.png 480w, /p/pwn/2_hu_4c5071a9706d750a.png 1024w"
+	loading="lazy"
+	
+		alt="程序运行时内存中栈帧（stack frame）的组织方式"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="64"
+		data-flex-basis="154px"
+	
+></p>
+<p>图很明了了吧。但我起初一看，为什么int a =2所在地址要高于fun_b函数？不是funb函数要先比int a=2先执行吗？</p>
+<p>自问自答：要理解这个问题，需结合函数调用栈的生长方向和代码执行顺序与栈帧分配的关系来分析，<strong>栈是从高地址向低地址生长的</strong></p>
+<p>代码执行顺序是：main → func_b → func_a → 返回 func_b → 定义 int c = 1 → 返回 main → 定义 int a = 2。</p>
+<p>因为<strong>每个函数调用通常会占用一个栈帧</strong>，所以说fun_b函数会被分配在main函数之下（main函数先执行，固然main是位于高地址），而int a = 2 属于 main 栈帧的局部变量，因此地址高于 func_b 的栈帧。</p>
+<p>来我们继续分析这图，func_b执行完维护栈帧操作后的栈布局。
+所谓栈帧的维护就是维护rbp和rsp两个指针。
+Rsp永远指向当前<strong>栈的顶部</strong>（Rsp在哪和栈顶在哪关系不大，但Rsp是指向它所在的栈帧的顶部）。
+Rbp用来定位局部变量。</p>
+<p>接着，再往下运行程序，调用func_a函数。</p>
+<p><img src="/p/pwn/3.png"
+	width="528"
+	height="810"
+	srcset="/p/pwn/3_hu_9a324d1379c9fdbc.png 480w, /p/pwn/3_hu_1191a96fcc708a5e.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="65"
+		data-flex-basis="156px"
+	
+></p>
+<p>那这里的每一个栈帧就代表我之前所说的薯片啦，一片片被拿出来，一个个运行。</p>
+<p>func_b调用完func_a后的栈布局。至此，示例的函数调用已经完毕。
+现在，func_a执行完毕，要返回了。如何维护栈帧呢?</p>
+<p>在这里，我们学习一个新的汇编指令leave：</p>
+<p>作用是维护栈帧，通常出现在函数的结尾，与ret（return）连用。其实际作用为：mov rsp rbp；pop rbp；即：将栈顶指针指向栈帧的底部、然后在栈中弹出新的栈底指针。</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+	const mainArticleElement = document.querySelector(".main-article");
+        renderMathInElement(mainArticleElement, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <script
+    src="https://giscus.app/client.js"
+    data-repo="Expl0rer-Ct/Expl0rer.Ct-s-Blog"
+    data-repo-id="R_kgDOPd0X7g"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOPd0X7s4CuMr6"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="light"
+    data-lang="en"
+    data-loading=""
+    crossorigin="anonymous"
+    async
+></script>
+<script>
+    function setGiscusTheme(theme) {
+        let giscus = document.querySelector("iframe.giscus-frame");
+        if (giscus) {
+            giscus.contentWindow.postMessage(
+                {
+                    giscus: {
+                        setConfig: {
+                            theme: theme,
+                        },
+                    },
+                },
+                "https://giscus.app"
+            );
+        }
+    }
+
+    (function () {
+        addEventListener("message", (e) => {
+            if (event.origin !== "https://giscus.app") return;
+            handler();
+        });
+        window.addEventListener("onColorSchemeChange", handler);
+
+        function handler() {
+            if (document.documentElement.dataset.scheme === "light") {
+                setGiscusTheme('light');
+            } else {
+                setGiscusTheme('dark');
+            }
+        }
+    })();
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2025 Expl0rer.Ct
+    </section>
+    
+    <section class="powerby">
+        
+
+        
+        
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+        <p>博主发布了 9 篇文章 | 共 44073 字</p>
+  
+<a>总访客数: </a><span id='busuanzi_value_site_uv'>别急在加载中了...</span> <a> | </a> <a>总访问量: </a><span id='busuanzi_value_site_pv'>加载中...</span></br>
+
+
+
+<div class="site-uptime-container">
+  <span id="timeDate" class="site-uptime-text">载入天数...</span>
+  <span id="times" class="site-uptime-text">载入时分秒...</span>
+</div>
+
+<script language="javascript"> 
+    var now = new Date();
+    function createtime(){
+        now.setTime(now.getTime()+250); 
+        var grt= new Date("2025/08/01 00:00:00"); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24;
+        dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum);
+        hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;}
+        minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes);
+        if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds);
+        if(String(snum).length ==1 ){snum = "0" + snum;}
+
+        document.getElementById("timeDate").innerHTML = "本站已稳定运行"+dnum+" 天 ";document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"
+    }
+    setInterval("createtime()",250); 
+</script> 
+
+
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdnjs.cloudflare.com/ajax/libs/node-vibrant/3.1.6/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script><script type="text/javascript" src="/ts/custom.89d9bb2c3c071ae8a261f67661c22b84ef67ba7b7a885dabd2bbd9ebef84ed40.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+
+<head>
+  
+  <link rel="preconnect" href="https://fonts.font.im" crossorigin>
+  <link 
+    href="https://fonts.font.im/css?family=PT+Sans" 
+    rel="stylesheet"
+    media="print" 
+    onload="this.media='all'"
+    id="font-cn"
+  >
+  
+  
+  <link 
+    href="https://fonts.googleapis.com/css2?family=PT+Sans" 
+    rel="stylesheet"
+    media="print" 
+    onload="this.media='all'"
+    id="font-en"
+    disabled
+  >
+  
+  <script>
+    
+    document.querySelector('#font-cn').addEventListener('load', function() {
+      document.querySelector('#font-en').disabled = true;
+    }).addEventListener('error', function() {
+      document.querySelector('#font-en').disabled = false;
+      document.querySelector('#font-en').media = 'all';
+    });
+  </script>
+  
+  <noscript>
+    <link 
+      href="https://fonts.font.im/css?family=PT+Sans" 
+      rel="stylesheet"
+    >
+  </noscript>
+</head>
+
+
+<script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+<style>
+    #TableOfContents > ul ul,
+    #TableOfContents > ul ol,
+    #TableOfContents > ol ul,
+    #TableOfContents > ol ol {
+        display: none;
+    }
+    #TableOfContents > ul .open,
+    #TableOfContents > ol .open {
+        display: block;
+    }
+</style>
+
+<script>
+    function initTocHide() {
+        let toc = document.querySelector(".widget--toc");
+        if (!toc) {
+            return;
+        }
+        window.addEventListener('scroll', function() {
+            let openUl = document.querySelectorAll(".open");
+            if (openUl.length > 0) {
+              openUl.forEach((ul) => {
+                ul.classList.remove("open")
+              })
+            }
+            let currentLi = document.querySelector(".active-class");
+            if (!currentLi) {
+                return
+            }
+            if (currentLi.children.length > 1) {
+                currentLi.children[1].classList.add("open")
+            }
+            let ul = currentLi.parentElement;
+            do {
+                ul.classList.add("open");
+                const parent = ul.parentElement;
+                ul = parent ? parent.parentElement : null;
+            } while (ul && (ul.localName === 'ul' || ul.localName === 'ol'))
+        });
+    }
+    initTocHide()
+</script>
+
+
+<style>
+    #backTopBtn {
+        display: none;
+        position: fixed;
+        bottom: 30px;
+        z-index: 99;
+        cursor: pointer;
+        width: 30px;
+        height: 30px;
+        background-image: url(http://8.148.145.201/icons/backTop.svg);
+    }
+</style>
+
+<script>
+    function initScrollTop() {
+        let rightSideBar = document.querySelector(".right-sidebar");
+        if (!rightSideBar) {
+            return;
+        }
+        let btn = document.createElement("div");
+        btn.id = "backTopBtn";
+        btn.onclick = backToTop
+        rightSideBar.appendChild(btn)
+        window.addEventListener('scroll', function() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                btn.style.display = "block";
+            } else {
+                btn.style.display = "none";
+            }
+        });
+    }
+
+    function backToTop(){
+        window.scrollTo({ top: 0, behavior: "smooth" })
+    }
+
+    initScrollTop();
+</script>
+
+
+<style>
+    .highlight {
+        max-height: 400px;
+        overflow: hidden;
+    }
+
+    .code-show {
+        max-height: none !important;
+    }
+
+    .code-more-box {
+        width: 100%;
+        padding-top: 78px;
+        background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0)), to(#fff));
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1;
+    }
+
+    .code-more-btn {
+        display: block;
+        margin: auto;
+        width: 44px;
+        height: 22px;
+        background: #f0f0f5;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        padding-top: 6px;
+        cursor: pointer;
+    }
+
+    .code-more-img {
+        cursor: pointer !important;
+        display: block;
+        margin: auto;
+        width: 22px;
+        height: 16px;
+    }
+</style>
+
+<script>
+  function initCodeMoreBox() {
+    let codeBlocks = document.querySelectorAll(".highlight");
+    if (!codeBlocks) {
+      return;
+    }
+    codeBlocks.forEach(codeBlock => {
+      if (codeBlock.scrollHeight <= codeBlock.clientHeight) {
+        return;
+      }
+      let codeMoreBox = document.createElement('div');
+      codeMoreBox.classList.add('code-more-box');
+      let codeMoreBtn = document.createElement('span');
+      codeMoreBtn.classList.add('code-more-btn');
+      codeMoreBtn.addEventListener('click', () => {
+        codeBlock.classList.add('code-show');
+        codeMoreBox.style.display = 'none';
+        window.dispatchEvent(new Event('resize'))
+      })
+      let img = document.createElement('img');
+      img.classList.add('code-more-img');
+      img.src = "http:\/\/8.148.145.201\/icons\/codeMore.png"
+      codeMoreBtn.appendChild(img);
+      codeMoreBox.appendChild(codeMoreBtn);
+      codeBlock.appendChild(codeMoreBox)
+    })
+  }
+  
+  initCodeMoreBox();
+</script>
+
+
+
+<script defer src="https://cn.vercount.one/js"></script>
+
+
+<script>
+    function showHideView() {
+        let viewCounts = document.querySelectorAll("#viewCount");
+        if (viewCounts) {
+            let article =  document.querySelector(".article-page");
+            if (!article) {
+                viewCounts.forEach(ele => {
+                    ele.style.display = 'none';
+                });
+            }
+        }
+    }
+    
+    showHideView();
+</script>
+
+<script src="https://npm.elemecdn.com/nprogress@0.2.0/nprogress.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://npm.elemecdn.com/nprogress@0.2.0/nprogress.css" crossorigin="anonymous" />
+<script>
+    NProgress.start();
+    document.addEventListener("readystatechange", () => {
+        if (document.readyState === "interactive") NProgress.inc(0.8);
+        if (document.readyState === "complete") NProgress.done();
+    });
+</script>
+
+
+<script>
+    var pjax = new pjax({
+        selectors: [
+            ".main-container"
+        ]
+    })
+
+</script>
+
+<script>
+    pjax._handleResponse = pjax.handleResponse;
+    pjax.handleResponse = function(responseText, request, href, options) {
+        if (request.responseText.match("<html")) {
+            if (responseText) {
+                let newDom = new DOMParser().parseFromString(responseText, 'text/html');
+                let bodyClass = newDom.body.className;
+                document.body.setAttribute("class", bodyClass)
+            }
+            pjax._handleResponse(responseText, request, href, options);
+        } else {
+        }
+    }
+</script>
+
+
+
+<script>
+    document.addEventListener('pjax:complete', () => {
+        if (window.Stack && typeof window.Stack.init === 'function') {
+            window.Stack.init();
+        }
+    })
+</script>
+
+<div id="particles-js"></div>
+
+<script src="http://8.148.145.201/background/particles.min.js"></script>
+<script>
+  particlesJS.load('particles-js', "http:\/\/8.148.145.201\/background\/particlesjs-config.json", function() {
+    console.log('particles.js loaded - callback');
+  });
+</script>
+
+<style>
+  #particles-js {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: -1;
+  }
+</style>
+
+
+<script src="http://8.148.145.201/background/sakura.js"></script>
+
+    </body>
+</html>

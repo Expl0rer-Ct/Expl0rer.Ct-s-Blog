@@ -2,18 +2,825 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>CTF_writeup on Expl0rer.Ct</title>
-        <link>http://expl0rer.top/categories/ctf_writeup/</link>
+        <link>http://8.148.145.201/categories/ctf_writeup/</link>
         <description>Recent content in CTF_writeup on Expl0rer.Ct</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Expl0rer.Ct</copyright>
-        <lastBuildDate>Sun, 27 Jul 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://expl0rer.top/categories/ctf_writeup/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>CTF</title>
-        <link>http://expl0rer.top/p/ctf/</link>
-        <pubDate>Sun, 27 Jul 2025 00:00:00 +0000</pubDate>
+        <lastBuildDate>Thu, 21 Aug 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://8.148.145.201/categories/ctf_writeup/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>PWN</title>
+        <link>http://8.148.145.201/p/pwn/</link>
+        <pubDate>Thu, 21 Aug 2025 00:00:00 +0000</pubDate>
         
-        <guid>http://expl0rer.top/p/ctf/</guid>
-        <description></description>
+        <guid>http://8.148.145.201/p/pwn/</guid>
+        <description>&lt;p&gt;&lt;strong&gt;前文：以下是我入门PWN的记录，欢迎各位前来观看，小弟领教！&lt;/strong&gt;&lt;/p&gt;
+&lt;h1 id=&#34;ctf是什么&#34;&gt;CTF是什么？
+&lt;/h1&gt;&lt;p&gt;CTF（Capture The Flag）中文一般译作夺旗赛，在网络安全领域中指的是网络安全技术人员之间进行技术竞技的一种比赛形式。CTF起源于1996年DEFCON全球黑客大会，以代替之前黑客们通过互相发起真实攻击进行技术比拼的方式。发展至今，已经成为全球范围网络安全圈流行的竞赛形式。&lt;/p&gt;
+&lt;p&gt;CTF比赛形式主要为&lt;strong&gt;线上解题（jeopardy）&lt;strong&gt;和&lt;/strong&gt;线下攻防（Attack With Defence）&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;线上赛题目大致方向有WEB、RE、PWN、MISC、CRYPTO，解出flag交给服务器验证通过才得分。&lt;/p&gt;
+&lt;h2 id=&#34;pwn简介&#34;&gt;PWN简介
+&lt;/h2&gt;&lt;p&gt;Pwn是什么？&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;Pwn&amp;quot;是一个黑客语法的俚语词，是指攻破设备或者系统。发音类似“砰”，对黑客而言，这就是成功实施黑客攻击的声音一研的一声，被“黑”的电脑或手机就被你操纵了。CTF中的PWN主要是针对于二进制漏洞挖掘与利用，通常情况下选手需要对于一个有漏洞的可执行文件进行分析，找到漏洞，然后利用漏洞读取远程服务器上的FLAG。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Pwn传统出题方向：glibc PWN：堆、栈、shellcode编写、iofile等。进阶：arm架构、loT、内核、vm、浏览器等。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;实际生活中我们会遇到的pwn：&lt;/p&gt;
+&lt;p&gt;泄露通信数据：心脏滴血（cve-2014-0160）&lt;/p&gt;
+&lt;p&gt;Linux本地提权root：脏牛dirty cow（cve-2016-5195）&lt;/p&gt;
+&lt;p&gt;Wannacry：永恒之蓝勒索病毒&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/pwn/glibc-pwn.png&#34;
+	width=&#34;2010&#34;
+	height=&#34;731&#34;
+	srcset=&#34;http://8.148.145.201/p/pwn/glibc-pwn_hu_76ead02599234b1.png 480w, http://8.148.145.201/p/pwn/glibc-pwn_hu_4c76d810cb42dfe6.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;glibc学习路线&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;274&#34;
+		data-flex-basis=&#34;659px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;blockquote class=&#34;alert alert-error&#34;&gt;
+    &lt;blockquote&gt;
+&lt;p&gt;PWN入门劝退集&amp;hellip;&amp;hellip;&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;h2 id=&#34;第一节汇编语言基础&#34;&gt;第一节：汇编语言基础
+&lt;/h2&gt;&lt;p&gt;我自己在打ctf逆向和pwn，也时常搞不懂bit和byte，在这里我先把一些计算机内的量词回忆一下：&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;名称&lt;/th&gt;
+          &lt;th&gt;翻译&lt;/th&gt;
+          &lt;th&gt;大小&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;bit&lt;/td&gt;
+          &lt;td&gt;比特&lt;/td&gt;
+          &lt;td&gt;1位（1b）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;byte&lt;/td&gt;
+          &lt;td&gt;字节&lt;/td&gt;
+          &lt;td&gt;8位（1B）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;word&lt;/td&gt;
+          &lt;td&gt;字&lt;/td&gt;
+          &lt;td&gt;16位&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;dword&lt;/td&gt;
+          &lt;td&gt;双字&lt;/td&gt;
+          &lt;td&gt;32位&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;qword&lt;/td&gt;
+          &lt;td&gt;四字&lt;/td&gt;
+          &lt;td&gt;64位&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;计算机寻址方式&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;在当前主流的操作系统中，都是以字节（B）为寻址单位进行寻址。&lt;/p&gt;
+&lt;p&gt;意味着计算机访问的最小单位是一个字节（B）。&lt;/p&gt;
+&lt;p&gt;类比于人口普查，普查员以每户（B)为单位统计，而不是访问到个人（b）。&lt;/p&gt;
+&lt;h3 id=&#34;寄存器&#34;&gt;寄存器
+&lt;/h3&gt;&lt;p&gt;计算机的指令都是由CPU来执行。&lt;/p&gt;
+&lt;p&gt;在计算机系统结构中，CPU和内存是分开的。&lt;/p&gt;
+&lt;p&gt;寄存器存在于CPU中，是CPU的直接操作对象。&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;寄存器名称&lt;/th&gt;
+          &lt;th&gt;作用&lt;/th&gt;
+          &lt;th&gt;备注&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;RAX&lt;/td&gt;
+          &lt;td&gt;通用寄存器&lt;/td&gt;
+          &lt;td&gt;低32位：EAX；低16位：AX；低8位：AL&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;RBX&lt;/td&gt;
+          &lt;td&gt;通用寄存器&lt;/td&gt;
+          &lt;td&gt;低32位：EAX；低16位：AX；低8位：AL&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;RCX&lt;/td&gt;
+          &lt;td&gt;通用寄存器&lt;/td&gt;
+          &lt;td&gt;低32位：EAX；低16位：AX；低8位：AL&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;RDX&lt;/td&gt;
+          &lt;td&gt;通用寄存器&lt;/td&gt;
+          &lt;td&gt;低32位：EAX；低16位：AX；低8位：AL&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;RDI&lt;/td&gt;
+          &lt;td&gt;通用寄存器&lt;/td&gt;
+          &lt;td&gt;低32位：EDI&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;RSI&lt;/td&gt;
+          &lt;td&gt;通用寄存器&lt;/td&gt;
+          &lt;td&gt;低32位：EDI&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;R8&lt;/td&gt;
+          &lt;td&gt;通用寄存器&lt;/td&gt;
+          &lt;td&gt;低32位：EDI&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;R9&lt;/td&gt;
+          &lt;td&gt;通用寄存器&lt;/td&gt;
+          &lt;td&gt;低32位：EDI&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;R10&lt;/td&gt;
+          &lt;td&gt;通用寄存器&lt;/td&gt;
+          &lt;td&gt;低32位：EDI&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;R11&lt;/td&gt;
+          &lt;td&gt;通用寄存器&lt;/td&gt;
+          &lt;td&gt;低32位：EDI&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;R12&lt;/td&gt;
+          &lt;td&gt;通用寄存器&lt;/td&gt;
+          &lt;td&gt;低32位：EDI&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;R13&lt;/td&gt;
+          &lt;td&gt;通用寄存器&lt;/td&gt;
+          &lt;td&gt;低32位：EDI&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;R14&lt;/td&gt;
+          &lt;td&gt;通用寄存器&lt;/td&gt;
+          &lt;td&gt;低32位：EDI&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;R15&lt;/td&gt;
+          &lt;td&gt;通用寄存器&lt;/td&gt;
+          &lt;td&gt;低32位：EDI&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;RSP&lt;/td&gt;
+          &lt;td&gt;栈顶指针&lt;/td&gt;
+          &lt;td&gt;低32位：ESP&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;RBP&lt;/td&gt;
+          &lt;td&gt;栈底指针&lt;/td&gt;
+          &lt;td&gt;低32位：ESP&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;EFLAGS&lt;/td&gt;
+          &lt;td&gt;标志寄存器&lt;/td&gt;
+          &lt;td&gt;记录标志状态，包括AF、PF、SF、ZF、OF、CF等标识位&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;RIP&lt;/td&gt;
+          &lt;td&gt;指令计数器&lt;/td&gt;
+          &lt;td&gt;保存下一条将会执行的指令的地址&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;上述的通用寄存器，通常用于参数传递以及算数运算等通用场合。&lt;/p&gt;
+&lt;p&gt;RSP为栈顶指针，RBP为栈底指针，二者用于维护程序运行时的函数栈，在之后的调用约定一节会对其进行讲解。&lt;/p&gt;
+&lt;p&gt;EFLAGS为标志位寄存器，用于存储CPU运行计算过程中的状态，如进位溢出等。&lt;/p&gt;
+&lt;p&gt;RIP指针用于存储CPU下一条将会执行的指针，不能直接修改,正常情况下会每一次运行一条指令自增一条指令的长度，当发生跳转时才会以其他形式改变其值。&lt;/p&gt;
+&lt;h3 id=&#34;cpu的寻址方式&#34;&gt;CPU的寻址方式
+&lt;/h3&gt;&lt;p&gt;学过C语言都知道指针，它是一个变量，它存储的是另一个变量的内存地址，而不是直接存储数据本身。这里解释的是比较含糊，详细的还请搜索引擎。&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;寻址方式&lt;/th&gt;
+          &lt;th&gt;示例&lt;/th&gt;
+          &lt;th&gt;实际访问&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;立即寻址&lt;/td&gt;
+          &lt;td&gt;1234h&lt;/td&gt;
+          &lt;td&gt;1234h这个数字本身&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;直接寻址&lt;/td&gt;
+          &lt;td&gt;[1234h]&lt;/td&gt;
+          &lt;td&gt;内存地址1234h&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;寄存器寻址&lt;/td&gt;
+          &lt;td&gt;RAX&lt;/td&gt;
+          &lt;td&gt;访问RAX寄存器&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;寄存器间接寻址&lt;/td&gt;
+          &lt;td&gt;[RAX]&lt;/td&gt;
+          &lt;td&gt;访问RAX寄存器存储的值的这一内存地址&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;变址寻址&lt;/td&gt;
+          &lt;td&gt;[RAX+1234h]&lt;/td&gt;
+          &lt;td&gt;访问RAX寄存器存储的值+1234h这一内存地址&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;汇编指令&#34;&gt;汇编指令
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;指令类型&lt;/th&gt;
+          &lt;th&gt;操作码&lt;/th&gt;
+          &lt;th&gt;例子（Intel格式）&lt;/th&gt;
+          &lt;th&gt;实际效果&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;数据传送指令&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;mov&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;mov rax rbx&lt;/td&gt;
+          &lt;td&gt;rax = rbx&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;取地址指令&lt;/td&gt;
+          &lt;td&gt;lea&lt;/td&gt;
+          &lt;td&gt;lex rax [rbx]&lt;/td&gt;
+          &lt;td&gt;rax =&amp;amp;*rbx&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;算数运算指令+&lt;/td&gt;
+          &lt;td&gt;add&lt;/td&gt;
+          &lt;td&gt;add rax rbx&lt;/td&gt;
+          &lt;td&gt;rax = rax + rbx&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-&lt;/td&gt;
+          &lt;td&gt;sub&lt;/td&gt;
+          &lt;td&gt;sub rax rbx&lt;/td&gt;
+          &lt;td&gt;rax = rax - rbx&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;逻辑运算指令&lt;/td&gt;
+          &lt;td&gt;and&lt;/td&gt;
+          &lt;td&gt;and rax rbx&lt;/td&gt;
+          &lt;td&gt;rax = rax&amp;amp;rbx&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;/td&gt;
+          &lt;td&gt;xor&lt;/td&gt;
+          &lt;td&gt;xor rax rbx&lt;/td&gt;
+          &lt;td&gt;rax = rax | rbx&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;函数调用指令&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;call&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;call 1234h&lt;/td&gt;
+          &lt;td&gt;执行内存地址1234h处的函数&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;函数返回指令&lt;/td&gt;
+          &lt;td&gt;ret&lt;/td&gt;
+          &lt;td&gt;ret&lt;/td&gt;
+          &lt;td&gt;函数返回&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;比较&lt;/td&gt;
+          &lt;td&gt;cmp&lt;/td&gt;
+          &lt;td&gt;cmp rax rbx&lt;/td&gt;
+          &lt;td&gt;比较rax与rbx，结果保存在EFLAG寄存器&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;无条件跳转&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;jmp&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;jmp 1234h&lt;/td&gt;
+          &lt;td&gt;eip = 1234h&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;栈操作指令&lt;/td&gt;
+          &lt;td&gt;push&lt;/td&gt;
+          &lt;td&gt;push rax&lt;/td&gt;
+          &lt;td&gt;将rax存储的值压栈&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;pop&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;pop rax&lt;/td&gt;
+          &lt;td&gt;将栈顶的值赋值给rax，rsp+=8&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;不难发现两个操作数指令的目的寄存器都是第一个寄存器，刚开始看的话有些奇怪。&lt;/p&gt;
+&lt;p&gt;细心的同学可能会注意到call和jmp指令看起来效果都一样，但是描述却有些不同，call的话是函数调用，需要一些函数地址的保存压栈参数传递的操作，而jmp指令类似于C、Python语言的函数中的if、else语句，只涉及跳转，不能作为函数调用来使用。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;另外在pop时rsp为何是+8而不是-8。&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote class=&#34;alert alert-note&#34;&gt;
+    &lt;p&gt;上述问题留到之后的&lt;strong&gt;调用约定&lt;/strong&gt;中讲解&amp;hellip;&amp;hellip;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;了解到上述汇编语言后，感觉生词特别多，这对我感觉也是，不过我建议还是学过C语言和有一点入门Python之后再去看汇编语言，不然会很坐牢的，因为：&lt;/p&gt;
+&lt;p&gt;计算机在执行汇编代码时，只会顺序执行。&lt;/p&gt;
+&lt;p&gt;通过&lt;strong&gt;call&lt;/strong&gt;、&lt;strong&gt;jmp&lt;/strong&gt;、&lt;strong&gt;ret&lt;/strong&gt;这种指令来完成跳转，所以汇编指令代码的执行流并不像高级语言程序一样流程明确。（在学习了C语言的指针这块的知识点，这会让你学汇编比较有利的）&lt;/p&gt;
+&lt;blockquote class=&#34;alert alert-warn&#34;&gt;
+    &lt;blockquote&gt;
+&lt;p&gt;汇编指令代码会经常跳转导致可读性差一些，但执行效果是和高级语言（C、Python语言）差不多的。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;给点表格太懵了，我列出些例子(assembly&amp;ndash;C)来看看：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-nasm&#34; data-lang=&#34;nasm&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;mov&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;rax&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;;int a = 0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;label1&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;;标签1，标签标志作用，用于标记代码中的某个位置，方便程序跳转或引用，标签本身不执行任何操作，仅作为一个 “标记点”，配合跳转指令jmp、jne（例如C中的goto作用），实现程序流程的控制&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;inc&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;rax&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;;a++、a = a + 1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;loop&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;;循环体的跳转&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;cmp&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;rax&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;100&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;;比较rax和100&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;jge&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;label2&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;;if a&amp;gt;= 100, break；这里就是a大于或等于100，就跳转到label2标签下的函数，否则就是小于100（jmp）跳转到label1下。&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;jmp&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;label1&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;;loop&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;label2&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;;标签2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;mov&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;rax&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;;将寄存器rax的值设置为0,清零返回（return 0）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;不难发现，汇编语言的类似条件语句的jmp、jge不像if、else那样会有个比较符号（&amp;gt;=、&amp;lt;、!=、==）这样明显区分的，而是jge默认有条件跳转——大于等于&amp;gt;=则跳转，jmp则是强制跳转（而不是小于&amp;lt;就跳转），这点需要记住咯。&lt;/p&gt;
+&lt;p&gt;这里的jge是通过eflag寄存器中的标志位来判断的，而eflag的标志位是通过之前的cmp来设置的。&lt;/p&gt;
+&lt;p&gt;loop的情况稍些复杂，这里单独为其解释下：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-nasm&#34; data-lang=&#34;nasm&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;mov&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;rcx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;5&lt;/span&gt;    &lt;span class=&#34;c1&#34;&gt;; 设置循环次数为 5（rcx 作为计数器）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;label_loop:&lt;/span&gt;   &lt;span class=&#34;c1&#34;&gt;; 循环体开始标签&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;; 循环执行的操作（例如打印、计算等）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;mov&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;rax&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;add&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;rax&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;loop&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;label_loop&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;; 计数器 rcx 减 1，若不为 0 则跳回 label_loop&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;; 循环结束后执行这里的代码&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;mov&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;rbx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;;return 0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;loop自带a- -、a =a -1的作用，所以rcx=5的话，那就循环执行5次，rcx=0就退出循环。&lt;/p&gt;
+&lt;p&gt;好难啊，要长脑子了&amp;hellip;&amp;hellip;&lt;/p&gt;
+&lt;p&gt;还是用C语言开开路吧：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#include&lt;/span&gt; &lt;span class=&#34;cpf&#34;&gt;&amp;lt;stdint.h&amp;gt;&lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kt&#34;&gt;uint64_t&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;rcx&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;// 循环计数器初始值为5
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;kt&#34;&gt;uint64_t&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;rax&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;      &lt;span class=&#34;c1&#34;&gt;//定义rax、rbx、rcx
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;kt&#34;&gt;uint64_t&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;rbx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// for循环模拟loop指令：先判断计数器，不为0则执行循环体
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;rcx&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;rcx&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;--&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;rax&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;       &lt;span class=&#34;c1&#34;&gt;// 对应 mov rax, 1
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;        &lt;span class=&#34;n&#34;&gt;rax&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;      &lt;span class=&#34;c1&#34;&gt;// 对应 add rax, 2
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;rbx&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;// 循环结束后设置rbx为0；rbx其实在C语言中是没有用的，在汇编语言中就充当类似return 0的作用
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;数值上下限溢出&#34;&gt;数值上下限/溢出
+&lt;/h3&gt;&lt;p&gt;计算机不能存储无限大的数，这个数的数值有一定上限和下限。在这里了解下就好，学C语言都知道的。&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th style=&#34;text-align: center&#34;&gt;类型&lt;/th&gt;
+          &lt;th&gt;存储空间大小&lt;/th&gt;
+          &lt;th&gt;最小值（一一对应）&lt;/th&gt;
+          &lt;th&gt;最大值（一一对应）&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;char&lt;/td&gt;
+          &lt;td&gt;1个字节&lt;/td&gt;
+          &lt;td&gt;-128 或 0&lt;/td&gt;
+          &lt;td&gt;127 或 255&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;unsigned char&lt;/td&gt;
+          &lt;td&gt;1个字节&lt;/td&gt;
+          &lt;td&gt;0&lt;/td&gt;
+          &lt;td&gt;255&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;signed char&lt;/td&gt;
+          &lt;td&gt;1个字节&lt;/td&gt;
+          &lt;td&gt;-128&lt;/td&gt;
+          &lt;td&gt;127&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;int&lt;/td&gt;
+          &lt;td&gt;2个或4个字节&lt;/td&gt;
+          &lt;td&gt;-32 768 或 -2 147 483 648&lt;/td&gt;
+          &lt;td&gt;32767 或 2 147 483 647&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;unsigned int&lt;/td&gt;
+          &lt;td&gt;2个或4个字节&lt;/td&gt;
+          &lt;td&gt;0&lt;/td&gt;
+          &lt;td&gt;65535或4 294 967 295&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;short&lt;/td&gt;
+          &lt;td&gt;2个字节&lt;/td&gt;
+          &lt;td&gt;-32 768&lt;/td&gt;
+          &lt;td&gt;32767&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;unsigned short&lt;/td&gt;
+          &lt;td&gt;2个字节&lt;/td&gt;
+          &lt;td&gt;0&lt;/td&gt;
+          &lt;td&gt;65 535&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;long&lt;/td&gt;
+          &lt;td&gt;4个字节&lt;/td&gt;
+          &lt;td&gt;-2 147 483 648&lt;/td&gt;
+          &lt;td&gt;4 294 967 295&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;unsigned long&lt;/td&gt;
+          &lt;td&gt;4个字节&lt;/td&gt;
+          &lt;td&gt;0&lt;/td&gt;
+          &lt;td&gt;4 294 967 295&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;long long (C99)&lt;/td&gt;
+          &lt;td&gt;8个字节&lt;/td&gt;
+          &lt;td&gt;-9 223 372 036 854 775 808&lt;/td&gt;
+          &lt;td&gt;9 223 372 036 854 775 807&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;unsigned long long&lt;/td&gt;
+          &lt;td&gt;8个字节&lt;/td&gt;
+          &lt;td&gt;0&lt;/td&gt;
+          &lt;td&gt;18 446 744 073 709 551 615&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;em&gt;如果是unsigned 也就是无符号数，数据的每一位都是代表数据。如果是signed有符号数，那么数据的最高位会被当作符号位处理。0代表正数,1代表负数。&lt;/em&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;溢出&lt;/strong&gt;（这些比较有辨识度，看到就知道是溢出就好）&lt;/p&gt;
+&lt;p&gt;数值有上下限范围，那么就不可避免的会有溢出情况。以32位int为例，有以下四种溢出：&lt;/p&gt;
+&lt;p&gt;无符号上溢：0xffffffff + 1变成0&lt;/p&gt;
+&lt;p&gt;无符号下溢：0-1变成0xffffffff&lt;/p&gt;
+&lt;p&gt;有符号上溢：有符号正数0x7fffffff +1 变成负数0x80000000&lt;/p&gt;
+&lt;p&gt;无符号下溢：有符号数0x80000000 -1 变成正数0x7fffffff&lt;/p&gt;
+&lt;p&gt;这就是整数溢出。通常来说原因就是两点：&lt;/p&gt;
+&lt;p&gt;存储位数不够&lt;/p&gt;
+&lt;p&gt;溢出到符号位&lt;/p&gt;
+&lt;blockquote class=&#34;alert alert-tip&#34;&gt;
+    &lt;blockquote&gt;
+&lt;p&gt;整数溢出一般配合别的漏洞来使用。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;h2 id=&#34;linux基础&#34;&gt;Linux基础
+&lt;/h2&gt;&lt;p&gt;这一章内容多是一些文字描述，也会有生活案例加以理解，图片较少，较为枯燥。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/pwn/1.png&#34;
+	width=&#34;1011&#34;
+	height=&#34;599&#34;
+	srcset=&#34;http://8.148.145.201/p/pwn/1_hu_f407604601a0a452.png 480w, http://8.148.145.201/p/pwn/1_hu_f5a7b4b89149cb17.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Linux大家族&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;168&#34;
+		data-flex-basis=&#34;405px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;保护层级：分为四个ring0-ring3。一般来说就两个：0为内核，3为用户。&lt;/p&gt;
+&lt;p&gt;权限：用户分为多个组&lt;/p&gt;
+&lt;p&gt;文件和目录等等的权限一般都是三个，即可读可写可执行，
+读：R，写：W，执行：X&lt;/p&gt;
+&lt;p&gt;赋予一个可执行文件执行权限就是chmod +x filename&lt;/p&gt;
+&lt;h3 id=&#34;操作系统&#34;&gt;操作系统
+&lt;/h3&gt;&lt;p&gt;在第一阶段学习中我们接触到了Linux操作系统的相关指令：&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th style=&#34;text-align: center&#34;&gt;名称&lt;/th&gt;
+          &lt;th style=&#34;text-align: center&#34;&gt;作用&lt;/th&gt;
+          &lt;th style=&#34;text-align: center&#34;&gt;示例（以Kali虚拟机为例）&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;ls&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;列出当前目录文件&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;ls&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;cd&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;切换目录&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;cd/home/ctf&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;pwd&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;打印当前目录&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;pwd&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;touch&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;创建空白文件&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;touch flag&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;mkdir&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;创建目录&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;mkdir /home/ctf&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;rmdir&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;删除目录&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;rmdir /home/ctf&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;rm&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;删除文件&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;rm flag&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;cp&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;复制文件&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;cp /home/ctf/flag /home/flag&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;mv&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;移动文件&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;mv flag /home/ctf/flag&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;cat&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;输出文件内容&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;cat flag&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;diff&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;比较两个文件信息&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;diff flag1 flag2&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;chmod&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;切换执行权限&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;chmod 777 elf1&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;locate&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;查找文件&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;locate flag&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;数据存储&#34;&gt;数据存储
+&lt;/h3&gt;&lt;p&gt;计算机内部有两种数据的存储形式：&lt;strong&gt;大端序、小端序&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;大端序&lt;/strong&gt;：数据高位存储在计算机地址的低位，数据低位存储在地址的高位。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;小端序&lt;/strong&gt;：数据高位存储在计算机地址的高位，数据低位存储在地址的低位。&lt;/p&gt;
+&lt;blockquote class=&#34;alert alert-tip&#34;&gt;
+    &lt;blockquote&gt;
+&lt;p&gt;大端序：高低低高&lt;/p&gt;
+&lt;p&gt;小端序：高高低低&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;这时我也看不懂，上例子！&lt;/p&gt;
+&lt;p&gt;我们以一个数据：0x123456789abcdef；那么0为低地址，7为高地址。&lt;/p&gt;
+&lt;p&gt;大端序存储：低位储存到计算机地址高位&amp;hellip;&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;0&lt;/th&gt;
+          &lt;th&gt;1&lt;/th&gt;
+          &lt;th&gt;2&lt;/th&gt;
+          &lt;th&gt;3&lt;/th&gt;
+          &lt;th&gt;4&lt;/th&gt;
+          &lt;th&gt;5&lt;/th&gt;
+          &lt;th&gt;6&lt;/th&gt;
+          &lt;th&gt;7&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;01&lt;/td&gt;
+          &lt;td&gt;23&lt;/td&gt;
+          &lt;td&gt;45&lt;/td&gt;
+          &lt;td&gt;67&lt;/td&gt;
+          &lt;td&gt;89&lt;/td&gt;
+          &lt;td&gt;ab&lt;/td&gt;
+          &lt;td&gt;cd&lt;/td&gt;
+          &lt;td&gt;ef&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;将此数据按照字符串输出，得到：\x01\x23\x45\x67\x89\xab\xcd\xef&lt;/p&gt;
+&lt;p&gt;小端序存储：低位储存到计算机地址的低位&amp;hellip;&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;0&lt;/th&gt;
+          &lt;th&gt;1&lt;/th&gt;
+          &lt;th&gt;2&lt;/th&gt;
+          &lt;th&gt;3&lt;/th&gt;
+          &lt;th&gt;4&lt;/th&gt;
+          &lt;th&gt;5&lt;/th&gt;
+          &lt;th&gt;6&lt;/th&gt;
+          &lt;th&gt;7&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;ef&lt;/td&gt;
+          &lt;td&gt;cd&lt;/td&gt;
+          &lt;td&gt;Ab&lt;/td&gt;
+          &lt;td&gt;89&lt;/td&gt;
+          &lt;td&gt;67&lt;/td&gt;
+          &lt;td&gt;45&lt;/td&gt;
+          &lt;td&gt;23&lt;/td&gt;
+          &lt;td&gt;01&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;将此数据按照字符串输出，得到：\xef\xcd\xab\x89\x67\x45\x23\x01&lt;/p&gt;
+&lt;p&gt;从上面这两种方式比较的话，可以知道，大端序符合人类的阅读习惯；但从存储逻辑、数学运算规律来看，小端序更正常。&lt;/p&gt;
+&lt;blockquote class=&#34;alert alert-note&#34;&gt;
+    &lt;blockquote&gt;
+&lt;p&gt;Linux数据存储的格式为&lt;strong&gt;小端序&lt;/strong&gt;&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;Linux是小端序储存，所以我们以字符串的形式输入一个数字时，要注意格式，比如输入0xdeadbeef这个数字。&lt;/p&gt;
+&lt;p&gt;字符串输入就是“\xef\xbe\xad\xde”传入给程序。不过好在有&lt;strong&gt;pwntools&lt;/strong&gt;，p32(0xdeadbeef)即可完成自动转换。&lt;/p&gt;
+&lt;h3 id=&#34;文件描述符&#34;&gt;文件描述符
+&lt;/h3&gt;&lt;p&gt;Linux系统中，把一切都看做是文件，当进程打开现有文件或创建新文件时，内核向进程返回一个文件描述符，文件描述符就是内核为了高效管理已被打开的文件所创建的索引，用来指向被打开的文件，所有执行 I/O 操作的系统调用都会通过文件描述符。&lt;/p&gt;
+&lt;p&gt;每个文件描述符会与一个打开的文件相对应，不同的文件描述符也可能指向同一个文件。&lt;/p&gt;
+&lt;p&gt;相同的文件可以被不同的进程打开，也可以在同一个进程被多次打开。&lt;/p&gt;
+&lt;p&gt;我们会在open、read、write这些常见函数中见到。&lt;/p&gt;
+&lt;p&gt;0标准输入（stdin）、1标准输出（stdout）、2标准错误（stderr）read(0,buf,size）从stdin中读size个数据到buf中，write(1,buf,size)从buf中取size个数据到stdout中。&lt;/p&gt;
+&lt;h3 id=&#34;栈stack&#34;&gt;栈（stack）
+&lt;/h3&gt;&lt;p&gt;学过数据结构都知道，这是一种储存方式：是一种遵循「后进先出（LIFO, Last In First Out）」原则的线性数据结构，类似于日常生活中堆叠的盘子 —— 最后放上去的盘子，会被最先取走。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;栈的核心特性&lt;/strong&gt;：
+操作受限：只能在栈的一端（通常称为「栈顶」）进行数据的插入（称为「入栈」或 push）和删除（称为「出栈」或 pop），另一端（「栈底」）固定不动。&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;&lt;strong&gt;由于函数调用顺序也是LIFO，所以我们能接触到的绝大多数系统，都是通过栈这一数据结构来维护函数调用关系。&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;顺序访问&lt;/strong&gt;：只能从&lt;strong&gt;栈顶&lt;/strong&gt;开始依次访问元素，无法直接访问栈中间或栈底的元素。&lt;/p&gt;
+&lt;p&gt;说得我都懵了，这啥？？通俗讲就是栈好比是一个薯片罐，只有一个罐口，把薯片装进去后，最后放的薯片总是被第一个拿出来，倒数第二个被放进去的，在后面被打开时都是第二个先被拿出来，这就是栈的顺序访问特点啦，而栈就是薯片罐这种存储器的名字。&lt;/p&gt;
+&lt;p&gt;等会？这放到机器语言如C语言的话，不就是数组吗？为什么那么麻烦要发明这个栈呢？就是方便一些，一把普通菜刀能切水果、剁骨头，为什么要发明水果刀和大砍刀？原因就是方便。&lt;/p&gt;
+&lt;blockquote class=&#34;alert alert-note&#34;&gt;
+    &lt;blockquote&gt;
+&lt;p&gt;栈其实就是一个“阉割版”的数组，只能在一头操作。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;h4 id=&#34;linux种的栈&#34;&gt;Linux种的栈
+&lt;/h4&gt;&lt;p&gt;在linux系统中，系统为每一个进程都安排了一个栈，进程中每一个调用的函数都有自己独立的栈帧。&lt;/p&gt;
+&lt;p&gt;在linux系统中，栈是由高地址向低地址&lt;strong&gt;生长&lt;/strong&gt;（小端序）。&lt;/p&gt;
+&lt;h5 id=&#34;换句话说高地址为栈底低地址为栈顶那么为什么这么反直觉反人类的安排呢&#34;&gt;换句话说,高地址为栈底，低地址为栈顶。那么为什么这么反直觉反人类的安排呢？
+&lt;/h5&gt;&lt;p&gt;我们接触到的一些算法，很多都是用栈来实现的，比如DFS。DFS会将发现的节点存储在栈中，然后访问的顺序就是LIFO。但是很多这种LIFO的算法都会以&lt;em&gt;&lt;strong&gt;递归&lt;/strong&gt;&lt;/em&gt;的形式实现。其实，递归的形式实现这些算法本质上来说也是利用栈结构，只不过他没有在程序中另外申请一个栈，而是用的函数调用栈。&lt;/p&gt;
+&lt;h5 id=&#34;为什么栈从高地址向低地址生长&#34;&gt;为什么栈从高地址向低地址生长？
+&lt;/h5&gt;&lt;p&gt;有的说法是这么设计和小端序更配合（比如说访问一个数据的低字节）。&lt;/p&gt;
+&lt;p&gt;这里我的认知有限，我也不能解答，过于理论化研究也是很牢的。这只能留到未来的自己去解答了，这里先标记一下以后再单独出一篇Blog文章来讲解。只能先死记一下咯/************。&lt;/p&gt;
+&lt;h2 id=&#34;调用约定&#34;&gt;调用约定
+&lt;/h2&gt;&lt;p&gt;看标题就是关于函数调用的内容，在上一章汇编指令就有预示了，像call调用函数地址、jmp无条件跳转。&lt;/p&gt;
+&lt;p&gt;再来回顾下栈的指令：&lt;/p&gt;
+&lt;p&gt;pop出栈/弹栈，Pop指令的作用是弹栈，将栈顶的数据弹出到寄存器，然后栈顶指针向下移动一个单位。具体来说：如pop rax，作用就是mov rax [rsp]；add rsp 8（平衡栈指针：当手动修改栈指针后（如临时分配栈空间），用 add rsp, 8 恢复栈的对齐状态，确保后续操作符合 8 字节对齐要求）；&lt;/p&gt;
+&lt;p&gt;push压栈，Push指令的作用就是压栈，将栈顶指针向上移动一个单位的距离，然后将一个寄存器的值存放在栈顶，具体来说：如push rax，其实际效果就是：sub rsp 8; mov [rsp] rax；&lt;/p&gt;
+&lt;blockquote class=&#34;alert alert-tip&#34;&gt;
+    &lt;blockquote&gt;
+&lt;p&gt;add rsp 8的8怎么来的？在 x86-64 架构（64 位系统）中：
+寄存器（如 rsp、rax 等）是 64 位（8 字节）的。内存地址也是 64 位的，最小的可寻址单位是字节，但栈操作通常以&lt;strong&gt;8 字节为单位进行对齐&lt;/strong&gt;（这是系统调用和函数调用的标准要求）。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;h3 id=&#34;函数调用流程&#34;&gt;函数调用流程
+&lt;/h3&gt;&lt;p&gt;从一个实例出发,main调用func_b, func_b调用func_a。我们从main函数开始，逐步分析栈帧变化:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;func_a&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;//do sth
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;func_b&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;dunc_a&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;c&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;func_b&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;a&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;当运行到call func b时main函数的栈帧。Rbp指向栈底,rsp指向栈底
+这段栈帧存放了一些main的局部变量。
+main函数要调用func b，main只需要call func b，
+也就是push rip；mov rip func b；&lt;/p&gt;
+&lt;p&gt;那么此时跳转到func_b继续执行，func _b直接执行主逻辑吗？
+显然不是的，被调用函数还需要维护栈帧。&lt;/p&gt;
+&lt;p&gt;具体来说，需要以下几步：&lt;/p&gt;
+&lt;p&gt;push rbp；将调用函数的栈底指针保存。&lt;/p&gt;
+&lt;p&gt;mov rbp rsp；将栈底指针指向现在的栈顶。&lt;/p&gt;
+&lt;p&gt;sub rsp xxx；开辟被调用函数的栈帧，此时上一步的rbp就指向栈帧的底。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/pwn/2.png&#34;
+	width=&#34;420&#34;
+	height=&#34;654&#34;
+	srcset=&#34;http://8.148.145.201/p/pwn/2_hu_1c5004a635f7b9a.png 480w, http://8.148.145.201/p/pwn/2_hu_4c5071a9706d750a.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;程序运行时内存中栈帧（stack frame）的组织方式&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;64&#34;
+		data-flex-basis=&#34;154px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;图很明了了吧。但我起初一看，为什么int a =2所在地址要高于fun_b函数？不是funb函数要先比int a=2先执行吗？&lt;/p&gt;
+&lt;p&gt;自问自答：要理解这个问题，需结合函数调用栈的生长方向和代码执行顺序与栈帧分配的关系来分析，&lt;strong&gt;栈是从高地址向低地址生长的&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;代码执行顺序是：main → func_b → func_a → 返回 func_b → 定义 int c = 1 → 返回 main → 定义 int a = 2。&lt;/p&gt;
+&lt;p&gt;因为&lt;strong&gt;每个函数调用通常会占用一个栈帧&lt;/strong&gt;，所以说fun_b函数会被分配在main函数之下（main函数先执行，固然main是位于高地址），而int a = 2 属于 main 栈帧的局部变量，因此地址高于 func_b 的栈帧。&lt;/p&gt;
+&lt;p&gt;来我们继续分析这图，func_b执行完维护栈帧操作后的栈布局。
+所谓栈帧的维护就是维护rbp和rsp两个指针。
+Rsp永远指向当前&lt;strong&gt;栈的顶部&lt;/strong&gt;（Rsp在哪和栈顶在哪关系不大，但Rsp是指向它所在的栈帧的顶部）。
+Rbp用来定位局部变量。&lt;/p&gt;
+&lt;p&gt;接着，再往下运行程序，调用func_a函数。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/pwn/3.png&#34;
+	width=&#34;528&#34;
+	height=&#34;810&#34;
+	srcset=&#34;http://8.148.145.201/p/pwn/3_hu_9a324d1379c9fdbc.png 480w, http://8.148.145.201/p/pwn/3_hu_1191a96fcc708a5e.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;65&#34;
+		data-flex-basis=&#34;156px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;那这里的每一个栈帧就代表我之前所说的薯片啦，一片片被拿出来，一个个运行。&lt;/p&gt;
+&lt;p&gt;func_b调用完func_a后的栈布局。至此，示例的函数调用已经完毕。
+现在，func_a执行完毕，要返回了。如何维护栈帧呢?&lt;/p&gt;
+&lt;p&gt;在这里，我们学习一个新的汇编指令leave：&lt;/p&gt;
+&lt;p&gt;作用是维护栈帧，通常出现在函数的结尾，与ret（return）连用。其实际作用为：mov rsp rbp；pop rbp；即：将栈顶指针指向栈帧的底部、然后在栈中弹出新的栈底指针。&lt;/p&gt;
+</description>
         </item>
         
     </channel>

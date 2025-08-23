@@ -2,38 +2,853 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>Expl0rer.Ct</title>
-        <link>http://expl0rer.top/</link>
+        <link>http://8.148.145.201/</link>
         <description>Recent content on Expl0rer.Ct</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Expl0rer.Ct</copyright>
-        <lastBuildDate>Thu, 14 Aug 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://expl0rer.top/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 21 Aug 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://8.148.145.201/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>PWN</title>
+        <link>http://8.148.145.201/p/pwn/</link>
+        <pubDate>Thu, 21 Aug 2025 00:00:00 +0000</pubDate>
+        
+        <guid>http://8.148.145.201/p/pwn/</guid>
+        <description>&lt;p&gt;&lt;strong&gt;前文：以下是我入门PWN的记录，欢迎各位前来观看，小弟领教！&lt;/strong&gt;&lt;/p&gt;
+&lt;h1 id=&#34;ctf是什么&#34;&gt;CTF是什么？
+&lt;/h1&gt;&lt;p&gt;CTF（Capture The Flag）中文一般译作夺旗赛，在网络安全领域中指的是网络安全技术人员之间进行技术竞技的一种比赛形式。CTF起源于1996年DEFCON全球黑客大会，以代替之前黑客们通过互相发起真实攻击进行技术比拼的方式。发展至今，已经成为全球范围网络安全圈流行的竞赛形式。&lt;/p&gt;
+&lt;p&gt;CTF比赛形式主要为&lt;strong&gt;线上解题（jeopardy）&lt;strong&gt;和&lt;/strong&gt;线下攻防（Attack With Defence）&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;线上赛题目大致方向有WEB、RE、PWN、MISC、CRYPTO，解出flag交给服务器验证通过才得分。&lt;/p&gt;
+&lt;h2 id=&#34;pwn简介&#34;&gt;PWN简介
+&lt;/h2&gt;&lt;p&gt;Pwn是什么？&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;Pwn&amp;quot;是一个黑客语法的俚语词，是指攻破设备或者系统。发音类似“砰”，对黑客而言，这就是成功实施黑客攻击的声音一研的一声，被“黑”的电脑或手机就被你操纵了。CTF中的PWN主要是针对于二进制漏洞挖掘与利用，通常情况下选手需要对于一个有漏洞的可执行文件进行分析，找到漏洞，然后利用漏洞读取远程服务器上的FLAG。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Pwn传统出题方向：glibc PWN：堆、栈、shellcode编写、iofile等。进阶：arm架构、loT、内核、vm、浏览器等。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;实际生活中我们会遇到的pwn：&lt;/p&gt;
+&lt;p&gt;泄露通信数据：心脏滴血（cve-2014-0160）&lt;/p&gt;
+&lt;p&gt;Linux本地提权root：脏牛dirty cow（cve-2016-5195）&lt;/p&gt;
+&lt;p&gt;Wannacry：永恒之蓝勒索病毒&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/pwn/glibc-pwn.png&#34;
+	width=&#34;2010&#34;
+	height=&#34;731&#34;
+	srcset=&#34;http://8.148.145.201/p/pwn/glibc-pwn_hu_76ead02599234b1.png 480w, http://8.148.145.201/p/pwn/glibc-pwn_hu_4c76d810cb42dfe6.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;glibc学习路线&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;274&#34;
+		data-flex-basis=&#34;659px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;blockquote class=&#34;alert alert-error&#34;&gt;
+    &lt;blockquote&gt;
+&lt;p&gt;PWN入门劝退集&amp;hellip;&amp;hellip;&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;h2 id=&#34;第一节汇编语言基础&#34;&gt;第一节：汇编语言基础
+&lt;/h2&gt;&lt;p&gt;我自己在打ctf逆向和pwn，也时常搞不懂bit和byte，在这里我先把一些计算机内的量词回忆一下：&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;名称&lt;/th&gt;
+          &lt;th&gt;翻译&lt;/th&gt;
+          &lt;th&gt;大小&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;bit&lt;/td&gt;
+          &lt;td&gt;比特&lt;/td&gt;
+          &lt;td&gt;1位（1b）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;byte&lt;/td&gt;
+          &lt;td&gt;字节&lt;/td&gt;
+          &lt;td&gt;8位（1B）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;word&lt;/td&gt;
+          &lt;td&gt;字&lt;/td&gt;
+          &lt;td&gt;16位&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;dword&lt;/td&gt;
+          &lt;td&gt;双字&lt;/td&gt;
+          &lt;td&gt;32位&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;qword&lt;/td&gt;
+          &lt;td&gt;四字&lt;/td&gt;
+          &lt;td&gt;64位&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;计算机寻址方式&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;在当前主流的操作系统中，都是以字节（B）为寻址单位进行寻址。&lt;/p&gt;
+&lt;p&gt;意味着计算机访问的最小单位是一个字节（B）。&lt;/p&gt;
+&lt;p&gt;类比于人口普查，普查员以每户（B)为单位统计，而不是访问到个人（b）。&lt;/p&gt;
+&lt;h3 id=&#34;寄存器&#34;&gt;寄存器
+&lt;/h3&gt;&lt;p&gt;计算机的指令都是由CPU来执行。&lt;/p&gt;
+&lt;p&gt;在计算机系统结构中，CPU和内存是分开的。&lt;/p&gt;
+&lt;p&gt;寄存器存在于CPU中，是CPU的直接操作对象。&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;寄存器名称&lt;/th&gt;
+          &lt;th&gt;作用&lt;/th&gt;
+          &lt;th&gt;备注&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;RAX&lt;/td&gt;
+          &lt;td&gt;通用寄存器&lt;/td&gt;
+          &lt;td&gt;低32位：EAX；低16位：AX；低8位：AL&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;RBX&lt;/td&gt;
+          &lt;td&gt;通用寄存器&lt;/td&gt;
+          &lt;td&gt;低32位：EAX；低16位：AX；低8位：AL&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;RCX&lt;/td&gt;
+          &lt;td&gt;通用寄存器&lt;/td&gt;
+          &lt;td&gt;低32位：EAX；低16位：AX；低8位：AL&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;RDX&lt;/td&gt;
+          &lt;td&gt;通用寄存器&lt;/td&gt;
+          &lt;td&gt;低32位：EAX；低16位：AX；低8位：AL&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;RDI&lt;/td&gt;
+          &lt;td&gt;通用寄存器&lt;/td&gt;
+          &lt;td&gt;低32位：EDI&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;RSI&lt;/td&gt;
+          &lt;td&gt;通用寄存器&lt;/td&gt;
+          &lt;td&gt;低32位：EDI&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;R8&lt;/td&gt;
+          &lt;td&gt;通用寄存器&lt;/td&gt;
+          &lt;td&gt;低32位：EDI&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;R9&lt;/td&gt;
+          &lt;td&gt;通用寄存器&lt;/td&gt;
+          &lt;td&gt;低32位：EDI&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;R10&lt;/td&gt;
+          &lt;td&gt;通用寄存器&lt;/td&gt;
+          &lt;td&gt;低32位：EDI&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;R11&lt;/td&gt;
+          &lt;td&gt;通用寄存器&lt;/td&gt;
+          &lt;td&gt;低32位：EDI&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;R12&lt;/td&gt;
+          &lt;td&gt;通用寄存器&lt;/td&gt;
+          &lt;td&gt;低32位：EDI&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;R13&lt;/td&gt;
+          &lt;td&gt;通用寄存器&lt;/td&gt;
+          &lt;td&gt;低32位：EDI&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;R14&lt;/td&gt;
+          &lt;td&gt;通用寄存器&lt;/td&gt;
+          &lt;td&gt;低32位：EDI&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;R15&lt;/td&gt;
+          &lt;td&gt;通用寄存器&lt;/td&gt;
+          &lt;td&gt;低32位：EDI&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;RSP&lt;/td&gt;
+          &lt;td&gt;栈顶指针&lt;/td&gt;
+          &lt;td&gt;低32位：ESP&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;RBP&lt;/td&gt;
+          &lt;td&gt;栈底指针&lt;/td&gt;
+          &lt;td&gt;低32位：ESP&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;EFLAGS&lt;/td&gt;
+          &lt;td&gt;标志寄存器&lt;/td&gt;
+          &lt;td&gt;记录标志状态，包括AF、PF、SF、ZF、OF、CF等标识位&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;RIP&lt;/td&gt;
+          &lt;td&gt;指令计数器&lt;/td&gt;
+          &lt;td&gt;保存下一条将会执行的指令的地址&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;上述的通用寄存器，通常用于参数传递以及算数运算等通用场合。&lt;/p&gt;
+&lt;p&gt;RSP为栈顶指针，RBP为栈底指针，二者用于维护程序运行时的函数栈，在之后的调用约定一节会对其进行讲解。&lt;/p&gt;
+&lt;p&gt;EFLAGS为标志位寄存器，用于存储CPU运行计算过程中的状态，如进位溢出等。&lt;/p&gt;
+&lt;p&gt;RIP指针用于存储CPU下一条将会执行的指针，不能直接修改,正常情况下会每一次运行一条指令自增一条指令的长度，当发生跳转时才会以其他形式改变其值。&lt;/p&gt;
+&lt;h3 id=&#34;cpu的寻址方式&#34;&gt;CPU的寻址方式
+&lt;/h3&gt;&lt;p&gt;学过C语言都知道指针，它是一个变量，它存储的是另一个变量的内存地址，而不是直接存储数据本身。这里解释的是比较含糊，详细的还请搜索引擎。&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;寻址方式&lt;/th&gt;
+          &lt;th&gt;示例&lt;/th&gt;
+          &lt;th&gt;实际访问&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;立即寻址&lt;/td&gt;
+          &lt;td&gt;1234h&lt;/td&gt;
+          &lt;td&gt;1234h这个数字本身&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;直接寻址&lt;/td&gt;
+          &lt;td&gt;[1234h]&lt;/td&gt;
+          &lt;td&gt;内存地址1234h&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;寄存器寻址&lt;/td&gt;
+          &lt;td&gt;RAX&lt;/td&gt;
+          &lt;td&gt;访问RAX寄存器&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;寄存器间接寻址&lt;/td&gt;
+          &lt;td&gt;[RAX]&lt;/td&gt;
+          &lt;td&gt;访问RAX寄存器存储的值的这一内存地址&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;变址寻址&lt;/td&gt;
+          &lt;td&gt;[RAX+1234h]&lt;/td&gt;
+          &lt;td&gt;访问RAX寄存器存储的值+1234h这一内存地址&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;汇编指令&#34;&gt;汇编指令
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;指令类型&lt;/th&gt;
+          &lt;th&gt;操作码&lt;/th&gt;
+          &lt;th&gt;例子（Intel格式）&lt;/th&gt;
+          &lt;th&gt;实际效果&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;数据传送指令&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;mov&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;mov rax rbx&lt;/td&gt;
+          &lt;td&gt;rax = rbx&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;取地址指令&lt;/td&gt;
+          &lt;td&gt;lea&lt;/td&gt;
+          &lt;td&gt;lex rax [rbx]&lt;/td&gt;
+          &lt;td&gt;rax =&amp;amp;*rbx&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;算数运算指令+&lt;/td&gt;
+          &lt;td&gt;add&lt;/td&gt;
+          &lt;td&gt;add rax rbx&lt;/td&gt;
+          &lt;td&gt;rax = rax + rbx&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-&lt;/td&gt;
+          &lt;td&gt;sub&lt;/td&gt;
+          &lt;td&gt;sub rax rbx&lt;/td&gt;
+          &lt;td&gt;rax = rax - rbx&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;逻辑运算指令&lt;/td&gt;
+          &lt;td&gt;and&lt;/td&gt;
+          &lt;td&gt;and rax rbx&lt;/td&gt;
+          &lt;td&gt;rax = rax&amp;amp;rbx&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;/td&gt;
+          &lt;td&gt;xor&lt;/td&gt;
+          &lt;td&gt;xor rax rbx&lt;/td&gt;
+          &lt;td&gt;rax = rax | rbx&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;函数调用指令&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;call&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;call 1234h&lt;/td&gt;
+          &lt;td&gt;执行内存地址1234h处的函数&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;函数返回指令&lt;/td&gt;
+          &lt;td&gt;ret&lt;/td&gt;
+          &lt;td&gt;ret&lt;/td&gt;
+          &lt;td&gt;函数返回&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;比较&lt;/td&gt;
+          &lt;td&gt;cmp&lt;/td&gt;
+          &lt;td&gt;cmp rax rbx&lt;/td&gt;
+          &lt;td&gt;比较rax与rbx，结果保存在EFLAG寄存器&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;无条件跳转&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;jmp&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;jmp 1234h&lt;/td&gt;
+          &lt;td&gt;eip = 1234h&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;栈操作指令&lt;/td&gt;
+          &lt;td&gt;push&lt;/td&gt;
+          &lt;td&gt;push rax&lt;/td&gt;
+          &lt;td&gt;将rax存储的值压栈&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;pop&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;pop rax&lt;/td&gt;
+          &lt;td&gt;将栈顶的值赋值给rax，rsp+=8&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;不难发现两个操作数指令的目的寄存器都是第一个寄存器，刚开始看的话有些奇怪。&lt;/p&gt;
+&lt;p&gt;细心的同学可能会注意到call和jmp指令看起来效果都一样，但是描述却有些不同，call的话是函数调用，需要一些函数地址的保存压栈参数传递的操作，而jmp指令类似于C、Python语言的函数中的if、else语句，只涉及跳转，不能作为函数调用来使用。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;另外在pop时rsp为何是+8而不是-8。&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote class=&#34;alert alert-note&#34;&gt;
+    &lt;p&gt;上述问题留到之后的&lt;strong&gt;调用约定&lt;/strong&gt;中讲解&amp;hellip;&amp;hellip;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;了解到上述汇编语言后，感觉生词特别多，这对我感觉也是，不过我建议还是学过C语言和有一点入门Python之后再去看汇编语言，不然会很坐牢的，因为：&lt;/p&gt;
+&lt;p&gt;计算机在执行汇编代码时，只会顺序执行。&lt;/p&gt;
+&lt;p&gt;通过&lt;strong&gt;call&lt;/strong&gt;、&lt;strong&gt;jmp&lt;/strong&gt;、&lt;strong&gt;ret&lt;/strong&gt;这种指令来完成跳转，所以汇编指令代码的执行流并不像高级语言程序一样流程明确。（在学习了C语言的指针这块的知识点，这会让你学汇编比较有利的）&lt;/p&gt;
+&lt;blockquote class=&#34;alert alert-warn&#34;&gt;
+    &lt;blockquote&gt;
+&lt;p&gt;汇编指令代码会经常跳转导致可读性差一些，但执行效果是和高级语言（C、Python语言）差不多的。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;给点表格太懵了，我列出些例子(assembly&amp;ndash;C)来看看：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-nasm&#34; data-lang=&#34;nasm&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;mov&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;rax&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;;int a = 0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;label1&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;;标签1，标签标志作用，用于标记代码中的某个位置，方便程序跳转或引用，标签本身不执行任何操作，仅作为一个 “标记点”，配合跳转指令jmp、jne（例如C中的goto作用），实现程序流程的控制&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;inc&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;rax&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;;a++、a = a + 1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;loop&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;;循环体的跳转&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;cmp&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;rax&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;100&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;;比较rax和100&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;jge&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;label2&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;;if a&amp;gt;= 100, break；这里就是a大于或等于100，就跳转到label2标签下的函数，否则就是小于100（jmp）跳转到label1下。&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;jmp&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;label1&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;;loop&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;label2&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;;标签2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;mov&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;rax&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;;将寄存器rax的值设置为0,清零返回（return 0）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;不难发现，汇编语言的类似条件语句的jmp、jge不像if、else那样会有个比较符号（&amp;gt;=、&amp;lt;、!=、==）这样明显区分的，而是jge默认有条件跳转——大于等于&amp;gt;=则跳转，jmp则是强制跳转（而不是小于&amp;lt;就跳转），这点需要记住咯。&lt;/p&gt;
+&lt;p&gt;这里的jge是通过eflag寄存器中的标志位来判断的，而eflag的标志位是通过之前的cmp来设置的。&lt;/p&gt;
+&lt;p&gt;loop的情况稍些复杂，这里单独为其解释下：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-nasm&#34; data-lang=&#34;nasm&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;mov&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;rcx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;5&lt;/span&gt;    &lt;span class=&#34;c1&#34;&gt;; 设置循环次数为 5（rcx 作为计数器）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;label_loop:&lt;/span&gt;   &lt;span class=&#34;c1&#34;&gt;; 循环体开始标签&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;; 循环执行的操作（例如打印、计算等）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;mov&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;rax&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;add&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;rax&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;loop&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;label_loop&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;; 计数器 rcx 减 1，若不为 0 则跳回 label_loop&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;; 循环结束后执行这里的代码&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;mov&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;rbx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;;return 0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;loop自带a- -、a =a -1的作用，所以rcx=5的话，那就循环执行5次，rcx=0就退出循环。&lt;/p&gt;
+&lt;p&gt;好难啊，要长脑子了&amp;hellip;&amp;hellip;&lt;/p&gt;
+&lt;p&gt;还是用C语言开开路吧：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#include&lt;/span&gt; &lt;span class=&#34;cpf&#34;&gt;&amp;lt;stdint.h&amp;gt;&lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kt&#34;&gt;uint64_t&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;rcx&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;// 循环计数器初始值为5
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;kt&#34;&gt;uint64_t&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;rax&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;      &lt;span class=&#34;c1&#34;&gt;//定义rax、rbx、rcx
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;kt&#34;&gt;uint64_t&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;rbx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// for循环模拟loop指令：先判断计数器，不为0则执行循环体
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;rcx&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;rcx&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;--&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;rax&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;       &lt;span class=&#34;c1&#34;&gt;// 对应 mov rax, 1
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;        &lt;span class=&#34;n&#34;&gt;rax&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;      &lt;span class=&#34;c1&#34;&gt;// 对应 add rax, 2
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;rbx&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;// 循环结束后设置rbx为0；rbx其实在C语言中是没有用的，在汇编语言中就充当类似return 0的作用
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;数值上下限溢出&#34;&gt;数值上下限/溢出
+&lt;/h3&gt;&lt;p&gt;计算机不能存储无限大的数，这个数的数值有一定上限和下限。在这里了解下就好，学C语言都知道的。&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th style=&#34;text-align: center&#34;&gt;类型&lt;/th&gt;
+          &lt;th&gt;存储空间大小&lt;/th&gt;
+          &lt;th&gt;最小值（一一对应）&lt;/th&gt;
+          &lt;th&gt;最大值（一一对应）&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;char&lt;/td&gt;
+          &lt;td&gt;1个字节&lt;/td&gt;
+          &lt;td&gt;-128 或 0&lt;/td&gt;
+          &lt;td&gt;127 或 255&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;unsigned char&lt;/td&gt;
+          &lt;td&gt;1个字节&lt;/td&gt;
+          &lt;td&gt;0&lt;/td&gt;
+          &lt;td&gt;255&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;signed char&lt;/td&gt;
+          &lt;td&gt;1个字节&lt;/td&gt;
+          &lt;td&gt;-128&lt;/td&gt;
+          &lt;td&gt;127&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;int&lt;/td&gt;
+          &lt;td&gt;2个或4个字节&lt;/td&gt;
+          &lt;td&gt;-32 768 或 -2 147 483 648&lt;/td&gt;
+          &lt;td&gt;32767 或 2 147 483 647&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;unsigned int&lt;/td&gt;
+          &lt;td&gt;2个或4个字节&lt;/td&gt;
+          &lt;td&gt;0&lt;/td&gt;
+          &lt;td&gt;65535或4 294 967 295&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;short&lt;/td&gt;
+          &lt;td&gt;2个字节&lt;/td&gt;
+          &lt;td&gt;-32 768&lt;/td&gt;
+          &lt;td&gt;32767&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;unsigned short&lt;/td&gt;
+          &lt;td&gt;2个字节&lt;/td&gt;
+          &lt;td&gt;0&lt;/td&gt;
+          &lt;td&gt;65 535&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;long&lt;/td&gt;
+          &lt;td&gt;4个字节&lt;/td&gt;
+          &lt;td&gt;-2 147 483 648&lt;/td&gt;
+          &lt;td&gt;4 294 967 295&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;unsigned long&lt;/td&gt;
+          &lt;td&gt;4个字节&lt;/td&gt;
+          &lt;td&gt;0&lt;/td&gt;
+          &lt;td&gt;4 294 967 295&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;long long (C99)&lt;/td&gt;
+          &lt;td&gt;8个字节&lt;/td&gt;
+          &lt;td&gt;-9 223 372 036 854 775 808&lt;/td&gt;
+          &lt;td&gt;9 223 372 036 854 775 807&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;unsigned long long&lt;/td&gt;
+          &lt;td&gt;8个字节&lt;/td&gt;
+          &lt;td&gt;0&lt;/td&gt;
+          &lt;td&gt;18 446 744 073 709 551 615&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;em&gt;如果是unsigned 也就是无符号数，数据的每一位都是代表数据。如果是signed有符号数，那么数据的最高位会被当作符号位处理。0代表正数,1代表负数。&lt;/em&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;溢出&lt;/strong&gt;（这些比较有辨识度，看到就知道是溢出就好）&lt;/p&gt;
+&lt;p&gt;数值有上下限范围，那么就不可避免的会有溢出情况。以32位int为例，有以下四种溢出：&lt;/p&gt;
+&lt;p&gt;无符号上溢：0xffffffff + 1变成0&lt;/p&gt;
+&lt;p&gt;无符号下溢：0-1变成0xffffffff&lt;/p&gt;
+&lt;p&gt;有符号上溢：有符号正数0x7fffffff +1 变成负数0x80000000&lt;/p&gt;
+&lt;p&gt;无符号下溢：有符号数0x80000000 -1 变成正数0x7fffffff&lt;/p&gt;
+&lt;p&gt;这就是整数溢出。通常来说原因就是两点：&lt;/p&gt;
+&lt;p&gt;存储位数不够&lt;/p&gt;
+&lt;p&gt;溢出到符号位&lt;/p&gt;
+&lt;blockquote class=&#34;alert alert-tip&#34;&gt;
+    &lt;blockquote&gt;
+&lt;p&gt;整数溢出一般配合别的漏洞来使用。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;h2 id=&#34;linux基础&#34;&gt;Linux基础
+&lt;/h2&gt;&lt;p&gt;这一章内容多是一些文字描述，也会有生活案例加以理解，图片较少，较为枯燥。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/pwn/1.png&#34;
+	width=&#34;1011&#34;
+	height=&#34;599&#34;
+	srcset=&#34;http://8.148.145.201/p/pwn/1_hu_f407604601a0a452.png 480w, http://8.148.145.201/p/pwn/1_hu_f5a7b4b89149cb17.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Linux大家族&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;168&#34;
+		data-flex-basis=&#34;405px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;保护层级：分为四个ring0-ring3。一般来说就两个：0为内核，3为用户。&lt;/p&gt;
+&lt;p&gt;权限：用户分为多个组&lt;/p&gt;
+&lt;p&gt;文件和目录等等的权限一般都是三个，即可读可写可执行，
+读：R，写：W，执行：X&lt;/p&gt;
+&lt;p&gt;赋予一个可执行文件执行权限就是chmod +x filename&lt;/p&gt;
+&lt;h3 id=&#34;操作系统&#34;&gt;操作系统
+&lt;/h3&gt;&lt;p&gt;在第一阶段学习中我们接触到了Linux操作系统的相关指令：&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th style=&#34;text-align: center&#34;&gt;名称&lt;/th&gt;
+          &lt;th style=&#34;text-align: center&#34;&gt;作用&lt;/th&gt;
+          &lt;th style=&#34;text-align: center&#34;&gt;示例（以Kali虚拟机为例）&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;ls&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;列出当前目录文件&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;ls&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;cd&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;切换目录&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;cd/home/ctf&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;pwd&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;打印当前目录&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;pwd&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;touch&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;创建空白文件&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;touch flag&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;mkdir&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;创建目录&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;mkdir /home/ctf&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;rmdir&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;删除目录&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;rmdir /home/ctf&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;rm&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;删除文件&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;rm flag&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;cp&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;复制文件&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;cp /home/ctf/flag /home/flag&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;mv&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;移动文件&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;mv flag /home/ctf/flag&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;cat&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;输出文件内容&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;cat flag&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;diff&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;比较两个文件信息&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;diff flag1 flag2&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;chmod&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;切换执行权限&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;chmod 777 elf1&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;locate&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;查找文件&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;locate flag&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;数据存储&#34;&gt;数据存储
+&lt;/h3&gt;&lt;p&gt;计算机内部有两种数据的存储形式：&lt;strong&gt;大端序、小端序&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;大端序&lt;/strong&gt;：数据高位存储在计算机地址的低位，数据低位存储在地址的高位。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;小端序&lt;/strong&gt;：数据高位存储在计算机地址的高位，数据低位存储在地址的低位。&lt;/p&gt;
+&lt;blockquote class=&#34;alert alert-tip&#34;&gt;
+    &lt;blockquote&gt;
+&lt;p&gt;大端序：高低低高&lt;/p&gt;
+&lt;p&gt;小端序：高高低低&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;这时我也看不懂，上例子！&lt;/p&gt;
+&lt;p&gt;我们以一个数据：0x123456789abcdef；那么0为低地址，7为高地址。&lt;/p&gt;
+&lt;p&gt;大端序存储：低位储存到计算机地址高位&amp;hellip;&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;0&lt;/th&gt;
+          &lt;th&gt;1&lt;/th&gt;
+          &lt;th&gt;2&lt;/th&gt;
+          &lt;th&gt;3&lt;/th&gt;
+          &lt;th&gt;4&lt;/th&gt;
+          &lt;th&gt;5&lt;/th&gt;
+          &lt;th&gt;6&lt;/th&gt;
+          &lt;th&gt;7&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;01&lt;/td&gt;
+          &lt;td&gt;23&lt;/td&gt;
+          &lt;td&gt;45&lt;/td&gt;
+          &lt;td&gt;67&lt;/td&gt;
+          &lt;td&gt;89&lt;/td&gt;
+          &lt;td&gt;ab&lt;/td&gt;
+          &lt;td&gt;cd&lt;/td&gt;
+          &lt;td&gt;ef&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;将此数据按照字符串输出，得到：\x01\x23\x45\x67\x89\xab\xcd\xef&lt;/p&gt;
+&lt;p&gt;小端序存储：低位储存到计算机地址的低位&amp;hellip;&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;0&lt;/th&gt;
+          &lt;th&gt;1&lt;/th&gt;
+          &lt;th&gt;2&lt;/th&gt;
+          &lt;th&gt;3&lt;/th&gt;
+          &lt;th&gt;4&lt;/th&gt;
+          &lt;th&gt;5&lt;/th&gt;
+          &lt;th&gt;6&lt;/th&gt;
+          &lt;th&gt;7&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;ef&lt;/td&gt;
+          &lt;td&gt;cd&lt;/td&gt;
+          &lt;td&gt;Ab&lt;/td&gt;
+          &lt;td&gt;89&lt;/td&gt;
+          &lt;td&gt;67&lt;/td&gt;
+          &lt;td&gt;45&lt;/td&gt;
+          &lt;td&gt;23&lt;/td&gt;
+          &lt;td&gt;01&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;将此数据按照字符串输出，得到：\xef\xcd\xab\x89\x67\x45\x23\x01&lt;/p&gt;
+&lt;p&gt;从上面这两种方式比较的话，可以知道，大端序符合人类的阅读习惯；但从存储逻辑、数学运算规律来看，小端序更正常。&lt;/p&gt;
+&lt;blockquote class=&#34;alert alert-note&#34;&gt;
+    &lt;blockquote&gt;
+&lt;p&gt;Linux数据存储的格式为&lt;strong&gt;小端序&lt;/strong&gt;&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;Linux是小端序储存，所以我们以字符串的形式输入一个数字时，要注意格式，比如输入0xdeadbeef这个数字。&lt;/p&gt;
+&lt;p&gt;字符串输入就是“\xef\xbe\xad\xde”传入给程序。不过好在有&lt;strong&gt;pwntools&lt;/strong&gt;，p32(0xdeadbeef)即可完成自动转换。&lt;/p&gt;
+&lt;h3 id=&#34;文件描述符&#34;&gt;文件描述符
+&lt;/h3&gt;&lt;p&gt;Linux系统中，把一切都看做是文件，当进程打开现有文件或创建新文件时，内核向进程返回一个文件描述符，文件描述符就是内核为了高效管理已被打开的文件所创建的索引，用来指向被打开的文件，所有执行 I/O 操作的系统调用都会通过文件描述符。&lt;/p&gt;
+&lt;p&gt;每个文件描述符会与一个打开的文件相对应，不同的文件描述符也可能指向同一个文件。&lt;/p&gt;
+&lt;p&gt;相同的文件可以被不同的进程打开，也可以在同一个进程被多次打开。&lt;/p&gt;
+&lt;p&gt;我们会在open、read、write这些常见函数中见到。&lt;/p&gt;
+&lt;p&gt;0标准输入（stdin）、1标准输出（stdout）、2标准错误（stderr）read(0,buf,size）从stdin中读size个数据到buf中，write(1,buf,size)从buf中取size个数据到stdout中。&lt;/p&gt;
+&lt;h3 id=&#34;栈stack&#34;&gt;栈（stack）
+&lt;/h3&gt;&lt;p&gt;学过数据结构都知道，这是一种储存方式：是一种遵循「后进先出（LIFO, Last In First Out）」原则的线性数据结构，类似于日常生活中堆叠的盘子 —— 最后放上去的盘子，会被最先取走。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;栈的核心特性&lt;/strong&gt;：
+操作受限：只能在栈的一端（通常称为「栈顶」）进行数据的插入（称为「入栈」或 push）和删除（称为「出栈」或 pop），另一端（「栈底」）固定不动。&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;&lt;strong&gt;由于函数调用顺序也是LIFO，所以我们能接触到的绝大多数系统，都是通过栈这一数据结构来维护函数调用关系。&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;顺序访问&lt;/strong&gt;：只能从&lt;strong&gt;栈顶&lt;/strong&gt;开始依次访问元素，无法直接访问栈中间或栈底的元素。&lt;/p&gt;
+&lt;p&gt;说得我都懵了，这啥？？通俗讲就是栈好比是一个薯片罐，只有一个罐口，把薯片装进去后，最后放的薯片总是被第一个拿出来，倒数第二个被放进去的，在后面被打开时都是第二个先被拿出来，这就是栈的顺序访问特点啦，而栈就是薯片罐这种存储器的名字。&lt;/p&gt;
+&lt;p&gt;等会？这放到机器语言如C语言的话，不就是数组吗？为什么那么麻烦要发明这个栈呢？就是方便一些，一把普通菜刀能切水果、剁骨头，为什么要发明水果刀和大砍刀？原因就是方便。&lt;/p&gt;
+&lt;blockquote class=&#34;alert alert-note&#34;&gt;
+    &lt;blockquote&gt;
+&lt;p&gt;栈其实就是一个“阉割版”的数组，只能在一头操作。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;h4 id=&#34;linux种的栈&#34;&gt;Linux种的栈
+&lt;/h4&gt;&lt;p&gt;在linux系统中，系统为每一个进程都安排了一个栈，进程中每一个调用的函数都有自己独立的栈帧。&lt;/p&gt;
+&lt;p&gt;在linux系统中，栈是由高地址向低地址&lt;strong&gt;生长&lt;/strong&gt;（小端序）。&lt;/p&gt;
+&lt;h5 id=&#34;换句话说高地址为栈底低地址为栈顶那么为什么这么反直觉反人类的安排呢&#34;&gt;换句话说,高地址为栈底，低地址为栈顶。那么为什么这么反直觉反人类的安排呢？
+&lt;/h5&gt;&lt;p&gt;我们接触到的一些算法，很多都是用栈来实现的，比如DFS。DFS会将发现的节点存储在栈中，然后访问的顺序就是LIFO。但是很多这种LIFO的算法都会以&lt;em&gt;&lt;strong&gt;递归&lt;/strong&gt;&lt;/em&gt;的形式实现。其实，递归的形式实现这些算法本质上来说也是利用栈结构，只不过他没有在程序中另外申请一个栈，而是用的函数调用栈。&lt;/p&gt;
+&lt;h5 id=&#34;为什么栈从高地址向低地址生长&#34;&gt;为什么栈从高地址向低地址生长？
+&lt;/h5&gt;&lt;p&gt;有的说法是这么设计和小端序更配合（比如说访问一个数据的低字节）。&lt;/p&gt;
+&lt;p&gt;这里我的认知有限，我也不能解答，过于理论化研究也是很牢的。这只能留到未来的自己去解答了，这里先标记一下以后再单独出一篇Blog文章来讲解。只能先死记一下咯/************。&lt;/p&gt;
+&lt;h2 id=&#34;调用约定&#34;&gt;调用约定
+&lt;/h2&gt;&lt;p&gt;看标题就是关于函数调用的内容，在上一章汇编指令就有预示了，像call调用函数地址、jmp无条件跳转。&lt;/p&gt;
+&lt;p&gt;再来回顾下栈的指令：&lt;/p&gt;
+&lt;p&gt;pop出栈/弹栈，Pop指令的作用是弹栈，将栈顶的数据弹出到寄存器，然后栈顶指针向下移动一个单位。具体来说：如pop rax，作用就是mov rax [rsp]；add rsp 8（平衡栈指针：当手动修改栈指针后（如临时分配栈空间），用 add rsp, 8 恢复栈的对齐状态，确保后续操作符合 8 字节对齐要求）；&lt;/p&gt;
+&lt;p&gt;push压栈，Push指令的作用就是压栈，将栈顶指针向上移动一个单位的距离，然后将一个寄存器的值存放在栈顶，具体来说：如push rax，其实际效果就是：sub rsp 8; mov [rsp] rax；&lt;/p&gt;
+&lt;blockquote class=&#34;alert alert-tip&#34;&gt;
+    &lt;blockquote&gt;
+&lt;p&gt;add rsp 8的8怎么来的？在 x86-64 架构（64 位系统）中：
+寄存器（如 rsp、rax 等）是 64 位（8 字节）的。内存地址也是 64 位的，最小的可寻址单位是字节，但栈操作通常以&lt;strong&gt;8 字节为单位进行对齐&lt;/strong&gt;（这是系统调用和函数调用的标准要求）。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;h3 id=&#34;函数调用流程&#34;&gt;函数调用流程
+&lt;/h3&gt;&lt;p&gt;从一个实例出发,main调用func_b, func_b调用func_a。我们从main函数开始，逐步分析栈帧变化:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;func_a&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;//do sth
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;func_b&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;dunc_a&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;c&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;func_b&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;a&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;当运行到call func b时main函数的栈帧。Rbp指向栈底,rsp指向栈底
+这段栈帧存放了一些main的局部变量。
+main函数要调用func b，main只需要call func b，
+也就是push rip；mov rip func b；&lt;/p&gt;
+&lt;p&gt;那么此时跳转到func_b继续执行，func _b直接执行主逻辑吗？
+显然不是的，被调用函数还需要维护栈帧。&lt;/p&gt;
+&lt;p&gt;具体来说，需要以下几步：&lt;/p&gt;
+&lt;p&gt;push rbp；将调用函数的栈底指针保存。&lt;/p&gt;
+&lt;p&gt;mov rbp rsp；将栈底指针指向现在的栈顶。&lt;/p&gt;
+&lt;p&gt;sub rsp xxx；开辟被调用函数的栈帧，此时上一步的rbp就指向栈帧的底。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/pwn/2.png&#34;
+	width=&#34;420&#34;
+	height=&#34;654&#34;
+	srcset=&#34;http://8.148.145.201/p/pwn/2_hu_1c5004a635f7b9a.png 480w, http://8.148.145.201/p/pwn/2_hu_4c5071a9706d750a.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;程序运行时内存中栈帧（stack frame）的组织方式&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;64&#34;
+		data-flex-basis=&#34;154px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;图很明了了吧。但我起初一看，为什么int a =2所在地址要高于fun_b函数？不是funb函数要先比int a=2先执行吗？&lt;/p&gt;
+&lt;p&gt;自问自答：要理解这个问题，需结合函数调用栈的生长方向和代码执行顺序与栈帧分配的关系来分析，&lt;strong&gt;栈是从高地址向低地址生长的&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;代码执行顺序是：main → func_b → func_a → 返回 func_b → 定义 int c = 1 → 返回 main → 定义 int a = 2。&lt;/p&gt;
+&lt;p&gt;因为&lt;strong&gt;每个函数调用通常会占用一个栈帧&lt;/strong&gt;，所以说fun_b函数会被分配在main函数之下（main函数先执行，固然main是位于高地址），而int a = 2 属于 main 栈帧的局部变量，因此地址高于 func_b 的栈帧。&lt;/p&gt;
+&lt;p&gt;来我们继续分析这图，func_b执行完维护栈帧操作后的栈布局。
+所谓栈帧的维护就是维护rbp和rsp两个指针。
+Rsp永远指向当前&lt;strong&gt;栈的顶部&lt;/strong&gt;（Rsp在哪和栈顶在哪关系不大，但Rsp是指向它所在的栈帧的顶部）。
+Rbp用来定位局部变量。&lt;/p&gt;
+&lt;p&gt;接着，再往下运行程序，调用func_a函数。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/pwn/3.png&#34;
+	width=&#34;528&#34;
+	height=&#34;810&#34;
+	srcset=&#34;http://8.148.145.201/p/pwn/3_hu_9a324d1379c9fdbc.png 480w, http://8.148.145.201/p/pwn/3_hu_1191a96fcc708a5e.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;65&#34;
+		data-flex-basis=&#34;156px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;那这里的每一个栈帧就代表我之前所说的薯片啦，一片片被拿出来，一个个运行。&lt;/p&gt;
+&lt;p&gt;func_b调用完func_a后的栈布局。至此，示例的函数调用已经完毕。
+现在，func_a执行完毕，要返回了。如何维护栈帧呢?&lt;/p&gt;
+&lt;p&gt;在这里，我们学习一个新的汇编指令leave：&lt;/p&gt;
+&lt;p&gt;作用是维护栈帧，通常出现在函数的结尾，与ret（return）连用。其实际作用为：mov rsp rbp；pop rbp；即：将栈顶指针指向栈帧的底部、然后在栈中弹出新的栈底指针。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>66C</title>
-        <link>http://expl0rer.top/p/66c/</link>
+        <link>http://8.148.145.201/p/66c/</link>
         <pubDate>Thu, 14 Aug 2025 00:00:00 +0000</pubDate>
         
-        <guid>http://expl0rer.top/p/66c/</guid>
+        <guid>http://8.148.145.201/p/66c/</guid>
         <description>&lt;p&gt;978675&lt;/p&gt;
 </description>
         </item>
         <item>
         <title>第一阶段（理论基础）</title>
-        <link>http://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/</link>
+        <link>http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/</link>
         <pubDate>Thu, 31 Jul 2025 00:00:00 +0000</pubDate>
         
-        <guid>http://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/</guid>
-        <description>&lt;img src="http://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/luca.jpg" alt="Featured image of post 第一阶段（理论基础）" /&gt;&lt;p&gt;&lt;img src=&#34;http://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/1.jpg&#34;
-	width=&#34;1151&#34;
+        <guid>http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/</guid>
+        <description>&lt;img src="http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/luca.jpg" alt="Featured image of post 第一阶段（理论基础）" /&gt;&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/1.png&#34;
+	width=&#34;1251&#34;
 	height=&#34;3526&#34;
-	srcset=&#34;http://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/1_hu_1e628be0bb5dc6b9.jpg 480w, http://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/1_hu_95eb275c9ff6786d.jpg 1024w&#34;
+	srcset=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/1_hu_33a2361632f79416.png 480w, http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/1_hu_185326c3c0740e5.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;学习思维导图&#34;
 	
 	
 		class=&#34;gallery-image&#34; 
-		data-flex-grow=&#34;32&#34;
-		data-flex-basis=&#34;78px&#34;
+		data-flex-grow=&#34;35&#34;
+		data-flex-basis=&#34;85px&#34;
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;[TOC]&lt;/p&gt;
@@ -43,10 +858,10 @@
 &lt;p&gt;的或者恶意的原因⽽遭受到破坏、更改、泄露，系统连续可靠正常地运⾏，⽹络服务不中断。&lt;/p&gt;
 &lt;h4 id=&#34;起源与发展&#34;&gt;起源与发展
 &lt;/h4&gt;&lt;p&gt;互联网发展迅速。互联⽹（Internet）是⼀种全球性的计算机⽹络。 通过电⼦，⽆线和光纤⽹络等等⼀系列⼴泛的技术连接着全球各地的设备和⼈，它基于⼀组通⽤的协议相互连接，形成逻辑上的单⼀巨⼤国际⽹络。&lt;/p&gt;
-&lt;p&gt;互联⽹始于1969年的美国阿帕⽹（ARPANET），最初是为了军事研究⽬的⽽建⽴的。随后，互联⽹逐渐发展成为⼀个覆盖全球的、由各种⽹络相互连接⽽成的庞⼤⽹络。&lt;img src=&#34;http://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/2.png&#34;
+&lt;p&gt;互联⽹始于1969年的美国阿帕⽹（ARPANET），最初是为了军事研究⽬的⽽建⽴的。随后，互联⽹逐渐发展成为⼀个覆盖全球的、由各种⽹络相互连接⽽成的庞⼤⽹络。&lt;img src=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/2.png&#34;
 	width=&#34;947&#34;
 	height=&#34;437&#34;
-	srcset=&#34;http://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/2_hu_71d7ca9179106730.png 480w, http://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/2_hu_84da7ef03db47129.png 1024w&#34;
+	srcset=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/2_hu_71d7ca9179106730.png 480w, http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/2_hu_84da7ef03db47129.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -62,10 +877,10 @@
 &lt;a class=&#34;link&#34; href=&#34;%e4%b8%ad%e5%8d%8e%e4%ba%ba%e6%b0%91%e5%85%b1%e5%92%8c%e5%9b%bd%e7%bd%91%e7%bb%9c%e5%ae%89%e5%85%a8%e6%b3%95.pdf&#34; &gt;中华人民共和国网络安全法.pdf&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&#34;网络安全就业&#34;&gt;网络安全就业
 &lt;/h3&gt;&lt;h4 id=&#34;企业需求哪些岗位需求大薪资高&#34;&gt;企业需求（哪些岗位需求大、薪资高）
-&lt;/h4&gt;&lt;p&gt;&lt;img src=&#34;http://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/3.png&#34;
+&lt;/h4&gt;&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/3.png&#34;
 	width=&#34;682&#34;
 	height=&#34;310&#34;
-	srcset=&#34;http://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/3_hu_ab6322c5ec49140f.png 480w, http://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/3_hu_4ee7dcb2ae0448a4.png 1024w&#34;
+	srcset=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/3_hu_ab6322c5ec49140f.png 480w, http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/3_hu_4ee7dcb2ae0448a4.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -75,10 +890,10 @@
 	
 &gt;&lt;/p&gt;
 &lt;h4 id=&#34;岗位方向&#34;&gt;岗位方向
-&lt;/h4&gt;&lt;p&gt;&lt;img src=&#34;http://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/4.png&#34;
+&lt;/h4&gt;&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/4.png&#34;
 	width=&#34;627&#34;
 	height=&#34;650&#34;
-	srcset=&#34;http://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/4_hu_1759bc6776181451.png 480w, http://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/4_hu_401556be11a76614.png 1024w&#34;
+	srcset=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/4_hu_1759bc6776181451.png 480w, http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/4_hu_401556be11a76614.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -108,10 +923,10 @@
 &lt;p&gt;SYSTEM：最高权限的组&lt;/p&gt;
 &lt;p&gt;Administrators：管理员组（完全控制权）&lt;/p&gt;
 &lt;p&gt;Users：普通用户组&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/5.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/5.png&#34;
 	width=&#34;864&#34;
 	height=&#34;489&#34;
-	srcset=&#34;http://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/5_hu_716a45c5dcc8cf06.png 480w, http://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/5_hu_69e73c0d3e6cf786.png 1024w&#34;
+	srcset=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/5_hu_716a45c5dcc8cf06.png 480w, http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/5_hu_69e73c0d3e6cf786.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -120,10 +935,10 @@
 		data-flex-basis=&#34;424px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/6.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/6.png&#34;
 	width=&#34;986&#34;
 	height=&#34;234&#34;
-	srcset=&#34;http://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/6_hu_a577c030999df982.png 480w, http://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/6_hu_9e92463ea5c4a2c4.png 1024w&#34;
+	srcset=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/6_hu_a577c030999df982.png 480w, http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/6_hu_9e92463ea5c4a2c4.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -190,10 +1005,10 @@
 &lt;/div&gt;&lt;p&gt;其实还有很多，比如开电脑的“户”的whoami、查看主机名的hostname、查看网络连接是否正常的ping呀、目录dir、天天用的cd/d，这些都是基础，在此提一下就好。&lt;/p&gt;
 &lt;h4 id=&#34;windows防火墙&#34;&gt;Windows防火墙
 &lt;/h4&gt;&lt;p&gt;防火墙（firewall）是一项协助确保信息安全的设备，会依照特定的规则，允许或限制传输的数据通过。Windows defender防火墙顾名思义就是在Windows操作系统中系统自带的软件防火墙。它有助于提高计算机的安全性。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/7.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/7.png&#34;
 	width=&#34;1260&#34;
 	height=&#34;440&#34;
-	srcset=&#34;http://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/7_hu_eb92813253433c06.png 480w, http://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/7_hu_1d6eec79b32ad28b.png 1024w&#34;
+	srcset=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/7_hu_eb92813253433c06.png 480w, http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/7_hu_1d6eec79b32ad28b.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -202,10 +1017,10 @@
 		data-flex-basis=&#34;687px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/8.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/8.png&#34;
 	width=&#34;995&#34;
 	height=&#34;445&#34;
-	srcset=&#34;http://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/8_hu_93103677082f5847.png 480w, http://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/8_hu_83c86bfd0ce209cf.png 1024w&#34;
+	srcset=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/8_hu_93103677082f5847.png 480w, http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/8_hu_83c86bfd0ce209cf.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -225,10 +1040,10 @@
 &lt;p&gt;1、准备一或二台虚拟机win用来远程连接，可以下载两台虚拟机，win7和win 2003，我这里用主机和win7好看些。&lt;/p&gt;
 &lt;p&gt;2、虚拟机/主机需要开启远程服务。&lt;/p&gt;
 &lt;p&gt;3、防火墙要允许远程服务通过。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/9.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/9.png&#34;
 	width=&#34;1635&#34;
 	height=&#34;921&#34;
-	srcset=&#34;http://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/9_hu_d8c0a0c131b5d318.png 480w, http://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/9_hu_9765eb407dfa6aa6.png 1024w&#34;
+	srcset=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/9_hu_d8c0a0c131b5d318.png 480w, http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/9_hu_9765eb407dfa6aa6.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -240,10 +1055,10 @@
 &lt;p&gt;4、创建一个用户用来远程登录，当然用本身用户也可以。&lt;/p&gt;
 &lt;p&gt;5、在本地安全策略里的用户权限分配要将新建的用户加进去；在计算机管理里面的组里面的Administrators或者users里面添加刚刚新建的用户。&lt;/p&gt;
 &lt;p&gt;6、另外开启一台虚拟机win二号要在开始菜单搜索远程桌面连接输入win1号的IP地址进行连接（相反连接也行），在输入刚刚新建的用户信息即可。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/10.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/10.png&#34;
 	width=&#34;1170&#34;
 	height=&#34;535&#34;
-	srcset=&#34;http://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/10_hu_5a1c1c01b9fb9475.png 480w, http://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/10_hu_47d33292aef282f2.png 1024w&#34;
+	srcset=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/10_hu_5a1c1c01b9fb9475.png 480w, http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/10_hu_47d33292aef282f2.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -254,10 +1069,10 @@
 &gt;&lt;/p&gt;
 &lt;p&gt;**前提：两台机子要相互ping通&lt;/p&gt;
 &lt;p&gt;我这里用win7和win2003、自己的win11来进行实验。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/11.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/11.png&#34;
 	width=&#34;1855&#34;
 	height=&#34;1001&#34;
-	srcset=&#34;http://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/11_hu_ca1c4e9f483ccd9d.png 480w, http://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/11_hu_56055bd4f642b672.png 1024w&#34;
+	srcset=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/11_hu_ca1c4e9f483ccd9d.png 480w, http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/11_hu_56055bd4f642b672.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -275,10 +1090,10 @@
 &lt;p&gt;Kali：基于Debian的Linux发行版，预装了许多安全工具。&lt;/p&gt;
 &lt;p&gt;RedHat：红帽公司，产品包括RHEL、Fedora Core与CentOS。&lt;/p&gt;
 &lt;p&gt;CentOS：RHEL依照开放源代码规定释出的源码所编译而成。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/12.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/12.png&#34;
 	width=&#34;670&#34;
 	height=&#34;449&#34;
-	srcset=&#34;http://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/12_hu_3cb184acf76422e7.png 480w, http://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/12_hu_6fc81928056b1f06.png 1024w&#34;
+	srcset=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/12_hu_3cb184acf76422e7.png 480w, http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/12_hu_6fc81928056b1f06.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Linux大家族&#34;
@@ -300,11 +1115,13 @@
 &lt;p&gt;发行版是指基于开源软件的操作系统的特定版本，经过整合、配置和打包后向用户发布的软件发行形式。它是将开源软件进行定制化和优化的结果，以便用户能够更方便地使用和管理操作系统。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
 &lt;h4 id=&#34;环境部署&#34;&gt;环境部署
 &lt;/h4&gt;&lt;h5 id=&#34;linux系统环境搭建&#34;&gt;Linux系统环境搭建
-&lt;/h5&gt;&lt;p&gt;&lt;img src=&#34;http://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/14.png&#34;
+&lt;/h5&gt;&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/14.png&#34;
 	width=&#34;1845&#34;
 	height=&#34;980&#34;
-	srcset=&#34;http://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/14_hu_6e64549c077333.png 480w, http://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/14_hu_9fcc10a24576c843.png 1024w&#34;
+	srcset=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/14_hu_6e64549c077333.png 480w, http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/14_hu_9fcc10a24576c843.png 1024w&#34;
 	loading=&#34;lazy&#34;
+	
+		alt=&#34;Kali虚拟机&#34;
 	
 	
 		class=&#34;gallery-image&#34; 
@@ -312,32 +1129,16 @@
 		data-flex-basis=&#34;451px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;Linux SSH远程管理实践&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Linux防火墙配置&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
 &lt;h4 id=&#34;linux常见分系统&#34;&gt;Linux常见分系统
-&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;Debian/ReaHat&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
+&lt;/h4&gt;&lt;p&gt;Debian/ReaHat&lt;/p&gt;
 &lt;p&gt;Ubuntu/CentOS&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
 &lt;p&gt;Kali（渗透真神）&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
 &lt;h4 id=&#34;linux文件与目录管理&#34;&gt;Linux文件与目录管理
 &lt;/h4&gt;&lt;h5 id=&#34;系统目录与重要系统文件&#34;&gt;系统目录与重要系统文件
-&lt;/h5&gt;&lt;p&gt;&lt;img src=&#34;http://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/13.png&#34;
+&lt;/h5&gt;&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/13.png&#34;
 	width=&#34;1544&#34;
 	height=&#34;603&#34;
-	srcset=&#34;http://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/13_hu_a3eff3c012c6e2eb.png 480w, http://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/13_hu_5ae81c767f45d9ee.png 1024w&#34;
+	srcset=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/13_hu_a3eff3c012c6e2eb.png 480w, http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/13_hu_5ae81c767f45d9ee.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;文件目录结构树状图&#34;
@@ -357,10 +1158,10 @@
 &lt;p&gt;rm 文件或目录 ：删除文件或目录remove&lt;/p&gt;
 &lt;p&gt;rm -rf 文件夹 ：删除非空目录&lt;/p&gt;
 &lt;p&gt;cat查看文件内容&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/15.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/15.png&#34;
 	width=&#34;729&#34;
 	height=&#34;195&#34;
-	srcset=&#34;http://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/15_hu_ccbe07fca39e12aa.png 480w, http://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/15_hu_f45fcb3cc5efb03f.png 1024w&#34;
+	srcset=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/15_hu_ccbe07fca39e12aa.png 480w, http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/15_hu_f45fcb3cc5efb03f.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -375,16 +1176,342 @@
 &lt;p&gt;grep -c &amp;ldquo;root&amp;rdquo; /etc/passwd&lt;/p&gt;
 &lt;p&gt;find按照条件查找文件&lt;/p&gt;
 &lt;p&gt;find /etc -name &amp;ldquo;network*&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;pwd：查看当前所在文件位置&lt;/p&gt;
+&lt;p&gt;cd ：切换目录 （后面接绝对路径或相对路径）&lt;/p&gt;
+&lt;p&gt;ls ：以平铺方式显示当前目录包含内容&lt;/p&gt;
+&lt;p&gt;ls -a ：查看隐藏文件&lt;/p&gt;
+&lt;p&gt;ls -l ：以详细列表形式显示当前目录包含内容&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/17.png&#34;
+	width=&#34;1436&#34;
+	height=&#34;625&#34;
+	srcset=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/17_hu_2e97dfff757583b5.png 480w, http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/17_hu_5e9e396ca0d2bbcd.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;229&#34;
+		data-flex-basis=&#34;551px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;ls：列出当前目录下文件&lt;/p&gt;
+&lt;p&gt;ll/ls -l：列出当前目录下文件（详细）&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/16.png&#34;
+	width=&#34;1156&#34;
+	height=&#34;806&#34;
+	srcset=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/16_hu_761b9d411238d6c5.png 480w, http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/16_hu_3c882dc3913fe766.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;143&#34;
+		data-flex-basis=&#34;344px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;命令行通配符&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;*匹配0-多个字符&lt;/p&gt;
+&lt;p&gt;? 匹配单个字符&lt;/p&gt;
+&lt;p&gt;[a-z] 匹配 a - z 之间的一个&lt;/p&gt;
+&lt;p&gt;[0-9]&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/28.png&#34;
+	width=&#34;789&#34;
+	height=&#34;169&#34;
+	srcset=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/28_hu_8b4f86e835801854.png 480w, http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/28_hu_6725741a5a8f474.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;466&#34;
+		data-flex-basis=&#34;1120px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;touch 文件名 ：创建文件&lt;/p&gt;
+&lt;p&gt;mkdir 目录名：创建目录 make dir&lt;/p&gt;
+&lt;p&gt;mkdir -p a/b ： 同时创建父子目录&lt;/p&gt;
+&lt;p&gt;cp：复制文件或目录copy&lt;/p&gt;
+&lt;p&gt;mv：移动文件或目录move&lt;/p&gt;
+&lt;p&gt;rm 文件或目录 ：删除文件或目录remove&lt;/p&gt;
+&lt;p&gt;rm -rf 文件夹 ：删除非空目录&lt;/p&gt;
 &lt;h4 id=&#34;linux用户管理&#34;&gt;Linux用户管理
-&lt;/h4&gt;&lt;p&gt;用户与用户组配置详解&lt;/p&gt;
-&lt;p&gt;用户及用户组常用命令&lt;/p&gt;
-&lt;p&gt;用户身份切换与授权&lt;/p&gt;
+&lt;/h4&gt;&lt;h5 id=&#34;用户与用户组配置详解&#34;&gt;用户与用户组配置详解
+&lt;/h5&gt;&lt;p&gt;&lt;strong&gt;用户（User）&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;用户账户：每个使用Linux系统的个体或进程都需要一个用户账户。用户账户包含了用户的信息，如用户名、用户ID（UID）、用户组、家目录、默认Shell等。&lt;/p&gt;
+&lt;p&gt;UID（User ID）：每个用户都有一个唯一的数字标识符，称为用户ID（UID）。UID为0的用户是超级用户（root），拥有系统上的所有权限。&lt;/p&gt;
+&lt;p&gt;root&amp;ndash;系统管理员用户信息文件：/etc/passwd文件包含了系统上所有用户的信息。每一行代表一个用户，包括用户名、UID、组ID（GID）、用户全名或描述、家目录、默认Shell等信息。&lt;/p&gt;
+&lt;p&gt;用户密码文件：用户的密码信息不直接存储在/etc/passwd文件中，而是存储在/etc/shadow文件中。该文件包含了加密后的密码、密码最后一次更改的日期、密码的最小和最大有效期等信息。&lt;/p&gt;
+&lt;h5 id=&#34;用户常用命令&#34;&gt;用户常用命令
+&lt;/h5&gt;&lt;p&gt;查看当前用户：whoami&lt;/p&gt;
+&lt;p&gt;查看当前用户详细信息：id&lt;/p&gt;
+&lt;p&gt;查看所有用户：cat /etc/passwd（可以看到root的UID为0，是超级用户的特征）&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/18.png&#34;
+	width=&#34;416&#34;
+	height=&#34;214&#34;
+	srcset=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/18_hu_ff1ef469f8484904.png 480w, http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/18_hu_2807f2c7e5076a92.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;194&#34;
+		data-flex-basis=&#34;466px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;查看用户数据信息：cat /etc/shadow&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/20.png&#34;
+	width=&#34;465&#34;
+	height=&#34;213&#34;
+	srcset=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/20_hu_1622de76628240dc.png 480w, http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/20_hu_5f71b5ed107e7c6f.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;218&#34;
+		data-flex-basis=&#34;523px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/21.png&#34;
+	width=&#34;835&#34;
+	height=&#34;144&#34;
+	srcset=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/21_hu_3bab68aed049f15c.png 480w, http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/21_hu_d27299d0e30e0c0f.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;579&#34;
+		data-flex-basis=&#34;1391px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;那么用：来分隔的每段字符串是什么意思？kali：用户名。
+$y$j9T$zY1oKFxJlTgP2WcJhzbNl1$xhkUmB8R9fzETc/1kgL/nOPcWFTvhn17clxXCgyFjpC：加密后的密码。采用的是带有 salt（盐值）的哈希加密方式，$y$ 等符号是标识加密算法等相关信息，这样的加密能增强密码安全性，防止彩虹表攻击。&lt;/p&gt;
+&lt;p&gt;19953：最后一次修改密码的日期，是从 1970 年 1 月 1 日起算的天数。&lt;/p&gt;
+&lt;p&gt;0：密码最小修改间隔天数，这里为 0 表示可以随时修改密码。
+99999：密码有效期天数，即从最后一次修改密码后，经过这么多天密码就会过期需要修改。&lt;/p&gt;
+&lt;p&gt;7：密码过期前提前多少天开始警告用户。&lt;/p&gt;
+&lt;p&gt;后面的空字段：分别对应密码过期后的宽限天数（密码过期后仍可登录的天数）、账户失效时间（密码过期且宽限天数过后，账户失效无法登录的日期，这里为空）、保留字段（暂无特定用途）。&lt;/p&gt;
+&lt;p&gt;这里了解下就好。&lt;/p&gt;
+&lt;p&gt;添加用户：useradd -m 用户名&lt;/p&gt;
+&lt;p&gt;删除用户：userdel 用户名&lt;/p&gt;
+&lt;p&gt;修改用户信息：usermod&lt;/p&gt;
+&lt;p&gt;配置密码：passwd 用户名&lt;/p&gt;
+&lt;p&gt;切换用户：su 用户名（不加用户名表示切换root）以系统管理者的身份执行指令：sudo 具体命令 &lt;strong&gt;root：最高权限组与用户&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;组（Group）&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;用户组：用户组用于将多个用户组织在一起，以便于对文件或目录的权限管理。用户可以是多个组的成员。&lt;/p&gt;
+&lt;p&gt;GID（Group ID）：每个用户组都有一个唯一的数字标识符，称为组ID（GID）。&lt;/p&gt;
+&lt;p&gt;组信息文件：/etc/group文件包含了系统上所有用户组的信息。每一行代表一个组，包括组名、GID、组成员列表等信息。&lt;/p&gt;
+&lt;h5 id=&#34;用户组常用命令&#34;&gt;用户组常用命令
+&lt;/h5&gt;&lt;p&gt;查看当前用户组：groups&lt;/p&gt;
+&lt;p&gt;创建新用户组：groupadd&lt;/p&gt;
+&lt;p&gt;删除用户组：groupdel&lt;/p&gt;
+&lt;p&gt;修改用户组信息；groupmod&lt;/p&gt;
+&lt;p&gt;查看所有组：cat /etc/group&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/19.png&#34;
+	width=&#34;400&#34;
+	height=&#34;200&#34;
+	srcset=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/19_hu_12c99d4525ae98b5.png 480w, http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/19_hu_ae2be78793ee948a.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;200&#34;
+		data-flex-basis=&#34;480px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h5 id=&#34;权限管理&#34;&gt;权限管理
+&lt;/h5&gt;&lt;p&gt;更改文件所有者change owner&lt;/p&gt;
+&lt;p&gt;chown kali:kali test&lt;/p&gt;
+&lt;p&gt;修改为kali用户，kali组&lt;/p&gt;
+&lt;p&gt;修改文件权限change mode&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;chmod 777 aa&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;给文件aa赋予rwx读、写、执行这三种权限，欸？为什么用数字代表？不是用rwx呢？这是因为：777 是权限数值，由三位数字组成，分别对应文件所有者（user）、所属组（group）、其他用户（other）的权限：数字 7 表示拥有读（r，对应数值 4）、写（w，对应数值 2）、执行（x，对应数值 1）的全部权限（4+2+1=7）。
+因此 777 意味着所有者、所属组和其他用户对该文件都拥有读、写、执行的最高权限。&lt;/p&gt;
+&lt;p&gt;那比如还有chmod 635就是代表：为目标文件或目录设置上述特定权限组合（所有者 rw-、所属组 -wx、其他用户 r-x）。&lt;/p&gt;
+&lt;p&gt;chmod +x aa&lt;/p&gt;
+&lt;p&gt;chmod u+x aa&lt;/p&gt;
+&lt;p&gt;chmod g-x aa&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;chmod u=rwx,g=rx,o=rx 文件名&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;对于这个指令chmdo u=rw g=r o=rx aa，作为一个例子，意思是修改目录或文件aa，将赋予user用户有read读、write（w）权限，但没有x执行权限的权限。w在group这里省略了，代表“没有权限”；对于group组，分配read读权限，没有w和x的权限。other其他用户来说，分配read读和x执行权限。如下图所示:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/23.png&#34;
+	width=&#34;444&#34;
+	height=&#34;59&#34;
+	srcset=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/23_hu_eab4027a4edf73a8.png 480w, http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/23_hu_4e129b4e9391a3f4.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;752&#34;
+		data-flex-basis=&#34;1806px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/22.png&#34;
+	width=&#34;581&#34;
+	height=&#34;200&#34;
+	srcset=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/22_hu_75685cd695577459.png 480w, http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/22_hu_99721ebec5a7f077.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;290&#34;
+		data-flex-basis=&#34;697px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;blockquote class=&#34;alert alert-note&#34;&gt;
+    &lt;blockquote&gt;
+&lt;p&gt;在这里可以发现，像change mode、password命令一样，都是些缩写，变成chmod、passwd这样的，很多Kali命令都是会缩写的，很好记。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
 &lt;h4 id=&#34;linux进程与软件管理&#34;&gt;Linux进程与软件管理
-&lt;/h4&gt;&lt;p&gt;进程概述&lt;/p&gt;
-&lt;p&gt;进程查看与控制&lt;/p&gt;
-&lt;p&gt;软件包管理（deb/rpm、apt/yum）&lt;/p&gt;
+&lt;/h4&gt;&lt;h5 id=&#34;进程概述&#34;&gt;进程概述
+&lt;/h5&gt;&lt;p&gt;Linux系统进程是指在Linux操作系统中运行的每一个独立的任务或程序实例。每个进程都拥有自己的地址空间、系统资源（如文件句柄和内存）以及一个唯一的进程标识符（PID）。Linux通过进程模型实现了多任务处理和并发执行，允许同时运行多个进程。&lt;/p&gt;
+&lt;h5 id=&#34;进程查看与控制&#34;&gt;进程查看与控制
+&lt;/h5&gt;&lt;p&gt;ifconfig：获取网卡状态或网卡配置&lt;/p&gt;
+&lt;p&gt;ping：检测网络连通&lt;/p&gt;
+&lt;p&gt;这俩命令自己去试吧，我在这里保护好自己就不泄露IP啦&amp;hellip;&amp;hellip;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/24.png&#34;
+	width=&#34;901&#34;
+	height=&#34;464&#34;
+	srcset=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/24_hu_fdbf01af36332239.png 480w, http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/24_hu_2c159067df4e7253.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;194&#34;
+		data-flex-basis=&#34;466px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;blockquote class=&#34;alert alert-tip&#34;&gt;
+    &lt;blockquote&gt;
+&lt;p&gt;当然有时候要用到IP、远程连接这样的话，难免会连接不上，那你可以试着重启，用到ifconfig &amp;lt;网卡比如eth0、eth1这样的&amp;gt; down，这样就把这个网卡关了，然后过一会就再输一次命令，把down换成up，就是开启网卡了。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;ps：显示当前终端下运行的进程&lt;/p&gt;
+&lt;p&gt;ps -aux：显示所有用户的所有进程，包括系统进程，提供更详细的进程信息.第二张图可以看到我们刚刚用了ps -aux指令的记录。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/25.png&#34;
+	width=&#34;1023&#34;
+	height=&#34;256&#34;
+	srcset=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/25_hu_9cce23edd31bdf20.png 480w, http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/25_hu_8fb6e40aad043bff.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;399&#34;
+		data-flex-basis=&#34;959px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/26.png&#34;
+	width=&#34;1140&#34;
+	height=&#34;210&#34;
+	srcset=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/26_hu_34ed4ff11ed98e93.png 480w, http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/26_hu_43cafe15ee48b53d.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;542&#34;
+		data-flex-basis=&#34;1302px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;kill （PID）： 终止指定PID进程&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/27.png&#34;
+	width=&#34;810&#34;
+	height=&#34;175&#34;
+	srcset=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/27_hu_93e6f9d1c0630287.png 480w, http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/27_hu_913ea3d72cca6c4f.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;462&#34;
+		data-flex-basis=&#34;1110px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;kill -9 （pid）：强制终止进程（-9 对应信号编号 9，即 SIGKILL 信号，这是一种强制终止信号，具有最高优先级。&lt;/p&gt;
+&lt;blockquote class=&#34;alert alert-error&#34;&gt;
+    &lt;p&gt;但是我比较建议你用上面的kill（PID），因为通常在进程正常终止（如 kill （PID）发送的 SIGTERM 信号）无效时，才会使用 -9 强制&lt;strong&gt;杀死&lt;/strong&gt;进程，但这种方式可能导致进程正在处理的数据丢失或资源未正常释放，因此需谨慎使用）&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;那有个问题来了，服务进程这么多一个个看PID查找忒麻烦啊！那可以用到pidof命令去找到你需要关闭的服务进程的pid。例如要关掉sshd远程连接服务，那我们就用pidof命令去找它的pid：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/29.png&#34;
+	width=&#34;525&#34;
+	height=&#34;80&#34;
+	srcset=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/29_hu_fbf1fee0d4abed50.png 480w, http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/29_hu_5d63206c29a608f5.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;656&#34;
+		data-flex-basis=&#34;1575px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;netstat -ano：显示网络状态、查端口、公私网地址、TCP、UDP等。&lt;/p&gt;
+&lt;h5 id=&#34;软件包管理debrpmaptyum&#34;&gt;软件包管理（deb/rpm、apt/yum）
+&lt;/h5&gt;&lt;p&gt;这里简单知道这个命令就好，基本上配了Kali虚拟机和有下载过CTF的解题工具的经验都见过这些命令：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;debian&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;包格式：.deb&lt;/p&gt;
+&lt;p&gt;包管理器：apt&lt;/p&gt;
+&lt;p&gt;安装一个包的命令：apt install xx&lt;/p&gt;
+&lt;blockquote class=&#34;alert alert-warn&#34;&gt;
+    &lt;p&gt;这里记得要切换root用户，不然会报错，权限不足&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;列出所有可更新的软件清单命令：apt update&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;升级软件包：apt upgrade&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote class=&#34;alert alert-tip&#34;&gt;
+    &lt;p&gt;在通过Linux进行命令行下载工具时，记得apt update一下噢&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;安装指定的软件命令：apt install &amp;lt;package_name&amp;gt;&lt;/p&gt;
+&lt;p&gt;删除软件包命令：apt remove &amp;lt;package_name&amp;gt;&lt;/p&gt;
+&lt;p&gt;列出所有已安装的包：apt list &amp;ndash;installed&lt;/p&gt;
+&lt;p&gt;列出所有已安装的包版本信息：apt list &amp;ndash;all-versions&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;redhat&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;包格式：.rpm&lt;/p&gt;
+&lt;p&gt;包管理器：yum yum install xx&lt;/p&gt;
+&lt;p&gt;安装镜像源：vim /etc/apt/sources.list（这个命令比较常用，因为Kali的下载速度比较慢的时候我都会用这个命令去换一下镜像源，阿里云、清华源等，这样速度比较快些）&lt;/p&gt;
+&lt;h4 id=&#34;linux系统防火墙&#34;&gt;Linux系统防火墙
+&lt;/h4&gt;&lt;p&gt;防火墙就是根据系统管理员设定的规则来控制数据包的进出，主要是保护内网的安全。目前Linux系统的防火墙类型主要有两种：分别是&lt;strong&gt;iptables&lt;/strong&gt;和&lt;strong&gt;firewalld&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;iptables-静态防火墙&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;早期的Linux系统中默认使用的是iptables防火墙，配置文件在/etc/sysconfig/iptables,主要工作在网络层&lt;/p&gt;
+&lt;p&gt;iptables只可以通过命令行进行配置&lt;/p&gt;
+&lt;p&gt;iptables默认是允许所有，需要通过拒绝去做限制&lt;/p&gt;
+&lt;p&gt;iptables在修改了规则之后必须得全部刷新才可以生效，还会丢失连接（无法守护进程）&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;firewalld-动态防火墙&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;取代了之前的iptables防火墙，配置文件在/usr/lib/firewalld和/etc/fiewalld中,主要工作在网络层&lt;/p&gt;
+&lt;p&gt;firewalld不仅可以通过命令行进行配置，也可以通过图形化界面配置&lt;/p&gt;
+&lt;p&gt;firewalld默认是拒绝所有，需要通过允许去放行&lt;/p&gt;
+&lt;p&gt;firewalld可以动态修改单条规则，动态管理规则集（允许更新规则而不破环现有会话和连接，可以守护进程&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;查看firewalld防火墙状态：sudo systemctl status firewalld&lt;/p&gt;
+&lt;p&gt;查看iptables防火墙状态（如果系统使用iptables作为防火墙）：sudo systemctl status iptables&lt;/p&gt;
+&lt;p&gt;基于RPM的系统安装firewalld：sudo yum install firewalld&lt;/p&gt;
+&lt;p&gt;基于Debian的系统（如Ubuntu），虽然通常不预装firewalld，但也可以使用apt命令进行安装：sudo apt install firewalld&lt;/p&gt;
+&lt;p&gt;启动firewalld服务：sudo systemctl start firewalld&lt;/p&gt;
+&lt;p&gt;关闭firewalld服务：sudo systemctl stop firewalld&lt;/p&gt;
+&lt;p&gt;开机自启动：sudo systemctl enable firewalld&lt;/p&gt;
+&lt;p&gt;禁止务开机自启动：sudo systemctl disable firewalld&lt;/p&gt;
 &lt;h4 id=&#34;shell基础与实践&#34;&gt;Shell基础与实践
-&lt;/h4&gt;&lt;h2 id=&#34;网络安全基础&#34;&gt;网络安全基础
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;shell脚本&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Linux 的 Shell 种类众多，常见的有：&lt;/p&gt;
+&lt;p&gt;• Bourne Shell（/usr/bin/sh或/bin/sh）&lt;/p&gt;
+&lt;p&gt;• Bourne Again Shell（/bin/bash）&lt;/p&gt;
+&lt;p&gt;• C Shell（/usr/bin/csh）&lt;/p&gt;
+&lt;p&gt;• K Shell（/usr/bin/ksh）&lt;/p&gt;
+&lt;p&gt;• Shell for Root（/sbin/sh）&lt;/p&gt;
+&lt;p&gt;由于&lt;strong&gt;bash&lt;/strong&gt;易用与免费，其被广泛使用也是大多数Linux系统的默认Shell。(Kali目前为zsh，兼容bash) /bin/bash&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Xshell&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.xshell.com/zh/free-for-home-school/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Xshell&lt;/a&gt;是一款功能强大的终端模拟器，它支持SSH、SERIAL等多种协议，可以用于远程连接和管理服务器或虚拟机。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/30.png&#34;
+	width=&#34;1920&#34;
+	height=&#34;670&#34;
+	srcset=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/30_hu_6f8ad4b4346912f8.png 480w, http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/30_hu_ea0e1932c7c469f4.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;286&#34;
+		data-flex-basis=&#34;687px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;九头蛇-ssh弱口令爆破实战&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/31.png&#34;
+	width=&#34;1052&#34;
+	height=&#34;305&#34;
+	srcset=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/31_hu_4d4354f54fdf7f2f.png 480w, http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/31_hu_fbcb1ee40c8cd453.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;344&#34;
+		data-flex-basis=&#34;827px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;网络安全基础&#34;&gt;网络安全基础
 &lt;/h2&gt;&lt;h3 id=&#34;计算机网络&#34;&gt;计算机网络
 &lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;
@@ -571,23 +1698,34 @@
 </description>
         </item>
         <item>
-        <title>CTF</title>
-        <link>http://expl0rer.top/p/ctf/</link>
-        <pubDate>Sun, 27 Jul 2025 00:00:00 +0000</pubDate>
-        
-        <guid>http://expl0rer.top/p/ctf/</guid>
-        <description></description>
-        </item>
-        <item>
         <title>Python学习</title>
-        <link>http://expl0rer.top/p/python/</link>
+        <link>http://8.148.145.201/p/python/</link>
         <pubDate>Sun, 27 Jul 2025 00:00:00 +0000</pubDate>
         
-        <guid>http://expl0rer.top/p/python/</guid>
-        <description>&lt;img src="http://expl0rer.top/p/python/python.jpg" alt="Featured image of post Python学习" /&gt;&lt;p&gt;[TOC]&lt;/p&gt;
+        <guid>http://8.148.145.201/p/python/</guid>
+        <description>&lt;img src="http://8.148.145.201/p/python/python.jpg" alt="Featured image of post Python学习" /&gt;
+
+
+
+
+
+    
+
+
+&lt;div class=&#34;video-wrapper&#34;&gt;
+    &lt;iframe src=&#34;https://player.bilibili.com/player.html?as_wide=1&amp;amp;high_quality=1&amp;amp;page=1&amp;bvid=BV1vfXHYtEHT&#34;
+            scrolling=&#34;no&#34;
+            frameborder=&#34;no&#34;
+            framespacing=&#34;0&#34;
+            allowfullscreen=&#34;true&#34;
+    &gt;
+    &lt;/iframe&gt;
+&lt;/div&gt;
+
+&lt;p&gt;[TOC]&lt;/p&gt;
 &lt;h1 id=&#34;前文&#34;&gt;前文
 &lt;/h1&gt;&lt;p&gt;Python是强类型的动态脚本语言，相比C、C++来说，它是一种解释型的高级编程语言，能更好跨平台运行，Python的优势在于它能以较短的篇幅完成一项任务，说人话就是敲代码敲得少不费手就能打出脚本，但劣势是运行相对C来说慢些，不过也无妨它成为脚本小子最爱，可以看看下方例子，你就知道差距了哈哈！！！&lt;/p&gt;
-&lt;p&gt;我一开始是先学C的，一开始接触编程很坐牢，if、else、for、do while等这些语句把我折磨得很惨，主要是零基础。。。。学完C后又到Python，因为不管打ctf还是以后工作，Python都是比较重要的，所以这也是我为什么要那么啰嗦的把我学Python的过程给记录下来，给未来的自己或者其它读者看看，交流一下也可。我参考嵩天的课本《Python语言程序基础》第二版来讲解，这也不算是讲解吧，更多是我学习的记录，你也看看我的过程，有错误的欢迎指正哈，邮箱联系我都可的。&lt;/p&gt;
+&lt;p&gt;我一开始是先学C的，一开始接触编程很坐牢，if、else、for、do while等这些语句把我折磨得很惨，主要是零基础。。。。学完C后又到Python，因为不管打ctf还是以后工作，Python都是比较重要的，所以这也是我为什么要那么啰嗦的把我学Python的过程给记录下来，给未来的自己或者其它读者看看，交流一下也可。我参考嵩天的课本《Python语言程序基础》第二版来讲解，这也不算是讲解吧，更多是我学习的记录，你也看看我的过程，有错误的欢迎在邮箱或者评论区留言指正哈。&lt;/p&gt;
 &lt;h2 id=&#34;直观例子&#34;&gt;直观例子
 &lt;/h2&gt;&lt;h3 id=&#34;c语言&#34;&gt;C语言
 &lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -655,10 +1793,10 @@
 &lt;h4 id=&#34;编译与解释&#34;&gt;编译与解释
 &lt;/h4&gt;&lt;p&gt;高级语言按照计算机执行方式的不同可分成两类：静态语言和脚本语言。这里所说的执行方式是指计算机执行一个程序的过程，静态语言采用编译执行，脚本语言采用解释执行。无论哪种执行方式，用户的使用方法可以是一致的，如通过鼠标双击执行一个程序。&lt;/p&gt;
 &lt;p&gt;编译是将源代码转换成目标代码的过程，通常，源代码是高级语言代码，目标代码是机器语言代码，执行编译的计算机程序称为编译器（Compiler)。如图1.1展示了程序的编译过程，其中，虚线表示目标代码被计算机运行。编译器将源代码转换成目标代码，计算机可以立即或稍后运行这个目标代码。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://expl0rer.top/p/python/2.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/python/2.png&#34;
 	width=&#34;909&#34;
 	height=&#34;270&#34;
-	srcset=&#34;http://expl0rer.top/p/python/2_hu_5b5c74b2036b1cf4.png 480w, http://expl0rer.top/p/python/2_hu_b5e28a33020169c8.png 1024w&#34;
+	srcset=&#34;http://8.148.145.201/p/python/2_hu_5b5c74b2036b1cf4.png 480w, http://8.148.145.201/p/python/2_hu_b5e28a33020169c8.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -668,10 +1806,10 @@
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;解释是将源代码逐条转换成目标代码同时逐条运行目标代码的过程。执行解释的计算机程序称为解释器（Interpreter)。如图1.2展示了程序的解释过程。其中，高级语言源代码与数据一同输入给解释器，然后输出运行结果。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://expl0rer.top/p/python/3.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/python/3.png&#34;
 	width=&#34;689&#34;
 	height=&#34;165&#34;
-	srcset=&#34;http://expl0rer.top/p/python/3_hu_95990392e3dbf0b.png 480w, http://expl0rer.top/p/python/3_hu_34d82038b00c7aa9.png 1024w&#34;
+	srcset=&#34;http://8.148.145.201/p/python/3_hu_95990392e3dbf0b.png 480w, http://8.148.145.201/p/python/3_hu_34d82038b00c7aa9.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -753,10 +1891,10 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;1、交互式：多行代码难以运行
-&lt;img src=&#34;http://expl0rer.top/p/python/4.png&#34;
+&lt;img src=&#34;http://8.148.145.201/p/python/4.png&#34;
 	width=&#34;736&#34;
 	height=&#34;277&#34;
-	srcset=&#34;http://expl0rer.top/p/python/4_hu_4385f3924c5587c0.png 480w, http://expl0rer.top/p/python/4_hu_3de8cbc99e6e6dfe.png 1024w&#34;
+	srcset=&#34;http://8.148.145.201/p/python/4_hu_4385f3924c5587c0.png 480w, http://8.148.145.201/p/python/4_hu_3de8cbc99e6e6dfe.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -765,10 +1903,10 @@
 		data-flex-basis=&#34;637px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://expl0rer.top/p/python/5.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/python/5.png&#34;
 	width=&#34;577&#34;
 	height=&#34;144&#34;
-	srcset=&#34;http://expl0rer.top/p/python/5_hu_5ba659a651c79571.png 480w, http://expl0rer.top/p/python/5_hu_dcde6bfb824d6304.png 1024w&#34;
+	srcset=&#34;http://8.148.145.201/p/python/5_hu_5ba659a651c79571.png 480w, http://8.148.145.201/p/python/5_hu_dcde6bfb824d6304.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -778,10 +1916,10 @@
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;2、文件式：多代码运行&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://expl0rer.top/p/python/6.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/python/6.png&#34;
 	width=&#34;695&#34;
 	height=&#34;381&#34;
-	srcset=&#34;http://expl0rer.top/p/python/6_hu_239c3096fde8566e.png 480w, http://expl0rer.top/p/python/6_hu_d67f669e0851f606.png 1024w&#34;
+	srcset=&#34;http://8.148.145.201/p/python/6_hu_239c3096fde8566e.png 480w, http://8.148.145.201/p/python/6_hu_d67f669e0851f606.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -885,10 +2023,10 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;如下：
-&lt;img src=&#34;http://expl0rer.top/p/python/7.png&#34;
+&lt;img src=&#34;http://8.148.145.201/p/python/7.png&#34;
 	width=&#34;956&#34;
 	height=&#34;486&#34;
-	srcset=&#34;http://expl0rer.top/p/python/7_hu_fd50b228f9b27d9.png 480w, http://expl0rer.top/p/python/7_hu_b4906a4ffb0f1e68.png 1024w&#34;
+	srcset=&#34;http://8.148.145.201/p/python/7_hu_fd50b228f9b27d9.png 480w, http://8.148.145.201/p/python/7_hu_b4906a4ffb0f1e68.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -968,10 +2106,10 @@
 &lt;/h2&gt;&lt;h3 id=&#34;python语法规则&#34;&gt;Python语法规则
 &lt;/h3&gt;&lt;h4 id=&#34;python格式框架&#34;&gt;Python格式框架
 &lt;/h4&gt;&lt;p&gt;Python语言采用严格的“缩进”来表明程序的格式框架，在符号“  ： ”下一行就需要缩进了，缩进用处是决定代码块的从属关系，说人话就是，比如if语句下一行开始，缩进相同的代码都是属于if旗下的，这好处是更加简洁。当然过C语言也知道。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://expl0rer.top/p/python/8.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/python/8.png&#34;
 	width=&#34;947&#34;
 	height=&#34;436&#34;
-	srcset=&#34;http://expl0rer.top/p/python/8_hu_e32b2df87e8b43ec.png 480w, http://expl0rer.top/p/python/8_hu_d218d1cc0887ba8a.png 1024w&#34;
+	srcset=&#34;http://8.148.145.201/p/python/8_hu_e32b2df87e8b43ec.png 480w, http://8.148.145.201/p/python/8_hu_d218d1cc0887ba8a.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -980,10 +2118,10 @@
 		data-flex-basis=&#34;521px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://expl0rer.top/p/python/9.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/python/9.png&#34;
 	width=&#34;936&#34;
 	height=&#34;502&#34;
-	srcset=&#34;http://expl0rer.top/p/python/9_hu_581cb71b23e25293.png 480w, http://expl0rer.top/p/python/9_hu_2cca4dc88a4becee.png 1024w&#34;
+	srcset=&#34;http://8.148.145.201/p/python/9_hu_581cb71b23e25293.png 480w, http://8.148.145.201/p/python/9_hu_2cca4dc88a4becee.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -1032,10 +2170,10 @@ Python 语言允许采用大写字母、小写字母、数字、下画线 和汉
 &lt;blockquote&gt;
 &lt;p&gt;python_is_good、python_is_not_good、is_it_a_question、1AG&lt;/p&gt;&lt;/blockquote&gt;
 &lt;p&gt;除此之外，命名还不能和Python自带的专用词重名：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://expl0rer.top/p/python/10.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/python/10.png&#34;
 	width=&#34;1125&#34;
 	height=&#34;386&#34;
-	srcset=&#34;http://expl0rer.top/p/python/10_hu_6c40184c917ccdf9.png 480w, http://expl0rer.top/p/python/10_hu_e0471830de472b20.png 1024w&#34;
+	srcset=&#34;http://8.148.145.201/p/python/10_hu_6c40184c917ccdf9.png 480w, http://8.148.145.201/p/python/10_hu_e0471830de472b20.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -1046,10 +2184,10 @@ Python 语言允许采用大写字母、小写字母、数字、下画线 和汉
 &gt;&lt;/p&gt;
 &lt;h4 id=&#34;字符串&#34;&gt;字符串
 &lt;/h4&gt;&lt;p&gt;字符串是字符的序列，可以按照单个字符或字符片段进行索引。字符串包括两号体系：正向递增序号和反向递减序号，如图所示。如果字符串长度为L，递增以最左侧字符序号为0,向右依次递增，最右侧字符序号为L-1；反向递减以最右侧字符序号为-1，向左依次递减，最左侧字符序号为-L。这两种索引字方法可以同时使用。实例代码1.1 中第3行 TempStr[-1]表示字符串TempStr变最后一个字符。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://expl0rer.top/p/python/11.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/python/11.png&#34;
 	width=&#34;636&#34;
 	height=&#34;224&#34;
-	srcset=&#34;http://expl0rer.top/p/python/11_hu_d92c72d0d03cce18.png 480w, http://expl0rer.top/p/python/11_hu_d08ebf2f4a21319.png 1024w&#34;
+	srcset=&#34;http://8.148.145.201/p/python/11_hu_d92c72d0d03cce18.png 480w, http://8.148.145.201/p/python/11_hu_d08ebf2f4a21319.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -1058,10 +2196,10 @@ Python 语言允许采用大写字母、小写字母、数字、下画线 和汉
 		data-flex-basis=&#34;681px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://expl0rer.top/p/python/12.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/python/12.png&#34;
 	width=&#34;325&#34;
 	height=&#34;147&#34;
-	srcset=&#34;http://expl0rer.top/p/python/12_hu_851b907ab136b0c3.png 480w, http://expl0rer.top/p/python/12_hu_d0efc657417a6654.png 1024w&#34;
+	srcset=&#34;http://8.148.145.201/p/python/12_hu_851b907ab136b0c3.png 480w, http://8.148.145.201/p/python/12_hu_d0efc657417a6654.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -1071,10 +2209,10 @@ Python 语言允许采用大写字母、小写字母、数字、下画线 和汉
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;a[0:3]就表示从第0个到第3个的前一个也就是0、1、2，所以没有”h“。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://expl0rer.top/p/python/13.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/python/13.png&#34;
 	width=&#34;421&#34;
 	height=&#34;107&#34;
-	srcset=&#34;http://expl0rer.top/p/python/13_hu_e0873ab9f54c600e.png 480w, http://expl0rer.top/p/python/13_hu_2d508000b1582c9f.png 1024w&#34;
+	srcset=&#34;http://8.148.145.201/p/python/13_hu_e0873ab9f54c600e.png 480w, http://8.148.145.201/p/python/13_hu_2d508000b1582c9f.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -1238,10 +2376,10 @@ Python 语言允许采用大写字母、小写字母、数字、下画线 和汉
 &lt;p&gt;​       &amp;lt;语句块1&amp;gt;&lt;/p&gt;
 &lt;h3 id=&#34;python模块-库的引用&#34;&gt;Python模块-库的引用
 &lt;/h3&gt;&lt;p&gt;先放预告片。。。
-&lt;img src=&#34;http://expl0rer.top/p/python/14.png&#34;
+&lt;img src=&#34;http://8.148.145.201/p/python/14.png&#34;
 	width=&#34;814&#34;
 	height=&#34;472&#34;
-	srcset=&#34;http://expl0rer.top/p/python/14_hu_576bd0006fea71e2.png 480w, http://expl0rer.top/p/python/14_hu_1758a64cfc72118e.png 1024w&#34;
+	srcset=&#34;http://8.148.145.201/p/python/14_hu_576bd0006fea71e2.png 480w, http://8.148.145.201/p/python/14_hu_1758a64cfc72118e.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;贪吃蛇&#34;
@@ -1307,10 +2445,10 @@ Python 语言允许采用大写字母、小写字母、数字、下画线 和汉
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;当然也可以用from &amp;lt;库名&amp;gt; import &amp;lt;函数名，函数名，&amp;hellip;&amp;hellip;..，函数名&amp;gt;    以及from &amp;lt;库名&amp;gt; import *（*表示通配符，把库所有函数都调用），如果全部调用的话，那就直接写对应函数就好，不用写math.xxx，而是直接写xxx函数&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://expl0rer.top/p/python/15.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/python/15.png&#34;
 	width=&#34;425&#34;
 	height=&#34;300&#34;
-	srcset=&#34;http://expl0rer.top/p/python/15_hu_8f392038032d3f23.png 480w, http://expl0rer.top/p/python/15_hu_52f0fa6da0d00817.png 1024w&#34;
+	srcset=&#34;http://8.148.145.201/p/python/15_hu_8f392038032d3f23.png 480w, http://8.148.145.201/p/python/15_hu_52f0fa6da0d00817.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -1324,10 +2462,10 @@ Python 语言允许采用大写字母、小写字母、数字、下画线 和汉
 &lt;/h4&gt;&lt;p&gt;turtle（海龟）是一个直观有趣的的图形绘制函数库，所以说turtle比较重要，单独细讲。在这里我仅举几例：&lt;/p&gt;
 &lt;h5 id=&#34;绘图坐标体系&#34;&gt;绘图坐标体系
 &lt;/h5&gt;&lt;p&gt;turtle库绘制有一个基本的结构框架：一个小乌龟在坐标系中爬行，其爬行轨迹形状形成了绘制图形。对于小海龟来说，有”前进“、”后退“、”旋转“等爬行行为，跟游戏一样有一个前、后、左、右方向键，刚开始时小海龟在原点（0，0），行进方向为水平右方。
-&lt;img src=&#34;http://expl0rer.top/p/python/16.png&#34;
+&lt;img src=&#34;http://8.148.145.201/p/python/16.png&#34;
 	width=&#34;490&#34;
 	height=&#34;356&#34;
-	srcset=&#34;http://expl0rer.top/p/python/16_hu_296a79369ef85733.png 480w, http://expl0rer.top/p/python/16_hu_b00fe89fa769d9d2.png 1024w&#34;
+	srcset=&#34;http://8.148.145.201/p/python/16_hu_296a79369ef85733.png 480w, http://8.148.145.201/p/python/16_hu_b00fe89fa769d9d2.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -1412,10 +2550,10 @@ Python 语言允许采用大写字母、小写字母、数字、下画线 和汉
 &lt;/h5&gt;&lt;p&gt;turtle.fd() 函数，全名turtle.forward() 函数，通过一组函数控制画笔的行进动作，进而绘制出形状。turtle.fd(distance) 表示向小海龟当前行进方向前进distance单位距离，值为负数就反方向走。&lt;/p&gt;
 &lt;p&gt;turtle.seth() 函数，别名turtle.setheading (to_angle)，设置小海龟当前的行进方向，该角度为绝对方向的角度值。&lt;/p&gt;
 &lt;p&gt;to_angle：角度的整数值。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://expl0rer.top/p/python/18.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/python/18.png&#34;
 	width=&#34;617&#34;
 	height=&#34;355&#34;
-	srcset=&#34;http://expl0rer.top/p/python/18_hu_dc1462dacd61dcd4.png 480w, http://expl0rer.top/p/python/18_hu_2c8e4afa8f197be5.png 1024w&#34;
+	srcset=&#34;http://8.148.145.201/p/python/18_hu_dc1462dacd61dcd4.png 480w, http://8.148.145.201/p/python/18_hu_2c8e4afa8f197be5.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -1443,10 +2581,10 @@ Python 语言允许采用大写字母、小写字母、数字、下画线 和汉
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;turtle.circle(radius, extent=None)&lt;/p&gt;
 &lt;p&gt;作用：根据半径radius绘制extent角度的弧形。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://expl0rer.top/p/python/19.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/python/19.png&#34;
 	width=&#34;599&#34;
 	height=&#34;277&#34;
-	srcset=&#34;http://expl0rer.top/p/python/19_hu_eb7a424f21b8326d.png 480w, http://expl0rer.top/p/python/19_hu_9f4f66567964afc6.png 1024w&#34;
+	srcset=&#34;http://8.148.145.201/p/python/19_hu_eb7a424f21b8326d.png 480w, http://8.148.145.201/p/python/19_hu_9f4f66567964afc6.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -1550,10 +2688,10 @@ $$
 x^2=-1
 $$&lt;p&gt;
 复数可以看作是二元有序实数对(a,b)，表示为a+i，其中，a是实数部分，简称实部，b是虚数部分，简称虚部。根据图3.1，复数是实数在二维平面空间旋转的一和麦示。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://expl0rer.top/p/python/21.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/python/21.png&#34;
 	width=&#34;565&#34;
 	height=&#34;311&#34;
-	srcset=&#34;http://expl0rer.top/p/python/21_hu_ac680a8d9d13b67c.png 480w, http://expl0rer.top/p/python/21_hu_9600e2601986bf08.png 1024w&#34;
+	srcset=&#34;http://8.148.145.201/p/python/21_hu_ac680a8d9d13b67c.png 480w, http://8.148.145.201/p/python/21_hu_9600e2601986bf08.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -1755,10 +2893,10 @@ $$&lt;p&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
           &lt;td style=&#34;text-align: left&#34;&gt;pow(x,y[,z])&lt;/td&gt;
-          &lt;td&gt;(x**y)%z,[.]表示该参数可以省略。即pow(x,y)，它与&lt;img src=&#34;http://expl0rer.top/p/python/22.png&#34;
+          &lt;td&gt;(x**y)%z,[.]表示该参数可以省略。即pow(x,y)，它与&lt;img src=&#34;http://8.148.145.201/p/python/22.png&#34;
 	width=&#34;71&#34;
 	height=&#34;30&#34;
-	srcset=&#34;http://expl0rer.top/p/python/22_hu_2e6a17b4427d2fd7.png 480w, http://expl0rer.top/p/python/22_hu_18098ab644999379.png 1024w&#34;
+	srcset=&#34;http://8.148.145.201/p/python/22_hu_2e6a17b4427d2fd7.png 480w, http://8.148.145.201/p/python/22_hu_18098ab644999379.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -1967,10 +3105,10 @@ $$&lt;p&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;p&gt;这个\a很有意思啊，真会响铃啊，不过得在终端才会这样的，在其它编程软件可能不会这样的，你可以去试一试。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://expl0rer.top/p/python/23.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/python/23.png&#34;
 	width=&#34;357&#34;
 	height=&#34;149&#34;
-	srcset=&#34;http://expl0rer.top/p/python/23_hu_9254bece0cbfffa4.png 480w, http://expl0rer.top/p/python/23_hu_823e3c11abdb15d4.png 1024w&#34;
+	srcset=&#34;http://8.148.145.201/p/python/23_hu_9254bece0cbfffa4.png 480w, http://8.148.145.201/p/python/23_hu_823e3c11abdb15d4.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -2251,10 +3389,10 @@ $$&lt;p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;计算机Python的CPU占用率为10%。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://expl0rer.top/p/python/24.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/python/24.png&#34;
 	width=&#34;1075&#34;
 	height=&#34;225&#34;
-	srcset=&#34;http://expl0rer.top/p/python/24_hu_fc22a925c547cb2.png 480w, http://expl0rer.top/p/python/24_hu_67527d3c57ccf5.png 1024w&#34;
+	srcset=&#34;http://8.148.145.201/p/python/24_hu_fc22a925c547cb2.png 480w, http://8.148.145.201/p/python/24_hu_67527d3c57ccf5.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -2487,10 +3625,10 @@ $$&lt;p&gt;
 &lt;h3 id=&#34;程序的基本结构&#34;&gt;程序的基本结构
 &lt;/h3&gt;&lt;h4 id=&#34;程序流程图&#34;&gt;程序流程图
 &lt;/h4&gt;&lt;p&gt;程序流程图用一系列图形、流程线和文字说明描述程序的基本操作和控制流程，它是程序分析和过程描述的最基本方式。流程图的基本元素包括7种，如图所示。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://expl0rer.top/p/python/25.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/python/25.png&#34;
 	width=&#34;719&#34;
 	height=&#34;296&#34;
-	srcset=&#34;http://expl0rer.top/p/python/25_hu_35d9ab2390f3c205.png 480w, http://expl0rer.top/p/python/25_hu_d99eba21bc6510e9.png 1024w&#34;
+	srcset=&#34;http://8.148.145.201/p/python/25_hu_35d9ab2390f3c205.png 480w, http://8.148.145.201/p/python/25_hu_d99eba21bc6510e9.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -2501,10 +3639,10 @@ $$&lt;p&gt;
 &gt;&lt;/p&gt;
 &lt;p&gt;学过C语言或者其它基础编程语言的对这方面比较熟悉。&lt;/p&gt;
 &lt;p&gt;其中，起止框表示一个程序的开始和结束；判断框判断一个条件是否成立，并根据判断结果选择不同的执行路径；处理框表示一组处理过程；输入/输出框表示数据输入或结果输出；注释框增加程序的解释；流向线以带箭头直线或曲线形式指示程序的执行路径；连接点将多个流程图连接到一起，常用于将一个较大流程图分隔为若干部分。下图所示为一个流程图示例，为了便于描述，采用连接点A将流程图分成两个部分。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://expl0rer.top/p/python/26.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/python/26.png&#34;
 	width=&#34;695&#34;
 	height=&#34;315&#34;
-	srcset=&#34;http://expl0rer.top/p/python/26_hu_61e21c150fdfe4b3.png 480w, http://expl0rer.top/p/python/26_hu_cb85d8c096b4f2fa.png 1024w&#34;
+	srcset=&#34;http://8.148.145.201/p/python/26_hu_61e21c150fdfe4b3.png 480w, http://8.148.145.201/p/python/26_hu_cb85d8c096b4f2fa.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -2519,10 +3657,10 @@ $$&lt;p&gt;
 &lt;p&gt;程序由3种基本结构组成：顺序结构、分支结构和循环结构。这些基本结构都有一个入口和一个出口。任何程序都由这3种基本结构组合而成。为了直观展示程序结构，这里采用流程图方式描述。&lt;/p&gt;
 &lt;p&gt;顺序结构是程序按照线性顺序依次执行的一种运行方式，如图4.3所示，其中语句块1和语句块2表示一个或一组顺序执行的语句。&lt;/p&gt;
 &lt;p&gt;分支结构是程序根据条件判断结果而选择不同向前执行路径的一种运行方式，如图所示，根据分支路径上的完备性，分支结构包括单分支结构和二分支结构，二分支结构组合形成多分支结构。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://expl0rer.top/p/python/27.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/python/27.png&#34;
 	width=&#34;1019&#34;
 	height=&#34;291&#34;
-	srcset=&#34;http://expl0rer.top/p/python/27_hu_a9135e8af8bda999.png 480w, http://expl0rer.top/p/python/27_hu_5dbbeb6e6d087255.png 1024w&#34;
+	srcset=&#34;http://8.148.145.201/p/python/27_hu_a9135e8af8bda999.png 480w, http://8.148.145.201/p/python/27_hu_5dbbeb6e6d087255.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -2532,10 +3670,10 @@ $$&lt;p&gt;
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;循环结构是程序根据条件判断结果向后反复执行的一种运行方式，如图，根据循环体触发条件不同,循环结构包括条件循环和遍历循环结构。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://expl0rer.top/p/python/28.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/python/28.png&#34;
 	width=&#34;1095&#34;
 	height=&#34;375&#34;
-	srcset=&#34;http://expl0rer.top/p/python/28_hu_b1e26ada27bf612c.png 480w, http://expl0rer.top/p/python/28_hu_94bc2de6df629018.png 1024w&#34;
+	srcset=&#34;http://8.148.145.201/p/python/28_hu_b1e26ada27bf612c.png 480w, http://8.148.145.201/p/python/28_hu_94bc2de6df629018.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -2566,10 +3704,10 @@ $$&lt;p&gt;
 &lt;p&gt;if &amp;lt;条件&amp;gt;:&lt;/p&gt;
 &lt;p&gt;​    &amp;lt;语句块&amp;gt;&lt;/p&gt;
 &lt;p&gt;语句块是if条件满足后执行的一个或多个语句序列，语句块中语句通过与if所在行形成缩进表达包含关系。if语句首先评估条件的结果值，如果结果为True，则执行语句块中的语句序列，然后控制转向程序的下一条语句。如果结果为False，语句块中的语句会被跳过。f语句的控制过程如图所示。（这张图就是上节我所讲解的其中一个IPO描述流程图，想起来了吗？）&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://expl0rer.top/p/python/30.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/python/30.png&#34;
 	width=&#34;389&#34;
 	height=&#34;235&#34;
-	srcset=&#34;http://expl0rer.top/p/python/30_hu_403454fa5bd64ed0.png 480w, http://expl0rer.top/p/python/30_hu_a8851e1d86507d20.png 1024w&#34;
+	srcset=&#34;http://8.148.145.201/p/python/30_hu_403454fa5bd64ed0.png 480w, http://8.148.145.201/p/python/30_hu_a8851e1d86507d20.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;if语句的控制流程图&#34;
@@ -2727,10 +3865,10 @@ $$&lt;p&gt;
 &lt;p&gt;&amp;hellip;&amp;hellip;&lt;/p&gt;
 &lt;p&gt;else:&lt;/p&gt;
 &lt;p&gt;​     &amp;lt;语句块N&amp;gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://expl0rer.top/p/python/31.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/python/31.png&#34;
 	width=&#34;539&#34;
 	height=&#34;440&#34;
-	srcset=&#34;http://expl0rer.top/p/python/31_hu_a77bce4b5301748f.png 480w, http://expl0rer.top/p/python/31_hu_a8908d2c94ec967e.png 1024w&#34;
+	srcset=&#34;http://8.148.145.201/p/python/31_hu_a77bce4b5301748f.png 480w, http://8.148.145.201/p/python/31_hu_a8908d2c94ec967e.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;多分支结构的控制流程图&#34;
@@ -2924,10 +4062,10 @@ $$&lt;p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;num&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;**&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://expl0rer.top/p/python/32.png&#34;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/python/32.png&#34;
 	width=&#34;821&#34;
 	height=&#34;305&#34;
-	srcset=&#34;http://expl0rer.top/p/python/32_hu_a2b3bcde723daa2a.png 480w, http://expl0rer.top/p/python/32_hu_52bea62d1cbbdfc5.png 1024w&#34;
+	srcset=&#34;http://8.148.145.201/p/python/32_hu_a2b3bcde723daa2a.png 480w, http://8.148.145.201/p/python/32_hu_52bea62d1cbbdfc5.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -3163,53 +4301,61 @@ n(n - 1)! &amp; \text{otherwise}
 $$&lt;p&gt;
 &lt;strong&gt;数学归纳法和递归都利用了递推原理，本质是相同的。&lt;/strong&gt;&lt;/p&gt;
 &lt;h4 id=&#34;递归的使用&#34;&gt;递归的使用
-&lt;/h4&gt;</description>
+&lt;/h4&gt;&lt;p&gt;先从阶乘开刀吧，根据用户输入的整数n，计算并输出n的阶乘值。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;fact()函数在其定义内部引用了自身，形成了递归过程（如第5行)。无限制的递归将耗尽计算资源，因此，需要设计基例使得递归逐层返回。fact()函数通过f语句给出了n为0时的基例，当n==0,fact()函数不再递归，返回数值1，如果n!=0,则通过递归返回n与n-1阶乘的乘积。&lt;/p&gt;
+</description>
         </item>
         <item>
         <title>从0-1的历程</title>
-        <link>http://expl0rer.top/p/%E4%BB%8E0-1%E7%9A%84%E5%8E%86%E7%A8%8B/</link>
+        <link>http://8.148.145.201/p/%E4%BB%8E0-1%E7%9A%84%E5%8E%86%E7%A8%8B/</link>
         <pubDate>Sun, 27 Jul 2025 00:00:00 +0000</pubDate>
         
-        <guid>http://expl0rer.top/p/%E4%BB%8E0-1%E7%9A%84%E5%8E%86%E7%A8%8B/</guid>
-        <description>&lt;img src="http://expl0rer.top/p/%E4%BB%8E0-1%E7%9A%84%E5%8E%86%E7%A8%8B/%E6%88%91%E7%9A%84%E9%A6%96%E6%AC%A1%E7%BA%BF%E4%B8%8B%E8%B5%9B.jpg" alt="Featured image of post 从0-1的历程" /&gt;&lt;h1 id=&#34;事先注明&#34;&gt;事先注明
+        <guid>http://8.148.145.201/p/%E4%BB%8E0-1%E7%9A%84%E5%8E%86%E7%A8%8B/</guid>
+        <description>&lt;img src="http://8.148.145.201/p/%E4%BB%8E0-1%E7%9A%84%E5%8E%86%E7%A8%8B/%E6%88%91%E7%9A%84%E9%A6%96%E6%AC%A1%E7%BA%BF%E4%B8%8B%E8%B5%9B.jpg" alt="Featured image of post 从0-1的历程" /&gt;&lt;h1 id=&#34;事先注明&#34;&gt;事先注明
 &lt;/h1&gt;&lt;p&gt;&lt;strong&gt;这篇文章类似我的日记，仅是个人主观意见，如有影响可联系本人删改。谢谢！&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;标题“从0-1”的“1”不可抵达，只是我的一个理想目标，我的“0”始于2024-09-04，这是我踏足网安行业的一个标志时间点。&lt;/p&gt;
 &lt;h2 id=&#34;我的经历&#34;&gt;我的经历
-&lt;/h2&gt;&lt;p&gt;我参加过很多比赛，不限于专业比赛，像互联网+，三创赛等，像专业比赛，比较典型的是UCSCctf、Actf、河南的御网杯、西电的XDCTF和他们那边的新生赛newstarsctf，虽然在初期更像是在当”混子“，其实也在给自己积累经验，，一开始我就是我通过学校的讲坐来了解到有ctf这东西的，我看着挺有趣我就开始自学了，其实不然，这蕴含很多高深知识，这也是为什么很多网安岗位的加分项都有说”有CTF相关各类奖项的优先“得原因了，我第一次参加ctf线下赛是在大一下时候，广药举办的，如头图所示，当时组队参加，有黄某、凌某和范🐏，当时结束后也没混到奖，这实属是难啊，跟那些专职人员抢不过的。。。。&lt;/p&gt;
+&lt;/h2&gt;&lt;p&gt;我参加过很多比赛，不限于专业比赛，像互联网+，三创赛等，像专业比赛，比较典型的是UCSCctf、Actf、河南的御网杯、西电的XDCTF和他们那边的新生赛newstarsctf，虽然在初期更像是在当“混子”，其实也在给自己积累经验，，一开始我就是我通过学校的讲座来了解到有ctf这东西的，我看着挺有趣我就开始自学了，其实不然，这蕴含很多高深知识，这也是为什么很多网安岗位的加分项都有说“有CTF相关各类奖项的优先”的原因了，我第一次参加ctf线下赛是在大一下学期时候，广药举办的，如头图所示，当时组队参加，有黄某、凌某和范🐏，当时结束后也没混到奖，这实属是难啊，跟那些专职人员抢不过的。。。。&lt;/p&gt;
 </description>
         </item>
         <item>
         <title>归档 | Archives</title>
-        <link>http://expl0rer.top/archives/</link>
+        <link>http://8.148.145.201/archives/</link>
         <pubDate>Tue, 28 May 2019 00:00:00 +0000</pubDate>
         
-        <guid>http://expl0rer.top/archives/</guid>
+        <guid>http://8.148.145.201/archives/</guid>
         <description></description>
         </item>
         <item>
         <title>关于 | About</title>
-        <link>http://expl0rer.top/%E5%85%B3%E4%BA%8E-about/</link>
+        <link>http://8.148.145.201/%E5%85%B3%E4%BA%8E-about/</link>
         <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
         
-        <guid>http://expl0rer.top/%E5%85%B3%E4%BA%8E-about/</guid>
+        <guid>http://8.148.145.201/%E5%85%B3%E4%BA%8E-about/</guid>
         <description>&lt;p&gt;有问题，可以在Blog文章下方评论区讨论下，如果显示异常可以试着刷新一下。当然可以联系QQ邮箱：2430752128@qq.com&lt;/p&gt;
 &lt;p&gt;每周更新一次Blog。谢谢各位大佬支持！！！&lt;/p&gt;
 </description>
         </item>
         <item>
         <title>技术链接 | Links</title>
-        <link>http://expl0rer.top/%E6%8A%80%E6%9C%AF%E9%93%BE%E6%8E%A5-links/</link>
+        <link>http://8.148.145.201/%E6%8A%80%E6%9C%AF%E9%93%BE%E6%8E%A5-links/</link>
         <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
         
-        <guid>http://expl0rer.top/%E6%8A%80%E6%9C%AF%E9%93%BE%E6%8E%A5-links/</guid>
+        <guid>http://8.148.145.201/%E6%8A%80%E6%9C%AF%E9%93%BE%E6%8E%A5-links/</guid>
         <description></description>
         </item>
         <item>
         <title>搜索 | Search</title>
-        <link>http://expl0rer.top/search/</link>
+        <link>http://8.148.145.201/search/</link>
         <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
         
-        <guid>http://expl0rer.top/search/</guid>
+        <guid>http://8.148.145.201/search/</guid>
         <description></description>
         </item>
         

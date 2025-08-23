@@ -2,21 +2,40 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>编程语言 on Expl0rer.Ct</title>
-        <link>http://expl0rer.top/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/</link>
+        <link>http://8.148.145.201/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/</link>
         <description>Recent content in 编程语言 on Expl0rer.Ct</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Expl0rer.Ct</copyright>
-        <lastBuildDate>Sun, 27 Jul 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://expl0rer.top/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 27 Jul 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://8.148.145.201/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>Python学习</title>
-        <link>http://expl0rer.top/p/python/</link>
+        <link>http://8.148.145.201/p/python/</link>
         <pubDate>Sun, 27 Jul 2025 00:00:00 +0000</pubDate>
         
-        <guid>http://expl0rer.top/p/python/</guid>
-        <description>&lt;img src="http://expl0rer.top/p/python/python.jpg" alt="Featured image of post Python学习" /&gt;&lt;p&gt;[TOC]&lt;/p&gt;
+        <guid>http://8.148.145.201/p/python/</guid>
+        <description>&lt;img src="http://8.148.145.201/p/python/python.jpg" alt="Featured image of post Python学习" /&gt;
+
+
+
+
+
+    
+
+
+&lt;div class=&#34;video-wrapper&#34;&gt;
+    &lt;iframe src=&#34;https://player.bilibili.com/player.html?as_wide=1&amp;amp;high_quality=1&amp;amp;page=1&amp;bvid=BV1vfXHYtEHT&#34;
+            scrolling=&#34;no&#34;
+            frameborder=&#34;no&#34;
+            framespacing=&#34;0&#34;
+            allowfullscreen=&#34;true&#34;
+    &gt;
+    &lt;/iframe&gt;
+&lt;/div&gt;
+
+&lt;p&gt;[TOC]&lt;/p&gt;
 &lt;h1 id=&#34;前文&#34;&gt;前文
 &lt;/h1&gt;&lt;p&gt;Python是强类型的动态脚本语言，相比C、C++来说，它是一种解释型的高级编程语言，能更好跨平台运行，Python的优势在于它能以较短的篇幅完成一项任务，说人话就是敲代码敲得少不费手就能打出脚本，但劣势是运行相对C来说慢些，不过也无妨它成为脚本小子最爱，可以看看下方例子，你就知道差距了哈哈！！！&lt;/p&gt;
-&lt;p&gt;我一开始是先学C的，一开始接触编程很坐牢，if、else、for、do while等这些语句把我折磨得很惨，主要是零基础。。。。学完C后又到Python，因为不管打ctf还是以后工作，Python都是比较重要的，所以这也是我为什么要那么啰嗦的把我学Python的过程给记录下来，给未来的自己或者其它读者看看，交流一下也可。我参考嵩天的课本《Python语言程序基础》第二版来讲解，这也不算是讲解吧，更多是我学习的记录，你也看看我的过程，有错误的欢迎指正哈，邮箱联系我都可的。&lt;/p&gt;
+&lt;p&gt;我一开始是先学C的，一开始接触编程很坐牢，if、else、for、do while等这些语句把我折磨得很惨，主要是零基础。。。。学完C后又到Python，因为不管打ctf还是以后工作，Python都是比较重要的，所以这也是我为什么要那么啰嗦的把我学Python的过程给记录下来，给未来的自己或者其它读者看看，交流一下也可。我参考嵩天的课本《Python语言程序基础》第二版来讲解，这也不算是讲解吧，更多是我学习的记录，你也看看我的过程，有错误的欢迎在邮箱或者评论区留言指正哈。&lt;/p&gt;
 &lt;h2 id=&#34;直观例子&#34;&gt;直观例子
 &lt;/h2&gt;&lt;h3 id=&#34;c语言&#34;&gt;C语言
 &lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -84,10 +103,10 @@
 &lt;h4 id=&#34;编译与解释&#34;&gt;编译与解释
 &lt;/h4&gt;&lt;p&gt;高级语言按照计算机执行方式的不同可分成两类：静态语言和脚本语言。这里所说的执行方式是指计算机执行一个程序的过程，静态语言采用编译执行，脚本语言采用解释执行。无论哪种执行方式，用户的使用方法可以是一致的，如通过鼠标双击执行一个程序。&lt;/p&gt;
 &lt;p&gt;编译是将源代码转换成目标代码的过程，通常，源代码是高级语言代码，目标代码是机器语言代码，执行编译的计算机程序称为编译器（Compiler)。如图1.1展示了程序的编译过程，其中，虚线表示目标代码被计算机运行。编译器将源代码转换成目标代码，计算机可以立即或稍后运行这个目标代码。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://expl0rer.top/p/python/2.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/python/2.png&#34;
 	width=&#34;909&#34;
 	height=&#34;270&#34;
-	srcset=&#34;http://expl0rer.top/p/python/2_hu_5b5c74b2036b1cf4.png 480w, http://expl0rer.top/p/python/2_hu_b5e28a33020169c8.png 1024w&#34;
+	srcset=&#34;http://8.148.145.201/p/python/2_hu_5b5c74b2036b1cf4.png 480w, http://8.148.145.201/p/python/2_hu_b5e28a33020169c8.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -97,10 +116,10 @@
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;解释是将源代码逐条转换成目标代码同时逐条运行目标代码的过程。执行解释的计算机程序称为解释器（Interpreter)。如图1.2展示了程序的解释过程。其中，高级语言源代码与数据一同输入给解释器，然后输出运行结果。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://expl0rer.top/p/python/3.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/python/3.png&#34;
 	width=&#34;689&#34;
 	height=&#34;165&#34;
-	srcset=&#34;http://expl0rer.top/p/python/3_hu_95990392e3dbf0b.png 480w, http://expl0rer.top/p/python/3_hu_34d82038b00c7aa9.png 1024w&#34;
+	srcset=&#34;http://8.148.145.201/p/python/3_hu_95990392e3dbf0b.png 480w, http://8.148.145.201/p/python/3_hu_34d82038b00c7aa9.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -182,10 +201,10 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;1、交互式：多行代码难以运行
-&lt;img src=&#34;http://expl0rer.top/p/python/4.png&#34;
+&lt;img src=&#34;http://8.148.145.201/p/python/4.png&#34;
 	width=&#34;736&#34;
 	height=&#34;277&#34;
-	srcset=&#34;http://expl0rer.top/p/python/4_hu_4385f3924c5587c0.png 480w, http://expl0rer.top/p/python/4_hu_3de8cbc99e6e6dfe.png 1024w&#34;
+	srcset=&#34;http://8.148.145.201/p/python/4_hu_4385f3924c5587c0.png 480w, http://8.148.145.201/p/python/4_hu_3de8cbc99e6e6dfe.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -194,10 +213,10 @@
 		data-flex-basis=&#34;637px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://expl0rer.top/p/python/5.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/python/5.png&#34;
 	width=&#34;577&#34;
 	height=&#34;144&#34;
-	srcset=&#34;http://expl0rer.top/p/python/5_hu_5ba659a651c79571.png 480w, http://expl0rer.top/p/python/5_hu_dcde6bfb824d6304.png 1024w&#34;
+	srcset=&#34;http://8.148.145.201/p/python/5_hu_5ba659a651c79571.png 480w, http://8.148.145.201/p/python/5_hu_dcde6bfb824d6304.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -207,10 +226,10 @@
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;2、文件式：多代码运行&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://expl0rer.top/p/python/6.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/python/6.png&#34;
 	width=&#34;695&#34;
 	height=&#34;381&#34;
-	srcset=&#34;http://expl0rer.top/p/python/6_hu_239c3096fde8566e.png 480w, http://expl0rer.top/p/python/6_hu_d67f669e0851f606.png 1024w&#34;
+	srcset=&#34;http://8.148.145.201/p/python/6_hu_239c3096fde8566e.png 480w, http://8.148.145.201/p/python/6_hu_d67f669e0851f606.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -314,10 +333,10 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;如下：
-&lt;img src=&#34;http://expl0rer.top/p/python/7.png&#34;
+&lt;img src=&#34;http://8.148.145.201/p/python/7.png&#34;
 	width=&#34;956&#34;
 	height=&#34;486&#34;
-	srcset=&#34;http://expl0rer.top/p/python/7_hu_fd50b228f9b27d9.png 480w, http://expl0rer.top/p/python/7_hu_b4906a4ffb0f1e68.png 1024w&#34;
+	srcset=&#34;http://8.148.145.201/p/python/7_hu_fd50b228f9b27d9.png 480w, http://8.148.145.201/p/python/7_hu_b4906a4ffb0f1e68.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -397,10 +416,10 @@
 &lt;/h2&gt;&lt;h3 id=&#34;python语法规则&#34;&gt;Python语法规则
 &lt;/h3&gt;&lt;h4 id=&#34;python格式框架&#34;&gt;Python格式框架
 &lt;/h4&gt;&lt;p&gt;Python语言采用严格的“缩进”来表明程序的格式框架，在符号“  ： ”下一行就需要缩进了，缩进用处是决定代码块的从属关系，说人话就是，比如if语句下一行开始，缩进相同的代码都是属于if旗下的，这好处是更加简洁。当然过C语言也知道。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://expl0rer.top/p/python/8.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/python/8.png&#34;
 	width=&#34;947&#34;
 	height=&#34;436&#34;
-	srcset=&#34;http://expl0rer.top/p/python/8_hu_e32b2df87e8b43ec.png 480w, http://expl0rer.top/p/python/8_hu_d218d1cc0887ba8a.png 1024w&#34;
+	srcset=&#34;http://8.148.145.201/p/python/8_hu_e32b2df87e8b43ec.png 480w, http://8.148.145.201/p/python/8_hu_d218d1cc0887ba8a.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -409,10 +428,10 @@
 		data-flex-basis=&#34;521px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://expl0rer.top/p/python/9.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/python/9.png&#34;
 	width=&#34;936&#34;
 	height=&#34;502&#34;
-	srcset=&#34;http://expl0rer.top/p/python/9_hu_581cb71b23e25293.png 480w, http://expl0rer.top/p/python/9_hu_2cca4dc88a4becee.png 1024w&#34;
+	srcset=&#34;http://8.148.145.201/p/python/9_hu_581cb71b23e25293.png 480w, http://8.148.145.201/p/python/9_hu_2cca4dc88a4becee.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -461,10 +480,10 @@ Python 语言允许采用大写字母、小写字母、数字、下画线 和汉
 &lt;blockquote&gt;
 &lt;p&gt;python_is_good、python_is_not_good、is_it_a_question、1AG&lt;/p&gt;&lt;/blockquote&gt;
 &lt;p&gt;除此之外，命名还不能和Python自带的专用词重名：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://expl0rer.top/p/python/10.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/python/10.png&#34;
 	width=&#34;1125&#34;
 	height=&#34;386&#34;
-	srcset=&#34;http://expl0rer.top/p/python/10_hu_6c40184c917ccdf9.png 480w, http://expl0rer.top/p/python/10_hu_e0471830de472b20.png 1024w&#34;
+	srcset=&#34;http://8.148.145.201/p/python/10_hu_6c40184c917ccdf9.png 480w, http://8.148.145.201/p/python/10_hu_e0471830de472b20.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -475,10 +494,10 @@ Python 语言允许采用大写字母、小写字母、数字、下画线 和汉
 &gt;&lt;/p&gt;
 &lt;h4 id=&#34;字符串&#34;&gt;字符串
 &lt;/h4&gt;&lt;p&gt;字符串是字符的序列，可以按照单个字符或字符片段进行索引。字符串包括两号体系：正向递增序号和反向递减序号，如图所示。如果字符串长度为L，递增以最左侧字符序号为0,向右依次递增，最右侧字符序号为L-1；反向递减以最右侧字符序号为-1，向左依次递减，最左侧字符序号为-L。这两种索引字方法可以同时使用。实例代码1.1 中第3行 TempStr[-1]表示字符串TempStr变最后一个字符。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://expl0rer.top/p/python/11.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/python/11.png&#34;
 	width=&#34;636&#34;
 	height=&#34;224&#34;
-	srcset=&#34;http://expl0rer.top/p/python/11_hu_d92c72d0d03cce18.png 480w, http://expl0rer.top/p/python/11_hu_d08ebf2f4a21319.png 1024w&#34;
+	srcset=&#34;http://8.148.145.201/p/python/11_hu_d92c72d0d03cce18.png 480w, http://8.148.145.201/p/python/11_hu_d08ebf2f4a21319.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -487,10 +506,10 @@ Python 语言允许采用大写字母、小写字母、数字、下画线 和汉
 		data-flex-basis=&#34;681px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://expl0rer.top/p/python/12.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/python/12.png&#34;
 	width=&#34;325&#34;
 	height=&#34;147&#34;
-	srcset=&#34;http://expl0rer.top/p/python/12_hu_851b907ab136b0c3.png 480w, http://expl0rer.top/p/python/12_hu_d0efc657417a6654.png 1024w&#34;
+	srcset=&#34;http://8.148.145.201/p/python/12_hu_851b907ab136b0c3.png 480w, http://8.148.145.201/p/python/12_hu_d0efc657417a6654.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -500,10 +519,10 @@ Python 语言允许采用大写字母、小写字母、数字、下画线 和汉
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;a[0:3]就表示从第0个到第3个的前一个也就是0、1、2，所以没有”h“。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://expl0rer.top/p/python/13.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/python/13.png&#34;
 	width=&#34;421&#34;
 	height=&#34;107&#34;
-	srcset=&#34;http://expl0rer.top/p/python/13_hu_e0873ab9f54c600e.png 480w, http://expl0rer.top/p/python/13_hu_2d508000b1582c9f.png 1024w&#34;
+	srcset=&#34;http://8.148.145.201/p/python/13_hu_e0873ab9f54c600e.png 480w, http://8.148.145.201/p/python/13_hu_2d508000b1582c9f.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -667,10 +686,10 @@ Python 语言允许采用大写字母、小写字母、数字、下画线 和汉
 &lt;p&gt;​       &amp;lt;语句块1&amp;gt;&lt;/p&gt;
 &lt;h3 id=&#34;python模块-库的引用&#34;&gt;Python模块-库的引用
 &lt;/h3&gt;&lt;p&gt;先放预告片。。。
-&lt;img src=&#34;http://expl0rer.top/p/python/14.png&#34;
+&lt;img src=&#34;http://8.148.145.201/p/python/14.png&#34;
 	width=&#34;814&#34;
 	height=&#34;472&#34;
-	srcset=&#34;http://expl0rer.top/p/python/14_hu_576bd0006fea71e2.png 480w, http://expl0rer.top/p/python/14_hu_1758a64cfc72118e.png 1024w&#34;
+	srcset=&#34;http://8.148.145.201/p/python/14_hu_576bd0006fea71e2.png 480w, http://8.148.145.201/p/python/14_hu_1758a64cfc72118e.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;贪吃蛇&#34;
@@ -736,10 +755,10 @@ Python 语言允许采用大写字母、小写字母、数字、下画线 和汉
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;当然也可以用from &amp;lt;库名&amp;gt; import &amp;lt;函数名，函数名，&amp;hellip;&amp;hellip;..，函数名&amp;gt;    以及from &amp;lt;库名&amp;gt; import *（*表示通配符，把库所有函数都调用），如果全部调用的话，那就直接写对应函数就好，不用写math.xxx，而是直接写xxx函数&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://expl0rer.top/p/python/15.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/python/15.png&#34;
 	width=&#34;425&#34;
 	height=&#34;300&#34;
-	srcset=&#34;http://expl0rer.top/p/python/15_hu_8f392038032d3f23.png 480w, http://expl0rer.top/p/python/15_hu_52f0fa6da0d00817.png 1024w&#34;
+	srcset=&#34;http://8.148.145.201/p/python/15_hu_8f392038032d3f23.png 480w, http://8.148.145.201/p/python/15_hu_52f0fa6da0d00817.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -753,10 +772,10 @@ Python 语言允许采用大写字母、小写字母、数字、下画线 和汉
 &lt;/h4&gt;&lt;p&gt;turtle（海龟）是一个直观有趣的的图形绘制函数库，所以说turtle比较重要，单独细讲。在这里我仅举几例：&lt;/p&gt;
 &lt;h5 id=&#34;绘图坐标体系&#34;&gt;绘图坐标体系
 &lt;/h5&gt;&lt;p&gt;turtle库绘制有一个基本的结构框架：一个小乌龟在坐标系中爬行，其爬行轨迹形状形成了绘制图形。对于小海龟来说，有”前进“、”后退“、”旋转“等爬行行为，跟游戏一样有一个前、后、左、右方向键，刚开始时小海龟在原点（0，0），行进方向为水平右方。
-&lt;img src=&#34;http://expl0rer.top/p/python/16.png&#34;
+&lt;img src=&#34;http://8.148.145.201/p/python/16.png&#34;
 	width=&#34;490&#34;
 	height=&#34;356&#34;
-	srcset=&#34;http://expl0rer.top/p/python/16_hu_296a79369ef85733.png 480w, http://expl0rer.top/p/python/16_hu_b00fe89fa769d9d2.png 1024w&#34;
+	srcset=&#34;http://8.148.145.201/p/python/16_hu_296a79369ef85733.png 480w, http://8.148.145.201/p/python/16_hu_b00fe89fa769d9d2.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -841,10 +860,10 @@ Python 语言允许采用大写字母、小写字母、数字、下画线 和汉
 &lt;/h5&gt;&lt;p&gt;turtle.fd() 函数，全名turtle.forward() 函数，通过一组函数控制画笔的行进动作，进而绘制出形状。turtle.fd(distance) 表示向小海龟当前行进方向前进distance单位距离，值为负数就反方向走。&lt;/p&gt;
 &lt;p&gt;turtle.seth() 函数，别名turtle.setheading (to_angle)，设置小海龟当前的行进方向，该角度为绝对方向的角度值。&lt;/p&gt;
 &lt;p&gt;to_angle：角度的整数值。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://expl0rer.top/p/python/18.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/python/18.png&#34;
 	width=&#34;617&#34;
 	height=&#34;355&#34;
-	srcset=&#34;http://expl0rer.top/p/python/18_hu_dc1462dacd61dcd4.png 480w, http://expl0rer.top/p/python/18_hu_2c8e4afa8f197be5.png 1024w&#34;
+	srcset=&#34;http://8.148.145.201/p/python/18_hu_dc1462dacd61dcd4.png 480w, http://8.148.145.201/p/python/18_hu_2c8e4afa8f197be5.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -872,10 +891,10 @@ Python 语言允许采用大写字母、小写字母、数字、下画线 和汉
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;turtle.circle(radius, extent=None)&lt;/p&gt;
 &lt;p&gt;作用：根据半径radius绘制extent角度的弧形。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://expl0rer.top/p/python/19.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/python/19.png&#34;
 	width=&#34;599&#34;
 	height=&#34;277&#34;
-	srcset=&#34;http://expl0rer.top/p/python/19_hu_eb7a424f21b8326d.png 480w, http://expl0rer.top/p/python/19_hu_9f4f66567964afc6.png 1024w&#34;
+	srcset=&#34;http://8.148.145.201/p/python/19_hu_eb7a424f21b8326d.png 480w, http://8.148.145.201/p/python/19_hu_9f4f66567964afc6.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -979,10 +998,10 @@ $$
 x^2=-1
 $$&lt;p&gt;
 复数可以看作是二元有序实数对(a,b)，表示为a+i，其中，a是实数部分，简称实部，b是虚数部分，简称虚部。根据图3.1，复数是实数在二维平面空间旋转的一和麦示。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://expl0rer.top/p/python/21.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/python/21.png&#34;
 	width=&#34;565&#34;
 	height=&#34;311&#34;
-	srcset=&#34;http://expl0rer.top/p/python/21_hu_ac680a8d9d13b67c.png 480w, http://expl0rer.top/p/python/21_hu_9600e2601986bf08.png 1024w&#34;
+	srcset=&#34;http://8.148.145.201/p/python/21_hu_ac680a8d9d13b67c.png 480w, http://8.148.145.201/p/python/21_hu_9600e2601986bf08.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -1184,10 +1203,10 @@ $$&lt;p&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
           &lt;td style=&#34;text-align: left&#34;&gt;pow(x,y[,z])&lt;/td&gt;
-          &lt;td&gt;(x**y)%z,[.]表示该参数可以省略。即pow(x,y)，它与&lt;img src=&#34;http://expl0rer.top/p/python/22.png&#34;
+          &lt;td&gt;(x**y)%z,[.]表示该参数可以省略。即pow(x,y)，它与&lt;img src=&#34;http://8.148.145.201/p/python/22.png&#34;
 	width=&#34;71&#34;
 	height=&#34;30&#34;
-	srcset=&#34;http://expl0rer.top/p/python/22_hu_2e6a17b4427d2fd7.png 480w, http://expl0rer.top/p/python/22_hu_18098ab644999379.png 1024w&#34;
+	srcset=&#34;http://8.148.145.201/p/python/22_hu_2e6a17b4427d2fd7.png 480w, http://8.148.145.201/p/python/22_hu_18098ab644999379.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -1396,10 +1415,10 @@ $$&lt;p&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;p&gt;这个\a很有意思啊，真会响铃啊，不过得在终端才会这样的，在其它编程软件可能不会这样的，你可以去试一试。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://expl0rer.top/p/python/23.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/python/23.png&#34;
 	width=&#34;357&#34;
 	height=&#34;149&#34;
-	srcset=&#34;http://expl0rer.top/p/python/23_hu_9254bece0cbfffa4.png 480w, http://expl0rer.top/p/python/23_hu_823e3c11abdb15d4.png 1024w&#34;
+	srcset=&#34;http://8.148.145.201/p/python/23_hu_9254bece0cbfffa4.png 480w, http://8.148.145.201/p/python/23_hu_823e3c11abdb15d4.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -1680,10 +1699,10 @@ $$&lt;p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;计算机Python的CPU占用率为10%。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://expl0rer.top/p/python/24.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/python/24.png&#34;
 	width=&#34;1075&#34;
 	height=&#34;225&#34;
-	srcset=&#34;http://expl0rer.top/p/python/24_hu_fc22a925c547cb2.png 480w, http://expl0rer.top/p/python/24_hu_67527d3c57ccf5.png 1024w&#34;
+	srcset=&#34;http://8.148.145.201/p/python/24_hu_fc22a925c547cb2.png 480w, http://8.148.145.201/p/python/24_hu_67527d3c57ccf5.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -1916,10 +1935,10 @@ $$&lt;p&gt;
 &lt;h3 id=&#34;程序的基本结构&#34;&gt;程序的基本结构
 &lt;/h3&gt;&lt;h4 id=&#34;程序流程图&#34;&gt;程序流程图
 &lt;/h4&gt;&lt;p&gt;程序流程图用一系列图形、流程线和文字说明描述程序的基本操作和控制流程，它是程序分析和过程描述的最基本方式。流程图的基本元素包括7种，如图所示。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://expl0rer.top/p/python/25.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/python/25.png&#34;
 	width=&#34;719&#34;
 	height=&#34;296&#34;
-	srcset=&#34;http://expl0rer.top/p/python/25_hu_35d9ab2390f3c205.png 480w, http://expl0rer.top/p/python/25_hu_d99eba21bc6510e9.png 1024w&#34;
+	srcset=&#34;http://8.148.145.201/p/python/25_hu_35d9ab2390f3c205.png 480w, http://8.148.145.201/p/python/25_hu_d99eba21bc6510e9.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -1930,10 +1949,10 @@ $$&lt;p&gt;
 &gt;&lt;/p&gt;
 &lt;p&gt;学过C语言或者其它基础编程语言的对这方面比较熟悉。&lt;/p&gt;
 &lt;p&gt;其中，起止框表示一个程序的开始和结束；判断框判断一个条件是否成立，并根据判断结果选择不同的执行路径；处理框表示一组处理过程；输入/输出框表示数据输入或结果输出；注释框增加程序的解释；流向线以带箭头直线或曲线形式指示程序的执行路径；连接点将多个流程图连接到一起，常用于将一个较大流程图分隔为若干部分。下图所示为一个流程图示例，为了便于描述，采用连接点A将流程图分成两个部分。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://expl0rer.top/p/python/26.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/python/26.png&#34;
 	width=&#34;695&#34;
 	height=&#34;315&#34;
-	srcset=&#34;http://expl0rer.top/p/python/26_hu_61e21c150fdfe4b3.png 480w, http://expl0rer.top/p/python/26_hu_cb85d8c096b4f2fa.png 1024w&#34;
+	srcset=&#34;http://8.148.145.201/p/python/26_hu_61e21c150fdfe4b3.png 480w, http://8.148.145.201/p/python/26_hu_cb85d8c096b4f2fa.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -1948,10 +1967,10 @@ $$&lt;p&gt;
 &lt;p&gt;程序由3种基本结构组成：顺序结构、分支结构和循环结构。这些基本结构都有一个入口和一个出口。任何程序都由这3种基本结构组合而成。为了直观展示程序结构，这里采用流程图方式描述。&lt;/p&gt;
 &lt;p&gt;顺序结构是程序按照线性顺序依次执行的一种运行方式，如图4.3所示，其中语句块1和语句块2表示一个或一组顺序执行的语句。&lt;/p&gt;
 &lt;p&gt;分支结构是程序根据条件判断结果而选择不同向前执行路径的一种运行方式，如图所示，根据分支路径上的完备性，分支结构包括单分支结构和二分支结构，二分支结构组合形成多分支结构。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://expl0rer.top/p/python/27.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/python/27.png&#34;
 	width=&#34;1019&#34;
 	height=&#34;291&#34;
-	srcset=&#34;http://expl0rer.top/p/python/27_hu_a9135e8af8bda999.png 480w, http://expl0rer.top/p/python/27_hu_5dbbeb6e6d087255.png 1024w&#34;
+	srcset=&#34;http://8.148.145.201/p/python/27_hu_a9135e8af8bda999.png 480w, http://8.148.145.201/p/python/27_hu_5dbbeb6e6d087255.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -1961,10 +1980,10 @@ $$&lt;p&gt;
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;循环结构是程序根据条件判断结果向后反复执行的一种运行方式，如图，根据循环体触发条件不同,循环结构包括条件循环和遍历循环结构。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://expl0rer.top/p/python/28.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/python/28.png&#34;
 	width=&#34;1095&#34;
 	height=&#34;375&#34;
-	srcset=&#34;http://expl0rer.top/p/python/28_hu_b1e26ada27bf612c.png 480w, http://expl0rer.top/p/python/28_hu_94bc2de6df629018.png 1024w&#34;
+	srcset=&#34;http://8.148.145.201/p/python/28_hu_b1e26ada27bf612c.png 480w, http://8.148.145.201/p/python/28_hu_94bc2de6df629018.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -1995,10 +2014,10 @@ $$&lt;p&gt;
 &lt;p&gt;if &amp;lt;条件&amp;gt;:&lt;/p&gt;
 &lt;p&gt;​    &amp;lt;语句块&amp;gt;&lt;/p&gt;
 &lt;p&gt;语句块是if条件满足后执行的一个或多个语句序列，语句块中语句通过与if所在行形成缩进表达包含关系。if语句首先评估条件的结果值，如果结果为True，则执行语句块中的语句序列，然后控制转向程序的下一条语句。如果结果为False，语句块中的语句会被跳过。f语句的控制过程如图所示。（这张图就是上节我所讲解的其中一个IPO描述流程图，想起来了吗？）&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://expl0rer.top/p/python/30.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/python/30.png&#34;
 	width=&#34;389&#34;
 	height=&#34;235&#34;
-	srcset=&#34;http://expl0rer.top/p/python/30_hu_403454fa5bd64ed0.png 480w, http://expl0rer.top/p/python/30_hu_a8851e1d86507d20.png 1024w&#34;
+	srcset=&#34;http://8.148.145.201/p/python/30_hu_403454fa5bd64ed0.png 480w, http://8.148.145.201/p/python/30_hu_a8851e1d86507d20.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;if语句的控制流程图&#34;
@@ -2156,10 +2175,10 @@ $$&lt;p&gt;
 &lt;p&gt;&amp;hellip;&amp;hellip;&lt;/p&gt;
 &lt;p&gt;else:&lt;/p&gt;
 &lt;p&gt;​     &amp;lt;语句块N&amp;gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://expl0rer.top/p/python/31.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/python/31.png&#34;
 	width=&#34;539&#34;
 	height=&#34;440&#34;
-	srcset=&#34;http://expl0rer.top/p/python/31_hu_a77bce4b5301748f.png 480w, http://expl0rer.top/p/python/31_hu_a8908d2c94ec967e.png 1024w&#34;
+	srcset=&#34;http://8.148.145.201/p/python/31_hu_a77bce4b5301748f.png 480w, http://8.148.145.201/p/python/31_hu_a8908d2c94ec967e.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;多分支结构的控制流程图&#34;
@@ -2353,10 +2372,10 @@ $$&lt;p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;num&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;**&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://expl0rer.top/p/python/32.png&#34;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/python/32.png&#34;
 	width=&#34;821&#34;
 	height=&#34;305&#34;
-	srcset=&#34;http://expl0rer.top/p/python/32_hu_a2b3bcde723daa2a.png 480w, http://expl0rer.top/p/python/32_hu_52bea62d1cbbdfc5.png 1024w&#34;
+	srcset=&#34;http://8.148.145.201/p/python/32_hu_a2b3bcde723daa2a.png 480w, http://8.148.145.201/p/python/32_hu_52bea62d1cbbdfc5.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -2592,7 +2611,15 @@ n(n - 1)! &amp; \text{otherwise}
 $$&lt;p&gt;
 &lt;strong&gt;数学归纳法和递归都利用了递推原理，本质是相同的。&lt;/strong&gt;&lt;/p&gt;
 &lt;h4 id=&#34;递归的使用&#34;&gt;递归的使用
-&lt;/h4&gt;</description>
+&lt;/h4&gt;&lt;p&gt;先从阶乘开刀吧，根据用户输入的整数n，计算并输出n的阶乘值。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;fact()函数在其定义内部引用了自身，形成了递归过程（如第5行)。无限制的递归将耗尽计算资源，因此，需要设计基例使得递归逐层返回。fact()函数通过f语句给出了n为0时的基例，当n==0,fact()函数不再递归，返回数值1，如果n!=0,则通过递归返回n与n-1阶乘的乘积。&lt;/p&gt;
+</description>
         </item>
         
     </channel>
