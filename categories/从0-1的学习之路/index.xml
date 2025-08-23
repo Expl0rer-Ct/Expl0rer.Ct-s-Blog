@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>从0-1的学习之路 on Expl0rer.Ct</title>
-        <link>http://8.148.145.201/categories/%E4%BB%8E0-1%E7%9A%84%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF/</link>
+        <link>https://expl0rer.top/categories/%E4%BB%8E0-1%E7%9A%84%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF/</link>
         <description>Recent content in 从0-1的学习之路 on Expl0rer.Ct</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Expl0rer.Ct</copyright>
-        <lastBuildDate>Thu, 31 Jul 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://8.148.145.201/categories/%E4%BB%8E0-1%E7%9A%84%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>第一阶段（理论基础）</title>
-        <link>http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/</link>
+        <lastBuildDate>Thu, 31 Jul 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://expl0rer.top/categories/%E4%BB%8E0-1%E7%9A%84%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>第一阶段</title>
+        <link>https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/</link>
         <pubDate>Thu, 31 Jul 2025 00:00:00 +0000</pubDate>
         
-        <guid>http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/</guid>
-        <description>&lt;img src="http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/luca.jpg" alt="Featured image of post 第一阶段（理论基础）" /&gt;&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/1.png&#34;
+        <guid>https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/</guid>
+        <description>&lt;img src="https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/luca.jpg" alt="Featured image of post 第一阶段" /&gt;&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/1.png&#34;
 	width=&#34;1251&#34;
 	height=&#34;3526&#34;
-	srcset=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/1_hu_33a2361632f79416.png 480w, http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/1_hu_185326c3c0740e5.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/1_hu_33a2361632f79416.png 480w, https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/1_hu_185326c3c0740e5.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;学习思维导图&#34;
@@ -34,10 +34,10 @@
 &lt;p&gt;的或者恶意的原因⽽遭受到破坏、更改、泄露，系统连续可靠正常地运⾏，⽹络服务不中断。&lt;/p&gt;
 &lt;h4 id=&#34;起源与发展&#34;&gt;起源与发展
 &lt;/h4&gt;&lt;p&gt;互联网发展迅速。互联⽹（Internet）是⼀种全球性的计算机⽹络。 通过电⼦，⽆线和光纤⽹络等等⼀系列⼴泛的技术连接着全球各地的设备和⼈，它基于⼀组通⽤的协议相互连接，形成逻辑上的单⼀巨⼤国际⽹络。&lt;/p&gt;
-&lt;p&gt;互联⽹始于1969年的美国阿帕⽹（ARPANET），最初是为了军事研究⽬的⽽建⽴的。随后，互联⽹逐渐发展成为⼀个覆盖全球的、由各种⽹络相互连接⽽成的庞⼤⽹络。&lt;img src=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/2.png&#34;
+&lt;p&gt;互联⽹始于1969年的美国阿帕⽹（ARPANET），最初是为了军事研究⽬的⽽建⽴的。随后，互联⽹逐渐发展成为⼀个覆盖全球的、由各种⽹络相互连接⽽成的庞⼤⽹络。&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/2.png&#34;
 	width=&#34;947&#34;
 	height=&#34;437&#34;
-	srcset=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/2_hu_71d7ca9179106730.png 480w, http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/2_hu_84da7ef03db47129.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/2_hu_71d7ca9179106730.png 480w, https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/2_hu_84da7ef03db47129.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -53,10 +53,10 @@
 &lt;a class=&#34;link&#34; href=&#34;%e4%b8%ad%e5%8d%8e%e4%ba%ba%e6%b0%91%e5%85%b1%e5%92%8c%e5%9b%bd%e7%bd%91%e7%bb%9c%e5%ae%89%e5%85%a8%e6%b3%95.pdf&#34; &gt;中华人民共和国网络安全法.pdf&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&#34;网络安全就业&#34;&gt;网络安全就业
 &lt;/h3&gt;&lt;h4 id=&#34;企业需求哪些岗位需求大薪资高&#34;&gt;企业需求（哪些岗位需求大、薪资高）
-&lt;/h4&gt;&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/3.png&#34;
+&lt;/h4&gt;&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/3.png&#34;
 	width=&#34;682&#34;
 	height=&#34;310&#34;
-	srcset=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/3_hu_ab6322c5ec49140f.png 480w, http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/3_hu_4ee7dcb2ae0448a4.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/3_hu_ab6322c5ec49140f.png 480w, https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/3_hu_4ee7dcb2ae0448a4.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -66,10 +66,10 @@
 	
 &gt;&lt;/p&gt;
 &lt;h4 id=&#34;岗位方向&#34;&gt;岗位方向
-&lt;/h4&gt;&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/4.png&#34;
+&lt;/h4&gt;&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/4.png&#34;
 	width=&#34;627&#34;
 	height=&#34;650&#34;
-	srcset=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/4_hu_1759bc6776181451.png 480w, http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/4_hu_401556be11a76614.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/4_hu_1759bc6776181451.png 480w, https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/4_hu_401556be11a76614.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -99,10 +99,10 @@
 &lt;p&gt;SYSTEM：最高权限的组&lt;/p&gt;
 &lt;p&gt;Administrators：管理员组（完全控制权）&lt;/p&gt;
 &lt;p&gt;Users：普通用户组&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/5.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/5.png&#34;
 	width=&#34;864&#34;
 	height=&#34;489&#34;
-	srcset=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/5_hu_716a45c5dcc8cf06.png 480w, http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/5_hu_69e73c0d3e6cf786.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/5_hu_716a45c5dcc8cf06.png 480w, https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/5_hu_69e73c0d3e6cf786.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -111,10 +111,10 @@
 		data-flex-basis=&#34;424px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/6.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/6.png&#34;
 	width=&#34;986&#34;
 	height=&#34;234&#34;
-	srcset=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/6_hu_a577c030999df982.png 480w, http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/6_hu_9e92463ea5c4a2c4.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/6_hu_a577c030999df982.png 480w, https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/6_hu_9e92463ea5c4a2c4.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -181,10 +181,10 @@
 &lt;/div&gt;&lt;p&gt;其实还有很多，比如开电脑的“户”的whoami、查看主机名的hostname、查看网络连接是否正常的ping呀、目录dir、天天用的cd/d，这些都是基础，在此提一下就好。&lt;/p&gt;
 &lt;h4 id=&#34;windows防火墙&#34;&gt;Windows防火墙
 &lt;/h4&gt;&lt;p&gt;防火墙（firewall）是一项协助确保信息安全的设备，会依照特定的规则，允许或限制传输的数据通过。Windows defender防火墙顾名思义就是在Windows操作系统中系统自带的软件防火墙。它有助于提高计算机的安全性。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/7.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/7.png&#34;
 	width=&#34;1260&#34;
 	height=&#34;440&#34;
-	srcset=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/7_hu_eb92813253433c06.png 480w, http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/7_hu_1d6eec79b32ad28b.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/7_hu_eb92813253433c06.png 480w, https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/7_hu_1d6eec79b32ad28b.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -193,10 +193,10 @@
 		data-flex-basis=&#34;687px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/8.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/8.png&#34;
 	width=&#34;995&#34;
 	height=&#34;445&#34;
-	srcset=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/8_hu_93103677082f5847.png 480w, http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/8_hu_83c86bfd0ce209cf.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/8_hu_93103677082f5847.png 480w, https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/8_hu_83c86bfd0ce209cf.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -216,10 +216,10 @@
 &lt;p&gt;1、准备一或二台虚拟机win用来远程连接，可以下载两台虚拟机，win7和win 2003，我这里用主机和win7好看些。&lt;/p&gt;
 &lt;p&gt;2、虚拟机/主机需要开启远程服务。&lt;/p&gt;
 &lt;p&gt;3、防火墙要允许远程服务通过。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/9.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/9.png&#34;
 	width=&#34;1635&#34;
 	height=&#34;921&#34;
-	srcset=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/9_hu_d8c0a0c131b5d318.png 480w, http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/9_hu_9765eb407dfa6aa6.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/9_hu_d8c0a0c131b5d318.png 480w, https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/9_hu_9765eb407dfa6aa6.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -231,10 +231,10 @@
 &lt;p&gt;4、创建一个用户用来远程登录，当然用本身用户也可以。&lt;/p&gt;
 &lt;p&gt;5、在本地安全策略里的用户权限分配要将新建的用户加进去；在计算机管理里面的组里面的Administrators或者users里面添加刚刚新建的用户。&lt;/p&gt;
 &lt;p&gt;6、另外开启一台虚拟机win二号要在开始菜单搜索远程桌面连接输入win1号的IP地址进行连接（相反连接也行），在输入刚刚新建的用户信息即可。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/10.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/10.png&#34;
 	width=&#34;1170&#34;
 	height=&#34;535&#34;
-	srcset=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/10_hu_5a1c1c01b9fb9475.png 480w, http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/10_hu_47d33292aef282f2.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/10_hu_5a1c1c01b9fb9475.png 480w, https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/10_hu_47d33292aef282f2.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -245,10 +245,10 @@
 &gt;&lt;/p&gt;
 &lt;p&gt;**前提：两台机子要相互ping通&lt;/p&gt;
 &lt;p&gt;我这里用win7和win2003、自己的win11来进行实验。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/11.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/11.png&#34;
 	width=&#34;1855&#34;
 	height=&#34;1001&#34;
-	srcset=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/11_hu_ca1c4e9f483ccd9d.png 480w, http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/11_hu_56055bd4f642b672.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/11_hu_ca1c4e9f483ccd9d.png 480w, https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/11_hu_56055bd4f642b672.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -266,10 +266,10 @@
 &lt;p&gt;Kali：基于Debian的Linux发行版，预装了许多安全工具。&lt;/p&gt;
 &lt;p&gt;RedHat：红帽公司，产品包括RHEL、Fedora Core与CentOS。&lt;/p&gt;
 &lt;p&gt;CentOS：RHEL依照开放源代码规定释出的源码所编译而成。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/12.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/12.png&#34;
 	width=&#34;670&#34;
 	height=&#34;449&#34;
-	srcset=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/12_hu_3cb184acf76422e7.png 480w, http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/12_hu_6fc81928056b1f06.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/12_hu_3cb184acf76422e7.png 480w, https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/12_hu_6fc81928056b1f06.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Linux大家族&#34;
@@ -291,10 +291,10 @@
 &lt;p&gt;发行版是指基于开源软件的操作系统的特定版本，经过整合、配置和打包后向用户发布的软件发行形式。它是将开源软件进行定制化和优化的结果，以便用户能够更方便地使用和管理操作系统。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
 &lt;h4 id=&#34;环境部署&#34;&gt;环境部署
 &lt;/h4&gt;&lt;h5 id=&#34;linux系统环境搭建&#34;&gt;Linux系统环境搭建
-&lt;/h5&gt;&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/14.png&#34;
+&lt;/h5&gt;&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/14.png&#34;
 	width=&#34;1845&#34;
 	height=&#34;980&#34;
-	srcset=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/14_hu_6e64549c077333.png 480w, http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/14_hu_9fcc10a24576c843.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/14_hu_6e64549c077333.png 480w, https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/14_hu_9fcc10a24576c843.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Kali虚拟机&#34;
@@ -311,10 +311,10 @@
 &lt;p&gt;Kali（渗透真神）&lt;/p&gt;
 &lt;h4 id=&#34;linux文件与目录管理&#34;&gt;Linux文件与目录管理
 &lt;/h4&gt;&lt;h5 id=&#34;系统目录与重要系统文件&#34;&gt;系统目录与重要系统文件
-&lt;/h5&gt;&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/13.png&#34;
+&lt;/h5&gt;&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/13.png&#34;
 	width=&#34;1544&#34;
 	height=&#34;603&#34;
-	srcset=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/13_hu_a3eff3c012c6e2eb.png 480w, http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/13_hu_5ae81c767f45d9ee.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/13_hu_a3eff3c012c6e2eb.png 480w, https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/13_hu_5ae81c767f45d9ee.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;文件目录结构树状图&#34;
@@ -334,10 +334,10 @@
 &lt;p&gt;rm 文件或目录 ：删除文件或目录remove&lt;/p&gt;
 &lt;p&gt;rm -rf 文件夹 ：删除非空目录&lt;/p&gt;
 &lt;p&gt;cat查看文件内容&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/15.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/15.png&#34;
 	width=&#34;729&#34;
 	height=&#34;195&#34;
-	srcset=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/15_hu_ccbe07fca39e12aa.png 480w, http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/15_hu_f45fcb3cc5efb03f.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/15_hu_ccbe07fca39e12aa.png 480w, https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/15_hu_f45fcb3cc5efb03f.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -357,10 +357,10 @@
 &lt;p&gt;ls ：以平铺方式显示当前目录包含内容&lt;/p&gt;
 &lt;p&gt;ls -a ：查看隐藏文件&lt;/p&gt;
 &lt;p&gt;ls -l ：以详细列表形式显示当前目录包含内容&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/17.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/17.png&#34;
 	width=&#34;1436&#34;
 	height=&#34;625&#34;
-	srcset=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/17_hu_2e97dfff757583b5.png 480w, http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/17_hu_5e9e396ca0d2bbcd.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/17_hu_2e97dfff757583b5.png 480w, https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/17_hu_5e9e396ca0d2bbcd.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -371,10 +371,10 @@
 &gt;&lt;/p&gt;
 &lt;p&gt;ls：列出当前目录下文件&lt;/p&gt;
 &lt;p&gt;ll/ls -l：列出当前目录下文件（详细）&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/16.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/16.png&#34;
 	width=&#34;1156&#34;
 	height=&#34;806&#34;
-	srcset=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/16_hu_761b9d411238d6c5.png 480w, http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/16_hu_3c882dc3913fe766.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/16_hu_761b9d411238d6c5.png 480w, https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/16_hu_3c882dc3913fe766.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -388,10 +388,10 @@
 &lt;p&gt;? 匹配单个字符&lt;/p&gt;
 &lt;p&gt;[a-z] 匹配 a - z 之间的一个&lt;/p&gt;
 &lt;p&gt;[0-9]&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/28.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/28.png&#34;
 	width=&#34;789&#34;
 	height=&#34;169&#34;
-	srcset=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/28_hu_8b4f86e835801854.png 480w, http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/28_hu_6725741a5a8f474.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/28_hu_8b4f86e835801854.png 480w, https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/28_hu_6725741a5a8f474.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -418,10 +418,10 @@
 &lt;/h5&gt;&lt;p&gt;查看当前用户：whoami&lt;/p&gt;
 &lt;p&gt;查看当前用户详细信息：id&lt;/p&gt;
 &lt;p&gt;查看所有用户：cat /etc/passwd（可以看到root的UID为0，是超级用户的特征）&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/18.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/18.png&#34;
 	width=&#34;416&#34;
 	height=&#34;214&#34;
-	srcset=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/18_hu_ff1ef469f8484904.png 480w, http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/18_hu_2807f2c7e5076a92.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/18_hu_ff1ef469f8484904.png 480w, https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/18_hu_2807f2c7e5076a92.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -431,10 +431,10 @@
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;查看用户数据信息：cat /etc/shadow&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/20.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/20.png&#34;
 	width=&#34;465&#34;
 	height=&#34;213&#34;
-	srcset=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/20_hu_1622de76628240dc.png 480w, http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/20_hu_5f71b5ed107e7c6f.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/20_hu_1622de76628240dc.png 480w, https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/20_hu_5f71b5ed107e7c6f.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -443,10 +443,10 @@
 		data-flex-basis=&#34;523px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/21.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/21.png&#34;
 	width=&#34;835&#34;
 	height=&#34;144&#34;
-	srcset=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/21_hu_3bab68aed049f15c.png 480w, http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/21_hu_d27299d0e30e0c0f.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/21_hu_3bab68aed049f15c.png 480w, https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/21_hu_d27299d0e30e0c0f.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -478,10 +478,10 @@ $y$j9T$zY1oKFxJlTgP2WcJhzbNl1$xhkUmB8R9fzETc/1kgL/nOPcWFTvhn17clxXCgyFjpC：加�
 &lt;p&gt;删除用户组：groupdel&lt;/p&gt;
 &lt;p&gt;修改用户组信息；groupmod&lt;/p&gt;
 &lt;p&gt;查看所有组：cat /etc/group&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/19.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/19.png&#34;
 	width=&#34;400&#34;
 	height=&#34;200&#34;
-	srcset=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/19_hu_12c99d4525ae98b5.png 480w, http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/19_hu_ae2be78793ee948a.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/19_hu_12c99d4525ae98b5.png 480w, https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/19_hu_ae2be78793ee948a.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -504,10 +504,10 @@ $y$j9T$zY1oKFxJlTgP2WcJhzbNl1$xhkUmB8R9fzETc/1kgL/nOPcWFTvhn17clxXCgyFjpC：加�
 &lt;p&gt;chmod g-x aa&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;chmod u=rwx,g=rx,o=rx 文件名&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;对于这个指令chmdo u=rw g=r o=rx aa，作为一个例子，意思是修改目录或文件aa，将赋予user用户有read读、write（w）权限，但没有x执行权限的权限。w在group这里省略了，代表“没有权限”；对于group组，分配read读权限，没有w和x的权限。other其他用户来说，分配read读和x执行权限。如下图所示:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/23.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/23.png&#34;
 	width=&#34;444&#34;
 	height=&#34;59&#34;
-	srcset=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/23_hu_eab4027a4edf73a8.png 480w, http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/23_hu_4e129b4e9391a3f4.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/23_hu_eab4027a4edf73a8.png 480w, https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/23_hu_4e129b4e9391a3f4.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -516,10 +516,10 @@ $y$j9T$zY1oKFxJlTgP2WcJhzbNl1$xhkUmB8R9fzETc/1kgL/nOPcWFTvhn17clxXCgyFjpC：加�
 		data-flex-basis=&#34;1806px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/22.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/22.png&#34;
 	width=&#34;581&#34;
 	height=&#34;200&#34;
-	srcset=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/22_hu_75685cd695577459.png 480w, http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/22_hu_99721ebec5a7f077.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/22_hu_75685cd695577459.png 480w, https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/22_hu_99721ebec5a7f077.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -538,10 +538,10 @@ $y$j9T$zY1oKFxJlTgP2WcJhzbNl1$xhkUmB8R9fzETc/1kgL/nOPcWFTvhn17clxXCgyFjpC：加�
 &lt;/h5&gt;&lt;p&gt;ifconfig：获取网卡状态或网卡配置&lt;/p&gt;
 &lt;p&gt;ping：检测网络连通&lt;/p&gt;
 &lt;p&gt;这俩命令自己去试吧，我在这里保护好自己就不泄露IP啦&amp;hellip;&amp;hellip;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/24.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/24.png&#34;
 	width=&#34;901&#34;
 	height=&#34;464&#34;
-	srcset=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/24_hu_fdbf01af36332239.png 480w, http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/24_hu_2c159067df4e7253.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/24_hu_fdbf01af36332239.png 480w, https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/24_hu_2c159067df4e7253.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -555,10 +555,10 @@ $y$j9T$zY1oKFxJlTgP2WcJhzbNl1$xhkUmB8R9fzETc/1kgL/nOPcWFTvhn17clxXCgyFjpC：加�
 &lt;p&gt;当然有时候要用到IP、远程连接这样的话，难免会连接不上，那你可以试着重启，用到ifconfig &amp;lt;网卡比如eth0、eth1这样的&amp;gt; down，这样就把这个网卡关了，然后过一会就再输一次命令，把down换成up，就是开启网卡了。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
 &lt;p&gt;ps：显示当前终端下运行的进程&lt;/p&gt;
 &lt;p&gt;ps -aux：显示所有用户的所有进程，包括系统进程，提供更详细的进程信息.第二张图可以看到我们刚刚用了ps -aux指令的记录。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/25.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/25.png&#34;
 	width=&#34;1023&#34;
 	height=&#34;256&#34;
-	srcset=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/25_hu_9cce23edd31bdf20.png 480w, http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/25_hu_8fb6e40aad043bff.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/25_hu_9cce23edd31bdf20.png 480w, https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/25_hu_8fb6e40aad043bff.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -567,10 +567,10 @@ $y$j9T$zY1oKFxJlTgP2WcJhzbNl1$xhkUmB8R9fzETc/1kgL/nOPcWFTvhn17clxXCgyFjpC：加�
 		data-flex-basis=&#34;959px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/26.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/26.png&#34;
 	width=&#34;1140&#34;
 	height=&#34;210&#34;
-	srcset=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/26_hu_34ed4ff11ed98e93.png 480w, http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/26_hu_43cafe15ee48b53d.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/26_hu_34ed4ff11ed98e93.png 480w, https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/26_hu_43cafe15ee48b53d.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -580,10 +580,10 @@ $y$j9T$zY1oKFxJlTgP2WcJhzbNl1$xhkUmB8R9fzETc/1kgL/nOPcWFTvhn17clxXCgyFjpC：加�
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;kill （PID）： 终止指定PID进程&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/27.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/27.png&#34;
 	width=&#34;810&#34;
 	height=&#34;175&#34;
-	srcset=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/27_hu_93e6f9d1c0630287.png 480w, http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/27_hu_913ea3d72cca6c4f.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/27_hu_93e6f9d1c0630287.png 480w, https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/27_hu_913ea3d72cca6c4f.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -596,10 +596,10 @@ $y$j9T$zY1oKFxJlTgP2WcJhzbNl1$xhkUmB8R9fzETc/1kgL/nOPcWFTvhn17clxXCgyFjpC：加�
 &lt;blockquote class=&#34;alert alert-error&#34;&gt;
     &lt;p&gt;但是我比较建议你用上面的kill（PID），因为通常在进程正常终止（如 kill （PID）发送的 SIGTERM 信号）无效时，才会使用 -9 强制&lt;strong&gt;杀死&lt;/strong&gt;进程，但这种方式可能导致进程正在处理的数据丢失或资源未正常释放，因此需谨慎使用）&lt;/p&gt;&lt;/blockquote&gt;
 &lt;p&gt;那有个问题来了，服务进程这么多一个个看PID查找忒麻烦啊！那可以用到pidof命令去找到你需要关闭的服务进程的pid。例如要关掉sshd远程连接服务，那我们就用pidof命令去找它的pid：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/29.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/29.png&#34;
 	width=&#34;525&#34;
 	height=&#34;80&#34;
-	srcset=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/29_hu_fbf1fee0d4abed50.png 480w, http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/29_hu_5d63206c29a608f5.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/29_hu_fbf1fee0d4abed50.png 480w, https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/29_hu_5d63206c29a608f5.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -662,10 +662,10 @@ $y$j9T$zY1oKFxJlTgP2WcJhzbNl1$xhkUmB8R9fzETc/1kgL/nOPcWFTvhn17clxXCgyFjpC：加�
 &lt;p&gt;&lt;strong&gt;Xshell&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.xshell.com/zh/free-for-home-school/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Xshell&lt;/a&gt;是一款功能强大的终端模拟器，它支持SSH、SERIAL等多种协议，可以用于远程连接和管理服务器或虚拟机。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/30.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/30.png&#34;
 	width=&#34;1920&#34;
 	height=&#34;670&#34;
-	srcset=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/30_hu_6f8ad4b4346912f8.png 480w, http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/30_hu_ea0e1932c7c469f4.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/30_hu_6f8ad4b4346912f8.png 480w, https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/30_hu_ea0e1932c7c469f4.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -675,10 +675,10 @@ $y$j9T$zY1oKFxJlTgP2WcJhzbNl1$xhkUmB8R9fzETc/1kgL/nOPcWFTvhn17clxXCgyFjpC：加�
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;九头蛇-ssh弱口令爆破实战&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/31.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/31.png&#34;
 	width=&#34;1052&#34;
 	height=&#34;305&#34;
-	srcset=&#34;http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/31_hu_4d4354f54fdf7f2f.png 480w, http://8.148.145.201/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/31_hu_fbcb1ee40c8cd453.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/31_hu_4d4354f54fdf7f2f.png 480w, https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/31_hu_fbcb1ee40c8cd453.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	

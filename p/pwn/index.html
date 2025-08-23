@@ -4,11 +4,11 @@
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="二进制漏洞与利用">
 <title>PWN</title>
 
-<link rel='canonical' href='http://8.148.145.201/p/pwn/'>
+<link rel='canonical' href='https://expl0rer.top/p/pwn/'>
 
 <link rel="stylesheet" href="/scss/style.min.ece3f31a86e5b2aa3023dd10f622ec7577d26755fc967fa467af45bd753c34bc.css"><meta property='og:title' content="PWN">
 <meta property='og:description' content="二进制漏洞与利用">
-<meta property='og:url' content='http://8.148.145.201/p/pwn/'>
+<meta property='og:url' content='https://expl0rer.top/p/pwn/'>
 <meta property='og:site_name' content='Expl0rer.Ct'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-08-21T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-08-21T00:00:00&#43;00:00'/>
 <meta name="twitter:title" content="PWN">
@@ -737,6 +737,7 @@ unicode: "ece7"
     <li><a href="#调用约定">调用约定</a>
       <ol>
         <li><a href="#函数调用流程">函数调用流程</a></li>
+        <li><a href="#调用约定-1">调用约定</a></li>
       </ol>
     </li>
   </ol>
@@ -1548,6 +1549,10 @@ unicode: "ece7"
 </span><span class="lnt">15
 </span><span class="lnt">16
 </span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">func_a</span><span class="p">()</span>
@@ -1557,7 +1562,11 @@ unicode: "ece7"
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">func_b</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;&lt;&lt;&lt;&lt;&lt;&lt;</span> <span class="n">HEAD</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">func_a</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="o">=======</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">dunc_a</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span> <span class="mi">943</span><span class="n">c4db94bd10918ad37ad4dbb25fda89bb80be4</span>
 </span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">c</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="k">return</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
@@ -1618,6 +1627,54 @@ Rbp用来定位局部变量。</p>
 <p>func_b调用完func_a后的栈布局。至此，示例的函数调用已经完毕。
 现在，func_a执行完毕，要返回了。如何维护栈帧呢?</p>
 <p>在这里，我们学习一个新的汇编指令leave：</p>
+<p>&laquo;&laquo;&laquo;&lt; HEAD
+作用是维护栈帧，通常出现在函数的结尾，与ret（return）连用。其实际作用为：mov rsp rbp；pop rbp；即：将栈顶指针指向栈帧的底部、然后在栈中弹出新的栈底指针。</p>
+<p>在一个函数执行结束返回时，会执行leave；ret；</p>
+<p>实际效果就是：mov rsp rbp； poprbp； pop eip；
+此时我们观察程序执行完func_a时的栈帧，如下图：</p>
+<p><img src="/p/pwn/4.png"
+	width="495"
+	height="805"
+	srcset="/p/pwn/4_hu_2cb24e1acdfb25b3.png 480w, /p/pwn/4_hu_2c5470e10b698a3a.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="61"
+		data-flex-basis="147px"
+	
+></p>
+<p>可以说，与之前的func_b未调用func_a前的栈帧对比，是一模一样，说明已经恢复了栈帧。唯一不同之处在于此时程序的rip已经指向了c=1后面一条指令，说明func_a已经执行完毕。</p>
+<p>以此类推，func_b执行完毕返回后，栈布局如下图：</p>
+<p><img src="/p/pwn/5.png"
+	width="455"
+	height="785"
+	srcset="/p/pwn/5_hu_99c9a90146c07cce.png 480w, /p/pwn/5_hu_929fb098a281dce3.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="57"
+		data-flex-basis="139px"
+	
+></p>
+<p>在这之后，main函数继续执行此时布局变回开始执行程序时的栈布局，直到结束。至此，函数的调用返回执行流程结束。</p>
+<p>总结：</p>
+<p>调用函数：只需要将rip压栈（保存到当前栈帧），即push rip，然后讲rip赋值为被调用函数的起始地址，这一操作被<em>隐性的内置在call指令中</em>。</p>
+<p>被调用函数：push rbp；mov rbp rsp； sub rsp 0xxxx。即保存调用函数的rbp指针，将自己的rbp指针指向栈顶，然后开辟栈空间给自己用，此时rbp就变成了被调用函数的栈底。</p>
+<p>函数返回：leave；ret；翻译过来就是：mov rsp rbp；pop rbp；pop rip；即恢复栈帧,返回调用函数的返回地址。</p>
+<p>这里有个疑问，为什么在调用过程种，寄存器rsp这类会出现很多的赋值操作，比如上述的“mov rsp rbp；pop rbp；pop rip”，rsp更像是一个中间变量，一直变化。其实这是有原因的。</p>
+<p>rsp 看似动态变化，但它的变化是完全遵循栈操作的逻辑和函数调用约定的。栈是一种后进先出的数据结构，在函数调用过程中，参数入栈、局部变量分配内存（通过调整 rsp 来实现）、保存寄存器值等操作，都需要通过修改 rsp 的值来改变栈顶位置，以完成对栈内存的合理使用和管理 。而在函数返回阶段，又要通过调整 rsp 来恢复之前的栈状态，释放当前函数占用的栈空间。</p>
+<p>而rbp 明确划分了当前函数栈帧的范围：从 rbp（底部）到 rsp（顶部）之间的内存区域，它更像是一个固定的描点，数值不变依靠rsp变化来完成操作。</p>
+<p>所以，这些寄存器的赋值操作都是为了严格按照计算机体系结构和编程语言的函数调用规范，实现函数调用、执行和返回过程中的内存管理、数据保护以及程序执行流的正确控制。</p>
+<blockquote class="alert alert-note">
+    <blockquote>
+<p>简单说，<code>rsp</code> 是 “动态变化的栈顶指针”，而 <code>rbp</code> 是 “固定不动的栈帧基准”—— 前者负责管理栈的实时状态，后者负责锚定当前栈帧的位置和范围、栈帧的局部变量，二者配合实现了函数调用过程中内存的有序管理。</p></blockquote></blockquote>
+<h3 id="调用约定-1">调用约定
+</h3><p>返回值：一般来说,一个函数的返回值会存储到RAX寄存器。
+X86-64函数的调用约定为：</p>
+<p>从左至右参数一次传递给rdi、rsi、rdx、rcx、r8、r9。</p>
+<p>如果一个函数的参数多于6个，则从右至左压入栈中传递。</p>
 <p>作用是维护栈帧，通常出现在函数的结尾，与ret（return）连用。其实际作用为：mov rsp rbp；pop rbp；即：将栈顶指针指向栈帧的底部、然后在栈中弹出新的栈底指针。</p>
 
 </section>
@@ -1661,6 +1718,28 @@ Rbp用来定位局部变量。</p>
     
 
     
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/misc/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">MISC</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
 
      
     
@@ -1718,7 +1797,9 @@ Rbp用来定位局部变量。</p>
 
     
 
-    <footer class="site-footer">
+    
+<script defer src="https://events.vercount.one/js"></script>
+<footer class="site-footer">
     <section class="copyright">
         &copy; 
         
@@ -1770,7 +1851,9 @@ Rbp用来定位局部变量。</p>
         
             
         
-        <p>博主发布了 9 篇文章 | 共 44073 字</p>
+            
+        
+        <p>博主发布了 10 篇文章 | 共 45263 字</p>
   
 <a>总访客数: </a><span id='busuanzi_value_site_uv'>别急在加载中了...</span> <a> | </a> <a>总访问量: </a><span id='busuanzi_value_site_pv'>加载中...</span></br>
 
@@ -1943,10 +2026,6 @@ Rbp用来定位局部变量。</p>
   </noscript>
 </head>
 
-
-<script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-
 <style>
     #TableOfContents > ul ul,
     #TableOfContents > ul ol,
@@ -2001,7 +2080,7 @@ Rbp用来定位局部变量。</p>
         cursor: pointer;
         width: 30px;
         height: 30px;
-        background-image: url(http://8.148.145.201/icons/backTop.svg);
+        background-image: url(https://expl0rer.top/icons/backTop.svg);
     }
 </style>
 
@@ -2095,7 +2174,7 @@ Rbp用来定位局部变量。</p>
       })
       let img = document.createElement('img');
       img.classList.add('code-more-img');
-      img.src = "http:\/\/8.148.145.201\/icons\/codeMore.png"
+      img.src = "https:\/\/expl0rer.top\/icons\/codeMore.png"
       codeMoreBtn.appendChild(img);
       codeMoreBox.appendChild(codeMoreBtn);
       codeBlock.appendChild(codeMoreBox)
@@ -2107,7 +2186,7 @@ Rbp用来定位局部变量。</p>
 
 
 
-<script defer src="https://cn.vercount.one/js"></script>
+
 
 
 <script>
@@ -2173,9 +2252,9 @@ Rbp用来定位局部变量。</p>
 
 <div id="particles-js"></div>
 
-<script src="http://8.148.145.201/background/particles.min.js"></script>
+<script src="https://expl0rer.top/background/particles.min.js"></script>
 <script>
-  particlesJS.load('particles-js', "http:\/\/8.148.145.201\/background\/particlesjs-config.json", function() {
+  particlesJS.load('particles-js', "https:\/\/expl0rer.top\/background\/particlesjs-config.json", function() {
     console.log('particles.js loaded - callback');
   });
 </script>
@@ -2191,7 +2270,7 @@ Rbp用来定位局部变量。</p>
 </style>
 
 
-<script src="http://8.148.145.201/background/sakura.js"></script>
+<script src="https://expl0rer.top/background/sakura.js"></script>
 
     </body>
 </html>
