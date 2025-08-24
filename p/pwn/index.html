@@ -737,7 +737,51 @@ unicode: "ece7"
     <li><a href="#调用约定">调用约定</a>
       <ol>
         <li><a href="#函数调用流程">函数调用流程</a></li>
-        <li><a href="#调用约定-1">调用约定</a></li>
+        <li><a href="#调用约定-1">调用约定</a>
+          <ol>
+            <li><a href="#系统调用">系统调用</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#elf文件">ELF文件</a>
+      <ol>
+        <li><a href="#elf">elf</a></li>
+        <li><a href="#libc">libc</a></li>
+      </ol>
+    </li>
+    <li><a href="#延迟绑定机制">延迟绑定机制</a>
+      <ol>
+        <li><a href="#动态链接库">动态链接库</a></li>
+        <li><a href="#静态编译和动态编译">静态编译和动态编译</a>
+          <ol>
+            <li><a href="#延迟绑定">延迟绑定</a></li>
+          </ol>
+        </li>
+        <li><a href="#plt与got">PLT与GOT</a>
+          <ol>
+            <li><a href="#plt-工作流程">PLT 工作流程</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#linux安全防护机制">Linux安全防护机制</a>
+      <ol>
+        <li><a href="#保护机制">保护机制</a></li>
+        <li><a href="#canary">CANARY</a></li>
+        <li><a href="#nx">NX</a></li>
+        <li><a href="#pie和aslr">PIE和ASLR</a></li>
+        <li><a href="#relro">RELRO</a></li>
+      </ol>
+    </li>
+    <li><a href="#总结">总结</a>
+      <ol>
+        <li><a href="#汇编语言">汇编语言</a></li>
+        <li><a href="#linux基础-1">Linux基础</a></li>
+        <li><a href="#调用约定-2">调用约定</a></li>
+        <li><a href="#elf文件-1">ELF文件</a></li>
+        <li><a href="#延迟绑定机制-1">延迟绑定机制</a></li>
+        <li><a href="#linux安全防护机制-1">Linux安全防护机制</a></li>
       </ol>
     </li>
   </ol>
@@ -813,7 +857,8 @@ unicode: "ece7"
     <section class="article-content">
     
     
-    <p><strong>前文：以下是我入门PWN的记录，欢迎各位前来观看，小弟领教！</strong></p>
+    <p>[TOC]</p>
+<p><strong>前文：以下是我入门PWN的记录，欢迎各位前来观看，小弟领教！</strong></p>
 <h1 id="ctf是什么">CTF是什么？
 </h1><p>CTF（Capture The Flag）中文一般译作夺旗赛，在网络安全领域中指的是网络安全技术人员之间进行技术竞技的一种比赛形式。CTF起源于1996年DEFCON全球黑客大会，以代替之前黑客们通过互相发起真实攻击进行技术比拼的方式。发展至今，已经成为全球范围网络安全圈流行的竞赛形式。</p>
 <p>CTF比赛形式主要为<strong>线上解题（jeopardy）<strong>和</strong>线下攻防（Attack With Defence）</strong></p>
@@ -822,6 +867,7 @@ unicode: "ece7"
 </h2><p>Pwn是什么？</p>
 <p>&ldquo;Pwn&quot;是一个黑客语法的俚语词，是指攻破设备或者系统。发音类似“砰”，对黑客而言，这就是成功实施黑客攻击的声音一研的一声，被“黑”的电脑或手机就被你操纵了。CTF中的PWN主要是针对于二进制漏洞挖掘与利用，通常情况下选手需要对于一个有漏洞的可执行文件进行分析，找到漏洞，然后利用漏洞读取远程服务器上的FLAG。</p>
 <p><strong>Pwn传统出题方向：glibc PWN：堆、栈、shellcode编写、iofile等。进阶：arm架构、loT、内核、vm、浏览器等。</strong></p>
+<p><strong>所需工具：pwntools、IDA、虚拟机（Ubuntu或Kali）</strong></p>
 <p>实际生活中我们会遇到的pwn：</p>
 <p>泄露通信数据：心脏滴血（cve-2014-0160）</p>
 <p>Linux本地提权root：脏牛dirty cow（cve-2016-5195）</p>
@@ -1674,8 +1720,532 @@ Rbp用来定位局部变量。</p>
 </h3><p>返回值：一般来说,一个函数的返回值会存储到RAX寄存器。
 X86-64函数的调用约定为：</p>
 <p>从左至右参数一次传递给rdi、rsi、rdx、rcx、r8、r9。</p>
-<p>如果一个函数的参数多于6个，则从右至左压入栈中传递。</p>
+<p>如果一个函数的参数多于6个，就不在寄存器传参了，而是从右至左压入栈中传递。</p>
 <p>作用是维护栈帧，通常出现在函数的结尾，与ret（return）连用。其实际作用为：mov rsp rbp；pop rbp；即：将栈顶指针指向栈帧的底部、然后在栈中弹出新的栈底指针。</p>
+<h4 id="系统调用">系统调用
+</h4><p>syscall指令，用于调用系统函数，调用时需要指明<strong>系统调用号码</strong>。系统调用号存在 rax 寄存器中，然后布置好参数，执行syscall即可。</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>调用号码</th>
+          <th>名称</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>0</td>
+          <td>read</td>
+      </tr>
+      <tr>
+          <td>1</td>
+          <td>write</td>
+      </tr>
+      <tr>
+          <td>2</td>
+          <td>open</td>
+      </tr>
+      <tr>
+          <td>3</td>
+          <td>close</td>
+      </tr>
+      <tr>
+          <td>9</td>
+          <td>mmap</td>
+      </tr>
+      <tr>
+          <td>37</td>
+          <td>alarm</td>
+      </tr>
+      <tr>
+          <td>60</td>
+          <td>exit</td>
+      </tr>
+      <tr>
+          <td>62</td>
+          <td>kill</td>
+      </tr>
+      <tr>
+          <td>59</td>
+          <td>execv</td>
+      </tr>
+  </tbody>
+</table></div>
+<p>还有一些调用号码没列出来，其实上网查一查就行，这东西用多了就记住了，前期不用刻意死记硬背的。</p>
+<p>看到这里，是不是有点熟悉，看过《第一阶段》的操作系统章节就知道，有chmod 777 &lt;文件&gt;：设定文件使用权限的指令。正好就是1+2+4，4代表是x执行权限，这里表格没写出来。所以入门pwn我就建议大家去学那个Linux操作系统，基础过一下，不用精通，不然你强行入门PWN很懵的。</p>
+<p>示例：调用read(0,buf,size)：</p>
+<p><em><strong>从左至右参数一次传递给rdi、rsi、rdx、rcx、r8、r9</strong></em>（寄存器）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-nasm" data-lang="nasm"><span class="line"><span class="cl"><span class="nf">mov</span> <span class="nb">rax</span> <span class="mi">0</span><span class="c1">;     read&#39;s syscall number</span>
+</span></span><span class="line"><span class="cl"><span class="nf">mov</span> <span class="nb">rdi</span> <span class="mi">0</span><span class="c1">;     first arg</span>
+</span></span><span class="line"><span class="cl"><span class="nf">mov</span> <span class="nb">rsi</span> <span class="nv">buf</span><span class="c1">;   second arg</span>
+</span></span><span class="line"><span class="cl"><span class="nf">mov</span> <span class="nb">rdx</span> <span class="nb">si</span><span class="nv">ze</span><span class="c1">;  third ard</span>
+</span></span><span class="line"><span class="cl"><span class="nf">syscall</span><span class="c1">;       execute read(0,buf,size);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="elf文件">ELF文件
+</h2><h3 id="elf">elf
+</h3><p>linux环境中，<strong>二进制可持性文件</strong>的类型是ELF（Executable and Linkable Format）文件。</p>
+<p>elf文件的格式比较简单，我们需要了解的就是elf文件中的各个节、段等概念。elf的基本信息存在于elf的头部信息中，这些信息包括指令的运行架构、程序入口等内容，可以通过readelf -h &lt;elf_name&gt;来查看头部信息，当然打过CTF-MISC的知道的话估计会去用010editor，都可。</p>
+<p><img src="/p/pwn/6.png"
+	width="610"
+	height="180"
+	srcset="/p/pwn/6_hu_4aa131809ccbce34.png 480w, /p/pwn/6_hu_66c842a6c402488c.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="338"
+		data-flex-basis="813px"
+	
+></p>
+<p><img src="/p/pwn/7.png"
+	width="1221"
+	height="659"
+	srcset="/p/pwn/7_hu_f82dfb9f0e6af09c.png 480w, /p/pwn/7_hu_c803067fc21ccd19.png 1024w"
+	loading="lazy"
+	
+		alt="Magic头部文件"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="185"
+		data-flex-basis="444px"
+	
+></p>
+<p><img src="/p/pwn/8.png"
+	width="858"
+	height="305"
+	srcset="/p/pwn/8_hu_ebcc70c8d17b8d76.png 480w, /p/pwn/8_hu_d91de4a5ee068c7b.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="281"
+		data-flex-basis="675px"
+	
+></p>
+<p>第二第三张图就是ELF文件了，这种文件并不是常规的ZIP这些噢。</p>
+<p>elf文件中包含许多个节（section），各个节中存放不同的数据，这些节的信息存放在节头表中，readelf -S &lt;file&gt;查看，这些节主要包括：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>名称</th>
+          <th>作用</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>.text</td>
+          <td>存放程序运行的代码</td>
+      </tr>
+      <tr>
+          <td>.rdata</td>
+          <td>存放一些如字符串等不可修改的数据</td>
+      </tr>
+      <tr>
+          <td>.data</td>
+          <td>存放<em>已经初始化</em>的可修改的数据</td>
+      </tr>
+      <tr>
+          <td>.bss</td>
+          <td>存放<em>未被初始化</em>的程序可修改的数据</td>
+      </tr>
+      <tr>
+          <td>.plt 与 .got</td>
+          <td>程序动态链接函数地址</td>
+      </tr>
+  </tbody>
+</table></div>
+<p>elf文件不是我们所说的常规文件，不在我们的电脑桌面上，而是存在磁盘文件里，它本质上是存储在磁盘（硬盘、SSD 等）上的 “常规文件”，运行程序时，这个程序的elf文件才会加载到内存里，这就是我们所说的<strong>运行内存</strong>。</p>
+<p>elf文件在加载进入内存时：
+elf文件的节（section）会被映射进内存中的段（segment），而这一映射过程遵循的机制是根据各个节的权限来进行映射的。</p>
+<p>换句话说，可读可写的节被映射入一个段，只读的节被映射入一个段。</p>
+<p><img src="/p/pwn/9.png"
+	width="1100"
+	height="560"
+	srcset="/p/pwn/9_hu_6bae07d610db5804.png 480w, /p/pwn/9_hu_66c8193d78b0595a.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="196"
+		data-flex-basis="471px"
+	
+></p>
+<p>单个elf文件内部多个节被合并映射入一个段，此时就标志着elf文件被启动运行了。</p>
+<p>根据上述讲解，可以知道ELF文件以两种状态存在：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>状态</th>
+          <th>存储位置</th>
+          <th>用途</th>
+          <th>能否被CPU直接执行</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>未运行时</td>
+          <td>磁盘</td>
+          <td>保存程序的指令和数据（静态文件）</td>
+          <td>不能（CPU只认识内存数据）</td>
+      </tr>
+      <tr>
+          <td>运行时</td>
+          <td>运行内存</td>
+          <td>CPU从内存读取指令并执行</td>
+          <td>能</td>
+      </tr>
+  </tbody>
+</table></div>
+<blockquote class="alert alert-note">
+    <blockquote>
+<p>In other words，ELF 文件是 “程序的静态载体”（存磁盘），确保程序能从源代码正确转换为可执行文件，并在内存中被正确加载和运行。</p></blockquote></blockquote>
+<h3 id="libc">libc
+</h3><p>什么是libc?</p>
+<p>glibc是linux下面C标准库的实现，全称GNU C Library。</p>
+<p>glibc本身是GNU旗下的C标准库，后来逐渐成为了Linux的标准C库，而Linux下原来的标准C库Linux libc逐渐不再被维护。</p>
+<p>Linux下面的标准C库不仅有这一个，如uclibc、klibc，以及上面被提到的Linux libc，但是glibc无疑是用得最多的。glibc在/lib目录下的.so文件为<strong>libc.so.6</strong>。</p>
+<p>等等&hellip;&hellip;so后缀？？.so时啥文件，本质上也是个elf文件</p>
+<p><img src="/p/pwn/10.png"
+	width="1219"
+	height="70"
+	srcset="/p/pwn/10_hu_4c2c3ddbfb8ccae1.png 480w, /p/pwn/10_hu_98caa8be48b8098e.png 1024w"
+	loading="lazy"
+	
+		alt="在Ubuntu上的so文件"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="1741"
+		data-flex-basis="4179px"
+	
+></p>
+<p>通常.so用./的指令运行后会给出版本信息，当然，用file命令也是可以的:</p>
+<p><img src="/p/pwn/11.png"
+	width="1676"
+	height="190"
+	srcset="/p/pwn/11_hu_adb8a45b71a6e24d.png 480w, /p/pwn/11_hu_c64d7e55efbc73c3.png 1024w"
+	loading="lazy"
+	
+		alt="libc.so文件版本信息"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="882"
+		data-flex-basis="2117px"
+	
+></p>
+<blockquote class="alert alert-note">
+    <blockquote>
+<p>Linux基本上所有的程序都依赖libc，所以libc中的函数至关重要。当然CTFpwn也离不开libc：IDA分析libc、源码。</p></blockquote></blockquote>
+<h2 id="延迟绑定机制">延迟绑定机制
+</h2><p>在上章的elf文件，看到了.got和.plt文件，用于动态链接函数地址。</p>
+<h3 id="动态链接库">动态链接库
+</h3><p>我们程序开发过程中都会用到系统函数，比如read，write， open等等。这些系统函数不需要我们实现,因为系统已经帮你完成这些工作，只需要调用即可，存放这些函数的库文件就是动态链接库。通常情况下，我们对于PWN接触到的动态链接库就是<strong>libc.so</strong>文件。</p>
+<h3 id="静态编译和动态编译">静态编译和动态编译
+</h3><p>这里我们举一个例子来类比<em>静态编译与动态编译</em>的概念：</p>
+<p>小明要开一个餐馆（program），餐馆的菜单上有几百种菜肴（函数），小明的餐馆每天都会来很多顾客，每个顾客点的菜都可能不一样。我们知道，每道菜所需要的食材（系统函数）都不一样，这些食材都存放于仓库（动态链接库）中。</p>
+<p>那么现在问题来了，小明如何保证每个顾客点的菜都能被满足呢？</p>
+<p>第一种方式：小明把仓库中所有的食材都搬进厨房（静态编译）这时，小明不需要挪地方（静态），只需要在厨房中就可以工作，但是
+这会带来冗余，可能厨房中的食材很多都用不上。高效</p>
+<p>第二种方式：小明每次遇到新的所需要的食材，才去仓库取（动态编译）。这时，小明可能挪动的比较频繁（动态），但是可以保证厨房面没那么多可能用不到的东西。全面</p>
+<p>一个程序运行过程中可能会调用许许多多的库函数，这些库函数在一次运行过程中不能保证全部被调用。</p>
+<p>静态编译的思路就是将所有可能运行到的库函数一同编译到可执行文件中。这一方式的优点就在于在程序运行中不需要依赖动态链接库。适用的场合就是比如你本地编译的程序需要的动态链接库版本比较特殊，如果在别的机器上运行可能对方动态链接库版本和你不一样会出bug，这时候用静态编译。</p>
+<p><em><strong>缺点就是变异过后程序体积很大，编译速度也很慢。</strong></em></p>
+<p>对于动态编译，优点是缩小了执行文件本身的体积，另一方面是加快了编译速度，节省本地的系统资源。</p>
+<p><em><strong>缺点是使用链接库的命令，需要附带相对庞大的链接库，如果其他计算机没有安装对于的运行库，则动态编译的可执行文件就不能运行。</strong></em></p>
+<p>欸欸看回小明，他要选第二种方式（动态编译），但每次去仓库找食材太麻烦了，而且仓库这么大，，于是他用小本本记下了在仓库的每样食材的位置（got表），下一次找这件食材就高效多了。这就是got。</p>
+<blockquote class="alert alert-note">
+    <blockquote>
+<h4 id="延迟绑定">延迟绑定
+</h4><p>这就是linux的延迟绑定机制，而存放这个地址的小本子就是got表。got表全程是Global Offset Table，也就是<strong>全局偏移量表</strong>。</p>
+<p>在程序运行时，got表初始并不保存库函数的地址，只有在第一次调用过后，程序才将这一地址保存在got表中。</p></blockquote></blockquote>
+<h3 id="plt与got">PLT与GOT
+</h3><p>GOT（Global Offset Table，全局偏移表）：数据段用于地址无关代码的 Linux ELF 文件中确定全局变量和外部函数地址的表。</p>
+<p>PLT（Procedure Linkage Table，程序链接表）： Linux ELF 文件中用于<strong>延迟绑定</strong>的表。</p>
+<p>ELF 中有.got和.plt.got 两个 GOT 表，got 表用于全局变量的引用地址，.got.plt 用于保存函数引用的地址。</p>
+<p>不论是第几次调用外部函数，程序真正调用的其实是plt表。plt表其实是一段段汇编指令构成。</p>
+<h4 id="plt-工作流程">PLT 工作流程
+</h4><p>在第一次调用外部函数时，plt表首先会跳到对应的got表项中。由于并没有被调用过，此时的got表存储的不是目标函数地址，此时的got表中存储的地址是pt表中的一段指令，其作用就是准备一些参数，进行动态解析。跳转回plt表后，plt表又会跳转回plt的表头，表头内容就是调用动态解析函数，将目标函数地址存放入got表中。</p>
+<p>第一次调用外部函数，以调用C语言的printf为例子去详细讲解：</p>
+<p>1、调用时，汇编语言执行到call printf时，先跳向PLT表中printf对应的条目（plt[printf]），这么说好像起到jmp跳转地址的作用啊。只是类似，并未跳转地址，而此时编译还不知道，而是先跳转PLT表中位该函数预留的一个”小跳板“（plt[printf]）。</p>
+<p>**2、plt[printf]**第一次被调用时，此时GOT表中还没被填充真实地址（因为此前没有被解析过），所以里头并不是printf的真实地址，而是plt[printf]中下一条指令的地址（也就是jmp*GOT[printf]）。</p>
+<p><code>call printf</code> → 跳向<code>plt[printf]</code> → 执行<code>jmp *GOT[printf]</code> → 此时<code>GOT[printf]</code>里已是真实地址，直接跳过去执行。此时就知道printf的真实地址了。</p>
+<p>3、**跳回PLT后，执行”准备解析参数“的指令。**plt[printf]的下一条指令是准备动态解析需要的参数：比如把printf对应的符号索引（用于告诉动态链接器 “要解析哪个函数”）压入栈中。这些参数是提前在编译时就写好的，目的是告诉动态链接器 “我要找的是printf，帮我查它的真实地址”。这些参数是提前在编译时就写好的，目的是告诉动态链接器 “我要找的是printf，帮我查它的真实地址”。</p>
+<p>4、**跳向PLT表头（plt[0]），触发动态链接器的解析函数。**准备好参数后，plt[printf]会跳向 PLT 表的 “表头”（plt[0]）。plt[0]里的指令是固定的：先把GOT[0]的地址压栈（GOT[0]存储着动态链接器需要的辅助信息），然后调用动态链接器的核心解析函数（_dl_runtime_resolve）。</p>
+<blockquote>
+<p>？？？这有个疑问，怎么会有函数来帮助外部函数如printf去确定地址呢？其实这个<code>_dl_runtime_resolve</code>函数比较特殊，它是动态链接器的组成部分，是已经预先存在于动态链接器的代码之中的，动态链接器一加载，它的地址就被先解析出来了。</p></blockquote>
+<p>5、<strong>动态链接器解析出真实地址，写入 GOT 表，完成绑定</strong></p>
+<p>以下是用汇编语言代码来概括这五步流程：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-nasm" data-lang="nasm"><span class="line"><span class="cl"><span class="nf">plt</span><span class="p">[</span><span class="nv">printf</span><span class="p">]:</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">jmp</span>    <span class="o">*</span><span class="nv">GOT</span><span class="p">[</span><span class="nv">printf</span><span class="p">]</span>    <span class="c1">; 第1行：跳向GOT[printf]存储的地址</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">push</span>   <span class="mh">0x123</span>           <span class="c1">; 第2行：压入printf的符号索引（假设是0x123）</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">jmp</span>    <span class="nv">plt</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>          <span class="c1">; 第3行：跳向PLT表头</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这五步也就系统概括了小明在厨房做菜麻烦需要用小本本记下仓库的所需食材的存放地方（地址）的过程。</p>
+<blockquote class="alert alert-note">
+    <blockquote>
+<p>总结：PLT 和 GOT 的协作核心</p>
+<p>PLT 是 “跳板”：负责第一次调用时触发解析流程，后续调用时直接转发到 GOT 中的真实地址。</p>
+<p>GOT 是 “缓存表”：第一次调用时存储 PLT 内的跳转地址（用于触发解析），解析后存储函数真实地址（供后续直接调用）。
+整个机制的目的是 <strong>“延迟解析”</strong>：避免程序启动时解析所有外部函数（耗时），只在第一次调用时解析，平衡启动速度和运行效率。</p></blockquote></blockquote>
+<blockquote class="alert alert-warn">
+    <blockquote>
+<p>理解了这个流程，就掌握了动态链接中最核心的 “懒绑定” 机制，这也是 CTFpwn 中 “<strong>PLT 劫持</strong>” 等漏洞利用的基础。</p></blockquote></blockquote>
+<h2 id="linux安全防护机制">Linux安全防护机制
+</h2><p>栈溢出、指针悬挂、内存地址泄露等Bug会导致程序崩溃，一些攻击者会刻意制造这些漏洞来扰乱程序正常执行，这就是早期PWN的威力。</p>
+<h3 id="保护机制">保护机制
+</h3><blockquote class="alert alert-error">
+    <blockquote>
+<p>CANARY、NX、ASRL、PIE、RELRO</p></blockquote></blockquote>
+<p>栈的作用为存储函数调用相关信息以及函数的局部变量。</p>
+<p>这些局部变量通常为数组或者输入的缓冲区（buf）。而函数调用相关的信息，主要是返回地址和栈底指针（rbp）。</p>
+<h3 id="canary">CANARY
+</h3><p>Canary中文翻译就是金丝雀，来源是之前科技不发达时，矿工会在下井作业时带一个金丝雀，用来判断地下环境有没有煤气之类的毒气泄漏，金丝雀没事，大家继续干活；金丝雀如果死了，大家赶紧跑。</p>
+<p>在Linux中，Canary的作用就如同他引用的一样，用来判断程序的执行环境，主要是针对检测<strong>栈溢出</strong>。</p>
+<p><strong>canary是一个开头字节为\x00的一段长度为八个字节(x64)的随机数，这个随机数本体存放于 fs 段偏移为 0x28 的区域。</strong></p>
+<p>在每次函数调用中，程序都会将这段随机数存放于栈底，每次运行结束返回时，都会将这一随机数与他的本体进行比对。如果这个值被改变，则意味着发生了栈溢出，程序直接退出，没有改变的话，程序继续执行。</p>
+<p><img src="/p/pwn/12.png"
+	width="819"
+	height="431"
+	srcset="/p/pwn/12_hu_e74b0eb1f3623cc7.png 480w, /p/pwn/12_hu_d9ea985ab2966894.png 1024w"
+	loading="lazy"
+	
+		alt="Canary示例"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="190"
+		data-flex-basis="456px"
+	
+></p>
+<blockquote class="alert alert-warn">
+    <blockquote>
+<p>由于canary开头字节为x00，所以通常情况下不能被打印出来。</p></blockquote></blockquote>
+<blockquote class="alert alert-note">
+    <blockquote>
+<p>通常情况下，程序如果开启了canary保护，大概率说明这道题目不是栈溢出题目了。当然也要具体情况具体分析。</p></blockquote></blockquote>
+<blockquote class="alert alert-error">
+    <blockquote>
+<p><strong>绕过方法主要就是修改canary或者泄漏canary</strong>。</p>
+<p>泄漏 canary：利用格式化字符串、栈溢出 + 输出功能等漏洞，读取栈上的 canary 值（注意首字节 \x00 的影响）。</p>
+<p>修改 canary：用泄漏的 canary 值，在栈溢出时覆盖栈上的 canary，使其与原始值（fs:0x28 处）一致，绕过检查。</p></blockquote></blockquote>
+<h3 id="nx">NX
+</h3><p>NX意思就是Not Executable，开启这个保护后，程序中的堆、栈、bss段等等可写的段就<em>不可以执行</em>。这就意味着如果开启了NX保护，通常情况下我们就不能执行我们自己编写的shellcode。</p>
+<p>绕过的方式通常是用mprotect函数来改写段的权限，nx保护对于rop或者劫持got表利用方式不影响。</p>
+<h3 id="pie和aslr">PIE和ASLR
+</h3><p>在我们编写ROP或者shellcode时，有一个问题是绕不开的，那就是找到函数地址：</p>
+<p>PIE指的就是程序内存加载基地址随机化，意味着我们不能一下子确定程序的基地址。</p>
+<p>ASLR与PIE大同小异，ASLR是程序运行动态链接库、栈等地址随机化。</p>
+<p>通常来说，CTF中的PWN题与这两个保护打交道的次数最多。</p>
+<blockquote class="alert alert-note">
+    <blockquote>
+<p>绕过方式就是泄露函数地址，然后通过函数的偏移来确定基地址。</p></blockquote></blockquote>
+<ul>
+<li><strong>PIE</strong>：是针对<strong>可执行文件本身</strong>的编译选项。开启后，可执行文件（ELF）会被加载到内存中的随机地址，其内部的代码段、数据段等位置不再是固定值（编译时不指定绝对地址，而是用相对偏移）。
+作用：让攻击者无法预先知道程序代码、全局变量等在内存中的绝对地址。</li>
+<li><strong>ASLR</strong>：是<strong>操作系统级别的保护机制</strong>。开启后，操作系统会随机化进程的内存布局，包括共享库（.so）的加载地址、栈、堆、内核映射区域等的起始地址。
+作用：让攻击者无法预测共享库函数（如 libc 中的 system）、栈 / 堆数据的内存地址。</li>
+</ul>
+<p><strong>关联</strong>：两者通常配合使用 ——PIE 让可执行文件本身地址随机化，ASLR 让系统其他内存区域随机化，共同增加内存地址预测难度。</p>
+<p><strong>区别核心</strong>：PIE 是编译时决定的程序属性，ASLR 是系统运行时的布局策略。</p>
+<blockquote>
+<p>通俗点理解：</p>
+<p>ASLR 是操作系统搞的 “整体大洗牌”：每次程序运行时，系统会把整个内存空间的布局（比如共享库放哪、栈和堆从哪开始）随机换个位置，让攻击者猜不到常用函数（比如 system）或数据的具体地址。
+ASLR 像每次开演唱会时，场馆里的座位区（共享库）、后台（堆）、观众入口（栈）的位置都随机换。</p>
+<p>PIE 是针对单个程序的 “自身随机化”：如果程序编译时开了 PIE，它自己加载到内存时，代码和数据会随机放在一个不确定的位置（而不是固定地址），让攻击者连程序自己的函数、变量在哪都猜不准。
+PIE 像演出团队（程序本身）每次上场时，自己的站位（代码和数据）也随机变。</p></blockquote>
+<h3 id="relro">RELRO
+</h3><p>RELRO（Relocation Read-Only，重定位只读）是一种针对 ELF 文件重定位表的保护机制，核心作用是<strong>限制对 GOT（全局偏移表）等重定位相关区域的修改权限</strong>，防止攻击者通过篡改 GOT 表实现函数劫持（如修改<code>printf</code>的 GOT 条目为<code>system</code>地址）。</p>
+<blockquote>
+<p>这个保护主要针对的是延迟绑定机制，意思就是说got表这种和函数动态链接相关的内存地址，对于用户是只读的。</p>
+<p>开启了这个保护，意味着我们不能<em><strong>劫持</strong></em>got表中的函数指针。</p></blockquote>
+<p>RELRO 的两种模式及作用:</p>
+<p><strong>Partial RELRO（部分 RELRO）</strong></p>
+<p>仅将 GOT 表的前半部分（.got.plt）设置为只读，后半部分仍可写。
+作用：基本防止对已解析的函数地址（GOT 表中已填充的条目）进行修改，但仍有一定安全隐患。</p>
+<p><strong>Full RELRO（完全 RELRO）</strong></p>
+<p>将整个 GOT 表（包括.dynamic 等重定位相关段）设置为只读，并在程序启动时提前解析所有动态链接符号（关闭延迟绑定）。
+作用：彻底阻止对 GOT 表的修改，同时消除延迟绑定可能带来的漏洞（如 PLT 表劫持），但会<em>略微增加程序启动时间</em>。</p>
+<h2 id="总结">总结
+</h2><p>以上就是六大章节，因为感觉学着每一章关系好像不是很大，前面elf后面又接个Linux保护机制，感觉很脱节，也可能是我的笔录存在不足，如果你们看到这里又问题的话，欢迎在评论区交流，Blogger会看到的！！！</p>
+<p>在这里总结下：</p>
+<h3 id="汇编语言">汇编语言
+</h3><p>讲了些量词：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>名称</th>
+          <th>翻译</th>
+          <th>大小</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>bit</td>
+          <td>比特</td>
+          <td>1位（1b）</td>
+      </tr>
+      <tr>
+          <td>byte</td>
+          <td>字节</td>
+          <td>8位（1B）</td>
+      </tr>
+      <tr>
+          <td>word</td>
+          <td>字</td>
+          <td>16位</td>
+      </tr>
+      <tr>
+          <td>dword</td>
+          <td>双字</td>
+          <td>32位</td>
+      </tr>
+      <tr>
+          <td>qword</td>
+          <td>四字</td>
+          <td>64位</td>
+      </tr>
+  </tbody>
+</table></div>
+<p><strong>汇编语言就是机器码的一个助记符，为了让人能看懂</strong></p>
+<p>然后有一些常见寄存器种类需要去了解的，篇幅太长，可以回到上面去看：RBP栈底指针、RAX-R15通用寄存器、RSP栈顶指针、EFLAGS标志寄存器、RIP指令计数器&hellip;&hellip;；各种各样的<strong>寻址方式</strong>&hellip;&hellip;</p>
+<p>更重要的是认识了一门语言：汇编语言；初步了解一些汇编指令，如操作码、指令类型、<em>实例和C语言运行得到效果比较</em>&hellip;</p>
+<p><strong>溢出</strong></p>
+<h3 id="linux基础-1">Linux基础
+</h3><p>初步了解Linux的基本内容，保护层级ring、文件描述符、及Linux计算机内部的<strong>大端小端序</strong>存储形式</p>
+<blockquote>
+<p>大端序：数据高位存储在计算机地址的低位，数据低位存储在地址的高位。</p>
+<p>小端序：数据高位存储在计算机地址的高位，数据低位存储在地址的低位。</p></blockquote>
+<p>初步认识栈的定义、作用、在PWN所发挥的威力。</p>
+<h3 id="调用约定-2">调用约定
+</h3><p>这里重要的是函数调用流程，重点讲解push、pop、call、ret、jmp等汇编指令的使用效果。</p>
+<p>学习调用约定：返回值：一般来说，一个函数的返回值会存储到RAX寄存器。</p>
+<p>X86-64函数的调用约定为：从左至右参数一次传递给rdi，rsi，rdx，rcx，r8，r9。如果一个函数的参数多于6个，则从右至左压入栈中传递。</p>
+<p><strong>系统调用</strong>：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>调用号码</th>
+          <th>名称</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>0</td>
+          <td>read</td>
+      </tr>
+      <tr>
+          <td>1</td>
+          <td>write</td>
+      </tr>
+      <tr>
+          <td>2</td>
+          <td>open</td>
+      </tr>
+      <tr>
+          <td>3</td>
+          <td>close</td>
+      </tr>
+      <tr>
+          <td>9</td>
+          <td>mmap</td>
+      </tr>
+      <tr>
+          <td>37</td>
+          <td>alarm</td>
+      </tr>
+      <tr>
+          <td>60</td>
+          <td>exit</td>
+      </tr>
+      <tr>
+          <td>62</td>
+          <td>kill</td>
+      </tr>
+      <tr>
+          <td>59</td>
+          <td>execv</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="elf文件-1">ELF文件
+</h3><p><strong>elf</strong>是 Linux 环境下二进制可执行文件的标准格式，存储在磁盘上，运行时加载到内存包含多个节（如.text 代码节、.data 数据节、.plt/.got 动态链接相关节等），节在加载时按权限合并映射到内存中的段有两种状态：未运行时作为静态载体存于磁盘，运行时加载到内存供CPU 执行。</p>
+<p><strong>libc</strong>是 Linux 下的 C 标准库（最常用的是 glibc），以.so 文件（本质也是 ELF）形式存在（如 /lib/libc.so.6）
+包含大量基础函数，是绝大多数程序的依赖，在 CTF Pwn 中具有重要地位。</p>
+<p>两者关系：程序（ELF）运行时会动态链接 libc 中的函数，通过PLT/GOT 等机制实现调用。</p>
+<h3 id="延迟绑定机制-1">延迟绑定机制
+</h3><p><strong>动态链接库与编译方式</strong>：</p>
+<p>动态链接库（如 libc.so）存系统函数（read、printf 等），程序无需自己实现，动态调用即可；</p>
+<p>静态编译：把所有可能用到的库函数打包进可执行文件，不依赖外部库但体积大；</p>
+<p>动态编译：仅在调用时从库中取函数，体积小但依赖外部库。</p>
+<p><strong>PLT 与 GOT 的作用和延迟绑定</strong>：
+为解决动态编译中 “找函数地址” 的效率问题，用 GOT（全局偏移表，像 “小本本”）存函数地址，PLT（程序链接表，像 “跳板”）负责调用逻辑；
+延迟绑定：程序启动时不解析所有函数地址，第一次调用时才通过 PLT 触发动态链接器（用_dl_runtime_resolve 函数）解析真实地址，并存入 GOT，后续调用直接读 GOT 即可。</p>
+<p>第一次调用外部函数的流程：
+调用函数→跳 PLT 对应条目→GOT 未存真实地址，跳回 PLT 准备参数→跳 PLT 表头触发解析→动态链接器解析地址写入 GOT→后续调用直接用 GOT 地址。</p>
+<h3 id="linux安全防护机制-1">Linux安全防护机制
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>保护机制</th>
+          <th>核心作用</th>
+          <th>关键特点</th>
+          <th>绕过方式</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>CANARY</td>
+          <td>检测栈溢出</td>
+          <td>栈底存 8 字节（x64）随机数（首字节 \x00），返回前比对</td>
+          <td>先泄漏栈上 canary，再用泄漏值覆盖栈上 canary</td>
+      </tr>
+      <tr>
+          <td>NX</td>
+          <td>防 shellcode 执行</td>
+          <td>栈、堆等可写区域标记为 “不可执行”</td>
+          <td>用 mprotect 改权限，或用 ROP、GOT 劫持</td>
+      </tr>
+      <tr>
+          <td>PIE</td>
+          <td>程序自身加载地址随机</td>
+          <td>编译选项决定，每次运行加载地址不同</td>
+          <td>泄漏程序内函数地址，算基地址</td>
+      </tr>
+      <tr>
+          <td>ASLR</td>
+          <td>系统内存布局随机</td>
+          <td>系统机制，随机库、栈、堆地址</td>
+          <td>泄漏库函数地址，算目标函数地址</td>
+      </tr>
+      <tr>
+          <td>RELRO</td>
+          <td>防 GOT/PLT 劫持</td>
+          <td>分 Partial（.got.plt 只读）、Full（全 GOT 只读）</td>
+          <td>Partial 可攻未保护 GOT 段；Full 弃 GOT 攻其他</td>
+      </tr>
+  </tbody>
+</table></div>
+<p>基本的PWN理论知识就到这里了，现在你看别人PWN神的writeup应该不会这么“牢”了吧，基本能看懂别人说的专用词了。</p>
 
 </section>
 
@@ -1853,7 +2423,7 @@ X86-64函数的调用约定为：</p>
         
             
         
-        <p>博主发布了 10 篇文章 | 共 45263 字</p>
+        <p>博主发布了 10 篇文章 | 共 53185 字</p>
   
 <a>总访客数: </a><span id='busuanzi_value_site_uv'>别急在加载中了...</span> <a> | </a> <a>总访问量: </a><span id='busuanzi_value_site_pv'>加载中...</span></br>
 
