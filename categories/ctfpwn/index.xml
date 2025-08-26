@@ -6,14 +6,39 @@
         <description>Recent content in CTFpwn on Expl0rer.Ct</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
-        <copyright>Expl0rer.Ct</copyright>
-        <lastBuildDate>Thu, 21 Aug 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://expl0rer.top/categories/ctfpwn/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>PWN</title>
-        <link>https://expl0rer.top/p/pwn/</link>
+        <copyright>Expl0rer.Ct</copyright><atom:link href="https://expl0rer.top/categories/ctfpwn/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>PWN-3</title>
+        <link>https://expl0rer.top/p/pwn-3/</link>
+        <pubDate>Tue, 26 Aug 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://expl0rer.top/p/pwn-3/</guid>
+        <description>&lt;img src="https://expl0rer.top/p/pwn-3/PWN3.png" alt="Featured image of post PWN-3" /&gt;&lt;p&gt;&lt;strong&gt;前文：以下是我入门PWN的记录，欢迎各位前来观看，小弟领教！&lt;/strong&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>PWN-2</title>
+        <link>https://expl0rer.top/p/pwn-2/</link>
+        <pubDate>Mon, 25 Aug 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://expl0rer.top/p/pwn-2/</guid>
+        <description>&lt;img src="https://expl0rer.top/p/pwn-2/PWN2.png" alt="Featured image of post PWN-2" /&gt;&lt;p&gt;&lt;strong&gt;前文：以下是我入门PWN的记录，欢迎各位前来观看，小弟领教！&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;[TOC]&lt;/p&gt;
+&lt;p&gt;继上一大章的基础学习后，对PWN有了一定了解，知道一些专名词、一些保护机制的工作流程、汇编语言等，接下来的几章开始正式学习二进制的漏洞利用和原理。&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;&lt;strong&gt;栈是PWN比较常见的突破点&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id=&#34;栈溢出原理&#34;&gt;栈溢出原理
+&lt;/h2&gt;&lt;p&gt;在上一大章的函数调用约定中，我们可以了解到函数的调用过程：
+调用函数：只需要将rip压栈，即push rip，然后讲rip赋值为被调用函数的起始地址，这一操作被隐性的内置在call指令中。&lt;/p&gt;
+&lt;p&gt;被调用函数：push rbp； mov rbp rsp；sub rsp oxxx。即保存调用函数的rbp指针，将自己的rbp指针指向栈顶，然后开辟栈空间给自己用,此时rbp就变成了被调用函数的栈底。&lt;/p&gt;
+&lt;p&gt;函数返回：leave；ret；翻译过来就是：mov rsp rbp；pop rbp；pop rip；即恢复栈帧，返回调用函数的返回地址。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>PWN-1</title>
+        <link>https://expl0rer.top/p/pwn-1/</link>
         <pubDate>Thu, 21 Aug 2025 00:00:00 +0000</pubDate>
         
-        <guid>https://expl0rer.top/p/pwn/</guid>
-        <description>&lt;p&gt;[TOC]&lt;/p&gt;
+        <guid>https://expl0rer.top/p/pwn-1/</guid>
+        <description>&lt;img src="https://expl0rer.top/p/pwn-1/PWN.png" alt="Featured image of post PWN-1" /&gt;&lt;p&gt;[TOC]&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;前文：以下是我入门PWN的记录，欢迎各位前来观看，小弟领教！&lt;/strong&gt;&lt;/p&gt;
 &lt;h1 id=&#34;ctf是什么&#34;&gt;CTF是什么？
 &lt;/h1&gt;&lt;p&gt;CTF（Capture The Flag）中文一般译作夺旗赛，在网络安全领域中指的是网络安全技术人员之间进行技术竞技的一种比赛形式。CTF起源于1996年DEFCON全球黑客大会，以代替之前黑客们通过互相发起真实攻击进行技术比拼的方式。发展至今，已经成为全球范围网络安全圈流行的竞赛形式。&lt;/p&gt;
@@ -22,16 +47,28 @@
 &lt;h2 id=&#34;pwn简介&#34;&gt;PWN简介
 &lt;/h2&gt;&lt;p&gt;Pwn是什么？&lt;/p&gt;
 &lt;p&gt;&amp;ldquo;Pwn&amp;quot;是一个黑客语法的俚语词，是指攻破设备或者系统。发音类似“砰”，对黑客而言，这就是成功实施黑客攻击的声音一研的一声，被“黑”的电脑或手机就被你操纵了。CTF中的PWN主要是针对于二进制漏洞挖掘与利用，通常情况下选手需要对于一个有漏洞的可执行文件进行分析，找到漏洞，然后利用漏洞读取远程服务器上的FLAG。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/pwn-1/hacker.png&#34;
+	width=&#34;1665&#34;
+	height=&#34;715&#34;
+	srcset=&#34;https://expl0rer.top/p/pwn-1/hacker_hu_702f4e64d6a77d56.png 480w, https://expl0rer.top/p/pwn-1/hacker_hu_91330cec3c1ac9fa.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;232&#34;
+		data-flex-basis=&#34;558px&#34;
+	
+&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Pwn传统出题方向：glibc PWN：堆、栈、shellcode编写、iofile等。进阶：arm架构、loT、内核、vm、浏览器等。&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;所需工具：pwntools、IDA、虚拟机（Ubuntu或Kali）&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;所需工具：pwntools、pwndbg、IDA、虚拟机（Ubuntu或Kali）&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;实际生活中我们会遇到的pwn：&lt;/p&gt;
 &lt;p&gt;泄露通信数据：心脏滴血（cve-2014-0160）&lt;/p&gt;
 &lt;p&gt;Linux本地提权root：脏牛dirty cow（cve-2016-5195）&lt;/p&gt;
 &lt;p&gt;Wannacry：永恒之蓝勒索病毒&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/pwn/glibc-pwn.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/pwn-1/glibc-pwn.png&#34;
 	width=&#34;2010&#34;
 	height=&#34;731&#34;
-	srcset=&#34;https://expl0rer.top/p/pwn/glibc-pwn_hu_76ead02599234b1.png 480w, https://expl0rer.top/p/pwn/glibc-pwn_hu_4c76d810cb42dfe6.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/pwn-1/glibc-pwn_hu_76ead02599234b1.png 480w, https://expl0rer.top/p/pwn-1/glibc-pwn_hu_4c76d810cb42dfe6.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;glibc学习路线&#34;
@@ -527,10 +564,10 @@
 &lt;p&gt;整数溢出一般配合别的漏洞来使用。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
 &lt;h2 id=&#34;linux基础&#34;&gt;Linux基础
 &lt;/h2&gt;&lt;p&gt;这一章内容多是一些文字描述，也会有生活案例加以理解，图片较少，较为枯燥。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/pwn/1.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/pwn-1/1.png&#34;
 	width=&#34;1011&#34;
 	height=&#34;599&#34;
-	srcset=&#34;https://expl0rer.top/p/pwn/1_hu_f407604601a0a452.png 480w, https://expl0rer.top/p/pwn/1_hu_f5a7b4b89149cb17.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/pwn-1/1_hu_f407604601a0a452.png 480w, https://expl0rer.top/p/pwn-1/1_hu_f5a7b4b89149cb17.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Linux大家族&#34;
@@ -752,9 +789,6 @@
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;func_a&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
@@ -764,11 +798,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;func_b&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;HEAD&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;func_a&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;=======&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;dunc_a&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;943&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;c4db94bd10918ad37ad4dbb25fda89bb80be4&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;c&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
@@ -790,10 +821,10 @@ main函数要调用func b，main只需要call func b，
 &lt;p&gt;push rbp；将调用函数的栈底指针保存。&lt;/p&gt;
 &lt;p&gt;mov rbp rsp；将栈底指针指向现在的栈顶。&lt;/p&gt;
 &lt;p&gt;sub rsp xxx；开辟被调用函数的栈帧，此时上一步的rbp就指向栈帧的底。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/pwn/2.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/pwn-1/2.png&#34;
 	width=&#34;420&#34;
 	height=&#34;654&#34;
-	srcset=&#34;https://expl0rer.top/p/pwn/2_hu_1c5004a635f7b9a.png 480w, https://expl0rer.top/p/pwn/2_hu_4c5071a9706d750a.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/pwn-1/2_hu_1c5004a635f7b9a.png 480w, https://expl0rer.top/p/pwn-1/2_hu_4c5071a9706d750a.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;程序运行时内存中栈帧（stack frame）的组织方式&#34;
@@ -813,10 +844,10 @@ main函数要调用func b，main只需要call func b，
 Rsp永远指向当前&lt;strong&gt;栈的顶部&lt;/strong&gt;（Rsp在哪和栈顶在哪关系不大，但Rsp是指向它所在的栈帧的顶部）。
 Rbp用来定位局部变量。&lt;/p&gt;
 &lt;p&gt;接着，再往下运行程序，调用func_a函数。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/pwn/3.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/pwn-1/3.png&#34;
 	width=&#34;528&#34;
 	height=&#34;810&#34;
-	srcset=&#34;https://expl0rer.top/p/pwn/3_hu_9a324d1379c9fdbc.png 480w, https://expl0rer.top/p/pwn/3_hu_1191a96fcc708a5e.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/pwn-1/3_hu_9a324d1379c9fdbc.png 480w, https://expl0rer.top/p/pwn-1/3_hu_1191a96fcc708a5e.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -834,10 +865,10 @@ Rbp用来定位局部变量。&lt;/p&gt;
 &lt;p&gt;在一个函数执行结束返回时，会执行leave；ret；&lt;/p&gt;
 &lt;p&gt;实际效果就是：mov rsp rbp； poprbp； pop eip；
 此时我们观察程序执行完func_a时的栈帧，如下图：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/pwn/4.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/pwn-1/4.png&#34;
 	width=&#34;495&#34;
 	height=&#34;805&#34;
-	srcset=&#34;https://expl0rer.top/p/pwn/4_hu_2cb24e1acdfb25b3.png 480w, https://expl0rer.top/p/pwn/4_hu_2c5470e10b698a3a.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/pwn-1/4_hu_2cb24e1acdfb25b3.png 480w, https://expl0rer.top/p/pwn-1/4_hu_2c5470e10b698a3a.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -848,10 +879,10 @@ Rbp用来定位局部变量。&lt;/p&gt;
 &gt;&lt;/p&gt;
 &lt;p&gt;可以说，与之前的func_b未调用func_a前的栈帧对比，是一模一样，说明已经恢复了栈帧。唯一不同之处在于此时程序的rip已经指向了c=1后面一条指令，说明func_a已经执行完毕。&lt;/p&gt;
 &lt;p&gt;以此类推，func_b执行完毕返回后，栈布局如下图：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/pwn/5.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/pwn-1/5.png&#34;
 	width=&#34;455&#34;
 	height=&#34;785&#34;
-	srcset=&#34;https://expl0rer.top/p/pwn/5_hu_99c9a90146c07cce.png 480w, https://expl0rer.top/p/pwn/5_hu_929fb098a281dce3.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/pwn-1/5_hu_99c9a90146c07cce.png 480w, https://expl0rer.top/p/pwn-1/5_hu_929fb098a281dce3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -950,10 +981,10 @@ X86-64函数的调用约定为：&lt;/p&gt;
 &lt;/h2&gt;&lt;h3 id=&#34;elf&#34;&gt;elf
 &lt;/h3&gt;&lt;p&gt;linux环境中，&lt;strong&gt;二进制可持性文件&lt;/strong&gt;的类型是ELF（Executable and Linkable Format）文件。&lt;/p&gt;
 &lt;p&gt;elf文件的格式比较简单，我们需要了解的就是elf文件中的各个节、段等概念。elf的基本信息存在于elf的头部信息中，这些信息包括指令的运行架构、程序入口等内容，可以通过readelf -h &amp;lt;elf_name&amp;gt;来查看头部信息，当然打过CTF-MISC的知道的话估计会去用010editor，都可。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/pwn/6.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/pwn-1/6.png&#34;
 	width=&#34;610&#34;
 	height=&#34;180&#34;
-	srcset=&#34;https://expl0rer.top/p/pwn/6_hu_4aa131809ccbce34.png 480w, https://expl0rer.top/p/pwn/6_hu_66c842a6c402488c.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/pwn-1/6_hu_4aa131809ccbce34.png 480w, https://expl0rer.top/p/pwn-1/6_hu_66c842a6c402488c.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -962,10 +993,10 @@ X86-64函数的调用约定为：&lt;/p&gt;
 		data-flex-basis=&#34;813px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/pwn/7.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/pwn-1/7.png&#34;
 	width=&#34;1221&#34;
 	height=&#34;659&#34;
-	srcset=&#34;https://expl0rer.top/p/pwn/7_hu_f82dfb9f0e6af09c.png 480w, https://expl0rer.top/p/pwn/7_hu_c803067fc21ccd19.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/pwn-1/7_hu_f82dfb9f0e6af09c.png 480w, https://expl0rer.top/p/pwn-1/7_hu_c803067fc21ccd19.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Magic头部文件&#34;
@@ -976,10 +1007,10 @@ X86-64函数的调用约定为：&lt;/p&gt;
 		data-flex-basis=&#34;444px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/pwn/8.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/pwn-1/8.png&#34;
 	width=&#34;858&#34;
 	height=&#34;305&#34;
-	srcset=&#34;https://expl0rer.top/p/pwn/8_hu_ebcc70c8d17b8d76.png 480w, https://expl0rer.top/p/pwn/8_hu_d91de4a5ee068c7b.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/pwn-1/8_hu_ebcc70c8d17b8d76.png 480w, https://expl0rer.top/p/pwn-1/8_hu_d91de4a5ee068c7b.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -1024,10 +1055,10 @@ X86-64函数的调用约定为：&lt;/p&gt;
 &lt;p&gt;elf文件在加载进入内存时：
 elf文件的节（section）会被映射进内存中的段（segment），而这一映射过程遵循的机制是根据各个节的权限来进行映射的。&lt;/p&gt;
 &lt;p&gt;换句话说，可读可写的节被映射入一个段，只读的节被映射入一个段。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/pwn/9.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/pwn-1/9.png&#34;
 	width=&#34;1100&#34;
 	height=&#34;560&#34;
-	srcset=&#34;https://expl0rer.top/p/pwn/9_hu_6bae07d610db5804.png 480w, https://expl0rer.top/p/pwn/9_hu_66c8193d78b0595a.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/pwn-1/9_hu_6bae07d610db5804.png 480w, https://expl0rer.top/p/pwn-1/9_hu_66c8193d78b0595a.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -1071,10 +1102,10 @@ elf文件的节（section）会被映射进内存中的段（segment），而这
 &lt;p&gt;glibc本身是GNU旗下的C标准库，后来逐渐成为了Linux的标准C库，而Linux下原来的标准C库Linux libc逐渐不再被维护。&lt;/p&gt;
 &lt;p&gt;Linux下面的标准C库不仅有这一个，如uclibc、klibc，以及上面被提到的Linux libc，但是glibc无疑是用得最多的。glibc在/lib目录下的.so文件为&lt;strong&gt;libc.so.6&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;等等&amp;hellip;&amp;hellip;so后缀？？.so时啥文件，本质上也是个elf文件&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/pwn/10.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/pwn-1/10.png&#34;
 	width=&#34;1219&#34;
 	height=&#34;70&#34;
-	srcset=&#34;https://expl0rer.top/p/pwn/10_hu_4c2c3ddbfb8ccae1.png 480w, https://expl0rer.top/p/pwn/10_hu_98caa8be48b8098e.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/pwn-1/10_hu_4c2c3ddbfb8ccae1.png 480w, https://expl0rer.top/p/pwn-1/10_hu_98caa8be48b8098e.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;在Ubuntu上的so文件&#34;
@@ -1086,10 +1117,10 @@ elf文件的节（section）会被映射进内存中的段（segment），而这
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;通常.so用./的指令运行后会给出版本信息，当然，用file命令也是可以的:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/pwn/11.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/pwn-1/11.png&#34;
 	width=&#34;1676&#34;
 	height=&#34;190&#34;
-	srcset=&#34;https://expl0rer.top/p/pwn/11_hu_adb8a45b71a6e24d.png 480w, https://expl0rer.top/p/pwn/11_hu_c64d7e55efbc73c3.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/pwn-1/11_hu_adb8a45b71a6e24d.png 480w, https://expl0rer.top/p/pwn-1/11_hu_c64d7e55efbc73c3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;libc.so文件版本信息&#34;
@@ -1179,10 +1210,10 @@ elf文件的节（section）会被映射进内存中的段（segment），而这
 &lt;p&gt;在Linux中，Canary的作用就如同他引用的一样，用来判断程序的执行环境，主要是针对检测&lt;strong&gt;栈溢出&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;canary是一个开头字节为\x00的一段长度为八个字节(x64)的随机数，这个随机数本体存放于 fs 段偏移为 0x28 的区域。&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;在每次函数调用中，程序都会将这段随机数存放于栈底，每次运行结束返回时，都会将这一随机数与他的本体进行比对。如果这个值被改变，则意味着发生了栈溢出，程序直接退出，没有改变的话，程序继续执行。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/pwn/12.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/pwn-1/12.png&#34;
 	width=&#34;819&#34;
 	height=&#34;431&#34;
-	srcset=&#34;https://expl0rer.top/p/pwn/12_hu_e74b0eb1f3623cc7.png 480w, https://expl0rer.top/p/pwn/12_hu_d9ea985ab2966894.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/pwn-1/12_hu_e74b0eb1f3623cc7.png 480w, https://expl0rer.top/p/pwn-1/12_hu_d9ea985ab2966894.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Canary示例&#34;
@@ -1401,7 +1432,8 @@ PIE 像演出团队（程序本身）每次上场时，自己的站位（代码�
       &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;p&gt;基本的PWN理论知识就到这里了，现在你看别人PWN神的writeup应该不会这么“牢”了吧，基本能看懂别人说的专用词了。&lt;/p&gt;
+&lt;h2 id=&#34;结尾&#34;&gt;结尾
+&lt;/h2&gt;&lt;p&gt;基本的PWN理论知识就到这里了，现在你看别人PWN神的writeup应该不会这么“牢”了吧，基本能看懂别人说的专用词了。&lt;/p&gt;
 </description>
         </item>
         
