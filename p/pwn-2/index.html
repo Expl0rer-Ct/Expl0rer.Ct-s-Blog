@@ -10,7 +10,7 @@
 <meta property='og:description' content="二进制漏洞与利用，栈">
 <meta property='og:url' content='https://expl0rer.top/p/pwn-2/'>
 <meta property='og:site_name' content='Expl0rer.Ct'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-08-25T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-08-26T07:03:44&#43;00:00'/><meta property='og:image' content='https://expl0rer.top/p/pwn-2/PWN2.png' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-08-25T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-08-26T08:46:15&#43;00:00'/><meta property='og:image' content='https://expl0rer.top/p/pwn-2/PWN2.png' />
 <meta name="twitter:title" content="PWN-2">
 <meta name="twitter:description" content="二进制漏洞与利用，栈"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://expl0rer.top/p/pwn-2/PWN2.png' />
@@ -432,6 +432,7 @@
 
 <link rel="stylesheet" href="https://npm.elemecdn.com/lxgw-wenkai-screen-webfont@1.7.0/lxgwwenkaiscreenr.css" />
 
+
     </head>
     <body class="
     article-page
@@ -714,7 +715,11 @@ unicode: "ece7"
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#栈溢出原理">栈溢出原理</a></li>
+    <li><a href="#栈溢出原理">栈溢出原理</a>
+      <ol>
+        <li><a href="#栈溢出">栈溢出</a></li>
+      </ol>
+    </li>
   </ol>
 </nav>
         </div>
@@ -813,6 +818,90 @@ unicode: "ece7"
 调用函数：只需要将rip压栈，即push rip，然后讲rip赋值为被调用函数的起始地址，这一操作被隐性的内置在call指令中。</p>
 <p>被调用函数：push rbp； mov rbp rsp；sub rsp oxxx。即保存调用函数的rbp指针，将自己的rbp指针指向栈顶，然后开辟栈空间给自己用,此时rbp就变成了被调用函数的栈底。</p>
 <p>函数返回：leave；ret；翻译过来就是：mov rsp rbp；pop rbp；pop rip；即恢复栈帧，返回调用函数的返回地址。</p>
+<p><strong>栈的作用为存储函数调用相关信息以及函数的局部变量。</strong></p>
+<p>这些局部变量通常为数组或者输入的缓冲区（buf）。而函数调用相关的信息，主要是返回地址和栈底指针（rbp）。</p>
+<h3 id="栈溢出">栈溢出
+</h3><p>函数中的存储在找中的局部变量数组边界检查不严格发生越界写，造成用户输入覆盖到缓冲区外的数据内容。</p>
+<p>由于栈中同时存在着与函数调用参数的相关信息，栈溢出可以导致<strong>控制流劫持</strong>。</p>
+<p>来让我解释一下：</p>
+<ol>
+<li>若用户输入长度超过数组容量，超出的部分会<strong>向上覆盖栈中更高地址的数据</strong>（因为栈向下生长，越界写会向高地址蔓延）；</li>
+<li>当覆盖到 “返回地址” 时，攻击者可以将其修改为<strong>任意地址</strong>（如 shellcode 地址、ROP gadget 地址等）；</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;unistd.h&gt; // 包含read函数声明</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 存在漏洞的函数：读取200字节到80字节的缓冲区
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="nf">func_a</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">char</span> <span class="n">buf</span><span class="p">[</span><span class="mi">80</span><span class="p">];</span>      <span class="c1">// 局部变量：80字节的数组
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">read</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">buf</span><span class="p">,</span> <span class="mi">200</span><span class="p">);</span> <span class="c1">// 从标准输入读取200字节到buf（无长度检查，必然溢出）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 调用func_a的函数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="nf">func_b</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">func_a</span><span class="p">();</span>          <span class="c1">// 调用漏洞函数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">int</span> <span class="n">c</span><span class="p">;</span>             <span class="c1">// 局部变量c
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">c</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>             <span class="c1">// 给c赋值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 主函数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">func_b</span><span class="p">();</span>          <span class="c1">// 调用func_b
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">int</span> <span class="n">a</span><span class="p">;</span>             <span class="c1">// 局部变量a
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">a</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>             <span class="c1">// 给a赋值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>main函数调用b，b函数调用a。缓冲区溢出发生在a函数中。</p>
+<p><em>buf的长度为80，但是却读入了200长度。</em>（栈溢出）</p>
+<p>分析程序运行至a时的栈帧、栈中存放buf和返回地址等等信息：
+<img src="/p/pwn-2/1.png"
+	width="413"
+	height="840"
+	srcset="/p/pwn-2/1_hu_2535d359c272f0be.png 480w, /p/pwn-2/1_hu_de5df19999eb436.png 1024w"
+	loading="lazy"
+	
+		alt="buf的长度为80，紧邻b函数的rbp指针和返回地址"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="49"
+		data-flex-basis="118px"
+	
+></p>
+<p>输入200长度造成栈溢出，超出的 120 字节会向上覆盖栈中更高地址的内容如ret（因为栈向下生长，越界写会向高地址蔓延）。</p>
+<p><strong>覆盖返回地址可以控制程序下一步执行的位置，而通过控制执行位置，攻击者可以间接实现 “修改任意地址” 的效果</strong>。</p>
+<p>举例，攻击者构造输入：前 84 字节填充无关数据（覆盖buf和func_b()的 ebp），第 85~88 字节填入0x12345678（小端序可能需要反写为0x78563412）；这时返回地址被覆盖成0x12345678，直接跳转到0x12345678（可能是攻击者的代码）。</p>
 
 </section>
 
@@ -1034,7 +1123,7 @@ unicode: "ece7"
 <section class="wordcount">
   <div class="wordcount-row">
     <p>博主发布了6篇文章  ||</p>
-    <p>总共53.17k 字</p>
+    <p>总共53.96k 字</p>
   </div>
 </section>
         
