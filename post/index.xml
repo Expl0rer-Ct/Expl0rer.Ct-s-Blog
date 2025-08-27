@@ -7,15 +7,726 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Expl0rer.Ct</copyright>
-        <lastBuildDate>Wed, 27 Aug 2025 02:14:29 +0000</lastBuildDate><atom:link href="https://expl0rer.top/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 27 Aug 2025 15:40:47 +0000</lastBuildDate><atom:link href="https://expl0rer.top/post/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>ctfshow-pwn-writeup</title>
         <link>https://expl0rer.top/p/ctfshow-pwn-writeup/</link>
         <pubDate>Wed, 27 Aug 2025 00:00:00 +0000</pubDate>
         
         <guid>https://expl0rer.top/p/ctfshow-pwn-writeup/</guid>
-        <description>&lt;img src="https://expl0rer.top/p/ctfshow-pwn-writeup/ctfshow.png" alt="Featured image of post ctfshow-pwn-writeup" /&gt;&lt;p&gt;&lt;strong&gt;前文：以下是我ctfshow的PWN做题记录，欢迎各位前来观看，小弟领教！&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;每道题我都给了所需的靶场链接、原题等，在官网做题需要付费，可以在我这食用题库。&lt;/p&gt;
-&lt;p&gt;正在努力加载，敬请期待&amp;hellip;&amp;hellip;&lt;/p&gt;
+        <description>&lt;img src="https://expl0rer.top/p/ctfshow-pwn-writeup/ctfshow.png" alt="Featured image of post ctfshow-pwn-writeup" /&gt;&lt;p&gt;[TOC]&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;前文：以下是我&lt;a class=&#34;link&#34; href=&#34;https://ctf.show/challenges&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;ctfshow&lt;/a&gt;的PWN做题记录，欢迎各位前来观看，小弟领教！&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;前文：每题我都放了链接，供下载，要靶场的题不能做，PWN_005~~PWN_029不需要靶场是可以做的，供大家食用PWN。&lt;/p&gt;
+&lt;h2 id=&#34;test_your_nc&#34;&gt;Test_your_nc
+&lt;/h2&gt;&lt;h3 id=&#34;pwn_000&#34;&gt;PWN_000
+&lt;/h3&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://pan.baidu.com/s/1wHPhZ7XOouFU6KgyOiSfLQ&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;专用虚拟机镜像&lt;/a&gt;，全套在这里，提取码show；虚拟机镜像，用户名为ctfshow，密码是ctfshow。&lt;/p&gt;
+&lt;p&gt;看了课也啥都不会或者工具不会下看这&amp;ndash;&amp;gt;&lt;a class=&#34;link&#34; href=&#34;https://ctf-wiki.org/pwn/linux/user-mode/environment/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;CTF Wiki-PWN&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;解题过程&#34;&gt;解题过程
+&lt;/h4&gt;&lt;p&gt;ssh连接（记得给虚拟机kali\Ubuntu或者主机设置打开SSH）：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;ssh ctfshow@pwn.challenge.ctf.show -pxxxx&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;一开始会让你输入yes/no的，直接yes，然后输入密码，等进程结束会有个交互shell&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/1.png&#34;
+	width=&#34;1184&#34;
+	height=&#34;570&#34;
+	srcset=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/1_hu_dff3e732402d7aaa.png 480w, https://expl0rer.top/p/ctfshow-pwn-writeup/1_hu_5121a93a292ddbe4.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;207&#34;
+		data-flex-basis=&#34;498px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;用命令ls打开看一下有啥文件，看到有个ctfshow_flag的文件，猜是个装flag的文件夹，直接用cat命令打开就好。注意斜杠/。&lt;/p&gt;
+&lt;h3 id=&#34;pwn_001&#34;&gt;PWN_001
+&lt;/h3&gt;&lt;p&gt;题目 &lt;a class=&#34;link&#34; href=&#34;PWN_001&#34; &gt;PWN_001&lt;/a&gt; ：提供后门函数，连上即可得到flag&lt;/p&gt;
+&lt;p&gt;这里有用到“&lt;a class=&#34;link&#34; href=&#34;https://ctf.xidian.edu.cn/wiki/13&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;&lt;code&gt;nc&lt;/code&gt;&lt;/a&gt;”连接，可以了解一下，方便后续做题。当然Kali自带nc连接的，你用Kali干PWN也行。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/2.png&#34;
+	width=&#34;826&#34;
+	height=&#34;310&#34;
+	srcset=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/2_hu_d89a142dd65a19e2.png 480w, https://expl0rer.top/p/ctfshow-pwn-writeup/2_hu_5516dc48b2b77e6e.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;266&#34;
+		data-flex-basis=&#34;639px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;这题送分的，nc连接一下就爆flag了。&lt;/p&gt;
+&lt;p&gt;不过说实话我是真不知道PWN_001文件给来干嘛的，直接nc交互一下就出flag了，这题没搞懂ctfshow意图在哪。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/3.png&#34;
+	width=&#34;1010&#34;
+	height=&#34;246&#34;
+	srcset=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/3_hu_e6fbe5354a4e4e53.png 480w, https://expl0rer.top/p/ctfshow-pwn-writeup/3_hu_9234984ec0f35806.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;checksec解析elf格式信息、二进制文件保护配置&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;410&#34;
+		data-flex-basis=&#34;985px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;不过我用了下刚学的指令checksec看了看ELF文件信息，发现是没开canary保护的，可以利用栈溢出漏洞&amp;hellip;&lt;/p&gt;
+&lt;p&gt;可以看到是64位仅关闭Canary保护。&lt;/p&gt;
+&lt;p&gt;接着用64位IDA打开查看main函数（按F5进入反汇编）：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/4.png&#34;
+	width=&#34;1375&#34;
+	height=&#34;790&#34;
+	srcset=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/4_hu_2ae06a810be6f21f.png 480w, https://expl0rer.top/p/ctfshow-pwn-writeup/4_hu_8b6f5df4cd345cc8.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;174&#34;
+		data-flex-basis=&#34;417px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;怪不得直接爆flag出来呢。后门system函数直接运行了。&lt;/p&gt;
+&lt;h3 id=&#34;pwn_002&#34;&gt;PWN_002
+&lt;/h3&gt;&lt;p&gt;题目： &lt;a class=&#34;link&#34; href=&#34;PWN_002&#34; &gt;PWN_002&lt;/a&gt; 给你一个shell，这次需要你自己去获得flag&lt;/p&gt;
+&lt;p&gt;到这里度过新手期了。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/5.png&#34;
+	width=&#34;765&#34;
+	height=&#34;260&#34;
+	srcset=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/5_hu_e343e2a59c5e743.png 480w, https://expl0rer.top/p/ctfshow-pwn-writeup/5_hu_4937eed7794a387b.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;294&#34;
+		data-flex-basis=&#34;706px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;这里需要我们输入指令了，一般来说做题习惯看到这样直接ls秒的，不过像我这样入门级别的还得用IDA琢磨琢磨：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/8.png&#34;
+	width=&#34;640&#34;
+	height=&#34;160&#34;
+	srcset=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/8_hu_5bc43d6c8900b4ef.png 480w, https://expl0rer.top/p/ctfshow-pwn-writeup/8_hu_e468d492633fbadf.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;checksec分析&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;400&#34;
+		data-flex-basis=&#34;960px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/6.png&#34;
+	width=&#34;1374&#34;
+	height=&#34;555&#34;
+	srcset=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/6_hu_540555b971908944.png 480w, https://expl0rer.top/p/ctfshow-pwn-writeup/6_hu_a88e21f83ae2c018.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;IDA-x64位main程序的反编译&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;247&#34;
+		data-flex-basis=&#34;594px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;可以看到是没canary保护的&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/7.png&#34;
+	width=&#34;909&#34;
+	height=&#34;484&#34;
+	srcset=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/7_hu_6dedf0753937e2ce.png 480w, https://expl0rer.top/p/ctfshow-pwn-writeup/7_hu_4bed3d833e192498.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;187&#34;
+		data-flex-basis=&#34;450px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;看到这里有个疑问，为什么system有这么大威力？，这次system里边是一个/bin/sh的软链接，很类似我们的文件地址&lt;/p&gt;
+&lt;blockquote class=&#34;alert alert-note&#34;&gt;
+    &lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;system(&amp;quot;/bin/sh&amp;quot;);&lt;/code&gt; 是漏洞利用中获取系统 shell 的核心操作，其工作原理涉及&lt;strong&gt;函数调用&lt;/strong&gt;、&lt;strong&gt;系统调用&lt;/strong&gt;和&lt;strong&gt;进程创建&lt;/strong&gt;三个层次，本质是通过标准库函数 &lt;code&gt;system&lt;/code&gt; 启动一个 &lt;code&gt;/bin/sh&lt;/code&gt; 进程（即命令行解释器），让攻击者获得交互权限。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;&lt;code&gt;system&lt;/code&gt; 是 C 标准库（libc）中的函数，原型为：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;system&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;const&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;char&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;command&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;blockquote class=&#34;alert alert-error&#34;&gt;
+    &lt;blockquote&gt;
+&lt;p&gt;它的功能是&lt;strong&gt;执行参数 &lt;code&gt;command&lt;/code&gt; 指向的字符串作为系统命令&lt;/strong&gt;，相当于在终端中输入该命令并执行。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;system()函数先fork一个子进程，在这个子进程中调用/bin/sh -c来执行command指定的命令。/bin/sh在系统中一般是个软链接，指向dash或者bash等常用的shell，-c选项是告诉shell从字符串command中读取要执行的命令（shell将扩展command中的任何特殊字符）。父进程则调用waitpid()函数来为变成僵尸的子进程收尸，获得其结束状态，然后将这个结束状态返回给system()函数的调用者。&lt;/p&gt;
+&lt;blockquote class=&#34;alert alert-note&#34;&gt;
+    &lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;system(&amp;quot;/bin/sh&amp;quot;)&lt;/code&gt; 的工作原理可简化为：
+&lt;strong&gt;通过 &lt;code&gt;system&lt;/code&gt; 函数创建子进程 → 子进程执行 &lt;code&gt;/bin/sh&lt;/code&gt; 程序 → 启动交互式 shell 环境&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;这也是漏洞利用中最常用的&lt;strong&gt;获取权限&lt;/strong&gt;的方式 —— 无论通过栈溢出、ROP 还是 ret2libc，最终目标都是让程序执行这条语句（或等效的系统调用）。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;h3 id=&#34;pwn_003&#34;&gt;PWN_003
+&lt;/h3&gt;&lt;p&gt;题目： &lt;a class=&#34;link&#34; href=&#34;PWN_003&#34; &gt;PWN_003&lt;/a&gt; 哪一个函数才能读取flag？&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/9.png&#34;
+	width=&#34;835&#34;
+	height=&#34;485&#34;
+	srcset=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/9_hu_cf2d18ee43fc45c9.png 480w, https://expl0rer.top/p/ctfshow-pwn-writeup/9_hu_4af22d79b2909177.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;172&#34;
+		data-flex-basis=&#34;413px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;通过前面的分析，我们可以很明显的看出来选项”6”为我们所需要的后门函数，其他的均不会得到我们所想要的flag，在system函数里面的命令都是在终端执行的，赋予system权限较大，在我所写的文章里，包括PWN入门知识讲解和操作系统都明确指出SYSTEM是与操作系统内核接触的，比Administrators的权限还要稍大。&lt;/p&gt;
+&lt;p&gt;直接选6秒了，但除这种送分的，其实还需要搞清运行的逻辑：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/10.png&#34;
+	width=&#34;1390&#34;
+	height=&#34;554&#34;
+	srcset=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/10_hu_c9707c3fe7bf59e8.png 480w, https://expl0rer.top/p/ctfshow-pwn-writeup/10_hu_b592fb61e24a27ee.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;IDAx64位程序反编译&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;250&#34;
+		data-flex-basis=&#34;602px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;跟进一下menu函数里边：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/11.png&#34;
+	width=&#34;726&#34;
+	height=&#34;280&#34;
+	srcset=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/11_hu_3d734164c38877e4.png 480w, https://expl0rer.top/p/ctfshow-pwn-writeup/11_hu_685776f269a503fb.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;259&#34;
+		data-flex-basis=&#34;622px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;回到main跟进一下这个“6”的函数，看看里头是不是真在执行system后门函数：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/12.png&#34;
+	width=&#34;744&#34;
+	height=&#34;240&#34;
+	srcset=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/12_hu_9db861ef6fbcf71d.png 480w, https://expl0rer.top/p/ctfshow-pwn-writeup/12_hu_9d996ee2d6fc5f89.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;310&#34;
+		data-flex-basis=&#34;744px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/13.png&#34;
+	width=&#34;501&#34;
+	height=&#34;119&#34;
+	srcset=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/13_hu_b70d12fb710b2ef9.png 480w, https://expl0rer.top/p/ctfshow-pwn-writeup/13_hu_c960f6a7ed96e8b6.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;421&#34;
+		data-flex-basis=&#34;1010px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;可以看到，确实是执行了。那么我们也就能得到我们需要的flag。&lt;/p&gt;
+&lt;h3 id=&#34;pwn_004&#34;&gt;PWN_004
+&lt;/h3&gt;&lt;p&gt;题目： &lt;a class=&#34;link&#34; href=&#34;PWN_004&#34; &gt;PWN_004&lt;/a&gt; 或许需要先得到某个神秘字符&lt;/p&gt;
+&lt;p&gt;真够阴间的，啥也不给了，才第几道啊就上强度了。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/14.png&#34;
+	width=&#34;1060&#34;
+	height=&#34;574&#34;
+	srcset=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/14_hu_fb649637a5b6a11b.png 480w, https://expl0rer.top/p/ctfshow-pwn-writeup/14_hu_c8ef954931f877ea.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;184&#34;
+		data-flex-basis=&#34;443px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;checksec看看，然后IDA反编译看看：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/15.png&#34;
+	width=&#34;481&#34;
+	height=&#34;159&#34;
+	srcset=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/15_hu_5f0f4805cec82d66.png 480w, https://expl0rer.top/p/ctfshow-pwn-writeup/15_hu_e21b6ee28222ffbe.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;302&#34;
+		data-flex-basis=&#34;726px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;64位二进制保护全开&amp;hellip;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/16.png&#34;
+	width=&#34;753&#34;
+	height=&#34;341&#34;
+	srcset=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/16_hu_ca7b56f27f75a918.png 480w, https://expl0rer.top/p/ctfshow-pwn-writeup/16_hu_6ad185fb146bb9a2.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;220&#34;
+		data-flex-basis=&#34;529px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;可以看到有几个似曾相识的函数：strcpy（复制函数把xx复制给s1，也可起到赋值的作用）、strcmp（比较函数，对比，判断作用）、execve（）；我曾说过汇编语言的cmp就有比较作用，这也算是类比吧，回想起来的，不过用AI搜一下也行。&lt;/p&gt;
+&lt;p&gt;来说下execve吧，上题讲过system函数，这个也应该知道的：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;execve&lt;/code&gt; 是 Unix/Linux 系统中最核心的&lt;strong&gt;系统调用（system call）&lt;/strong&gt; 之一，用于&lt;strong&gt;在当前进程中加载并执行一个新的程序&lt;/strong&gt;，替换当前进程的代码、数据和堆栈，实现进程 “变身”。它是所有程序启动和替换的底层基础，包括 &lt;code&gt;system&lt;/code&gt; 函数、shell 执行命令等最终都会依赖 &lt;code&gt;execve&lt;/code&gt; 完成。&lt;/p&gt;
+&lt;p&gt;看到这段代码，大致意思是，让s1等于“CTFshowPWN”这段字符串，然后到if判断语句这进行比较：&lt;strong&gt;如果s1和s2相等&lt;/strong&gt;（这里的！不是我们C语言中的“不”的意思啊），就执行execve函数，启动交互权限，从而得到flag。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/17.png&#34;
+	width=&#34;890&#34;
+	height=&#34;506&#34;
+	srcset=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/17_hu_cb606be9be72c140.png 480w, https://expl0rer.top/p/ctfshow-pwn-writeup/17_hu_e8a05d11d9a5f65f.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;175&#34;
+		data-flex-basis=&#34;422px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;至此：下一节就开始前置基础了，开始应用&lt;a class=&#34;link&#34; href=&#34;https://expl0rer.top/p/pwn-1/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;PWN-1&lt;/a&gt;、&lt;a class=&#34;link&#34; href=&#34;https://expl0rer.top/p/pwn-2/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;PWN-2&lt;/a&gt;、&lt;a class=&#34;link&#34; href=&#34;https://expl0rer.top/p/pwn-3/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;PWN-3&lt;/a&gt;所学的知识了。&lt;/p&gt;
+&lt;h2 id=&#34;前置基础&#34;&gt;前置基础
+&lt;/h2&gt;&lt;h3 id=&#34;pwn_005&#34;&gt;PWN_005
+&lt;/h3&gt;&lt;p&gt;题目：运行此文件，将得到的字符串以ctfshow{xxxxx}提交。&lt;/p&gt;
+&lt;p&gt;如：运行文件后 输出的内容为 Hello_World&lt;/p&gt;
+&lt;p&gt;提交的flag值为：ctfshow{Hello_World}&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;注：计组原理题型后续的flag中地址字母大写&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;PWN_005%5cWelcome_to_CTFshow&#34; &gt;Welcome_to_CTFshow&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;PWN_005%5cWelcome_to_CTFshow.asm&#34; &gt;Welcome_to_CTFshow.asm&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Welcome_to_CTFshow.asm文本打开后发现是汇编语言文件：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;33
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;34
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;35
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;36
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;37
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;38
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;39
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;40
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;41
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;42
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;43
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;44
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;45
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;46
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;47
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;48
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;49
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;50
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;51
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-nasm&#34; data-lang=&#34;nasm&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;section&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;.data&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;msg&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;db&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;Welcome_to_CTFshow_PWN&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;section&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;.text&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;global&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;_start&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;_start:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;; 立即寻址方式&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;mov&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;eax&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;11&lt;/span&gt;         &lt;span class=&#34;c1&#34;&gt;; 将11赋值给eax&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;add&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;eax&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;114504&lt;/span&gt;     &lt;span class=&#34;c1&#34;&gt;; eax加上114504&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;sub&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;eax&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;          &lt;span class=&#34;c1&#34;&gt;; eax减去1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;; 寄存器寻址方式&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;mov&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;ebx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mh&#34;&gt;0x36d&lt;/span&gt;      &lt;span class=&#34;c1&#34;&gt;; 将0x36d赋值给ebx&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;mov&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;edx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;ebx&lt;/span&gt;        &lt;span class=&#34;c1&#34;&gt;; 将ebx的值赋值给edx&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;; 直接寻址方式&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;mov&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;ecx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;msg&lt;/span&gt;      &lt;span class=&#34;c1&#34;&gt;; 将msg的地址赋值给ecx&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;; 寄存器间接寻址方式&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;mov&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;esi&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;msg&lt;/span&gt;        &lt;span class=&#34;c1&#34;&gt;; 将msg的地址赋值给esi&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;mov&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;eax&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;esi&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;      &lt;span class=&#34;c1&#34;&gt;; 将esi所指向的地址的值赋值给eax&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;; 寄存器相对寻址方式&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;mov&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;ecx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;msg&lt;/span&gt;        &lt;span class=&#34;c1&#34;&gt;; 将msg的地址赋值给ecx&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;add&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;ecx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;4&lt;/span&gt;          &lt;span class=&#34;c1&#34;&gt;; 将ecx加上4&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;mov&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;eax&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;ecx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;      &lt;span class=&#34;c1&#34;&gt;; 将ecx所指向的地址的值赋值给eax&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;; 基址变址寻址方式&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;mov&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;ecx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;msg&lt;/span&gt;        &lt;span class=&#34;c1&#34;&gt;; 将msg的地址赋值给ecx&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;mov&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;edx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;          &lt;span class=&#34;c1&#34;&gt;; 将2赋值给edx&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;mov&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;eax&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;ecx&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;edx&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;; 将ecx+edx*2所指向的地址的值赋值给eax&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;; 相对基址变址寻址方式&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;mov&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;ecx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;msg&lt;/span&gt;        &lt;span class=&#34;c1&#34;&gt;; 将msg的地址赋值给ecx&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;mov&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;edx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;          &lt;span class=&#34;c1&#34;&gt;; 将1赋值给edx&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;add&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;ecx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;8&lt;/span&gt;          &lt;span class=&#34;c1&#34;&gt;; 将ecx加上8&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;mov&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;eax&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;ecx&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;edx&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;6&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;; 将ecx+edx*2-6所指向的地址的值赋值给eax&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;; 输出字符串&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;mov&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;eax&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;4&lt;/span&gt;          &lt;span class=&#34;c1&#34;&gt;; 系统调用号4代表输出字符串&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;mov&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;ebx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;          &lt;span class=&#34;c1&#34;&gt;; 文件描述符1代表标准输出&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;mov&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;ecx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;msg&lt;/span&gt;        &lt;span class=&#34;c1&#34;&gt;; 要输出的字符串的地址&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;mov&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;edx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;22&lt;/span&gt;         &lt;span class=&#34;c1&#34;&gt;; 要输出的字符串的长度&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;mh&#34;&gt;0x80&lt;/span&gt;            &lt;span class=&#34;c1&#34;&gt;; 调用系统调用&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;; 退出程序&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;mov&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;eax&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;          &lt;span class=&#34;c1&#34;&gt;; 系统调用号1代表退出程序&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;xor&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;ebx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;ebx&lt;/span&gt;        &lt;span class=&#34;c1&#34;&gt;; 返回值为0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;mh&#34;&gt;0x80&lt;/span&gt;            &lt;span class=&#34;c1&#34;&gt;; 调用系统调用&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;checksec一下这个PWN文件：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/18.png&#34;
+	width=&#34;560&#34;
+	height=&#34;160&#34;
+	srcset=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/18_hu_b88e80be1380d264.png 480w, https://expl0rer.top/p/ctfshow-pwn-writeup/18_hu_edb93148c7d1aae7.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;350&#34;
+		data-flex-basis=&#34;840px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;ohoh这个保护全关的！IDA的x32位&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/19.png&#34;
+	width=&#34;986&#34;
+	height=&#34;270&#34;
+	srcset=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/19_hu_5a1e69eadca2a8dd.png 480w, https://expl0rer.top/p/ctfshow-pwn-writeup/19_hu_94c08c2f6f98fd2d.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;365&#34;
+		data-flex-basis=&#34;876px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;这个没main函数，那我们回看那段汇编语言asm，这段汇编语言更像是在帮助我们了解汇编语言的逻辑语法规则的，在&lt;a class=&#34;link&#34; href=&#34;https://expl0rer.top/p/pwn-1/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;PWN-1&lt;/a&gt;文章中就有讲过汇编语言，这里就直接跳过详解&lt;/p&gt;
+&lt;p&gt;这题开始就有点变样了，“Welcome_to_CTFshow.asm”这文件是一个存放汇编语言的文本文件，需要运行一下转换成像exe这样的可执行文件，在PWN-1讲过elf文件：&lt;/p&gt;
+&lt;blockquote class=&#34;alert alert-note&#34;&gt;
+    &lt;blockquote&gt;
+&lt;p&gt;将汇编语言（.asm）文件转换为可执行文件，需要经过&lt;strong&gt;汇编（Assemble）&lt;/strong&gt; 和&lt;strong&gt;链接（Link）&lt;/strong&gt; 两个核心步骤.&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;在Kali/Linux上下载nasm编辑器：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo apt install nasm
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;然后下载ld链接器（通常自带）：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo apt update &lt;span class=&#34;o&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; sudo apt install binutils
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;汇编转换：将 .asm 转换为目标文件（.obj 或 .o）&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;nasm -f elf Welcome_to_CTFshow.asm
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;汇编生成可执行文件：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;ld -m elf_i386 -s -o Welcome_to_CTFshow1 Welcome_to_CTFshow.o
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;（Welcome_to_CTFshow1是可执行文件）&lt;/p&gt;
+&lt;p&gt;我的建议汇编转换和生成可执行文件的过程都在Kali/Linux/Ubuntu上，比较方便，windows下载比较麻烦。&lt;/p&gt;
+&lt;p&gt;生成这个可执行文件之后，直接运行就能得到输出结果了，按照题目要求，加个{}包皮去提交就好了。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/20.png&#34;
+	width=&#34;765&#34;
+	height=&#34;230&#34;
+	srcset=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/20_hu_9d3cd65ccf046d84.png 480w, https://expl0rer.top/p/ctfshow-pwn-writeup/20_hu_f0e09656aebee87e.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;332&#34;
+		data-flex-basis=&#34;798px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/21.png&#34;
+	width=&#34;1040&#34;
+	height=&#34;295&#34;
+	srcset=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/21_hu_96a8674a27a83293.png 480w, https://expl0rer.top/p/ctfshow-pwn-writeup/21_hu_adca9e8247769340.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;352&#34;
+		data-flex-basis=&#34;846px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;pwn_006&#34;&gt;PWN_006
+&lt;/h3&gt;&lt;p&gt;题目：立即寻址方式结束后eax寄存器的值为？&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;PWN_006%5cWelcome_to_CTFshow&#34; &gt;Welcome_to_CTFshow&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;PWN_006%5cWelcome_to_CTFshow.asm&#34; &gt;Welcome_to_CTFshow.asm&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;按照PWN-005那样去转换生成这个可执行文件&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;汇编转换：将 .asm 转换为目标文件（.obj 或 .o）&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;nasm -f elf Welcome_to_CTFshow.asm
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;汇编生成可执行文件：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;ld -m elf_i386 -s -o Welcome_to_CTFshow1 Welcome_to_CTFshow.o
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;（Welcome_to_CTFshow1是可执行文件）&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/22.png&#34;
+	width=&#34;618&#34;
+	height=&#34;155&#34;
+	srcset=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/22_hu_38c3a83cb1d6b3d2.png 480w, https://expl0rer.top/p/ctfshow-pwn-writeup/22_hu_15cc2bc9e2e15087.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;398&#34;
+		data-flex-basis=&#34;956px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;Welcome_to_CTFshow_PWN???是flag，错了，题目是&lt;strong&gt;立即寻址&lt;/strong&gt;方式结束后&lt;strong&gt;eax寄存器的值&lt;/strong&gt;为？&lt;/p&gt;
+&lt;p&gt;那就是得把这个转换出的可执行文件放到IDA上，不过之前记得checksec一下看看是x32还是x64位哦&amp;hellip;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-nasm&#34; data-lang=&#34;nasm&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;; 立即寻址方式&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;mov&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;eax&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;11&lt;/span&gt;        &lt;span class=&#34;c1&#34;&gt;; 将11赋值给eax&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;add&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;eax&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;114504&lt;/span&gt;    &lt;span class=&#34;c1&#34;&gt;; eax加上114504&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;sub&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;eax&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;         &lt;span class=&#34;c1&#34;&gt;; eax减去1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/23.png&#34;
+	width=&#34;1153&#34;
+	height=&#34;151&#34;
+	srcset=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/23_hu_d9da713c30313d8.png 480w, https://expl0rer.top/p/ctfshow-pwn-writeup/23_hu_9162e9b7e00f4ccc.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;763&#34;
+		data-flex-basis=&#34;1832px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;那就加减法咯：11+114504-1=114514&lt;/p&gt;
+&lt;p&gt;ctfshow{114514}&lt;/p&gt;
+&lt;h3 id=&#34;pwn_007&#34;&gt;PWN_007
+&lt;/h3&gt;&lt;p&gt;题目：&lt;strong&gt;寄存器寻址方式&lt;/strong&gt;结束后&lt;code&gt;edx寄存器&lt;/code&gt;的值为？&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;PWN_007%5cWelcome_to_CTFshow&#34; &gt;Welcome_to_CTFshow&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;PWN_007%5cWelcome_to_CTFshow.asm&#34; &gt;Welcome_to_CTFshow.asm&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;按照上述方法去得出可执行文件，放入IDA：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/24.png&#34;
+	width=&#34;985&#34;
+	height=&#34;95&#34;
+	srcset=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/24_hu_92bd39fab506337a.png 480w, https://expl0rer.top/p/ctfshow-pwn-writeup/24_hu_75d2f4fa5f54ead5.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;1036&#34;
+		data-flex-basis=&#34;2488px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-nasm&#34; data-lang=&#34;nasm&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;; 寄存器寻址方式&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;mov&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;ebx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mh&#34;&gt;0x36d&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;; 将0x36d赋值给ebx&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;mov&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;edx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;ebx&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;; 将ebx的值赋值给edx&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;所以ctfshow{0x36D}&lt;/p&gt;
+&lt;h3 id=&#34;pwn_008&#34;&gt;PWN_008
+&lt;/h3&gt;&lt;p&gt;题目：直接寻址方式结束后ecx寄存器的值为？&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;..%5c..%5c..%5c..%5c..%5cLegion22%5cCTF-CTFshow%e7%a7%81%e6%95%99-PWN%5c02_%e5%89%8d%e7%bd%ae%e5%9f%ba%e7%a1%80%5cpwn_008%5cWelcome_to_CTFshow&#34; &gt;Welcome_to_CTFshow&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;..%5c..%5c..%5c..%5c..%5cLegion22%5cCTF-CTFshow%e7%a7%81%e6%95%99-PWN%5c02_%e5%89%8d%e7%bd%ae%e5%9f%ba%e7%a1%80%5cpwn_008%5cWelcome_to_CTFshow.asm&#34; &gt;Welcome_to_CTFshow.asm&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-nasm&#34; data-lang=&#34;nasm&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;; 直接寻址方式&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;mov&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;ecx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;msg&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;; 将msg的地址赋值给ecx&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;当你编译后发现找不到地址[msg]，然后我们倒回来找题目的Welcome_to_CTFshow文件，用IDA：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/25.png&#34;
+	width=&#34;721&#34;
+	height=&#34;25&#34;
+	srcset=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/25_hu_5372def4240b6f53.png 480w, https://expl0rer.top/p/ctfshow-pwn-writeup/25_hu_1d2087bdde9824cc.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;2884&#34;
+		data-flex-basis=&#34;6921px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;故flag:ctfshow{0x80490E8}&lt;/p&gt;
+&lt;p&gt;其实不用去进行编译的，在题目给的文件就能做，编译出来的其实就是题目给的文件。&lt;/p&gt;
+&lt;h3 id=&#34;pwn_009&#34;&gt;PWN_009
+&lt;/h3&gt;&lt;p&gt;题目：&lt;strong&gt;寄存器间接寻址&lt;/strong&gt;方式结束后eax寄存器的值为？&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;..%5c..%5c..%5c..%5c..%5cLegion22%5cCTF-CTFshow%e7%a7%81%e6%95%99-PWN%5c02_%e5%89%8d%e7%bd%ae%e5%9f%ba%e7%a1%80%5cpwn_009%5cWelcome_to_CTFshow&#34; &gt;Welcome_to_CTFshow&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;..%5c..%5c..%5c..%5c..%5cLegion22%5cCTF-CTFshow%e7%a7%81%e6%95%99-PWN%5c02_%e5%89%8d%e7%bd%ae%e5%9f%ba%e7%a1%80%5cpwn_009%5cWelcome_to_CTFshow.asm&#34; &gt;Welcome_to_CTFshow.asm&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-nasm&#34; data-lang=&#34;nasm&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;; 寄存器间接寻址方式&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;mov&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;esi&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;msg&lt;/span&gt;        &lt;span class=&#34;c1&#34;&gt;; 将msg的地址赋值给esi&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;mov&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;eax&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;esi&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;      &lt;span class=&#34;c1&#34;&gt;; 将esi所指向的地址的值赋值给eax&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/26.png&#34;
+	width=&#34;650&#34;
+	height=&#34;175&#34;
+	srcset=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/26_hu_db95f2c70775bfb6.png 480w, https://expl0rer.top/p/ctfshow-pwn-writeup/26_hu_6e7577b16306137d.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;371&#34;
+		data-flex-basis=&#34;891px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;不是80490E8哈别被误导了，这是&lt;strong&gt;虚拟地址&lt;/strong&gt;哦&lt;/p&gt;
+&lt;p&gt;点击跟进：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/27.png&#34;
+	width=&#34;659&#34;
+	height=&#34;25&#34;
+	srcset=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/27_hu_2f879014412c83d2.png 480w, https://expl0rer.top/p/ctfshow-pwn-writeup/27_hu_a9abfa63d7183e7a.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;2636&#34;
+		data-flex-basis=&#34;6326px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;dd 636C6557h&lt;/code&gt;&lt;/strong&gt;：&lt;code&gt;dd&lt;/code&gt; 是汇编指令中的伪操作符，意为 “定义双字（define double word）”，表示在当前地址处存放一个 4 字节的数值。这里存放的数值是 &lt;code&gt;636C6557h&lt;/code&gt;（十六进制）。&lt;/p&gt;
+&lt;p&gt;flag:ctfshow{0x636C6557}&lt;/p&gt;
+&lt;h3 id=&#34;pwn_010&#34;&gt;PWN_010
+&lt;/h3&gt;&lt;p&gt;题目：&lt;strong&gt;寄存器相对寻址&lt;/strong&gt;方式结束后eax寄存器的值为？&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;PWN_010%5cWelcome_to_CTFshow&#34; &gt;Welcome_to_CTFshow&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;PWN_010%5cWelcome_to_CTFshow.asm&#34; &gt;Welcome_to_CTFshow.asm&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-nasm&#34; data-lang=&#34;nasm&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;; 寄存器相对寻址方式&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;mov&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;ecx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;msg&lt;/span&gt;        &lt;span class=&#34;c1&#34;&gt;; 将msg的地址赋值给ecx&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;add&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;ecx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;4&lt;/span&gt;          &lt;span class=&#34;c1&#34;&gt;; 将ecx加上4&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;mov&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;eax&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;ecx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;      &lt;span class=&#34;c1&#34;&gt;; 将ecx所指向的地址的值赋值给eax&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/28.png&#34;
+	width=&#34;845&#34;
+	height=&#34;154&#34;
+	srcset=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/28_hu_e162f950e4f701a0.png 480w, https://expl0rer.top/p/ctfshow-pwn-writeup/28_hu_fc64a86acf95c0c7.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;548&#34;
+		data-flex-basis=&#34;1316px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;然后我们跟进看一下地址：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/29.png&#34;
+	width=&#34;770&#34;
+	height=&#34;110&#34;
+	srcset=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/29_hu_8e18458aaf2629b0.png 480w, https://expl0rer.top/p/ctfshow-pwn-writeup/29_hu_265416ee1eefcac9.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;700&#34;
+		data-flex-basis=&#34;1680px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;也就是这里将msg的地址（0x80490E8）+ 4 处所执向的地址的值赋给eax&lt;/p&gt;
+&lt;p&gt;4是十进制的，地址是16进制的，记得转换一下：&lt;/p&gt;
+&lt;p&gt;hex(0x80490E8+4)&amp;ndash;&amp;gt; 080490EC&lt;/p&gt;
+&lt;p&gt;对应地址得值是ome_to_CTFshow_PWN&lt;/p&gt;
+&lt;p&gt;故flag:ctfshow{ome_to_CTFshow_PWN}&lt;/p&gt;
 </description>
         </item>
         <item>
@@ -380,7 +1091,7 @@
 &lt;blockquote class=&#34;alert alert-error&#34;&gt;
     &lt;blockquote&gt;
 &lt;p&gt;PWN入门劝退集&amp;hellip;&amp;hellip;&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
-&lt;h2 id=&#34;第一节汇编语言基础&#34;&gt;第一节：汇编语言基础
+&lt;h2 id=&#34;汇编语言基础&#34;&gt;汇编语言基础
 &lt;/h2&gt;&lt;p&gt;我自己在打ctf逆向和pwn，也时常搞不懂bit和byte，在这里我先把一些计算机内的量词回忆一下：&lt;/p&gt;
 &lt;table&gt;
   &lt;thead&gt;
@@ -860,7 +1571,101 @@
 &lt;blockquote class=&#34;alert alert-tip&#34;&gt;
     &lt;blockquote&gt;
 &lt;p&gt;整数溢出一般配合别的漏洞来使用。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
-&lt;h2 id=&#34;linux基础&#34;&gt;Linux基础
+&lt;h3 id=&#34;汇编小结&#34;&gt;汇编小结
+&lt;/h3&gt;&lt;p&gt;汇编语言贯穿PWN、Reverse（逆向）的，比较重要。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;33
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;34
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;35
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;36
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;37
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;38
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;39
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;40
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;41
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;42
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;43
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-nasm&#34; data-lang=&#34;nasm&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;; 立即寻址方式&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;mov&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;eax&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;11&lt;/span&gt;         &lt;span class=&#34;c1&#34;&gt;; 将11赋值给eax&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;add&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;eax&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;114504&lt;/span&gt;     &lt;span class=&#34;c1&#34;&gt;; eax加上114504&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;sub&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;eax&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;          &lt;span class=&#34;c1&#34;&gt;; eax减去1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;; 寄存器寻址方式&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;mov&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;ebx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mh&#34;&gt;0x36d&lt;/span&gt;      &lt;span class=&#34;c1&#34;&gt;; 将0x36d赋值给ebx&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;mov&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;edx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;ebx&lt;/span&gt;        &lt;span class=&#34;c1&#34;&gt;; 将ebx的值赋值给edx&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;; 直接寻址方式&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;mov&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;ecx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;msg&lt;/span&gt;      &lt;span class=&#34;c1&#34;&gt;; 将msg的地址赋值给ecx&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;; 寄存器间接寻址方式&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;mov&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;esi&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;msg&lt;/span&gt;        &lt;span class=&#34;c1&#34;&gt;; 将msg的地址赋值给esi&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;mov&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;eax&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;esi&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;      &lt;span class=&#34;c1&#34;&gt;; 将esi所指向的地址的值赋值给eax&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;; 寄存器相对寻址方式&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;mov&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;ecx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;msg&lt;/span&gt;        &lt;span class=&#34;c1&#34;&gt;; 将msg的地址赋值给ecx&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;add&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;ecx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;4&lt;/span&gt;          &lt;span class=&#34;c1&#34;&gt;; 将ecx加上4&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;mov&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;eax&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;ecx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;      &lt;span class=&#34;c1&#34;&gt;; 将ecx所指向的地址的值赋值给eax&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;; 基址变址寻址方式&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;mov&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;ecx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;msg&lt;/span&gt;        &lt;span class=&#34;c1&#34;&gt;; 将msg的地址赋值给ecx&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;mov&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;edx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;          &lt;span class=&#34;c1&#34;&gt;; 将2赋值给edx&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;mov&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;eax&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;ecx&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;edx&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;; 将ecx+edx*2所指向的地址的值赋值给eax&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;; 相对基址变址寻址方式&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;mov&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;ecx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;msg&lt;/span&gt;        &lt;span class=&#34;c1&#34;&gt;; 将msg的地址赋值给ecx&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;mov&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;edx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;          &lt;span class=&#34;c1&#34;&gt;; 将1赋值给edx&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;add&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;ecx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;8&lt;/span&gt;          &lt;span class=&#34;c1&#34;&gt;; 将ecx加上8&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;mov&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;eax&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;ecx&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;edx&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;6&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;; 将ecx+edx*2-6所指向的地址的值赋值给eax&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;; 输出字符串&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;mov&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;eax&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;4&lt;/span&gt;          &lt;span class=&#34;c1&#34;&gt;; 系统调用号4代表输出字符串&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;mov&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;ebx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;          &lt;span class=&#34;c1&#34;&gt;; 文件描述符1代表标准输出&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;mov&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;ecx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;msg&lt;/span&gt;        &lt;span class=&#34;c1&#34;&gt;; 要输出的字符串的地址&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;mov&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;edx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;22&lt;/span&gt;         &lt;span class=&#34;c1&#34;&gt;; 要输出的字符串的长度&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;mh&#34;&gt;0x80&lt;/span&gt;            &lt;span class=&#34;c1&#34;&gt;; 调用系统调用&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;; 退出程序&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;mov&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;eax&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;          &lt;span class=&#34;c1&#34;&gt;; 系统调用号1代表退出程序&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;xor&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;ebx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;ebx&lt;/span&gt;        &lt;span class=&#34;c1&#34;&gt;; 返回值为0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;mh&#34;&gt;0x80&lt;/span&gt;            &lt;span class=&#34;c1&#34;&gt;; 调用系统调用&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;linux基础&#34;&gt;Linux基础
 &lt;/h2&gt;&lt;p&gt;这一章内容多是一些文字描述，也会有生活案例加以理解，图片较少，较为枯燥。&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/pwn-1/1.png&#34;
 	width=&#34;1011&#34;

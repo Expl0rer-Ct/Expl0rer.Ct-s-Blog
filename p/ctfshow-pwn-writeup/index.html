@@ -10,7 +10,7 @@
 <meta property='og:description' content="二进制漏洞与利用，PWN_wrtieup，会员套餐360题">
 <meta property='og:url' content='https://expl0rer.top/p/ctfshow-pwn-writeup/'>
 <meta property='og:site_name' content='Expl0rer.Ct'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-08-27T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-08-27T10:14:12&#43;08:00'/><meta property='og:image' content='https://expl0rer.top/p/ctfshow-pwn-writeup/ctfshow.png' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-08-27T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-08-27T23:40:29&#43;08:00'/><meta property='og:image' content='https://expl0rer.top/p/ctfshow-pwn-writeup/ctfshow.png' />
 <meta name="twitter:title" content="ctfshow-pwn-writeup">
 <meta name="twitter:description" content="二进制漏洞与利用，PWN_wrtieup，会员套餐360题"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://expl0rer.top/p/ctfshow-pwn-writeup/ctfshow.png' />
@@ -693,7 +693,60 @@ unicode: "ece7"
     </ol>
 </aside>
 
-    
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#test_your_nc">Test_your_nc</a>
+      <ol>
+        <li><a href="#pwn_000">PWN_000</a>
+          <ol>
+            <li><a href="#解题过程">解题过程</a></li>
+          </ol>
+        </li>
+        <li><a href="#pwn_001">PWN_001</a></li>
+        <li><a href="#pwn_002">PWN_002</a></li>
+        <li><a href="#pwn_003">PWN_003</a></li>
+        <li><a href="#pwn_004">PWN_004</a></li>
+      </ol>
+    </li>
+    <li><a href="#前置基础">前置基础</a>
+      <ol>
+        <li><a href="#pwn_005">PWN_005</a></li>
+        <li><a href="#pwn_006">PWN_006</a></li>
+        <li><a href="#pwn_007">PWN_007</a></li>
+        <li><a href="#pwn_008">PWN_008</a></li>
+        <li><a href="#pwn_009">PWN_009</a></li>
+        <li><a href="#pwn_010">PWN_010</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
 
             <main class="main full-width">
     <article class="has-image main-article">
@@ -770,9 +823,720 @@ unicode: "ece7"
     <section class="article-content">
     
     
-    <p><strong>前文：以下是我ctfshow的PWN做题记录，欢迎各位前来观看，小弟领教！</strong></p>
-<p>每道题我都给了所需的靶场链接、原题等，在官网做题需要付费，可以在我这食用题库。</p>
-<p>正在努力加载，敬请期待&hellip;&hellip;</p>
+    <p>[TOC]</p>
+<p><strong>前文：以下是我<a class="link" href="https://ctf.show/challenges"  target="_blank" rel="noopener"
+    >ctfshow</a>的PWN做题记录，欢迎各位前来观看，小弟领教！</strong></p>
+<p>前文：每题我都放了链接，供下载，要靶场的题不能做，PWN_005~~PWN_029不需要靶场是可以做的，供大家食用PWN。</p>
+<h2 id="test_your_nc">Test_your_nc
+</h2><h3 id="pwn_000">PWN_000
+</h3><p><a class="link" href="https://pan.baidu.com/s/1wHPhZ7XOouFU6KgyOiSfLQ"  target="_blank" rel="noopener"
+    >专用虚拟机镜像</a>，全套在这里，提取码show；虚拟机镜像，用户名为ctfshow，密码是ctfshow。</p>
+<p>看了课也啥都不会或者工具不会下看这&ndash;&gt;<a class="link" href="https://ctf-wiki.org/pwn/linux/user-mode/environment/"  target="_blank" rel="noopener"
+    >CTF Wiki-PWN</a></p>
+<h4 id="解题过程">解题过程
+</h4><p>ssh连接（记得给虚拟机kali\Ubuntu或者主机设置打开SSH）：</p>
+<p><code>ssh ctfshow@pwn.challenge.ctf.show -pxxxx</code></p>
+<p>一开始会让你输入yes/no的，直接yes，然后输入密码，等进程结束会有个交互shell</p>
+<p><img src="/p/ctfshow-pwn-writeup/1.png"
+	width="1184"
+	height="570"
+	srcset="/p/ctfshow-pwn-writeup/1_hu_dff3e732402d7aaa.png 480w, /p/ctfshow-pwn-writeup/1_hu_5121a93a292ddbe4.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="207"
+		data-flex-basis="498px"
+	
+></p>
+<p>用命令ls打开看一下有啥文件，看到有个ctfshow_flag的文件，猜是个装flag的文件夹，直接用cat命令打开就好。注意斜杠/。</p>
+<h3 id="pwn_001">PWN_001
+</h3><p>题目 <a class="link" href="PWN_001" >PWN_001</a> ：提供后门函数，连上即可得到flag</p>
+<p>这里有用到“<a class="link" href="https://ctf.xidian.edu.cn/wiki/13"  target="_blank" rel="noopener"
+    ><code>nc</code></a>”连接，可以了解一下，方便后续做题。当然Kali自带nc连接的，你用Kali干PWN也行。</p>
+<p><img src="/p/ctfshow-pwn-writeup/2.png"
+	width="826"
+	height="310"
+	srcset="/p/ctfshow-pwn-writeup/2_hu_d89a142dd65a19e2.png 480w, /p/ctfshow-pwn-writeup/2_hu_5516dc48b2b77e6e.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="266"
+		data-flex-basis="639px"
+	
+></p>
+<p>这题送分的，nc连接一下就爆flag了。</p>
+<p>不过说实话我是真不知道PWN_001文件给来干嘛的，直接nc交互一下就出flag了，这题没搞懂ctfshow意图在哪。</p>
+<p><img src="/p/ctfshow-pwn-writeup/3.png"
+	width="1010"
+	height="246"
+	srcset="/p/ctfshow-pwn-writeup/3_hu_e6fbe5354a4e4e53.png 480w, /p/ctfshow-pwn-writeup/3_hu_9234984ec0f35806.png 1024w"
+	loading="lazy"
+	
+		alt="checksec解析elf格式信息、二进制文件保护配置"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="410"
+		data-flex-basis="985px"
+	
+></p>
+<p>不过我用了下刚学的指令checksec看了看ELF文件信息，发现是没开canary保护的，可以利用栈溢出漏洞&hellip;</p>
+<p>可以看到是64位仅关闭Canary保护。</p>
+<p>接着用64位IDA打开查看main函数（按F5进入反汇编）：</p>
+<p><img src="/p/ctfshow-pwn-writeup/4.png"
+	width="1375"
+	height="790"
+	srcset="/p/ctfshow-pwn-writeup/4_hu_2ae06a810be6f21f.png 480w, /p/ctfshow-pwn-writeup/4_hu_8b6f5df4cd345cc8.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="174"
+		data-flex-basis="417px"
+	
+></p>
+<p>怪不得直接爆flag出来呢。后门system函数直接运行了。</p>
+<h3 id="pwn_002">PWN_002
+</h3><p>题目： <a class="link" href="PWN_002" >PWN_002</a> 给你一个shell，这次需要你自己去获得flag</p>
+<p>到这里度过新手期了。</p>
+<p><img src="/p/ctfshow-pwn-writeup/5.png"
+	width="765"
+	height="260"
+	srcset="/p/ctfshow-pwn-writeup/5_hu_e343e2a59c5e743.png 480w, /p/ctfshow-pwn-writeup/5_hu_4937eed7794a387b.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="294"
+		data-flex-basis="706px"
+	
+></p>
+<p>这里需要我们输入指令了，一般来说做题习惯看到这样直接ls秒的，不过像我这样入门级别的还得用IDA琢磨琢磨：</p>
+<p><img src="/p/ctfshow-pwn-writeup/8.png"
+	width="640"
+	height="160"
+	srcset="/p/ctfshow-pwn-writeup/8_hu_5bc43d6c8900b4ef.png 480w, /p/ctfshow-pwn-writeup/8_hu_e468d492633fbadf.png 1024w"
+	loading="lazy"
+	
+		alt="checksec分析"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="400"
+		data-flex-basis="960px"
+	
+></p>
+<p><img src="/p/ctfshow-pwn-writeup/6.png"
+	width="1374"
+	height="555"
+	srcset="/p/ctfshow-pwn-writeup/6_hu_540555b971908944.png 480w, /p/ctfshow-pwn-writeup/6_hu_a88e21f83ae2c018.png 1024w"
+	loading="lazy"
+	
+		alt="IDA-x64位main程序的反编译"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="247"
+		data-flex-basis="594px"
+	
+></p>
+<p>可以看到是没canary保护的</p>
+<p><img src="/p/ctfshow-pwn-writeup/7.png"
+	width="909"
+	height="484"
+	srcset="/p/ctfshow-pwn-writeup/7_hu_6dedf0753937e2ce.png 480w, /p/ctfshow-pwn-writeup/7_hu_4bed3d833e192498.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="187"
+		data-flex-basis="450px"
+	
+></p>
+<p>看到这里有个疑问，为什么system有这么大威力？，这次system里边是一个/bin/sh的软链接，很类似我们的文件地址</p>
+<blockquote class="alert alert-note">
+    <blockquote>
+<p><code>system(&quot;/bin/sh&quot;);</code> 是漏洞利用中获取系统 shell 的核心操作，其工作原理涉及<strong>函数调用</strong>、<strong>系统调用</strong>和<strong>进程创建</strong>三个层次，本质是通过标准库函数 <code>system</code> 启动一个 <code>/bin/sh</code> 进程（即命令行解释器），让攻击者获得交互权限。</p></blockquote></blockquote>
+<p><code>system</code> 是 C 标准库（libc）中的函数，原型为：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">system</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">command</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote class="alert alert-error">
+    <blockquote>
+<p>它的功能是<strong>执行参数 <code>command</code> 指向的字符串作为系统命令</strong>，相当于在终端中输入该命令并执行。</p></blockquote></blockquote>
+<p>system()函数先fork一个子进程，在这个子进程中调用/bin/sh -c来执行command指定的命令。/bin/sh在系统中一般是个软链接，指向dash或者bash等常用的shell，-c选项是告诉shell从字符串command中读取要执行的命令（shell将扩展command中的任何特殊字符）。父进程则调用waitpid()函数来为变成僵尸的子进程收尸，获得其结束状态，然后将这个结束状态返回给system()函数的调用者。</p>
+<blockquote class="alert alert-note">
+    <blockquote>
+<p><code>system(&quot;/bin/sh&quot;)</code> 的工作原理可简化为：
+<strong>通过 <code>system</code> 函数创建子进程 → 子进程执行 <code>/bin/sh</code> 程序 → 启动交互式 shell 环境</strong>。</p>
+<p>这也是漏洞利用中最常用的<strong>获取权限</strong>的方式 —— 无论通过栈溢出、ROP 还是 ret2libc，最终目标都是让程序执行这条语句（或等效的系统调用）。</p></blockquote></blockquote>
+<h3 id="pwn_003">PWN_003
+</h3><p>题目： <a class="link" href="PWN_003" >PWN_003</a> 哪一个函数才能读取flag？</p>
+<p><img src="/p/ctfshow-pwn-writeup/9.png"
+	width="835"
+	height="485"
+	srcset="/p/ctfshow-pwn-writeup/9_hu_cf2d18ee43fc45c9.png 480w, /p/ctfshow-pwn-writeup/9_hu_4af22d79b2909177.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="172"
+		data-flex-basis="413px"
+	
+></p>
+<p>通过前面的分析，我们可以很明显的看出来选项”6”为我们所需要的后门函数，其他的均不会得到我们所想要的flag，在system函数里面的命令都是在终端执行的，赋予system权限较大，在我所写的文章里，包括PWN入门知识讲解和操作系统都明确指出SYSTEM是与操作系统内核接触的，比Administrators的权限还要稍大。</p>
+<p>直接选6秒了，但除这种送分的，其实还需要搞清运行的逻辑：</p>
+<p><img src="/p/ctfshow-pwn-writeup/10.png"
+	width="1390"
+	height="554"
+	srcset="/p/ctfshow-pwn-writeup/10_hu_c9707c3fe7bf59e8.png 480w, /p/ctfshow-pwn-writeup/10_hu_b592fb61e24a27ee.png 1024w"
+	loading="lazy"
+	
+		alt="IDAx64位程序反编译"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="250"
+		data-flex-basis="602px"
+	
+></p>
+<p>跟进一下menu函数里边：</p>
+<p><img src="/p/ctfshow-pwn-writeup/11.png"
+	width="726"
+	height="280"
+	srcset="/p/ctfshow-pwn-writeup/11_hu_3d734164c38877e4.png 480w, /p/ctfshow-pwn-writeup/11_hu_685776f269a503fb.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="259"
+		data-flex-basis="622px"
+	
+></p>
+<p>回到main跟进一下这个“6”的函数，看看里头是不是真在执行system后门函数：</p>
+<p><img src="/p/ctfshow-pwn-writeup/12.png"
+	width="744"
+	height="240"
+	srcset="/p/ctfshow-pwn-writeup/12_hu_9db861ef6fbcf71d.png 480w, /p/ctfshow-pwn-writeup/12_hu_9d996ee2d6fc5f89.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="310"
+		data-flex-basis="744px"
+	
+></p>
+<p><img src="/p/ctfshow-pwn-writeup/13.png"
+	width="501"
+	height="119"
+	srcset="/p/ctfshow-pwn-writeup/13_hu_b70d12fb710b2ef9.png 480w, /p/ctfshow-pwn-writeup/13_hu_c960f6a7ed96e8b6.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="421"
+		data-flex-basis="1010px"
+	
+></p>
+<p>可以看到，确实是执行了。那么我们也就能得到我们需要的flag。</p>
+<h3 id="pwn_004">PWN_004
+</h3><p>题目： <a class="link" href="PWN_004" >PWN_004</a> 或许需要先得到某个神秘字符</p>
+<p>真够阴间的，啥也不给了，才第几道啊就上强度了。</p>
+<p><img src="/p/ctfshow-pwn-writeup/14.png"
+	width="1060"
+	height="574"
+	srcset="/p/ctfshow-pwn-writeup/14_hu_fb649637a5b6a11b.png 480w, /p/ctfshow-pwn-writeup/14_hu_c8ef954931f877ea.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="184"
+		data-flex-basis="443px"
+	
+></p>
+<p>checksec看看，然后IDA反编译看看：</p>
+<p><img src="/p/ctfshow-pwn-writeup/15.png"
+	width="481"
+	height="159"
+	srcset="/p/ctfshow-pwn-writeup/15_hu_5f0f4805cec82d66.png 480w, /p/ctfshow-pwn-writeup/15_hu_e21b6ee28222ffbe.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="302"
+		data-flex-basis="726px"
+	
+></p>
+<p>64位二进制保护全开&hellip;</p>
+<p><img src="/p/ctfshow-pwn-writeup/16.png"
+	width="753"
+	height="341"
+	srcset="/p/ctfshow-pwn-writeup/16_hu_ca7b56f27f75a918.png 480w, /p/ctfshow-pwn-writeup/16_hu_6ad185fb146bb9a2.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="220"
+		data-flex-basis="529px"
+	
+></p>
+<p>可以看到有几个似曾相识的函数：strcpy（复制函数把xx复制给s1，也可起到赋值的作用）、strcmp（比较函数，对比，判断作用）、execve（）；我曾说过汇编语言的cmp就有比较作用，这也算是类比吧，回想起来的，不过用AI搜一下也行。</p>
+<p>来说下execve吧，上题讲过system函数，这个也应该知道的：</p>
+<p><code>execve</code> 是 Unix/Linux 系统中最核心的<strong>系统调用（system call）</strong> 之一，用于<strong>在当前进程中加载并执行一个新的程序</strong>，替换当前进程的代码、数据和堆栈，实现进程 “变身”。它是所有程序启动和替换的底层基础，包括 <code>system</code> 函数、shell 执行命令等最终都会依赖 <code>execve</code> 完成。</p>
+<p>看到这段代码，大致意思是，让s1等于“CTFshowPWN”这段字符串，然后到if判断语句这进行比较：<strong>如果s1和s2相等</strong>（这里的！不是我们C语言中的“不”的意思啊），就执行execve函数，启动交互权限，从而得到flag。</p>
+<p><img src="/p/ctfshow-pwn-writeup/17.png"
+	width="890"
+	height="506"
+	srcset="/p/ctfshow-pwn-writeup/17_hu_cb606be9be72c140.png 480w, /p/ctfshow-pwn-writeup/17_hu_e8a05d11d9a5f65f.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="175"
+		data-flex-basis="422px"
+	
+></p>
+<p>至此：下一节就开始前置基础了，开始应用<a class="link" href="https://expl0rer.top/p/pwn-1/"  target="_blank" rel="noopener"
+    >PWN-1</a>、<a class="link" href="https://expl0rer.top/p/pwn-2/"  target="_blank" rel="noopener"
+    >PWN-2</a>、<a class="link" href="https://expl0rer.top/p/pwn-3/"  target="_blank" rel="noopener"
+    >PWN-3</a>所学的知识了。</p>
+<h2 id="前置基础">前置基础
+</h2><h3 id="pwn_005">PWN_005
+</h3><p>题目：运行此文件，将得到的字符串以ctfshow{xxxxx}提交。</p>
+<p>如：运行文件后 输出的内容为 Hello_World</p>
+<p>提交的flag值为：ctfshow{Hello_World}</p>
+<p><strong>注：计组原理题型后续的flag中地址字母大写</strong></p>
+<p><a class="link" href="PWN_005%5cWelcome_to_CTFshow" >Welcome_to_CTFshow</a></p>
+<p><a class="link" href="PWN_005%5cWelcome_to_CTFshow.asm" >Welcome_to_CTFshow.asm</a></p>
+<p>Welcome_to_CTFshow.asm文本打开后发现是汇编语言文件：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-nasm" data-lang="nasm"><span class="line"><span class="cl"><span class="k">section</span> <span class="nv">.data</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">msg</span> <span class="nv">db</span> <span class="s">&#34;Welcome_to_CTFshow_PWN&#34;</span><span class="p">,</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">section</span> <span class="nv">.text</span>
+</span></span><span class="line"><span class="cl">    <span class="k">global</span> <span class="nv">_start</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nl">_start:</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">; 立即寻址方式</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">mov</span> <span class="nb">eax</span><span class="p">,</span> <span class="mi">11</span>         <span class="c1">; 将11赋值给eax</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">add</span> <span class="nb">eax</span><span class="p">,</span> <span class="mi">114504</span>     <span class="c1">; eax加上114504</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">sub</span> <span class="nb">eax</span><span class="p">,</span> <span class="mi">1</span>          <span class="c1">; eax减去1</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">; 寄存器寻址方式</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">mov</span> <span class="nb">ebx</span><span class="p">,</span> <span class="mh">0x36d</span>      <span class="c1">; 将0x36d赋值给ebx</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">mov</span> <span class="nb">edx</span><span class="p">,</span> <span class="nb">ebx</span>        <span class="c1">; 将ebx的值赋值给edx</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">; 直接寻址方式</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">mov</span> <span class="nb">ecx</span><span class="p">,</span> <span class="nv">msg</span>      <span class="c1">; 将msg的地址赋值给ecx</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">; 寄存器间接寻址方式</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">mov</span> <span class="nb">esi</span><span class="p">,</span> <span class="nv">msg</span>        <span class="c1">; 将msg的地址赋值给esi</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">mov</span> <span class="nb">eax</span><span class="p">,</span> <span class="p">[</span><span class="nb">esi</span><span class="p">]</span>      <span class="c1">; 将esi所指向的地址的值赋值给eax</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">; 寄存器相对寻址方式</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">mov</span> <span class="nb">ecx</span><span class="p">,</span> <span class="nv">msg</span>        <span class="c1">; 将msg的地址赋值给ecx</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">add</span> <span class="nb">ecx</span><span class="p">,</span> <span class="mi">4</span>          <span class="c1">; 将ecx加上4</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">mov</span> <span class="nb">eax</span><span class="p">,</span> <span class="p">[</span><span class="nb">ecx</span><span class="p">]</span>      <span class="c1">; 将ecx所指向的地址的值赋值给eax</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">; 基址变址寻址方式</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">mov</span> <span class="nb">ecx</span><span class="p">,</span> <span class="nv">msg</span>        <span class="c1">; 将msg的地址赋值给ecx</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">mov</span> <span class="nb">edx</span><span class="p">,</span> <span class="mi">2</span>          <span class="c1">; 将2赋值给edx</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">mov</span> <span class="nb">eax</span><span class="p">,</span> <span class="p">[</span><span class="nb">ecx</span> <span class="o">+</span> <span class="nb">edx</span><span class="o">*</span><span class="mi">2</span><span class="p">]</span>  <span class="c1">; 将ecx+edx*2所指向的地址的值赋值给eax</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">; 相对基址变址寻址方式</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">mov</span> <span class="nb">ecx</span><span class="p">,</span> <span class="nv">msg</span>        <span class="c1">; 将msg的地址赋值给ecx</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">mov</span> <span class="nb">edx</span><span class="p">,</span> <span class="mi">1</span>          <span class="c1">; 将1赋值给edx</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">add</span> <span class="nb">ecx</span><span class="p">,</span> <span class="mi">8</span>          <span class="c1">; 将ecx加上8</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">mov</span> <span class="nb">eax</span><span class="p">,</span> <span class="p">[</span><span class="nb">ecx</span> <span class="o">+</span> <span class="nb">edx</span><span class="o">*</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">6</span><span class="p">]</span>  <span class="c1">; 将ecx+edx*2-6所指向的地址的值赋值给eax</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">; 输出字符串</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">mov</span> <span class="nb">eax</span><span class="p">,</span> <span class="mi">4</span>          <span class="c1">; 系统调用号4代表输出字符串</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">mov</span> <span class="nb">ebx</span><span class="p">,</span> <span class="mi">1</span>          <span class="c1">; 文件描述符1代表标准输出</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">mov</span> <span class="nb">ecx</span><span class="p">,</span> <span class="nv">msg</span>        <span class="c1">; 要输出的字符串的地址</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">mov</span> <span class="nb">edx</span><span class="p">,</span> <span class="mi">22</span>         <span class="c1">; 要输出的字符串的长度</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">int</span> <span class="mh">0x80</span>            <span class="c1">; 调用系统调用</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">; 退出程序</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">mov</span> <span class="nb">eax</span><span class="p">,</span> <span class="mi">1</span>          <span class="c1">; 系统调用号1代表退出程序</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">xor</span> <span class="nb">ebx</span><span class="p">,</span> <span class="nb">ebx</span>        <span class="c1">; 返回值为0</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">int</span> <span class="mh">0x80</span>            <span class="c1">; 调用系统调用</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>checksec一下这个PWN文件：</p>
+<p><img src="/p/ctfshow-pwn-writeup/18.png"
+	width="560"
+	height="160"
+	srcset="/p/ctfshow-pwn-writeup/18_hu_b88e80be1380d264.png 480w, /p/ctfshow-pwn-writeup/18_hu_edb93148c7d1aae7.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="350"
+		data-flex-basis="840px"
+	
+></p>
+<p>ohoh这个保护全关的！IDA的x32位</p>
+<p><img src="/p/ctfshow-pwn-writeup/19.png"
+	width="986"
+	height="270"
+	srcset="/p/ctfshow-pwn-writeup/19_hu_5a1e69eadca2a8dd.png 480w, /p/ctfshow-pwn-writeup/19_hu_94c08c2f6f98fd2d.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="365"
+		data-flex-basis="876px"
+	
+></p>
+<p>这个没main函数，那我们回看那段汇编语言asm，这段汇编语言更像是在帮助我们了解汇编语言的逻辑语法规则的，在<a class="link" href="https://expl0rer.top/p/pwn-1/"  target="_blank" rel="noopener"
+    >PWN-1</a>文章中就有讲过汇编语言，这里就直接跳过详解</p>
+<p>这题开始就有点变样了，“Welcome_to_CTFshow.asm”这文件是一个存放汇编语言的文本文件，需要运行一下转换成像exe这样的可执行文件，在PWN-1讲过elf文件：</p>
+<blockquote class="alert alert-note">
+    <blockquote>
+<p>将汇编语言（.asm）文件转换为可执行文件，需要经过<strong>汇编（Assemble）</strong> 和<strong>链接（Link）</strong> 两个核心步骤.</p></blockquote></blockquote>
+<p>在Kali/Linux上下载nasm编辑器：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt install nasm
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后下载ld链接器（通常自带）：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt update <span class="o">&amp;&amp;</span> sudo apt install binutils
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>汇编转换：将 .asm 转换为目标文件（.obj 或 .o）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">nasm -f elf Welcome_to_CTFshow.asm
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>汇编生成可执行文件：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ld -m elf_i386 -s -o Welcome_to_CTFshow1 Welcome_to_CTFshow.o
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>（Welcome_to_CTFshow1是可执行文件）</p>
+<p>我的建议汇编转换和生成可执行文件的过程都在Kali/Linux/Ubuntu上，比较方便，windows下载比较麻烦。</p>
+<p>生成这个可执行文件之后，直接运行就能得到输出结果了，按照题目要求，加个{}包皮去提交就好了。</p>
+<p><img src="/p/ctfshow-pwn-writeup/20.png"
+	width="765"
+	height="230"
+	srcset="/p/ctfshow-pwn-writeup/20_hu_9d3cd65ccf046d84.png 480w, /p/ctfshow-pwn-writeup/20_hu_f0e09656aebee87e.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="332"
+		data-flex-basis="798px"
+	
+></p>
+<p><img src="/p/ctfshow-pwn-writeup/21.png"
+	width="1040"
+	height="295"
+	srcset="/p/ctfshow-pwn-writeup/21_hu_96a8674a27a83293.png 480w, /p/ctfshow-pwn-writeup/21_hu_adca9e8247769340.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="352"
+		data-flex-basis="846px"
+	
+></p>
+<h3 id="pwn_006">PWN_006
+</h3><p>题目：立即寻址方式结束后eax寄存器的值为？</p>
+<p><a class="link" href="PWN_006%5cWelcome_to_CTFshow" >Welcome_to_CTFshow</a></p>
+<p><a class="link" href="PWN_006%5cWelcome_to_CTFshow.asm" >Welcome_to_CTFshow.asm</a></p>
+<p>按照PWN-005那样去转换生成这个可执行文件</p>
+<blockquote>
+<p>汇编转换：将 .asm 转换为目标文件（.obj 或 .o）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">nasm -f elf Welcome_to_CTFshow.asm
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>汇编生成可执行文件：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ld -m elf_i386 -s -o Welcome_to_CTFshow1 Welcome_to_CTFshow.o
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>（Welcome_to_CTFshow1是可执行文件）</p></blockquote>
+<p><img src="/p/ctfshow-pwn-writeup/22.png"
+	width="618"
+	height="155"
+	srcset="/p/ctfshow-pwn-writeup/22_hu_38c3a83cb1d6b3d2.png 480w, /p/ctfshow-pwn-writeup/22_hu_15cc2bc9e2e15087.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="398"
+		data-flex-basis="956px"
+	
+></p>
+<p>Welcome_to_CTFshow_PWN???是flag，错了，题目是<strong>立即寻址</strong>方式结束后<strong>eax寄存器的值</strong>为？</p>
+<p>那就是得把这个转换出的可执行文件放到IDA上，不过之前记得checksec一下看看是x32还是x64位哦&hellip;</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-nasm" data-lang="nasm"><span class="line"><span class="cl"><span class="c1">; 立即寻址方式</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">mov</span> <span class="nb">eax</span><span class="p">,</span> <span class="mi">11</span>        <span class="c1">; 将11赋值给eax</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">add</span> <span class="nb">eax</span><span class="p">,</span> <span class="mi">114504</span>    <span class="c1">; eax加上114504</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">sub</span> <span class="nb">eax</span><span class="p">,</span> <span class="mi">1</span>         <span class="c1">; eax减去1</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/p/ctfshow-pwn-writeup/23.png"
+	width="1153"
+	height="151"
+	srcset="/p/ctfshow-pwn-writeup/23_hu_d9da713c30313d8.png 480w, /p/ctfshow-pwn-writeup/23_hu_9162e9b7e00f4ccc.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="763"
+		data-flex-basis="1832px"
+	
+></p>
+<p>那就加减法咯：11+114504-1=114514</p>
+<p>ctfshow{114514}</p>
+<h3 id="pwn_007">PWN_007
+</h3><p>题目：<strong>寄存器寻址方式</strong>结束后<code>edx寄存器</code>的值为？</p>
+<p><a class="link" href="PWN_007%5cWelcome_to_CTFshow" >Welcome_to_CTFshow</a></p>
+<p><a class="link" href="PWN_007%5cWelcome_to_CTFshow.asm" >Welcome_to_CTFshow.asm</a></p>
+<p>按照上述方法去得出可执行文件，放入IDA：</p>
+<p><img src="/p/ctfshow-pwn-writeup/24.png"
+	width="985"
+	height="95"
+	srcset="/p/ctfshow-pwn-writeup/24_hu_92bd39fab506337a.png 480w, /p/ctfshow-pwn-writeup/24_hu_75d2f4fa5f54ead5.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="1036"
+		data-flex-basis="2488px"
+	
+></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-nasm" data-lang="nasm"><span class="line"><span class="cl"><span class="c1">; 寄存器寻址方式</span>
+</span></span><span class="line"><span class="cl"><span class="nf">mov</span> <span class="nb">ebx</span><span class="p">,</span> <span class="mh">0x36d</span> <span class="c1">; 将0x36d赋值给ebx</span>
+</span></span><span class="line"><span class="cl"><span class="nf">mov</span> <span class="nb">edx</span><span class="p">,</span> <span class="nb">ebx</span> <span class="c1">; 将ebx的值赋值给edx</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>所以ctfshow{0x36D}</p>
+<h3 id="pwn_008">PWN_008
+</h3><p>题目：直接寻址方式结束后ecx寄存器的值为？</p>
+<p><a class="link" href="..%5c..%5c..%5c..%5c..%5cLegion22%5cCTF-CTFshow%e7%a7%81%e6%95%99-PWN%5c02_%e5%89%8d%e7%bd%ae%e5%9f%ba%e7%a1%80%5cpwn_008%5cWelcome_to_CTFshow" >Welcome_to_CTFshow</a></p>
+<p><a class="link" href="..%5c..%5c..%5c..%5c..%5cLegion22%5cCTF-CTFshow%e7%a7%81%e6%95%99-PWN%5c02_%e5%89%8d%e7%bd%ae%e5%9f%ba%e7%a1%80%5cpwn_008%5cWelcome_to_CTFshow.asm" >Welcome_to_CTFshow.asm</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-nasm" data-lang="nasm"><span class="line"><span class="cl"><span class="c1">; 直接寻址方式</span>
+</span></span><span class="line"><span class="cl"><span class="nf">mov</span> <span class="nb">ecx</span><span class="p">,</span> <span class="p">[</span><span class="nv">msg</span><span class="p">]</span> <span class="c1">; 将msg的地址赋值给ecx</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>当你编译后发现找不到地址[msg]，然后我们倒回来找题目的Welcome_to_CTFshow文件，用IDA：</p>
+<p><img src="/p/ctfshow-pwn-writeup/25.png"
+	width="721"
+	height="25"
+	srcset="/p/ctfshow-pwn-writeup/25_hu_5372def4240b6f53.png 480w, /p/ctfshow-pwn-writeup/25_hu_1d2087bdde9824cc.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="2884"
+		data-flex-basis="6921px"
+	
+></p>
+<p>故flag:ctfshow{0x80490E8}</p>
+<p>其实不用去进行编译的，在题目给的文件就能做，编译出来的其实就是题目给的文件。</p>
+<h3 id="pwn_009">PWN_009
+</h3><p>题目：<strong>寄存器间接寻址</strong>方式结束后eax寄存器的值为？</p>
+<p><a class="link" href="..%5c..%5c..%5c..%5c..%5cLegion22%5cCTF-CTFshow%e7%a7%81%e6%95%99-PWN%5c02_%e5%89%8d%e7%bd%ae%e5%9f%ba%e7%a1%80%5cpwn_009%5cWelcome_to_CTFshow" >Welcome_to_CTFshow</a></p>
+<p><a class="link" href="..%5c..%5c..%5c..%5c..%5cLegion22%5cCTF-CTFshow%e7%a7%81%e6%95%99-PWN%5c02_%e5%89%8d%e7%bd%ae%e5%9f%ba%e7%a1%80%5cpwn_009%5cWelcome_to_CTFshow.asm" >Welcome_to_CTFshow.asm</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-nasm" data-lang="nasm"><span class="line"><span class="cl"><span class="c1">; 寄存器间接寻址方式</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">mov</span> <span class="nb">esi</span><span class="p">,</span> <span class="nv">msg</span>        <span class="c1">; 将msg的地址赋值给esi</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">mov</span> <span class="nb">eax</span><span class="p">,</span> <span class="p">[</span><span class="nb">esi</span><span class="p">]</span>      <span class="c1">; 将esi所指向的地址的值赋值给eax</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/p/ctfshow-pwn-writeup/26.png"
+	width="650"
+	height="175"
+	srcset="/p/ctfshow-pwn-writeup/26_hu_db95f2c70775bfb6.png 480w, /p/ctfshow-pwn-writeup/26_hu_6e7577b16306137d.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="371"
+		data-flex-basis="891px"
+	
+></p>
+<p>不是80490E8哈别被误导了，这是<strong>虚拟地址</strong>哦</p>
+<p>点击跟进：</p>
+<p><img src="/p/ctfshow-pwn-writeup/27.png"
+	width="659"
+	height="25"
+	srcset="/p/ctfshow-pwn-writeup/27_hu_2f879014412c83d2.png 480w, /p/ctfshow-pwn-writeup/27_hu_a9abfa63d7183e7a.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="2636"
+		data-flex-basis="6326px"
+	
+></p>
+<p><strong><code>dd 636C6557h</code></strong>：<code>dd</code> 是汇编指令中的伪操作符，意为 “定义双字（define double word）”，表示在当前地址处存放一个 4 字节的数值。这里存放的数值是 <code>636C6557h</code>（十六进制）。</p>
+<p>flag:ctfshow{0x636C6557}</p>
+<h3 id="pwn_010">PWN_010
+</h3><p>题目：<strong>寄存器相对寻址</strong>方式结束后eax寄存器的值为？</p>
+<p><a class="link" href="PWN_010%5cWelcome_to_CTFshow" >Welcome_to_CTFshow</a></p>
+<p><a class="link" href="PWN_010%5cWelcome_to_CTFshow.asm" >Welcome_to_CTFshow.asm</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-nasm" data-lang="nasm"><span class="line"><span class="cl"><span class="c1">; 寄存器相对寻址方式</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">mov</span> <span class="nb">ecx</span><span class="p">,</span> <span class="nv">msg</span>        <span class="c1">; 将msg的地址赋值给ecx</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">add</span> <span class="nb">ecx</span><span class="p">,</span> <span class="mi">4</span>          <span class="c1">; 将ecx加上4</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">mov</span> <span class="nb">eax</span><span class="p">,</span> <span class="p">[</span><span class="nb">ecx</span><span class="p">]</span>      <span class="c1">; 将ecx所指向的地址的值赋值给eax</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/p/ctfshow-pwn-writeup/28.png"
+	width="845"
+	height="154"
+	srcset="/p/ctfshow-pwn-writeup/28_hu_e162f950e4f701a0.png 480w, /p/ctfshow-pwn-writeup/28_hu_fc64a86acf95c0c7.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="548"
+		data-flex-basis="1316px"
+	
+></p>
+<p>然后我们跟进看一下地址：</p>
+<p><img src="/p/ctfshow-pwn-writeup/29.png"
+	width="770"
+	height="110"
+	srcset="/p/ctfshow-pwn-writeup/29_hu_8e18458aaf2629b0.png 480w, /p/ctfshow-pwn-writeup/29_hu_265416ee1eefcac9.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="700"
+		data-flex-basis="1680px"
+	
+></p>
+<p>也就是这里将msg的地址（0x80490E8）+ 4 处所执向的地址的值赋给eax</p>
+<p>4是十进制的，地址是16进制的，记得转换一下：</p>
+<p>hex(0x80490E8+4)&ndash;&gt; 080490EC</p>
+<p>对应地址得值是ome_to_CTFshow_PWN</p>
+<p>故flag:ctfshow{ome_to_CTFshow_PWN}</p>
 
 </section>
 
@@ -1044,7 +1808,7 @@ unicode: "ece7"
 <section class="wordcount">
   <div class="wordcount-row">
     <p>博主发布了7篇文章  ||</p>
-    <p>总共56.79k 字</p>
+    <p>总共61.51k 字</p>
   </div>
 </section>
         
