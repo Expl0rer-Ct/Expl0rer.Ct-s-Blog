@@ -10,7 +10,7 @@
 <meta property='og:description' content="我的学习记录">
 <meta property='og:url' content='https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/'>
 <meta property='og:site_name' content='Expl0rer.Ct'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-07-31T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-08-28T09:06:26&#43;00:00'/><meta property='og:image' content='https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/%E5%B0%81%E9%9D%A2.jpg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-07-31T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-08-28T13:54:15&#43;00:00'/><meta property='og:image' content='https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/%E5%B0%81%E9%9D%A2.jpg' />
 <meta name="twitter:title" content="第一阶段">
 <meta name="twitter:description" content="我的学习记录"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/%E5%B0%81%E9%9D%A2.jpg' />
@@ -761,8 +761,12 @@ unicode: "ece7"
     </li>
     <li><a href="#网络安全基础">网络安全基础</a>
       <ol>
-        <li><a href="#计算机网络">计算机网络</a></li>
-        <li><a href="#网络协议安全">网络协议安全</a></li>
+        <li><a href="#计算机网络">计算机网络</a>
+          <ol>
+            <li></li>
+            <li><a href="#网络协议安全">网络协议安全</a></li>
+          </ol>
+        </li>
       </ol>
     </li>
     <li><a href="#web安全基础">Web安全基础</a>
@@ -1711,22 +1715,494 @@ $y$j9T$zY1oKFxJlTgP2WcJhzbNl1$xhkUmB8R9fzETc/1kgL/nOPcWFTvhn17clxXCgyFjpC：加�
     <blockquote>
 <p>法律问题：未经授权对系统进行密码破解是违法行为，仅可在自己拥有或获得明确许可的系统上使用。</p></blockquote></blockquote>
 <h2 id="网络安全基础">网络安全基础
-</h2><h3 id="计算机网络">计算机网络
-</h3><p>计算机网络基础</p>
-<p>OS与TCP网络模型</p>
-<p>TCO与IP协议</p>
-<p>交换机与路由器</p>
-<p>虚拟专用网络</p>
-<p>内网与外网</p>
-<p>常见名词</p>
-<p>DNS、域名、URL、CDN、代理</p>
-<h3 id="网络协议安全">网络协议安全
-</h3><p>HTTP与HHTPS</p>
-<p>Wireshark与Tcpdump</p>
-<p>Burpsuite工具</p>
-<p>MITM中间人攻击</p>
-<p>ARP欺诈攻击</p>
-<p>僵尸网络与DDOS</p>
+</h2><p><a class="link" href="%e8%ae%a1%e7%ae%97%e6%9c%ba%e7%bd%91%e7%bb%9c%e4%bf%9d%e5%a7%86%e7%ba%a7%e8%b5%84%e6%96%99.pdf" >计算机网络保姆级资料</a></p>
+<h3 id="计算机网络">计算机网络
+</h3><h5 id="计算机网络基础">计算机网络基础
+</h5><p>计算机网络是一组自治计算机互连的集合；</p>
+<p>一个完整的计算机网络系统主要由<code>硬件</code>、<code>软件</code>和<code>协议</code>三大部分组成，缺一不可。</p>
+<p><img src="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/41.png"
+	width="835"
+	height="316"
+	srcset="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/41_hu_a64ec6f02bbc0b2d.png 480w, /p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/41_hu_83eb16a3195eae00.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="264"
+		data-flex-basis="634px"
+	
+></p>
+<p>计算机网络网络的基本功能</p>
+<p>• 资源共享；</p>
+<p>• 分布式处理与负载均衡；</p>
+<p>• 综合信息服务；</p>
+<p>协议：实现通信所需要的一些约定，为使网内各计算机之间的通信可靠有效,通信双方必须共同遵守的规则和约定称为通信协议。</p>
+<p><img src="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/42.png"
+	width="905"
+	height="414"
+	srcset="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/42_hu_b61ecf8eabc78816.png 480w, /p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/42_hu_d7a2503398947418.png 1024w"
+	loading="lazy"
+	
+		alt="层次模型"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="218"
+		data-flex-basis="524px"
+	
+></p>
+<p>伴随着计算机网络的飞跃发展，各大厂商根据自己的协议生产出了不同的硬件和软件。为了实现网络设备间的互相通讯，ISO和IEEE相继提出了OSI参考模型及其TCP/IP模型。</p>
+<p>层次模型：计算机网络是一个非常复杂的系统，分层可以将庞大而复杂的问题，转化为若干较小的局部问题，而这些较小的局部问题就比较易于研究和处理。</p>
+<h5 id="osi与tcpip网络模型">OSI与TCP、IP网络模型
+</h5><p>OSI参考模型**定义了网络中设备所遵守的层次结构</p>
+<p>分层结构的优点：开放的标准化接口；多厂商兼容；易于理解、学习和更新协议标准；实现模块化工程，降低了开发实现的复杂度；便于故障排除。</p>
+<p><img src="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/43.png"
+	width="835"
+	height="410"
+	srcset="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/43_hu_1e12236992db7856.png 480w, /p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/43_hu_faea615d009d3cc7.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="203"
+		data-flex-basis="488px"
+	
+></p>
+<p><img src="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/44.png"
+	width="1353"
+	height="615"
+	srcset="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/44_hu_ebe86cae20b86aac.png 480w, /p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/44_hu_814c1f6cdbf410e2.png 1024w"
+	loading="lazy"
+	
+		alt="模型"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="220"
+		data-flex-basis="528px"
+	
+></p>
+<h5 id="tcpudp传输层">TCP/UDP&ndash;传输层
+</h5><p>TCP工作机制：三次握手建立连接，四次挥手断开连接。</p>
+<blockquote class="alert alert-note">
+    <blockquote>
+<p>TCP(Transmission Control Protocol 传输控制协议)是一种面向连接的、可靠的。</p></blockquote></blockquote>
+<p>UDP协议：</p>
+<p>用户数据报协议，无连接的、不可靠的、基于数据报的传输层通信协议。</p>
+<p>用于数据传输控制的协议，对数据的可靠性、安全没有保证，不需要连接就可以发送。</p>
+<p><strong>总结：</strong></p>
+<p>tcp是面向连接的，udp是面向无连接</p>
+<p>tcp的报文的结构相对要比udp更复杂</p>
+<p>tcp是基于字节流（0、1），udp是基于数据报</p>
+<p>tcp会保证数据的正确性、udp不能，会存在丢包的现象</p>
+<h5 id="交换机与路由器">交换机与路由器
+</h5><p><strong>交换机</strong>：</p>
+<p>交换机按照通信两端传输信息的需要，用人工或设备自动完成的方法，把要传输的信息送到符合要求的相应路由上的技术统称。它能够为接入交换机的任意两个网络节点提供独享的电信号通路。</p>
+<p><img src="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/45.png"
+	width="692"
+	height="342"
+	srcset="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/45_hu_e121bc5bc421b232.png 480w, /p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/45_hu_6865682bbbf29ec7.png 1024w"
+	loading="lazy"
+	
+		alt="交换机"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="202"
+		data-flex-basis="485px"
+	
+></p>
+<p><strong>交换机的工作方式</strong>:</p>
+<p><strong>数据包转发</strong></p>
+<p>交换机接收到数据包后，会依据数据包中的目的 MAC 地址来决定将数据包转发到哪个端口。具体过程是，交换机查询自身的 MAC 地址表 ，如果目的 MAC 地址在表中有对应的端口记录，就将数据包转发到该端口；若 MAC 地址表中没有匹配的记录，交换机则会采用泛洪的方式，将数据包转发到除接收端口外的其他所有端口 。例如，在一个办公室网络中，当某台计算机 A 向计算机 B 发送数据时，交换机先查找 MAC 地址表，若找到计算机 B 对应的端口，就把数据包精准发到该端口；若没找到，就会把数据包发到其他所有连接设备的端口，直到计算机 B 接收到并做出回应，交换机也就学习到了计算机 B 的 MAC 地址和对应端口。</p>
+<p><strong>MAC 地址学习</strong></p>
+<p>交换机刚启动时，MAC 地址表是空的。在工作过程中，它会学习连接到各个端口设备的 MAC 地址。当交换机从某个端口接收到一个数据包时，它会记录下数据包源 MAC 地址与该接收端口的对应关系，并将其添加到 MAC 地址表中 。随着时间推移，交换机通过不断接收来自不同设备的数据包，逐渐建立起完整的 MAC 地址表。比如，新接入网络的打印机发送了一个数据包，交换机就会记录下打印机的 MAC 地址和它所连接的端口，下次再有发往该打印机的数据，就能直接转发。</p>
+<p><strong>高速数据传输</strong></p>
+<p>交换机内部采用了并行处理技术，能够同时处理多个端口之间的数据传输，具备很高的数据传输速率。交换机为每个端口提供独立的带宽，端口之间的数据传输可以并行进行，不会产生冲突，这大大提高了网络的整体性能 。比如在一个有 24 个端口的百兆以太网交换机中，每个端口都可以提供 100Mbps 的带宽，不同端口之间的数据传输可以同时进行，极大地提升了数据传输效率，满足了网络中大量设备同时高速传输数据的需求。</p>
+<p><strong>路由器</strong>：</p>
+<p>路由器是一种用于连接多个逻辑上分开的网络的</p>
+<p>设备，它能够在多网络互联环境中建立灵活的连接，</p>
+<p>实现不同网络之间的数据传输</p>
+<p><img src="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/46.png"
+	width="762"
+	height="305"
+	srcset="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/46_hu_d399aefb81342973.png 480w, /p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/46_hu_72659ef097128452.png 1024w"
+	loading="lazy"
+	
+		alt="路由器"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="249"
+		data-flex-basis="599px"
+	
+></p>
+<p><strong>路由决策</strong></p>
+<p>路由决策是路由器 “判断走哪条路转发数据” 的过程，核心是<strong>依据路由表选择最优路径</strong>，避免数据绕远路或走拥堵的路。</p>
+<p><strong>数据包转发</strong></p>
+<p>路由器的核心作用是<strong>将数据包从一个网络转发到另一个网络</strong>（比如把家里的局域网数据转发到互联网，或把 A 公司的网络数据转发到 B 公司的网络），关键依赖 “IP 地址” 而非交换机的 “MAC 地址”。</p>
+<p><strong>网络安全</strong></p>
+<p>路由器自带基础的安全功能，能阻挡非法访问、保护内部网络，常见手段包括：</p>
+<ol>
+<li><strong>防火墙功能</strong>：
+可配置 “访问控制规则”，比如禁止外部网络直接访问内部的服务器（只允许内部主动访问外部），或限制特定 IP / 端口的访问（比如禁止家里的设备访问危险端口 22、3389）。</li>
+<li><strong>NAT 地址转换</strong>：
+把内部的 “私有 IP”（如 192.168.1.x、10.0.0.x）转换成 “公网 IP”，外部网络只能看到公网 IP，无法直接访问内部的私有 IP 设备，相当于给内部网络加了一层 “隐藏保护”。</li>
+<li><strong>DHCP 地址过滤</strong>：
+只给指定 MAC 地址的设备分配 IP（比如只允许家里的手机、电脑连网，陌生设备即使连了 WiFi 也拿不到 IP，无法访问网络）。</li>
+<li><strong>VPN 功能</strong>：
+企业中常用，员工在外网（比如咖啡厅 WiFi）可通过 “VPN 连接” 加密访问公司内部网络，防止数据被窃取。</li>
+</ol>
+<p><img src="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/47.png"
+	width="1045"
+	height="605"
+	srcset="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/47_hu_2a03c88c283737e2.png 480w, /p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/47_hu_e17d699c813ad9d2.png 1024w"
+	loading="lazy"
+	
+		alt="交换机与路由器"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="172"
+		data-flex-basis="414px"
+	
+></p>
+<p><strong>网络分类</strong></p>
+<p>按照覆盖范围分类</p>
+<p>○局域网（LAN）：局限于较小的地理范围内，如家庭、学校或公司内部的网络。</p>
+<p>○城域网（MAN）：覆盖范围比局域网大，通常覆盖一个城市或地区。</p>
+<p>○广域网（WAN）：覆盖范围广泛，可以跨越多个城市、国家或地区，甚至全球。</p>
+<p><img src="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/48.png"
+	width="963"
+	height="425"
+	srcset="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/48_hu_9bbee665b27cb8a1.png 480w, /p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/48_hu_75b408178da85cc0.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="226"
+		data-flex-basis="543px"
+	
+></p>
+<p><strong>IP地址&ndash;网络层</strong></p>
+<p>IP地址是电子设备（计算机）在互联网上的唯一标识。IP地址分为IPv4和IPv6。IPv4地址由32位二进制组成，采用点分十进制。</p>
+<p>IP主要作用</p>
+<p>标识节点和链路：用唯一的IP地址标识每一个节点;用唯一的IP网络号标识每一个链路。</p>
+<p>寻址和转发：确定节点所在网络的位置，进而确定节点所在的位置;IP路由器选择适当的路径将IP包转发到目的节点。</p>
+<p><strong>IP地址格式表示方法</strong></p>
+<p>IP地址由网络号（包括子网号）和主机号两部分组成。网络位相同的IP地址为同一网段。</p>
+<p><em>网络号</em>用于区分不同的IP网络。</p>
+<p><em>主机号</em>用于标识该网络内的一个IP节点。</p>
+<p><img src="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/49.png"
+	width="986"
+	height="430"
+	srcset="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/49_hu_60e18fb732641d29.png 480w, /p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/49_hu_30391837379e0065.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="229"
+		data-flex-basis="550px"
+	
+></p>
+<p><strong>IP地址分类</strong></p>
+<p>IPv4地址分为A、B、C、D、E 五类，每一类有不同的划分规则：</p>
+<p><img src="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/50.png"
+	width="925"
+	height="506"
+	srcset="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/50_hu_caf5a24c5d3e3b2f.png 480w, /p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/50_hu_ccd51ca83e3a32a5.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="182"
+		data-flex-basis="438px"
+	
+></p>
+<p><strong>一、A 类地址：面向大型网络的 “骨干级” 地址</strong></p>
+<ul>
+<li><strong>核心特征</strong>：
+最高位固定为 “0”，地址结构是「1 字节网络位 + 3 字节主机位」（比如<code>10.0.0.0</code>，前 8 位是网络位，后 24 位是主机位）。</li>
+<li>关键补充：
+<ul>
+<li>地址范围中，<code>1.0.0.0 ~ 126.255.255.255</code> 是合法可用地址，<code>127.0.0.0/8</code> 网段（不止<code>127.0.0.1</code>）均为 “回环地址”，用于本地测试（比如<code>ping 127.0.0.2</code>也能检测本机网络协议栈是否正常）。</li>
+<li>每个网络可容纳 <code>2²⁴ - 2 = 16777214</code> 个主机（减 2 是因为 “网络地址” 如<code>10.0.0.0</code>和 “广播地址” 如<code>10.255.255.255</code>不能分配给主机）。</li>
+</ul>
+</li>
+<li><strong>典型场景</strong>：早期用于大型企业、运营商骨干网络（比如某省的电信核心网络可能用一个 A 类地址段）。</li>
+</ul>
+<p><strong>二、B 类地址：适配中型网络的 “区域级” 地址</strong></p>
+<ul>
+<li><strong>核心特征</strong>：
+最高两位固定为 “10”，地址结构是「2 字节网络位 + 2 字节主机位」（比如<code>172.16.0.0</code>，前 16 位是网络位，后 16 位是主机位）。</li>
+<li>关键补充：
+<ul>
+<li>可容纳 <code>2¹⁶ - 2 = 65534</code> 个主机，适合中型园区、高校或集团公司（比如一所大学的校园网可能用一个 B 类地址段，覆盖所有教学楼、宿舍的设备）。</li>
+<li>私有 B 类地址段：<code>172.16.0.0 ~ 172.31.255.255</code>（共 16 个网段），常用于企业内部局域网，不对外网路由。</li>
+</ul>
+</li>
+<li><strong>典型场景</strong>：中型企业、高校校园网、城市级政务内网。</li>
+</ul>
+<p><strong>三、C 类地址：服务小型网络的 “终端级” 地址</strong></p>
+<ul>
+<li><strong>核心特征</strong>：
+最高三位固定为 “110”，地址结构是「3 字节网络位 + 1 字节主机位」（比如<code>192.168.1.0</code>，前 24 位是网络位，后 8 位是主机位）。</li>
+<li>关键补充：
+<ul>
+<li>每个网络仅能容纳 <code>2⁸ - 2 = 254</code> 个主机，适合小型办公室、家庭局域网（比如家里的路由器默认用<code>192.168.1.0/24</code>，最多连 254 台设备）。</li>
+<li>私有 C 类地址段：<code>192.168.0.0 ~ 192.168.255.255</code>（共 256 个网段），是最常用的内网地址（路由器、摄像头、智能家居设备基本都用这类地址）。</li>
+</ul>
+</li>
+<li><strong>典型场景</strong>：家庭 WiFi、小型公司、商铺的局域网。</li>
+</ul>
+<p><strong>四、D 类地址：专注 “一对多” 的组播地址</strong></p>
+<ul>
+<li><strong>核心特征</strong>：
+最高四位固定为 “1110”，地址范围是<code>224.0.0.0 ~ 239.255.255.255</code>，<strong>没有网络位和主机位之分</strong>，直接代表一个 “组播组”。</li>
+<li>关键补充：
+<ul>
+<li>不是给单个设备分配，而是给一组设备 “共同订阅”（比如设备加入<code>224.0.0.1</code>组播组，就能接收发给这个组的所有数据）。</li>
+<li>常见用途：视频会议（多人同时接收同一视频流，避免重复发送浪费带宽）、安防监控（多个监控屏幕接收同一摄像头的画面）、IPTV（机顶盒接收电视台的组播信号）。</li>
+</ul>
+</li>
+<li><strong>特殊地址</strong>：<code>224.0.0.1</code>是 “所有主机组播地址”（同一网段内所有设备都能接收），<code>224.0.0.5</code>是 OSPF 路由协议专用组播地址。</li>
+</ul>
+<p><strong>五、E 类地址：预留的 “科研级” 地址</strong></p>
+<ul>
+<li><strong>核心特征</strong>：
+最高四位固定为 “1111”，地址范围是<code>240.0.0.0 ~ 255.255.255.255</code>，<strong>目前没有公开商用</strong>，仅用于科研实验、协议测试（比如未来可能的 IPv4 扩展技术研发）。</li>
+<li><strong>注意</strong>：<code>255.255.255.255</code>是 “全局广播地址”，不属于 E 类的常规用途，发送到这个地址的数据会被同一网段所有设备接收（比如路由器的 DHCP 广播）。</li>
+</ul>
+<h5 id="内网与外网">内网与外网
+</h5><ul>
+<li>公网地址是由互联网注册机构进行分配的，这些地址在Internet上是唯一的，并且具有全球可达性。公网地址用于Internet上的设备，允许设备在Internet上进行通信。</li>
+<li>私网地址则是由局域网管理员自行分配的，它们只在局域网内部具有唯一性。私网地址则仅限于局域网内部使用，不能直接在Internet上访问。这种设计有助于保护内部网络的安全性，防止内部网络与公共网络之间的冲突。</li>
+</ul>
+<p>子网掩码：用来确定IP地址的网络位，网络号的位都置1，主机号都置0。</p>
+<p><strong>内网（局域网，LAN）</strong></p>
+<p>定义：内网是指在某一特定区域内由多台计算机以及网络设备构成的网络，如校园网、政府网、企业内网等。</p>
+<p>范围：内网的覆盖范围相对较小，通常仅限于某一建筑物、园区或公司内部，方圆几公里以内。</p>
+<p><strong>外网（广域网，WAN）</strong></p>
+<p>定义：外网又称广域网、公网，是连接不同地区局域网或城域网计算机通信的远程网。</p>
+<p>范围：外网的覆盖范围广泛，可以跨越城市、国家甚至全球，提供远距离通信服务。</p>
+<p><img src="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/51.png"
+	width="558"
+	height="286"
+	srcset="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/51_hu_69ee3c20147ba542.png 480w, /p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/51_hu_278a3650c03b7ba7.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="195"
+		data-flex-basis="468px"
+	
+></p>
+<p><strong>虚拟专用网络（（Virtual Private Network，VPN））</strong></p>
+<p>定义：是指依靠ISP或其他NSP在公用网络基础设施之上构建的专用的安全数据通信网络，只不过这个专线网络是逻辑上的而不是物理的，所以称为虚拟专用网。</p>
+<p>虚拟：用户不再需要拥有实际的长途数据线路，而是使用公共网络资源建立自己的私有网络。</p>
+<p>专用：虚拟出来的网络并非任何连接在公共网络上的用户都能使用，只有经过授权的用户才可以使用。</p>
+<p><img src="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/52.png"
+	width="498"
+	height="359"
+	srcset="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/52_hu_c09e6f5221da56b2.png 480w, /p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/52_hu_c0bbc95b680be5a3.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="138"
+		data-flex-basis="332px"
+	
+></p>
+<h5 id="常见名词">常见名词
+</h5><p><strong>DNS-域名</strong>：由一串用点分隔的名字组成的Internet上某一台计算机或计算机组的名称</p>
+<p>常见的域名有www.baidu.com , <a class="link" href="https://www.taobao.com"  target="_blank" rel="noopener"
+    >www.taobao.com</a> , <a class="link" href="https://www.jd.com"  target="_blank" rel="noopener"
+    >www.jd.com</a> 这些都是域名。</p>
+<p>域名可以在Godaddy、Gandi、Hover、Namesilo、Namecheap等网站注册。</p>
+<p>域名由两个或两个以上的词构成，中间由点号分隔开。最右边的那个词称为顶级域名。</p>
+<p><img src="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/53.png"
+	width="815"
+	height="374"
+	srcset="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/53_hu_688770642d1a5923.png 480w, /p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/53_hu_8a59197a0232489c.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="217"
+		data-flex-basis="522px"
+	
+></p>
+<p><strong>CDN（Content DeliveryNetwork）</strong></p>
+<p>即内容分发网络，CDN的基本思路：是尽可能避开互联网上有可能影响数据传输速度和稳定性的瓶颈和环节，使内容传输的更快、更稳定。</p>
+<p><img src="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/54.png"
+	width="581"
+	height="405"
+	srcset="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/54_hu_12f0207dcffb5708.png 480w, /p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/54_hu_3cc8bd63c8c677ae.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="143"
+		data-flex-basis="344px"
+	
+></p>
+<p><strong>代理</strong></p>
+<p>代理也称网络代理，是一种特殊的网络服务。它允许客户端通过这个服务与服务器进行连接。简单的来说，可以把代理理解为一种网络中间商。</p>
+<p><img src="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/55.png"
+	width="1136"
+	height="561"
+	srcset="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/55_hu_8ceca4b4904fa91a.png 480w, /p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/55_hu_a35528375abed3f0.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="202"
+		data-flex-basis="485px"
+	
+></p>
+<h4 id="网络协议安全">网络协议安全
+</h4><p><strong>HTTP协议(Hyper Text Transfer Protocol)</strong></p>
+<p>它是从WEB服务器传输超文本标记语言(HTML)到本地浏览器的超文本传输协议。</p>
+<p><strong>建立连接</strong>：客户端与服务器之间建立连接。</p>
+<p><strong>发送请求</strong>：客户端向服务器发送请求，请求中包含要访问的资源。</p>
+<p><strong>处理请求</strong>：服务器接收到请求后，根据请求中的信息找到相应的资源，执行相应的处理操作。</p>
+<p><strong>发送响应</strong>：服务器将处理后的结果封装在响应中，并将其发送回客户端。</p>
+<p><strong>关闭连接</strong>：在完成请求-响应周期后，客户端和服务器<strong>之间</strong>的连接可以被关闭。</p>
+<p><img src="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/56.png"
+	width="695"
+	height="311"
+	srcset="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/56_hu_c6f8974e60c47350.png 480w, /p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/56_hu_a3a020ae1ec40d64.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="223"
+		data-flex-basis="536px"
+	
+></p>
+<p><strong>HTTPS</strong> <strong>协议HyperText Transfer Protocol Secure</strong></p>
+<p>是（超文本传输安全协议）的缩写，是一种通过计算机网络进行安全通信的传输协议。</p>
+<p>HTTPS 的主要作用是在不安全的网络上创建一个安全信道，并可在使用适当的加密包和服务器证书可被验证且可被信任时，对窃听和中间人攻击提供合理的防护。</p>
+<p><img src="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/57.png"
+	width="1071"
+	height="375"
+	srcset="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/57_hu_20f39cd1e34d478d.png 480w, /p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/57_hu_3411a050f3e9ba53.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="285"
+		data-flex-basis="685px"
+	
+></p>
+<p>关于SSL证书，这个地方可以用我的博客去进做例子：</p>
+<p><a class="link" href="https://expl0rer.top/"  target="_blank" rel="noopener"
+    >Expl0rer.Ct1号</a></p>
+<p><a class="link" href="http://8.148.145.201/"  target="_blank" rel="noopener"
+    >Expl0rer.Ct2号</a></p>
+<p>你可以看看1号和2号的区别😄（温馨提醒：打开网站后看左上角）</p>
+<p><strong>http、https</strong></p>
+<p><em>GET：请求从服务器获取指定资源。这是最常用的方法，用于访问页面。</em></p>
+<p><em>POST：请求服务器接受并处理请求体中的数据，通常用于表单提交。</em></p>
+<p>PUT：请求服务器存储一个资源，并用请求体中的内容替换目标资源的所有内容。</p>
+<p>DELETE：请求服务器删除指定的资源。</p>
+<p>HEAD：与 GET 类似，但不获取资源的内容，只获取响应头信息</p>
+<p><strong>HTTP</strong> **响应头信息：**<a class="link" href="https://expl0rer.top/"  target="_blank" rel="noopener"
+    >https://expl0rer.top/</a></p>
+<h5 id="wireshark与tcpdump">Wireshark与Tcpdump
+</h5><p><strong>Wireshark</strong>是一款开源抓包工具，也被称为网络嗅探器，用于分析网络流量和数据包。适用于Windows环境，也支持其他操作系统。当然它也是CTF流量分析中的常用工具。</p>
+<p><img src="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/wireshark.png"
+	width="32"
+	height="32"
+	srcset="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/wireshark_hu_1892aa4cf0be0a5b.png 480w, /p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/wireshark_hu_7b34d4138d4ffbde.png 1024w"
+	loading="lazy"
+	
+		alt="wireshark"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="100"
+		data-flex-basis="240px"
+	
+></p>
+<p><strong>Tcpdump</strong>是一个命令行格式的网络抓包工具，用于捕获和分析网络数据包。适用于Linux环境，是类UNIX系统下用于网络分析和问题排查的首选工具。</p>
+<p><img src="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/tcpdump.png"
+	width="320"
+	height="248"
+	srcset="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/tcpdump_hu_3e10343628f1b779.png 480w, /p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/tcpdump_hu_8131112e83b3c5ef.png 1024w"
+	loading="lazy"
+	
+		alt="tcpdump"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="129"
+		data-flex-basis="309px"
+	
+></p>
+<h5 id="burpsuite工具">Burpsuite工具
+</h5><p>BurpSuite是一款集成化的<strong>渗透测试</strong>工具，它包含了许多功能，可以帮助安全人员快速完成对web应用程序的渗透测试和攻击。</p>
+<p><img src="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/58.png"
+	width="1266"
+	height="520"
+	srcset="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/58_hu_f4c81a607654c990.png 480w, /p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/58_hu_f009bbdfc5d54a21.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="243"
+		data-flex-basis="584px"
+	
+></p>
+<p>网上有众多的破解版，可以自己去“0元购”&hellip;&hellip;</p>
+<h5 id="mitm中间人攻击">MITM中间人攻击
+</h5><p>MITM（Man-in-the-Middle）中间人攻击是一种网络攻击方式，攻击者通过某种手段将自己插入到通信双方之间，窃取、篡改或者干扰双方的通信内容</p>
+<p>MITM攻击的基本原理是攻击者通过各种技术手段（如ARP欺骗、DNS劫持、Wi-Fi劫持、IP欺骗、SSL/TLS欺骗等），将一台计算机虚拟放置在网络连接中的两台通信计算机之间，这台计算机就称为“中间人”。在这个过程中，攻击者可以截取、查看、篡改、伪造或修改受害者之间的通信数据，以达到窃取敏感信息、篡改数据或实施其他恶意行为的目的。</p>
+<p><img src="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/59.png"
+	width="519"
+	height="324"
+	srcset="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/59_hu_33d3d280ac4532ee.png 480w, /p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/59_hu_f40d19da1ebdbb4d.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="160"
+		data-flex-basis="384px"
+	
+></p>
+<h5 id="arp欺诈攻击">ARP欺诈攻击
+</h5><p>ARP攻击就是通过伪造IP地址和MAC地址实现ARP欺骗，能够在网络中产生大量的ARP通信量，攻击者只要持续不断的发出伪造的ARP响应包就能更改目标主机ARP缓存中的IP-MAC条目，造成网络中断或中间人攻击。</p>
+<p><img src="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/60.png"
+	width="1145"
+	height="473"
+	srcset="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/60_hu_e7de8f9bbd2563a1.png 480w, /p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/60_hu_58a5fcc6315ea3f2.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="242"
+		data-flex-basis="580px"
+	
+></p>
+<h5 id="僵尸网络与ddos">僵尸网络与DDOS
+</h5><p><strong>僵尸网络</strong></p>
+<p>僵尸网络是由黑客集中控制的一群互联网上的计算机。黑客通过各种手段将大量的主机感染僵尸程序，从而在控制者和被感染主机之间形成一对多的控制僵尸网络。</p>
+<p>僵尸网络是一个可控制的网络，由黑客进行控制。这个网络是采用了一定的恶意传播手段形成的；可以一对多的执行相同的恶意命令，因为数量庞大，一个人无法单独。</p>
+<p><strong>DDos攻击</strong></p>
+<p>DDoS攻击(分布式拒绝服务攻击)是一种常见的网络攻击方式，旨在使目标服务器无法正常提供服务，在DDoS攻击中，攻击者会控制大量的计算机或设备，向目标服务器发送大量的请求，使其超出承受范围，导致服务器无法正常响应请求，从而使服务不可用。</p>
+<p>一种常见的DDoS攻击方式是DNS Request Flood攻击。这种攻击既可以针对DNS缓存服务器，又可以针对DNS授权服务器。攻击者通过直接或间接向DNS服务器发送大量不存在的域名解析请求，导致服务器严重超载，无法继续响应正常用户的DNS请求。这种攻击会导致DNS服务器瘫痪，影响正常业务的进行。</p>
+<p><img src="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/61.png"
+	width="655"
+	height="440"
+	srcset="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/61_hu_9479d881f2c589c4.png 480w, /p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/61_hu_7c76e3e9f406823b.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="148"
+		data-flex-basis="357px"
+	
+></p>
 <h2 id="web安全基础">Web安全基础
 </h2><h3 id="web基础">Web基础
 </h3><h4 id="web结构">Web结构
@@ -1973,7 +2449,7 @@ $y$j9T$zY1oKFxJlTgP2WcJhzbNl1$xhkUmB8R9fzETc/1kgL/nOPcWFTvhn17clxXCgyFjpC：加�
 <section class="wordcount">
   <div class="wordcount-row">
     <p>博主发布了7篇文章  ||</p>
-    <p>总共65.02k 字</p>
+    <p>总共72.43k 字</p>
   </div>
 </section>
         

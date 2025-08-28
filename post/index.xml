@@ -7,7 +7,7 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Expl0rer.Ct</copyright>
-        <lastBuildDate>Thu, 28 Aug 2025 09:06:26 +0000</lastBuildDate><atom:link href="https://expl0rer.top/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 28 Aug 2025 13:54:15 +0000</lastBuildDate><atom:link href="https://expl0rer.top/post/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>ctfshow-pwn-writeup</title>
         <link>https://expl0rer.top/p/ctfshow-pwn-writeup/</link>
         <pubDate>Wed, 27 Aug 2025 00:00:00 +0000</pubDate>
@@ -1122,6 +1122,38 @@
 		data-flex-basis=&#34;587px&#34;
 	
 &gt;&lt;/p&gt;
+&lt;p&gt;分别跟进一下real和fake：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/46.png&#34;
+	width=&#34;689&#34;
+	height=&#34;156&#34;
+	srcset=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/46_hu_4f7764fbe823e672.png 480w, https://expl0rer.top/p/ctfshow-pwn-writeup/46_hu_faedb59ceeafafd5.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;fake&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;441&#34;
+		data-flex-basis=&#34;1060px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/47.png&#34;
+	width=&#34;711&#34;
+	height=&#34;189&#34;
+	srcset=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/47_hu_c473fd1e4140dc1a.png 480w, https://expl0rer.top/p/ctfshow-pwn-writeup/47_hu_f4c64f3e30a094f4.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;real&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;376&#34;
+		data-flex-basis=&#34;902px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;解读一下发现一个机制：当v4不等于9时就会执行real函数，这时real会执行&lt;code&gt;echo &#39;flag is here&#39;&amp;gt;/ctfshow_flag&lt;/code&gt;，这个命令将字符串 &amp;lsquo;flag is here&amp;rsquo; 覆盖写入 /ctfshow_flag 文件中。 &amp;gt; 符号表示以覆盖的方式写入文件，如果文件不存在则创建新文件。如果 /ctfshow_flag 文件已经存在，那么该命令会将文件中原有的内容替换为 &amp;lsquo;flag is here&amp;rsquo; 。也就是说你第一次和靶机交互时没输入9，你以后都不得不到flag了，只能重开靶机&amp;hellip;..比较CS吧&amp;hellip;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;echo &#39;flag is here&#39;&amp;gt;&amp;gt;/ctfshow_flag&lt;/code&gt;这个命令将字符串 &amp;lsquo;flag is here&amp;rsquo; &lt;em&gt;&lt;strong&gt;追加&lt;/strong&gt;&lt;/em&gt;写入 /ctfshow_flag 文件中。 &amp;raquo; 符号表示以追加的方式写入文件，如果文件不存在则创建新文件。如果 /ctfshow_flag 文件已经存在，那么该命令会在文件的末尾添加 &amp;lsquo;flag is here&amp;rsquo; 。&lt;/p&gt;
+&lt;p&gt;这两个命令都用于将 &amp;lsquo;flag is here&amp;rsquo; 写入 /ctfshow_flag 文件中，不同之处在于写入方式的不同。第一个命令使用追加方式，在文件末尾添加内容；第二个命令使用覆盖方式，将文件内容替换为新内容。具体使用哪个命令取决于需求和文件操作的预期结果。也就是所假的其实是我们需要的真的，真的反而是假的在远程环境中，我们需要在第一次读到flag，否则后续得到的flag都已经被覆写再追加，真实的flag内容已经没了。&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/45.png&#34;
 	width=&#34;751&#34;
 	height=&#34;315&#34;
@@ -1134,6 +1166,54 @@
 		data-flex-basis=&#34;572px&#34;
 	
 &gt;&lt;/p&gt;
+&lt;h3 id=&#34;pwn_019&#34;&gt;PWN_019
+&lt;/h3&gt;&lt;p&gt;题目：关闭了输出流，一定是最安全的吗？ &lt;a class=&#34;link&#34; href=&#34;PWN_019&#34; &gt;PWN_019&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/48.png&#34;
+	width=&#34;1315&#34;
+	height=&#34;636&#34;
+	srcset=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/48_hu_2e667aaa82bc0e4f.png 480w, https://expl0rer.top/p/ctfshow-pwn-writeup/48_hu_d60e1adae16a1f50.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;206&#34;
+		data-flex-basis=&#34;496px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;在IDA上看到，是由read和system函数的，按道理我直接cat /ctf*应该就出flag了啊&amp;hellip;&lt;/p&gt;
+&lt;p&gt;问题就出在这个fclose函数（确实没辙了，只能用AI解释一下了）作用是关闭文件输出流，标准输出被关闭了（无法显示）。&lt;/p&gt;
+&lt;p&gt;那还有&lt;strong&gt;输入流&lt;/strong&gt;啊，可以用重定向：&lt;strong&gt;&lt;code&gt;1&amp;gt;&amp;amp;0&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;这是 Linux 的 I/O 重定向语法：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;1&lt;/code&gt; 代表&lt;strong&gt;标准输出（stdout）&lt;/strong&gt;（正常情况下，命令的输出会送到这里，显示在终端）；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;0&lt;/code&gt; 代表&lt;strong&gt;标准输入（stdin）&lt;/strong&gt;（正常情况下，用户输入从这里读取，通常指向终端）；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;1&amp;gt;&amp;amp;0&lt;/code&gt; 表示：&lt;strong&gt;将标准输出重定向到标准输入所指向的位置&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;因为代码中标准输出被关闭了（无法显示），但标准输入（通常是终端）仍然可用，所以通过这个重定向，&lt;code&gt;cat&lt;/code&gt; 命令的输出会被 “转移” 到标准输入对应的终端，从而让内容能显示出来。&lt;/p&gt;
+&lt;p&gt;简单说就是：正常显示内容的 “输出通道” 被关了，但接收输入的 “输入通道” 还能用。通过 1&amp;gt;&amp;amp;0 把原本该从 “输出通道” 显示的内容，转到 “输入通道” 对应的终端上，这样就能看到 flag 了。ctfshow{a390a91b-5203-46ae-812d-0396de95184f}&lt;/p&gt;
+&lt;p&gt;本质上是利用了 “输入通道和终端还连着” 这个漏洞，让内容 “借道” 显示出来～。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/49.png&#34;
+	width=&#34;1030&#34;
+	height=&#34;550&#34;
+	srcset=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/49_hu_9e7f3c9c7cb0a617.png 480w, https://expl0rer.top/p/ctfshow-pwn-writeup/49_hu_2a293b314017f370.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;重定向&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;187&#34;
+		data-flex-basis=&#34;449px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;pwn_020&#34;&gt;PWN_020
+&lt;/h3&gt;&lt;p&gt;题目：提交ctfshow{【.got表与.got.plt是否可写(可写为1，不可写为0)】,【.got的地址】,【.got.plt的地址】}&lt;/p&gt;
+&lt;p&gt;例如 .got可写.got.plt表可写其地址为0x400820 0x8208820&lt;/p&gt;
+&lt;p&gt;最终flag为ctfshow{1_1_0x400820_0x8208820}&lt;/p&gt;
+&lt;p&gt;若某个表不存在，则无需写其对应地址&lt;/p&gt;
+&lt;p&gt;如不存在.got.plt表，则最终flag值为ctfshow{1_0_0x400820}&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;PWN_020&#34; &gt;PWN_020&lt;/a&gt;&lt;/p&gt;
+&lt;hr&gt;
 </description>
         </item>
         <item>
@@ -3795,22 +3875,494 @@ $y$j9T$zY1oKFxJlTgP2WcJhzbNl1$xhkUmB8R9fzETc/1kgL/nOPcWFTvhn17clxXCgyFjpC：加�
     &lt;blockquote&gt;
 &lt;p&gt;法律问题：未经授权对系统进行密码破解是违法行为，仅可在自己拥有或获得明确许可的系统上使用。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
 &lt;h2 id=&#34;网络安全基础&#34;&gt;网络安全基础
-&lt;/h2&gt;&lt;h3 id=&#34;计算机网络&#34;&gt;计算机网络
-&lt;/h3&gt;&lt;p&gt;计算机网络基础&lt;/p&gt;
-&lt;p&gt;OS与TCP网络模型&lt;/p&gt;
-&lt;p&gt;TCO与IP协议&lt;/p&gt;
-&lt;p&gt;交换机与路由器&lt;/p&gt;
-&lt;p&gt;虚拟专用网络&lt;/p&gt;
-&lt;p&gt;内网与外网&lt;/p&gt;
-&lt;p&gt;常见名词&lt;/p&gt;
-&lt;p&gt;DNS、域名、URL、CDN、代理&lt;/p&gt;
-&lt;h3 id=&#34;网络协议安全&#34;&gt;网络协议安全
-&lt;/h3&gt;&lt;p&gt;HTTP与HHTPS&lt;/p&gt;
-&lt;p&gt;Wireshark与Tcpdump&lt;/p&gt;
-&lt;p&gt;Burpsuite工具&lt;/p&gt;
-&lt;p&gt;MITM中间人攻击&lt;/p&gt;
-&lt;p&gt;ARP欺诈攻击&lt;/p&gt;
-&lt;p&gt;僵尸网络与DDOS&lt;/p&gt;
+&lt;/h2&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;%e8%ae%a1%e7%ae%97%e6%9c%ba%e7%bd%91%e7%bb%9c%e4%bf%9d%e5%a7%86%e7%ba%a7%e8%b5%84%e6%96%99.pdf&#34; &gt;计算机网络保姆级资料&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;计算机网络&#34;&gt;计算机网络
+&lt;/h3&gt;&lt;h5 id=&#34;计算机网络基础&#34;&gt;计算机网络基础
+&lt;/h5&gt;&lt;p&gt;计算机网络是一组自治计算机互连的集合；&lt;/p&gt;
+&lt;p&gt;一个完整的计算机网络系统主要由&lt;code&gt;硬件&lt;/code&gt;、&lt;code&gt;软件&lt;/code&gt;和&lt;code&gt;协议&lt;/code&gt;三大部分组成，缺一不可。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/41.png&#34;
+	width=&#34;835&#34;
+	height=&#34;316&#34;
+	srcset=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/41_hu_a64ec6f02bbc0b2d.png 480w, https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/41_hu_83eb16a3195eae00.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;264&#34;
+		data-flex-basis=&#34;634px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;计算机网络网络的基本功能&lt;/p&gt;
+&lt;p&gt;• 资源共享；&lt;/p&gt;
+&lt;p&gt;• 分布式处理与负载均衡；&lt;/p&gt;
+&lt;p&gt;• 综合信息服务；&lt;/p&gt;
+&lt;p&gt;协议：实现通信所需要的一些约定，为使网内各计算机之间的通信可靠有效,通信双方必须共同遵守的规则和约定称为通信协议。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/42.png&#34;
+	width=&#34;905&#34;
+	height=&#34;414&#34;
+	srcset=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/42_hu_b61ecf8eabc78816.png 480w, https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/42_hu_d7a2503398947418.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;层次模型&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;218&#34;
+		data-flex-basis=&#34;524px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;伴随着计算机网络的飞跃发展，各大厂商根据自己的协议生产出了不同的硬件和软件。为了实现网络设备间的互相通讯，ISO和IEEE相继提出了OSI参考模型及其TCP/IP模型。&lt;/p&gt;
+&lt;p&gt;层次模型：计算机网络是一个非常复杂的系统，分层可以将庞大而复杂的问题，转化为若干较小的局部问题，而这些较小的局部问题就比较易于研究和处理。&lt;/p&gt;
+&lt;h5 id=&#34;osi与tcpip网络模型&#34;&gt;OSI与TCP、IP网络模型
+&lt;/h5&gt;&lt;p&gt;OSI参考模型**定义了网络中设备所遵守的层次结构&lt;/p&gt;
+&lt;p&gt;分层结构的优点：开放的标准化接口；多厂商兼容；易于理解、学习和更新协议标准；实现模块化工程，降低了开发实现的复杂度；便于故障排除。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/43.png&#34;
+	width=&#34;835&#34;
+	height=&#34;410&#34;
+	srcset=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/43_hu_1e12236992db7856.png 480w, https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/43_hu_faea615d009d3cc7.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;203&#34;
+		data-flex-basis=&#34;488px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/44.png&#34;
+	width=&#34;1353&#34;
+	height=&#34;615&#34;
+	srcset=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/44_hu_ebe86cae20b86aac.png 480w, https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/44_hu_814c1f6cdbf410e2.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;模型&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;220&#34;
+		data-flex-basis=&#34;528px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h5 id=&#34;tcpudp传输层&#34;&gt;TCP/UDP&amp;ndash;传输层
+&lt;/h5&gt;&lt;p&gt;TCP工作机制：三次握手建立连接，四次挥手断开连接。&lt;/p&gt;
+&lt;blockquote class=&#34;alert alert-note&#34;&gt;
+    &lt;blockquote&gt;
+&lt;p&gt;TCP(Transmission Control Protocol 传输控制协议)是一种面向连接的、可靠的。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;UDP协议：&lt;/p&gt;
+&lt;p&gt;用户数据报协议，无连接的、不可靠的、基于数据报的传输层通信协议。&lt;/p&gt;
+&lt;p&gt;用于数据传输控制的协议，对数据的可靠性、安全没有保证，不需要连接就可以发送。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;总结：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;tcp是面向连接的，udp是面向无连接&lt;/p&gt;
+&lt;p&gt;tcp的报文的结构相对要比udp更复杂&lt;/p&gt;
+&lt;p&gt;tcp是基于字节流（0、1），udp是基于数据报&lt;/p&gt;
+&lt;p&gt;tcp会保证数据的正确性、udp不能，会存在丢包的现象&lt;/p&gt;
+&lt;h5 id=&#34;交换机与路由器&#34;&gt;交换机与路由器
+&lt;/h5&gt;&lt;p&gt;&lt;strong&gt;交换机&lt;/strong&gt;：&lt;/p&gt;
+&lt;p&gt;交换机按照通信两端传输信息的需要，用人工或设备自动完成的方法，把要传输的信息送到符合要求的相应路由上的技术统称。它能够为接入交换机的任意两个网络节点提供独享的电信号通路。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/45.png&#34;
+	width=&#34;692&#34;
+	height=&#34;342&#34;
+	srcset=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/45_hu_e121bc5bc421b232.png 480w, https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/45_hu_6865682bbbf29ec7.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;交换机&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;202&#34;
+		data-flex-basis=&#34;485px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;交换机的工作方式&lt;/strong&gt;:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;数据包转发&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;交换机接收到数据包后，会依据数据包中的目的 MAC 地址来决定将数据包转发到哪个端口。具体过程是，交换机查询自身的 MAC 地址表 ，如果目的 MAC 地址在表中有对应的端口记录，就将数据包转发到该端口；若 MAC 地址表中没有匹配的记录，交换机则会采用泛洪的方式，将数据包转发到除接收端口外的其他所有端口 。例如，在一个办公室网络中，当某台计算机 A 向计算机 B 发送数据时，交换机先查找 MAC 地址表，若找到计算机 B 对应的端口，就把数据包精准发到该端口；若没找到，就会把数据包发到其他所有连接设备的端口，直到计算机 B 接收到并做出回应，交换机也就学习到了计算机 B 的 MAC 地址和对应端口。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;MAC 地址学习&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;交换机刚启动时，MAC 地址表是空的。在工作过程中，它会学习连接到各个端口设备的 MAC 地址。当交换机从某个端口接收到一个数据包时，它会记录下数据包源 MAC 地址与该接收端口的对应关系，并将其添加到 MAC 地址表中 。随着时间推移，交换机通过不断接收来自不同设备的数据包，逐渐建立起完整的 MAC 地址表。比如，新接入网络的打印机发送了一个数据包，交换机就会记录下打印机的 MAC 地址和它所连接的端口，下次再有发往该打印机的数据，就能直接转发。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;高速数据传输&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;交换机内部采用了并行处理技术，能够同时处理多个端口之间的数据传输，具备很高的数据传输速率。交换机为每个端口提供独立的带宽，端口之间的数据传输可以并行进行，不会产生冲突，这大大提高了网络的整体性能 。比如在一个有 24 个端口的百兆以太网交换机中，每个端口都可以提供 100Mbps 的带宽，不同端口之间的数据传输可以同时进行，极大地提升了数据传输效率，满足了网络中大量设备同时高速传输数据的需求。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;路由器&lt;/strong&gt;：&lt;/p&gt;
+&lt;p&gt;路由器是一种用于连接多个逻辑上分开的网络的&lt;/p&gt;
+&lt;p&gt;设备，它能够在多网络互联环境中建立灵活的连接，&lt;/p&gt;
+&lt;p&gt;实现不同网络之间的数据传输&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/46.png&#34;
+	width=&#34;762&#34;
+	height=&#34;305&#34;
+	srcset=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/46_hu_d399aefb81342973.png 480w, https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/46_hu_72659ef097128452.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;路由器&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;249&#34;
+		data-flex-basis=&#34;599px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;路由决策&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;路由决策是路由器 “判断走哪条路转发数据” 的过程，核心是&lt;strong&gt;依据路由表选择最优路径&lt;/strong&gt;，避免数据绕远路或走拥堵的路。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;数据包转发&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;路由器的核心作用是&lt;strong&gt;将数据包从一个网络转发到另一个网络&lt;/strong&gt;（比如把家里的局域网数据转发到互联网，或把 A 公司的网络数据转发到 B 公司的网络），关键依赖 “IP 地址” 而非交换机的 “MAC 地址”。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;网络安全&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;路由器自带基础的安全功能，能阻挡非法访问、保护内部网络，常见手段包括：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;防火墙功能&lt;/strong&gt;：
+可配置 “访问控制规则”，比如禁止外部网络直接访问内部的服务器（只允许内部主动访问外部），或限制特定 IP / 端口的访问（比如禁止家里的设备访问危险端口 22、3389）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;NAT 地址转换&lt;/strong&gt;：
+把内部的 “私有 IP”（如 192.168.1.x、10.0.0.x）转换成 “公网 IP”，外部网络只能看到公网 IP，无法直接访问内部的私有 IP 设备，相当于给内部网络加了一层 “隐藏保护”。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;DHCP 地址过滤&lt;/strong&gt;：
+只给指定 MAC 地址的设备分配 IP（比如只允许家里的手机、电脑连网，陌生设备即使连了 WiFi 也拿不到 IP，无法访问网络）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;VPN 功能&lt;/strong&gt;：
+企业中常用，员工在外网（比如咖啡厅 WiFi）可通过 “VPN 连接” 加密访问公司内部网络，防止数据被窃取。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/47.png&#34;
+	width=&#34;1045&#34;
+	height=&#34;605&#34;
+	srcset=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/47_hu_2a03c88c283737e2.png 480w, https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/47_hu_e17d699c813ad9d2.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;交换机与路由器&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;172&#34;
+		data-flex-basis=&#34;414px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;网络分类&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;按照覆盖范围分类&lt;/p&gt;
+&lt;p&gt;○局域网（LAN）：局限于较小的地理范围内，如家庭、学校或公司内部的网络。&lt;/p&gt;
+&lt;p&gt;○城域网（MAN）：覆盖范围比局域网大，通常覆盖一个城市或地区。&lt;/p&gt;
+&lt;p&gt;○广域网（WAN）：覆盖范围广泛，可以跨越多个城市、国家或地区，甚至全球。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/48.png&#34;
+	width=&#34;963&#34;
+	height=&#34;425&#34;
+	srcset=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/48_hu_9bbee665b27cb8a1.png 480w, https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/48_hu_75b408178da85cc0.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;226&#34;
+		data-flex-basis=&#34;543px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;IP地址&amp;ndash;网络层&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;IP地址是电子设备（计算机）在互联网上的唯一标识。IP地址分为IPv4和IPv6。IPv4地址由32位二进制组成，采用点分十进制。&lt;/p&gt;
+&lt;p&gt;IP主要作用&lt;/p&gt;
+&lt;p&gt;标识节点和链路：用唯一的IP地址标识每一个节点;用唯一的IP网络号标识每一个链路。&lt;/p&gt;
+&lt;p&gt;寻址和转发：确定节点所在网络的位置，进而确定节点所在的位置;IP路由器选择适当的路径将IP包转发到目的节点。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;IP地址格式表示方法&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;IP地址由网络号（包括子网号）和主机号两部分组成。网络位相同的IP地址为同一网段。&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;网络号&lt;/em&gt;用于区分不同的IP网络。&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;主机号&lt;/em&gt;用于标识该网络内的一个IP节点。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/49.png&#34;
+	width=&#34;986&#34;
+	height=&#34;430&#34;
+	srcset=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/49_hu_60e18fb732641d29.png 480w, https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/49_hu_30391837379e0065.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;229&#34;
+		data-flex-basis=&#34;550px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;IP地址分类&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;IPv4地址分为A、B、C、D、E 五类，每一类有不同的划分规则：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/50.png&#34;
+	width=&#34;925&#34;
+	height=&#34;506&#34;
+	srcset=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/50_hu_caf5a24c5d3e3b2f.png 480w, https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/50_hu_ccd51ca83e3a32a5.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;182&#34;
+		data-flex-basis=&#34;438px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;一、A 类地址：面向大型网络的 “骨干级” 地址&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;核心特征&lt;/strong&gt;：
+最高位固定为 “0”，地址结构是「1 字节网络位 + 3 字节主机位」（比如&lt;code&gt;10.0.0.0&lt;/code&gt;，前 8 位是网络位，后 24 位是主机位）。&lt;/li&gt;
+&lt;li&gt;关键补充：
+&lt;ul&gt;
+&lt;li&gt;地址范围中，&lt;code&gt;1.0.0.0 ~ 126.255.255.255&lt;/code&gt; 是合法可用地址，&lt;code&gt;127.0.0.0/8&lt;/code&gt; 网段（不止&lt;code&gt;127.0.0.1&lt;/code&gt;）均为 “回环地址”，用于本地测试（比如&lt;code&gt;ping 127.0.0.2&lt;/code&gt;也能检测本机网络协议栈是否正常）。&lt;/li&gt;
+&lt;li&gt;每个网络可容纳 &lt;code&gt;2²⁴ - 2 = 16777214&lt;/code&gt; 个主机（减 2 是因为 “网络地址” 如&lt;code&gt;10.0.0.0&lt;/code&gt;和 “广播地址” 如&lt;code&gt;10.255.255.255&lt;/code&gt;不能分配给主机）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;典型场景&lt;/strong&gt;：早期用于大型企业、运营商骨干网络（比如某省的电信核心网络可能用一个 A 类地址段）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;二、B 类地址：适配中型网络的 “区域级” 地址&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;核心特征&lt;/strong&gt;：
+最高两位固定为 “10”，地址结构是「2 字节网络位 + 2 字节主机位」（比如&lt;code&gt;172.16.0.0&lt;/code&gt;，前 16 位是网络位，后 16 位是主机位）。&lt;/li&gt;
+&lt;li&gt;关键补充：
+&lt;ul&gt;
+&lt;li&gt;可容纳 &lt;code&gt;2¹⁶ - 2 = 65534&lt;/code&gt; 个主机，适合中型园区、高校或集团公司（比如一所大学的校园网可能用一个 B 类地址段，覆盖所有教学楼、宿舍的设备）。&lt;/li&gt;
+&lt;li&gt;私有 B 类地址段：&lt;code&gt;172.16.0.0 ~ 172.31.255.255&lt;/code&gt;（共 16 个网段），常用于企业内部局域网，不对外网路由。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;典型场景&lt;/strong&gt;：中型企业、高校校园网、城市级政务内网。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;三、C 类地址：服务小型网络的 “终端级” 地址&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;核心特征&lt;/strong&gt;：
+最高三位固定为 “110”，地址结构是「3 字节网络位 + 1 字节主机位」（比如&lt;code&gt;192.168.1.0&lt;/code&gt;，前 24 位是网络位，后 8 位是主机位）。&lt;/li&gt;
+&lt;li&gt;关键补充：
+&lt;ul&gt;
+&lt;li&gt;每个网络仅能容纳 &lt;code&gt;2⁸ - 2 = 254&lt;/code&gt; 个主机，适合小型办公室、家庭局域网（比如家里的路由器默认用&lt;code&gt;192.168.1.0/24&lt;/code&gt;，最多连 254 台设备）。&lt;/li&gt;
+&lt;li&gt;私有 C 类地址段：&lt;code&gt;192.168.0.0 ~ 192.168.255.255&lt;/code&gt;（共 256 个网段），是最常用的内网地址（路由器、摄像头、智能家居设备基本都用这类地址）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;典型场景&lt;/strong&gt;：家庭 WiFi、小型公司、商铺的局域网。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;四、D 类地址：专注 “一对多” 的组播地址&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;核心特征&lt;/strong&gt;：
+最高四位固定为 “1110”，地址范围是&lt;code&gt;224.0.0.0 ~ 239.255.255.255&lt;/code&gt;，&lt;strong&gt;没有网络位和主机位之分&lt;/strong&gt;，直接代表一个 “组播组”。&lt;/li&gt;
+&lt;li&gt;关键补充：
+&lt;ul&gt;
+&lt;li&gt;不是给单个设备分配，而是给一组设备 “共同订阅”（比如设备加入&lt;code&gt;224.0.0.1&lt;/code&gt;组播组，就能接收发给这个组的所有数据）。&lt;/li&gt;
+&lt;li&gt;常见用途：视频会议（多人同时接收同一视频流，避免重复发送浪费带宽）、安防监控（多个监控屏幕接收同一摄像头的画面）、IPTV（机顶盒接收电视台的组播信号）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;特殊地址&lt;/strong&gt;：&lt;code&gt;224.0.0.1&lt;/code&gt;是 “所有主机组播地址”（同一网段内所有设备都能接收），&lt;code&gt;224.0.0.5&lt;/code&gt;是 OSPF 路由协议专用组播地址。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;五、E 类地址：预留的 “科研级” 地址&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;核心特征&lt;/strong&gt;：
+最高四位固定为 “1111”，地址范围是&lt;code&gt;240.0.0.0 ~ 255.255.255.255&lt;/code&gt;，&lt;strong&gt;目前没有公开商用&lt;/strong&gt;，仅用于科研实验、协议测试（比如未来可能的 IPv4 扩展技术研发）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;注意&lt;/strong&gt;：&lt;code&gt;255.255.255.255&lt;/code&gt;是 “全局广播地址”，不属于 E 类的常规用途，发送到这个地址的数据会被同一网段所有设备接收（比如路由器的 DHCP 广播）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&#34;内网与外网&#34;&gt;内网与外网
+&lt;/h5&gt;&lt;ul&gt;
+&lt;li&gt;公网地址是由互联网注册机构进行分配的，这些地址在Internet上是唯一的，并且具有全球可达性。公网地址用于Internet上的设备，允许设备在Internet上进行通信。&lt;/li&gt;
+&lt;li&gt;私网地址则是由局域网管理员自行分配的，它们只在局域网内部具有唯一性。私网地址则仅限于局域网内部使用，不能直接在Internet上访问。这种设计有助于保护内部网络的安全性，防止内部网络与公共网络之间的冲突。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;子网掩码：用来确定IP地址的网络位，网络号的位都置1，主机号都置0。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;内网（局域网，LAN）&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;定义：内网是指在某一特定区域内由多台计算机以及网络设备构成的网络，如校园网、政府网、企业内网等。&lt;/p&gt;
+&lt;p&gt;范围：内网的覆盖范围相对较小，通常仅限于某一建筑物、园区或公司内部，方圆几公里以内。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;外网（广域网，WAN）&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;定义：外网又称广域网、公网，是连接不同地区局域网或城域网计算机通信的远程网。&lt;/p&gt;
+&lt;p&gt;范围：外网的覆盖范围广泛，可以跨越城市、国家甚至全球，提供远距离通信服务。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/51.png&#34;
+	width=&#34;558&#34;
+	height=&#34;286&#34;
+	srcset=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/51_hu_69ee3c20147ba542.png 480w, https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/51_hu_278a3650c03b7ba7.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;195&#34;
+		data-flex-basis=&#34;468px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;虚拟专用网络（（Virtual Private Network，VPN））&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;定义：是指依靠ISP或其他NSP在公用网络基础设施之上构建的专用的安全数据通信网络，只不过这个专线网络是逻辑上的而不是物理的，所以称为虚拟专用网。&lt;/p&gt;
+&lt;p&gt;虚拟：用户不再需要拥有实际的长途数据线路，而是使用公共网络资源建立自己的私有网络。&lt;/p&gt;
+&lt;p&gt;专用：虚拟出来的网络并非任何连接在公共网络上的用户都能使用，只有经过授权的用户才可以使用。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/52.png&#34;
+	width=&#34;498&#34;
+	height=&#34;359&#34;
+	srcset=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/52_hu_c09e6f5221da56b2.png 480w, https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/52_hu_c0bbc95b680be5a3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;138&#34;
+		data-flex-basis=&#34;332px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h5 id=&#34;常见名词&#34;&gt;常见名词
+&lt;/h5&gt;&lt;p&gt;&lt;strong&gt;DNS-域名&lt;/strong&gt;：由一串用点分隔的名字组成的Internet上某一台计算机或计算机组的名称&lt;/p&gt;
+&lt;p&gt;常见的域名有www.baidu.com , &lt;a class=&#34;link&#34; href=&#34;https://www.taobao.com&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;www.taobao.com&lt;/a&gt; , &lt;a class=&#34;link&#34; href=&#34;https://www.jd.com&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;www.jd.com&lt;/a&gt; 这些都是域名。&lt;/p&gt;
+&lt;p&gt;域名可以在Godaddy、Gandi、Hover、Namesilo、Namecheap等网站注册。&lt;/p&gt;
+&lt;p&gt;域名由两个或两个以上的词构成，中间由点号分隔开。最右边的那个词称为顶级域名。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/53.png&#34;
+	width=&#34;815&#34;
+	height=&#34;374&#34;
+	srcset=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/53_hu_688770642d1a5923.png 480w, https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/53_hu_8a59197a0232489c.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;217&#34;
+		data-flex-basis=&#34;522px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;CDN（Content DeliveryNetwork）&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;即内容分发网络，CDN的基本思路：是尽可能避开互联网上有可能影响数据传输速度和稳定性的瓶颈和环节，使内容传输的更快、更稳定。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/54.png&#34;
+	width=&#34;581&#34;
+	height=&#34;405&#34;
+	srcset=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/54_hu_12f0207dcffb5708.png 480w, https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/54_hu_3cc8bd63c8c677ae.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;143&#34;
+		data-flex-basis=&#34;344px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;代理&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;代理也称网络代理，是一种特殊的网络服务。它允许客户端通过这个服务与服务器进行连接。简单的来说，可以把代理理解为一种网络中间商。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/55.png&#34;
+	width=&#34;1136&#34;
+	height=&#34;561&#34;
+	srcset=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/55_hu_8ceca4b4904fa91a.png 480w, https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/55_hu_a35528375abed3f0.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;202&#34;
+		data-flex-basis=&#34;485px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h4 id=&#34;网络协议安全&#34;&gt;网络协议安全
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;HTTP协议(Hyper Text Transfer Protocol)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;它是从WEB服务器传输超文本标记语言(HTML)到本地浏览器的超文本传输协议。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;建立连接&lt;/strong&gt;：客户端与服务器之间建立连接。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;发送请求&lt;/strong&gt;：客户端向服务器发送请求，请求中包含要访问的资源。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;处理请求&lt;/strong&gt;：服务器接收到请求后，根据请求中的信息找到相应的资源，执行相应的处理操作。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;发送响应&lt;/strong&gt;：服务器将处理后的结果封装在响应中，并将其发送回客户端。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;关闭连接&lt;/strong&gt;：在完成请求-响应周期后，客户端和服务器&lt;strong&gt;之间&lt;/strong&gt;的连接可以被关闭。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/56.png&#34;
+	width=&#34;695&#34;
+	height=&#34;311&#34;
+	srcset=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/56_hu_c6f8974e60c47350.png 480w, https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/56_hu_a3a020ae1ec40d64.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;223&#34;
+		data-flex-basis=&#34;536px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;HTTPS&lt;/strong&gt; &lt;strong&gt;协议HyperText Transfer Protocol Secure&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;是（超文本传输安全协议）的缩写，是一种通过计算机网络进行安全通信的传输协议。&lt;/p&gt;
+&lt;p&gt;HTTPS 的主要作用是在不安全的网络上创建一个安全信道，并可在使用适当的加密包和服务器证书可被验证且可被信任时，对窃听和中间人攻击提供合理的防护。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/57.png&#34;
+	width=&#34;1071&#34;
+	height=&#34;375&#34;
+	srcset=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/57_hu_20f39cd1e34d478d.png 480w, https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/57_hu_3411a050f3e9ba53.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;285&#34;
+		data-flex-basis=&#34;685px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;关于SSL证书，这个地方可以用我的博客去进做例子：&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://expl0rer.top/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Expl0rer.Ct1号&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;http://8.148.145.201/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Expl0rer.Ct2号&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;你可以看看1号和2号的区别😄（温馨提醒：打开网站后看左上角）&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;http、https&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;GET：请求从服务器获取指定资源。这是最常用的方法，用于访问页面。&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;POST：请求服务器接受并处理请求体中的数据，通常用于表单提交。&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;PUT：请求服务器存储一个资源，并用请求体中的内容替换目标资源的所有内容。&lt;/p&gt;
+&lt;p&gt;DELETE：请求服务器删除指定的资源。&lt;/p&gt;
+&lt;p&gt;HEAD：与 GET 类似，但不获取资源的内容，只获取响应头信息&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;HTTP&lt;/strong&gt; **响应头信息：**&lt;a class=&#34;link&#34; href=&#34;https://expl0rer.top/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://expl0rer.top/&lt;/a&gt;&lt;/p&gt;
+&lt;h5 id=&#34;wireshark与tcpdump&#34;&gt;Wireshark与Tcpdump
+&lt;/h5&gt;&lt;p&gt;&lt;strong&gt;Wireshark&lt;/strong&gt;是一款开源抓包工具，也被称为网络嗅探器，用于分析网络流量和数据包。适用于Windows环境，也支持其他操作系统。当然它也是CTF流量分析中的常用工具。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/wireshark.png&#34;
+	width=&#34;32&#34;
+	height=&#34;32&#34;
+	srcset=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/wireshark_hu_1892aa4cf0be0a5b.png 480w, https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/wireshark_hu_7b34d4138d4ffbde.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;wireshark&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;100&#34;
+		data-flex-basis=&#34;240px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Tcpdump&lt;/strong&gt;是一个命令行格式的网络抓包工具，用于捕获和分析网络数据包。适用于Linux环境，是类UNIX系统下用于网络分析和问题排查的首选工具。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/tcpdump.png&#34;
+	width=&#34;320&#34;
+	height=&#34;248&#34;
+	srcset=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/tcpdump_hu_3e10343628f1b779.png 480w, https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/tcpdump_hu_8131112e83b3c5ef.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;tcpdump&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;129&#34;
+		data-flex-basis=&#34;309px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h5 id=&#34;burpsuite工具&#34;&gt;Burpsuite工具
+&lt;/h5&gt;&lt;p&gt;BurpSuite是一款集成化的&lt;strong&gt;渗透测试&lt;/strong&gt;工具，它包含了许多功能，可以帮助安全人员快速完成对web应用程序的渗透测试和攻击。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/58.png&#34;
+	width=&#34;1266&#34;
+	height=&#34;520&#34;
+	srcset=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/58_hu_f4c81a607654c990.png 480w, https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/58_hu_f009bbdfc5d54a21.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;243&#34;
+		data-flex-basis=&#34;584px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;网上有众多的破解版，可以自己去“0元购”&amp;hellip;&amp;hellip;&lt;/p&gt;
+&lt;h5 id=&#34;mitm中间人攻击&#34;&gt;MITM中间人攻击
+&lt;/h5&gt;&lt;p&gt;MITM（Man-in-the-Middle）中间人攻击是一种网络攻击方式，攻击者通过某种手段将自己插入到通信双方之间，窃取、篡改或者干扰双方的通信内容&lt;/p&gt;
+&lt;p&gt;MITM攻击的基本原理是攻击者通过各种技术手段（如ARP欺骗、DNS劫持、Wi-Fi劫持、IP欺骗、SSL/TLS欺骗等），将一台计算机虚拟放置在网络连接中的两台通信计算机之间，这台计算机就称为“中间人”。在这个过程中，攻击者可以截取、查看、篡改、伪造或修改受害者之间的通信数据，以达到窃取敏感信息、篡改数据或实施其他恶意行为的目的。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/59.png&#34;
+	width=&#34;519&#34;
+	height=&#34;324&#34;
+	srcset=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/59_hu_33d3d280ac4532ee.png 480w, https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/59_hu_f40d19da1ebdbb4d.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;160&#34;
+		data-flex-basis=&#34;384px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h5 id=&#34;arp欺诈攻击&#34;&gt;ARP欺诈攻击
+&lt;/h5&gt;&lt;p&gt;ARP攻击就是通过伪造IP地址和MAC地址实现ARP欺骗，能够在网络中产生大量的ARP通信量，攻击者只要持续不断的发出伪造的ARP响应包就能更改目标主机ARP缓存中的IP-MAC条目，造成网络中断或中间人攻击。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/60.png&#34;
+	width=&#34;1145&#34;
+	height=&#34;473&#34;
+	srcset=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/60_hu_e7de8f9bbd2563a1.png 480w, https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/60_hu_58a5fcc6315ea3f2.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;242&#34;
+		data-flex-basis=&#34;580px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h5 id=&#34;僵尸网络与ddos&#34;&gt;僵尸网络与DDOS
+&lt;/h5&gt;&lt;p&gt;&lt;strong&gt;僵尸网络&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;僵尸网络是由黑客集中控制的一群互联网上的计算机。黑客通过各种手段将大量的主机感染僵尸程序，从而在控制者和被感染主机之间形成一对多的控制僵尸网络。&lt;/p&gt;
+&lt;p&gt;僵尸网络是一个可控制的网络，由黑客进行控制。这个网络是采用了一定的恶意传播手段形成的；可以一对多的执行相同的恶意命令，因为数量庞大，一个人无法单独。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;DDos攻击&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;DDoS攻击(分布式拒绝服务攻击)是一种常见的网络攻击方式，旨在使目标服务器无法正常提供服务，在DDoS攻击中，攻击者会控制大量的计算机或设备，向目标服务器发送大量的请求，使其超出承受范围，导致服务器无法正常响应请求，从而使服务不可用。&lt;/p&gt;
+&lt;p&gt;一种常见的DDoS攻击方式是DNS Request Flood攻击。这种攻击既可以针对DNS缓存服务器，又可以针对DNS授权服务器。攻击者通过直接或间接向DNS服务器发送大量不存在的域名解析请求，导致服务器严重超载，无法继续响应正常用户的DNS请求。这种攻击会导致DNS服务器瘫痪，影响正常业务的进行。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/61.png&#34;
+	width=&#34;655&#34;
+	height=&#34;440&#34;
+	srcset=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/61_hu_9479d881f2c589c4.png 480w, https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/61_hu_7c76e3e9f406823b.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;148&#34;
+		data-flex-basis=&#34;357px&#34;
+	
+&gt;&lt;/p&gt;
 &lt;h2 id=&#34;web安全基础&#34;&gt;Web安全基础
 &lt;/h2&gt;&lt;h3 id=&#34;web基础&#34;&gt;Web基础
 &lt;/h3&gt;&lt;h4 id=&#34;web结构&#34;&gt;Web结构

@@ -1121,6 +1121,38 @@
 		data-flex-basis=&#34;587px&#34;
 	
 &gt;&lt;/p&gt;
+&lt;p&gt;分别跟进一下real和fake：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/46.png&#34;
+	width=&#34;689&#34;
+	height=&#34;156&#34;
+	srcset=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/46_hu_4f7764fbe823e672.png 480w, https://expl0rer.top/p/ctfshow-pwn-writeup/46_hu_faedb59ceeafafd5.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;fake&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;441&#34;
+		data-flex-basis=&#34;1060px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/47.png&#34;
+	width=&#34;711&#34;
+	height=&#34;189&#34;
+	srcset=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/47_hu_c473fd1e4140dc1a.png 480w, https://expl0rer.top/p/ctfshow-pwn-writeup/47_hu_f4c64f3e30a094f4.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;real&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;376&#34;
+		data-flex-basis=&#34;902px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;解读一下发现一个机制：当v4不等于9时就会执行real函数，这时real会执行&lt;code&gt;echo &#39;flag is here&#39;&amp;gt;/ctfshow_flag&lt;/code&gt;，这个命令将字符串 &amp;lsquo;flag is here&amp;rsquo; 覆盖写入 /ctfshow_flag 文件中。 &amp;gt; 符号表示以覆盖的方式写入文件，如果文件不存在则创建新文件。如果 /ctfshow_flag 文件已经存在，那么该命令会将文件中原有的内容替换为 &amp;lsquo;flag is here&amp;rsquo; 。也就是说你第一次和靶机交互时没输入9，你以后都不得不到flag了，只能重开靶机&amp;hellip;..比较CS吧&amp;hellip;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;echo &#39;flag is here&#39;&amp;gt;&amp;gt;/ctfshow_flag&lt;/code&gt;这个命令将字符串 &amp;lsquo;flag is here&amp;rsquo; &lt;em&gt;&lt;strong&gt;追加&lt;/strong&gt;&lt;/em&gt;写入 /ctfshow_flag 文件中。 &amp;raquo; 符号表示以追加的方式写入文件，如果文件不存在则创建新文件。如果 /ctfshow_flag 文件已经存在，那么该命令会在文件的末尾添加 &amp;lsquo;flag is here&amp;rsquo; 。&lt;/p&gt;
+&lt;p&gt;这两个命令都用于将 &amp;lsquo;flag is here&amp;rsquo; 写入 /ctfshow_flag 文件中，不同之处在于写入方式的不同。第一个命令使用追加方式，在文件末尾添加内容；第二个命令使用覆盖方式，将文件内容替换为新内容。具体使用哪个命令取决于需求和文件操作的预期结果。也就是所假的其实是我们需要的真的，真的反而是假的在远程环境中，我们需要在第一次读到flag，否则后续得到的flag都已经被覆写再追加，真实的flag内容已经没了。&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/45.png&#34;
 	width=&#34;751&#34;
 	height=&#34;315&#34;
@@ -1133,6 +1165,54 @@
 		data-flex-basis=&#34;572px&#34;
 	
 &gt;&lt;/p&gt;
+&lt;h3 id=&#34;pwn_019&#34;&gt;PWN_019
+&lt;/h3&gt;&lt;p&gt;题目：关闭了输出流，一定是最安全的吗？ &lt;a class=&#34;link&#34; href=&#34;PWN_019&#34; &gt;PWN_019&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/48.png&#34;
+	width=&#34;1315&#34;
+	height=&#34;636&#34;
+	srcset=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/48_hu_2e667aaa82bc0e4f.png 480w, https://expl0rer.top/p/ctfshow-pwn-writeup/48_hu_d60e1adae16a1f50.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;206&#34;
+		data-flex-basis=&#34;496px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;在IDA上看到，是由read和system函数的，按道理我直接cat /ctf*应该就出flag了啊&amp;hellip;&lt;/p&gt;
+&lt;p&gt;问题就出在这个fclose函数（确实没辙了，只能用AI解释一下了）作用是关闭文件输出流，标准输出被关闭了（无法显示）。&lt;/p&gt;
+&lt;p&gt;那还有&lt;strong&gt;输入流&lt;/strong&gt;啊，可以用重定向：&lt;strong&gt;&lt;code&gt;1&amp;gt;&amp;amp;0&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;这是 Linux 的 I/O 重定向语法：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;1&lt;/code&gt; 代表&lt;strong&gt;标准输出（stdout）&lt;/strong&gt;（正常情况下，命令的输出会送到这里，显示在终端）；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;0&lt;/code&gt; 代表&lt;strong&gt;标准输入（stdin）&lt;/strong&gt;（正常情况下，用户输入从这里读取，通常指向终端）；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;1&amp;gt;&amp;amp;0&lt;/code&gt; 表示：&lt;strong&gt;将标准输出重定向到标准输入所指向的位置&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;因为代码中标准输出被关闭了（无法显示），但标准输入（通常是终端）仍然可用，所以通过这个重定向，&lt;code&gt;cat&lt;/code&gt; 命令的输出会被 “转移” 到标准输入对应的终端，从而让内容能显示出来。&lt;/p&gt;
+&lt;p&gt;简单说就是：正常显示内容的 “输出通道” 被关了，但接收输入的 “输入通道” 还能用。通过 1&amp;gt;&amp;amp;0 把原本该从 “输出通道” 显示的内容，转到 “输入通道” 对应的终端上，这样就能看到 flag 了。ctfshow{a390a91b-5203-46ae-812d-0396de95184f}&lt;/p&gt;
+&lt;p&gt;本质上是利用了 “输入通道和终端还连着” 这个漏洞，让内容 “借道” 显示出来～。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/49.png&#34;
+	width=&#34;1030&#34;
+	height=&#34;550&#34;
+	srcset=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/49_hu_9e7f3c9c7cb0a617.png 480w, https://expl0rer.top/p/ctfshow-pwn-writeup/49_hu_2a293b314017f370.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;重定向&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;187&#34;
+		data-flex-basis=&#34;449px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;pwn_020&#34;&gt;PWN_020
+&lt;/h3&gt;&lt;p&gt;题目：提交ctfshow{【.got表与.got.plt是否可写(可写为1，不可写为0)】,【.got的地址】,【.got.plt的地址】}&lt;/p&gt;
+&lt;p&gt;例如 .got可写.got.plt表可写其地址为0x400820 0x8208820&lt;/p&gt;
+&lt;p&gt;最终flag为ctfshow{1_1_0x400820_0x8208820}&lt;/p&gt;
+&lt;p&gt;若某个表不存在，则无需写其对应地址&lt;/p&gt;
+&lt;p&gt;如不存在.got.plt表，则最终flag值为ctfshow{1_0_0x400820}&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;PWN_020&#34; &gt;PWN_020&lt;/a&gt;&lt;/p&gt;
+&lt;hr&gt;
 </description>
         </item>
         <item>

@@ -10,7 +10,7 @@
 <meta property='og:description' content="二进制漏洞与利用，PWN_wrtieup，会员套餐360题">
 <meta property='og:url' content='https://expl0rer.top/p/ctfshow-pwn-writeup/'>
 <meta property='og:site_name' content='Expl0rer.Ct'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-08-27T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-08-28T17:05:53&#43;08:00'/><meta property='og:image' content='https://expl0rer.top/p/ctfshow-pwn-writeup/ctfshow.png' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-08-27T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-08-28T21:53:34&#43;08:00'/><meta property='og:image' content='https://expl0rer.top/p/ctfshow-pwn-writeup/ctfshow.png' />
 <meta name="twitter:title" content="ctfshow-pwn-writeup">
 <meta name="twitter:description" content="二进制漏洞与利用，PWN_wrtieup，会员套餐360题"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://expl0rer.top/p/ctfshow-pwn-writeup/ctfshow.png' />
@@ -744,6 +744,8 @@ unicode: "ece7"
         <li><a href="#pwn_016">PWN_016</a></li>
         <li><a href="#pwn_017">PWN_017</a></li>
         <li><a href="#pwn_018">PWN_018</a></li>
+        <li><a href="#pwn_019">PWN_019</a></li>
+        <li><a href="#pwn_020">PWN_020</a></li>
       </ol>
     </li>
   </ol>
@@ -1940,6 +1942,38 @@ unicode: "ece7"
 		data-flex-basis="587px"
 	
 ></p>
+<p>分别跟进一下real和fake：</p>
+<p><img src="/p/ctfshow-pwn-writeup/46.png"
+	width="689"
+	height="156"
+	srcset="/p/ctfshow-pwn-writeup/46_hu_4f7764fbe823e672.png 480w, /p/ctfshow-pwn-writeup/46_hu_faedb59ceeafafd5.png 1024w"
+	loading="lazy"
+	
+		alt="fake"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="441"
+		data-flex-basis="1060px"
+	
+></p>
+<p><img src="/p/ctfshow-pwn-writeup/47.png"
+	width="711"
+	height="189"
+	srcset="/p/ctfshow-pwn-writeup/47_hu_c473fd1e4140dc1a.png 480w, /p/ctfshow-pwn-writeup/47_hu_f4c64f3e30a094f4.png 1024w"
+	loading="lazy"
+	
+		alt="real"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="376"
+		data-flex-basis="902px"
+	
+></p>
+<p>解读一下发现一个机制：当v4不等于9时就会执行real函数，这时real会执行<code>echo 'flag is here'&gt;/ctfshow_flag</code>，这个命令将字符串 &lsquo;flag is here&rsquo; 覆盖写入 /ctfshow_flag 文件中。 &gt; 符号表示以覆盖的方式写入文件，如果文件不存在则创建新文件。如果 /ctfshow_flag 文件已经存在，那么该命令会将文件中原有的内容替换为 &lsquo;flag is here&rsquo; 。也就是说你第一次和靶机交互时没输入9，你以后都不得不到flag了，只能重开靶机&hellip;..比较CS吧&hellip;</p>
+<p><code>echo 'flag is here'&gt;&gt;/ctfshow_flag</code>这个命令将字符串 &lsquo;flag is here&rsquo; <em><strong>追加</strong></em>写入 /ctfshow_flag 文件中。 &raquo; 符号表示以追加的方式写入文件，如果文件不存在则创建新文件。如果 /ctfshow_flag 文件已经存在，那么该命令会在文件的末尾添加 &lsquo;flag is here&rsquo; 。</p>
+<p>这两个命令都用于将 &lsquo;flag is here&rsquo; 写入 /ctfshow_flag 文件中，不同之处在于写入方式的不同。第一个命令使用追加方式，在文件末尾添加内容；第二个命令使用覆盖方式，将文件内容替换为新内容。具体使用哪个命令取决于需求和文件操作的预期结果。也就是所假的其实是我们需要的真的，真的反而是假的在远程环境中，我们需要在第一次读到flag，否则后续得到的flag都已经被覆写再追加，真实的flag内容已经没了。</p>
 <p><img src="/p/ctfshow-pwn-writeup/45.png"
 	width="751"
 	height="315"
@@ -1952,6 +1986,54 @@ unicode: "ece7"
 		data-flex-basis="572px"
 	
 ></p>
+<h3 id="pwn_019">PWN_019
+</h3><p>题目：关闭了输出流，一定是最安全的吗？ <a class="link" href="PWN_019" >PWN_019</a></p>
+<p><img src="/p/ctfshow-pwn-writeup/48.png"
+	width="1315"
+	height="636"
+	srcset="/p/ctfshow-pwn-writeup/48_hu_2e667aaa82bc0e4f.png 480w, /p/ctfshow-pwn-writeup/48_hu_d60e1adae16a1f50.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="206"
+		data-flex-basis="496px"
+	
+></p>
+<p>在IDA上看到，是由read和system函数的，按道理我直接cat /ctf*应该就出flag了啊&hellip;</p>
+<p>问题就出在这个fclose函数（确实没辙了，只能用AI解释一下了）作用是关闭文件输出流，标准输出被关闭了（无法显示）。</p>
+<p>那还有<strong>输入流</strong>啊，可以用重定向：<strong><code>1&gt;&amp;0</code></strong></p>
+<p>这是 Linux 的 I/O 重定向语法：</p>
+<ul>
+<li><code>1</code> 代表<strong>标准输出（stdout）</strong>（正常情况下，命令的输出会送到这里，显示在终端）；</li>
+<li><code>0</code> 代表<strong>标准输入（stdin）</strong>（正常情况下，用户输入从这里读取，通常指向终端）；</li>
+<li><code>1&gt;&amp;0</code> 表示：<strong>将标准输出重定向到标准输入所指向的位置</strong>。</li>
+</ul>
+<p>因为代码中标准输出被关闭了（无法显示），但标准输入（通常是终端）仍然可用，所以通过这个重定向，<code>cat</code> 命令的输出会被 “转移” 到标准输入对应的终端，从而让内容能显示出来。</p>
+<p>简单说就是：正常显示内容的 “输出通道” 被关了，但接收输入的 “输入通道” 还能用。通过 1&gt;&amp;0 把原本该从 “输出通道” 显示的内容，转到 “输入通道” 对应的终端上，这样就能看到 flag 了。ctfshow{a390a91b-5203-46ae-812d-0396de95184f}</p>
+<p>本质上是利用了 “输入通道和终端还连着” 这个漏洞，让内容 “借道” 显示出来～。</p>
+<p><img src="/p/ctfshow-pwn-writeup/49.png"
+	width="1030"
+	height="550"
+	srcset="/p/ctfshow-pwn-writeup/49_hu_9e7f3c9c7cb0a617.png 480w, /p/ctfshow-pwn-writeup/49_hu_2a293b314017f370.png 1024w"
+	loading="lazy"
+	
+		alt="重定向"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="187"
+		data-flex-basis="449px"
+	
+></p>
+<h3 id="pwn_020">PWN_020
+</h3><p>题目：提交ctfshow{【.got表与.got.plt是否可写(可写为1，不可写为0)】,【.got的地址】,【.got.plt的地址】}</p>
+<p>例如 .got可写.got.plt表可写其地址为0x400820 0x8208820</p>
+<p>最终flag为ctfshow{1_1_0x400820_0x8208820}</p>
+<p>若某个表不存在，则无需写其对应地址</p>
+<p>如不存在.got.plt表，则最终flag值为ctfshow{1_0_0x400820}</p>
+<p><a class="link" href="PWN_020" >PWN_020</a></p>
+<hr>
 
 </section>
 
@@ -2223,7 +2305,7 @@ unicode: "ece7"
 <section class="wordcount">
   <div class="wordcount-row">
     <p>博主发布了7篇文章  ||</p>
-    <p>总共65.02k 字</p>
+    <p>总共72.43k 字</p>
   </div>
 </section>
         
