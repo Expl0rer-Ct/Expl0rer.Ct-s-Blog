@@ -10,7 +10,7 @@
 <meta property='og:description' content="二进制漏洞与利用，PWN_wrtieup，会员套餐360题">
 <meta property='og:url' content='https://expl0rer.top/p/ctfshow-pwn-writeup/'>
 <meta property='og:site_name' content='Expl0rer.Ct'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-08-27T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-08-27T23:40:29&#43;08:00'/><meta property='og:image' content='https://expl0rer.top/p/ctfshow-pwn-writeup/ctfshow.png' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-08-27T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-08-28T17:05:53&#43;08:00'/><meta property='og:image' content='https://expl0rer.top/p/ctfshow-pwn-writeup/ctfshow.png' />
 <meta name="twitter:title" content="ctfshow-pwn-writeup">
 <meta name="twitter:description" content="二进制漏洞与利用，PWN_wrtieup，会员套餐360题"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://expl0rer.top/p/ctfshow-pwn-writeup/ctfshow.png' />
@@ -736,6 +736,14 @@ unicode: "ece7"
         <li><a href="#pwn_008">PWN_008</a></li>
         <li><a href="#pwn_009">PWN_009</a></li>
         <li><a href="#pwn_010">PWN_010</a></li>
+        <li><a href="#pwn_011">PWN_011</a></li>
+        <li><a href="#pwn_012">PWN_012</a></li>
+        <li><a href="#pwn_013">PWN_013</a></li>
+        <li><a href="#pwn_014">PWN_014</a></li>
+        <li><a href="#pwn_015">PWN_015</a></li>
+        <li><a href="#pwn_016">PWN_016</a></li>
+        <li><a href="#pwn_017">PWN_017</a></li>
+        <li><a href="#pwn_018">PWN_018</a></li>
       </ol>
     </li>
   </ol>
@@ -826,7 +834,7 @@ unicode: "ece7"
     <p>[TOC]</p>
 <p><strong>前文：以下是我<a class="link" href="https://ctf.show/challenges"  target="_blank" rel="noopener"
     >ctfshow</a>的PWN做题记录，欢迎各位前来观看，小弟领教！</strong></p>
-<p>前文：每题我都放了链接，供下载，要靶场的题不能做，PWN_005~~PWN_029不需要靶场是可以做的，供大家食用PWN。</p>
+<p>前文：每题我都放了链接，供下载，要靶场的题不能做，PWN_005 <del>PWN_016，PWN_20~~PWN_022，PWN_026</del>PWN_029不需要靶场是可以做的，供大家食用PWN。</p>
 <h2 id="test_your_nc">Test_your_nc
 </h2><h3 id="pwn_000">PWN_000
 </h3><p><a class="link" href="https://pan.baidu.com/s/1wHPhZ7XOouFU6KgyOiSfLQ"  target="_blank" rel="noopener"
@@ -1537,6 +1545,413 @@ unicode: "ece7"
 <p>hex(0x80490E8+4)&ndash;&gt; 080490EC</p>
 <p>对应地址得值是ome_to_CTFshow_PWN</p>
 <p>故flag:ctfshow{ome_to_CTFshow_PWN}</p>
+<h3 id="pwn_011">PWN_011
+</h3><p>题目：<strong>基址变址寻址</strong>方式结束后的eax寄存器的值为？</p>
+<p><a class="link" href="PWN_011%5cWelcome_to_CTFshow" >Welcome_to_CTFshow</a></p>
+<p><a class="link" href="PWN_011%5cWelcome_to_CTFshow.asm" >Welcome_to_CTFshow.asm</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-nasm" data-lang="nasm"><span class="line"><span class="cl"><span class="c1">; 基址变址寻址方式</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">mov</span> <span class="nb">ecx</span><span class="p">,</span> <span class="nv">msg</span>        <span class="c1">; 将msg的地址赋值给ecx</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">mov</span> <span class="nb">edx</span><span class="p">,</span> <span class="mi">2</span>          <span class="c1">; 将2赋值给edx</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">mov</span> <span class="nb">eax</span><span class="p">,</span> <span class="p">[</span><span class="nb">ecx</span> <span class="o">+</span> <span class="nb">edx</span><span class="o">*</span><span class="mi">2</span><span class="p">]</span>  <span class="c1">; 将ecx+edx*2所指向的地址的值赋值给eax</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>同样的，放到IDA上找这个基址变址寻址方式：</p>
+<p><img src="/p/ctfshow-pwn-writeup/30.png"
+	width="780"
+	height="60"
+	srcset="/p/ctfshow-pwn-writeup/30_hu_901c17825a17f8ed.png 480w, /p/ctfshow-pwn-writeup/30_hu_668a6173f2e3ecb2.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="1300"
+		data-flex-basis="3120px"
+	
+></p>
+<p>双击点dword去跟进到地址：</p>
+<p><img src="/p/ctfshow-pwn-writeup/31.png"
+	width="820"
+	height="135"
+	srcset="/p/ctfshow-pwn-writeup/31_hu_15a7389171b58f28.png 480w, /p/ctfshow-pwn-writeup/31_hu_750b9884b38e7964.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="607"
+		data-flex-basis="1457px"
+	
+></p>
+<p>计算最终也是 [0x80490E8 + 2*2 ] = [0X80490EC]</p>
+<p>其实也是和PWN_010一样：hex(0x80490E8+4)</p>
+<p>就是说hex(0x80490E8 + 2*2 )=0X80490EC，对应的是“ome_to_CTFshow_PWN”。</p>
+<p>flag：ctfshow{ome_to_CTFshow_PWN}</p>
+<h3 id="pwn_012">PWN_012
+</h3><p>题目：相对基址变址寻址方式结束后eax寄存器的值为？</p>
+<p><a class="link" href="PWN_012%5cWelcome_to_CTFshow" >Welcome_to_CTFshow</a></p>
+<p><a class="link" href="PWN_012%5cWelcome_to_CTFshow.asm" >Welcome_to_CTFshow.asm</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-nasm" data-lang="nasm"><span class="line"><span class="cl"><span class="c1">; 相对基址变址寻址方式</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">mov</span> <span class="nb">ecx</span><span class="p">,</span> <span class="nv">msg</span>        <span class="c1">; 将msg的地址赋值给ecx</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">mov</span> <span class="nb">edx</span><span class="p">,</span> <span class="mi">1</span>          <span class="c1">; 将1赋值给edx</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">add</span> <span class="nb">ecx</span><span class="p">,</span> <span class="mi">8</span>          <span class="c1">; 将ecx加上8</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">mov</span> <span class="nb">eax</span><span class="p">,</span> <span class="p">[</span><span class="nb">ecx</span> <span class="o">+</span> <span class="nb">edx</span><span class="o">*</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">6</span><span class="p">]</span>  <span class="c1">; 将ecx+edx*2-6所指向的地址的值赋值给eax</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/p/ctfshow-pwn-writeup/32.png"
+	width="770"
+	height="164"
+	srcset="/p/ctfshow-pwn-writeup/32_hu_99e9e101810244d0.png 480w, /p/ctfshow-pwn-writeup/32_hu_f807a9c980e1f370.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="469"
+		data-flex-basis="1126px"
+	
+></p>
+<p>跟进offset dword_80490E8：</p>
+<p><img src="/p/ctfshow-pwn-writeup/33.png"
+	width="856"
+	height="105"
+	srcset="/p/ctfshow-pwn-writeup/33_hu_3157e877f3a9f1c1.png 480w, /p/ctfshow-pwn-writeup/33_hu_77b09f0915eccfa5.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="815"
+		data-flex-basis="1956px"
+	
+></p>
+<p>那就是：[8 + 0x80490E8 + 1*2 - 6] = [0x80490EC]</p>
+<p>故flag:ctfshow{ome_to_CTFshow_PWN}</p>
+<h3 id="pwn_013">PWN_013
+</h3><p>题目：如何使用GCC？编译运行后即可获得flag  <a class="link" href="PWN_013%5cPWN_013.c" >PWN_013.c</a></p>
+<p>学过C语言都会安装配置编译器环境的，我这里使用的是<strong>visual-studio-code</strong>。</p>
+<p><img src="/p/ctfshow-pwn-writeup/34.png"
+	width="1534"
+	height="466"
+	srcset="/p/ctfshow-pwn-writeup/34_hu_a2d59cd0ef0b2014.png 480w, /p/ctfshow-pwn-writeup/34_hu_a654e108c81c213e.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="329"
+		data-flex-basis="790px"
+	
+></p>
+<p>这段代码是一个简单的 C 程序，它使用字符数组 flag 存储了一个加密的字符串，并通过 printf函数将其打印出来。</p>
+<p>在这段代码中， flag 数组存储了一串整数值，这些整数值代表了字符的 ASCII 码。通过将这些整数值转换为相应的字符，就可以还原出原始的字符串。</p>
+<p>运行该程序， printf 函数使用 %s 格式字符串将 flag 数组作为参数进行打印。由于 flag 数组的最后一个元素为零（NULL 字符）， printf 函数会将其之前的字符依次打印，直到遇到 NULL 字符为止。根据给定的整数值数组，还原出的字符串为： ctfshow{hOw_t0_us3_GCC?} 。</p>
+<h3 id="pwn_014">PWN_014
+</h3><p>题目：请你阅读以下源码，<strong>给定key为”CTFshow”</strong>，编译运行即可获得flag。 <a class="link" href="PWN_014%5cPWN_014.c" >PWN_014.c</a></p>
+<p>这个文件有强度了，直接编译运行会说nothing is here，不给flag，先读一下这个C语言文件在干什么的：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">FILE</span> <span class="o">*</span><span class="n">fp</span><span class="p">;</span>                  <span class="c1">// 文件指针，用于操作文件
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">buffer</span><span class="p">[</span><span class="n">BUFFER_SIZE</span><span class="p">];</span>  <span class="c1">// 缓冲区，存储从文件读取的二进制数据
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">size_t</span> <span class="n">n</span><span class="p">;</span>                  <span class="c1">// 记录每次实际读取的字节数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">fp</span> <span class="o">=</span> <span class="nf">fopen</span><span class="p">(</span><span class="s">&#34;key&#34;</span><span class="p">,</span> <span class="s">&#34;rb&#34;</span><span class="p">);</span>   <span class="c1">// 以二进制只读方式打开名为 &#34;key&#34; 的文件
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 检查文件是否成功打开
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="n">fp</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">perror</span><span class="p">(</span><span class="s">&#34;Nothing here!&#34;</span><span class="p">);</span>  <span class="c1">// 若打开失败，打印错误信息
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 输出缓冲区：大小为 BUFFER_SIZE*9 + 12（预留足够空间存储二进制字符串和分隔符）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">char</span> <span class="n">output</span><span class="p">[</span><span class="n">BUFFER_SIZE</span> <span class="o">*</span> <span class="mi">9</span> <span class="o">+</span> <span class="mi">12</span><span class="p">];</span> 
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">offset</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>  <span class="c1">// 记录 output 中当前已使用的位置（偏移量）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 先在 output 开头写入 &#34;ctfshow{&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">offset</span> <span class="o">+=</span> <span class="nf">sprintf</span><span class="p">(</span><span class="n">output</span> <span class="o">+</span> <span class="n">offset</span><span class="p">,</span> <span class="s">&#34;ctfshow{&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 循环读取文件内容：每次最多读 BUFFER_SIZE 字节，直到文件结束
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">while</span> <span class="p">((</span><span class="n">n</span> <span class="o">=</span> <span class="nf">fread</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="p">),</span> <span class="n">BUFFER_SIZE</span><span class="p">,</span> <span class="n">fp</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 遍历本次读取的每个字节
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// 将当前字节拆分为 8 位二进制（从高位到低位）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">7</span><span class="p">;</span> <span class="n">j</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="c1">// (buffer[i] &gt;&gt; j) &amp; 1：获取第 j 位（0 或 1），并写入 output
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">offset</span> <span class="o">+=</span> <span class="nf">sprintf</span><span class="p">(</span><span class="n">output</span> <span class="o">+</span> <span class="n">offset</span><span class="p">,</span> <span class="s">&#34;%d&#34;</span><span class="p">,</span> <span class="p">(</span><span class="n">buffer</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;&gt;</span> <span class="n">j</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// 除了最后一个字节，每个字节的二进制后加下划线 &#34;_&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">!=</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">offset</span> <span class="o">+=</span> <span class="nf">sprintf</span><span class="p">(</span><span class="n">output</span> <span class="o">+</span> <span class="n">offset</span><span class="p">,</span> <span class="s">&#34;_&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 若未到文件末尾，在本次缓冲区数据后加空格 &#34; &#34;（分隔不同批次的读取）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nf">feof</span><span class="p">(</span><span class="n">fp</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">offset</span> <span class="o">+=</span> <span class="nf">sprintf</span><span class="p">(</span><span class="n">output</span> <span class="o">+</span> <span class="n">offset</span><span class="p">,</span> <span class="s">&#34; &#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 在 output 末尾写入 &#34;}&#34;，完成格式包裹
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">offset</span> <span class="o">+=</span> <span class="nf">sprintf</span><span class="p">(</span><span class="n">output</span> <span class="o">+</span> <span class="n">offset</span><span class="p">,</span> <span class="s">&#34;}&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 打印最终生成的字符串
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;%s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">output</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">fclose</span><span class="p">(</span><span class="n">fp</span><span class="p">);</span>  <span class="c1">// 关闭文件
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>也就是说我们需要一个名为key的文件，让这个程序知道，然后他就能把flag字符串吐出来了。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ <span class="nb">echo</span> <span class="s2">&#34;CTFshow&#34;</span>&gt; key  <span class="c1">#创建一个名为key得文件，向内输入“CTFshow”的字符串</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/p/ctfshow-pwn-writeup/35.png"
+	width="1145"
+	height="336"
+	srcset="/p/ctfshow-pwn-writeup/35_hu_df60cb17ad88303e.png 480w, /p/ctfshow-pwn-writeup/35_hu_aca6ec48c69a455b.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="340"
+		data-flex-basis="817px"
+	
+></p>
+<p>答案是ctfshow{01000011_01010100_01000110_01110011_01101000_01101111_01110111_00001010}</p>
+<p>题目要求在key里加CTFshow字符串，加其它是错的，输出结果不同。</p>
+<h3 id="pwn_015">PWN_015
+</h3><p>题目：编译汇编代码到可执行文件，即可拿到flag。 <a class="link" href="PWN_015%5cflag.asm" >flag.asm</a></p>
+<p>汇编转换：将 .asm 转换为目标文件（.obj 或 .o）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">nasm -f elf flag.asm
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>汇编生成可执行文件：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ld -m elf_i386 -s -o flag1 flag.o
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>（flag1是可执行文件）</p>
+<p><img src="/p/ctfshow-pwn-writeup/36.png"
+	width="624"
+	height="165"
+	srcset="/p/ctfshow-pwn-writeup/36_hu_fda5333d80d87b82.png 480w, /p/ctfshow-pwn-writeup/36_hu_4d6103555c03c502.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="378"
+		data-flex-basis="907px"
+	
+></p>
+<p>比较简单，和<a class="link" href="https://expl0rer.top/p/ctfshow-pwn-writeup/#pwn_005"  target="_blank" rel="noopener"
+    >PWN_005</a>很类似，都是汇编语言编译运行之类的。</p>
+<p>ctfshow{@ss3mb1y_1s_3@sy}</p>
+<h3 id="pwn_016">PWN_016
+</h3><p>题目：使用gcc将其编译为可执行文件。 <a class="link" href="PWN_016%5cflag.s" >flag.s</a></p>
+<p><img src="/p/ctfshow-pwn-writeup/37.png"
+	width="646"
+	height="104"
+	srcset="/p/ctfshow-pwn-writeup/37_hu_b3e8aef3e1ef05a0.png 480w, /p/ctfshow-pwn-writeup/37_hu_af79549354799dd4.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="621"
+		data-flex-basis="1490px"
+	
+></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">gcc flag.s -o flag
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>可以使用 gcc 命令直接编译汇编语言源文件（ .s 文件）并将其链接为可执行文件。 gcc 命令具有适用于多种语言的编译器驱动程序功能，它可以根据输入文件的扩展名自动选择适当的编译器和链接器。</p>
+<p>故flag：ctfshow{daniuniuda}</p>
+<h3 id="pwn_017">PWN_017
+</h3><p>题目：有些命令好像有点不一样？不要一直等，可能那样永远也等不到flag。</p>
+<p><img src="/p/ctfshow-pwn-writeup/38.png"
+	width="930"
+	height="325"
+	srcset="/p/ctfshow-pwn-writeup/38_hu_7d79a6ffed12bd13.png 480w, /p/ctfshow-pwn-writeup/38_hu_bffb150ab5d0f0e3.png 1024w"
+	loading="lazy"
+	
+		alt="进程3"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="286"
+		data-flex-basis="686px"
+	
+></p>
+<p>比较奇葩的是，这里选择3的话，一直在loading的，可能是不通的，我换到主机的nc也不行，那就是选2进程的</p>
+<p><img src="/p/ctfshow-pwn-writeup/39.png"
+	width="879"
+	height="536"
+	srcset="/p/ctfshow-pwn-writeup/39_hu_feeea272629e1334.png 480w, /p/ctfshow-pwn-writeup/39_hu_cc955cd53b60ba21.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="163"
+		data-flex-basis="393px"
+	
+></p>
+<p>选了2后，程序开始发癫了&hellip;.，一直循环搞得我Kali虚拟机卡死了，进到IDAx64去看：</p>
+<p><img src="/p/ctfshow-pwn-writeup/40.png"
+	width="1160"
+	height="423"
+	srcset="/p/ctfshow-pwn-writeup/40_hu_4ec1173fad870b57.png 480w, /p/ctfshow-pwn-writeup/40_hu_9873e66f0cb6080d.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="274"
+		data-flex-basis="658px"
+	
+></p>
+<p>这个case2的read函数只读取10字节以内的，也就是说ctfshow_flag（12byte）这串是超字节限制了。不过之前学了那个指令有通配符的cat ctf*（因为当你选择”ls ./“，打开全部文件后，发现只有一个ctfshow_flag时由ctf字眼的，那我们正好可以绕过超字节的限制了）</p>
+<p>搜索打开由ctf这串字符的文件内容：</p>
+<p><img src="/p/ctfshow-pwn-writeup/41.png"
+	width="691"
+	height="231"
+	srcset="/p/ctfshow-pwn-writeup/41_hu_fc1a2ff65540e4c9.png 480w, /p/ctfshow-pwn-writeup/41_hu_6ea90f86dc5d2b36.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="299"
+		data-flex-basis="717px"
+	
+></p>
+<h3 id="pwn_018">PWN_018
+</h3><p>题目：仔细看看源码，或许有惊喜；假作真时真亦假，真作假时假亦真。 <a class="link" href="PWN_018" >PWN_018</a></p>
+<p>连接nc后一上来就问：</p>
+<p><img src="/p/ctfshow-pwn-writeup/42.png"
+	width="754"
+	height="275"
+	srcset="/p/ctfshow-pwn-writeup/42_hu_b8edf74f377f50dc.png 480w, /p/ctfshow-pwn-writeup/42_hu_48a1d4051a0ee6e8.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="274"
+		data-flex-basis="658px"
+	
+></p>
+<p>这我哪知道啊？去看IDAx64：</p>
+<p><img src="/p/ctfshow-pwn-writeup/43.png"
+	width="736"
+	height="230"
+	srcset="/p/ctfshow-pwn-writeup/43_hu_a7c9b35aa1d7b9e4.png 480w, /p/ctfshow-pwn-writeup/43_hu_566fc56e89492c97.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="320"
+		data-flex-basis="768px"
+	
+></p>
+<p><img src="/p/ctfshow-pwn-writeup/44.png"
+	width="905"
+	height="370"
+	srcset="/p/ctfshow-pwn-writeup/44_hu_c4fb8fcadd3dd78e.png 480w, /p/ctfshow-pwn-writeup/44_hu_1ce437554407a80a.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="244"
+		data-flex-basis="587px"
+	
+></p>
+<p><img src="/p/ctfshow-pwn-writeup/45.png"
+	width="751"
+	height="315"
+	srcset="/p/ctfshow-pwn-writeup/45_hu_5e1d20db51249b2d.png 480w, /p/ctfshow-pwn-writeup/45_hu_acaf9b3fd36a04e.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="238"
+		data-flex-basis="572px"
+	
+></p>
 
 </section>
 
@@ -1554,7 +1969,7 @@ unicode: "ece7"
 
 
         <span>
-            最后更新于 2025-08-27
+            最后更新于 2025-08-28
         </span>
     </section></footer>
 
@@ -1808,7 +2223,7 @@ unicode: "ece7"
 <section class="wordcount">
   <div class="wordcount-row">
     <p>博主发布了7篇文章  ||</p>
-    <p>总共61.51k 字</p>
+    <p>总共65.02k 字</p>
   </div>
 </section>
         

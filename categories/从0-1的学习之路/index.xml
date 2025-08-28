@@ -27,7 +27,8 @@
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;[TOC]&lt;/p&gt;
-&lt;h2 id=&#34;网络空间安全导论&#34;&gt;网络空间安全导论
+&lt;h1 id=&#34;网安学习第一阶段&#34;&gt;网安学习第一阶段
+&lt;/h1&gt;&lt;h2 id=&#34;网络空间安全导论&#34;&gt;网络空间安全导论
 &lt;/h2&gt;&lt;h3 id=&#34;网络安全行业简介&#34;&gt;网络安全行业简介
 &lt;/h3&gt;&lt;p&gt;⽹络安全（Cyber Security）是指⽹络系统的硬件、软件及其系统中的数据受到保护，不因偶然&lt;/p&gt;
 &lt;p&gt;的或者恶意的原因⽽遭受到破坏、更改、泄露，系统连续可靠正常地运⾏，⽹络服务不中断。&lt;/p&gt;
@@ -630,16 +631,16 @@ $y$j9T$zY1oKFxJlTgP2WcJhzbNl1$xhkUmB8R9fzETc/1kgL/nOPcWFTvhn17clxXCgyFjpC：加�
 &lt;p&gt;安装镜像源：vim /etc/apt/sources.list（这个命令比较常用，因为Kali的下载速度比较慢的时候我都会用这个命令去换一下镜像源，阿里云、清华源等，这样速度比较快些）&lt;/p&gt;
 &lt;h4 id=&#34;linux系统防火墙&#34;&gt;Linux系统防火墙
 &lt;/h4&gt;&lt;p&gt;防火墙就是根据系统管理员设定的规则来控制数据包的进出，主要是保护内网的安全。目前Linux系统的防火墙类型主要有两种：分别是&lt;strong&gt;iptables&lt;/strong&gt;和&lt;strong&gt;firewalld&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;iptables-静态防火墙&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;早期的Linux系统中默认使用的是iptables防火墙，配置文件在/etc/sysconfig/iptables,主要工作在网络层&lt;/p&gt;
+&lt;h5 id=&#34;iptables-静态防火墙&#34;&gt;iptables-静态防火墙
+&lt;/h5&gt;&lt;p&gt;早期的Linux系统中默认使用的是iptables防火墙，配置文件在/etc/sysconfig/iptables,主要工作在网络层&lt;/p&gt;
 &lt;p&gt;iptables只可以通过命令行进行配置&lt;/p&gt;
 &lt;p&gt;iptables默认是允许所有，需要通过拒绝去做限制&lt;/p&gt;
 &lt;p&gt;iptables在修改了规则之后必须得全部刷新才可以生效，还会丢失连接（无法守护进程）&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;firewalld-动态防火墙&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;取代了之前的iptables防火墙，配置文件在/usr/lib/firewalld和/etc/fiewalld中,主要工作在网络层&lt;/p&gt;
+&lt;h5 id=&#34;firewalld-动态防火墙常用&#34;&gt;firewalld-动态防火墙（常用）
+&lt;/h5&gt;&lt;p&gt;取代了之前的iptables防火墙，配置文件在/usr/lib/firewalld和/etc/fiewalld中,主要工作在网络层&lt;/p&gt;
 &lt;p&gt;firewalld不仅可以通过命令行进行配置，也可以通过图形化界面配置&lt;/p&gt;
 &lt;p&gt;firewalld默认是拒绝所有，需要通过允许去放行&lt;/p&gt;
-&lt;p&gt;firewalld可以动态修改单条规则，动态管理规则集（允许更新规则而不破环现有会话和连接，可以守护进程&lt;/p&gt;
+&lt;p&gt;firewalld可以动态修改单条规则，动态管理规则集（允许更新规则而不破环现有会话和连接，可以守护进程，会过滤内网、互联网数据，当前电脑系统都有装防火墙的&lt;/p&gt;
 &lt;hr&gt;
 &lt;p&gt;查看firewalld防火墙状态：sudo systemctl status firewalld&lt;/p&gt;
 &lt;p&gt;查看iptables防火墙状态（如果系统使用iptables作为防火墙）：sudo systemctl status iptables&lt;/p&gt;
@@ -652,15 +653,157 @@ $y$j9T$zY1oKFxJlTgP2WcJhzbNl1$xhkUmB8R9fzETc/1kgL/nOPcWFTvhn17clxXCgyFjpC：加�
 &lt;h4 id=&#34;shell基础与实践&#34;&gt;Shell基础与实践
 &lt;/h4&gt;&lt;p&gt;&lt;strong&gt;shell脚本&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;Linux 的 Shell 种类众多，常见的有：&lt;/p&gt;
-&lt;p&gt;• Bourne Shell（/usr/bin/sh或/bin/sh）&lt;/p&gt;
-&lt;p&gt;• Bourne Again Shell（/bin/bash）&lt;/p&gt;
-&lt;p&gt;• C Shell（/usr/bin/csh）&lt;/p&gt;
-&lt;p&gt;• K Shell（/usr/bin/ksh）&lt;/p&gt;
-&lt;p&gt;• Shell for Root（/sbin/sh）&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Bourne Shell（/usr/bin/sh或/bin/sh）&lt;/p&gt;
+&lt;p&gt;Bourne Again Shell（/bin/bash）&lt;/p&gt;
+&lt;p&gt;C Shell（/usr/bin/csh）&lt;/p&gt;
+&lt;p&gt;K Shell（/usr/bin/ksh）&lt;/p&gt;
+&lt;p&gt;Shell for Root（/sbin/sh）&lt;/p&gt;&lt;/blockquote&gt;
 &lt;p&gt;由于&lt;strong&gt;bash&lt;/strong&gt;易用与免费，其被广泛使用也是大多数Linux系统的默认Shell。(Kali目前为zsh，兼容bash) /bin/bash&lt;/p&gt;
+&lt;blockquote class=&#34;alert alert-note&#34;&gt;
+    &lt;blockquote&gt;
+&lt;p&gt;/bin/bash这个shell适用在轻量级程序，易写好操作。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;接下来拿/bin/bash这个shell举个应用例子：&lt;/p&gt;
+&lt;p&gt;打开Kali终端，然后输入vim指令：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/32.png&#34;
+	width=&#34;396&#34;
+	height=&#34;65&#34;
+	srcset=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/32_hu_605ec3ded98e01f3.png 480w, https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/32_hu_8d3b6421895833c4.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;vim&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;609&#34;
+		data-flex-basis=&#34;1462px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;blockquote class=&#34;alert alert-tip&#34;&gt;
+    &lt;blockquote&gt;
+&lt;p&gt;在 Kali Linux 中，&lt;code&gt;vim&lt;/code&gt; 是一个&lt;strong&gt;命令行文本编辑器&lt;/strong&gt;的启动指令，用于创建、打开和编辑文本文件（如配置文件、脚本、代码等）。当然也是用它来编shell脚本的。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/33.png&#34;
+	width=&#34;1035&#34;
+	height=&#34;195&#34;
+	srcset=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/33_hu_95b6f17ec858a5a3.png 480w, https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/33_hu_5fccd75f4aa5eb47.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;530&#34;
+		data-flex-basis=&#34;1273px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;一开始先点击&lt;kbd&gt;i&lt;/kbd&gt;键，进入编辑模式，然后再顶行输入&lt;kbd&gt;#&lt;/kbd&gt;和&lt;kbd&gt;！&lt;/kbd&gt;，接着输入&lt;code&gt;/bin/bash&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;按回车下一行这里我们以简单的echo指令去运行shell，echo类似输出函数print的效果。&lt;/p&gt;
+&lt;p&gt;输入好shell后就按&lt;kbd&gt;Esc&lt;/kbd&gt;键，退出编辑模式，此时输出双引号&lt;kbd&gt;:&lt;/kbd&gt;，再输入wq+回车保存就好了，然后就自动退出vim模式了，回到命令行界面了，这是这个shell脚本就会保存到相应的路径了，我们可以运行的，&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/34.png&#34;
+	width=&#34;700&#34;
+	height=&#34;175&#34;
+	srcset=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/34_hu_4c37194659478a52.png 480w, https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/34_hu_ee0cf151cb42724e.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;wq保存&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;400&#34;
+		data-flex-basis=&#34;960px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;保存之后，我们找到这个文件，发现是和文本txt有差别的：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/35.png&#34;
+	width=&#34;1085&#34;
+	height=&#34;445&#34;
+	srcset=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/35_hu_e0168877e1f69303.png 480w, https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/35_hu_2792965a665bfd7d.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;243&#34;
+		data-flex-basis=&#34;585px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;接下来我们运行一下：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/36.png&#34;
+	width=&#34;620&#34;
+	height=&#34;115&#34;
+	srcset=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/36_hu_413b3ff427b5e540.png 480w, https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/36_hu_5f84b78ab3db9e8.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;root运行被告知权限不够&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;539&#34;
+		data-flex-basis=&#34;1293px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;用ll命令去看看权限：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/37.png&#34;
+	width=&#34;741&#34;
+	height=&#34;55&#34;
+	srcset=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/37_hu_ed5f6337a73aaf65.png 480w, https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/37_hu_18f287821ee17ae5.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;1347&#34;
+		data-flex-basis=&#34;3233px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;这里我之前有提到过：该文件权限为 &lt;code&gt;-rw-rw-r--&lt;/code&gt;（所有者和所属组有读写权限，其他用户有读权限）&lt;/p&gt;
+&lt;p&gt;可以直接用chmod 777 hacker去给这文件提权。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/38.png&#34;
+	width=&#34;761&#34;
+	height=&#34;114&#34;
+	srcset=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/38_hu_7245e99faab77870.png 480w, https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/38_hu_27ef5706be507fcd.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;输出结果&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;667&#34;
+		data-flex-basis=&#34;1602px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;这里提一下：每个用户其实都有默认的shell的，向上面所讲的那几种的其中之一，如果我们在vim编辑时不声明是用/bin/bash的话就会用用户本身自带的shell，现在可以用&lt;code&gt;echo $SHELL&lt;/code&gt;查看一下：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/39.png&#34;
+	width=&#34;640&#34;
+	height=&#34;105&#34;
+	srcset=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/39_hu_c06850a0dd12a86d.png 480w, https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/39_hu_39130f40eec1a15c.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;默认shell&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;609&#34;
+		data-flex-basis=&#34;1462px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;可以看到不是/bin/bash而是/usr/bin/zsh，也就是说如果你当时在vim编辑中不写明是#!/bin/bash的话，就会默认用zsh去运行那段代码“echo &amp;ldquo;hello hacke!!!!!!r&amp;rdquo;”&lt;/p&gt;
+&lt;p&gt;那我觉得好麻烦啊！！！！！！先vim敲代码然后还要chmod给文件执行提权&amp;hellip;.&lt;/p&gt;
+&lt;p&gt;这里有个简单方法：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/40.png&#34;
+	width=&#34;610&#34;
+	height=&#34;174&#34;
+	srcset=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/40_hu_c00b638eff190cf4.png 480w, https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/40_hu_b56d61ac48721b96.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;350&#34;
+		data-flex-basis=&#34;841px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;这样子的话就是强制执行了，bash、sh这种是默认带x执行权限的，bash就是用/bin/bash去执行里头的代码，那sh就是用另外一种不同的去执行里头的代码&amp;hellip;..&lt;/p&gt;
+&lt;p&gt;Shell的展示就到这里，感兴趣的可以细学，不过我学完C、Python感觉学不下shell了哈哈😄&amp;hellip;..&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Xshell&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.xshell.com/zh/free-for-home-school/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;Xshell&lt;/a&gt;是一款功能强大的终端模拟器，它支持SSH、SERIAL等多种协议，可以用于远程连接和管理服务器或虚拟机。&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;Xshell%e5%ae%89%e8%a3%85%e6%95%99%e7%a8%8b.pdf&#34; &gt;Xshell&lt;/a&gt; 是一款功能强大的终端模拟器，它支持SSH、SERIAL等多种协议，可以用于远程连接和管理服务器或虚拟机。在我们以后工作可以用Xshell去连接公司的服务器。（ &lt;a class=&#34;link&#34; href=&#34;Xftp%e5%ae%89%e8%a3%85%e6%95%99%e7%a8%8b_%e5%8a%a0%e6%b0%b4%e5%8d%b0.pdf&#34; &gt;Xftp&lt;/a&gt; 快速传输工具）&lt;/p&gt;
+&lt;p&gt;当然习惯用winscp、todesk、电脑自带的RDP这些的话也行。&lt;/p&gt;
+&lt;p&gt;连接时记得打开SSH，网络要能ping通&amp;hellip;.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/30.png&#34;
 	width=&#34;1920&#34;
 	height=&#34;670&#34;
@@ -673,6 +816,7 @@ $y$j9T$zY1oKFxJlTgP2WcJhzbNl1$xhkUmB8R9fzETc/1kgL/nOPcWFTvhn17clxXCgyFjpC：加�
 		data-flex-basis=&#34;687px&#34;
 	
 &gt;&lt;/p&gt;
+&lt;p&gt;Xshell、Xftp怎么用我不介绍了，搜一搜有教程。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;九头蛇-ssh弱口令爆破实战&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/31.png&#34;
 	width=&#34;1052&#34;
@@ -686,190 +830,85 @@ $y$j9T$zY1oKFxJlTgP2WcJhzbNl1$xhkUmB8R9fzETc/1kgL/nOPcWFTvhn17clxXCgyFjpC：加�
 		data-flex-basis=&#34;827px&#34;
 	
 &gt;&lt;/p&gt;
+&lt;p&gt;介绍：Hydra是一款强大的网络登录破解工具，可以用于测试SSH等服务的弱口令。Hydra是一个开源的密码破解工具，主要用于网络安全的&lt;strong&gt;渗透测试&lt;/strong&gt;。kali白带无需安装。&lt;/p&gt;
+&lt;p&gt;使用语法&amp;mdash;- hydra 参数IP地址 服务名&lt;/p&gt;
+&lt;p&gt;常见命令：&lt;/p&gt;
+&lt;p&gt;hydra [-l 用户名或者-L 用户名文件路径]&lt;/p&gt;
+&lt;p&gt;[-p密码 或者-Р密码文件路径]&lt;/p&gt;
+&lt;p&gt;[-t线程数]默认16&lt;/p&gt;
+&lt;p&gt;[-vV 显示详细信息]&lt;/p&gt;
+&lt;p&gt;[-o 输出文件路径&lt;/p&gt;
+&lt;p&gt;[-f找到密码就停止]&lt;/p&gt;
+&lt;p&gt;[-e ns 空密码和指定密码试探]&lt;/p&gt;
+&lt;p&gt;[ip |-M ip列表文件路径]&lt;/p&gt;
+&lt;p&gt;这里给大家这些命令，关于详细用法在后续，下一阶段将和burpsuite细讲&amp;hellip;&amp;hellip;&lt;/p&gt;
+&lt;blockquote class=&#34;alert alert-warn&#34;&gt;
+    &lt;blockquote&gt;
+&lt;p&gt;法律问题：未经授权对系统进行密码破解是违法行为，仅可在自己拥有或获得明确许可的系统上使用。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
 &lt;h2 id=&#34;网络安全基础&#34;&gt;网络安全基础
 &lt;/h2&gt;&lt;h3 id=&#34;计算机网络&#34;&gt;计算机网络
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;计算机网络基础&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
+&lt;/h3&gt;&lt;p&gt;计算机网络基础&lt;/p&gt;
 &lt;p&gt;OS与TCP网络模型&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
 &lt;p&gt;TCO与IP协议&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
 &lt;p&gt;交换机与路由器&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
 &lt;p&gt;虚拟专用网络&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
 &lt;p&gt;内网与外网&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
 &lt;p&gt;常见名词&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;DNS、域名、URL、CDN、代理&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;DNS、域名、URL、CDN、代理&lt;/p&gt;
 &lt;h3 id=&#34;网络协议安全&#34;&gt;网络协议安全
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;HTTP与HHTPS&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
+&lt;/h3&gt;&lt;p&gt;HTTP与HHTPS&lt;/p&gt;
 &lt;p&gt;Wireshark与Tcpdump&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
 &lt;p&gt;Burpsuite工具&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
 &lt;p&gt;MITM中间人攻击&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
 &lt;p&gt;ARP欺诈攻击&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
 &lt;p&gt;僵尸网络与DDOS&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
 &lt;h2 id=&#34;web安全基础&#34;&gt;Web安全基础
 &lt;/h2&gt;&lt;h3 id=&#34;web基础&#34;&gt;Web基础
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;
-&lt;h4 id=&#34;web结构&#34;&gt;Web结构
-&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;Web服务器与Web容器&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
+&lt;/h3&gt;&lt;h4 id=&#34;web结构&#34;&gt;Web结构
+&lt;/h4&gt;&lt;p&gt;Web服务器与Web容器&lt;/p&gt;
 &lt;p&gt;Web开放框架&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
 &lt;p&gt;Web应用与发展里程&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
 &lt;h4 id=&#34;web访问流程&#34;&gt;Web访问流程
-&lt;/h4&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;web前端&#34;&gt;Web前端
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;
-&lt;h4 id=&#34;html基础&#34;&gt;HTML基础
-&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;HTML简介与常用标记&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
+&lt;/h4&gt;&lt;h3 id=&#34;web前端&#34;&gt;Web前端
+&lt;/h3&gt;&lt;h4 id=&#34;html基础&#34;&gt;HTML基础
+&lt;/h4&gt;&lt;p&gt;HTML简介与常用标记&lt;/p&gt;
 &lt;h4 id=&#34;css样式&#34;&gt;CSS样式
-&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;CSS简介&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
+&lt;/h4&gt;&lt;p&gt;CSS简介&lt;/p&gt;
 &lt;h4 id=&#34;javascript&#34;&gt;JavaScript
-&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;JavaScript简介与常用函数&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
+&lt;/h4&gt;&lt;p&gt;JavaScript简介与常用函数&lt;/p&gt;
 &lt;h3 id=&#34;web后端&#34;&gt;Web后端
 &lt;/h3&gt;&lt;h4 id=&#34;php基础&#34;&gt;PHP基础
-&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;PHP简介与安装&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
+&lt;/h4&gt;&lt;p&gt;PHP简介与安装&lt;/p&gt;
 &lt;p&gt;PHP开发环境配置&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
 &lt;p&gt;PHP基础语法与函数&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
 &lt;p&gt;PHP循环与流程控制&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
 &lt;p&gt;PHP表单与Web操作&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
 &lt;p&gt;PHP文件上传&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
 &lt;p&gt;PHP类与对象&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
 &lt;p&gt;PHP魔术方法&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
 &lt;p&gt;PHPStudy与宝塔&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
 &lt;h4 id=&#34;python基础&#34;&gt;Python基础
 &lt;/h4&gt;&lt;p&gt;这里有重复，可倒回去看我所发的&amp;quot;Python学习&amp;rsquo;&amp;lsquo;的文章。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
 &lt;p&gt;Python基础语法&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
 &lt;p&gt;Python函数&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
 &lt;p&gt;Python模块&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
 &lt;p&gt;Python类与对象&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
 &lt;p&gt;Python魔术方法&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
 &lt;h3 id=&#34;web安全问题&#34;&gt;Web安全问题
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;安全事件&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
+&lt;/h3&gt;&lt;p&gt;安全事件&lt;/p&gt;
 &lt;p&gt;OWASP TOP10&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
 &lt;h2 id=&#34;数据库安全基础&#34;&gt;数据库安全基础
 &lt;/h2&gt;&lt;h3 id=&#34;数据库简介&#34;&gt;数据库简介
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;数据库基础概念&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
+&lt;/h3&gt;&lt;p&gt;数据库基础概念&lt;/p&gt;
 &lt;p&gt;常用数据库与管理工具&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
 &lt;p&gt;MySql数据库基本操作&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
 &lt;h3 id=&#34;数据库sql语言&#34;&gt;数据库SQL语言
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;SQL的CRUD（增强改查）&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
+&lt;/h3&gt;&lt;p&gt;SQL的CRUD（增强改查）&lt;/p&gt;
 &lt;p&gt;分组查询、关联查询、子查询&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
 &lt;p&gt;后端语言SQL操作（PHP）&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
 &lt;h3 id=&#34;数据库安全加固&#34;&gt;数据库安全加固
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;SQL注入漏洞后门&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
+&lt;/h3&gt;&lt;p&gt;SQL注入漏洞后门&lt;/p&gt;
 &lt;p&gt;数据库加固实操&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
 </description>
         </item>
         
