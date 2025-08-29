@@ -1578,7 +1578,7 @@ elf文件的节（section）会被映射进内存中的段（segment），而这
     &lt;blockquote&gt;
 &lt;p&gt;理解了这个流程，就掌握了动态链接中最核心的 “懒绑定” 机制，这也是 CTFpwn 中 “&lt;strong&gt;PLT 劫持&lt;/strong&gt;” 等漏洞利用的基础。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
 &lt;h2 id=&#34;linux安全防护机制&#34;&gt;Linux安全防护机制
-&lt;/h2&gt;&lt;p&gt;栈溢出、指针悬挂、内存地址泄露等Bug会导致程序崩溃，一些攻击者会刻意制造这些漏洞来扰乱程序正常执行，这就是早期PWN的威力。&lt;/p&gt;
+&lt;/h2&gt;&lt;p&gt;栈溢出、指针悬挂、内存地址泄露等Bug会导致程序崩溃，一些攻击者会刻意制造这些漏洞来扰乱程序正常执行，这就是早期PWN的威力。这一章比较重要，几乎贯穿后续栈溢出、堆的题目。&lt;/p&gt;
 &lt;h3 id=&#34;保护机制&#34;&gt;保护机制
 &lt;/h3&gt;&lt;blockquote class=&#34;alert alert-error&#34;&gt;
     &lt;blockquote&gt;
