@@ -1627,11 +1627,77 @@ elf文件的节（section）会被映射进内存中的段（segment），而这
     &lt;blockquote&gt;
 &lt;p&gt;绕过方式就是泄露函数地址，然后通过函数的偏移来确定基地址。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;PIE&lt;/strong&gt;：是针对&lt;strong&gt;可执行文件本身&lt;/strong&gt;的编译选项。开启后，可执行文件（ELF）会被加载到内存中的随机地址，其内部的代码段、数据段等位置不再是固定值（编译时不指定绝对地址，而是用相对偏移）。
-作用：让攻击者无法预先知道程序代码、全局变量等在内存中的绝对地址。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;ASLR&lt;/strong&gt;：是&lt;strong&gt;操作系统级别的保护机制&lt;/strong&gt;。开启后，操作系统会随机化进程的内存布局，包括共享库（.so）的加载地址、栈、堆、内核映射区域等的起始地址。
-作用：让攻击者无法预测共享库函数（如 libc 中的 system）、栈 / 堆数据的内存地址。&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;PIE&lt;/strong&gt;：是针对&lt;strong&gt;可执行文件本身&lt;/strong&gt;的编译选项。开启后，可执行文件（ELF）会被加载到内存中的随机地址，其内部的代码段、数据段等位置不再是固定值（编译时不指定绝对地址，而是用相对偏移）。
+作用：让攻击者无法预先知道程序代码、全局变量等在内存中的绝对地址。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;ASLR&lt;/strong&gt;：是&lt;strong&gt;操作系统级别的保护机制&lt;/strong&gt;。开启后，操作系统会随机化进程的内存布局，包括共享库（.so）的加载地址、栈、堆、内核映射区域等的起始地址。
+作用：让攻击者无法预测共享库函数（如 libc 中的 system）、栈 / 堆数据的内存地址。&lt;/p&gt;
+&lt;p&gt;该文件只有 3 种合法取值，分别对应不同的 ASLR 策略，具体如下：&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;取值&lt;/th&gt;
+          &lt;th&gt;名称&lt;/th&gt;
+          &lt;th&gt;作用（随机化范围）&lt;/th&gt;
+          &lt;th&gt;安全强度&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;0&lt;/td&gt;
+          &lt;td&gt;关闭ASLR&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;完全不随机化&lt;/strong&gt;：栈、堆、共享库、内核空间的地址每次运行都固定不变。&lt;/td&gt;
+          &lt;td&gt;最低&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;1&lt;/td&gt;
+          &lt;td&gt;部分随机化（默认）&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;部分区域随机&lt;/strong&gt;：栈地址、VDSO（虚拟动态共享对象）地址随机化；堆、共享库地址不随机。&lt;/td&gt;
+          &lt;td&gt;中等&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;2&lt;/td&gt;
+          &lt;td&gt;完全随机化&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;全区域随机&lt;/strong&gt;：栈、堆、共享库、VDSO 地址全部随机化；64 位系统还会随机化内核空间。&lt;/td&gt;
+          &lt;td&gt;最高&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;1）查看当前 ASLR 状态&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 读取文件内容，输出 0/1/2 中的一个&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;cat /proc/sys/kernel/randomize_va_space
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;（2）&lt;strong&gt;临时&lt;/strong&gt;修改 ASLR 强度&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 1. 关闭 ASLR&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo &lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt; &amp;gt; /proc/sys/kernel/randomize_va_space
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 2. 恢复默认部分随机化&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo &lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &amp;gt; /proc/sys/kernel/randomize_va_space
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 3. 开启完全随机化（高安全需求）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo &lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt; &amp;gt; /proc/sys/kernel/randomize_va_space
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
 &lt;/ul&gt;
+&lt;p&gt;​&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;关联&lt;/strong&gt;：两者通常配合使用 ——PIE 让可执行文件本身地址随机化，ASLR 让系统其他内存区域随机化，共同增加内存地址预测难度。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;区别核心&lt;/strong&gt;：PIE 是编译时决定的程序属性，ASLR 是系统运行时的布局策略。&lt;/p&gt;
 &lt;blockquote&gt;

