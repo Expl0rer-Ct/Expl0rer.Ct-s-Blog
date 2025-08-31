@@ -1545,7 +1545,7 @@ elf文件的节（section）会被映射进内存中的段（segment），而这
 &lt;/h4&gt;&lt;p&gt;在第一次调用外部函数时，plt表首先会跳到对应的got表项中。由于并没有被调用过，此时的got表存储的不是目标函数地址，此时的got表中存储的地址是pt表中的一段指令，其作用就是准备一些参数，进行动态解析。跳转回plt表后，plt表又会跳转回plt的表头，表头内容就是调用动态解析函数，将目标函数地址存放入got表中。&lt;/p&gt;
 &lt;p&gt;第一次调用外部函数，以调用C语言的printf为例子去详细讲解：&lt;/p&gt;
 &lt;p&gt;1、调用时，汇编语言执行到call printf时，先跳向PLT表中printf对应的条目（plt[printf]），这么说好像起到jmp跳转地址的作用啊。只是类似，并未跳转地址，而此时编译还不知道，而是先跳转PLT表中位该函数预留的一个”小跳板“（plt[printf]）。&lt;/p&gt;
-&lt;p&gt;**2、plt[printf]**第一次被调用时，此时GOT表中还没被填充真实地址（因为此前没有被解析过），所以里头并不是printf的真实地址，而是plt[printf]中下一条指令的地址（也就是jmp*GOT[printf]）。&lt;/p&gt;
+&lt;p&gt;2、**plt[printf]**第一次被调用时，此时GOT表中还没被填充真实地址（因为此前没有被解析过），所以里头并不是printf的真实地址，而是plt[printf]中下一条指令的地址（也就是jmp*GOT[printf]）。&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;call printf&lt;/code&gt; → 跳向&lt;code&gt;plt[printf]&lt;/code&gt; → 执行&lt;code&gt;jmp *GOT[printf]&lt;/code&gt; → 此时&lt;code&gt;GOT[printf]&lt;/code&gt;里已是真实地址，直接跳过去执行。此时就知道printf的真实地址了。&lt;/p&gt;
 &lt;p&gt;3、**跳回PLT后，执行”准备解析参数“的指令。**plt[printf]的下一条指令是准备动态解析需要的参数：比如把printf对应的符号索引（用于告诉动态链接器 “要解析哪个函数”）压入栈中。这些参数是提前在编译时就写好的，目的是告诉动态链接器 “我要找的是printf，帮我查它的真实地址”。这些参数是提前在编译时就写好的，目的是告诉动态链接器 “我要找的是printf，帮我查它的真实地址”。&lt;/p&gt;
 &lt;p&gt;4、**跳向PLT表头（plt[0]），触发动态链接器的解析函数。**准备好参数后，plt[printf]会跳向 PLT 表的 “表头”（plt[0]）。plt[0]里的指令是固定的：先把GOT[0]的地址压栈（GOT[0]存储着动态链接器需要的辅助信息），然后调用动态链接器的核心解析函数（_dl_runtime_resolve）。&lt;/p&gt;
