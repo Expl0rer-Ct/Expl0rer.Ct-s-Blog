@@ -6,11 +6,11 @@
 
 <link rel='canonical' href='https://expl0rer.top/p/pwn-2/'>
 
-<link rel="stylesheet" href="/scss/style.min.2c77b19359813276c65acd84dec34da71ed0ee906a8812f34e2c2899887b4ce7.css"><meta property='og:title' content="PWN-2">
+<link rel="stylesheet" href="/scss/style.min.4bd4146745b8cfb7d738bd4abe865979f0ea7240549e1e4a81cc0e68784b07a0.css"><meta property='og:title' content="PWN-2">
 <meta property='og:description' content="二进制漏洞与利用，栈">
 <meta property='og:url' content='https://expl0rer.top/p/pwn-2/'>
 <meta property='og:site_name' content='Expl0rer.Ct'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-08-25T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-09-02T13:08:30&#43;00:00'/><meta property='og:image' content='https://expl0rer.top/p/pwn-2/PWN2.png' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-08-25T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-09-11T05:02:53&#43;00:00'/><meta property='og:image' content='https://expl0rer.top/p/pwn-2/PWN2.png' />
 <meta name="twitter:title" content="PWN-2">
 <meta name="twitter:description" content="二进制漏洞与利用，栈"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://expl0rer.top/p/pwn-2/PWN2.png' />
@@ -732,7 +732,33 @@ unicode: "ece7"
         <li><a href="#ret2libc">ret2libc</a></li>
       </ol>
     </li>
-    <li><a href="#rop">ROP</a></li>
+    <li><a href="#rop-前传">ROP 前传</a></li>
+    <li><a href="#rop">ROP++</a>
+      <ol>
+        <li><a href="#栈转移">栈转移</a>
+          <ol>
+            <li><a href="#栈转移第一种方法">栈转移第一种方法</a></li>
+            <li><a href="#栈转移第二种方法">栈转移第二种方法</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#改写got表getshell方法">改写.got表getshell方法</a></li>
+    <li><a href="#pwn栈溢出题的一般解题思路">PWN栈溢出题的一般解题思路</a>
+      <ol>
+        <li><a href="#第一步查看文件信息checksec看架构保护信息">第一步、查看文件信息（checksec看架构、保护信息）</a></li>
+        <li><a href="#第二步理清函数逻辑如何执行">第二步、理清函数逻辑（如何执行？）</a></li>
+        <li><a href="#第三步找到漏洞栈堆gets函数systemexecv">第三步、找到漏洞（栈？堆？gets函数、system、execv）</a></li>
+        <li><a href="#第四步漏洞利用写exppayload">第四步、漏洞利用（写exp、payload）</a>
+          <ol>
+            <li><a href="#地址问题"><strong>地址问题</strong></a></li>
+            <li><a href="#canary和nx问题"><strong>canary和NX问题</strong></a></li>
+            <li><a href="#程序本身的限制">程序本身的限制</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#完结">完结</a></li>
   </ol>
 </nav>
         </div>
@@ -824,7 +850,7 @@ unicode: "ece7"
     
     <p><strong>前文：以下是我入门PWN的记录，欢迎各位前来观看，小弟领教！</strong></p>
 <p>[TOC]</p>
-<p>继上一大章的基础学习后，对PWN有了一定了解，知道一些专名词、一些保护机制的工作流程、汇编语言等，接下来的几章开始正式学习二进制的漏洞利用和原理。</p>
+<p>继上一大章的基础学 习后，对PWN有了一定了解，知道一些专名词、一些保护机制的工作流程、汇编语言等，接下来的几章开始正式学习二进制的漏洞利用和原理。</p>
 <p><em><strong>栈是PWN比较常见的突破点</strong></em></p>
 <h2 id="栈溢出原理">栈溢出原理
 </h2><p>在上一大章的函数调用约定中，我们可以了解到函数的调用过程：
@@ -1115,8 +1141,250 @@ unicode: "ece7"
 <p><strong>用 <code>pop rdi; ret</code> 把栈中的 <code>&quot;/bin/sh&quot;</code> 地址 “搬” 到 <code>rdi</code> 寄存器，再跳转到 <code>system</code> 函数</strong>。</p>
 <p>整个过程完全依赖栈溢出控制程序执行顺序，不需要程序中存在现成的 shell 函数，也不需要栈可执行，因此适用性极强。</p>
 <p>在这里开始就需要刷点PWN题了，我比较推荐的是ctfshow，购买官网套餐或者去咸鱼上买网盘保存的ctfshow-pwn题也行，看自己预算，在这里我就会同步进行writeup_pwn的编写了。</p>
-<h2 id="rop">ROP
-</h2>
+<h2 id="rop-前传">ROP 前传
+</h2><p>ROP（Return-Oriented Programming，返回导向编程）是一种高级漏洞利用技术，主要用于在内存保护机制（如 NX/DEP，即代码段不可执行）限制下，通过拼接程序中已有的代码片段（称为 “gadget”）来构造攻击逻辑，实现对程序的控制。</p>
+<p>很多情况下，程序中我们能够利用的只有栈。也就是说，程序中没有一个可读可写可执行的区域让我们输入shellcode。同时，大多数题目也不会那么好心给你留一个后门函数直接执行system。那么这个时候，我们就要利用ROP。我们不能运行shellcode，也没有后门函数一步到位。我们可以利用程序中的一些指令片段，一点点拼接起来，拼成我们想要的样子。怎么拼？</p>
+<p>拿system(&quot;“/bin/sh&quot;);举例：</p>
+<p>我们要将rdi改成/bin/sh这个字符串的地址，然后call system。不能执行shellcode，怎么改？我们有栈（传递参数）!  pop rdi ret + /bin/sh addr</p>
+<p>不能shellcode，怎么call？我们有ret!
+所以，我们构造的payload就是：
+padding + pop rdi; ret + /bin/sh + system</p>
+<p>ROP就是搭积木，用一个个小小的片段来完成复杂的工作，基本只需要用到栈这些小小的积木，我们称之为gadget怎么找gadget呢?</p>
+<p><strong>ropper &amp; ROPgadgets</strong>（自行安装）可以帮我们寻找</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ROPgadget --binary file 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>如果要找特定寄存器或者返回值，可以在后面加，比如图的指令:</p>
+<p><img src="/p/pwn-2/2.png"
+	width="1265"
+	height="375"
+	srcset="/p/pwn-2/2_hu_5a7538fd605e720d.png 480w, /p/pwn-2/2_hu_a866cc865737ff56.png 1024w"
+	loading="lazy"
+	
+		alt="PWN_042的示例：使用ROPgadget"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="337"
+		data-flex-basis="809px"
+	
+></p>
+<p>来个例子：</p>
+<p>read(0,buf,200);向buf上写数据（/bin/sh），buf地址已知；system(buf);即执行system(&quot;/bin/sh&quot;)；</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-nasm" data-lang="nasm"><span class="line"><span class="cl"><span class="nf">mov</span> <span class="nb">rdi</span> <span class="mi">0</span><span class="c1">;   //第一个参数0</span>
+</span></span><span class="line"><span class="cl"><span class="nf">mov</span> <span class="nb">rsi</span> <span class="nv">buf</span><span class="c1">; //第二个参数 buf地址</span>
+</span></span><span class="line"><span class="cl"><span class="nf">mov</span> <span class="nb">rdx</span> <span class="mi">200</span><span class="c1">; //第三个参数，写入的长度</span>
+</span></span><span class="line"><span class="cl"><span class="nf">call</span> <span class="nv">read</span><span class="c1">;   //调用read</span>
+</span></span><span class="line"><span class="cl"><span class="nf">mov</span> <span class="nb">rdi</span> <span class="nv">buf</span><span class="c1">; //第一个参数 buf地址</span>
+</span></span><span class="line"><span class="cl"><span class="nf">call</span> <span class="nv">system</span><span class="c1">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>ROP传参：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">pop rdi;ret；
+</span></span><span class="line"><span class="cl">0
+</span></span><span class="line"><span class="cl">pop rsi;ret;
+</span></span><span class="line"><span class="cl">buf
+</span></span><span class="line"><span class="cl">pop rdx;ret；
+</span></span><span class="line"><span class="cl">200
+</span></span><span class="line"><span class="cl">read
+</span></span><span class="line"><span class="cl">pop rdi;ret;
+</span></span><span class="line"><span class="cl">buf
+</span></span><span class="line"><span class="cl">system；
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>很抽象？那我们可以看回这个例子：</p>
+<p><img src="/p/pwn-2/2.png"
+	width="1265"
+	height="375"
+	srcset="/p/pwn-2/2_hu_5a7538fd605e720d.png 480w, /p/pwn-2/2_hu_a866cc865737ff56.png 1024w"
+	loading="lazy"
+	
+		alt="PWN_042的示例：使用ROPgadget"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="337"
+		data-flex-basis="809px"
+	
+></p>
+<p>看到里面的一些地址pop rdi;ret之类的，再看回上面的，你就能读懂是什么意思。</p>
+<p>但是在实际情况下，并不一定有像之前举的例子一样的gadget供我们使用，有时候我们需要一个gadget,比如poprsi；ret,程序中不一定会有，这时候就需要调动我们的思维能力，曲线救国，通过别的方式来完成ROP。</p>
+<blockquote class="alert alert-note">
+    <blockquote>
+<p>通用ROP：
+在64位程序中，函数的前6个参数是通过寄存器传递的，但是大多数时候，我们很难找到每一个寄存器对应的gadgets。</p>
+<p><img src="/p/pwn-2/3.png"
+	width="1065"
+	height="296"
+	srcset="/p/pwn-2/3_hu_d894993e4110c0f0.png 480w, /p/pwn-2/3_hu_6bafde7ec4c92de7.png 1024w"
+	loading="lazy"
+	
+		alt="示例"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="359"
+		data-flex-basis="863px"
+	
+></p>
+<p>这时候，我们可以利用x64下的libc_csu_init 中的gadgets。</p>
+<p>这个函数是用来对 ibc 进行初始化操作的，而一般的程序都会调用libc函数，所以这个函数一定会存在。</p></blockquote></blockquote>
+<p>本章的ROP介绍到这啦。</p>
+<h2 id="rop">ROP++
+</h2><p>通过之前的认识，我们发现ROP形式上把代码片段分散在程序代码中。ROP通过栈来维护整个链的逻辑。
+但如果栈溢出字节不够怎么办？</p>
+<p>思路一：one punch!</p>
+<p>libc中有没有这么一段代码，直接就运行system(“/bin/sh”)呢？这样我们就不需要传递参数，直接将返回地址覆盖到那里就好了。
+答案是：有，而且不止一个。这种一步到位的gadget，我们称之为<strong>one gadget</strong>。</p>
+<p>看起来像梭哈的，很方便喔！但是又局限性的，</p>
+<p>师傅，那我还学什么ROP，直接每次一步到位不就得了？想法总是好的，但是现实是很差强人意的。
+onegadget通常有变量要求，比如栈中的某个偏移处值必须为0，rax必须为0。所以说，onegadget这个东西，比较玄学，不靠谱。</p>
+<p>思路二：没条件创造条件</p>
+<p>计算机是怎么知道栈的？答：通过rbprsp</p>
+<p>ROP怎么维护逻辑的?答：通过一系列的pop和ret操作，依靠rsp。</p>
+<p>溢出字节不够，rop写不完，rsp一条路走到黑，一顿popret操作后跑到了我们溢出控制区域外。</p>
+<p>问题归纳总结：溢出字节不够只是原因，我们的目的是让rsp在我们能够控制的区域自由飞翔。</p>
+<h3 id="栈转移">栈转移
+</h3><p>只要控制rsp一直在我们可控制内容的区域，就可以完成rop。那么，如何控制RSP?其实就是mov rsp XXX 这种效果。有没有mov rsp rax；ret，或者pop rsp；ret这种gadgets呢?理论上应该有的，但是实际情况下极其少见。那么，除了push和pop，还有没有其他常见指令能对rsp值进行更改呢?</p>
+<p>那就是<em><strong>leave ret</strong></em>，<code>leave</code>指令的实际效果就是mov rsprbp; pop rbp；用于恢复栈帧，通常与ret连用。
+这里我们可以看到，leave将rbp的值符给了rsp。
+也就是说我们<strong>控制了rbp指针，就可以控制rsp</strong>。</p>
+<h4 id="栈转移第一种方法">栈转移第一种方法
+</h4><p>pop rbp; ret+ leave; ret</p>
+<p>rop的构成：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">pop rbp;ret;
+</span></span><span class="line"><span class="cl">target stack address
+</span></span><span class="line"><span class="cl">leave;ret;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>首先利用pop rbp ret来控制rbp指针的值为我们想要将栈转移到的地址，然后执行leave；ret来控制rsp指针。</p>
+<p>我们计算一下总共溢出的字节，pop rbp； ret的地址为返回地址，后续的所需要的<strong>溢出字节数仅仅为16字节</strong>，如果算上溢出覆盖到的rbp指针和返回地址，
+那么一共是32字节。然后栈转移到我们目标的地址上继续执行rop。</p>
+<h4 id="栈转移第二种方法">栈转移第二种方法
+</h4><p>两次leave ret</p>
+<p>rop构成：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">target stack address
+</span></span><span class="line"><span class="cl">leave ret;
+</span></span><span class="line"><span class="cl">leave ret;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这种方式与上一种方式大同小异，但是我们需要将栈上保存的rbp（也就是返回地址之前）改成迁移的地址。程序在第一次执行leave ret时，会将rbp搞到目标迁移地址上。再次执行leave ret时，效果就和之前一样了。</p>
+<p>那么溢出字节仅仅需要8个字节，算上覆盖的rbp以及返回地址，一共需要24字节溢出。</p>
+<p><strong>如果我们溢出的函数本身结尾带有leave；ret，那么我们只需要溢出16字节，只需要覆盖到返回地址即可</strong>。</p>
+<p>总之，栈转移通过将 <code>rsp</code> 指向可控区域，解决了以下问题：</p>
+<ol>
+<li>原始栈空间不足，无法构造长 ROP 链；</li>
+<li>利用堆或其他可写区域（如 <code>.bss</code> 段）作为新栈，绕过栈保护机制；</li>
+<li>串联多个分散的 gadget，实现复杂攻击逻辑（如调用 <code>execve</code> 或泄露 libc 地址）。</li>
+</ol>
+<p>其本质是利用 <code>leave</code> 指令对 <code>rbp</code> 和 <code>rsp</code> 的关联关系，通过控制 <code>rbp</code> 间接 “劫持” 栈指针，是 ROP 进阶利用中的关键技术。</p>
+<h2 id="改写got表getshell方法">改写.got表getshell方法
+</h2><p>我们思考一下，程序调用函数都是通过访问got表。
+如果我们将.got表中原本存放比如说puts函数的地址，改成system函数的地址，这样程序想要调用puts时，实际调用的却是system，利用这种方式getshell，不是很好吗？</p>
+<p>这种方式叫做got表劫持，是一种间接控制程序执行流的方式。</p>
+<p>GOT的地址，在没开PIE的情况下，我们可以在IDA中查看，也可以用pwntools指令查询：elf.GOT[&ldquo;puts&rdquo;]</p>
+<p><img src="/p/pwn-2/4.png"
+	width="999"
+	height="321"
+	srcset="/p/pwn-2/4_hu_6233a4acaebdd711.png 480w, /p/pwn-2/4_hu_2afefb642b4f59a8.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="311"
+		data-flex-basis="746px"
+	
+></p>
+<p>在我们劫持got表时，常见的有如下几种：
+puts(buf)、 、atoi(buf)、atol(buf)、free(buf)</p>
+<p>free在当前阶段少见，在后续的堆会很常见。</p>
+<p>总的来说，把这些第一个参数也就是rdi指针指向我们可以控制输入的区域的函数，改成system，这样，当我们程序执行到调用这些函数时，程序就被劫持到我们目标函数处了。</p>
+<p>如何改写？</p>
+<p>ROP: read (0, got, size)；</p>
+<p>达到任意内存地址写后，不能确定栈地址，考虑写got。</p>
+<p>bss等段越界访问(负值)。</p>
+<p>主要看程序逻辑，具体问题具体分析。</p>
+<h2 id="pwn栈溢出题的一般解题思路">PWN栈溢出题的一般解题思路
+</h2><p>直接控制执行流：shellcode &amp;ROP</p>
+<p>间接控制执行流：改写函数指针，如got表。</p>
+<p>保护机制绕过：canary、ASLR、PIE</p>
+<p>方法论</p>
+<h3 id="第一步查看文件信息checksec看架构保护信息">第一步、查看文件信息（checksec看架构、保护信息）
+</h3><blockquote>
+<p>一般来说，栈题目都会或多或少关闭一些保护。
+如果关了canary，那么大概率是栈题。如果开启了PIE，那么就需要找个地方泄漏地址信息。如果开启了 FULL RELRO，那么思路就不应该是改写got。</p></blockquote>
+<h3 id="第二步理清函数逻辑如何执行">第二步、理清函数逻辑（如何执行？）
+</h3><blockquote>
+<p>直接在linux中运行，丢进ida，静态分析。</p>
+<p>首先把函数名、变量等等搞成自己看得懂的地步。如果有结构体，最好花时间建一个结构体,这样之后分析省事。</p></blockquote>
+<h3 id="第三步找到漏洞栈堆gets函数systemexecv">第三步、找到漏洞（栈？堆？gets函数、system、execv）
+</h3><blockquote class="alert alert-warn">
+    <blockquote>
+<p>找漏洞是很考验经验的。</p>
+<p>一般先分析一下危险函数，比如<code>gets</code>、<code>read</code>、<code>write</code>、<code>free</code>、<code>printf</code>等等。
+很多PWN题目会自己封装一个<code>input</code>函数,重点分析一下，看看有没有越界。
+分析的时候也有技巧，通常我们要看看我们的输入数据会被程序如何处理。</p>
+<p>由于pwn多数是<strong>内存破坏漏洞</strong>，所以对于内存拷贝等函数要格外注意。</p></blockquote></blockquote>
+<h3 id="第四步漏洞利用写exppayload">第四步、漏洞利用（写exp、payload）
+</h3><blockquote>
+<p>基本上找到漏洞工作就完成了一半。
+漏洞利用和程序本身的逻辑以及保护机制息息相关。通常来说，需要解决以下几个问题：</p>
+<h4 id="地址问题"><strong>地址问题</strong>
+</h4><p>我们编写EXP离不开函数地址以及gadgets地址。</p>
+<p>开启了PIE和ASLR，我们就需要想办法泄漏地址。</p>
+<p>泄漏方法一般就是让程序打印出来一些脏数据或者函数地址。</p>
+<p>程序基地址、堆地址、Iibc基地址、栈地址。</p>
+<h4 id="canary和nx问题"><strong>canary和NX问题</strong>
+</h4><p>如果确定是栈题，并且有canary，那么通常考虑泄漏或者修改canary。一般来说，NX都是开启的，没有开启就说明要你执行<code>shellcode</code>了。</p>
+<p>NX对于我们写ROP基本没影响，绕过方法也很简单：<code>mprotect</code></p>
+<h4 id="程序本身的限制">程序本身的限制
+</h4><p>gadget种类少、输入字符有限制、栈溢出字节不够、具体情况具体分析。</p></blockquote>
+<h2 id="完结">完结
+</h2><p>栈的讲解就到这，可能内容比较少，概念抽象些，也是怪小生基础不牢理解力不够强😄，还得区看看PWB题加强一下。</p>
+
 </section>
 
 
@@ -1133,7 +1401,7 @@ unicode: "ece7"
 
 
         <span>
-            最后更新于 2025-09-02
+            最后更新于 2025-09-11
         </span>
     </section></footer>
 
@@ -1363,7 +1631,7 @@ unicode: "ece7"
 <section class="wordcount">
   <div class="wordcount-row">
     <p>博主发布了7篇文章  ||</p>
-    <p>总共90.80k 字</p>
+    <p>总共109.74k 字</p>
   </div>
 </section>
         

@@ -9,11 +9,18 @@
         <copyright>Expl0rer.Ct</copyright><atom:link href="https://expl0rer.top/categories/pwn%E5%85%A5%E9%97%A8/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>PWN-3</title>
         <link>https://expl0rer.top/p/pwn-3/</link>
-        <pubDate>Tue, 26 Aug 2025 00:00:00 +0000</pubDate>
+        <pubDate>Sun, 07 Sep 2025 00:00:00 +0000</pubDate>
         
         <guid>https://expl0rer.top/p/pwn-3/</guid>
         <description>&lt;img src="https://expl0rer.top/p/pwn-3/PWN3.png" alt="Featured image of post PWN-3" /&gt;&lt;p&gt;&lt;strong&gt;前文：以下是我入门PWN的记录，欢迎各位前来观看，小弟领教！&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;正在努力加载，敬请期待&amp;hellip;&amp;hellip;&lt;/p&gt;
+&lt;p&gt;在前面的章节中，我们已经粗略的了解了栈相关的知识点：
+ROP、shellcode、栈转移等。&lt;/p&gt;
+&lt;p&gt;内存中还有一块区域叫做堆（heap）。&lt;/p&gt;
+&lt;p&gt;接下来的一整章的内容，我们就来讲堆。&lt;/p&gt;
+&lt;h2 id=&#34;linux动态内存管理机制&#34;&gt;Linux动态内存管理机制
+&lt;/h2&gt;&lt;p&gt;什么是堆,现在我来带你研究&lt;/p&gt;
+&lt;p&gt;堆是程序用于分配动态内存的一段内存区域。
+他独立的存在于内存中，介于程序内存 基地址和libc地址之间，&lt;strong&gt;从低地址向高地址生长&lt;/strong&gt;，与用户打交道最多。&lt;/p&gt;
 </description>
         </item>
         <item>
@@ -24,7 +31,7 @@
         <guid>https://expl0rer.top/p/pwn-2/</guid>
         <description>&lt;img src="https://expl0rer.top/p/pwn-2/PWN2.png" alt="Featured image of post PWN-2" /&gt;&lt;p&gt;&lt;strong&gt;前文：以下是我入门PWN的记录，欢迎各位前来观看，小弟领教！&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;[TOC]&lt;/p&gt;
-&lt;p&gt;继上一大章的基础学习后，对PWN有了一定了解，知道一些专名词、一些保护机制的工作流程、汇编语言等，接下来的几章开始正式学习二进制的漏洞利用和原理。&lt;/p&gt;
+&lt;p&gt;继上一大章的基础学 习后，对PWN有了一定了解，知道一些专名词、一些保护机制的工作流程、汇编语言等，接下来的几章开始正式学习二进制的漏洞利用和原理。&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;&lt;strong&gt;栈是PWN比较常见的突破点&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;
 &lt;h2 id=&#34;栈溢出原理&#34;&gt;栈溢出原理
 &lt;/h2&gt;&lt;p&gt;在上一大章的函数调用约定中，我们可以了解到函数的调用过程：
@@ -315,8 +322,250 @@
 &lt;p&gt;&lt;strong&gt;用 &lt;code&gt;pop rdi; ret&lt;/code&gt; 把栈中的 &lt;code&gt;&amp;quot;/bin/sh&amp;quot;&lt;/code&gt; 地址 “搬” 到 &lt;code&gt;rdi&lt;/code&gt; 寄存器，再跳转到 &lt;code&gt;system&lt;/code&gt; 函数&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;整个过程完全依赖栈溢出控制程序执行顺序，不需要程序中存在现成的 shell 函数，也不需要栈可执行，因此适用性极强。&lt;/p&gt;
 &lt;p&gt;在这里开始就需要刷点PWN题了，我比较推荐的是ctfshow，购买官网套餐或者去咸鱼上买网盘保存的ctfshow-pwn题也行，看自己预算，在这里我就会同步进行writeup_pwn的编写了。&lt;/p&gt;
-&lt;h2 id=&#34;rop&#34;&gt;ROP
-&lt;/h2&gt;</description>
+&lt;h2 id=&#34;rop-前传&#34;&gt;ROP 前传
+&lt;/h2&gt;&lt;p&gt;ROP（Return-Oriented Programming，返回导向编程）是一种高级漏洞利用技术，主要用于在内存保护机制（如 NX/DEP，即代码段不可执行）限制下，通过拼接程序中已有的代码片段（称为 “gadget”）来构造攻击逻辑，实现对程序的控制。&lt;/p&gt;
+&lt;p&gt;很多情况下，程序中我们能够利用的只有栈。也就是说，程序中没有一个可读可写可执行的区域让我们输入shellcode。同时，大多数题目也不会那么好心给你留一个后门函数直接执行system。那么这个时候，我们就要利用ROP。我们不能运行shellcode，也没有后门函数一步到位。我们可以利用程序中的一些指令片段，一点点拼接起来，拼成我们想要的样子。怎么拼？&lt;/p&gt;
+&lt;p&gt;拿system(&amp;quot;“/bin/sh&amp;quot;);举例：&lt;/p&gt;
+&lt;p&gt;我们要将rdi改成/bin/sh这个字符串的地址，然后call system。不能执行shellcode，怎么改？我们有栈（传递参数）!  pop rdi ret + /bin/sh addr&lt;/p&gt;
+&lt;p&gt;不能shellcode，怎么call？我们有ret!
+所以，我们构造的payload就是：
+padding + pop rdi; ret + /bin/sh + system&lt;/p&gt;
+&lt;p&gt;ROP就是搭积木，用一个个小小的片段来完成复杂的工作，基本只需要用到栈这些小小的积木，我们称之为gadget怎么找gadget呢?&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;ropper &amp;amp; ROPgadgets&lt;/strong&gt;（自行安装）可以帮我们寻找&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;ROPgadget --binary file 
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;如果要找特定寄存器或者返回值，可以在后面加，比如图的指令:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/pwn-2/2.png&#34;
+	width=&#34;1265&#34;
+	height=&#34;375&#34;
+	srcset=&#34;https://expl0rer.top/p/pwn-2/2_hu_5a7538fd605e720d.png 480w, https://expl0rer.top/p/pwn-2/2_hu_a866cc865737ff56.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;PWN_042的示例：使用ROPgadget&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;337&#34;
+		data-flex-basis=&#34;809px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;来个例子：&lt;/p&gt;
+&lt;p&gt;read(0,buf,200);向buf上写数据（/bin/sh），buf地址已知；system(buf);即执行system(&amp;quot;/bin/sh&amp;quot;)；&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-nasm&#34; data-lang=&#34;nasm&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;mov&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;rdi&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;;   //第一个参数0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;mov&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;rsi&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;buf&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;; //第二个参数 buf地址&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;mov&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;rdx&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;200&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;; //第三个参数，写入的长度&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;call&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;read&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;;   //调用read&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;mov&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;rdi&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;buf&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;; //第一个参数 buf地址&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;call&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;system&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;ROP传参：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;pop rdi;ret；
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;0
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;pop rsi;ret;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;buf
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;pop rdx;ret；
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;200
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;read
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;pop rdi;ret;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;buf
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;system；
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;很抽象？那我们可以看回这个例子：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/pwn-2/2.png&#34;
+	width=&#34;1265&#34;
+	height=&#34;375&#34;
+	srcset=&#34;https://expl0rer.top/p/pwn-2/2_hu_5a7538fd605e720d.png 480w, https://expl0rer.top/p/pwn-2/2_hu_a866cc865737ff56.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;PWN_042的示例：使用ROPgadget&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;337&#34;
+		data-flex-basis=&#34;809px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;看到里面的一些地址pop rdi;ret之类的，再看回上面的，你就能读懂是什么意思。&lt;/p&gt;
+&lt;p&gt;但是在实际情况下，并不一定有像之前举的例子一样的gadget供我们使用，有时候我们需要一个gadget,比如poprsi；ret,程序中不一定会有，这时候就需要调动我们的思维能力，曲线救国，通过别的方式来完成ROP。&lt;/p&gt;
+&lt;blockquote class=&#34;alert alert-note&#34;&gt;
+    &lt;blockquote&gt;
+&lt;p&gt;通用ROP：
+在64位程序中，函数的前6个参数是通过寄存器传递的，但是大多数时候，我们很难找到每一个寄存器对应的gadgets。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/pwn-2/3.png&#34;
+	width=&#34;1065&#34;
+	height=&#34;296&#34;
+	srcset=&#34;https://expl0rer.top/p/pwn-2/3_hu_d894993e4110c0f0.png 480w, https://expl0rer.top/p/pwn-2/3_hu_6bafde7ec4c92de7.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;示例&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;359&#34;
+		data-flex-basis=&#34;863px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;这时候，我们可以利用x64下的libc_csu_init 中的gadgets。&lt;/p&gt;
+&lt;p&gt;这个函数是用来对 ibc 进行初始化操作的，而一般的程序都会调用libc函数，所以这个函数一定会存在。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;本章的ROP介绍到这啦。&lt;/p&gt;
+&lt;h2 id=&#34;rop&#34;&gt;ROP++
+&lt;/h2&gt;&lt;p&gt;通过之前的认识，我们发现ROP形式上把代码片段分散在程序代码中。ROP通过栈来维护整个链的逻辑。
+但如果栈溢出字节不够怎么办？&lt;/p&gt;
+&lt;p&gt;思路一：one punch!&lt;/p&gt;
+&lt;p&gt;libc中有没有这么一段代码，直接就运行system(“/bin/sh”)呢？这样我们就不需要传递参数，直接将返回地址覆盖到那里就好了。
+答案是：有，而且不止一个。这种一步到位的gadget，我们称之为&lt;strong&gt;one gadget&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;看起来像梭哈的，很方便喔！但是又局限性的，&lt;/p&gt;
+&lt;p&gt;师傅，那我还学什么ROP，直接每次一步到位不就得了？想法总是好的，但是现实是很差强人意的。
+onegadget通常有变量要求，比如栈中的某个偏移处值必须为0，rax必须为0。所以说，onegadget这个东西，比较玄学，不靠谱。&lt;/p&gt;
+&lt;p&gt;思路二：没条件创造条件&lt;/p&gt;
+&lt;p&gt;计算机是怎么知道栈的？答：通过rbprsp&lt;/p&gt;
+&lt;p&gt;ROP怎么维护逻辑的?答：通过一系列的pop和ret操作，依靠rsp。&lt;/p&gt;
+&lt;p&gt;溢出字节不够，rop写不完，rsp一条路走到黑，一顿popret操作后跑到了我们溢出控制区域外。&lt;/p&gt;
+&lt;p&gt;问题归纳总结：溢出字节不够只是原因，我们的目的是让rsp在我们能够控制的区域自由飞翔。&lt;/p&gt;
+&lt;h3 id=&#34;栈转移&#34;&gt;栈转移
+&lt;/h3&gt;&lt;p&gt;只要控制rsp一直在我们可控制内容的区域，就可以完成rop。那么，如何控制RSP?其实就是mov rsp XXX 这种效果。有没有mov rsp rax；ret，或者pop rsp；ret这种gadgets呢?理论上应该有的，但是实际情况下极其少见。那么，除了push和pop，还有没有其他常见指令能对rsp值进行更改呢?&lt;/p&gt;
+&lt;p&gt;那就是&lt;em&gt;&lt;strong&gt;leave ret&lt;/strong&gt;&lt;/em&gt;，&lt;code&gt;leave&lt;/code&gt;指令的实际效果就是mov rsprbp; pop rbp；用于恢复栈帧，通常与ret连用。
+这里我们可以看到，leave将rbp的值符给了rsp。
+也就是说我们&lt;strong&gt;控制了rbp指针，就可以控制rsp&lt;/strong&gt;。&lt;/p&gt;
+&lt;h4 id=&#34;栈转移第一种方法&#34;&gt;栈转移第一种方法
+&lt;/h4&gt;&lt;p&gt;pop rbp; ret+ leave; ret&lt;/p&gt;
+&lt;p&gt;rop的构成：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;pop rbp;ret;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;target stack address
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;leave;ret;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;首先利用pop rbp ret来控制rbp指针的值为我们想要将栈转移到的地址，然后执行leave；ret来控制rsp指针。&lt;/p&gt;
+&lt;p&gt;我们计算一下总共溢出的字节，pop rbp； ret的地址为返回地址，后续的所需要的&lt;strong&gt;溢出字节数仅仅为16字节&lt;/strong&gt;，如果算上溢出覆盖到的rbp指针和返回地址，
+那么一共是32字节。然后栈转移到我们目标的地址上继续执行rop。&lt;/p&gt;
+&lt;h4 id=&#34;栈转移第二种方法&#34;&gt;栈转移第二种方法
+&lt;/h4&gt;&lt;p&gt;两次leave ret&lt;/p&gt;
+&lt;p&gt;rop构成：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;target stack address
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;leave ret;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;leave ret;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;这种方式与上一种方式大同小异，但是我们需要将栈上保存的rbp（也就是返回地址之前）改成迁移的地址。程序在第一次执行leave ret时，会将rbp搞到目标迁移地址上。再次执行leave ret时，效果就和之前一样了。&lt;/p&gt;
+&lt;p&gt;那么溢出字节仅仅需要8个字节，算上覆盖的rbp以及返回地址，一共需要24字节溢出。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;如果我们溢出的函数本身结尾带有leave；ret，那么我们只需要溢出16字节，只需要覆盖到返回地址即可&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;总之，栈转移通过将 &lt;code&gt;rsp&lt;/code&gt; 指向可控区域，解决了以下问题：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;原始栈空间不足，无法构造长 ROP 链；&lt;/li&gt;
+&lt;li&gt;利用堆或其他可写区域（如 &lt;code&gt;.bss&lt;/code&gt; 段）作为新栈，绕过栈保护机制；&lt;/li&gt;
+&lt;li&gt;串联多个分散的 gadget，实现复杂攻击逻辑（如调用 &lt;code&gt;execve&lt;/code&gt; 或泄露 libc 地址）。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;其本质是利用 &lt;code&gt;leave&lt;/code&gt; 指令对 &lt;code&gt;rbp&lt;/code&gt; 和 &lt;code&gt;rsp&lt;/code&gt; 的关联关系，通过控制 &lt;code&gt;rbp&lt;/code&gt; 间接 “劫持” 栈指针，是 ROP 进阶利用中的关键技术。&lt;/p&gt;
+&lt;h2 id=&#34;改写got表getshell方法&#34;&gt;改写.got表getshell方法
+&lt;/h2&gt;&lt;p&gt;我们思考一下，程序调用函数都是通过访问got表。
+如果我们将.got表中原本存放比如说puts函数的地址，改成system函数的地址，这样程序想要调用puts时，实际调用的却是system，利用这种方式getshell，不是很好吗？&lt;/p&gt;
+&lt;p&gt;这种方式叫做got表劫持，是一种间接控制程序执行流的方式。&lt;/p&gt;
+&lt;p&gt;GOT的地址，在没开PIE的情况下，我们可以在IDA中查看，也可以用pwntools指令查询：elf.GOT[&amp;ldquo;puts&amp;rdquo;]&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/pwn-2/4.png&#34;
+	width=&#34;999&#34;
+	height=&#34;321&#34;
+	srcset=&#34;https://expl0rer.top/p/pwn-2/4_hu_6233a4acaebdd711.png 480w, https://expl0rer.top/p/pwn-2/4_hu_2afefb642b4f59a8.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;311&#34;
+		data-flex-basis=&#34;746px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;在我们劫持got表时，常见的有如下几种：
+puts(buf)、 、atoi(buf)、atol(buf)、free(buf)&lt;/p&gt;
+&lt;p&gt;free在当前阶段少见，在后续的堆会很常见。&lt;/p&gt;
+&lt;p&gt;总的来说，把这些第一个参数也就是rdi指针指向我们可以控制输入的区域的函数，改成system，这样，当我们程序执行到调用这些函数时，程序就被劫持到我们目标函数处了。&lt;/p&gt;
+&lt;p&gt;如何改写？&lt;/p&gt;
+&lt;p&gt;ROP: read (0, got, size)；&lt;/p&gt;
+&lt;p&gt;达到任意内存地址写后，不能确定栈地址，考虑写got。&lt;/p&gt;
+&lt;p&gt;bss等段越界访问(负值)。&lt;/p&gt;
+&lt;p&gt;主要看程序逻辑，具体问题具体分析。&lt;/p&gt;
+&lt;h2 id=&#34;pwn栈溢出题的一般解题思路&#34;&gt;PWN栈溢出题的一般解题思路
+&lt;/h2&gt;&lt;p&gt;直接控制执行流：shellcode &amp;amp;ROP&lt;/p&gt;
+&lt;p&gt;间接控制执行流：改写函数指针，如got表。&lt;/p&gt;
+&lt;p&gt;保护机制绕过：canary、ASLR、PIE&lt;/p&gt;
+&lt;p&gt;方法论&lt;/p&gt;
+&lt;h3 id=&#34;第一步查看文件信息checksec看架构保护信息&#34;&gt;第一步、查看文件信息（checksec看架构、保护信息）
+&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;一般来说，栈题目都会或多或少关闭一些保护。
+如果关了canary，那么大概率是栈题。如果开启了PIE，那么就需要找个地方泄漏地址信息。如果开启了 FULL RELRO，那么思路就不应该是改写got。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;h3 id=&#34;第二步理清函数逻辑如何执行&#34;&gt;第二步、理清函数逻辑（如何执行？）
+&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;直接在linux中运行，丢进ida，静态分析。&lt;/p&gt;
+&lt;p&gt;首先把函数名、变量等等搞成自己看得懂的地步。如果有结构体，最好花时间建一个结构体,这样之后分析省事。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;h3 id=&#34;第三步找到漏洞栈堆gets函数systemexecv&#34;&gt;第三步、找到漏洞（栈？堆？gets函数、system、execv）
+&lt;/h3&gt;&lt;blockquote class=&#34;alert alert-warn&#34;&gt;
+    &lt;blockquote&gt;
+&lt;p&gt;找漏洞是很考验经验的。&lt;/p&gt;
+&lt;p&gt;一般先分析一下危险函数，比如&lt;code&gt;gets&lt;/code&gt;、&lt;code&gt;read&lt;/code&gt;、&lt;code&gt;write&lt;/code&gt;、&lt;code&gt;free&lt;/code&gt;、&lt;code&gt;printf&lt;/code&gt;等等。
+很多PWN题目会自己封装一个&lt;code&gt;input&lt;/code&gt;函数,重点分析一下，看看有没有越界。
+分析的时候也有技巧，通常我们要看看我们的输入数据会被程序如何处理。&lt;/p&gt;
+&lt;p&gt;由于pwn多数是&lt;strong&gt;内存破坏漏洞&lt;/strong&gt;，所以对于内存拷贝等函数要格外注意。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;h3 id=&#34;第四步漏洞利用写exppayload&#34;&gt;第四步、漏洞利用（写exp、payload）
+&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;基本上找到漏洞工作就完成了一半。
+漏洞利用和程序本身的逻辑以及保护机制息息相关。通常来说，需要解决以下几个问题：&lt;/p&gt;
+&lt;h4 id=&#34;地址问题&#34;&gt;&lt;strong&gt;地址问题&lt;/strong&gt;
+&lt;/h4&gt;&lt;p&gt;我们编写EXP离不开函数地址以及gadgets地址。&lt;/p&gt;
+&lt;p&gt;开启了PIE和ASLR，我们就需要想办法泄漏地址。&lt;/p&gt;
+&lt;p&gt;泄漏方法一般就是让程序打印出来一些脏数据或者函数地址。&lt;/p&gt;
+&lt;p&gt;程序基地址、堆地址、Iibc基地址、栈地址。&lt;/p&gt;
+&lt;h4 id=&#34;canary和nx问题&#34;&gt;&lt;strong&gt;canary和NX问题&lt;/strong&gt;
+&lt;/h4&gt;&lt;p&gt;如果确定是栈题，并且有canary，那么通常考虑泄漏或者修改canary。一般来说，NX都是开启的，没有开启就说明要你执行&lt;code&gt;shellcode&lt;/code&gt;了。&lt;/p&gt;
+&lt;p&gt;NX对于我们写ROP基本没影响，绕过方法也很简单：&lt;code&gt;mprotect&lt;/code&gt;&lt;/p&gt;
+&lt;h4 id=&#34;程序本身的限制&#34;&gt;程序本身的限制
+&lt;/h4&gt;&lt;p&gt;gadget种类少、输入字符有限制、栈溢出字节不够、具体情况具体分析。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;h2 id=&#34;完结&#34;&gt;完结
+&lt;/h2&gt;&lt;p&gt;栈的讲解就到这，可能内容比较少，概念抽象些，也是怪小生基础不牢理解力不够强😄，还得区看看PWB题加强一下。&lt;/p&gt;
+</description>
         </item>
         <item>
         <title>PWN-1</title>
@@ -346,7 +595,7 @@
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Pwn传统出题方向：glibc PWN：堆、栈、shellcode编写、iofile等。进阶：arm架构、loT、内核、vm、浏览器等。&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;所需工具：pwntools、pwndbg、IDA、虚拟机（Ubuntu或Kali）&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;所需工具：pwntools、pwndbg、IDA、虚拟机（Ubuntu或Kali）、LibcSearcher、ropper&amp;amp;ROPgadgets、one_gadget、Ruby&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;实际生活中我们会遇到的pwn：&lt;/p&gt;
 &lt;p&gt;泄露通信数据：心脏滴血（cve-2014-0160）&lt;/p&gt;
 &lt;p&gt;Linux本地提权root：脏牛dirty cow（cve-2016-5195）&lt;/p&gt;
