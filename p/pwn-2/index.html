@@ -10,7 +10,7 @@
 <meta property='og:description' content="二进制漏洞与利用，栈">
 <meta property='og:url' content='https://expl0rer.top/p/pwn-2/'>
 <meta property='og:site_name' content='Expl0rer.Ct'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-08-25T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-09-25T18:19:52&#43;00:00'/><meta property='og:image' content='https://expl0rer.top/p/pwn-2/PWN2.png' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-08-25T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-09-29T16:31:05&#43;00:00'/><meta property='og:image' content='https://expl0rer.top/p/pwn-2/PWN2.png' />
 <meta name="twitter:title" content="PWN-2">
 <meta name="twitter:description" content="二进制漏洞与利用，栈"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://expl0rer.top/p/pwn-2/PWN2.png' />
@@ -967,7 +967,7 @@ unicode: "ece7"
 <p>ret2shellcode的思路就是：</p>
 <p>如果程序中存在让用户向一段长度足够的缓冲区中输入数据。我们向其中输入shellcode，将程序劫持到shellcode上即可。当然，这种也是理想情况。</p>
 <blockquote>
-<p><code>ret2shellcode</code>是二进制漏：洞利用中的一种常见技术，用于在存在栈溢出等漏洞的程序中获取系统的 shell 权限，从而执行任意命令。<code>ret2shellcode</code>利用这个特性，将返回地址覆盖为一段精心构造的机器码（即 shellcode）的地址，从而返回到攻击者留下的shellcode进行劫持。</p></blockquote>
+<p><code>ret2shellcode</code>是二进制漏洞利用中的一种常见技术，用于在存在栈溢出等漏洞的程序中获取系统的 shell 权限，从而执行任意命令。<code>ret2shellcode</code>利用这个特性，将返回地址覆盖为一段精心构造的机器码（即 shellcode）的地址，从而返回到攻击者留下的shellcode进行劫持。</p></blockquote>
 <h3 id="栈溢出案例ret2shellcode">栈溢出案例：ret2shellcode
 </h3><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1257,7 +1257,7 @@ padding + pop rdi; ret + /bin/sh + system</p>
 	
 ></p>
 <p>这时候，我们可以利用x64下的libc_csu_init 中的gadgets。</p>
-<p>这个函数是用来对 ibc 进行初始化操作的，而一般的程序都会调用libc函数，所以这个函数一定会存在。</p></blockquote></blockquote>
+<p>这个函数是用来对libc 进行初始化操作的，而一般的程序都会调用libc函数，所以这个函数一定会存在。</p></blockquote></blockquote>
 <p>本章的ROP介绍到这啦。</p>
 <h2 id="rop">ROP++
 </h2><p>通过之前的认识，我们发现ROP形式上把代码片段分散在程序代码中。ROP通过栈来维护整个链的逻辑。
@@ -1339,7 +1339,7 @@ onegadget通常有变量要求，比如栈中的某个偏移处值必须为0，r
 	
 ></p>
 <p>在我们劫持got表时，常见的有如下几种：
-puts(buf)、 、atoi(buf)、atol(buf)、free(buf)</p>
+puts(buf)、atoi(buf)、atol(buf)、free(buf)</p>
 <p>free在当前阶段少见，在后续的堆会很常见。</p>
 <p>总的来说，把这些第一个参数也就是rdi指针指向我们可以控制输入的区域的函数，改成system，这样，当我们程序执行到调用这些函数时，程序就被劫持到我们目标函数处了。</p>
 <p>如何改写？</p>
@@ -1401,7 +1401,7 @@ puts(buf)、 、atoi(buf)、atol(buf)、free(buf)</p>
 
 
         <span>
-            最后更新于 2025-09-25
+            最后更新于 2025-09-29
         </span>
     </section></footer>
 
@@ -1631,7 +1631,7 @@ puts(buf)、 、atoi(buf)、atol(buf)、free(buf)</p>
 <section class="wordcount">
   <div class="wordcount-row">
     <p>博主发布了7篇文章  ||</p>
-    <p>总共161.41k 字</p>
+    <p>总共163.54k 字</p>
   </div>
 </section>
         

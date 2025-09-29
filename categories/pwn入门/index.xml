@@ -148,7 +148,7 @@ ROP、shellcode、栈转移等。&lt;/p&gt;
 &lt;p&gt;ret2shellcode的思路就是：&lt;/p&gt;
 &lt;p&gt;如果程序中存在让用户向一段长度足够的缓冲区中输入数据。我们向其中输入shellcode，将程序劫持到shellcode上即可。当然，这种也是理想情况。&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;&lt;code&gt;ret2shellcode&lt;/code&gt;是二进制漏：洞利用中的一种常见技术，用于在存在栈溢出等漏洞的程序中获取系统的 shell 权限，从而执行任意命令。&lt;code&gt;ret2shellcode&lt;/code&gt;利用这个特性，将返回地址覆盖为一段精心构造的机器码（即 shellcode）的地址，从而返回到攻击者留下的shellcode进行劫持。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;&lt;code&gt;ret2shellcode&lt;/code&gt;是二进制漏洞利用中的一种常见技术，用于在存在栈溢出等漏洞的程序中获取系统的 shell 权限，从而执行任意命令。&lt;code&gt;ret2shellcode&lt;/code&gt;利用这个特性，将返回地址覆盖为一段精心构造的机器码（即 shellcode）的地址，从而返回到攻击者留下的shellcode进行劫持。&lt;/p&gt;&lt;/blockquote&gt;
 &lt;h3 id=&#34;栈溢出案例ret2shellcode&#34;&gt;栈溢出案例：ret2shellcode
 &lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -438,7 +438,7 @@ padding + pop rdi; ret + /bin/sh + system&lt;/p&gt;
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;这时候，我们可以利用x64下的libc_csu_init 中的gadgets。&lt;/p&gt;
-&lt;p&gt;这个函数是用来对 ibc 进行初始化操作的，而一般的程序都会调用libc函数，所以这个函数一定会存在。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;这个函数是用来对libc 进行初始化操作的，而一般的程序都会调用libc函数，所以这个函数一定会存在。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
 &lt;p&gt;本章的ROP介绍到这啦。&lt;/p&gt;
 &lt;h2 id=&#34;rop&#34;&gt;ROP++
 &lt;/h2&gt;&lt;p&gt;通过之前的认识，我们发现ROP形式上把代码片段分散在程序代码中。ROP通过栈来维护整个链的逻辑。
@@ -520,7 +520,7 @@ onegadget通常有变量要求，比如栈中的某个偏移处值必须为0，r
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;在我们劫持got表时，常见的有如下几种：
-puts(buf)、 、atoi(buf)、atol(buf)、free(buf)&lt;/p&gt;
+puts(buf)、atoi(buf)、atol(buf)、free(buf)&lt;/p&gt;
 &lt;p&gt;free在当前阶段少见，在后续的堆会很常见。&lt;/p&gt;
 &lt;p&gt;总的来说，把这些第一个参数也就是rdi指针指向我们可以控制输入的区域的函数，改成system，这样，当我们程序执行到调用这些函数时，程序就被劫持到我们目标函数处了。&lt;/p&gt;
 &lt;p&gt;如何改写？&lt;/p&gt;
