@@ -2,18 +2,18 @@
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="二进制漏洞与利用，PWN入门_wrtieup，会员套餐360题">
-<title>ctfshow-pwn-writeup</title>
+<title>CTFshow-入门PWN-writeup</title>
 
-<link rel='canonical' href='https://expl0rer.top/p/ctfshow-pwn-writeup/'>
+<link rel='canonical' href='https://expl0rer.top/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/'>
 
-<link rel="stylesheet" href="/scss/style.min.4bd4146745b8cfb7d738bd4abe865979f0ea7240549e1e4a81cc0e68784b07a0.css"><meta property='og:title' content="ctfshow-pwn-writeup">
+<link rel="stylesheet" href="/scss/style.min.4bd4146745b8cfb7d738bd4abe865979f0ea7240549e1e4a81cc0e68784b07a0.css"><meta property='og:title' content="CTFshow-入门PWN-writeup">
 <meta property='og:description' content="二进制漏洞与利用，PWN入门_wrtieup，会员套餐360题">
-<meta property='og:url' content='https://expl0rer.top/p/ctfshow-pwn-writeup/'>
+<meta property='og:url' content='https://expl0rer.top/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/'>
 <meta property='og:site_name' content='Expl0rer.Ct'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-08-27T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-09-30T00:30:40&#43;08:00'/><meta property='og:image' content='https://expl0rer.top/p/ctfshow-pwn-writeup/ctfshow.png' />
-<meta name="twitter:title" content="ctfshow-pwn-writeup">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-08-27T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-10-01T03:22:26&#43;08:00'/><meta property='og:image' content='https://expl0rer.top/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/ctfshow.png' />
+<meta name="twitter:title" content="CTFshow-入门PWN-writeup">
 <meta name="twitter:description" content="二进制漏洞与利用，PWN入门_wrtieup，会员套餐360题"><meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content='https://expl0rer.top/p/ctfshow-pwn-writeup/ctfshow.png' />
+    <meta name="twitter:image" content='https://expl0rer.top/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/ctfshow.png' />
     <link rel="shortcut icon" href="/favicon.ico" />
 <div class="loading">
      
@@ -846,6 +846,11 @@ unicode: "ece7"
         <li><a href="#pwn_073">PWN_073</a></li>
         <li><a href="#one_"><strong>one_gadget攻击</strong></a></li>
         <li><a href="#pwn_074">PWN_074</a></li>
+        <li><a href="#栈迁移"><strong>栈迁移</strong></a>
+          <ol>
+            <li><a href="#原理">原理</a></li>
+          </ol>
+        </li>
         <li><a href="#pwn_075">PWN_075</a></li>
       </ol>
     </li>
@@ -863,13 +868,13 @@ unicode: "ece7"
     <article class="has-image main-article">
     <header class="article-header">
         <div class="article-image">
-            <a href="/p/ctfshow-pwn-writeup/">
-                <img src="/p/ctfshow-pwn-writeup/ctfshow_hu_2da768fbb28f8f82.png"
-                        srcset="/p/ctfshow-pwn-writeup/ctfshow_hu_2da768fbb28f8f82.png 800w, /p/ctfshow-pwn-writeup/ctfshow_hu_ecf2a63f33ea59e3.png 1600w"
+            <a href="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/">
+                <img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/ctfshow_hu_2da768fbb28f8f82.png"
+                        srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/ctfshow_hu_2da768fbb28f8f82.png 800w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/ctfshow_hu_ecf2a63f33ea59e3.png 1600w"
                         width="800" 
                         height="405" 
                         loading="lazy"
-                        alt="Featured image of post ctfshow-pwn-writeup" />
+                        alt="Featured image of post CTFshow-入门PWN-writeup" />
                 
             </a>
         </div>
@@ -892,7 +897,7 @@ unicode: "ece7"
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/ctfshow-pwn-writeup/">ctfshow-pwn-writeup</a>
+            <a href="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/">CTFshow-入门PWN-writeup</a>
         </h2>
     
         
@@ -947,10 +952,10 @@ unicode: "ece7"
 </h4><p>ssh连接（记得给虚拟机kali\Ubuntu或者主机设置打开SSH）：</p>
 <p><code>ssh ctfshow@pwn.challenge.ctf.show -pxxxx</code></p>
 <p>一开始会让你输入yes/no的，直接yes，然后输入密码，等进程结束会有个交互shell</p>
-<p><img src="/p/ctfshow-pwn-writeup/1.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/1.png"
 	width="1184"
 	height="570"
-	srcset="/p/ctfshow-pwn-writeup/1_hu_dff3e732402d7aaa.png 480w, /p/ctfshow-pwn-writeup/1_hu_5121a93a292ddbe4.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/1_hu_dff3e732402d7aaa.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/1_hu_5121a93a292ddbe4.png 1024w"
 	loading="lazy"
 	
 	
@@ -964,10 +969,10 @@ unicode: "ece7"
 </h3><p>题目 <a class="link" href="PWN_001" >PWN_001</a> ：提供后门函数，连上即可得到flag</p>
 <p>这里有用到“<a class="link" href="https://ctf.xidian.edu.cn/wiki/13"  target="_blank" rel="noopener"
     ><code>nc</code></a>”连接，可以了解一下，方便后续做题。当然Kali自带nc连接的，你用Kali干PWN也行。</p>
-<p><img src="/p/ctfshow-pwn-writeup/2.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/2.png"
 	width="826"
 	height="310"
-	srcset="/p/ctfshow-pwn-writeup/2_hu_d89a142dd65a19e2.png 480w, /p/ctfshow-pwn-writeup/2_hu_5516dc48b2b77e6e.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/2_hu_d89a142dd65a19e2.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/2_hu_5516dc48b2b77e6e.png 1024w"
 	loading="lazy"
 	
 	
@@ -978,10 +983,10 @@ unicode: "ece7"
 ></p>
 <p>这题送分的，nc连接一下就爆flag了。</p>
 <p>不过说实话我是真不知道PWN_001文件给来干嘛的，直接nc交互一下就出flag了，这题没搞懂ctfshow意图在哪。</p>
-<p><img src="/p/ctfshow-pwn-writeup/3.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/3.png"
 	width="1010"
 	height="246"
-	srcset="/p/ctfshow-pwn-writeup/3_hu_e6fbe5354a4e4e53.png 480w, /p/ctfshow-pwn-writeup/3_hu_9234984ec0f35806.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/3_hu_e6fbe5354a4e4e53.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/3_hu_9234984ec0f35806.png 1024w"
 	loading="lazy"
 	
 		alt="checksec解析elf格式信息、二进制文件保护配置"
@@ -995,10 +1000,10 @@ unicode: "ece7"
 <p>不过我用了下刚学的指令checksec看了看ELF文件信息，发现是没开canary保护的，可以利用栈溢出漏洞&hellip;</p>
 <p>可以看到是64位仅关闭Canary保护。</p>
 <p>接着用64位IDA打开查看main函数（按F5进入反汇编）：</p>
-<p><img src="/p/ctfshow-pwn-writeup/4.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/4.png"
 	width="1375"
 	height="790"
-	srcset="/p/ctfshow-pwn-writeup/4_hu_2ae06a810be6f21f.png 480w, /p/ctfshow-pwn-writeup/4_hu_8b6f5df4cd345cc8.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/4_hu_2ae06a810be6f21f.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/4_hu_8b6f5df4cd345cc8.png 1024w"
 	loading="lazy"
 	
 	
@@ -1011,10 +1016,10 @@ unicode: "ece7"
 <h3 id="pwn_002">PWN_002
 </h3><p>题目： <a class="link" href="PWN_002" >PWN_002</a> 给你一个shell，这次需要你自己去获得flag</p>
 <p>到这里度过新手期了。</p>
-<p><img src="/p/ctfshow-pwn-writeup/5.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/5.png"
 	width="765"
 	height="260"
-	srcset="/p/ctfshow-pwn-writeup/5_hu_e343e2a59c5e743.png 480w, /p/ctfshow-pwn-writeup/5_hu_4937eed7794a387b.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/5_hu_e343e2a59c5e743.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/5_hu_4937eed7794a387b.png 1024w"
 	loading="lazy"
 	
 	
@@ -1024,10 +1029,10 @@ unicode: "ece7"
 	
 ></p>
 <p>这里需要我们输入指令了，一般来说做题习惯看到这样直接ls秒的，不过像我这样入门级别的还得用IDA琢磨琢磨：</p>
-<p><img src="/p/ctfshow-pwn-writeup/8.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/8.png"
 	width="640"
 	height="160"
-	srcset="/p/ctfshow-pwn-writeup/8_hu_5bc43d6c8900b4ef.png 480w, /p/ctfshow-pwn-writeup/8_hu_e468d492633fbadf.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/8_hu_5bc43d6c8900b4ef.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/8_hu_e468d492633fbadf.png 1024w"
 	loading="lazy"
 	
 		alt="checksec分析"
@@ -1038,10 +1043,10 @@ unicode: "ece7"
 		data-flex-basis="960px"
 	
 ></p>
-<p><img src="/p/ctfshow-pwn-writeup/6.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/6.png"
 	width="1374"
 	height="555"
-	srcset="/p/ctfshow-pwn-writeup/6_hu_540555b971908944.png 480w, /p/ctfshow-pwn-writeup/6_hu_a88e21f83ae2c018.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/6_hu_540555b971908944.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/6_hu_a88e21f83ae2c018.png 1024w"
 	loading="lazy"
 	
 		alt="IDA-x64位main程序的反编译"
@@ -1053,10 +1058,10 @@ unicode: "ece7"
 	
 ></p>
 <p>可以看到是没canary保护的</p>
-<p><img src="/p/ctfshow-pwn-writeup/7.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/7.png"
 	width="909"
 	height="484"
-	srcset="/p/ctfshow-pwn-writeup/7_hu_6dedf0753937e2ce.png 480w, /p/ctfshow-pwn-writeup/7_hu_4bed3d833e192498.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/7_hu_6dedf0753937e2ce.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/7_hu_4bed3d833e192498.png 1024w"
 	loading="lazy"
 	
 	
@@ -1089,10 +1094,10 @@ unicode: "ece7"
 <p>这也是漏洞利用中最常用的<strong>获取权限</strong>的方式 —— 无论通过栈溢出、ROP 还是 ret2libc，最终目标都是让程序执行这条语句（或等效的系统调用）。</p></blockquote></blockquote>
 <h3 id="pwn_003">PWN_003
 </h3><p>题目： <a class="link" href="PWN_003" >PWN_003</a> 哪一个函数才能读取flag？</p>
-<p><img src="/p/ctfshow-pwn-writeup/9.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/9.png"
 	width="835"
 	height="485"
-	srcset="/p/ctfshow-pwn-writeup/9_hu_cf2d18ee43fc45c9.png 480w, /p/ctfshow-pwn-writeup/9_hu_4af22d79b2909177.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/9_hu_cf2d18ee43fc45c9.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/9_hu_4af22d79b2909177.png 1024w"
 	loading="lazy"
 	
 	
@@ -1103,10 +1108,10 @@ unicode: "ece7"
 ></p>
 <p>通过前面的分析，我们可以很明显的看出来选项”6”为我们所需要的后门函数，其他的均不会得到我们所想要的flag，在system函数里面的命令都是在终端执行的，赋予system权限较大，在我所写的文章里，包括PWN入门知识讲解和操作系统都明确指出SYSTEM是与操作系统内核接触的，比Administrators的权限还要稍大。</p>
 <p>直接选6秒了，但除这种送分的，其实还需要搞清运行的逻辑：</p>
-<p><img src="/p/ctfshow-pwn-writeup/10.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/10.png"
 	width="1390"
 	height="554"
-	srcset="/p/ctfshow-pwn-writeup/10_hu_c9707c3fe7bf59e8.png 480w, /p/ctfshow-pwn-writeup/10_hu_b592fb61e24a27ee.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/10_hu_c9707c3fe7bf59e8.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/10_hu_b592fb61e24a27ee.png 1024w"
 	loading="lazy"
 	
 		alt="IDAx64位程序反编译"
@@ -1118,10 +1123,10 @@ unicode: "ece7"
 	
 ></p>
 <p>跟进一下menu函数里边：</p>
-<p><img src="/p/ctfshow-pwn-writeup/11.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/11.png"
 	width="726"
 	height="280"
-	srcset="/p/ctfshow-pwn-writeup/11_hu_3d734164c38877e4.png 480w, /p/ctfshow-pwn-writeup/11_hu_685776f269a503fb.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/11_hu_3d734164c38877e4.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/11_hu_685776f269a503fb.png 1024w"
 	loading="lazy"
 	
 	
@@ -1131,10 +1136,10 @@ unicode: "ece7"
 	
 ></p>
 <p>回到main跟进一下这个“6”的函数，看看里头是不是真在执行system后门函数：</p>
-<p><img src="/p/ctfshow-pwn-writeup/12.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/12.png"
 	width="744"
 	height="240"
-	srcset="/p/ctfshow-pwn-writeup/12_hu_9db861ef6fbcf71d.png 480w, /p/ctfshow-pwn-writeup/12_hu_9d996ee2d6fc5f89.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/12_hu_9db861ef6fbcf71d.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/12_hu_9d996ee2d6fc5f89.png 1024w"
 	loading="lazy"
 	
 	
@@ -1143,10 +1148,10 @@ unicode: "ece7"
 		data-flex-basis="744px"
 	
 ></p>
-<p><img src="/p/ctfshow-pwn-writeup/13.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/13.png"
 	width="501"
 	height="119"
-	srcset="/p/ctfshow-pwn-writeup/13_hu_b70d12fb710b2ef9.png 480w, /p/ctfshow-pwn-writeup/13_hu_c960f6a7ed96e8b6.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/13_hu_b70d12fb710b2ef9.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/13_hu_c960f6a7ed96e8b6.png 1024w"
 	loading="lazy"
 	
 	
@@ -1159,10 +1164,10 @@ unicode: "ece7"
 <h3 id="pwn_004">PWN_004
 </h3><p>题目： <a class="link" href="PWN_004" >PWN_004</a> 或许需要先得到某个神秘字符</p>
 <p>真够阴间的，啥也不给了，才第几道啊就上强度了。</p>
-<p><img src="/p/ctfshow-pwn-writeup/14.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/14.png"
 	width="1060"
 	height="574"
-	srcset="/p/ctfshow-pwn-writeup/14_hu_fb649637a5b6a11b.png 480w, /p/ctfshow-pwn-writeup/14_hu_c8ef954931f877ea.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/14_hu_fb649637a5b6a11b.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/14_hu_c8ef954931f877ea.png 1024w"
 	loading="lazy"
 	
 	
@@ -1172,10 +1177,10 @@ unicode: "ece7"
 	
 ></p>
 <p>checksec看看，然后IDA反编译看看：</p>
-<p><img src="/p/ctfshow-pwn-writeup/15.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/15.png"
 	width="481"
 	height="159"
-	srcset="/p/ctfshow-pwn-writeup/15_hu_5f0f4805cec82d66.png 480w, /p/ctfshow-pwn-writeup/15_hu_e21b6ee28222ffbe.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/15_hu_5f0f4805cec82d66.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/15_hu_e21b6ee28222ffbe.png 1024w"
 	loading="lazy"
 	
 	
@@ -1185,10 +1190,10 @@ unicode: "ece7"
 	
 ></p>
 <p>64位二进制保护全开&hellip;</p>
-<p><img src="/p/ctfshow-pwn-writeup/16.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/16.png"
 	width="753"
 	height="341"
-	srcset="/p/ctfshow-pwn-writeup/16_hu_ca7b56f27f75a918.png 480w, /p/ctfshow-pwn-writeup/16_hu_6ad185fb146bb9a2.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/16_hu_ca7b56f27f75a918.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/16_hu_6ad185fb146bb9a2.png 1024w"
 	loading="lazy"
 	
 	
@@ -1201,10 +1206,10 @@ unicode: "ece7"
 <p>来说下execve吧，上题讲过system函数，这个也应该知道的：</p>
 <p><code>execve</code> 是 Unix/Linux 系统中最核心的<strong>系统调用（system call）</strong> 之一，用于<strong>在当前进程中加载并执行一个新的程序</strong>，替换当前进程的代码、数据和堆栈，实现进程 “变身”。它是所有程序启动和替换的底层基础，包括 <code>system</code> 函数、shell 执行命令等最终都会依赖 <code>execve</code> 完成。</p>
 <p>看到这段代码，大致意思是，让s1等于“CTFshowPWN”这段字符串，然后到if判断语句这进行比较：<strong>如果s1和s2相等</strong>（这里的！不是我们C语言中的“不”的意思啊），就执行execve函数，启动交互权限，从而得到flag。</p>
-<p><img src="/p/ctfshow-pwn-writeup/17.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/17.png"
 	width="890"
 	height="506"
-	srcset="/p/ctfshow-pwn-writeup/17_hu_cb606be9be72c140.png 480w, /p/ctfshow-pwn-writeup/17_hu_e8a05d11d9a5f65f.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/17_hu_cb606be9be72c140.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/17_hu_e8a05d11d9a5f65f.png 1024w"
 	loading="lazy"
 	
 	
@@ -1335,10 +1340,10 @@ unicode: "ece7"
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>checksec一下这个PWN文件：</p>
-<p><img src="/p/ctfshow-pwn-writeup/18.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/18.png"
 	width="560"
 	height="160"
-	srcset="/p/ctfshow-pwn-writeup/18_hu_b88e80be1380d264.png 480w, /p/ctfshow-pwn-writeup/18_hu_edb93148c7d1aae7.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/18_hu_b88e80be1380d264.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/18_hu_edb93148c7d1aae7.png 1024w"
 	loading="lazy"
 	
 	
@@ -1348,10 +1353,10 @@ unicode: "ece7"
 	
 ></p>
 <p>ohoh这个保护全关的！IDA的x32位</p>
-<p><img src="/p/ctfshow-pwn-writeup/19.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/19.png"
 	width="986"
 	height="270"
-	srcset="/p/ctfshow-pwn-writeup/19_hu_5a1e69eadca2a8dd.png 480w, /p/ctfshow-pwn-writeup/19_hu_94c08c2f6f98fd2d.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/19_hu_5a1e69eadca2a8dd.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/19_hu_94c08c2f6f98fd2d.png 1024w"
 	loading="lazy"
 	
 	
@@ -1405,10 +1410,10 @@ unicode: "ece7"
 </div><p>（Welcome_to_CTFshow1是可执行文件）</p>
 <p>我的建议汇编转换和生成可执行文件的过程都在Kali/Linux/Ubuntu上，比较方便，windows下载比较麻烦。</p>
 <p>生成这个可执行文件之后，直接运行就能得到输出结果了，按照题目要求，加个{}包皮去提交就好了。</p>
-<p><img src="/p/ctfshow-pwn-writeup/20.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/20.png"
 	width="765"
 	height="230"
-	srcset="/p/ctfshow-pwn-writeup/20_hu_9d3cd65ccf046d84.png 480w, /p/ctfshow-pwn-writeup/20_hu_f0e09656aebee87e.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/20_hu_9d3cd65ccf046d84.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/20_hu_f0e09656aebee87e.png 1024w"
 	loading="lazy"
 	
 	
@@ -1417,10 +1422,10 @@ unicode: "ece7"
 		data-flex-basis="798px"
 	
 ></p>
-<p><img src="/p/ctfshow-pwn-writeup/21.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/21.png"
 	width="1040"
 	height="295"
-	srcset="/p/ctfshow-pwn-writeup/21_hu_96a8674a27a83293.png 480w, /p/ctfshow-pwn-writeup/21_hu_adca9e8247769340.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/21_hu_96a8674a27a83293.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/21_hu_adca9e8247769340.png 1024w"
 	loading="lazy"
 	
 	
@@ -1454,10 +1459,10 @@ unicode: "ece7"
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>（Welcome_to_CTFshow1是可执行文件）</p></blockquote>
-<p><img src="/p/ctfshow-pwn-writeup/22.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/22.png"
 	width="618"
 	height="155"
-	srcset="/p/ctfshow-pwn-writeup/22_hu_38c3a83cb1d6b3d2.png 480w, /p/ctfshow-pwn-writeup/22_hu_15cc2bc9e2e15087.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/22_hu_38c3a83cb1d6b3d2.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/22_hu_15cc2bc9e2e15087.png 1024w"
 	loading="lazy"
 	
 	
@@ -1482,10 +1487,10 @@ unicode: "ece7"
 </span></span><span class="line"><span class="cl">    <span class="nf">sub</span> <span class="nb">eax</span><span class="p">,</span> <span class="mi">1</span>         <span class="c1">; eax减去1</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><img src="/p/ctfshow-pwn-writeup/23.png"
+</div><p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/23.png"
 	width="1153"
 	height="151"
-	srcset="/p/ctfshow-pwn-writeup/23_hu_d9da713c30313d8.png 480w, /p/ctfshow-pwn-writeup/23_hu_9162e9b7e00f4ccc.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/23_hu_d9da713c30313d8.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/23_hu_9162e9b7e00f4ccc.png 1024w"
 	loading="lazy"
 	
 	
@@ -1501,10 +1506,10 @@ unicode: "ece7"
 <p><a class="link" href="PWN_007%5cWelcome_to_CTFshow" >Welcome_to_CTFshow</a></p>
 <p><a class="link" href="PWN_007%5cWelcome_to_CTFshow.asm" >Welcome_to_CTFshow.asm</a></p>
 <p>按照上述方法去得出可执行文件，放入IDA：</p>
-<p><img src="/p/ctfshow-pwn-writeup/24.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/24.png"
 	width="985"
 	height="95"
-	srcset="/p/ctfshow-pwn-writeup/24_hu_92bd39fab506337a.png 480w, /p/ctfshow-pwn-writeup/24_hu_75d2f4fa5f54ead5.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/24_hu_92bd39fab506337a.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/24_hu_75d2f4fa5f54ead5.png 1024w"
 	loading="lazy"
 	
 	
@@ -1541,10 +1546,10 @@ unicode: "ece7"
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>当你编译后发现找不到地址[msg]，然后我们倒回来找题目的Welcome_to_CTFshow文件，用IDA：</p>
-<p><img src="/p/ctfshow-pwn-writeup/25.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/25.png"
 	width="721"
 	height="25"
-	srcset="/p/ctfshow-pwn-writeup/25_hu_5372def4240b6f53.png 480w, /p/ctfshow-pwn-writeup/25_hu_1d2087bdde9824cc.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/25_hu_5372def4240b6f53.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/25_hu_1d2087bdde9824cc.png 1024w"
 	loading="lazy"
 	
 	
@@ -1571,10 +1576,10 @@ unicode: "ece7"
 </span></span><span class="line"><span class="cl">    <span class="nf">mov</span> <span class="nb">eax</span><span class="p">,</span> <span class="p">[</span><span class="nb">esi</span><span class="p">]</span>      <span class="c1">; 将esi所指向的地址的值赋值给eax</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><img src="/p/ctfshow-pwn-writeup/26.png"
+</div><p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/26.png"
 	width="650"
 	height="175"
-	srcset="/p/ctfshow-pwn-writeup/26_hu_db95f2c70775bfb6.png 480w, /p/ctfshow-pwn-writeup/26_hu_6e7577b16306137d.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/26_hu_db95f2c70775bfb6.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/26_hu_6e7577b16306137d.png 1024w"
 	loading="lazy"
 	
 	
@@ -1585,10 +1590,10 @@ unicode: "ece7"
 ></p>
 <p>不是80490E8哈别被误导了，这是<strong>虚拟地址</strong>哦</p>
 <p>点击跟进：</p>
-<p><img src="/p/ctfshow-pwn-writeup/27.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/27.png"
 	width="659"
 	height="25"
-	srcset="/p/ctfshow-pwn-writeup/27_hu_2f879014412c83d2.png 480w, /p/ctfshow-pwn-writeup/27_hu_a9abfa63d7183e7a.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/27_hu_2f879014412c83d2.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/27_hu_a9abfa63d7183e7a.png 1024w"
 	loading="lazy"
 	
 	
@@ -1617,10 +1622,10 @@ unicode: "ece7"
 </span></span><span class="line"><span class="cl">    <span class="nf">mov</span> <span class="nb">eax</span><span class="p">,</span> <span class="p">[</span><span class="nb">ecx</span><span class="p">]</span>      <span class="c1">; 将ecx所指向的地址的值赋值给eax</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><img src="/p/ctfshow-pwn-writeup/28.png"
+</div><p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/28.png"
 	width="845"
 	height="154"
-	srcset="/p/ctfshow-pwn-writeup/28_hu_e162f950e4f701a0.png 480w, /p/ctfshow-pwn-writeup/28_hu_fc64a86acf95c0c7.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/28_hu_e162f950e4f701a0.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/28_hu_fc64a86acf95c0c7.png 1024w"
 	loading="lazy"
 	
 	
@@ -1630,10 +1635,10 @@ unicode: "ece7"
 	
 ></p>
 <p>然后我们跟进看一下地址：</p>
-<p><img src="/p/ctfshow-pwn-writeup/29.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/29.png"
 	width="770"
 	height="110"
-	srcset="/p/ctfshow-pwn-writeup/29_hu_8e18458aaf2629b0.png 480w, /p/ctfshow-pwn-writeup/29_hu_265416ee1eefcac9.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/29_hu_8e18458aaf2629b0.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/29_hu_265416ee1eefcac9.png 1024w"
 	loading="lazy"
 	
 	
@@ -1666,10 +1671,10 @@ unicode: "ece7"
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>同样的，放到IDA上找这个基址变址寻址方式：</p>
-<p><img src="/p/ctfshow-pwn-writeup/30.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/30.png"
 	width="780"
 	height="60"
-	srcset="/p/ctfshow-pwn-writeup/30_hu_901c17825a17f8ed.png 480w, /p/ctfshow-pwn-writeup/30_hu_668a6173f2e3ecb2.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/30_hu_901c17825a17f8ed.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/30_hu_668a6173f2e3ecb2.png 1024w"
 	loading="lazy"
 	
 	
@@ -1679,10 +1684,10 @@ unicode: "ece7"
 	
 ></p>
 <p>双击点dword去跟进到地址：</p>
-<p><img src="/p/ctfshow-pwn-writeup/31.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/31.png"
 	width="820"
 	height="135"
-	srcset="/p/ctfshow-pwn-writeup/31_hu_15a7389171b58f28.png 480w, /p/ctfshow-pwn-writeup/31_hu_750b9884b38e7964.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/31_hu_15a7389171b58f28.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/31_hu_750b9884b38e7964.png 1024w"
 	loading="lazy"
 	
 	
@@ -1715,10 +1720,10 @@ unicode: "ece7"
 </span></span><span class="line"><span class="cl">    <span class="nf">mov</span> <span class="nb">eax</span><span class="p">,</span> <span class="p">[</span><span class="nb">ecx</span> <span class="o">+</span> <span class="nb">edx</span><span class="o">*</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">6</span><span class="p">]</span>  <span class="c1">; 将ecx+edx*2-6所指向的地址的值赋值给eax</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><img src="/p/ctfshow-pwn-writeup/32.png"
+</div><p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/32.png"
 	width="770"
 	height="164"
-	srcset="/p/ctfshow-pwn-writeup/32_hu_99e9e101810244d0.png 480w, /p/ctfshow-pwn-writeup/32_hu_f807a9c980e1f370.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/32_hu_99e9e101810244d0.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/32_hu_f807a9c980e1f370.png 1024w"
 	loading="lazy"
 	
 	
@@ -1728,10 +1733,10 @@ unicode: "ece7"
 	
 ></p>
 <p>跟进offset dword_80490E8：</p>
-<p><img src="/p/ctfshow-pwn-writeup/33.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/33.png"
 	width="856"
 	height="105"
-	srcset="/p/ctfshow-pwn-writeup/33_hu_3157e877f3a9f1c1.png 480w, /p/ctfshow-pwn-writeup/33_hu_77b09f0915eccfa5.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/33_hu_3157e877f3a9f1c1.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/33_hu_77b09f0915eccfa5.png 1024w"
 	loading="lazy"
 	
 	
@@ -1745,10 +1750,10 @@ unicode: "ece7"
 <h3 id="pwn_013">PWN_013
 </h3><p>题目：如何使用GCC？编译运行后即可获得flag  <a class="link" href="PWN_013%5cPWN_013.c" >PWN_013.c</a></p>
 <p>学过C语言都会安装配置编译器环境的，我这里使用的是<strong>visual-studio-code</strong>。</p>
-<p><img src="/p/ctfshow-pwn-writeup/34.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/34.png"
 	width="1534"
 	height="466"
-	srcset="/p/ctfshow-pwn-writeup/34_hu_a2d59cd0ef0b2014.png 480w, /p/ctfshow-pwn-writeup/34_hu_a654e108c81c213e.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/34_hu_a2d59cd0ef0b2014.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/34_hu_a654e108c81c213e.png 1024w"
 	loading="lazy"
 	
 	
@@ -1872,10 +1877,10 @@ unicode: "ece7"
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ <span class="nb">echo</span> <span class="s2">&#34;CTFshow&#34;</span>&gt; key  <span class="c1">#创建一个名为key得文件，向内输入“CTFshow”的字符串</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><img src="/p/ctfshow-pwn-writeup/35.png"
+</div><p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/35.png"
 	width="1145"
 	height="336"
-	srcset="/p/ctfshow-pwn-writeup/35_hu_df60cb17ad88303e.png 480w, /p/ctfshow-pwn-writeup/35_hu_aca6ec48c69a455b.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/35_hu_df60cb17ad88303e.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/35_hu_aca6ec48c69a455b.png 1024w"
 	loading="lazy"
 	
 	
@@ -1907,10 +1912,10 @@ unicode: "ece7"
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>（flag1是可执行文件）</p>
-<p><img src="/p/ctfshow-pwn-writeup/36.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/36.png"
 	width="624"
 	height="165"
-	srcset="/p/ctfshow-pwn-writeup/36_hu_fda5333d80d87b82.png 480w, /p/ctfshow-pwn-writeup/36_hu_4d6103555c03c502.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/36_hu_fda5333d80d87b82.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/36_hu_4d6103555c03c502.png 1024w"
 	loading="lazy"
 	
 	
@@ -1924,10 +1929,10 @@ unicode: "ece7"
 <p>ctfshow{@ss3mb1y_1s_3@sy}</p>
 <h3 id="pwn_016">PWN_016
 </h3><p>题目：使用gcc将其编译为可执行文件。 <a class="link" href="PWN_016%5cflag.s" >flag.s</a></p>
-<p><img src="/p/ctfshow-pwn-writeup/37.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/37.png"
 	width="646"
 	height="104"
-	srcset="/p/ctfshow-pwn-writeup/37_hu_b3e8aef3e1ef05a0.png 480w, /p/ctfshow-pwn-writeup/37_hu_af79549354799dd4.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/37_hu_b3e8aef3e1ef05a0.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/37_hu_af79549354799dd4.png 1024w"
 	loading="lazy"
 	
 	
@@ -1948,10 +1953,10 @@ unicode: "ece7"
 <p>故flag：ctfshow{daniuniuda}</p>
 <h3 id="pwn_017">PWN_017
 </h3><p>题目：有些命令好像有点不一样？不要一直等，可能那样永远也等不到flag。</p>
-<p><img src="/p/ctfshow-pwn-writeup/38.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/38.png"
 	width="930"
 	height="325"
-	srcset="/p/ctfshow-pwn-writeup/38_hu_7d79a6ffed12bd13.png 480w, /p/ctfshow-pwn-writeup/38_hu_bffb150ab5d0f0e3.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/38_hu_7d79a6ffed12bd13.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/38_hu_bffb150ab5d0f0e3.png 1024w"
 	loading="lazy"
 	
 		alt="进程3"
@@ -1963,10 +1968,10 @@ unicode: "ece7"
 	
 ></p>
 <p>比较奇葩的是，这里选择3的话，一直在loading的，可能是不通的，我换到主机的nc也不行，那就是选2进程的</p>
-<p><img src="/p/ctfshow-pwn-writeup/39.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/39.png"
 	width="879"
 	height="536"
-	srcset="/p/ctfshow-pwn-writeup/39_hu_feeea272629e1334.png 480w, /p/ctfshow-pwn-writeup/39_hu_cc955cd53b60ba21.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/39_hu_feeea272629e1334.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/39_hu_cc955cd53b60ba21.png 1024w"
 	loading="lazy"
 	
 	
@@ -1976,10 +1981,10 @@ unicode: "ece7"
 	
 ></p>
 <p>选了2后，程序开始发癫了&hellip;.，一直循环搞得我Kali虚拟机卡死了，进到IDAx64去看：</p>
-<p><img src="/p/ctfshow-pwn-writeup/40.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/40.png"
 	width="1160"
 	height="423"
-	srcset="/p/ctfshow-pwn-writeup/40_hu_4ec1173fad870b57.png 480w, /p/ctfshow-pwn-writeup/40_hu_9873e66f0cb6080d.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/40_hu_4ec1173fad870b57.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/40_hu_9873e66f0cb6080d.png 1024w"
 	loading="lazy"
 	
 	
@@ -1990,10 +1995,10 @@ unicode: "ece7"
 ></p>
 <p>这个case2的read函数只读取10字节以内的，也就是说ctfshow_flag（12byte）这串是超字节限制了。不过之前学了那个指令有通配符的cat ctf*（因为当你选择”ls ./“，打开全部文件后，发现只有一个ctfshow_flag时由ctf字眼的，那我们正好可以绕过超字节的限制了）</p>
 <p>搜索打开由ctf这串字符的文件内容：</p>
-<p><img src="/p/ctfshow-pwn-writeup/41.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/41.png"
 	width="691"
 	height="231"
-	srcset="/p/ctfshow-pwn-writeup/41_hu_fc1a2ff65540e4c9.png 480w, /p/ctfshow-pwn-writeup/41_hu_6ea90f86dc5d2b36.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/41_hu_fc1a2ff65540e4c9.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/41_hu_6ea90f86dc5d2b36.png 1024w"
 	loading="lazy"
 	
 	
@@ -2005,10 +2010,10 @@ unicode: "ece7"
 <h3 id="pwn_018">PWN_018
 </h3><p>题目：仔细看看源码，或许有惊喜；假作真时真亦假，真作假时假亦真。 <a class="link" href="PWN_018" >PWN_018</a></p>
 <p>连接nc后一上来就问：</p>
-<p><img src="/p/ctfshow-pwn-writeup/42.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/42.png"
 	width="754"
 	height="275"
-	srcset="/p/ctfshow-pwn-writeup/42_hu_b8edf74f377f50dc.png 480w, /p/ctfshow-pwn-writeup/42_hu_48a1d4051a0ee6e8.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/42_hu_b8edf74f377f50dc.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/42_hu_48a1d4051a0ee6e8.png 1024w"
 	loading="lazy"
 	
 	
@@ -2018,10 +2023,10 @@ unicode: "ece7"
 	
 ></p>
 <p>这我哪知道啊？去看IDAx64：</p>
-<p><img src="/p/ctfshow-pwn-writeup/43.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/43.png"
 	width="736"
 	height="230"
-	srcset="/p/ctfshow-pwn-writeup/43_hu_a7c9b35aa1d7b9e4.png 480w, /p/ctfshow-pwn-writeup/43_hu_566fc56e89492c97.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/43_hu_a7c9b35aa1d7b9e4.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/43_hu_566fc56e89492c97.png 1024w"
 	loading="lazy"
 	
 	
@@ -2030,10 +2035,10 @@ unicode: "ece7"
 		data-flex-basis="768px"
 	
 ></p>
-<p><img src="/p/ctfshow-pwn-writeup/44.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/44.png"
 	width="905"
 	height="370"
-	srcset="/p/ctfshow-pwn-writeup/44_hu_c4fb8fcadd3dd78e.png 480w, /p/ctfshow-pwn-writeup/44_hu_1ce437554407a80a.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/44_hu_c4fb8fcadd3dd78e.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/44_hu_1ce437554407a80a.png 1024w"
 	loading="lazy"
 	
 	
@@ -2043,10 +2048,10 @@ unicode: "ece7"
 	
 ></p>
 <p>分别跟进一下real和fake：</p>
-<p><img src="/p/ctfshow-pwn-writeup/46.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/46.png"
 	width="689"
 	height="156"
-	srcset="/p/ctfshow-pwn-writeup/46_hu_4f7764fbe823e672.png 480w, /p/ctfshow-pwn-writeup/46_hu_faedb59ceeafafd5.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/46_hu_4f7764fbe823e672.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/46_hu_faedb59ceeafafd5.png 1024w"
 	loading="lazy"
 	
 		alt="fake"
@@ -2057,10 +2062,10 @@ unicode: "ece7"
 		data-flex-basis="1060px"
 	
 ></p>
-<p><img src="/p/ctfshow-pwn-writeup/47.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/47.png"
 	width="711"
 	height="189"
-	srcset="/p/ctfshow-pwn-writeup/47_hu_c473fd1e4140dc1a.png 480w, /p/ctfshow-pwn-writeup/47_hu_f4c64f3e30a094f4.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/47_hu_c473fd1e4140dc1a.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/47_hu_f4c64f3e30a094f4.png 1024w"
 	loading="lazy"
 	
 		alt="real"
@@ -2074,10 +2079,10 @@ unicode: "ece7"
 <p>解读一下发现一个机制：当v4不等于9时就会执行real函数，这时real会执行<code>echo 'flag is here'&gt;/ctfshow_flag</code>，这个命令将字符串 &lsquo;flag is here&rsquo; 覆盖写入 /ctfshow_flag 文件中。 &gt; 符号表示以覆盖的方式写入文件，如果文件不存在则创建新文件。如果 /ctfshow_flag 文件已经存在，那么该命令会将文件中原有的内容替换为 &lsquo;flag is here&rsquo; 。也就是说你第一次和靶机交互时没输入9，你以后都不得不到flag了，只能重开靶机&hellip;..比较CS吧&hellip;</p>
 <p><code>echo 'flag is here'&gt;&gt;/ctfshow_flag</code>这个命令将字符串 &lsquo;flag is here&rsquo; <em><strong>追加</strong></em>写入 /ctfshow_flag 文件中。 &raquo; 符号表示以追加的方式写入文件，如果文件不存在则创建新文件。如果 /ctfshow_flag 文件已经存在，那么该命令会在文件的末尾添加 &lsquo;flag is here&rsquo; 。</p>
 <p>这两个命令都用于将 &lsquo;flag is here&rsquo; 写入 /ctfshow_flag 文件中，不同之处在于写入方式的不同。第一个命令使用追加方式，在文件末尾添加内容；第二个命令使用覆盖方式，将文件内容替换为新内容。具体使用哪个命令取决于需求和文件操作的预期结果。也就是所假的其实是我们需要的真的，真的反而是假的在远程环境中，我们需要在第一次读到flag，否则后续得到的flag都已经被覆写再追加，真实的flag内容已经没了。</p>
-<p><img src="/p/ctfshow-pwn-writeup/45.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/45.png"
 	width="751"
 	height="315"
-	srcset="/p/ctfshow-pwn-writeup/45_hu_5e1d20db51249b2d.png 480w, /p/ctfshow-pwn-writeup/45_hu_acaf9b3fd36a04e.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/45_hu_5e1d20db51249b2d.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/45_hu_acaf9b3fd36a04e.png 1024w"
 	loading="lazy"
 	
 	
@@ -2088,10 +2093,10 @@ unicode: "ece7"
 ></p>
 <h3 id="pwn_019">PWN_019
 </h3><p>题目：关闭了输出流，一定是最安全的吗？ <a class="link" href="PWN_019" >PWN_019</a></p>
-<p><img src="/p/ctfshow-pwn-writeup/48.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/48.png"
 	width="1315"
 	height="636"
-	srcset="/p/ctfshow-pwn-writeup/48_hu_2e667aaa82bc0e4f.png 480w, /p/ctfshow-pwn-writeup/48_hu_d60e1adae16a1f50.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/48_hu_2e667aaa82bc0e4f.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/48_hu_d60e1adae16a1f50.png 1024w"
 	loading="lazy"
 	
 	
@@ -2112,10 +2117,10 @@ unicode: "ece7"
 <p>因为代码中标准输出被关闭了（无法显示），但标准输入（通常是终端）仍然可用，所以通过这个重定向，<code>cat</code> 命令的输出会被 “转移” 到标准输入对应的终端，从而让内容能显示出来。</p>
 <p>简单说就是：正常显示内容的 “输出通道” 被关了，但接收输入的 “输入通道” 还能用。通过 1&gt;&amp;0 把原本该从 “输出通道” 显示的内容，转到 “输入通道” 对应的终端上，这样就能看到 flag 了。ctfshow{a390a91b-5203-46ae-812d-0396de95184f}</p>
 <p>本质上是利用了 “输入通道和终端还连着” 这个漏洞，让内容 “借道” 显示出来～。</p>
-<p><img src="/p/ctfshow-pwn-writeup/49.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/49.png"
 	width="1030"
 	height="550"
-	srcset="/p/ctfshow-pwn-writeup/49_hu_9e7f3c9c7cb0a617.png 480w, /p/ctfshow-pwn-writeup/49_hu_2a293b314017f370.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/49_hu_9e7f3c9c7cb0a617.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/49_hu_2a293b314017f370.png 1024w"
 	loading="lazy"
 	
 		alt="重定向"
@@ -2135,10 +2140,10 @@ unicode: "ece7"
 <p><a class="link" href="PWN_020" >PWN_020</a></p>
 <hr>
 <p>checksec一下：</p>
-<p><img src="/p/ctfshow-pwn-writeup/50.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/50.png"
 	width="600"
 	height="155"
-	srcset="/p/ctfshow-pwn-writeup/50_hu_5395d84a6ce1faca.png 480w, /p/ctfshow-pwn-writeup/50_hu_d78e65288b53f8ce.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/50_hu_5395d84a6ce1faca.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/50_hu_d78e65288b53f8ce.png 1024w"
 	loading="lazy"
 	
 	
@@ -2148,10 +2153,10 @@ unicode: "ece7"
 	
 ></p>
 <p>在这里只开了NX保护。</p>
-<p><img src="/p/ctfshow-pwn-writeup/51.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/51.png"
 	width="755"
 	height="264"
-	srcset="/p/ctfshow-pwn-writeup/51_hu_ec1407a9bbbb57d8.png 480w, /p/ctfshow-pwn-writeup/51_hu_5eec920743e7e000.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/51_hu_ec1407a9bbbb57d8.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/51_hu_5eec920743e7e000.png 1024w"
 	loading="lazy"
 	
 		alt="Hint提示：什么是RETRO保护"
@@ -2173,10 +2178,10 @@ unicode: "ece7"
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">readelf -S PWN_020
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><img src="/p/ctfshow-pwn-writeup/52.png"
+</div><p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/52.png"
 	width="1044"
 	height="630"
-	srcset="/p/ctfshow-pwn-writeup/52_hu_9e02d9e9ca78633b.png 480w, /p/ctfshow-pwn-writeup/52_hu_cfc6139e4ad6cdf.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/52_hu_9e02d9e9ca78633b.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/52_hu_cfc6139e4ad6cdf.png 1024w"
 	loading="lazy"
 	
 	
@@ -2195,10 +2200,10 @@ unicode: "ece7"
 <p><a class="link" href="PWN_021" >PWN_021</a></p>
 <hr>
 <p>checksec一下：</p>
-<p><img src="/p/ctfshow-pwn-writeup/53.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/53.png"
 	width="1215"
 	height="610"
-	srcset="/p/ctfshow-pwn-writeup/53_hu_8be2513129fe3dd3.png 480w, /p/ctfshow-pwn-writeup/53_hu_b1f2d1e70b5f95ba.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/53_hu_8be2513129fe3dd3.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/53_hu_b1f2d1e70b5f95ba.png 1024w"
 	loading="lazy"
 	
 		alt="partial Relro保护"
@@ -2212,10 +2217,10 @@ unicode: "ece7"
 <p>要还不记得Relro保护机制原理的就回PWN-1去看吧&hellip;</p>
 <p>这里是 GOT 表的前半部分（.got.plt）设置为只读，后半部分（.got）仍可写。</p>
 <p>用readelf命令去爱看表地址就好了：</p>
-<p><img src="/p/ctfshow-pwn-writeup/54.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/54.png"
 	width="670"
 	height="114"
-	srcset="/p/ctfshow-pwn-writeup/54_hu_8d769b287fb3ac64.png 480w, /p/ctfshow-pwn-writeup/54_hu_3cbf63d5305f0ffc.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/54_hu_8d769b287fb3ac64.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/54_hu_3cbf63d5305f0ffc.png 1024w"
 	loading="lazy"
 	
 	
@@ -2234,10 +2239,10 @@ unicode: "ece7"
 <p><a class="link" href="PWN_021" >PWN_021</a></p>
 <hr>
 <p>道理一样checksec看relro的保护、readelf看表&hellip;..</p>
-<p><img src="/p/ctfshow-pwn-writeup/55.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/55.png"
 	width="725"
 	height="153"
-	srcset="/p/ctfshow-pwn-writeup/55_hu_4f21e41ae9717f96.png 480w, /p/ctfshow-pwn-writeup/55_hu_9ef604a41c7706ab.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/55_hu_4f21e41ae9717f96.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/55_hu_9ef604a41c7706ab.png 1024w"
 	loading="lazy"
 	
 		alt=".got、.got.plt表都不可写"
@@ -2248,10 +2253,10 @@ unicode: "ece7"
 		data-flex-basis="1137px"
 	
 ></p>
-<p><img src="/p/ctfshow-pwn-writeup/56.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/56.png"
 	width="705"
 	height="101"
-	srcset="/p/ctfshow-pwn-writeup/56_hu_fd84664444ae0205.png 480w, /p/ctfshow-pwn-writeup/56_hu_beb3fc8924561d37.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/56_hu_fd84664444ae0205.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/56_hu_beb3fc8924561d37.png 1024w"
 	loading="lazy"
 	
 	
@@ -2272,10 +2277,10 @@ unicode: "ece7"
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p><strong>不是nc连接</strong>   <a class="link" href="PWN_023" >PWN_023</a></p>
-<p><img src="/p/ctfshow-pwn-writeup/57.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/57.png"
 	width="695"
 	height="140"
-	srcset="/p/ctfshow-pwn-writeup/57_hu_55b6f42bf446c46b.png 480w, /p/ctfshow-pwn-writeup/57_hu_a8dd5de87eab3f4f.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/57_hu_55b6f42bf446c46b.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/57_hu_a8dd5de87eab3f4f.png 1024w"
 	loading="lazy"
 	
 		alt="checksec一下"
@@ -2288,10 +2293,10 @@ unicode: "ece7"
 ></p>
 <p>没有canary保护，这可以是个突破点：栈溢出漏洞。</p>
 <p>看回IDA：</p>
-<p><img src="/p/ctfshow-pwn-writeup/58.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/58.png"
 	width="1060"
 	height="615"
-	srcset="/p/ctfshow-pwn-writeup/58_hu_803795aedfc75284.png 480w, /p/ctfshow-pwn-writeup/58_hu_31f0d9d5938f057f.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/58_hu_803795aedfc75284.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/58_hu_31f0d9d5938f057f.png 1024w"
 	loading="lazy"
 	
 	
@@ -2301,10 +2306,10 @@ unicode: "ece7"
 	
 ></p>
 <p>跟进ctfshow函数</p>
-<p><img src="/p/ctfshow-pwn-writeup/59.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/59.png"
 	width="669"
 	height="159"
-	srcset="/p/ctfshow-pwn-writeup/59_hu_14eb223bc3e77877.png 480w, /p/ctfshow-pwn-writeup/59_hu_99cf8a4061518c1e.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/59_hu_14eb223bc3e77877.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/59_hu_99cf8a4061518c1e.png 1024w"
 	loading="lazy"
 	
 	
@@ -2315,10 +2320,10 @@ unicode: "ece7"
 ></p>
 <p>可以知道，一开始dgets函数读取flag字符串到内存中</p>
 <p>跟进signal函数：</p>
-<p><img src="/p/ctfshow-pwn-writeup/60.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/60.png"
 	width="529"
 	height="139"
-	srcset="/p/ctfshow-pwn-writeup/60_hu_e4f58d85598c5ca3.png 480w, /p/ctfshow-pwn-writeup/60_hu_e7413abc36f52d2b.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/60_hu_e4f58d85598c5ca3.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/60_hu_e7413abc36f52d2b.png 1024w"
 	loading="lazy"
 	
 	
@@ -2329,10 +2334,10 @@ unicode: "ece7"
 ></p>
 <p>这行代码会将内存中存储的 <code>flag</code> 字符串，输出到标准错误流（<code>stderr</code>）。因为程序启动时已经通过 <code>fgets</code> 从 <code>/ctfshow_flag</code> 文件读取了 flag 内容到 <code>flag</code> 变量中，所以这里能直接打印出正确的 flag。</p>
 <p>所以说我们让程序报错也就是让它栈溢出，覆盖后的地址还不能是有效地址，让它全部报错，也就是我们可以输入好多个a就行，几十个a的16进制地址是无效地址。</p>
-<p><img src="/p/ctfshow-pwn-writeup/61.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/61.png"
 	width="945"
 	height="394"
-	srcset="/p/ctfshow-pwn-writeup/61_hu_dbfd74188df09469.png 480w, /p/ctfshow-pwn-writeup/61_hu_a8d8dd6c093b2cde.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/61_hu_dbfd74188df09469.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/61_hu_a8d8dd6c093b2cde.png 1024w"
 	loading="lazy"
 	
 	
@@ -2361,10 +2366,10 @@ unicode: "ece7"
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>IDA：可以看到这题似乎和ret2shellcode有关</p>
-<p><img src="/p/ctfshow-pwn-writeup/63.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/63.png"
 	width="1045"
 	height="415"
-	srcset="/p/ctfshow-pwn-writeup/63_hu_8320440ce8e9ad20.png 480w, /p/ctfshow-pwn-writeup/63_hu_f063bc9aa051b388.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/63_hu_8320440ce8e9ad20.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/63_hu_f063bc9aa051b388.png 1024w"
 	loading="lazy"
 	
 	
@@ -2374,10 +2379,10 @@ unicode: "ece7"
 	
 ></p>
 <p>看题目提示，进入新大陆了&hellip;用pwntools了。</p>
-<p><img src="/p/ctfshow-pwn-writeup/64.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/64.png"
 	width="710"
 	height="295"
-	srcset="/p/ctfshow-pwn-writeup/64_hu_2df4fc228f333ed2.png 480w, /p/ctfshow-pwn-writeup/64_hu_ff2fcff08e5e36b.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/64_hu_2df4fc228f333ed2.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/64_hu_ff2fcff08e5e36b.png 1024w"
 	loading="lazy"
 	
 	
@@ -2602,10 +2607,10 @@ unicode: "ece7"
 </div>
 </div><p>这代码是在看不懂可以上AI嗦一下，让它帮你解析一下，毕竟刚入门&hellip;&hellip;（这段代码是 IDA 反编译出的 32 位 x86 架构程序中<code>ctfshow</code>函数）</p>
 <p>checksec一下：记住上面的参数，后面写exp要用&hellip;</p>
-<p><img src="/p/ctfshow-pwn-writeup/62.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/62.png"
 	width="675"
 	height="180"
-	srcset="/p/ctfshow-pwn-writeup/62_hu_384015e3cc48e.png 480w, /p/ctfshow-pwn-writeup/62_hu_8910832fcad885ea.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/62_hu_384015e3cc48e.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/62_hu_8910832fcad885ea.png 1024w"
 	loading="lazy"
 	
 	
@@ -2654,10 +2659,10 @@ unicode: "ece7"
 </table></div>
 <p><strong>总结</strong>：程序保护机制极弱，直接用 “栈溢出注入 shellcode” 即可，无需复杂绕过。</p>
 <p>回到本题目，在nc连接之后交互一会发现并无实际效果，PWN大致思路是找到后门函数或者系统调用函数进行<code>提权</code>，提权之后就进行交互去执行一些靶机的终端命令例如：cat ctfshow_flag、ls之类的。那在此之前都得先找到这“后门”，也就是/bin/sh、zsh、system函数等等，但我发现这个程序并无这些地址存在，所以说这个程序从被制造出来都没想过要执行这些有关提权的代码&hellip;..</p>
-<p><img src="/p/ctfshow-pwn-writeup/66.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/66.png"
 	width="1650"
 	height="625"
-	srcset="/p/ctfshow-pwn-writeup/66_hu_da2faac4b22ea10b.png 480w, /p/ctfshow-pwn-writeup/66_hu_a3ee0bccff8fa056.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/66_hu_da2faac4b22ea10b.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/66_hu_a3ee0bccff8fa056.png 1024w"
 	loading="lazy"
 	
 		alt="全篇搜索/bin/sh字符串"
@@ -2891,10 +2896,10 @@ unicode: "ece7"
 </span></span><span class="line"><span class="cl">        int 0x80
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><img src="/p/ctfshow-pwn-writeup/65.png"
+</div><p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/65.png"
 	width="1030"
 	height="560"
-	srcset="/p/ctfshow-pwn-writeup/65_hu_a1098df37bfcfd3b.png 480w, /p/ctfshow-pwn-writeup/65_hu_199a30cfb9c2d5a8.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/65_hu_a1098df37bfcfd3b.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/65_hu_199a30cfb9c2d5a8.png 1024w"
 	loading="lazy"
 	
 		alt="调用pwntools所产生的shellcode"
@@ -2907,10 +2912,10 @@ unicode: "ece7"
 ></p>
 <p>看着确实比较乱&hellip;..😅</p>
 <p>最后的最后我想对这题做些评价，其实题不难主要是我初次做，讲得比较啰嗦，如果你会手敲shellcode或者调用pwntools的shellcraft模块的话还是很简单秒掉的。只能怪小生太cai了😄</p>
-<p><img src="/p/ctfshow-pwn-writeup/67.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/67.png"
 	width="856"
 	height="304"
-	srcset="/p/ctfshow-pwn-writeup/67_hu_12ec48f01ef5c991.png 480w, /p/ctfshow-pwn-writeup/67_hu_825f43a0aef1cbbe.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/67_hu_12ec48f01ef5c991.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/67_hu_825f43a0aef1cbbe.png 1024w"
 	loading="lazy"
 	
 		alt="顺利完成execve系统调用，得以进行交互"
@@ -2937,10 +2942,10 @@ unicode: "ece7"
 <li><strong>发送 payload</strong>：将构造好的 payload 发送给存在漏洞的程序，使程序按照攻击者期望的流程执行，最终获取到一个交互式 shell，达到漏洞利用的目的。</li>
 </ol></blockquote>
 <p>checksec一下，发现开了NX保护，也就是说不能用shellcode了。</p>
-<p><img src="/p/ctfshow-pwn-writeup/68.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/68.png"
 	width="746"
 	height="164"
-	srcset="/p/ctfshow-pwn-writeup/68_hu_a99ea644fc591014.png 480w, /p/ctfshow-pwn-writeup/68_hu_74f646b65d73e4a1.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/68_hu_a99ea644fc591014.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/68_hu_74f646b65d73e4a1.png 1024w"
 	loading="lazy"
 	
 		alt="x32"
@@ -2952,10 +2957,10 @@ unicode: "ece7"
 	
 ></p>
 <p>跟进ctfshow函数：</p>
-<p><img src="/p/ctfshow-pwn-writeup/86.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/86.png"
 	width="716"
 	height="251"
-	srcset="/p/ctfshow-pwn-writeup/86_hu_ad09145c80ebcfc7.png 480w, /p/ctfshow-pwn-writeup/86_hu_102f231e16202428.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/86_hu_ad09145c80ebcfc7.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/86_hu_102f231e16202428.png 1024w"
 	loading="lazy"
 	
 		alt="F5反编译查看main代码"
@@ -2966,10 +2971,10 @@ unicode: "ece7"
 		data-flex-basis="684px"
 	
 ></p>
-<p><img src="/p/ctfshow-pwn-writeup/87.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/87.png"
 	width="670"
 	height="225"
-	srcset="/p/ctfshow-pwn-writeup/87_hu_4b1328521ea80b77.png 480w, /p/ctfshow-pwn-writeup/87_hu_6142d0f1d51ae79b.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/87_hu_4b1328521ea80b77.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/87_hu_6142d0f1d51ae79b.png 1024w"
 	loading="lazy"
 	
 	
@@ -2980,10 +2985,10 @@ unicode: "ece7"
 ></p>
 <p>可以发现buf大小为 132 字节，但read允许读取 0x100（256）字节存在栈溢出漏洞。</p>
 <p>跟进write函数：</p>
-<p><img src="/p/ctfshow-pwn-writeup/87%EF%BC%881%EF%BC%89.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/87%EF%BC%881%EF%BC%89.png"
 	width="726"
 	height="135"
-	srcset="/p/ctfshow-pwn-writeup/87%EF%BC%881%EF%BC%89_hu_e35dedabfd39796d.png 480w, /p/ctfshow-pwn-writeup/87%EF%BC%881%EF%BC%89_hu_f0ccf21542fa3cb6.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/87%EF%BC%881%EF%BC%89_hu_e35dedabfd39796d.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/87%EF%BC%881%EF%BC%89_hu_f0ccf21542fa3cb6.png 1024w"
 	loading="lazy"
 	
 	
@@ -2993,10 +2998,10 @@ unicode: "ece7"
 	
 ></p>
 <p>IDAx32分析，也没有/bin/sh、后门system：</p>
-<p><img src="/p/ctfshow-pwn-writeup/69.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/69.png"
 	width="1324"
 	height="545"
-	srcset="/p/ctfshow-pwn-writeup/69_hu_6b3b5c81b042741f.png 480w, /p/ctfshow-pwn-writeup/69_hu_60765907f2428b45.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/69_hu_6b3b5c81b042741f.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/69_hu_60765907f2428b45.png 1024w"
 	loading="lazy"
 	
 		alt="无/bin/sh路径"
@@ -3010,10 +3015,10 @@ unicode: "ece7"
 <p>这时候就需要使用利用libc（动态链接库）的system函数和/bin/sh字符串（这题思路很类似PWN_024的编写shellcode一样，程序本身没有后门可入只能从外部链接进这些函数，从而达到进入交互&hellip;），这些东西在程序运行时的真实地址计算方法为：<code>@got真实地址 = libc基址 + 偏移</code>，所以要先计算出<strong>偏移</strong>。</p>
 <p>以write函数为例 ，偏移 = 真实地址 - libc基址，真实地址存在write@got、write@got可以通过write@plt来运行这个函数从而泄露出来，libc 版本和基址可以导入 libcSearcher 库来查找计算这里需要去系统学习一下动态链接的过程（<a class="link" href="https://expl0rer.top/p/pwn-1/#plt%e4%b8%8egot"  target="_blank" rel="noopener"
     >有关.got、.plt表的知识</a>），简单画个图说明一下黄色部分是静态的，绿色部分是动态变化的：</p>
-<p><img src="/p/ctfshow-pwn-writeup/88.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/88.png"
 	width="742"
 	height="207"
-	srcset="/p/ctfshow-pwn-writeup/88_hu_f4cd45bfba752e2c.png 480w, /p/ctfshow-pwn-writeup/88_hu_6305d23fee54b4e3.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/88_hu_f4cd45bfba752e2c.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/88_hu_6305d23fee54b4e3.png 1024w"
 	loading="lazy"
 	
 		alt="动态链接库的过程"
@@ -3217,10 +3222,10 @@ unicode: "ece7"
     >libc-2.27.so</a> （提取码show）</p>
 <p>这题坑到我了，运行程序发现直接爆flag，交上去发现是假的/(ㄒoㄒ)/~~</p>
 <p>IDAx64分析，有system后门函数：</p>
-<p><img src="/p/ctfshow-pwn-writeup/70.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/70.png"
 	width="1195"
 	height="590"
-	srcset="/p/ctfshow-pwn-writeup/70_hu_5af04d0f0913cda9.png 480w, /p/ctfshow-pwn-writeup/70_hu_4cf51b4305482ce.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/70_hu_5af04d0f0913cda9.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/70_hu_4cf51b4305482ce.png 1024w"
 	loading="lazy"
 	
 	
@@ -3231,10 +3236,10 @@ unicode: "ece7"
 ></p>
 <p>而且可以知道这个flag是有几个printf、puts共同打印出的、字符串由地址拼接（%p打印指针或者地址，以16进制形式）而成。</p>
 <p>运行一下：</p>
-<p><img src="/p/ctfshow-pwn-writeup/71.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/71.png"
 	width="1250"
 	height="719"
-	srcset="/p/ctfshow-pwn-writeup/71_hu_e57bc28849d3c88.png 480w, /p/ctfshow-pwn-writeup/71_hu_1586fa3609ae168d.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/71_hu_e57bc28849d3c88.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/71_hu_1586fa3609ae168d.png 1024w"
 	loading="lazy"
 	
 	
@@ -3255,10 +3260,10 @@ unicode: "ece7"
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">gdb -q pwn
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><img src="/p/ctfshow-pwn-writeup/72.png"
+</div><p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/72.png"
 	width="1110"
 	height="410"
-	srcset="/p/ctfshow-pwn-writeup/72_hu_f7e2f4bac4aac2dd.png 480w, /p/ctfshow-pwn-writeup/72_hu_1517f77077b3d7c7.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/72_hu_f7e2f4bac4aac2dd.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/72_hu_1517f77077b3d7c7.png 1024w"
 	loading="lazy"
 	
 	
@@ -3285,10 +3290,10 @@ unicode: "ece7"
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">echo</span> <span class="m">0</span> &gt; /proc/sys/kernel/randomize_va_space
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><img src="/p/ctfshow-pwn-writeup/73.png"
+</div><p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/73.png"
 	width="1340"
 	height="774"
-	srcset="/p/ctfshow-pwn-writeup/73_hu_b96db4a3f2e41298.png 480w, /p/ctfshow-pwn-writeup/73_hu_5ee4a282ddb01af4.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/73_hu_b96db4a3f2e41298.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/73_hu_5ee4a282ddb01af4.png 1024w"
 	loading="lazy"
 	
 		alt="flag"
@@ -3309,10 +3314,10 @@ unicode: "ece7"
     >libc-2.27.so</a>   <a class="link" href="PWN_027%5cPWN" >PWN</a></p>
 <p>这题也是一样的，”If the result is 0 or 1, then you get the correct flag!“将ASLR保护的数值改成1或0就好。（套上题的公式）</p>
 <p>怪怪的：</p>
-<p><img src="/p/ctfshow-pwn-writeup/74.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/74.png"
 	width="579"
 	height="161"
-	srcset="/p/ctfshow-pwn-writeup/74_hu_a5de9c2fc5414abb.png 480w, /p/ctfshow-pwn-writeup/74_hu_32320de88db9a594.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/74_hu_a5de9c2fc5414abb.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/74_hu_32320de88db9a594.png 1024w"
 	loading="lazy"
 	
 	
@@ -3323,10 +3328,10 @@ unicode: "ece7"
 ></p>
 <p>官方flag是ctfshow{0x400687_0x400560_0x603260}</p>
 <p>欸我发现&hellip;.0x603260的后面的6变成a了，有点招笑&hellip;应该是Kali环境和Ubuntu不同，我去网上查了下，发现大部分PWN的WP都是用Ubuntu解的：</p>
-<p><img src="/p/ctfshow-pwn-writeup/75.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/75.png"
 	width="1203"
 	height="595"
-	srcset="/p/ctfshow-pwn-writeup/75_hu_d19abb44e81b7200.png 480w, /p/ctfshow-pwn-writeup/75_hu_da8dd3cdf4dd0a83.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/75_hu_d19abb44e81b7200.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/75_hu_da8dd3cdf4dd0a83.png 1024w"
 	loading="lazy"
 	
 		alt="Ubuntu"
@@ -3341,10 +3346,10 @@ unicode: "ece7"
 <h3 id="pwn_028">PWN_028
 </h3><p>题目：设置好 ASLR 保护参数值即可获得flag；<a class="link" href="https://pan.baidu.com/s/1aBhaQfgcw4m2ut6ybNOBmA"  target="_blank" rel="noopener"
     >libc-2.27.so</a>、 <a class="link" href="PWN_028%5cPWN" >PWN</a> （show）</p>
-<p><img src="/p/ctfshow-pwn-writeup/76.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/76.png"
 	width="1081"
 	height="520"
-	srcset="/p/ctfshow-pwn-writeup/76_hu_3bb0ae8eea6f69ee.png 480w, /p/ctfshow-pwn-writeup/76_hu_bd87ab6076c16d6.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/76_hu_3bb0ae8eea6f69ee.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/76_hu_bd87ab6076c16d6.png 1024w"
 	loading="lazy"
 	
 		alt="送分"
@@ -3362,10 +3367,10 @@ unicode: "ece7"
     >libc-2.27.so</a>、 <a class="link" href="PWN_029%5cPWN" >PWN</a></p>
 <p>试着<a class="link" href="https://expl0rer.top/p/pwn-1/#pie%e5%92%8caslr"  target="_blank" rel="noopener"
     >ASLR和PIE保护</a>开启后，地址都会将随机化，这里值得注意的是，由于粒度问题，虽然地址都被随机化了，但是被随机化的都仅仅是某个对象的起始地址，而在其内部还是原来的结构，也就是相对偏移是不会变化的。</p>
-<p><img src="/p/ctfshow-pwn-writeup/80.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/80.png"
 	width="1045"
 	height="210"
-	srcset="/p/ctfshow-pwn-writeup/80_hu_eb0b3f7225c19224.png 480w, /p/ctfshow-pwn-writeup/80_hu_a72e66fce323c049.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/80_hu_eb0b3f7225c19224.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/80_hu_a72e66fce323c049.png 1024w"
 	loading="lazy"
 	
 		alt="已经开了PIE保护"
@@ -3387,10 +3392,10 @@ unicode: "ece7"
 </div><p>直接运行&hellip;&hellip;</p>
 <p>flag（有点长但是对的&hellip;）：ctfshow{Address_Space_Layout_Randomization&amp;&amp;Position-Independent_Executable_1s_C0000000000l!}</p>
 <p>这题只是让你了解下ASLR和PIE保护的特点，flag不是目的：</p>
-<p><img src="/p/ctfshow-pwn-writeup/77.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/77.png"
 	width="721"
 	height="246"
-	srcset="/p/ctfshow-pwn-writeup/77_hu_786e1172cf75d668.png 480w, /p/ctfshow-pwn-writeup/77_hu_6905a90a7330f54a.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/77_hu_786e1172cf75d668.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/77_hu_6905a90a7330f54a.png 1024w"
 	loading="lazy"
 	
 		alt="1"
@@ -3401,10 +3406,10 @@ unicode: "ece7"
 		data-flex-basis="703px"
 	
 ></p>
-<p><img src="/p/ctfshow-pwn-writeup/78.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/78.png"
 	width="939"
 	height="306"
-	srcset="/p/ctfshow-pwn-writeup/78_hu_e1703259702046b2.png 480w, /p/ctfshow-pwn-writeup/78_hu_f1640231a6bba9a3.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/78_hu_e1703259702046b2.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/78_hu_f1640231a6bba9a3.png 1024w"
 	loading="lazy"
 	
 		alt="2"
@@ -3415,10 +3420,10 @@ unicode: "ece7"
 		data-flex-basis="736px"
 	
 ></p>
-<p><img src="/p/ctfshow-pwn-writeup/79.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/79.png"
 	width="851"
 	height="331"
-	srcset="/p/ctfshow-pwn-writeup/79_hu_fec9c38c099bb243.png 480w, /p/ctfshow-pwn-writeup/79_hu_e3e1050063b8af4d.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/79_hu_fec9c38c099bb243.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/79_hu_e3e1050063b8af4d.png 1024w"
 	loading="lazy"
 	
 		alt="3"
@@ -3432,10 +3437,10 @@ unicode: "ece7"
 <h3 id="pwn_030">PWN_030
 </h3><p>题目：关闭PIE后；程序的基地址固定，攻击者可以更容易地确定内存中函数和变量的位置。 <a class="link" href="PWN_030" >PWN_030</a></p>
 <p>checksec一下：没开canary和PIE，开了NX不好用Shellcode。</p>
-<p><img src="/p/ctfshow-pwn-writeup/81.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/81.png"
 	width="1219"
 	height="630"
-	srcset="/p/ctfshow-pwn-writeup/81_hu_890da67cf56d99a7.png 480w, /p/ctfshow-pwn-writeup/81_hu_931c9c7556ed7bb5.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/81_hu_890da67cf56d99a7.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/81_hu_931c9c7556ed7bb5.png 1024w"
 	loading="lazy"
 	
 	
@@ -3445,10 +3450,10 @@ unicode: "ece7"
 	
 ></p>
 <p>IDAx32看一下：</p>
-<p><img src="/p/ctfshow-pwn-writeup/82.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/82.png"
 	width="690"
 	height="215"
-	srcset="/p/ctfshow-pwn-writeup/82_hu_598aa473ae731e26.png 480w, /p/ctfshow-pwn-writeup/82_hu_8f000c14f3a5fcb4.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/82_hu_598aa473ae731e26.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/82_hu_8f000c14f3a5fcb4.png 1024w"
 	loading="lazy"
 	
 		alt="栈溢出"
@@ -3688,10 +3693,10 @@ unicode: "ece7"
 <h3 id="pwn_031待定">PWN_031（待定）
 </h3><p>题目：开启 ASLR 和 PIE 的情况下，仍可能被利用； <a class="link" href="PWN_031" >PWN_031</a></p>
 <p>checksec一下，无栈保护：</p>
-<p><img src="/p/ctfshow-pwn-writeup/83.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/83.png"
 	width="1153"
 	height="201"
-	srcset="/p/ctfshow-pwn-writeup/83_hu_7ff647734d8a0296.png 480w, /p/ctfshow-pwn-writeup/83_hu_441617b6b4ffee67.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/83_hu_7ff647734d8a0296.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/83_hu_441617b6b4ffee67.png 1024w"
 	loading="lazy"
 	
 		alt="栈溢出"
@@ -3703,10 +3708,10 @@ unicode: "ece7"
 	
 ></p>
 <p>跟进ctfshow函数：</p>
-<p><img src="/p/ctfshow-pwn-writeup/84.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/84.png"
 	width="674"
 	height="184"
-	srcset="/p/ctfshow-pwn-writeup/84_hu_b9ac56fd6a862ae6.png 480w, /p/ctfshow-pwn-writeup/84_hu_3105db06c121094.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/84_hu_b9ac56fd6a862ae6.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/84_hu_3105db06c121094.png 1024w"
 	loading="lazy"
 	
 	
@@ -3717,10 +3722,10 @@ unicode: "ece7"
 ></p>
 <p>发现同样的代码，有溢出，似乎可用上题的exp，不过checksec看到的保护是不一样的，exp肯定不一样了&hellip;.</p>
 <p>运行之后莫名其妙，会有报随机化的地址：</p>
-<p><img src="/p/ctfshow-pwn-writeup/85.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/85.png"
 	width="1055"
 	height="680"
-	srcset="/p/ctfshow-pwn-writeup/85_hu_164fbd871315e02a.png 480w, /p/ctfshow-pwn-writeup/85_hu_4528b5c9989ab6ae.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/85_hu_164fbd871315e02a.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/85_hu_4528b5c9989ab6ae.png 1024w"
 	loading="lazy"
 	
 	
@@ -3778,10 +3783,10 @@ unicode: "ece7"
 <p>禁用 Fortify 功能。 不会进行任何额外的安全检查。 可能导致潜在的安全漏洞。</p>
 <p>这题主要是在函数逻辑运行，知道运行的原理就好。</p>
 <p>IDA分析main：</p>
-<p><img src="/p/ctfshow-pwn-writeup/89.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/89.png"
 	width="849"
 	height="610"
-	srcset="/p/ctfshow-pwn-writeup/89_hu_46351ba23fdd4185.png 480w, /p/ctfshow-pwn-writeup/89_hu_90e899f007f35973.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/89_hu_46351ba23fdd4185.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/89_hu_90e899f007f35973.png 1024w"
 	loading="lazy"
 	
 		alt="main"
@@ -3793,10 +3798,10 @@ unicode: "ece7"
 	
 ></p>
 <p>跟进undefined函数：</p>
-<p><img src="/p/ctfshow-pwn-writeup/90.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/90.png"
 	width="1305"
 	height="355"
-	srcset="/p/ctfshow-pwn-writeup/90_hu_973dd70d1193f96a.png 480w, /p/ctfshow-pwn-writeup/90_hu_8bf66355b5d6254e.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/90_hu_973dd70d1193f96a.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/90_hu_8bf66355b5d6254e.png 1024w"
 	loading="lazy"
 	
 	
@@ -3871,10 +3876,10 @@ unicode: "ece7"
 </div>
 </div><p>大致是：起初先打印ctfshow的logo信息（其实一开始那个v3把我搞懵了，其实对解题过程没啥帮助的），在最顶端的__fastcall main已经把一些参数给定义了比如argv数组，第一个参数argv[1]被赋给v4，v4作中介把数值传递给了buf1，之后程序将v4[10]数组内容赋值给buf1[10]，接着通过strcpy函数，把字符串“CTFshowPWN”复制/赋值给buf2，printf打印buf1、buf2的当前的字符串内容，最后fget读取_bss_start的11个字符给buf1，打印buf1和num的信息，最后通过if判断argc是否大于4(默认情况下argc是等于1的，因为argv[0]必定存在，我们输入一个参数，argc就会等于2，依次递推)，大于4就进入undefined函数内</p>
 <p>因为本题目FORTIFY_SOURCE没有开启，代表我们启动函数直接输入4个参数(这时argc=5 &gt; 4，为什么五个？因为你输入的4个+argc[0] = 5)就行了，而且这4个参数没有长度限制，如果开启FORTIFY_SOURCE就不好说了，因为开启了之后，由于程序存在strcpy和memcpy函数会检测长度，如果长度超过了限制，可能会使程序抛出异常而退出执行。</p>
-<p><img src="/p/ctfshow-pwn-writeup/91.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/91.png"
 	width="1400"
 	height="756"
-	srcset="/p/ctfshow-pwn-writeup/91_hu_15b7482435404dc9.png 480w, /p/ctfshow-pwn-writeup/91_hu_ba35ebc958987903.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/91_hu_15b7482435404dc9.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/91_hu_ba35ebc958987903.png 1024w"
 	loading="lazy"
 	
 	
@@ -3888,10 +3893,10 @@ unicode: "ece7"
 <p>启用 Fortify 功能的基本级别。 在编译时进行一些安全检查，如缓冲区边界检查、格式化字符串检查等。 在运行时进行某些检查，如检测函数返回值和大小的一致性。 如果检测到潜在的安全问题，会触发运行时错误，并终止程序执行。 <a class="link" href="PWN_033" >PWN_033</a></p>
 <hr>
 <p>IDAx64分析：</p>
-<p><img src="/p/ctfshow-pwn-writeup/92.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/92.png"
 	width="890"
 	height="575"
-	srcset="/p/ctfshow-pwn-writeup/92_hu_b8d7b58369f7ed42.png 480w, /p/ctfshow-pwn-writeup/92_hu_5f64d4fe00dca924.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/92_hu_b8d7b58369f7ed42.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/92_hu_5f64d4fe00dca924.png 1024w"
 	loading="lazy"
 	
 	
@@ -3912,10 +3917,10 @@ unicode: "ece7"
 </span></span><span class="line"><span class="cl">$./pwnme <span class="s2">&#34;short&#34;</span> <span class="s2">&#34;a&#34;</span> <span class="s2">&#34;5&#34;</span> <span class="s2">&#34;d&#34;</span> <span class="s2">&#34;e&#34;</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><img src="/p/ctfshow-pwn-writeup/93.png"
+</div><p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/93.png"
 	width="1340"
 	height="735"
-	srcset="/p/ctfshow-pwn-writeup/93_hu_9f26a9108882b142.png 480w, /p/ctfshow-pwn-writeup/93_hu_c04b5083116f2c7c.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/93_hu_9f26a9108882b142.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/93_hu_c04b5083116f2c7c.png 1024w"
 	loading="lazy"
 	
 	
@@ -3930,10 +3935,10 @@ unicode: "ece7"
 <hr>
 <p>IDA分析，题目描述也说了该程序包括基本级别的安全检查，并添加了更多的检查。 在编译时进行更严格的检查，如更精确的缓冲区边界检查。 提供更丰富的编译器警告和错误信息。
 使用ida64反编译的加过略微与前两道题目有所不同，大部分还是一样的，还是把危险函数替换成了安全函数。如下：</p>
-<p><img src="/p/ctfshow-pwn-writeup/94.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/94.png"
 	width="814"
 	height="505"
-	srcset="/p/ctfshow-pwn-writeup/94_hu_43f6bccc3a9f8aca.png 480w, /p/ctfshow-pwn-writeup/94_hu_7ea7c32cd0d7cfe1.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/94_hu_43f6bccc3a9f8aca.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/94_hu_7ea7c32cd0d7cfe1.png 1024w"
 	loading="lazy"
 	
 	
@@ -3944,10 +3949,10 @@ unicode: "ece7"
 ></p>
 <p>大致能看出原函数是什么吧，这里就不多解释了&hellip;</p>
 <p># 格式化函数与解题操作说明 <code>__printf__chk</code> 函数与 <code>printf</code> 的区别在于：不能使用 <code>%x$n</code> 不连续地打印，也就是说如果要使用 <code>%3$n</code>，则必须同时使用 <code>%1$n</code> 和 <code>%2$n</code>。在使用 <code>%n</code> 的时候会做一些检查。 这涉及到格式化字符串漏洞，但本题不涉及此漏洞，所以对本道题几乎没有阻碍。后续我们还是通过 SSH 连接后运行文件，输入 4 个长度为 1 的参数，不出意外就能拿到 flag！</p>
-<p><img src="/p/ctfshow-pwn-writeup/95.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/95.png"
 	width="1493"
 	height="726"
-	srcset="/p/ctfshow-pwn-writeup/95_hu_b3792e7f70688569.png 480w, /p/ctfshow-pwn-writeup/95_hu_abc131af3d5d11c9.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/95_hu_b3792e7f70688569.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/95_hu_abc131af3d5d11c9.png 1024w"
 	loading="lazy"
 	
 	
@@ -3974,10 +3979,10 @@ unicode: "ece7"
 <p><a class="link" href="PWN_035" >PWN_035</a></p>
 <hr>
 <p>checksec一下：</p>
-<p><img src="/p/ctfshow-pwn-writeup/96.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/96.png"
 	width="845"
 	height="198"
-	srcset="/p/ctfshow-pwn-writeup/96_hu_5cec7781a9fafd95.png 480w, /p/ctfshow-pwn-writeup/96_hu_ceae71005b53e245.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/96_hu_5cec7781a9fafd95.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/96_hu_ceae71005b53e245.png 1024w"
 	loading="lazy"
 	
 	
@@ -3988,10 +3993,10 @@ unicode: "ece7"
 ></p>
 <p>没开canary保护，对应了本章主题——栈溢出。</p>
 <p>IDA分析：</p>
-<p><img src="/p/ctfshow-pwn-writeup/97.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/97.png"
 	width="1106"
 	height="726"
-	srcset="/p/ctfshow-pwn-writeup/97_hu_8cfcbbb1f6ccb348.png 480w, /p/ctfshow-pwn-writeup/97_hu_894ff25413a0ac82.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/97_hu_8cfcbbb1f6ccb348.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/97_hu_894ff25413a0ac82.png 1024w"
 	loading="lazy"
 	
 		alt="main函数反编译分析"
@@ -4003,10 +4008,10 @@ unicode: "ece7"
 	
 ></p>
 <p>跟进函数：</p>
-<p><img src="/p/ctfshow-pwn-writeup/98.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/98.png"
 	width="569"
 	height="200"
-	srcset="/p/ctfshow-pwn-writeup/98_hu_7f17590d89865cd7.png 480w, /p/ctfshow-pwn-writeup/98_hu_492c2c611443a23c.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/98_hu_7f17590d89865cd7.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/98_hu_492c2c611443a23c.png 1024w"
 	loading="lazy"
 	
 		alt="sigsegv_handler函数"
@@ -4017,10 +4022,10 @@ unicode: "ece7"
 		data-flex-basis="682px"
 	
 ></p>
-<p><img src="/p/ctfshow-pwn-writeup/99.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/99.png"
 	width="564"
 	height="190"
-	srcset="/p/ctfshow-pwn-writeup/99_hu_64242a0110d6f688.png 480w, /p/ctfshow-pwn-writeup/99_hu_f5443b1ee09bc173.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/99_hu_64242a0110d6f688.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/99_hu_f5443b1ee09bc173.png 1024w"
 	loading="lazy"
 	
 		alt="ctfshow函数"
@@ -4036,10 +4041,10 @@ unicode: "ece7"
 <blockquote class="alert alert-warn">
     <p>栈溢出会破坏栈上的 “返回地址”“栈帧信息” 或其他关键内存结构，最终引发<strong>非法内存访问</strong>（比如函数返回时跳转到无效地址），触发 <code>SIGSEGV</code> 信号。</p></blockquote>
 <p>所以说我们只要在运行的时候给程序打入超过104个的字符串就好，可以是105个“a”。</p>
-<p><img src="/p/ctfshow-pwn-writeup/100.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/100.png"
 	width="1235"
 	height="555"
-	srcset="/p/ctfshow-pwn-writeup/100_hu_3fabc6f5bf3328d1.png 480w, /p/ctfshow-pwn-writeup/100_hu_28f40016a971c608.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/100_hu_3fabc6f5bf3328d1.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/100_hu_28f40016a971c608.png 1024w"
 	loading="lazy"
 	
 	
@@ -4061,10 +4066,10 @@ unicode: "ece7"
 </div>
 </div><h3 id="pwn_036">PWN_036
 </h3><p>题目：存在后门函数，如何利用？ <a class="link" href="PWN_036" >PWN_036</a></p>
-<p><img src="/p/ctfshow-pwn-writeup/101.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/101.png"
 	width="826"
 	height="231"
-	srcset="/p/ctfshow-pwn-writeup/101_hu_6afe63e25fe4af19.png 480w, /p/ctfshow-pwn-writeup/101_hu_ca0bed959ef72a10.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/101_hu_6afe63e25fe4af19.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/101_hu_ca0bed959ef72a10.png 1024w"
 	loading="lazy"
 	
 	
@@ -4074,10 +4079,10 @@ unicode: "ece7"
 	
 ></p>
 <p>非常不安全！！！！没有canary保护。可以用ret2shellcode、ret2libc。</p>
-<p><img src="/p/ctfshow-pwn-writeup/102.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/102.png"
 	width="1225"
 	height="506"
-	srcset="/p/ctfshow-pwn-writeup/102_hu_1ea758b340b9373a.png 480w, /p/ctfshow-pwn-writeup/102_hu_c4eefe935b6b6cf7.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/102_hu_1ea758b340b9373a.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/102_hu_c4eefe935b6b6cf7.png 1024w"
 	loading="lazy"
 	
 		alt="main-IDA的分析"
@@ -4089,10 +4094,10 @@ unicode: "ece7"
 	
 ></p>
 <p>这题开始怪怪的，找不到/bin/sh的后门，sigsegv_handler 函数没有我们想要的flag，不过在左边函数目录看到熟悉的故人——get_flag函数，直接跟进看看：</p>
-<p><img src="/p/ctfshow-pwn-writeup/103.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/103.png"
 	width="961"
 	height="289"
-	srcset="/p/ctfshow-pwn-writeup/103_hu_ec17c27209d749fe.png 480w, /p/ctfshow-pwn-writeup/103_hu_ed5b527b98ddfd0f.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/103_hu_ec17c27209d749fe.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/103_hu_ed5b527b98ddfd0f.png 1024w"
 	loading="lazy"
 	
 		alt="跟进get_flag函数"
@@ -4105,10 +4110,10 @@ unicode: "ece7"
 ></p>
 <p>可以看到下面的fgets读取和返回的printf(s)打印函数，输出flag字符串，主函数没有引用它啊，怎么办？我们只需要利用栈溢出漏洞覆盖返回地址，将程序的执行流程转向 get_flag 函数，从而获取flag。（可以用ret2shellcode、ret2libc）</p>
 <p>main函数的突破点在这：</p>
-<p><img src="/p/ctfshow-pwn-writeup/104.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/104.png"
 	width="860"
 	height="215"
-	srcset="/p/ctfshow-pwn-writeup/104_hu_5cc36469a1fe2e12.png 480w, /p/ctfshow-pwn-writeup/104_hu_fcf805775837a51c.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/104_hu_5cc36469a1fe2e12.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/104_hu_fcf805775837a51c.png 1024w"
 	loading="lazy"
 	
 		alt="在main跟进ctfshow函数"
@@ -4154,10 +4159,10 @@ unicode: "ece7"
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>这里的44个‘a’是0x28 + 4 ，0x28（十进制 40）是缓冲区到 ebp（栈基址寄存器）的距离，+4 是覆盖 ebp 本身（32 位程序中寄存器占 4 字节），总共 44 字节后，后续数据才能覆盖函数的 “返回地址”，从而跳转到 get_flag 函数。当然你可以用cyclic(0x28 + 4)，产生44字节的垃圾值。</p>
-<p><img src="/p/ctfshow-pwn-writeup/105.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/105.png"
 	width="1130"
 	height="569"
-	srcset="/p/ctfshow-pwn-writeup/105_hu_9fe21db2e56fb303.png 480w, /p/ctfshow-pwn-writeup/105_hu_2f03f58823b9acb.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/105_hu_9fe21db2e56fb303.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/105_hu_2f03f58823b9acb.png 1024w"
 	loading="lazy"
 	
 	
@@ -4170,10 +4175,10 @@ unicode: "ece7"
 </h3><p>题目：32位的 system(“/bin/sh”) 后门函数给你。 <a class="link" href="PWN_037" >PWN_037</a></p>
 <p>checksec发现是有无栈溢出保护的，关了canary。</p>
 <p>IDA分析：</p>
-<p><img src="/p/ctfshow-pwn-writeup/106.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/106.png"
 	width="649"
 	height="204"
-	srcset="/p/ctfshow-pwn-writeup/106_hu_28baf5c7d68b2e77.png 480w, /p/ctfshow-pwn-writeup/106_hu_1e83db09825e803f.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/106_hu_28baf5c7d68b2e77.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/106_hu_1e83db09825e803f.png 1024w"
 	loading="lazy"
 	
 	
@@ -4183,10 +4188,10 @@ unicode: "ece7"
 	
 ></p>
 <p>可以发现main函数没有什么可以利用的，但是在函数目录可以看到有个backdoor的函数有猫腻&hellip;.</p>
-<p><img src="/p/ctfshow-pwn-writeup/107.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/107.png"
 	width="689"
 	height="309"
-	srcset="/p/ctfshow-pwn-writeup/107_hu_8a3f21dfb544f975.png 480w, /p/ctfshow-pwn-writeup/107_hu_82558c987e30e4e0.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/107_hu_8a3f21dfb544f975.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/107_hu_82558c987e30e4e0.png 1024w"
 	loading="lazy"
 	
 		alt="真“后门”函数——backdoor"
@@ -4199,10 +4204,10 @@ unicode: "ece7"
 ></p>
 <p>这个函数居然有/bin/sh！！！！！</p>
 <p>跟进ctfshow函数：</p>
-<p><img src="/p/ctfshow-pwn-writeup/108.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/108.png"
 	width="685"
 	height="149"
-	srcset="/p/ctfshow-pwn-writeup/108_hu_2f6decafcbb4d7a.png 480w, /p/ctfshow-pwn-writeup/108_hu_13e7ed272ddf4f58.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/108_hu_2f6decafcbb4d7a.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/108_hu_13e7ed272ddf4f58.png 1024w"
 	loading="lazy"
 	
 	
@@ -4237,10 +4242,10 @@ unicode: "ece7"
 </span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><img src="/p/ctfshow-pwn-writeup/109.png"
+</div><p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/109.png"
 	width="1043"
 	height="460"
-	srcset="/p/ctfshow-pwn-writeup/109_hu_5594301dde95ce57.png 480w, /p/ctfshow-pwn-writeup/109_hu_f2393a4d4b100c98.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/109_hu_5594301dde95ce57.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/109_hu_f2393a4d4b100c98.png 1024w"
 	loading="lazy"
 	
 	
@@ -4253,10 +4258,10 @@ unicode: "ece7"
 <h3 id="pwn_038">PWN_038
 </h3><p>题目：64位的 system(“/bin/sh”) 后门函数给你。</p>
 <p>checksec：</p>
-<p><img src="/p/ctfshow-pwn-writeup/110.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/110.png"
 	width="845"
 	height="209"
-	srcset="/p/ctfshow-pwn-writeup/110_hu_cc699b9c9e84b874.png 480w, /p/ctfshow-pwn-writeup/110_hu_818237d793c59893.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/110_hu_cc699b9c9e84b874.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/110_hu_818237d793c59893.png 1024w"
 	loading="lazy"
 	
 	
@@ -4266,10 +4271,10 @@ unicode: "ece7"
 	
 ></p>
 <p>没开canary保护，开NX保护（不能ret2shellcode）</p>
-<p><img src="/p/ctfshow-pwn-writeup/111.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/111.png"
 	width="653"
 	height="150"
-	srcset="/p/ctfshow-pwn-writeup/111_hu_557177fc9847835c.png 480w, /p/ctfshow-pwn-writeup/111_hu_3e2e3f6328afcdc.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/111_hu_557177fc9847835c.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/111_hu_3e2e3f6328afcdc.png 1024w"
 	loading="lazy"
 	
 	
@@ -4280,10 +4285,10 @@ unicode: "ece7"
 ></p>
 <p>buf数组距离ebp寄存器为0xAh，加上本身寄存器ebp的8字节。</p>
 <p>跟进backdoor函数看到/bin/sh，本题思路和上题PWN_037一样，只不过架构变成64位而已。</p>
-<p><img src="/p/ctfshow-pwn-writeup/107.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/107.png"
 	width="689"
 	height="309"
-	srcset="/p/ctfshow-pwn-writeup/107_hu_8a3f21dfb544f975.png 480w, /p/ctfshow-pwn-writeup/107_hu_82558c987e30e4e0.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/107_hu_8a3f21dfb544f975.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/107_hu_82558c987e30e4e0.png 1024w"
 	loading="lazy"
 	
 		alt="上题backdoor函数的int类型"
@@ -4294,10 +4299,10 @@ unicode: "ece7"
 		data-flex-basis="535px"
 	
 ></p>
-<p><img src="/p/ctfshow-pwn-writeup/112.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/112.png"
 	width="610"
 	height="126"
-	srcset="/p/ctfshow-pwn-writeup/112_hu_7a50666a6534a184.png 480w, /p/ctfshow-pwn-writeup/112_hu_f2c44b968d3f43b7.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/112_hu_7a50666a6534a184.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/112_hu_f2c44b968d3f43b7.png 1024w"
 	loading="lazy"
 	
 		alt="本题的后门函数int_64"
@@ -4312,10 +4317,10 @@ unicode: "ece7"
     <blockquote>
 <p>64 位程序调用 <code>system</code> 需考虑堆栈平衡，本质是 <strong>64 位 ABI 对 “栈对齐” 的硬性要求</strong>—— 若不满足，函数执行时访问栈内存会崩溃；而 32 位 ABI 无此要求，仅需调用后清理参数栈即可，因此无需额外关注平衡。</p></blockquote></blockquote>
 <p>所以说exp需要考虑到堆栈平衡加上ret返回地址：</p>
-<p><img src="/p/ctfshow-pwn-writeup/113.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/113.png"
 	width="1198"
 	height="261"
-	srcset="/p/ctfshow-pwn-writeup/113_hu_3770565c136ecdbb.png 480w, /p/ctfshow-pwn-writeup/113_hu_f3c84935d209b6bf.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/113_hu_3770565c136ecdbb.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/113_hu_f3c84935d209b6bf.png 1024w"
 	loading="lazy"
 	
 	
@@ -4366,10 +4371,10 @@ unicode: "ece7"
 </div><h3 id="pwn_039">PWN_039
 </h3><p>题目：32位的 system(); &ldquo;/bin/sh&rdquo;。 <a class="link" href="PWN_039" >PWN_039</a></p>
 <p>checksec一下：</p>
-<p><img src="/p/ctfshow-pwn-writeup/114.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/114.png"
 	width="750"
 	height="210"
-	srcset="/p/ctfshow-pwn-writeup/114_hu_ffd0edb80748b701.png 480w, /p/ctfshow-pwn-writeup/114_hu_ed469b05f80e7568.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/114_hu_ffd0edb80748b701.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/114_hu_ed469b05f80e7568.png 1024w"
 	loading="lazy"
 	
 	
@@ -4380,10 +4385,10 @@ unicode: "ece7"
 ></p>
 <p>可以看到没开启canary、PIE保护的，存在可利用栈溢出漏洞的可能。</p>
 <p>IDA：</p>
-<p><img src="/p/ctfshow-pwn-writeup/115.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/115.png"
 	width="1000"
 	height="450"
-	srcset="/p/ctfshow-pwn-writeup/115_hu_e696ee341380586.png 480w, /p/ctfshow-pwn-writeup/115_hu_a20ea7fd6a1243a2.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/115_hu_e696ee341380586.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/115_hu_a20ea7fd6a1243a2.png 1024w"
 	loading="lazy"
 	
 		alt="32位的IDA分析"
@@ -4395,10 +4400,10 @@ unicode: "ece7"
 	
 ></p>
 <p>跟进ctfshow函数发现栈溢出：</p>
-<p><img src="/p/ctfshow-pwn-writeup/116.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/116.png"
 	width="596"
 	height="140"
-	srcset="/p/ctfshow-pwn-writeup/116_hu_1199a62a52d94a2a.png 480w, /p/ctfshow-pwn-writeup/116_hu_d138901c5d88e68e.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/116_hu_1199a62a52d94a2a.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/116_hu_d138901c5d88e68e.png 1024w"
 	loading="lazy"
 	
 	
@@ -4409,10 +4414,10 @@ unicode: "ece7"
 ></p>
 <p>可以读取50个字符给buf，但buf容量只有14，所以超过14就会造成栈溢出。</p>
 <p>接着在函数目录看到hint函数有猫腻：</p>
-<p><img src="/p/ctfshow-pwn-writeup/117.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/117.png"
 	width="854"
 	height="390"
-	srcset="/p/ctfshow-pwn-writeup/117_hu_25ebd19a12518947.png 480w, /p/ctfshow-pwn-writeup/117_hu_27e696ef37eed855.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/117_hu_25ebd19a12518947.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/117_hu_27e696ef37eed855.png 1024w"
 	loading="lazy"
 	
 	
@@ -4452,10 +4457,10 @@ unicode: "ece7"
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>这里的p32(0)等于4字节，可以用四个a或者cyclic(4)代替也行，这时32位下system函数的返回地址占位符，然后就到执行/bin/sh，那就是跳转到它的地址：</p>
-<p><img src="/p/ctfshow-pwn-writeup/118.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/118.png"
 	width="1155"
 	height="119"
-	srcset="/p/ctfshow-pwn-writeup/118_hu_e5e93807f34b7bdd.png 480w, /p/ctfshow-pwn-writeup/118_hu_875bb0d0ab4ca27d.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/118_hu_e5e93807f34b7bdd.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/118_hu_875bb0d0ab4ca27d.png 1024w"
 	loading="lazy"
 	
 		alt="/bin/sh字符串的地址"
@@ -4471,10 +4476,10 @@ unicode: "ece7"
 <h3 id="pwn_040">PWN_040
 </h3><p>题目：64位的 system(); &ldquo;/bin/sh&rdquo;。</p>
 <p>IDA64位分析，跟进ctfshow函数：</p>
-<p><img src="/p/ctfshow-pwn-writeup/119.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/119.png"
 	width="551"
 	height="149"
-	srcset="/p/ctfshow-pwn-writeup/119_hu_4361ba4a461d934e.png 480w, /p/ctfshow-pwn-writeup/119_hu_d335e677bd05e71e.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/119_hu_4361ba4a461d934e.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/119_hu_d335e677bd05e71e.png 1024w"
 	loading="lazy"
 	
 	
@@ -4485,10 +4490,10 @@ unicode: "ece7"
 ></p>
 <p>checksec看到未打开canary保护，而且在ctfshow函数这发现有栈溢出。</p>
 <p>跟进hint函数，发现后门。</p>
-<p><img src="/p/ctfshow-pwn-writeup/120.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/120.png"
 	width="540"
 	height="125"
-	srcset="/p/ctfshow-pwn-writeup/120_hu_ac0e24a915fef2c8.png 480w, /p/ctfshow-pwn-writeup/120_hu_a859f06ba4c0b768.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/120_hu_ac0e24a915fef2c8.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/120_hu_a859f06ba4c0b768.png 1024w"
 	loading="lazy"
 	
 	
@@ -4506,10 +4511,10 @@ unicode: "ece7"
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ROPgadget --binary ./pwn <span class="p">|</span> grep ret
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><img src="/p/ctfshow-pwn-writeup/121.png"
+</div><p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/121.png"
 	width="1224"
 	height="450"
-	srcset="/p/ctfshow-pwn-writeup/121_hu_749e2c86a93f982a.png 480w, /p/ctfshow-pwn-writeup/121_hu_9f8cdc6270b0312a.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/121_hu_749e2c86a93f982a.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/121_hu_9f8cdc6270b0312a.png 1024w"
 	loading="lazy"
 	
 		alt="ret地址查询"
@@ -4521,10 +4526,10 @@ unicode: "ece7"
 	
 ></p>
 <p>查询/bin/sh的地址：</p>
-<p><img src="/p/ctfshow-pwn-writeup/122.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/122.png"
 	width="1135"
 	height="105"
-	srcset="/p/ctfshow-pwn-writeup/122_hu_8e4f1859de6b1d4c.png 480w, /p/ctfshow-pwn-writeup/122_hu_772a3258af0a8472.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/122_hu_8e4f1859de6b1d4c.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/122_hu_772a3258af0a8472.png 1024w"
 	loading="lazy"
 	
 		alt="/bin/sh的地址：0x400808"
@@ -4581,10 +4586,10 @@ unicode: "ece7"
 </h3><h4 id="题目-1">题目：
 </h4><p>32位的 system(); 但是没&quot;/bin/sh&quot; ，好像有其他的可以替代。 <a class="link" href="PWN_041" >PWN_041</a></p>
 <p>checksec一下，然后IDA分析</p>
-<p><img src="/p/ctfshow-pwn-writeup/126.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/126.png"
 	width="1055"
 	height="206"
-	srcset="/p/ctfshow-pwn-writeup/126_hu_50a6b7b4540d004f.png 480w, /p/ctfshow-pwn-writeup/126_hu_a5b594f7bf368fe2.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/126_hu_50a6b7b4540d004f.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/126_hu_a5b594f7bf368fe2.png 1024w"
 	loading="lazy"
 	
 	
@@ -4595,10 +4600,10 @@ unicode: "ece7"
 ></p>
 <p>不能用ret2shellcode了。</p>
 <p>这里和上题差不多，找一下/bin/sh：</p>
-<p><img src="/p/ctfshow-pwn-writeup/123.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/123.png"
 	width="1550"
 	height="630"
-	srcset="/p/ctfshow-pwn-writeup/123_hu_bbacdeabd557b527.png 480w, /p/ctfshow-pwn-writeup/123_hu_7ec5c23639120ed9.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/123_hu_bbacdeabd557b527.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/123_hu_7ec5c23639120ed9.png 1024w"
 	loading="lazy"
 	
 	
@@ -4635,10 +4640,10 @@ unicode: "ece7"
 </ul>
 <p>PWN 利用中为了「兼容性和稳定性」，即使是 <code>system</code> 函数，也更推荐写 <code>/bin/sh</code> 而非 <code>sh</code>（避免因环境变量异常导致利用失败）。</p></blockquote></blockquote>
 <p>这里跟进hint函数：</p>
-<p><img src="/p/ctfshow-pwn-writeup/125.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/125.png"
 	width="838"
 	height="150"
-	srcset="/p/ctfshow-pwn-writeup/125_hu_2475afccf8340c50.png 480w, /p/ctfshow-pwn-writeup/125_hu_f610554b4ea5f28d.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/125_hu_2475afccf8340c50.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/125_hu_f610554b4ea5f28d.png 1024w"
 	loading="lazy"
 	
 	
@@ -4684,10 +4689,10 @@ unicode: "ece7"
 </div><h3 id="pwn_042">PWN_042
 </h3><p>题目：64位的 system(); 但是没&quot;/bin/sh&quot; ，好像有其他的可以替代。 <a class="link" href="PWN_042" >PWN_042</a></p>
 <p>来看IDA64位分析：</p>
-<p><img src="/p/ctfshow-pwn-writeup/128.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/128.png"
 	width="670"
 	height="180"
-	srcset="/p/ctfshow-pwn-writeup/128_hu_773d0a462a9bb4a6.png 480w, /p/ctfshow-pwn-writeup/128_hu_8acb802bbfbe83f2.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/128_hu_773d0a462a9bb4a6.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/128_hu_8acb802bbfbe83f2.png 1024w"
 	loading="lazy"
 	
 		alt="存在栈溢出"
@@ -4699,10 +4704,10 @@ unicode: "ece7"
 	
 ></p>
 <p>checksec：</p>
-<p><img src="/p/ctfshow-pwn-writeup/129.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/129.png"
 	width="946"
 	height="234"
-	srcset="/p/ctfshow-pwn-writeup/129_hu_720d126d72ab49b9.png 480w, /p/ctfshow-pwn-writeup/129_hu_e7d4450d3040833.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/129_hu_720d126d72ab49b9.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/129_hu_e7d4450d3040833.png 1024w"
 	loading="lazy"
 	
 	
@@ -4713,10 +4718,10 @@ unicode: "ece7"
 ></p>
 <p>在跟进hint函数也是如此，和PWN_041一样的，这次程序是64位，<a class="link" href="https://expl0rer.top/p/ctfshow-pwn-writeup/#32%e4%bd%8d%e5%92%8c64%e4%bd%8d%e5%8f%af%e6%89%a7%e8%a1%8c%e7%a8%8b%e5%ba%8f%e7%9a%84%e5%8f%82%e6%95%b0%e4%bc%a0%e9%80%92%e9%a1%ba%e5%ba%8f"  target="_blank" rel="noopener"
     >在exp编写上有所不同</a>，需要pop_rdi：ret、ret的地址：</p>
-<p><img src="/p/ctfshow-pwn-writeup/130.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/130.png"
 	width="1265"
 	height="375"
-	srcset="/p/ctfshow-pwn-writeup/130_hu_5a7538fd605e720d.png 480w, /p/ctfshow-pwn-writeup/130_hu_a866cc865737ff56.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/130_hu_5a7538fd605e720d.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/130_hu_a866cc865737ff56.png 1024w"
 	loading="lazy"
 	
 	
@@ -4728,10 +4733,10 @@ unicode: "ece7"
 <p>ret：0x40053e</p>
 <p>pop_rdi：0x400843</p>
 <p>再找sh的地址吧：</p>
-<p><img src="/p/ctfshow-pwn-writeup/131.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/131.png"
 	width="1096"
 	height="204"
-	srcset="/p/ctfshow-pwn-writeup/131_hu_6a6662067bbd0f05.png 480w, /p/ctfshow-pwn-writeup/131_hu_9a6c214336b69472.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/131_hu_6a6662067bbd0f05.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/131_hu_9a6c214336b69472.png 1024w"
 	loading="lazy"
 	
 		alt="sh的地址是0x400872"
@@ -4781,10 +4786,10 @@ unicode: "ece7"
 <h3 id="pwn_043">PWN_043
 </h3><p>题目：32位的 system(); 但是好像没&quot;/bin/sh&quot; 上面的办法不行了，想想办法。 <a class="link" href="PWN_043" >PWN_043</a></p>
 <p>IDA32位跟进ctfshow函数：</p>
-<p><img src="/p/ctfshow-pwn-writeup/132.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/132.png"
 	width="875"
 	height="151"
-	srcset="/p/ctfshow-pwn-writeup/132_hu_c59120af2cb1695a.png 480w, /p/ctfshow-pwn-writeup/132_hu_cb4a8ac9d3d15d72.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/132_hu_c59120af2cb1695a.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/132_hu_cb4a8ac9d3d15d72.png 1024w"
 	loading="lazy"
 	
 		alt="gets栈溢出"
@@ -4797,10 +4802,10 @@ unicode: "ece7"
 ></p>
 <p>gets函数很危险的，一般都用fgets，用这个必溢出的好吧&hellip;&hellip;</p>
 <p>跟进hint函数：</p>
-<p><img src="/p/ctfshow-pwn-writeup/133.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/133.png"
 	width="896"
 	height="339"
-	srcset="/p/ctfshow-pwn-writeup/133_hu_6591d04ae9fff383.png 480w, /p/ctfshow-pwn-writeup/133_hu_7fceb86594aae882.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/133_hu_6591d04ae9fff383.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/133_hu_7fceb86594aae882.png 1024w"
 	loading="lazy"
 	
 	
@@ -4813,10 +4818,10 @@ unicode: "ece7"
 <p>那大致的exp思路来了；先用cyclic产生垃圾值填充缓冲区和ebp本身，出现栈溢出后，将返回值覆盖为gets函数地址，加上ebx寄存器弹栈，gets函数读取数据，把我们所给的/bin/sh字符串写入这个内存里面，再次利用栈溢出，将返回地址覆盖为 system 函数的地址，使得 gets 执行完后，程序自动跳转到 system 执行，执行 <code>system(&quot;/bin/sh&quot;)</code> 获取 shell。</p>
 <p>这个内存去哪找？</p>
 <p>在bss字段（未初始化字段）找到了buf2变量：</p>
-<p><img src="/p/ctfshow-pwn-writeup/134.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/134.png"
 	width="929"
 	height="215"
-	srcset="/p/ctfshow-pwn-writeup/134_hu_e07f711cd6a6e5ef.png 480w, /p/ctfshow-pwn-writeup/134_hu_4dc65a9b43ad1b81.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/134_hu_e07f711cd6a6e5ef.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/134_hu_4dc65a9b43ad1b81.png 1024w"
 	loading="lazy"
 	
 		alt="buf2：未定义的内存变量"
@@ -4828,10 +4833,10 @@ unicode: "ece7"
 	
 ></p>
 <p>查询pop_ebx的地址</p>
-<p><img src="/p/ctfshow-pwn-writeup/135.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/135.png"
 	width="1245"
 	height="505"
-	srcset="/p/ctfshow-pwn-writeup/135_hu_d45e675ff438bc16.png 480w, /p/ctfshow-pwn-writeup/135_hu_c1d3ce761cd87966.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/135_hu_d45e675ff438bc16.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/135_hu_c1d3ce761cd87966.png 1024w"
 	loading="lazy"
 	
 		alt="pop_ebx的地址是0x8048409"
@@ -4887,10 +4892,10 @@ unicode: "ece7"
 <h3 id="pwn_044">PWN_044
 </h3><p>题目：64位的 system(); 但是好像没&quot;/bin/sh&quot; 上面的办法不行了，想想办法。 <a class="link" href="PWN_044" >PWN_044</a></p>
 <p>IDA分析：</p>
-<p><img src="/p/ctfshow-pwn-writeup/136.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/136.png"
 	width="855"
 	height="194"
-	srcset="/p/ctfshow-pwn-writeup/136_hu_ad575c4dd168699f.png 480w, /p/ctfshow-pwn-writeup/136_hu_f6ed3a0acf42320a.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/136_hu_ad575c4dd168699f.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/136_hu_f6ed3a0acf42320a.png 1024w"
 	loading="lazy"
 	
 		alt="main函数"
@@ -4901,10 +4906,10 @@ unicode: "ece7"
 		data-flex-basis="1057px"
 	
 ></p>
-<p><img src="/p/ctfshow-pwn-writeup/137.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/137.png"
 	width="671"
 	height="175"
-	srcset="/p/ctfshow-pwn-writeup/137_hu_deb54602fe7918b8.png 480w, /p/ctfshow-pwn-writeup/137_hu_19200459f04ccefb.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/137_hu_deb54602fe7918b8.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/137_hu_19200459f04ccefb.png 1024w"
 	loading="lazy"
 	
 		alt="gets函数"
@@ -4915,10 +4920,10 @@ unicode: "ece7"
 		data-flex-basis="920px"
 	
 ></p>
-<p><img src="/p/ctfshow-pwn-writeup/138.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/138.png"
 	width="869"
 	height="140"
-	srcset="/p/ctfshow-pwn-writeup/138_hu_176d74d6a11854a.png 480w, /p/ctfshow-pwn-writeup/138_hu_3cd2788b29cb94c5.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/138_hu_176d74d6a11854a.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/138_hu_3cd2788b29cb94c5.png 1024w"
 	loading="lazy"
 	
 		alt="bss字段上的buf2变量"
@@ -4930,10 +4935,10 @@ unicode: "ece7"
 	
 ></p>
 <p>和上一题区别是参数传递，64位的前6参数是靠寄存器rdi传递的。查询<code>pop rdi；ret</code>汇编命令的地址：</p>
-<p><img src="/p/ctfshow-pwn-writeup/139.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/139.png"
 	width="1478"
 	height="361"
-	srcset="/p/ctfshow-pwn-writeup/139_hu_1875753dd456a7b6.png 480w, /p/ctfshow-pwn-writeup/139_hu_56ce53ca262cfd73.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/139_hu_1875753dd456a7b6.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/139_hu_56ce53ca262cfd73.png 1024w"
 	loading="lazy"
 	
 	
@@ -5018,10 +5023,10 @@ unicode: "ece7"
 </div><h3 id="pwn_045">PWN_045
 </h3><p>题目：32位 无 system 无 &ldquo;/bin/sh&rdquo;。 <a class="link" href="PWN_045" >PWN_045</a></p>
 <p>checksec一下：</p>
-<p><img src="/p/ctfshow-pwn-writeup/142.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/142.png"
 	width="910"
 	height="200"
-	srcset="/p/ctfshow-pwn-writeup/142_hu_82abb708cf1a0811.png 480w, /p/ctfshow-pwn-writeup/142_hu_f4f82383442791c4.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/142_hu_82abb708cf1a0811.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/142_hu_f4f82383442791c4.png 1024w"
 	loading="lazy"
 	
 	
@@ -5032,10 +5037,10 @@ unicode: "ece7"
 ></p>
 <p>32位关闭栈保护关闭PIE。</p>
 <p>IDA分析main：</p>
-<p><img src="/p/ctfshow-pwn-writeup/140.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/140.png"
 	width="711"
 	height="240"
-	srcset="/p/ctfshow-pwn-writeup/140_hu_175a81e93975ecf3.png 480w, /p/ctfshow-pwn-writeup/140_hu_cd9361b7005e1aae.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/140_hu_175a81e93975ecf3.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/140_hu_cd9361b7005e1aae.png 1024w"
 	loading="lazy"
 	
 	
@@ -5045,10 +5050,10 @@ unicode: "ece7"
 	
 ></p>
 <p>跟进ctfshow函数：</p>
-<p><img src="/p/ctfshow-pwn-writeup/141.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/141.png"
 	width="608"
 	height="195"
-	srcset="/p/ctfshow-pwn-writeup/141_hu_c9fb5296e0aa6dc5.png 480w, /p/ctfshow-pwn-writeup/141_hu_f7ef6bad6f31ddd8.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/141_hu_c9fb5296e0aa6dc5.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/141_hu_f7ef6bad6f31ddd8.png 1024w"
 	loading="lazy"
 	
 	
@@ -5091,10 +5096,10 @@ unicode: "ece7"
 </div><p>这时候已经把write函数地址泄露出来了，不过看到这里比较懵逼哈，payload为什么要上传这么多，直接调用write函数不行了吗？还要got、plt啥的（堆plt、got不熟悉的可以看回<a class="link" href="https://expl0rer.top/p/pwn-1/#plt%e4%b8%8egot"  target="_blank" rel="noopener"
     >PWN-1中plt和got表的讲解</a>）。让我给你细分一下：先调用write_plt，这指write函数的执行入口，告诉write我要使用你了，调用write后，会从栈上读取这个地址作为下一条指令的位置。这里指定 main 函数，是为了让程序在泄露地址后回到主函数，继续接收我们的第二次payload（用于后续调用 system 获取 shell），避免程序直接退出。第一次payload是获得write地址，第二次payload是执行system函数。</p>
 <p>接着到p32(1) + p32(write_got) + p32(4)：write 函数的三个参数：</p>
-<p><img src="/p/ctfshow-pwn-writeup/143.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/143.png"
 	width="670"
 	height="135"
-	srcset="/p/ctfshow-pwn-writeup/143_hu_f3c975e2df9b88f1.png 480w, /p/ctfshow-pwn-writeup/143_hu_c713cca5ee6c652a.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/143_hu_f3c975e2df9b88f1.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/143_hu_c713cca5ee6c652a.png 1024w"
 	loading="lazy"
 	
 		alt="write函数原型"
@@ -5146,10 +5151,10 @@ unicode: "ece7"
 </div><h3 id="pwn_046待定">PWN_046（待定）
 </h3><p>题目：64位 无 system 无 &ldquo;/bin/sh&rdquo;。 <a class="link" href="PWN_046" >PWN_046</a></p>
 <p>IDA64分析：</p>
-<p><img src="/p/ctfshow-pwn-writeup/144.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/144.png"
 	width="836"
 	height="195"
-	srcset="/p/ctfshow-pwn-writeup/144_hu_cf5ef8ac764a5ada.png 480w, /p/ctfshow-pwn-writeup/144_hu_c486a541b03ac4d3.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/144_hu_cf5ef8ac764a5ada.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/144_hu_c486a541b03ac4d3.png 1024w"
 	loading="lazy"
 	
 		alt="main函数"
@@ -5160,10 +5165,10 @@ unicode: "ece7"
 		data-flex-basis="1028px"
 	
 ></p>
-<p><img src="/p/ctfshow-pwn-writeup/145.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/145.png"
 	width="838"
 	height="145"
-	srcset="/p/ctfshow-pwn-writeup/145_hu_745994514c60a089.png 480w, /p/ctfshow-pwn-writeup/145_hu_de6931636b3f1092.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/145_hu_745994514c60a089.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/145_hu_de6931636b3f1092.png 1024w"
 	loading="lazy"
 	
 		alt="跟进ctfshow函数"
@@ -5181,10 +5186,10 @@ unicode: "ece7"
 </h3><p>题目：ez ret2libc     <a class="link" href="PWN_047" >PWN_047</a></p>
 <p>就提示用ret2libc</p>
 <p>checksec一下：</p>
-<p><img src="/p/ctfshow-pwn-writeup/146.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/146.png"
 	width="770"
 	height="234"
-	srcset="/p/ctfshow-pwn-writeup/146_hu_fc06a635d328f011.png 480w, /p/ctfshow-pwn-writeup/146_hu_919669922d8ebe2f.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/146_hu_fc06a635d328f011.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/146_hu_919669922d8ebe2f.png 1024w"
 	loading="lazy"
 	
 	
@@ -5194,10 +5199,10 @@ unicode: "ece7"
 	
 ></p>
 <p>IDA32位分析：</p>
-<p><img src="/p/ctfshow-pwn-writeup/147.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/147.png"
 	width="864"
 	height="290"
-	srcset="/p/ctfshow-pwn-writeup/147_hu_ecb2389afc78956f.png 480w, /p/ctfshow-pwn-writeup/147_hu_c87d29f473550c93.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/147_hu_ecb2389afc78956f.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/147_hu_c87d29f473550c93.png 1024w"
 	loading="lazy"
 	
 	
@@ -5207,10 +5212,10 @@ unicode: "ece7"
 	
 ></p>
 <p>运行程序：</p>
-<p><img src="/p/ctfshow-pwn-writeup/148.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/148.png"
 	width="1075"
 	height="585"
-	srcset="/p/ctfshow-pwn-writeup/148_hu_68a9c42744f4d3b5.png 480w, /p/ctfshow-pwn-writeup/148_hu_2f76dbfda3e7bb57.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/148_hu_68a9c42744f4d3b5.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/148_hu_2f76dbfda3e7bb57.png 1024w"
 	loading="lazy"
 	
 	
@@ -5221,10 +5226,10 @@ unicode: "ece7"
 ></p>
 <p>一上来就给了几个函数的地址，目前来看还没给出system的地址。</p>
 <p>跟进ctfshow函数还发现了<code>gets</code>函数：</p>
-<p><img src="/p/ctfshow-pwn-writeup/149.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/149.png"
 	width="720"
 	height="200"
-	srcset="/p/ctfshow-pwn-writeup/149_hu_f03cd6d93e5d9470.png 480w, /p/ctfshow-pwn-writeup/149_hu_dce5425d9dfb9004.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/149_hu_f03cd6d93e5d9470.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/149_hu_dce5425d9dfb9004.png 1024w"
 	loading="lazy"
 	
 	
@@ -5235,10 +5240,10 @@ unicode: "ece7"
 ></p>
 <p>那就是通过栈溢出ret2libc来搞flag咯。</p>
 <p>在data字段还找到了/bin/sh：</p>
-<p><img src="/p/ctfshow-pwn-writeup/150.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/150.png"
 	width="870"
 	height="288"
-	srcset="/p/ctfshow-pwn-writeup/150_hu_80b41588e2888370.png 480w, /p/ctfshow-pwn-writeup/150_hu_14f781a1e68c7689.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/150_hu_80b41588e2888370.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/150_hu_14f781a1e68c7689.png 1024w"
 	loading="lazy"
 	
 	
@@ -5248,10 +5253,10 @@ unicode: "ece7"
 	
 ></p>
 <p>你有无发现：这个/bin/sh的地址就是gift</p>
-<p><img src="/p/ctfshow-pwn-writeup/151.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/151.png"
 	width="1204"
 	height="570"
-	srcset="/p/ctfshow-pwn-writeup/151_hu_fc6f5087e790c1de.png 480w, /p/ctfshow-pwn-writeup/151_hu_f0d75ad6073237cd.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/151_hu_fc6f5087e790c1de.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/151_hu_f0d75ad6073237cd.png 1024w"
 	loading="lazy"
 	
 	
@@ -5315,10 +5320,10 @@ unicode: "ece7"
 </div>
 </div><h3 id="pwn_048">PWN_048
 </h3><p>题目：没有write了，试试用puts吧，更简单了呢。 <a class="link" href="PWN_048" >PWN_048</a></p>
-<p><img src="/p/ctfshow-pwn-writeup/152.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/152.png"
 	width="795"
 	height="234"
-	srcset="/p/ctfshow-pwn-writeup/152_hu_82ddc294ee9dbdfb.png 480w, /p/ctfshow-pwn-writeup/152_hu_da96e2278b37543.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/152_hu_82ddc294ee9dbdfb.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/152_hu_da96e2278b37543.png 1024w"
 	loading="lazy"
 	
 		alt="checksec"
@@ -5330,10 +5335,10 @@ unicode: "ece7"
 	
 ></p>
 <p>IDA32分析：</p>
-<p><img src="/p/ctfshow-pwn-writeup/153.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/153.png"
 	width="936"
 	height="199"
-	srcset="/p/ctfshow-pwn-writeup/153_hu_db48b024a3718cbf.png 480w, /p/ctfshow-pwn-writeup/153_hu_7601ca075a457054.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/153_hu_db48b024a3718cbf.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/153_hu_7601ca075a457054.png 1024w"
 	loading="lazy"
 	
 		alt="main函数"
@@ -5345,10 +5350,10 @@ unicode: "ece7"
 	
 ></p>
 <p>跟进ctfshow函数：</p>
-<p><img src="/p/ctfshow-pwn-writeup/154.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/154.png"
 	width="746"
 	height="140"
-	srcset="/p/ctfshow-pwn-writeup/154_hu_6bb66ac2c50192d8.png 480w, /p/ctfshow-pwn-writeup/154_hu_277011d3545cec3e.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/154_hu_6bb66ac2c50192d8.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/154_hu_277011d3545cec3e.png 1024w"
 	loading="lazy"
 	
 		alt="有栈溢出"
@@ -5415,10 +5420,10 @@ unicode: "ece7"
 </h3><p>题目：静态编译？或许你可以找找mprotect函数。 <a class="link" href="PWN_049" >PWN_049</a></p>
 <p>checksec一下，没开canary、PIE、NX保护。</p>
 <p>IDA32：</p>
-<p><img src="/p/ctfshow-pwn-writeup/155.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/155.png"
 	width="1281"
 	height="516"
-	srcset="/p/ctfshow-pwn-writeup/155_hu_b973c2d823f63ff9.png 480w, /p/ctfshow-pwn-writeup/155_hu_b3772a185c0448ca.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/155_hu_b973c2d823f63ff9.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/155_hu_b3772a185c0448ca.png 1024w"
 	loading="lazy"
 	
 	
@@ -5429,10 +5434,10 @@ unicode: "ece7"
 ></p>
 <p>可以看到有非常多的函数，这就是静态编译。</p>
 <p>跟进ctfshow函数，看到read有栈溢出漏洞。</p>
-<p><img src="/p/ctfshow-pwn-writeup/157.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/157.png"
 	width="654"
 	height="149"
-	srcset="/p/ctfshow-pwn-writeup/157_hu_9ddface01add7ae3.png 480w, /p/ctfshow-pwn-writeup/157_hu_e826473b4239865f.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/157_hu_9ddface01add7ae3.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/157_hu_e826473b4239865f.png 1024w"
 	loading="lazy"
 	
 	
@@ -5442,10 +5447,10 @@ unicode: "ece7"
 	
 ></p>
 <p>找mprotect函数：</p>
-<p><img src="/p/ctfshow-pwn-writeup/156.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/156.png"
 	width="820"
 	height="205"
-	srcset="/p/ctfshow-pwn-writeup/156_hu_4c4ae03dbf0da030.png 480w, /p/ctfshow-pwn-writeup/156_hu_5d71e420e11b0740.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/156_hu_4c4ae03dbf0da030.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/156_hu_5d71e420e11b0740.png 1024w"
 	loading="lazy"
 	
 	
@@ -5503,10 +5508,10 @@ unicode: "ece7"
 <p>那么我们可以利用它修改内存的权限为可读可写可执 行（RWX），然后我们就可以往栈上写入shellcode、执行，最后获取shell。</p>
 <p>在构造 payload 前，需先确定 3 个核心要素：<strong>目标内存地址、<code>mprotect</code> 参数、控制寄存器的 Gadget</strong>，这些是 payload 的 “积木”。</p>
 <p>我们要选择的内存地址是<code>0x80DA000</code>，等会？这不是bss段吧？</p>
-<p><img src="/p/ctfshow-pwn-writeup/159.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/159.png"
 	width="1125"
 	height="494"
-	srcset="/p/ctfshow-pwn-writeup/159_hu_fb0f9122edba3687.png 480w, /p/ctfshow-pwn-writeup/159_hu_6ce7b5fc8e39cc95.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/159_hu_fb0f9122edba3687.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/159_hu_6ce7b5fc8e39cc95.png 1024w"
 	loading="lazy"
 	
 		alt="页对齐的地址"
@@ -5533,10 +5538,10 @@ unicode: "ece7"
 </div><p>a1是start起始地址，也就是0x80DA000；a2是长度范围，这里选择0x1000，足够我们容纳shellcode大小了；a3是prot，也就是修改成的权限范围，这里直接改为RWX，也就是简写<code>0x7</code>。</p>
 <p>最后是控制函数参数的工具——关键<code>gadgets</code></p>
 <p>32位程序用栈传参的，这里的mprotect函数有三个参数，且调用后需继续控制流程，因此需要 <code>pop ebx ; pop esi ; pop ebp ; ret</code> 这样的 Gadget，用ROPgadget指令查询地址：</p>
-<p><img src="/p/ctfshow-pwn-writeup/158.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/158.png"
 	width="1116"
 	height="505"
-	srcset="/p/ctfshow-pwn-writeup/158_hu_4a650557b39f9dbd.png 480w, /p/ctfshow-pwn-writeup/158_hu_f4b49bbc5059aa15.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/158_hu_4a650557b39f9dbd.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/158_hu_f4b49bbc5059aa15.png 1024w"
 	loading="lazy"
 	
 	
@@ -5626,10 +5631,10 @@ unicode: "ece7"
 </h3><p>题目：好像哪里不一样了；远程libc环境 Ubuntu 18。 <a class="link" href="PWN_050" >PWN_050</a></p>
 <p>当然，你可以继续使用ret2libc来完成这题，甚至会更简单，而我的目的是为了让大家进一步学mprotect函数。</p>
 <p>这里叫我们启动Ubuntu 18，就ctfshow配给我们的，那我们就听劝用它的虚拟机。虽说比较老&hellip;&hellip;</p>
-<p><img src="/p/ctfshow-pwn-writeup/160.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/160.png"
 	width="676"
 	height="209"
-	srcset="/p/ctfshow-pwn-writeup/160_hu_bd2a78b1036eb8c2.png 480w, /p/ctfshow-pwn-writeup/160_hu_e3f01219916f9207.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/160_hu_bd2a78b1036eb8c2.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/160_hu_e3f01219916f9207.png 1024w"
 	loading="lazy"
 	
 		alt="checksec"
@@ -5641,10 +5646,10 @@ unicode: "ece7"
 	
 ></p>
 <p>跟进ctfshow、main函数：</p>
-<p><img src="/p/ctfshow-pwn-writeup/161.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/161.png"
 	width="684"
 	height="179"
-	srcset="/p/ctfshow-pwn-writeup/161_hu_a971b4f57d92d856.png 480w, /p/ctfshow-pwn-writeup/161_hu_265d4964c1ecede1.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/161_hu_a971b4f57d92d856.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/161_hu_265d4964c1ecede1.png 1024w"
 	loading="lazy"
 	
 		alt="ctfshow函数"
@@ -5655,10 +5660,10 @@ unicode: "ece7"
 		data-flex-basis="917px"
 	
 ></p>
-<p><img src="/p/ctfshow-pwn-writeup/162.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/162.png"
 	width="910"
 	height="175"
-	srcset="/p/ctfshow-pwn-writeup/162_hu_8b989b1353770219.png 480w, /p/ctfshow-pwn-writeup/162_hu_8ac0967a3730fdae.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/162_hu_8b989b1353770219.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/162_hu_8ac0967a3730fdae.png 1024w"
 	loading="lazy"
 	
 		alt="main函数"
@@ -5678,10 +5683,10 @@ unicode: "ece7"
 <li>跳转到写入shellcode的区域，并执行</li>
 </ol>
 <p>我们要利用mprotect函数改变内存执行权限，那我们需要找地址，正好这次和上次一样不是页对齐：</p>
-<p><img src="/p/ctfshow-pwn-writeup/163.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/163.png"
 	width="1120"
 	height="564"
-	srcset="/p/ctfshow-pwn-writeup/163_hu_e33d9ccea361e8ae.png 480w, /p/ctfshow-pwn-writeup/163_hu_e154328f1e16809f.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/163_hu_e33d9ccea361e8ae.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/163_hu_e154328f1e16809f.png 1024w"
 	loading="lazy"
 	
 	
@@ -5692,10 +5697,10 @@ unicode: "ece7"
 ></p>
 <p>bss_start_address = 0x602000</p>
 <p>64位程序靠寄存器传参，用ROPgadget命令查询程序本身的gadget：</p>
-<p><img src="/p/ctfshow-pwn-writeup/164.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/164.png"
 	width="1105"
 	height="469"
-	srcset="/p/ctfshow-pwn-writeup/164_hu_54c58ffaf5f7ac8c.png 480w, /p/ctfshow-pwn-writeup/164_hu_19fc98944930584e.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/164_hu_54c58ffaf5f7ac8c.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/164_hu_19fc98944930584e.png 1024w"
 	loading="lazy"
 	
 	
@@ -5714,10 +5719,10 @@ unicode: "ece7"
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ROPgadget --binary /lib/x86_64-linux-gnu/libc.so.6
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><img src="/p/ctfshow-pwn-writeup/165.png"
+</div><p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/165.png"
 	width="1590"
 	height="293"
-	srcset="/p/ctfshow-pwn-writeup/165_hu_d11a96159544a496.png 480w, /p/ctfshow-pwn-writeup/165_hu_895ab54d666f15f6.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/165_hu_d11a96159544a496.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/165_hu_895ab54d666f15f6.png 1024w"
 	loading="lazy"
 	
 	
@@ -5731,10 +5736,10 @@ unicode: "ece7"
 <p>前面加个1是因为，后续还有一个类似的gadget变量，好区分一些。</p>
 <blockquote>
 <p>为什么第一个gadget可以从程序本身去查到，而第二三个gadget地址却要在libc库获取？</p>
-<p><img src="/p/ctfshow-pwn-writeup/166.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/166.png"
 	width="1235"
 	height="85"
-	srcset="/p/ctfshow-pwn-writeup/166_hu_3325de85d6270528.png 480w, /p/ctfshow-pwn-writeup/166_hu_855601e05de87156.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/166_hu_3325de85d6270528.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/166_hu_855601e05de87156.png 1024w"
 	loading="lazy"
 	
 		alt="查询不到"
@@ -5908,10 +5913,10 @@ unicode: "ece7"
 <p>总的来说这题质量不错，耗了我两天空闲时间去攻克。</p>
 <h3 id="pwn_051">PWN_051
 </h3><p>题目：I‘m IronMan； <a class="link" href="PWN_051" >PWN_051</a></p>
-<p><img src="/p/ctfshow-pwn-writeup/167.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/167.png"
 	width="825"
 	height="214"
-	srcset="/p/ctfshow-pwn-writeup/167_hu_87fa00768af6d9eb.png 480w, /p/ctfshow-pwn-writeup/167_hu_5d4af73eb38f32b1.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/167_hu_87fa00768af6d9eb.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/167_hu_5d4af73eb38f32b1.png 1024w"
 	loading="lazy"
 	
 		alt="32位关闭栈保护以及PIE"
@@ -5923,10 +5928,10 @@ unicode: "ece7"
 	
 ></p>
 <p>IDA抽象🤦‍😄&hellip;</p>
-<p><img src="/p/ctfshow-pwn-writeup/168.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/168.png"
 	width="1545"
 	height="583"
-	srcset="/p/ctfshow-pwn-writeup/168_hu_85b4abbb3660f982.png 480w, /p/ctfshow-pwn-writeup/168_hu_f5473e747256948b.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/168_hu_85b4abbb3660f982.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/168_hu_f5473e747256948b.png 1024w"
 	loading="lazy"
 	
 	
@@ -5936,10 +5941,10 @@ unicode: "ece7"
 	
 ></p>
 <p>跟进main函数，这次函数名字比较难记，可以改个名字：</p>
-<p><img src="/p/ctfshow-pwn-writeup/169.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/169.png"
 	width="1035"
 	height="455"
-	srcset="/p/ctfshow-pwn-writeup/169_hu_9a03f1dbf9af4215.png 480w, /p/ctfshow-pwn-writeup/169_hu_1e041167a5b894e3.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/169_hu_9a03f1dbf9af4215.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/169_hu_1e041167a5b894e3.png 1024w"
 	loading="lazy"
 	
 	
@@ -5948,10 +5953,10 @@ unicode: "ece7"
 		data-flex-basis="545px"
 	
 ></p>
-<p><img src="/p/ctfshow-pwn-writeup/170.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/170.png"
 	width="620"
 	height="180"
-	srcset="/p/ctfshow-pwn-writeup/170_hu_79a8cee284c0d251.png 480w, /p/ctfshow-pwn-writeup/170_hu_7c31f7e1b55ae952.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/170_hu_79a8cee284c0d251.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/170_hu_7c31f7e1b55ae952.png 1024w"
 	loading="lazy"
 	
 		alt="更改名字后"
@@ -5963,10 +5968,10 @@ unicode: "ece7"
 	
 ></p>
 <p>跟进ctfshow函数：</p>
-<p><img src="/p/ctfshow-pwn-writeup/171.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/171.png"
 	width="660"
 	height="1080"
-	srcset="/p/ctfshow-pwn-writeup/171_hu_c36869fb038422ed.png 480w, /p/ctfshow-pwn-writeup/171_hu_cd0446a43f1edacb.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/171_hu_c36869fb038422ed.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/171_hu_cd0446a43f1edacb.png 1024w"
 	loading="lazy"
 	
 	
@@ -5978,10 +5983,10 @@ unicode: "ece7"
 <p>很明显这是用C++写的，这里我看的不太懂，借用AI解读&hellip;</p>
 <p>在往s中read的时候大小没有问题，但是程序在下面将字符&quot;I&quot;替换成 了&quot;IronMan&quot;，最后在strcpy的时候发生了溢出。只需要简单计算一下，那么在输入16个“I” 就会被替换为 16 * 7 = 112个字符，而s距ebp的距离为 0x6c = 108。</p>
 <p>正常溢出覆盖到返回地址就是 cyclic(0x6c+4) = cyclic(112) ,输入16个I刚好替换成 16个&quot;IronMan&quot;，刚好是112个，也就刚好覆盖到返回地址，但用其它字符比如a不可以，因为会再调用 <code>std::string::operator+=</code> 将输入的 <code>&quot;a&quot;*112</code> 拼接到这个固定前缀之后。此时，字符串总长度已变为 <strong>“固定前缀长度 + 112 字节”</strong>，必然超过 112 字节。</p>
-<p><img src="/p/ctfshow-pwn-writeup/172.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/172.png"
 	width="1255"
 	height="445"
-	srcset="/p/ctfshow-pwn-writeup/172_hu_27afd99bc34b6d8a.png 480w, /p/ctfshow-pwn-writeup/172_hu_b9863ff8944de29a.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/172_hu_27afd99bc34b6d8a.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/172_hu_b9863ff8944de29a.png 1024w"
 	loading="lazy"
 	
 		alt="shift &#43; F12查看字符串"
@@ -5993,10 +5998,10 @@ unicode: "ece7"
 	
 ></p>
 <p>让我发现了<strong>cat /ctfshow_flag</strong>，可以利用栈溢出来执行这个catflag的命令：</p>
-<p><img src="/p/ctfshow-pwn-writeup/173.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/173.png"
 	width="925"
 	height="270"
-	srcset="/p/ctfshow-pwn-writeup/173_hu_1ac11bfcef4c507f.png 480w, /p/ctfshow-pwn-writeup/173_hu_312bc12e61d10954.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/173_hu_1ac11bfcef4c507f.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/173_hu_312bc12e61d10954.png 1024w"
 	loading="lazy"
 	
 	
@@ -6005,10 +6010,10 @@ unicode: "ece7"
 		data-flex-basis="822px"
 	
 ></p>
-<p><img src="/p/ctfshow-pwn-writeup/174.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/174.png"
 	width="1085"
 	height="356"
-	srcset="/p/ctfshow-pwn-writeup/174_hu_cde4da8a3d61171.png 480w, /p/ctfshow-pwn-writeup/174_hu_1cda939199b13027.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/174_hu_cde4da8a3d61171.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/174_hu_1cda939199b13027.png 1024w"
 	loading="lazy"
 	
 	
@@ -6018,10 +6023,10 @@ unicode: "ece7"
 	
 ></p>
 <p>找它地址：</p>
-<p><img src="/p/ctfshow-pwn-writeup/175.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/175.png"
 	width="646"
 	height="61"
-	srcset="/p/ctfshow-pwn-writeup/175_hu_2bf71b1fe453b1b0.png 480w, /p/ctfshow-pwn-writeup/175_hu_8c599f0fad61de00.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/175_hu_2bf71b1fe453b1b0.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/175_hu_8c599f0fad61de00.png 1024w"
 	loading="lazy"
 	
 		alt="Alt &#43; T查询"
@@ -6058,10 +6063,10 @@ unicode: "ece7"
 </div>
 </div><h3 id="pwn_052">PWN_052
 </h3><p>题目：迎面走来的flag让我如此蠢蠢欲动； <a class="link" href="PWN_052" >PWN_052</a></p>
-<p><img src="/p/ctfshow-pwn-writeup/176.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/176.png"
 	width="739"
 	height="204"
-	srcset="/p/ctfshow-pwn-writeup/176_hu_7ed53533366a2e52.png 480w, /p/ctfshow-pwn-writeup/176_hu_76a91fbb4acab851.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/176_hu_7ed53533366a2e52.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/176_hu_76a91fbb4acab851.png 1024w"
 	loading="lazy"
 	
 	
@@ -6071,10 +6076,10 @@ unicode: "ece7"
 	
 ></p>
 <p>IDA32位分析，跟进ctfshow函数：</p>
-<p><img src="/p/ctfshow-pwn-writeup/177.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/177.png"
 	width="686"
 	height="184"
-	srcset="/p/ctfshow-pwn-writeup/177_hu_afb68bf3489fef2a.png 480w, /p/ctfshow-pwn-writeup/177_hu_4446c7a38ba878d5.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/177_hu_afb68bf3489fef2a.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/177_hu_4446c7a38ba878d5.png 1024w"
 	loading="lazy"
 	
 	
@@ -6085,10 +6090,10 @@ unicode: "ece7"
 ></p>
 <p>让我看到了gets函数。</p>
 <p>跟进flag函数：</p>
-<p><img src="/p/ctfshow-pwn-writeup/178.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/178.png"
 	width="944"
 	height="345"
-	srcset="/p/ctfshow-pwn-writeup/178_hu_c542e5fc3e82054f.png 480w, /p/ctfshow-pwn-writeup/178_hu_8c4a240f10e94703.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/178_hu_c542e5fc3e82054f.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/178_hu_8c4a240f10e94703.png 1024w"
 	loading="lazy"
 	
 	
@@ -6136,10 +6141,10 @@ unicode: "ece7"
 </h3><p>题目：再多一眼看一眼就会爆炸； <a class="link" href="PWN_053" >PWN_053</a></p>
 <p>checksec看信息&hellip;.没开canary、PIE，有NX</p>
 <p>跟进flag函数：</p>
-<p><img src="/p/ctfshow-pwn-writeup/179.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/179.png"
 	width="785"
 	height="309"
-	srcset="/p/ctfshow-pwn-writeup/179_hu_609a70c9b8d82948.png 480w, /p/ctfshow-pwn-writeup/179_hu_76ce6657743640.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/179_hu_609a70c9b8d82948.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/179_hu_76ce6657743640.png 1024w"
 	loading="lazy"
 	
 		alt="flag函数"
@@ -6155,10 +6160,10 @@ unicode: "ece7"
 <p>如果文件打开失败（stream为 NULL），则输出错误信息并退出程序；如果文件打开成功，使用fgets从文件中读取最多 64 个字符到数组s中，通过puts(s)输出读取到的内容（会自动在末尾添加换行符），调用fflush(stdout)刷新标准输出缓冲区，并将其返回值作为函数的返回值。</p>
 <p>这段代码的逻辑比上一个版本更直接，不需要特定参数即可输出 flag 内容，只要成功打开文件就会直接打印文件中的内容。fflush(stdout)的作用是确保内容立即输出到终端，而不会停留在缓冲区中。也就是说只要执行到flag函数就直接给flag字符串。</p>
 <p>在函数目录上看到了canary函数，这还是第一次见到手动放置的canary：</p>
-<p><img src="/p/ctfshow-pwn-writeup/181.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/181.png"
 	width="844"
 	height="288"
-	srcset="/p/ctfshow-pwn-writeup/181_hu_c5e21505468ae92f.png 480w, /p/ctfshow-pwn-writeup/181_hu_de81624b0c62b6b1.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/181_hu_c5e21505468ae92f.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/181_hu_de81624b0c62b6b1.png 1024w"
 	loading="lazy"
 	
 		alt="canary函数"
@@ -6171,10 +6176,10 @@ unicode: "ece7"
 ></p>
 <p>这段代码的功能是从标准输入读取用户输入的字节数，并将相应字节数的数据读取到缓冲区 buf 中。然后，它会检查堆栈的完整性，如果堆栈被破坏，则输出错误信息并终止程序。</p>
 <p>跟进ctfshow函数：</p>
-<p><img src="/p/ctfshow-pwn-writeup/180.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/180.png"
 	width="989"
 	height="585"
-	srcset="/p/ctfshow-pwn-writeup/180_hu_a811b94715c574ff.png 480w, /p/ctfshow-pwn-writeup/180_hu_e77629cc3ef1954.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/180_hu_a811b94715c574ff.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/180_hu_e77629cc3ef1954.png 1024w"
 	loading="lazy"
 	
 		alt="ctfshow函数"
@@ -6222,10 +6227,10 @@ unicode: "ece7"
 </div>
 </div><p>那输入1000，程序在后续就让我能输入1000字节的东西。</p>
 <p>看main函数：</p>
-<p><img src="/p/ctfshow-pwn-writeup/182.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/182.png"
 	width="780"
 	height="165"
-	srcset="/p/ctfshow-pwn-writeup/182_hu_b3b6890d8e8bb62.png 480w, /p/ctfshow-pwn-writeup/182_hu_89f1da9771e81f93.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/182_hu_b3b6890d8e8bb62.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/182_hu_89f1da9771e81f93.png 1024w"
 	loading="lazy"
 	
 		alt="main函数"
@@ -6326,10 +6331,10 @@ unicode: "ece7"
 </h3><p>题目：再近一点靠近点快被融化； <a class="link" href="PWN_054" >PWN_054</a></p>
 <p>IDA32：</p>
 <p>跟进flag函数：</p>
-<p><img src="/p/ctfshow-pwn-writeup/184.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/184.png"
 	width="590"
 	height="321"
-	srcset="/p/ctfshow-pwn-writeup/184_hu_b895d69b1278d88a.png 480w, /p/ctfshow-pwn-writeup/184_hu_af0ad798c324c942.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/184_hu_b895d69b1278d88a.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/184_hu_af0ad798c324c942.png 1024w"
 	loading="lazy"
 	
 		alt="flag函数"
@@ -6341,10 +6346,10 @@ unicode: "ece7"
 	
 ></p>
 <p>分析main函数：</p>
-<p><img src="/p/ctfshow-pwn-writeup/183.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/183.png"
 	width="805"
 	height="875"
-	srcset="/p/ctfshow-pwn-writeup/183_hu_363b311c3db3a1fd.png 480w, /p/ctfshow-pwn-writeup/183_hu_5fefdf21f2445a5c.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/183_hu_363b311c3db3a1fd.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/183_hu_5fefdf21f2445a5c.png 1024w"
 	loading="lazy"
 	
 		alt="main函数"
@@ -6355,10 +6360,10 @@ unicode: "ece7"
 		data-flex-basis="220px"
 	
 ></p>
-<p><img src="/p/ctfshow-pwn-writeup/185.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/185.png"
 	width="905"
 	height="181"
-	srcset="/p/ctfshow-pwn-writeup/185_hu_e195608c564437ee.png 480w, /p/ctfshow-pwn-writeup/185_hu_48885fbcd406ae7d.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/185_hu_e195608c564437ee.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/185_hu_48885fbcd406ae7d.png 1024w"
 	loading="lazy"
 	
 	
@@ -6369,10 +6374,10 @@ unicode: "ece7"
 ></p>
 <p>只要密码正确，输出欢迎信息 &ldquo;Welcome! Here&rsquo;s what you want:&quot;，然后main就会调用flag函数直接获取flag字符串；但密码不正确就会输出”You has been banned!“的提示。</p>
 <p>我们查看重要参数在堆栈中的位置：</p>
-<p><img src="/p/ctfshow-pwn-writeup/186.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/186.png"
 	width="690"
 	height="330"
-	srcset="/p/ctfshow-pwn-writeup/186_hu_795ea6b6ed69c677.png 480w, /p/ctfshow-pwn-writeup/186_hu_2122bb21e37c902d.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/186_hu_795ea6b6ed69c677.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/186_hu_2122bb21e37c902d.png 1024w"
 	loading="lazy"
 	
 		alt="s1的位置"
@@ -6383,10 +6388,10 @@ unicode: "ece7"
 		data-flex-basis="501px"
 	
 ></p>
-<p><img src="/p/ctfshow-pwn-writeup/187.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/187.png"
 	width="700"
 	height="186"
-	srcset="/p/ctfshow-pwn-writeup/187_hu_7013ac1e226ae9f1.png 480w, /p/ctfshow-pwn-writeup/187_hu_521b1f3a40a7e064.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/187_hu_7013ac1e226ae9f1.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/187_hu_521b1f3a40a7e064.png 1024w"
 	loading="lazy"
 	
 		alt="s的位置"
@@ -6397,10 +6402,10 @@ unicode: "ece7"
 		data-flex-basis="903px"
 	
 ></p>
-<p><img src="/p/ctfshow-pwn-writeup/188.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/188.png"
 	width="783"
 	height="194"
-	srcset="/p/ctfshow-pwn-writeup/188_hu_ebffdbad06ebce9.png 480w, /p/ctfshow-pwn-writeup/188_hu_fda5205a3e5b8428.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/188_hu_ebffdbad06ebce9.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/188_hu_fda5205a3e5b8428.png 1024w"
 	loading="lazy"
 	
 		alt="v5的位置"
@@ -6412,10 +6417,10 @@ unicode: "ece7"
 	
 ></p>
 <p>从v5和s的位置来看，它俩所处的栈位置距离比较近欸！0x160 - 0x60 = 0x100。</p>
-<p><img src="/p/ctfshow-pwn-writeup/189.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/189.png"
 	width="761"
 	height="178"
-	srcset="/p/ctfshow-pwn-writeup/189_hu_821da6a52c323ada.png 480w, /p/ctfshow-pwn-writeup/189_hu_47c25130beef317d.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/189_hu_821da6a52c323ada.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/189_hu_47c25130beef317d.png 1024w"
 	loading="lazy"
 	
 		alt="main函数的数组"
@@ -6460,10 +6465,10 @@ unicode: "ece7"
 </span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><img src="/p/ctfshow-pwn-writeup/190.png"
+</div><p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/190.png"
 	width="1246"
 	height="605"
-	srcset="/p/ctfshow-pwn-writeup/190_hu_731abf12cc5b5291.png 480w, /p/ctfshow-pwn-writeup/190_hu_2e056237ce9f9a7e.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/190_hu_731abf12cc5b5291.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/190_hu_2e056237ce9f9a7e.png 1024w"
 	loading="lazy"
 	
 	
@@ -6473,10 +6478,10 @@ unicode: "ece7"
 	
 ></p>
 <p>整串复制，不要只复制h3r3！！</p>
-<p><img src="/p/ctfshow-pwn-writeup/191.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/191.png"
 	width="911"
 	height="265"
-	srcset="/p/ctfshow-pwn-writeup/191_hu_e547faac653efd85.png 480w, /p/ctfshow-pwn-writeup/191_hu_25c355aad2f46d16.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/191_hu_e547faac653efd85.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/191_hu_25c355aad2f46d16.png 1024w"
 	loading="lazy"
 	
 	
@@ -6488,10 +6493,10 @@ unicode: "ece7"
 <h3 id="pwn_055">PWN_055
 </h3><p>题目：你是我的谁，我的我是你的谁； <a class="link" href="PWN_055" >PWN_055</a></p>
 <p>IDA，跟进main函数：</p>
-<p><img src="/p/ctfshow-pwn-writeup/192.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/192.png"
 	width="574"
 	height="175"
-	srcset="/p/ctfshow-pwn-writeup/192_hu_3aea53581e3b75b1.png 480w, /p/ctfshow-pwn-writeup/192_hu_fa6b794185a6065d.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/192_hu_3aea53581e3b75b1.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/192_hu_fa6b794185a6065d.png 1024w"
 	loading="lazy"
 	
 		alt="main函数"
@@ -6503,10 +6508,10 @@ unicode: "ece7"
 	
 ></p>
 <p>跟进flag函数：</p>
-<p><img src="/p/ctfshow-pwn-writeup/193.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/193.png"
 	width="721"
 	height="410"
-	srcset="/p/ctfshow-pwn-writeup/193_hu_f36baeb593fad0dc.png 480w, /p/ctfshow-pwn-writeup/193_hu_8c0ef1ce3d1b80ba.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/193_hu_f36baeb593fad0dc.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/193_hu_8c0ef1ce3d1b80ba.png 1024w"
 	loading="lazy"
 	
 		alt="flag函数"
@@ -6520,10 +6525,10 @@ unicode: "ece7"
 <p>要想flag字符串被打印出来，就要满足第一个条件：<code>flag1 &amp;&amp; flag2 &amp;&amp; a1 == 0xBDBDBDBD</code></p>
 <p>flag1、flag2须为真值，而a1要等于0xBDBDBDBD就行。</p>
 <p>分别跟进flag_func1、flag_func2函数：</p>
-<p><img src="/p/ctfshow-pwn-writeup/194.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/194.png"
 	width="591"
 	height="169"
-	srcset="/p/ctfshow-pwn-writeup/194_hu_dc3ce0ea6cd05759.png 480w, /p/ctfshow-pwn-writeup/194_hu_99eba6d139b5b18d.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/194_hu_dc3ce0ea6cd05759.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/194_hu_99eba6d139b5b18d.png 1024w"
 	loading="lazy"
 	
 		alt="flag_func1函数"
@@ -6534,10 +6539,10 @@ unicode: "ece7"
 		data-flex-basis="839px"
 	
 ></p>
-<p><img src="/p/ctfshow-pwn-writeup/195.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/195.png"
 	width="756"
 	height="384"
-	srcset="/p/ctfshow-pwn-writeup/195_hu_3695df074b52678a.png 480w, /p/ctfshow-pwn-writeup/195_hu_abb073b85e1de91a.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/195_hu_3695df074b52678a.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/195_hu_abb073b85e1de91a.png 1024w"
 	loading="lazy"
 	
 		alt="flag_func2函数"
@@ -6599,10 +6604,10 @@ unicode: "ece7"
 </h3><h3 id="pwn_056">PWN_056
 </h3><p>题目：先了解一下简单的32位shellcode吧。 <a class="link" href="PWN_056" >PWN_056</a></p>
 <p>IDA32分析：</p>
-<p><img src="/p/ctfshow-pwn-writeup/196.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/196.png"
 	width="934"
 	height="216"
-	srcset="/p/ctfshow-pwn-writeup/196_hu_ae51ca9a6dc8f358.png 480w, /p/ctfshow-pwn-writeup/196_hu_7869cf41786bb51c.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/196_hu_ae51ca9a6dc8f358.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/196_hu_7869cf41786bb51c.png 1024w"
 	loading="lazy"
 	
 		alt="start函数"
@@ -6729,10 +6734,10 @@ unicode: "ece7"
 <h3 id="pwn_057">PWN_057
 </h3><p>题目：先了解一下简单的64位shellcode吧。 <a class="link" href="PWN_057" >PWN_057</a></p>
 <p>IDA64：</p>
-<p><img src="/p/ctfshow-pwn-writeup/197.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/197.png"
 	width="775"
 	height="91"
-	srcset="/p/ctfshow-pwn-writeup/197_hu_4ea3113fe1deac76.png 480w, /p/ctfshow-pwn-writeup/197_hu_85677d2664cb8eb9.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/197_hu_4ea3113fe1deac76.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/197_hu_85677d2664cb8eb9.png 1024w"
 	loading="lazy"
 	
 		alt="start函数"
@@ -6849,10 +6854,10 @@ unicode: "ece7"
 </h3><p>题目：32位 无限制。 <a class="link" href="PWN_058" >PWN_058</a></p>
 <p>32位仅部分开启RELRO，其他保护全关，并且有可读，可写，可执行段。可以用shellcode。</p>
 <p>看不到源码，那就只能看汇编代码：</p>
-<p><img src="/p/ctfshow-pwn-writeup/198.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/198.png"
 	width="620"
 	height="1030"
-	srcset="/p/ctfshow-pwn-writeup/198_hu_ddb0945d713ff3cc.png 480w, /p/ctfshow-pwn-writeup/198_hu_d19be5ee44d7ddc0.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/198_hu_ddb0945d713ff3cc.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/198_hu_d19be5ee44d7ddc0.png 1024w"
 	loading="lazy"
 	
 		alt="NASM"
@@ -6865,10 +6870,10 @@ unicode: "ece7"
 ></p>
 <p>大致就是：会调用puts函数</p>
 <p>看text段：</p>
-<p><img src="/p/ctfshow-pwn-writeup/199.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/199.png"
 	width="984"
 	height="558"
-	srcset="/p/ctfshow-pwn-writeup/199_hu_90e10171a73e5174.png 480w, /p/ctfshow-pwn-writeup/199_hu_e7ef58fcbe3b0e15.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/199_hu_90e10171a73e5174.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/199_hu_e7ef58fcbe3b0e15.png 1024w"
 	loading="lazy"
 	
 	
@@ -6878,10 +6883,10 @@ unicode: "ece7"
 	
 ></p>
 <p>这里看到调用gets函数了，参数对应的是 [ebp+s] 的地址,也就是在返回地址上一栈内存单元处，接着往下就是调用puts函数了：</p>
-<p><img src="/p/ctfshow-pwn-writeup/200.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/200.png"
 	width="799"
 	height="578"
-	srcset="/p/ctfshow-pwn-writeup/200_hu_60d7edb98ce367f7.png 480w, /p/ctfshow-pwn-writeup/200_hu_f340d09493ddcca3.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/200_hu_60d7edb98ce367f7.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/200_hu_f340d09493ddcca3.png 1024w"
 	loading="lazy"
 	
 	
@@ -6891,10 +6896,10 @@ unicode: "ece7"
 	
 ></p>
 <p>紧接着就是ctfshow函数：</p>
-<p><img src="/p/ctfshow-pwn-writeup/201.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/201.png"
 	width="1074"
 	height="535"
-	srcset="/p/ctfshow-pwn-writeup/201_hu_46ecca29bb84491b.png 480w, /p/ctfshow-pwn-writeup/201_hu_9ad4dde3c4d2423a.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/201_hu_46ecca29bb84491b.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/201_hu_9ad4dde3c4d2423a.png 1024w"
 	loading="lazy"
 	
 	
@@ -6957,10 +6962,10 @@ unicode: "ece7"
 </div><h3 id="pwn_060">PWN_060
 </h3><p>题目：入门难度shellcode。 <a class="link" href="PWN_060" >PWN_060</a></p>
 <p>IDA32分析：</p>
-<p><img src="/p/ctfshow-pwn-writeup/202.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/202.png"
 	width="766"
 	height="241"
-	srcset="/p/ctfshow-pwn-writeup/202_hu_62e54366fd6cb2ae.png 480w, /p/ctfshow-pwn-writeup/202_hu_5a8410ec937a91fe.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/202_hu_62e54366fd6cb2ae.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/202_hu_5a8410ec937a91fe.png 1024w"
 	loading="lazy"
 	
 		alt="main函数"
@@ -6973,10 +6978,10 @@ unicode: "ece7"
 ></p>
 <p>发现gets函数。</p>
 <p>使用strncpy函数将对应的字符串复制到 buf2 处。跟进查看：</p>
-<p><img src="/p/ctfshow-pwn-writeup/203.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/203.png"
 	width="891"
 	height="253"
-	srcset="/p/ctfshow-pwn-writeup/203_hu_8bac13b915311301.png 480w, /p/ctfshow-pwn-writeup/203_hu_c7eb78038416691f.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/203_hu_8bac13b915311301.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/203_hu_c7eb78038416691f.png 1024w"
 	loading="lazy"
 	
 		alt="bss段"
@@ -7003,10 +7008,10 @@ unicode: "ece7"
 </span></span><span class="line"><span class="cl">vmmap
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><img src="/p/ctfshow-pwn-writeup/204.png"
+</div><p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/204.png"
 	width="1169"
 	height="719"
-	srcset="/p/ctfshow-pwn-writeup/204_hu_a7c8df1eb90cff4.png 480w, /p/ctfshow-pwn-writeup/204_hu_df2f362f2b92ed2f.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/204_hu_a7c8df1eb90cff4.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/204_hu_df2f362f2b92ed2f.png 1024w"
 	loading="lazy"
 	
 	
@@ -7047,10 +7052,10 @@ unicode: "ece7"
 <blockquote>
 <p>“多填充 8 字节” 并非随意设置，而是<strong>由程序实际栈帧结构决定的</strong>—— 可能是编译器的栈对齐策略，也可能是隐式局部变量占用空间，最终通过调试确认 “只有填充至 112 字节才能覆盖返回地址”。这也符合 PWN 题的通用原则：栈溢出的填充长度需以 “实际调试 / 逆向结果” 为准，而非仅依赖理论计算的 “缓冲区大小 + 旧 EBP”。</p></blockquote>
 <p>不过在新版本的Ubuntu虚拟机中就可能会误导你：</p>
-<p><img src="/p/ctfshow-pwn-writeup/205.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/205.png"
 	width="1010"
 	height="475"
-	srcset="/p/ctfshow-pwn-writeup/205_hu_a3b5e06235441d9b.png 480w, /p/ctfshow-pwn-writeup/205_hu_82fa9f9066716311.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/205_hu_a3b5e06235441d9b.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/205_hu_82fa9f9066716311.png 1024w"
 	loading="lazy"
 	
 		alt="在Ubuntu24.04的gdb调试情况"
@@ -7065,10 +7070,10 @@ unicode: "ece7"
 </h3><h3 id="pwn_061">PWN_061
 </h3><p>题目：输出了什么？ <a class="link" href="PWN_061" >PWN_061</a></p>
 <p>checksec查看保护信息：没栈溢出保护、没开NX，可以尝试注入shellcode：</p>
-<p><img src="/p/ctfshow-pwn-writeup/206.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/206.png"
 	width="711"
 	height="230"
-	srcset="/p/ctfshow-pwn-writeup/206_hu_50a5ab14e3ee18df.png 480w, /p/ctfshow-pwn-writeup/206_hu_bfa9c2229d230a73.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/206_hu_50a5ab14e3ee18df.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/206_hu_bfa9c2229d230a73.png 1024w"
 	loading="lazy"
 	
 	
@@ -7078,10 +7083,10 @@ unicode: "ece7"
 	
 ></p>
 <p>IDA64：</p>
-<p><img src="/p/ctfshow-pwn-writeup/207.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/207.png"
 	width="845"
 	height="321"
-	srcset="/p/ctfshow-pwn-writeup/207_hu_84ca861f6334ccf0.png 480w, /p/ctfshow-pwn-writeup/207_hu_2f31d5f12103b5f4.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/207_hu_84ca861f6334ccf0.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/207_hu_2f31d5f12103b5f4.png 1024w"
 	loading="lazy"
 	
 		alt="main函数"
@@ -7095,10 +7100,10 @@ unicode: "ece7"
 <p>欸我们分析这个main函数看到v5地址在每次程序运行都会打印出来，但因为是有PIE保护，所以每次地址都会随机化，所以在构造exp时需要接收这个v5地址。</p>
 <p>gets函数会读取v5参数然后存入内存段中。</p>
 <p>可以看到会打印出v5地址：</p>
-<p><img src="/p/ctfshow-pwn-writeup/208.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/208.png"
 	width="1116"
 	height="754"
-	srcset="/p/ctfshow-pwn-writeup/208_hu_4fb289520877de27.png 480w, /p/ctfshow-pwn-writeup/208_hu_7a1fc1baba003ef0.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/208_hu_4fb289520877de27.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/208_hu_7a1fc1baba003ef0.png 1024w"
 	loading="lazy"
 	
 	
@@ -7108,10 +7113,10 @@ unicode: "ece7"
 	
 ></p>
 <p>exp大致思路是先覆盖缓冲区，然后跳转到v5地址，注入shellcode，但要注意：</p>
-<p><img src="/p/ctfshow-pwn-writeup/209.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/209.png"
 	width="775"
 	height="119"
-	srcset="/p/ctfshow-pwn-writeup/209_hu_d06c6cfedf713d6c.png 480w, /p/ctfshow-pwn-writeup/209_hu_4219d35f69199420.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/209_hu_d06c6cfedf713d6c.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/209_hu_4219d35f69199420.png 1024w"
 	loading="lazy"
 	
 		alt="leave指令"
@@ -7180,10 +7185,10 @@ unicode: "ece7"
 <h3 id="pwn_062">PWN_062
 </h3><p>题目：短了一点。 <a class="link" href="PWN_062" >PWN_062</a></p>
 <p>checksec一下：</p>
-<p><img src="/p/ctfshow-pwn-writeup/210.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/210.png"
 	width="689"
 	height="224"
-	srcset="/p/ctfshow-pwn-writeup/210_hu_dadb37b7fe9ed49d.png 480w, /p/ctfshow-pwn-writeup/210_hu_4549a7ef4108eb50.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/210_hu_dadb37b7fe9ed49d.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/210_hu_4549a7ef4108eb50.png 1024w"
 	loading="lazy"
 	
 	
@@ -7193,10 +7198,10 @@ unicode: "ece7"
 	
 ></p>
 <p>IDA64分析：</p>
-<p><img src="/p/ctfshow-pwn-writeup/211.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/211.png"
 	width="713"
 	height="325"
-	srcset="/p/ctfshow-pwn-writeup/211_hu_a858fbf705829cf2.png 480w, /p/ctfshow-pwn-writeup/211_hu_1b70de5939175c3f.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/211_hu_a858fbf705829cf2.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/211_hu_1b70de5939175c3f.png 1024w"
 	loading="lazy"
 	
 		alt="main函数"
@@ -7209,10 +7214,10 @@ unicode: "ece7"
 ></p>
 <p>和上题差不多，但这里换成read函数了，<code>read(0, buf, 56uLL)</code>意思是读取56长度的数据到buf中。</p>
 <p>在text字段查看read函数附近的汇编指令：</p>
-<p><img src="/p/ctfshow-pwn-writeup/212.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/212.png"
 	width="686"
 	height="100"
-	srcset="/p/ctfshow-pwn-writeup/212_hu_38f0ce144b19f134.png 480w, /p/ctfshow-pwn-writeup/212_hu_bedfde0c9fbaa368.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/212_hu_38f0ce144b19f134.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/212_hu_bedfde0c9fbaa368.png 1024w"
 	loading="lazy"
 	
 		alt="leave指令"
@@ -7328,10 +7333,10 @@ unicode: "ece7"
 </div><h3 id="pwn_063">PWN_063
 </h3><p>题目：又短了一点。 <a class="link" href="PWN_063" >PWN_063</a></p>
 <p>checksec，不多说：</p>
-<p><img src="/p/ctfshow-pwn-writeup/213.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/213.png"
 	width="750"
 	height="230"
-	srcset="/p/ctfshow-pwn-writeup/213_hu_37ebbc241cc091a6.png 480w, /p/ctfshow-pwn-writeup/213_hu_3ce05ff41c169de6.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/213_hu_37ebbc241cc091a6.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/213_hu_3ce05ff41c169de6.png 1024w"
 	loading="lazy"
 	
 	
@@ -7341,10 +7346,10 @@ unicode: "ece7"
 	
 ></p>
 <p>IDA64：</p>
-<p><img src="/p/ctfshow-pwn-writeup/214.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/214.png"
 	width="683"
 	height="320"
-	srcset="/p/ctfshow-pwn-writeup/214_hu_d91ab9a7582c983b.png 480w, /p/ctfshow-pwn-writeup/214_hu_9fd2b425b225cc2b.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/214_hu_d91ab9a7582c983b.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/214_hu_9fd2b425b225cc2b.png 1024w"
 	loading="lazy"
 	
 		alt="main函数"
@@ -7394,10 +7399,10 @@ unicode: "ece7"
 <h3 id="pwn_064">PWN_064
 </h3><p>题目：有时候开启某种保护并不代表这条路不通。 <a class="link" href="PWN_064" >PWN_064</a></p>
 <p>checksec：</p>
-<p><img src="/p/ctfshow-pwn-writeup/215.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/215.png"
 	width="820"
 	height="201"
-	srcset="/p/ctfshow-pwn-writeup/215_hu_85ff8b3cf65352ea.png 480w, /p/ctfshow-pwn-writeup/215_hu_aae5ea8ee9e2b917.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/215_hu_85ff8b3cf65352ea.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/215_hu_aae5ea8ee9e2b917.png 1024w"
 	loading="lazy"
 	
 	
@@ -7407,10 +7412,10 @@ unicode: "ece7"
 	
 ></p>
 <p>IDA32分析：</p>
-<p><img src="/p/ctfshow-pwn-writeup/216.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/216.png"
 	width="640"
 	height="350"
-	srcset="/p/ctfshow-pwn-writeup/216_hu_13386c853c3b0f6d.png 480w, /p/ctfshow-pwn-writeup/216_hu_dac7daa91c634eb8.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/216_hu_13386c853c3b0f6d.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/216_hu_dac7daa91c634eb8.png 1024w"
 	loading="lazy"
 	
 		alt="main函数"
@@ -7496,10 +7501,10 @@ unicode: "ece7"
 </div><h3 id="pwn_065">PWN_065
 </h3><p>题目：你是一个好人。 <a class="link" href="PWN_065" >PWN_065</a></p>
 <p>checksec：</p>
-<p><img src="/p/ctfshow-pwn-writeup/217.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/217.png"
 	width="689"
 	height="230"
-	srcset="/p/ctfshow-pwn-writeup/217_hu_9219bd1807e776b6.png 480w, /p/ctfshow-pwn-writeup/217_hu_4a3ba2071de4bd87.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/217_hu_9219bd1807e776b6.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/217_hu_4a3ba2071de4bd87.png 1024w"
 	loading="lazy"
 	
 	
@@ -7510,10 +7515,10 @@ unicode: "ece7"
 ></p>
 <p>居然开了RELRO完全保护。</p>
 <p>运行下看看：</p>
-<p><img src="/p/ctfshow-pwn-writeup/219.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/219.png"
 	width="800"
 	height="130"
-	srcset="/p/ctfshow-pwn-writeup/219_hu_7cb2704aaaf5c087.png 480w, /p/ctfshow-pwn-writeup/219_hu_f3f9891fe0470510.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/219_hu_7cb2704aaaf5c087.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/219_hu_f3f9891fe0470510.png 1024w"
 	loading="lazy"
 	
 	
@@ -7524,10 +7529,10 @@ unicode: "ece7"
 ></p>
 <p>可以发现这里要我们输入一个符合要求的字符串才行。</p>
 <p>IDA64看不了源码，只能看汇编代码：</p>
-<p><img src="/p/ctfshow-pwn-writeup/220.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/220.png"
 	width="854"
 	height="143"
-	srcset="/p/ctfshow-pwn-writeup/220_hu_5fd5faaaffbfe84b.png 480w, /p/ctfshow-pwn-writeup/220_hu_b8c536d0801b1752.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/220_hu_5fd5faaaffbfe84b.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/220_hu_b8c536d0801b1752.png 1024w"
 	loading="lazy"
 	
 	
@@ -7537,10 +7542,10 @@ unicode: "ece7"
 	
 ></p>
 <p>在这里我们看到我们输入的字符经read函数读取然后通过jg比较是var_8否大于零，符合要求就跳转到<strong>loc_11AC</strong></p>
-<p><img src="/p/ctfshow-pwn-writeup/221.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/221.png"
 	width="905"
 	height="384"
-	srcset="/p/ctfshow-pwn-writeup/221_hu_fd3b4f7c452cd320.png 480w, /p/ctfshow-pwn-writeup/221_hu_91c3e0d533f16fc6.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/221_hu_fd3b4f7c452cd320.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/221_hu_91c3e0d533f16fc6.png 1024w"
 	loading="lazy"
 	
 	
@@ -7552,10 +7557,10 @@ unicode: "ece7"
 <blockquote>
 <p><code>cdqe</code>使用eax的最高位拓展rax高32位的所有位 movzx则是按无符号数传送+扩展（16-32） EAX是32位的寄存器，而AX是EAX的低16位,AH是ax的高8位，而AL是ax的低8位大致就是将我们输入的字符串每一位进行比较，如果不在<code>0x60~0x7A</code>这个范围就跳转剩下几个就是跳转的范围。</p>
 <p>意思可能就是从第一个字符开始一直做循环判断，如果每一个字符都在一定区间，结束最后一个字符判断时就能够绕过上面的 loc_11B8 来执行 shellcode 了。</p></blockquote>
-<p><img src="/p/ctfshow-pwn-writeup/222.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/222.png"
 	width="1025"
 	height="859"
-	srcset="/p/ctfshow-pwn-writeup/222_hu_e5c0df3aa0131082.png 480w, /p/ctfshow-pwn-writeup/222_hu_fbda44b5fa3129b9.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/222_hu_e5c0df3aa0131082.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/222_hu_fbda44b5fa3129b9.png 1024w"
 	loading="lazy"
 	
 		alt="字符范围确定"
@@ -7637,10 +7642,10 @@ unicode: "ece7"
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p><code>jhh///sh/bin\x89�h\x814$ri1�Qj\x04�Q��1�j\x0b̀</code></p>
-<p><img src="/p/ctfshow-pwn-writeup/218.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/218.png"
 	width="871"
 	height="55"
-	srcset="/p/ctfshow-pwn-writeup/218_hu_dead02297c5d775a.png 480w, /p/ctfshow-pwn-writeup/218_hu_ea0a8deb66a09465.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/218_hu_dead02297c5d775a.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/218_hu_ea0a8deb66a09465.png 1024w"
 	loading="lazy"
 	
 		alt="shellcode有乱码"
@@ -7691,10 +7696,10 @@ unicode: "ece7"
 </div><h3 id="pwn_066">PWN_066
 </h3><p>题目：简单的shellcode？不对劲，十分得有十二分的不对劲。 <a class="link" href="PWN_066" >PWN_066</a></p>
 <p>checksec、IDA64分析：</p>
-<p><img src="/p/ctfshow-pwn-writeup/223.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/223.png"
 	width="743"
 	height="360"
-	srcset="/p/ctfshow-pwn-writeup/223_hu_afd71517e93ebe2c.png 480w, /p/ctfshow-pwn-writeup/223_hu_dbb097a6028a9ea3.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/223_hu_afd71517e93ebe2c.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/223_hu_dbb097a6028a9ea3.png 1024w"
 	loading="lazy"
 	
 		alt="main函数"
@@ -7706,10 +7711,10 @@ unicode: "ece7"
 	
 ></p>
 <p>看到了熟悉的mmap函数；buf存在溢出点，往buf里写入shellcode，然后程序会执行shellcod但是有一个check函数，跟进查看：</p>
-<p><img src="/p/ctfshow-pwn-writeup/234.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/234.png"
 	width="621"
 	height="288"
-	srcset="/p/ctfshow-pwn-writeup/234_hu_32b208621f405438.png 480w, /p/ctfshow-pwn-writeup/234_hu_6044adf69ba41af8.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/234_hu_32b208621f405438.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/234_hu_6044adf69ba41af8.png 1024w"
 	loading="lazy"
 	
 	
@@ -7720,10 +7725,10 @@ unicode: "ece7"
 ></p>
 <p><code>check</code>函数的作用是：验证输入字符串a1中的每个字符是否都属于<code>unk_400F20</code>指向的允许字符集。</p>
 <p>继续跟进unk_400F20：</p>
-<p><img src="/p/ctfshow-pwn-writeup/235.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/235.png"
 	width="899"
 	height="560"
-	srcset="/p/ctfshow-pwn-writeup/235_hu_3dec90b968dc9972.png 480w, /p/ctfshow-pwn-writeup/235_hu_34c6842586e5580d.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/235_hu_3dec90b968dc9972.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/235_hu_34c6842586e5580d.png 1024w"
 	loading="lazy"
 	
 		alt="unk_400F20"
@@ -7734,10 +7739,10 @@ unicode: "ece7"
 		data-flex-basis="385px"
 	
 ></p>
-<p><img src="/p/ctfshow-pwn-writeup/236.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/236.png"
 	width="729"
 	height="475"
-	srcset="/p/ctfshow-pwn-writeup/236_hu_32f8ca70634168cf.png 480w, /p/ctfshow-pwn-writeup/236_hu_a1d682be0ebede7.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/236_hu_32f8ca70634168cf.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/236_hu_a1d682be0ebede7.png 1024w"
 	loading="lazy"
 	
 		alt="shift &#43; e"
@@ -7750,10 +7755,10 @@ unicode: "ece7"
 ></p>
 <p>我们输入的shellcode的每一位字符要在unk_400F20中，检查的时候*j==0会退出，可以使用\x00来突破程序队shellcode的<code>字符白名单校验</code>；而常规的<code>shellcraft.sh()</code>生成的 shellcode 包含大量白名单外字符（如<code>\x3b</code>、<code>\x0f</code>等），无法直接通过校验，因此必须绕过。</p>
 <p>如何绕过从check函数下手：</p>
-<p><img src="/p/ctfshow-pwn-writeup/237.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/237.png"
 	width="620"
 	height="281"
-	srcset="/p/ctfshow-pwn-writeup/237_hu_3dfef3f5acc20542.png 480w, /p/ctfshow-pwn-writeup/237_hu_113bba7bb71263d7.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/237_hu_3dfef3f5acc20542.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/237_hu_113bba7bb71263d7.png 1024w"
 	loading="lazy"
 	
 		alt="突破点"
@@ -7794,10 +7799,10 @@ unicode: "ece7"
 <h3 id="pwn_067待定">PWN_067*（待定）
 </h3><p>题目：32bit nop sled； <a class="link" href="PWN_067" >PWN_067</a></p>
 <p>checksec：</p>
-<p><img src="/p/ctfshow-pwn-writeup/238.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/238.png"
 	width="801"
 	height="234"
-	srcset="/p/ctfshow-pwn-writeup/238_hu_e3f1d88191a0ef75.png 480w, /p/ctfshow-pwn-writeup/238_hu_19041a51464601be.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/238_hu_e3f1d88191a0ef75.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/238_hu_19041a51464601be.png 1024w"
 	loading="lazy"
 	
 		alt="有栈溢出保护"
@@ -7810,10 +7815,10 @@ unicode: "ece7"
 ></p>
 <p>这次只有栈溢出保护了。</p>
 <p>IDA32分析：</p>
-<p><img src="/p/ctfshow-pwn-writeup/239.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/239.png"
 	width="908"
 	height="466"
-	srcset="/p/ctfshow-pwn-writeup/239_hu_55405d1133582b8d.png 480w, /p/ctfshow-pwn-writeup/239_hu_befde81098e46521.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/239_hu_55405d1133582b8d.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/239_hu_befde81098e46521.png 1024w"
 	loading="lazy"
 	
 	
@@ -7822,10 +7827,10 @@ unicode: "ece7"
 		data-flex-basis="467px"
 	
 ></p>
-<p><img src="/p/ctfshow-pwn-writeup/240.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/240.png"
 	width="1296"
 	height="785"
-	srcset="/p/ctfshow-pwn-writeup/240_hu_ba20d400cc872dc.png 480w, /p/ctfshow-pwn-writeup/240_hu_66be74762e913a37.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/240_hu_ba20d400cc872dc.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/240_hu_66be74762e913a37.png 1024w"
 	loading="lazy"
 	
 	
@@ -7839,10 +7844,10 @@ unicode: "ece7"
 <p>因此我们可以从堆栈中执行。向程序提供 shellcode 很容易，因为它只要求输入。现在我们只需要找到一种方法来跳转到我们的 shellcode。</p>
 <p>刚好有个 fgets 可以读取 shellcode 到 seed，但是我们并不知道 seed 的地址。</p>
 <p>跟进query_position函数：</p>
-<p><img src="/p/ctfshow-pwn-writeup/241.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/241.png"
 	width="610"
 	height="253"
-	srcset="/p/ctfshow-pwn-writeup/241_hu_b76db1763bd6df64.png 480w, /p/ctfshow-pwn-writeup/241_hu_5afb8f9679a37742.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/241_hu_b76db1763bd6df64.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/241_hu_5afb8f9679a37742.png 1024w"
 	loading="lazy"
 	
 		alt="query_position函数"
@@ -7933,10 +7938,10 @@ unicode: "ece7"
 </table></div>
 <p>21 (0x15) + 4 + 4 + 16 (0x10) = 45 字节 （0x2d）</p>
 <p><code>+668</code>：覆盖程序的最大负偏移（<code>-668</code>），确保跳转地址落入 1336 个 nop 的范围内（无论随机偏移如何波动，地址都能命中 nop 序列）。</p>
-<p><img src="/p/ctfshow-pwn-writeup/242.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/242.png"
 	width="941"
 	height="700"
-	srcset="/p/ctfshow-pwn-writeup/242_hu_207a95fa89730080.png 480w, /p/ctfshow-pwn-writeup/242_hu_d488948d8264c5bd.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/242_hu_207a95fa89730080.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/242_hu_d488948d8264c5bd.png 1024w"
 	loading="lazy"
 	
 		alt="转载博主大佬的栈图"
@@ -7948,10 +7953,10 @@ unicode: "ece7"
 	
 ></p>
 <p>看回*query_position函数：</p>
-<p><img src="/p/ctfshow-pwn-writeup/241.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/241.png"
 	width="610"
 	height="253"
-	srcset="/p/ctfshow-pwn-writeup/241_hu_b76db1763bd6df64.png 480w, /p/ctfshow-pwn-writeup/241_hu_5afb8f9679a37742.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/241_hu_b76db1763bd6df64.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/241_hu_5afb8f9679a37742.png 1024w"
 	loading="lazy"
 	
 		alt="query_position函数"
@@ -7963,10 +7968,10 @@ unicode: "ece7"
 	
 ></p>
 <p>可以看到v1在query_position函数ebp-0x15的位置。</p>
-<p><img src="/p/ctfshow-pwn-writeup/243.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/243.png"
 	width="833"
 	height="743"
-	srcset="/p/ctfshow-pwn-writeup/243_hu_5e90158efa9a242b.png 480w, /p/ctfshow-pwn-writeup/243_hu_dc47b50d10bbd0a5.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/243_hu_5e90158efa9a242b.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/243_hu_dc47b50d10bbd0a5.png 1024w"
 	loading="lazy"
 	
 		alt="栈布局"
@@ -7990,10 +7995,10 @@ unicode: "ece7"
 <h3 id="pwn_069">PWN_069
 </h3><p>题目：可以尝试用ORW读flag flag文件位置为/ctfshow_flag。 <a class="link" href="PWN_069" >PWN_069</a></p>
 <p>checksec一下：</p>
-<p><img src="/p/ctfshow-pwn-writeup/244.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/244.png"
 	width="895"
 	height="230"
-	srcset="/p/ctfshow-pwn-writeup/244_hu_5888906a57a3adf4.png 480w, /p/ctfshow-pwn-writeup/244_hu_3919f1e7c20ea38e.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/244_hu_5888906a57a3adf4.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/244_hu_3919f1e7c20ea38e.png 1024w"
 	loading="lazy"
 	
 	
@@ -8004,10 +8009,10 @@ unicode: "ece7"
 ></p>
 <p>64位仅部分开启RELRO，其他保护全关。</p>
 <p>IDA查看main函数（依据函数功能修改对应函数名）：</p>
-<p><img src="/p/ctfshow-pwn-writeup/245.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/245.png"
 	width="690"
 	height="170"
-	srcset="/p/ctfshow-pwn-writeup/245_hu_4bd20d6e8b245f4d.png 480w, /p/ctfshow-pwn-writeup/245_hu_ad8d371ac9bf937.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/245_hu_4bd20d6e8b245f4d.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/245_hu_ad8d371ac9bf937.png 1024w"
 	loading="lazy"
 	
 		alt="main函数"
@@ -8025,10 +8030,10 @@ unicode: "ece7"
 <p>3、为无关联的进程提供共享内存空间，一般也是将一个普通文件映射到内存中。</p></blockquote>
 <p>把从0x123000开始的地址，大小为0x1000的长度，权限改为<code>可写可执行</code>。</p>
 <p>跟进seccomp函数：</p>
-<p><img src="/p/ctfshow-pwn-writeup/246.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/246.png"
 	width="705"
 	height="235"
-	srcset="/p/ctfshow-pwn-writeup/246_hu_80ee2fadc85a00d3.png 480w, /p/ctfshow-pwn-writeup/246_hu_d7d4eb3f947974a7.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/246_hu_80ee2fadc85a00d3.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/246_hu_d7d4eb3f947974a7.png 1024w"
 	loading="lazy"
 	
 		alt="seccomp"
@@ -8049,10 +8054,10 @@ unicode: "ece7"
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">seccomp-tools dump ./pwn
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><img src="/p/ctfshow-pwn-writeup/247.png"
+</div><p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/247.png"
 	width="984"
 	height="438"
-	srcset="/p/ctfshow-pwn-writeup/247_hu_7b0db2f85b62029c.png 480w, /p/ctfshow-pwn-writeup/247_hu_1b6df6a4536fab9f.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/247_hu_7b0db2f85b62029c.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/247_hu_1b6df6a4536fab9f.png 1024w"
 	loading="lazy"
 	
 	
@@ -8069,10 +8074,10 @@ unicode: "ece7"
 <p>read：通过文件描述符读取文件内容到缓冲区。</p>
 <p>write：将缓冲区的内容写入标准输出。</p></blockquote>
 <p>跟进ctfshow函数：</p>
-<p><img src="/p/ctfshow-pwn-writeup/248.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/248.png"
 	width="660"
 	height="175"
-	srcset="/p/ctfshow-pwn-writeup/248_hu_18988f2cbd8a93ca.png 480w, /p/ctfshow-pwn-writeup/248_hu_4d3b52149e6e7a93.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/248_hu_18988f2cbd8a93ca.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/248_hu_4d3b52149e6e7a93.png 1024w"
 	loading="lazy"
 	
 		alt="ctfshow函数"
@@ -8120,10 +8125,10 @@ unicode: "ece7"
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>我在汇编代码分析的过程中找到关键的jmp_rsp后门地址，可以调用这行汇编代码来实现跳转回起始地址：</p>
-<p><img src="/p/ctfshow-pwn-writeup/249.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/249.png"
 	width="786"
 	height="154"
-	srcset="/p/ctfshow-pwn-writeup/249_hu_bc25242458eb6cd9.png 480w, /p/ctfshow-pwn-writeup/249_hu_2ab8c0e2c163ef75.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/249_hu_bc25242458eb6cd9.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/249_hu_2ab8c0e2c163ef75.png 1024w"
 	loading="lazy"
 	
 		alt="后门jmp_rsp = 0x400a01"
@@ -8183,10 +8188,10 @@ unicode: "ece7"
 </div><h3 id="pwn_070">PWN_070
 </h3><p>题目：可以开始你的个人秀了 flag文件位置为/flag。 <a class="link" href="PWN_070" >PWN_070</a></p>
 <p>checksec：</p>
-<p><img src="/p/ctfshow-pwn-writeup/250.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/250.png"
 	width="761"
 	height="230"
-	srcset="/p/ctfshow-pwn-writeup/250_hu_a3b3de7f37a5aec2.png 480w, /p/ctfshow-pwn-writeup/250_hu_5972e005b5612e1c.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/250_hu_a3b3de7f37a5aec2.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/250_hu_5972e005b5612e1c.png 1024w"
 	loading="lazy"
 	
 	
@@ -8196,10 +8201,10 @@ unicode: "ece7"
 	
 ></p>
 <p>64位程序部分开启RELRO，开启栈保护。告诉了我们flag文件位置，hint中还是让我们用ORW读flag。</p>
-<p><img src="/p/ctfshow-pwn-writeup/251.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/251.png"
 	width="956"
 	height="350"
-	srcset="/p/ctfshow-pwn-writeup/251_hu_9018d94ef92274a8.png 480w, /p/ctfshow-pwn-writeup/251_hu_975528a02a4c9696.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/251_hu_9018d94ef92274a8.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/251_hu_975528a02a4c9696.png 1024w"
 	loading="lazy"
 	
 	
@@ -8222,10 +8227,10 @@ unicode: "ece7"
     <blockquote>
 <p>完全支持**<code>ORW</code>**操作！唯一被禁止的是 <code>execve</code>（执行新程序），但 ORW 操作不依赖它，因此可以正常执行。</p></blockquote></blockquote>
 <p>跟进到is_printable函数：</p>
-<p><img src="/p/ctfshow-pwn-writeup/252.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/252.png"
 	width="1030"
 	height="289"
-	srcset="/p/ctfshow-pwn-writeup/252_hu_e7879f82b69e6c28.png 480w, /p/ctfshow-pwn-writeup/252_hu_b6086d1ac0acec0d.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/252_hu_e7879f82b69e6c28.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/252_hu_b6086d1ac0acec0d.png 1024w"
 	loading="lazy"
 	
 		alt="is_printable"
@@ -8356,10 +8361,10 @@ unicode: "ece7"
 <h3 id="pwn_071">PWN_071
 </h3><p>题目：32位的ret2syscall。 <a class="link" href="PWN_071" >PWN_071</a></p>
 <p>checksec：</p>
-<p><img src="/p/ctfshow-pwn-writeup/253.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/253.png"
 	width="705"
 	height="200"
-	srcset="/p/ctfshow-pwn-writeup/253_hu_64035e311317f69c.png 480w, /p/ctfshow-pwn-writeup/253_hu_6f12b5aec5e8a08a.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/253_hu_64035e311317f69c.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/253_hu_6f12b5aec5e8a08a.png 1024w"
 	loading="lazy"
 	
 	
@@ -8370,10 +8375,10 @@ unicode: "ece7"
 ></p>
 <p>32位关闭栈保护与PIE。</p>
 <p>IDA32位分析：</p>
-<p><img src="/p/ctfshow-pwn-writeup/254.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/254.png"
 	width="389"
 	height="539"
-	srcset="/p/ctfshow-pwn-writeup/254_hu_347977e041ff3715.png 480w, /p/ctfshow-pwn-writeup/254_hu_dfc2988a7dd696b0.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/254_hu_347977e041ff3715.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/254_hu_dfc2988a7dd696b0.png 1024w"
 	loading="lazy"
 	
 		alt="静态编译"
@@ -8384,10 +8389,10 @@ unicode: "ece7"
 		data-flex-basis="173px"
 	
 ></p>
-<p><img src="/p/ctfshow-pwn-writeup/255.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/255.png"
 	width="686"
 	height="224"
-	srcset="/p/ctfshow-pwn-writeup/255_hu_bad0c869421ae208.png 480w, /p/ctfshow-pwn-writeup/255_hu_63c4f54e6c6a9801.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/255_hu_bad0c869421ae208.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/255_hu_63c4f54e6c6a9801.png 1024w"
 	loading="lazy"
 	
 		alt="main函数"
@@ -8417,10 +8422,10 @@ unicode: "ece7"
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ROPgadget --binary pwn --only <span class="s2">&#34;pop|ret&#34;</span><span class="p">|</span>grep eax
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><img src="/p/ctfshow-pwn-writeup/263.png"
+</div><p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/263.png"
 	width="1255"
 	height="171"
-	srcset="/p/ctfshow-pwn-writeup/263_hu_326ee45a78f9d319.png 480w, /p/ctfshow-pwn-writeup/263_hu_d53916b8141aa5b2.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/263_hu_326ee45a78f9d319.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/263_hu_d53916b8141aa5b2.png 1024w"
 	loading="lazy"
 	
 		alt="pop_eax_ret:0x080bb196"
@@ -8441,10 +8446,10 @@ unicode: "ece7"
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>同理，int 0x80调用号的gadget地址亦是如此：</p>
-<p><img src="/p/ctfshow-pwn-writeup/269.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/269.png"
 	width="1381"
 	height="351"
-	srcset="/p/ctfshow-pwn-writeup/269_hu_24a61b0f2e8ca09a.png 480w, /p/ctfshow-pwn-writeup/269_hu_e8d841aa604d322b.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/269_hu_24a61b0f2e8ca09a.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/269_hu_e8d841aa604d322b.png 1024w"
 	loading="lazy"
 	
 		alt="int_0x80:0x08049421"
@@ -8455,10 +8460,10 @@ unicode: "ece7"
 		data-flex-basis="944px"
 	
 ></p>
-<p><img src="/p/ctfshow-pwn-writeup/264.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/264.png"
 	width="1219"
 	height="236"
-	srcset="/p/ctfshow-pwn-writeup/264_hu_d49a61625bac63d0.png 480w, /p/ctfshow-pwn-writeup/264_hu_b65b203022f2e0fd.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/264_hu_d49a61625bac63d0.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/264_hu_b65b203022f2e0fd.png 1024w"
 	loading="lazy"
 	
 		alt="pop_edx_ecx_ebx_ret:0x0806eb90"
@@ -8470,10 +8475,10 @@ unicode: "ece7"
 	
 ></p>
 <p>/bin/sh的地址：</p>
-<p><img src="/p/ctfshow-pwn-writeup/265.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/265.png"
 	width="1333"
 	height="465"
-	srcset="/p/ctfshow-pwn-writeup/265_hu_4cef6958caeafb9c.png 480w, /p/ctfshow-pwn-writeup/265_hu_d16ab7ba28a6252d.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/265_hu_4cef6958caeafb9c.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/265_hu_d16ab7ba28a6252d.png 1024w"
 	loading="lazy"
 	
 		alt="binsh:0x80BE408"
@@ -8519,10 +8524,10 @@ unicode: "ece7"
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>试半天爆EOF，也是无语，后来才知道想起这个程序是静态编译的，而运行程序是动态的，在IDA上呈现的数据可能是有偏差，这让我想起了缓冲区大小，寄存器esp是动态寄存器，<strong>ebp-64h</strong>可能是错误的，于是我开始用动态调试<code>pwngdb</code>，既然gets是我们唯一能和程序交互的地方，我们可以通过gets函数，输入一些垃圾值，那就aaaa吧，刚好4字节（建议不要太大，万一溢出了程序就崩溃了，当然aaa、ctf也行），让esp把我所输入的值运走，这会就能看到esp的地址了，然后用ebp地址和它相减得到偏移量了。</p>
-<p><img src="/p/ctfshow-pwn-writeup/266.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/266.png"
 	width="1836"
 	height="838"
-	srcset="/p/ctfshow-pwn-writeup/266_hu_a77d25f28c503b3f.png 480w, /p/ctfshow-pwn-writeup/266_hu_97886add58639320.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/266_hu_a77d25f28c503b3f.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/266_hu_97886add58639320.png 1024w"
 	loading="lazy"
 	
 	
@@ -8532,10 +8537,10 @@ unicode: "ece7"
 	
 ></p>
 <p>在右边的运行框上，先给程序进行break main指令给main函数断点进行动态调试准备，然后开始了，用<code>n</code>指令（也就是next缩写，一步步进行，左边的调试框也会看到变化），接着回车换行一直进行下一步操作，直到看到有熟悉的ctfshow交互界面和让你输入的交互操作时就可以了：</p>
-<p><img src="/p/ctfshow-pwn-writeup/267.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/267.png"
 	width="1830"
 	height="733"
-	srcset="/p/ctfshow-pwn-writeup/267_hu_53af3ccc1bf52b4e.png 480w, /p/ctfshow-pwn-writeup/267_hu_f8f1b70314387566.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/267_hu_53af3ccc1bf52b4e.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/267_hu_f8f1b70314387566.png 1024w"
 	loading="lazy"
 	
 		alt="esp地址：0xffffceec"
@@ -8556,10 +8561,10 @@ unicode: "ece7"
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">info registers
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><img src="/p/ctfshow-pwn-writeup/268.png"
+</div><p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/268.png"
 	width="810"
 	height="718"
-	srcset="/p/ctfshow-pwn-writeup/268_hu_cdb1a5a742eaf8ff.png 480w, /p/ctfshow-pwn-writeup/268_hu_7b1f43937804a501.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/268_hu_cdb1a5a742eaf8ff.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/268_hu_7b1f43937804a501.png 1024w"
 	loading="lazy"
 	
 		alt="ebp:0xffffcf58"
@@ -8611,10 +8616,10 @@ unicode: "ece7"
 <h3 id="pwn_072">PWN_072
 </h3><p>题目：接着练ret2syscall，多系统函数调用。 <a class="link" href="PWN_072" >PWN_072</a></p>
 <p>checksec一下：</p>
-<p><img src="/p/ctfshow-pwn-writeup/270.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/270.png"
 	width="785"
 	height="200"
-	srcset="/p/ctfshow-pwn-writeup/270_hu_11c7119c01019f55.png 480w, /p/ctfshow-pwn-writeup/270_hu_e602151e18533c05.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/270_hu_11c7119c01019f55.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/270_hu_e602151e18533c05.png 1024w"
 	loading="lazy"
 	
 	
@@ -8625,10 +8630,10 @@ unicode: "ece7"
 ></p>
 <p>32位关闭栈保护与PIE。</p>
 <p>IDA分析，依旧静态编译：</p>
-<p><img src="/p/ctfshow-pwn-writeup/271.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/271.png"
 	width="714"
 	height="250"
-	srcset="/p/ctfshow-pwn-writeup/271_hu_fce3f959fda3fd0.png 480w, /p/ctfshow-pwn-writeup/271_hu_ee7f129c4ad1c729.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/271_hu_fce3f959fda3fd0.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/271_hu_ee7f129c4ad1c729.png 1024w"
 	loading="lazy"
 	
 		alt="main函数"
@@ -8641,10 +8646,10 @@ unicode: "ece7"
 ></p>
 <p>看到gets函数，和上题差不多，都是利用栈溢出漏洞。</p>
 <p>/bin/sh在IDA上搜索不到，不能返回地址执行getshell了，那就找另外一种方法。确实难找，read衍生函数很多，找到个单纯“read”的函数是真难&hellip;&hellip;</p>
-<p><img src="/p/ctfshow-pwn-writeup/272.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/272.png"
 	width="1169"
 	height="358"
-	srcset="/p/ctfshow-pwn-writeup/272_hu_d83895fa855b5b5b.png 480w, /p/ctfshow-pwn-writeup/272_hu_adb2fe1b9c39c764.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/272_hu_d83895fa855b5b5b.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/272_hu_adb2fe1b9c39c764.png 1024w"
 	loading="lazy"
 	
 		alt="read函数"
@@ -8659,10 +8664,10 @@ unicode: "ece7"
 <p><strong>有read函数那我们可以用它去读取字符串到内存呐，利用read函数来进行手动写入“/bin/sh”字符串。</strong></p>
 <p>在main函数中没看到调用read函数，只能我们写exp时利用syscall去调用read函数，搭配gadgets去让read通过寄存器去读取/bin/sh字符串。可以看到read函数需要三个参数，加上自身系统调用号，我们就需要使用eax、ebx、ecx、edx的gadgets。</p>
 <p>gadget查询：</p>
-<p><img src="/p/ctfshow-pwn-writeup/273.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/273.png"
 	width="1335"
 	height="471"
-	srcset="/p/ctfshow-pwn-writeup/273_hu_f21142f753693b87.png 480w, /p/ctfshow-pwn-writeup/273_hu_4bc82d8f24bc116a.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/273_hu_f21142f753693b87.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/273_hu_4bc82d8f24bc116a.png 1024w"
 	loading="lazy"
 	
 	
@@ -8671,10 +8676,10 @@ unicode: "ece7"
 		data-flex-basis="680px"
 	
 ></p>
-<p><img src="/p/ctfshow-pwn-writeup/274.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/274.png"
 	width="1273"
 	height="346"
-	srcset="/p/ctfshow-pwn-writeup/274_hu_20e73841a55bd7fd.png 480w, /p/ctfshow-pwn-writeup/274_hu_a5fd2ee60dfff618.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/274_hu_20e73841a55bd7fd.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/274_hu_a5fd2ee60dfff618.png 1024w"
 	loading="lazy"
 	
 	
@@ -8687,10 +8692,10 @@ unicode: "ece7"
 <p>pop_eax_ret：0x080bb2c6</p>
 <p>int 0x80：0x08049421</p>
 <p>调用read函数，read函数系统调用号是0x3，用eax寄存，三个参数用ebx、ecx、edx分别暂时寄存，int 0x80去开启执行read函数，把<code>/bin/sh</code>写入内存bss段后，接着执行<code>execve</code>函数，也是用一样的gadgets：</p>
-<p><img src="/p/ctfshow-pwn-writeup/275.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/275.png"
 	width="1058"
 	height="390"
-	srcset="/p/ctfshow-pwn-writeup/275_hu_de707a3a1df9d98.png 480w, /p/ctfshow-pwn-writeup/275_hu_e6147e0449921e7b.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/275_hu_de707a3a1df9d98.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/275_hu_e6147e0449921e7b.png 1024w"
 	loading="lazy"
 	
 		alt="读入字符串到bss内存段的起始地址:0x080eb000"
@@ -8704,10 +8709,10 @@ unicode: "ece7"
 <blockquote class="alert alert-note">
     <blockquote>
 <p>read函数的解释：</p>
-<p><img src="/p/ctfshow-pwn-writeup/277.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/277.png"
 	width="725"
 	height="299"
-	srcset="/p/ctfshow-pwn-writeup/277_hu_5928d148ef09be4f.png 480w, /p/ctfshow-pwn-writeup/277_hu_4f0c279e6ad4b93d.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/277_hu_5928d148ef09be4f.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/277_hu_4f0c279e6ad4b93d.png 1024w"
 	loading="lazy"
 	
 	
@@ -8727,10 +8732,10 @@ unicode: "ece7"
 </ul>
 <p>总的来说，<code>read</code> 函数的作用就是从指定的文件描述符所对应的文件中，读取指定字节数的数据到给定的缓冲区中，并且在多线程环境下，对异步取消等情况进行了一定的处理。</p></blockquote></blockquote>
 <p>想起上一题，我怕有坑，还特定去用pwngdb调了下，发现真有猫腻：</p>
-<p><img src="/p/ctfshow-pwn-writeup/276.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/276.png"
 	width="1836"
 	height="784"
-	srcset="/p/ctfshow-pwn-writeup/276_hu_565afc3bc813c434.png 480w, /p/ctfshow-pwn-writeup/276_hu_19f03963b000ad83.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/276_hu_565afc3bc813c434.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/276_hu_19f03963b000ad83.png 1024w"
 	loading="lazy"
 	
 		alt="偏移量为40（十进制）"
@@ -8791,10 +8796,10 @@ unicode: "ece7"
 <h3 id="pwn_073">PWN_073
 </h3><p>题目：愉快的尝试一下一把梭吧！ <a class="link" href="PWN_073" >PWN_073</a></p>
 <p>checksec：</p>
-<p><img src="/p/ctfshow-pwn-writeup/256.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/256.png"
 	width="740"
 	height="195"
-	srcset="/p/ctfshow-pwn-writeup/256_hu_3275742cbac66bb4.png 480w, /p/ctfshow-pwn-writeup/256_hu_22389705e6ff8589.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/256_hu_3275742cbac66bb4.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/256_hu_22389705e6ff8589.png 1024w"
 	loading="lazy"
 	
 	
@@ -8804,10 +8809,10 @@ unicode: "ece7"
 	
 ></p>
 <p>看出来是静态编译了：</p>
-<p><img src="/p/ctfshow-pwn-writeup/257.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/257.png"
 	width="991"
 	height="479"
-	srcset="/p/ctfshow-pwn-writeup/257_hu_261a8f8dceaa8e19.png 480w, /p/ctfshow-pwn-writeup/257_hu_283078c59db171fe.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/257_hu_261a8f8dceaa8e19.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/257_hu_283078c59db171fe.png 1024w"
 	loading="lazy"
 	
 	
@@ -8816,10 +8821,10 @@ unicode: "ece7"
 		data-flex-basis="496px"
 	
 ></p>
-<p><img src="/p/ctfshow-pwn-writeup/258.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/258.png"
 	width="1840"
 	height="81"
-	srcset="/p/ctfshow-pwn-writeup/258_hu_c3bef381c605e654.png 480w, /p/ctfshow-pwn-writeup/258_hu_7af9f22cc3ac88ae.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/258_hu_c3bef381c605e654.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/258_hu_7af9f22cc3ac88ae.png 1024w"
 	loading="lazy"
 	
 		alt="静态编译"
@@ -8831,10 +8836,10 @@ unicode: "ece7"
 	
 ></p>
 <p>IDA分析main函数：</p>
-<p><img src="/p/ctfshow-pwn-writeup/259.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/259.png"
 	width="705"
 	height="210"
-	srcset="/p/ctfshow-pwn-writeup/259_hu_ee8d103a764557f5.png 480w, /p/ctfshow-pwn-writeup/259_hu_c5e2952197f3a5ff.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/259_hu_ee8d103a764557f5.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/259_hu_c5e2952197f3a5ff.png 1024w"
 	loading="lazy"
 	
 		alt="main函数"
@@ -9103,10 +9108,10 @@ unicode: "ece7"
     <blockquote>
 <p>使用前提：程序为 “静态编译” 且无现成的 <code>system</code>/<code>execve</code> 函数、关闭 PIE 且开启 NX（栈不可执行）、存在 “可控栈溢出” 且溢出空间足够。</p>
 <p>使用该指令的核心原因是程序为 <strong>静态编译</strong>，<code>file pwn</code> 显示 <code>statically linked</code>，且未直接提供 <code>system</code>、<code>execve</code> 等可直接 getshell 的函数：</p>
-<p><img src="/p/ctfshow-pwn-writeup/258.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/258.png"
 	width="1840"
 	height="81"
-	srcset="/p/ctfshow-pwn-writeup/258_hu_c3bef381c605e654.png 480w, /p/ctfshow-pwn-writeup/258_hu_7af9f22cc3ac88ae.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/258_hu_c3bef381c605e654.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/258_hu_7af9f22cc3ac88ae.png 1024w"
 	loading="lazy"
 	
 		alt="静态编译"
@@ -9125,10 +9130,10 @@ unicode: "ece7"
 </h3><h3 id="pwn_074">PWN_074
 </h3><p>题目：噢？好像到现在为止还没有了解到one_gadget? <a class="link" href="PWN_074" >PWN_074</a></p>
 <p>checksec：</p>
-<p><img src="/p/ctfshow-pwn-writeup/260.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/260.png"
 	width="811"
 	height="201"
-	srcset="/p/ctfshow-pwn-writeup/260_hu_d9ce22458a2b640e.png 480w, /p/ctfshow-pwn-writeup/260_hu_696ecee99d8fc59e.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/260_hu_d9ce22458a2b640e.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/260_hu_696ecee99d8fc59e.png 1024w"
 	loading="lazy"
 	
 	
@@ -9140,10 +9145,10 @@ unicode: "ece7"
 <p>64位保护全开&hellip;.我都懵了。</p>
 <p>相对于现阶段，看到这种保护全开的题可能会有点迷茫，但是实际上在堆阶段后面基本上都是保护全开的题比较多一点，这里也是为了让大家提前了解一些攻击手法。</p>
 <p>IDA64分析：</p>
-<p><img src="/p/ctfshow-pwn-writeup/261.png"
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/261.png"
 	width="1070"
 	height="506"
-	srcset="/p/ctfshow-pwn-writeup/261_hu_fb268501c613659a.png 480w, /p/ctfshow-pwn-writeup/261_hu_626707aef074ad69.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/261_hu_fb268501c613659a.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/261_hu_626707aef074ad69.png 1024w"
 	loading="lazy"
 	
 		alt="main函数"
@@ -9171,10 +9176,10 @@ unicode: "ece7"
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">one_gadget /lib/x86_64-linux-gnu/libc.so.6
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><img src="/p/ctfshow-pwn-writeup/262.png"
+</div><p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/262.png"
 	width="899"
 	height="375"
-	srcset="/p/ctfshow-pwn-writeup/262_hu_88cc34031fb4af00.png 480w, /p/ctfshow-pwn-writeup/262_hu_4a5d6ba47111a871.png 1024w"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/262_hu_88cc34031fb4af00.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/262_hu_4a5d6ba47111a871.png 1024w"
 	loading="lazy"
 	
 	
@@ -9227,8 +9232,61 @@ unicode: "ece7"
 </div>
 </div><p><strong><code>one_gadget + libc_base</code></strong>：计算得到 one_gadget 在内存中的<strong>真实地址</strong></p>
 <p>*<strong><code>str(one_gadget+libc_base)</code></strong>：<code>one_gadget + libc_base</code> 是十进制整数），<code>main</code> 函数明确使用 <code>__isoc99_scanf(&quot;%ld&quot;, v4)</code> 读取用户输入，也就是说要的是用户输入的字符串，不要数值本身的意义。（one_gadget 真实地址为 <code>0x7f8a9b12d95c</code>（十进制数值为 <code>140239165128028</code>），程序要求输入的是字符串 <code>&quot;140239165128028&quot;</code>，而非数值<code>140239165128028</code> 本身）大概就这么理解，这是python的自身规则。</p>
+<h3 id="栈迁移"><strong>栈迁移</strong>
+</h3><p>栈迁移是在二进制漏洞利用（尤其是栈溢出漏洞场景）中常用的一种技术手段，目的是改变程序执行时栈的布局和执行流程，绕过一些安全防护机制， 实现攻击者想要的代码执行。</p>
+<p>在存在栈溢出漏洞的程序中，攻击者原本可以通过覆盖返回地址来劫持程序执行流，让程序跳转到攻击者指定的地址（如 shellcode 地址）执行恶意代码。但随着系统安全机制（如 NX 保护，使栈上数据不可执行 ）的引入或者栈空间过小，直接在栈上执行注入的 shellcode 变得困难。同时，一些程序还可能存在栈金丝雀保护（Stack Canary）来检测栈是否被非法篡改，这也增加了传统栈溢出利用的难度。因此，栈迁移技术应运而生，以绕过这些安全防护。</p>
+<h4 id="原理">原理
+</h4><ul>
+<li><strong>改变栈的位置</strong>：正常情况下，程序按照默认的栈布局执行，栈迁移的核心是将栈的位置移动到一个对攻击者有利的地方，比如具有可写可执行权限的内存区域（如 <code>bss</code> 段） 。在栈溢出漏洞发生时，攻击者可以通过覆盖某些关键寄存器（如 <code>esp</code>，在 32 位程序中；<code>rsp</code>，在 64 位程序中 ）的值，使程序在后续执行中，将新的栈帧设置在攻击者指定的内存位置。</li>
+<li><strong>构造新栈帧</strong>：在新的栈位置，攻击者精心构造栈帧，放置需要执行的指令地址、函数参数等数据。例如，攻击者可以将 <code>execve(&quot;/bin/sh&quot;, NULL, NULL)</code> 系统调用的相关参数和指令地址按照正确的顺序放置在新栈帧中，当程序执行到相应指令时，就会按照攻击者的意图执行系统调用，获取 shell。</li>
+</ul>
 <h3 id="pwn_075">PWN_075
 </h3><p>题目：栈空间不够怎么办？ <a class="link" href="PWN_075" >PWN_075</a></p>
+<p>checksec一下：</p>
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/278.png"
+	width="934"
+	height="205"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/278_hu_e448f1b5f594d4c4.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/278_hu_7fdb3c9e6ab48043.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="455"
+		data-flex-basis="1093px"
+	
+></p>
+<p>32位开启NX保护，部分开启RELRO。</p>
+<p>IDA分析，查看main中的ctfshow函数：</p>
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/279.png"
+	width="575"
+	height="229"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/279_hu_d1c22ead98e69375.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/279_hu_73a3be9205fd366f.png 1024w"
+	loading="lazy"
+	
+		alt="ctfshow函数"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="251"
+		data-flex-basis="602px"
+	
+></p>
+<p>其实在连靶机进行交互时，无论你输入什么，都是招原样给你打印出来的，主要还是看read、memset函数，况且没开canary保护有站处理漏洞可以利用。</p>
+<p>跟进hackerout函数：</p>
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/280.png"
+	width="934"
+	height="443"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/280_hu_a80eef9c498fb510.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/280_hu_22dac4a619e0f38b.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="210"
+		data-flex-basis="506px"
+	
+></p>
+<p>看到有system函数，不过里边不是binsh，问题不大可以构造出来。</p>
+<p>看回ctfshow函数的栈溢出漏洞，可以发现s容量是36，但s到ebp距离有0x28=40，加上覆盖ebp本身的4字节，也就是说只有8字给到我们放东西，无法进行我们的ROP链构造，那么这里就应该要想到<code>栈迁移</code>了</p>
 
 </section>
 
@@ -9246,7 +9304,7 @@ unicode: "ece7"
 
 
         <span>
-            最后更新于 2025-09-30
+            最后更新于 2025-10-01
         </span>
     </section></footer>
 
@@ -9288,6 +9346,30 @@ unicode: "ece7"
     <h2 class="section-title">相关文章</h2>
     <div class="related-content">
         <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/nssctf-%E4%B8%93%E9%A2%98pwn-writeup/">
+        
+        
+            <div class="article-image">
+                <img src="/p/nssctf-%E4%B8%93%E9%A2%98pwn-writeup/NSSCTF.1c98166412d77e7df01c95595a3b990c_hu_34be2363eb9b4f12.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post NSSctf-专题PWN-writeup"
+                        
+                        data-hash="md5-HJgWZBLXfn3wHJVZWjuZDA==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">NSSctf-专题PWN-writeup</h2>
+        </div>
+    </a>
+</article>
+
             
                 
 <article class="has-image">
@@ -9472,11 +9554,13 @@ unicode: "ece7"
 
 
 
+
+
         
 <section class="wordcount">
   <div class="wordcount-row">
-    <p>博主发布了7篇文章  ||</p>
-    <p>总共163.54k 字</p>
+    <p>博主发布了8篇文章  ||</p>
+    <p>总共165.51k 字</p>
   </div>
 </section>
         

@@ -10,7 +10,7 @@
 <meta property='og:description' content="我的学习记录">
 <meta property='og:url' content='https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/'>
 <meta property='og:site_name' content='Expl0rer.Ct'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-07-31T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-09-29T16:31:05&#43;00:00'/><meta property='og:image' content='https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/%E5%B0%81%E9%9D%A2.jpg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-07-31T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-09-30T19:22:47&#43;00:00'/><meta property='og:image' content='https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/%E5%B0%81%E9%9D%A2.jpg' />
 <meta name="twitter:title" content="第一阶段（前置知识）">
 <meta name="twitter:description" content="我的学习记录"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/%E5%B0%81%E9%9D%A2.jpg' />
@@ -805,6 +805,7 @@ unicode: "ece7"
             <li><a href="#mysql的优点">MySQL的优点</a></li>
           </ol>
         </li>
+        <li><a href="#数据库管理工具">数据库管理工具</a></li>
         <li><a href="#客户端使用演示">客户端使用演示</a>
           <ol>
             <li><a href="#数据库">数据库</a></li>
@@ -3605,6 +3606,21 @@ $y$j9T$zY1oKFxJlTgP2WcJhzbNl1$xhkUmB8R9fzETc/1kgL/nOPcWFTvhn17clxXCgyFjpC：加�
 </h2><h3 id="数据库概述">数据库概述
 </h3><p>1、数据库是什么？</p>
 <p>存储数据的地方、DB：数据库（Database）</p>
+<p>它是统一管理的、长期储存在计算机内的、有组织的相关数据的集合。数据库的基本特征包括：数据按一定的数据模型组织、描述和储存；数据间联系密切、冗余度较小；数据独立性较高；易扩展；可为各种用户共享。</p>
+<p><img src="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/105.png"
+	width="870"
+	height="479"
+	srcset="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/105_hu_adb34874a87f9229.png 480w, /p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/105_hu_21e9e059e7584505.png 1024w"
+	loading="lazy"
+	
+		alt="数据库"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="181"
+		data-flex-basis="435px"
+	
+></p>
 <p>2、为什么要用数据库？</p>
 <p>因为应用程序产生的数据是在内存中的，如果程序退出或者是断电了，则数据就会消失。使用数据库是为了能够永久保存数据。当然这里指的是非内存数据库。</p>
 <p>3、用普通文件存储行不行？</p>
@@ -3616,7 +3632,7 @@ $y$j9T$zY1oKFxJlTgP2WcJhzbNl1$xhkUmB8R9fzETc/1kgL/nOPcWFTvhn17clxXCgyFjpC：加�
 <h3 id="mysql数据库管理系统">MySQL数据库管理系统
 </h3><p>在互联网行业，MySQL数据库毫无疑问已经是最常用的数据库。MySQL数据库由瑞典MySQL AB公司开发。公司名中的“AB”是瑞典语“aktiebolag”股份公司的首字母缩写。该公司于2008年1月16号被Sun（Stanford University Network）公司收购。然而2009年，SUN公司又被Oracle收购。因此，MySQL数据库现在隶属于Oracle（甲骨文）公司。MySQL中的“My”是其发明者（Michael Widenius，通常称为Monty）根据其女儿的名字来命名的。对这位发明者来说，MySQL数据库就仿佛是他可爱的女儿。</p>
 <h4 id="关系型数据库和非关系数据库">关系型数据库和非关系数据库
-</h4><p>MySQL、Oracle、SqlServer等是关系型数据库管理系统。</p>
+</h4><p>MySQL、Oracle、Microsoft SQL Server 和IBM DB2都是关系型数据库系统(database system)。除了管理数据，一个这样的系统还包括用来管理各种关系数据库的程序。通过SQL结构化查询语言来存取、管理关系型数据库的数据。</p>
 <p>MongoDB、Redis、Elasticsearch等是非关系型数据库管理系统。</p>
 <p><img src="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/88.png"
 	width="953"
@@ -3631,7 +3647,12 @@ $y$j9T$zY1oKFxJlTgP2WcJhzbNl1$xhkUmB8R9fzETc/1kgL/nOPcWFTvhn17clxXCgyFjpC：加�
 	
 ></p>
 <p>关系型数据库，采用关系模型来组织数据，简单来说，<strong>关系模型指的就是二维表格模型</strong>。类似于Excel工作表。</p>
-<p><strong>非关系型数据库</strong>，可看成传统关系型数据库的功能阉割版本，基于键值对存储数据，通过减少很少用的功能，来提高性能。</p>
+<p><strong>非关系型数据库</strong>，可看成传统关系型数据库的功能<strong>阉割版本</strong>，基于键值对存储数据，通过减少很少用的功能，来提高性能。</p>
+<p><strong>Mysql服务端架构：</strong></p>
+<p>1、数据库管理系统（最外层）：DBMS，专门管理服务器端的所有内容。</p>
+<p>2、数据库（第二层）：Database，专门用于存储数据的仓库（可以有很多个）。</p>
+<p>3、二维数据表（第三层）：Table，专门用于存储具体实体的数据。</p>
+<p>4、字段（第四层）：Field，具体存储某种类型的数据（实际存储单元）。</p>
 <h4 id="mysql的优点">MySQL的优点
 </h4><p>主要的优势有如下几点：</p>
 <p>可移植性：MySQL数据库几乎支持所有的操作系统，如Linux、Solaris、FreeBSD、Mac和Windows。</p>
@@ -3654,6 +3675,62 @@ $y$j9T$zY1oKFxJlTgP2WcJhzbNl1$xhkUmB8R9fzETc/1kgL/nOPcWFTvhn17clxXCgyFjpC：加�
 <li>MySQL5.7（RC）是当前稳定的发布系列RC（Release Candidate候选版本）版只针对严重漏洞修复和安全修复重新发布，没有增加会影响该系列的重要功能。从MySQL 5.0、5.1、5.5、5.6直到5.7都基于5这个大版本，升级的小版本。5.0版本中加入了存储过程、服务器端游标、触发器、视图、分布式事务、查询优化器的显著改进以及其他的一些特性。这也为MySQL 5.0之后的版本迈向高性能数据库的发展奠定了基础。</li>
 <li>MySQL8.0.26（GA）是最新开发的稳定发布系列。GA（General Availability正式发布的版本）是包含新功能的正式发布版本。这个版本是MySQL数据库又一个开拓时代的开始。</li>
 </ul>
+<h3 id="数据库管理工具">数据库管理工具
+</h3><p>Mysql服务可以本地连接（记得开启mysql服务！！），用终端或者其它图像化工具（如PHPstudy、Navicat）</p>
+<p><img src="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/106.png"
+	width="1479"
+	height="759"
+	srcset="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/106_hu_bffc029a939e32dc.png 480w, /p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/106_hu_ce5f3673d49c0d1d.png 1024w"
+	loading="lazy"
+	
+		alt="终端"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="194"
+		data-flex-basis="467px"
+	
+></p>
+<p><img src="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/107.png"
+	width="735"
+	height="278"
+	srcset="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/107_hu_22773ba77e0e1450.png 480w, /p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/107_hu_d801e73154043f79.png 1024w"
+	loading="lazy"
+	
+		alt="Navicat"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="264"
+		data-flex-basis="634px"
+	
+></p>
+<p>Navicat可以连接到MySQL服务器，进行数据库的创建、修改、删除等操作。</p>
+<p><img src="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/108.png"
+	width="1920"
+	height="1015"
+	srcset="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/108_hu_4ed1f68f49812e11.png 480w, /p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/108_hu_ceb0b9a0bfeb77b2.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="189"
+		data-flex-basis="453px"
+	
+></p>
+<p><img src="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/109.png"
+	width="1650"
+	height="710"
+	srcset="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/109_hu_76d886ae134bf70a.png 480w, /p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/109_hu_b56306b4b4262243.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="232"
+		data-flex-basis="557px"
+	
+></p>
+<p>它支持数据表的创建、修改、删除以及数据的增删改查等操作。Navicat还提供了可视化的查询构建工具，使得查询操作更加直观和方便。</p>
 <h3 id="客户端使用演示">客户端使用演示
 </h3><h4 id="数据库">数据库
 </h4><p>1、查看所有数据库</p>
@@ -9016,7 +9093,7 @@ $y$j9T$zY1oKFxJlTgP2WcJhzbNl1$xhkUmB8R9fzETc/1kgL/nOPcWFTvhn17clxXCgyFjpC：加�
 
 
         <span>
-            最后更新于 2025-09-29
+            最后更新于 2025-09-30
         </span>
     </section></footer>
 
@@ -9148,11 +9225,13 @@ $y$j9T$zY1oKFxJlTgP2WcJhzbNl1$xhkUmB8R9fzETc/1kgL/nOPcWFTvhn17clxXCgyFjpC：加�
 
 
 
+
+
         
 <section class="wordcount">
   <div class="wordcount-row">
-    <p>博主发布了7篇文章  ||</p>
-    <p>总共163.54k 字</p>
+    <p>博主发布了8篇文章  ||</p>
+    <p>总共165.51k 字</p>
   </div>
 </section>
         
