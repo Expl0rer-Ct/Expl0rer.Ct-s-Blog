@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="杂项">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="杂项——CTF最好入门的一个方向">
 <title>MISC</title>
 
 <link rel='canonical' href='https://expl0rer.top/p/misc/'>
 
 <link rel="stylesheet" href="/scss/style.min.84f4364fa3a5758ecded3430d054d555b355a8e9efd1baf1e03c18d73802579f.css"><meta property='og:title' content="MISC">
-<meta property='og:description' content="杂项">
+<meta property='og:description' content="杂项——CTF最好入门的一个方向">
 <meta property='og:url' content='https://expl0rer.top/p/misc/'>
 <meta property='og:site_name' content='Expl0rer.Ct'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-08-14T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-09-02T21:07:57&#43;08:00'/>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-08-14T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-10-09T00:18:47&#43;08:00'/><meta property='og:image' content='https://expl0rer.top/p/misc/MISC.png' />
 <meta name="twitter:title" content="MISC">
-<meta name="twitter:description" content="杂项">
+<meta name="twitter:description" content="杂项——CTF最好入门的一个方向"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://expl0rer.top/p/misc/MISC.png' />
     <link rel="shortcut icon" href="/favicon.ico" />
 <div class="loading">
      
@@ -692,18 +693,103 @@ unicode: "ece7"
     </ol>
 </aside>
 
-    
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#杂项前传介绍">杂项前传介绍</a></li>
+    <li><a href="#文件类型识别">文件类型识别</a>
+      <ol>
+        <li><a href="#文件分离">文件分离</a>
+          <ol>
+            <li><a href="#binwalk">Binwalk</a></li>
+            <li><a href="#foremost">Foremost</a></li>
+            <li><a href="#手动提取">手动提取</a></li>
+            <li><a href="#文件提取小总结">文件提取小总结</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#隐写术">隐写术</a>
+      <ol>
+        <li><a href="#图片隐写术">图片隐写术</a>
+          <ol>
+            <li><a href="#lsb隐写">LSB隐写</a></li>
+            <li><a href="#文件格式缺失gif隐写">文件格式缺失&amp;GIF隐写</a></li>
+            <li><a href="#图片隐写查看器stegsolve">图片隐写查看器——stegsolve</a></li>
+          </ol>
+        </li>
+        <li><a href="#音视频隐写术">音视频隐写术</a>
+          <ol>
+            <li><a href="#mp3隐写术">MP3隐写术</a></li>
+            <li><a href="#频谱隐写">频谱隐写</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#压缩包解密">压缩包解密</a>
+      <ol>
+        <li><a href="#压缩包伪加密">压缩包伪加密</a></li>
+        <li><a href="#crc32碰撞">CRC32碰撞</a></li>
+        <li><a href="#已知明文攻击即crc32-爆破">已知明文攻击即CRC32 爆破</a></li>
+        <li><a href="#直接爆破">直接爆破</a></li>
+      </ol>
+    </li>
+    <li><a href="#misc总结">MISC总结</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
 
             <main class="main full-width">
-    <article class="main-article">
+    <article class="has-image main-article">
     <header class="article-header">
+        <div class="article-image">
+            <a href="/p/misc/">
+                <img src="/p/misc/MISC_hu_ca09783ced9ccf5f.png"
+                        srcset="/p/misc/MISC_hu_ca09783ced9ccf5f.png 800w, /p/misc/MISC_hu_71216950361786da.png 1600w"
+                        width="800" 
+                        height="450" 
+                        loading="lazy"
+                        alt="Featured image of post MISC" />
+                
+            </a>
+        </div>
+    
 
     <div class="article-details">
     
     <header class="article-category">
         
-            <a href="/categories/ctf_writeup/" style="background-color: #2a9d8f; color: #fff;">
-                CTF_writeup
+            <a href="/categories/ctfmisc/" >
+                CTFmisc
+            </a>
+        
+            <a href="/categories/ctf%E5%85%A5%E9%97%A8/" >
+                CTF入门
             </a>
         
     </header>
@@ -716,7 +802,7 @@ unicode: "ece7"
     
         
         <h3 class="article-subtitle">
-            杂项
+            杂项——CTF最好入门的一个方向
         </h3>
         
     </div>
@@ -753,7 +839,446 @@ unicode: "ece7"
     <section class="article-content">
     
     
-    <p>不要急我还没搞完</p>
+    <p>[TOC]</p>
+<p>前言：拖了很久的MISC它来了，作者入门CTF第一个方向就是选择MISC的，当然它确实好入门，知识研究面不深，重在积累，研究面比较广，但我认为坏处就在这，技术不精，它重在让我了解CTF其它方向的知识，MISC比较适合作为你以后准备转方向的基础。</p>
+<p>虽说我已经转PWN方向，学了一年的MISC，有幸参加过省级CTF线下赛、盘古石取证杯，于心不忍抛弃这些积累知识点，我就想把我以前学到、积累过的知识点在这里系统地总结起来呈现给大家。</p>
+<h2 id="杂项前传介绍">杂项前传介绍
+</h2><p>不多说，杂项就是“杂”，什么东西都有，Miscellaneous 简称 MISC，意思是杂项，混杂的意思。</p>
+<p>杂项大致有这几种类型：</p>
+<p>1、隐写：图片（webp、png、jpg、gif）、音频（mp4、mov等）、视频（mp4等）、其它。</p>
+<p>2、压缩包处理：zip、rar、7z等压缩包密码爆破、解压、拼接。</p>
+<p>3、流量分析：计算机网络协议、文件传输、USB、WIFI。</p>
+<p>4、数字取证：日志分析、内存取证分析、文件镜像取证、电子取证。</p>
+<p>5、脑洞题：说不尽&hellip;，多是送分或者压分、彩蛋题。</p>
+<p>工具说明：Kali（binwalk、foremost）、010editor或者winhex、winrar、WPS</p>
+<h2 id="文件类型识别">文件类型识别
+</h2><p>杂项题目主要是以文件附件作为题目，但是给的文件不一定是有后缀名的，这就需要我们识别这些文件，当然你可以用010editor/winhex等工具查看16进制/ASCII码去辨别特征判断类型，也可用file命令：</p>
+<p>file命令：</p>
+<p>file 命令实际上是一个命令行工具，用来查看文件类型。</p>
+<p>使用方法：</p>
+<p>将文件复制到 kail 或者带有 file 工具的系统中，使用 file 查看文件。</p>
+<p><img src="/p/misc/1.png"
+	width="860"
+	height="60"
+	srcset="/p/misc/1_hu_506bfb4d0dfab118.png 480w, /p/misc/1_hu_d68b14f577f008ca.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="1433"
+		data-flex-basis="3440px"
+	
+></p>
+<p>然后将后缀名补上就可以正常打开了。</p>
+<p>010editor/winhex</p>
+<p>010Editor 是一款快速且强大的十六进制编辑器。用来编辑二进制文件。有一个友好易于使用的界面，无限次的 undo 和 redo 操作。另外还可以打印 x 十六进制的字节或者以书签的方式标出某些重要的字节。我们可以通过使用 010Editor 查看文件的头部来判断类型。</p>
+<p>以下是我积累总结出的文件头：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>文件类型</th>
+          <th>文件头</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>JPEG(jpg)</td>
+          <td>FFDSFFE1</td>
+      </tr>
+      <tr>
+          <td>PNG(png)</td>
+          <td>89504E47</td>
+      </tr>
+      <tr>
+          <td>GIF(gif)</td>
+          <td>47494638</td>
+      </tr>
+      <tr>
+          <td>TIFF(tif)</td>
+          <td>49492A00</td>
+      </tr>
+      <tr>
+          <td>Windows Bitmap(bmp)</td>
+          <td>424DC001</td>
+      </tr>
+      <tr>
+          <td>ZIP Archive(zip)</td>
+          <td>504B0304</td>
+      </tr>
+      <tr>
+          <td>RAR Archive(rar)</td>
+          <td>52617221</td>
+      </tr>
+      <tr>
+          <td>Adobe Photoshop(psd)</td>
+          <td>38425053</td>
+      </tr>
+      <tr>
+          <td>Rich Text Format(rtf)</td>
+          <td>7B5C727466</td>
+      </tr>
+      <tr>
+          <td>XML(xml)</td>
+          <td>3C3F786D6C</td>
+      </tr>
+      <tr>
+          <td>Adobe Acrobat(pdf)</td>
+          <td>255044462D312E</td>
+      </tr>
+      <tr>
+          <td>Wave(wav)</td>
+          <td>57415645</td>
+      </tr>
+      <tr>
+          <td>pcap(pcap)</td>
+          <td>D4C3B2A1</td>
+      </tr>
+      <tr>
+          <td>HTML(html)</td>
+          <td>68746D6C3E</td>
+      </tr>
+  </tbody>
+</table></div>
+<p>用010editor举个例子：</p>
+<p><img src="/p/misc/2.png"
+	width="870"
+	height="371"
+	srcset="/p/misc/2_hu_748b12a18589730.png 480w, /p/misc/2_hu_bbeb4fee030f708e.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="234"
+		data-flex-basis="562px"
+	
+></p>
+<blockquote class="alert alert-note">
+    <blockquote>
+<p>这里的文件头将贯穿你的MISC生涯，务必牢记这些文件头特征，以备不时之需！</p></blockquote></blockquote>
+<h3 id="文件分离">文件分离
+</h3><p>介绍了文件类型的识别方法了，接下来来讲一下文件分离。</p>
+<p>文件分离的原因：</p>
+<p>在 CTF 这个充满脑洞的比赛中，出题人往往会以一些稀奇古怪的出题方式出题，因此你可以常常看见暴打出题人等字眼出现在比赛论坛中。在 CTF 中一个文件中隐藏着另外其他文件的题目是经常有的。这就需要掌握文件分离的技巧来应对。下面介绍几种方法：</p>
+<h4 id="binwalk">Binwalk
+</h4><p>工具介绍：</p>
+<p><code>Binwalk</code> 是一个自动提取文件系统，该工具可以自动完成指定文件的扫描，智能发掘潜藏在文件中所有可疑的文件类型及文件系统。相比于之前介绍的 file 命令行工具来说，file 只能把一个文件识别成一个类型的文件，很难看出是否隐藏着其他的文件，Binwalk 就能很好的完成这项任务。</p>
+<p>建议在Linux安装，Windows安装不太建议，比较鸡肋而且还会有<code>电脑环境污染</code></p>
+<blockquote>
+<p>后续你从事网安信安行业时，或者此时打CTF尤其是杂项这个方向，工具、脚本、环境配置特别多，一道MISC题用十个工具解答也不惊讶，而且稍不注意下载破解版、私人汉化的工具可能会挂马，导致计算机中毒！！，再者很多工具和环境都是要求Linux系统的，所以建议还是安装一台Kali或者Ubuntu虚拟机系统更好。</p>
+<p>作者的MISC工具，忒多！！！</p>
+<p><img src="/p/misc/6.png"
+	width="860"
+	height="485"
+	srcset="/p/misc/6_hu_fc82cdb2a32049c5.png 480w, /p/misc/6_hu_b727bfc520fab572.png 1024w"
+	loading="lazy"
+	
+		alt="图片隐写"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="177"
+		data-flex-basis="425px"
+	
+></p>
+<p><img src="/p/misc/7.png"
+	width="859"
+	height="315"
+	srcset="/p/misc/7_hu_45e8d43e6e6269ad.png 480w, /p/misc/7_hu_9ef7df27edf9feb4.png 1024w"
+	loading="lazy"
+	
+		alt="其它隐写"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="272"
+		data-flex-basis="654px"
+	
+></p>
+<p><img src="/p/misc/8.png"
+	width="860"
+	height="563"
+	srcset="/p/misc/8_hu_7e9525b56a7fd4d1.png 480w, /p/misc/8_hu_d535684fb68bf709.png 1024w"
+	loading="lazy"
+	
+		alt="编码解码"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="152"
+		data-flex-basis="366px"
+	
+></p></blockquote>
+<p>binwalk如何安装？自行解决。</p>
+<p>Binwalk命令分离misc文件（-e全名就是extract缩写）：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">binwalk -e misc
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>若提取成功则会生成一个文件名extracted的目录，目录中存放的就是提取出的文件。</p>
+<h4 id="foremost">Foremost
+</h4><p>工具介绍：</p>
+<p>foremost 该工具通过分析不同类型文件的头、尾和内部数据结构，同镜像文件的数据进行比对，以还原文件。它默认支持 19 种类型文件的恢复。用户还可以通过配置文件扩展支持其他文件类型。</p>
+<p>有时候 binwalk 无法正确分离出文件，这时候就可以使用 foremost，将目标文件复制到 kali中，在终端中使用命令行进入文件所在文件夹，使用如下命令：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">foremost -o MISC
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>执行成功后会在目标文件的文件目录下生成我们设置的目录，目录有中按照文件类型分离出文件。</p>
+<h4 id="手动提取">手动提取
+</h4><p>这个需要掌握！！在之前文件识别中提到这个工具，手动分离文件也可以使用这个工具拖动想要分离的部分。</p>
+<p><img src="/p/misc/3.png"
+	width="915"
+	height="605"
+	srcset="/p/misc/3_hu_8905bcf0983606ee.png 480w, /p/misc/3_hu_559fba73bc43d3c7.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="151"
+		data-flex-basis="362px"
+	
+></p>
+<p>右键-&gt;选择-&gt;保存选择。然后根据需要分离的文件类型选择后缀名。</p>
+<h4 id="文件提取小总结">文件提取小总结
+</h4><p>凡事不要慌，binwalk+foremost 合体！</p>
+<h2 id="隐写术">隐写术
+</h2><h3 id="图片隐写术">图片隐写术
+</h3><p>遇到图片隐写，直接binwalk+foremost连招。</p>
+<h4 id="lsb隐写">LSB隐写
+</h4><p>LSB 隐写，也就是最低有效位 (Least Significant Bit)。图片中的像数一般是由三原色组成，由这三种原色可以组成其他各种颜色，例如在 PNG 图片的储存中，每个颜色会有 8bit，LSB 隐写就是修改了像数中的最低的 1bit，写入加密信息，而人眼无法注意到前后的变化。</p>
+<p>例如此图看起只是六只环保色猪头，但是其中包含了一张隐藏的二维码，我们可以通过工具 Stegsolve.jar 打开此图，然后通过下方的按钮切换到 Gray bits，可以看到左上角出现了隐写在该通道的二维码，扫描二维码即可得到 flag。</p>
+<p>这里取一张网上的MISC-WP的图例：</p>
+<p><img src="/p/misc/4.png"
+	width="1055"
+	height="316"
+	srcset="/p/misc/4_hu_87c2b19f9fbf3300.png 480w, /p/misc/4_hu_fc76f70d10e912c5.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="333"
+		data-flex-basis="801px"
+	
+></p>
+<h4 id="文件格式缺失gif隐写">文件格式缺失&amp;GIF隐写
+</h4><p>一张名为“此为 gif 图片.gif”的文件，打开发现了报错。</p>
+<p>我们将其拖入 winhex 中查看。在 CTF 中有的时候会需要我们去修复图片，这对我们对于图片的文件结构要有了解。找到 gif 的文件格式，然后对照破损的文件对其进行修复。我们可以用工具一帧一帧的观察图片，Stegsolve 就带有这种功能。</p>
+<p>Stegsolve —&gt; Analyse —&gt; Frame Brower</p>
+<p><img src="/p/misc/5.png"
+	width="798"
+	height="264"
+	srcset="/p/misc/5_hu_316f9e34110d49f7.png 480w, /p/misc/5_hu_67e8ee51d2284bc9.png 1024w"
+	loading="lazy"
+	
+		alt="stegsolve"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="302"
+		data-flex-basis="725px"
+	
+></p>
+<h4 id="图片隐写查看器stegsolve">图片隐写查看器——stegsolve
+</h4><p>LSB 隐写、一帧一帧的观察图片，都使用到了这个工具：</p>
+<p>今天做 CTF 隐写术的题偶然发现一隐写图片查看的神器&mdash;&mdash;stegsolve，分享给大家stegsolve 下载地址：http://www.caesum.com/handbook/Stegsolve.jar</p>
+<p>stegsolve 安装配置：配置好 Java 环境变量（就是需要安装 Java，然后配环境变量，具体的配置过程上网一搜一堆，这里就不赘述）配置好环境之后直接打开就可以使用😄。</p>
+<p><img src="/p/misc/5.png"
+	width="798"
+	height="264"
+	srcset="/p/misc/5_hu_316f9e34110d49f7.png 480w, /p/misc/5_hu_67e8ee51d2284bc9.png 1024w"
+	loading="lazy"
+	
+		alt="stegsolve"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="302"
+		data-flex-basis="725px"
+	
+></p>
+<p>上面是软件打开的界面，界面简单。主要供能为 analyse，下面对 Analyse 下面几个功能键作简单介绍：</p>
+<p>File Format:文件格式，这个主要是查看图片的具体信息；</p>
+<p>Data Extract:数据抽取，图片中隐藏数据的抽取；</p>
+<p>Frame Browser:帧浏览器，主要是对 GIF 之类的动图进行分解，动图变成一张张图片，便于查看；</p>
+<p>Image Combiner:拼图，图片拼接。</p>
+<h3 id="音视频隐写术">音视频隐写术
+</h3><p>**音频相关的 CTF 题目主要使用的隐写策略，主要分为 MP3隐写、LSB隐写、波形隐写、频谱隐写等。</p>
+<p>使用的工具：</p>
+<p>● Audacity，ocenaudio 音频编辑的工具软件；</p>
+<p>● Mp3stego 将需要加密的数据压缩加密隐藏在 MP3 文件中；</p>
+<p>● video to Picture 可以将视频的每帧提转换成图片；</p>
+<p>● QR Research ctf 中常用的二维码识别软件；</p>
+<p>● mageMagick 是一个免费的创建、编辑、合成图片的软件。</p>
+<p><img src="/p/misc/9.png"
+	width="785"
+	height="336"
+	srcset="/p/misc/9_hu_3e82b0718561578d.png 480w, /p/misc/9_hu_d71f047ae957f19d.png 1024w"
+	loading="lazy"
+	
+		alt="摩斯密码表"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="233"
+		data-flex-basis="560px"
+	
+></p>
+<p><img src="/p/misc/10.png"
+	width="1265"
+	height="172"
+	srcset="/p/misc/10_hu_b0cab265bb022d2c.png 480w, /p/misc/10_hu_948ea8948cc28712.png 1024w"
+	loading="lazy"
+	
+		alt="频谱隐写的摩斯密码解码"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="735"
+		data-flex-basis="1765px"
+	
+></p>
+<p>除了摩斯密码还有SSTV等等，可以上网搜。</p>
+<h4 id="mp3隐写术">MP3隐写术
+</h4><p>MP3 隐写两种方式：</p>
+<p>第一种：题目中给了密码了，用 mp3stego 去解密；</p>
+<p>第二种：如果在题目中没有给 key，而附件只给了一个 MP3，那就有可是用 mp3stego 隐藏的数据，也有可能是在音轨的频谱中隐藏了数据。</p>
+<p>MP3 隐写主要是使用 Mp3Stego 工具进行隐写，使用方法如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">encode -E hidden_text.txt -P pass svega.wavsvega_stego.mp3
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>演示图例暂不提供，详细了解可以自行参考其他大佬的MISC-WP。</p>
+<h4 id="频谱隐写">频谱隐写
+</h4><p>频谱隐写：音频中的频谱隐写是将字符串隐藏在频谱中，此类音频通常会有一个较明显的特征，听起来是一段杂音或者比较刺耳。比如这题moectf2025—安全杂项的“捂住一只耳”，我们使用 audacity 打开。</p>
+<p><img src="/p/misc/11.png"
+	width="1139"
+	height="679"
+	srcset="/p/misc/11_hu_76d506a511303b38.png 480w, /p/misc/11_hu_5af3f53bd7d2a07a.png 1024w"
+	loading="lazy"
+	
+		alt="粒子艺术"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="167"
+		data-flex-basis="402px"
+	
+></p>
+<p>这道题听起来就不对劲，一只耳有滴滴嘟嘟的电频声。</p>
+<p>分离并掐头去尾：</p>
+<p><img src="/p/misc/12.png"
+	width="1910"
+	height="375"
+	srcset="/p/misc/12_hu_689f8570f81b78e0.png 480w, /p/misc/12_hu_24457365e9845782.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="509"
+		data-flex-basis="1222px"
+	
+></p>
+<p>最好我们拿去解密就好了。</p>
+<p>当然还有另外一种：</p>
+<p><img src="/p/misc/13.png"
+	width="1259"
+	height="625"
+	srcset="/p/misc/13_hu_ff90af01176166f5.png 480w, /p/misc/13_hu_de6f6f95180b0519.png 1024w"
+	loading="lazy"
+	
+		alt="频谱隐写"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="201"
+		data-flex-basis="483px"
+	
+></p>
+<h2 id="压缩包解密">压缩包解密
+</h2><p>压缩包有时候给到你时会设置密码不给你打开，也有可能是伪加密也可能是真加密。</p>
+<p>通用方法：</p>
+<p>1、用 winhex/010editor 打开，搜索字符 pass 、 key 、ctf、flag等，查看是否有含有压缩包密码；</p>
+<p>2、如果要爆破：先 0-6 位数字来一遍；</p>
+<p>3、如果爆破不成功可以根据题意或者社工 猜密码组合。例如某用户名叫王方，密码就有可能是 wangfang123；</p>
+<p>4、伪加密；</p>
+<p>5、明文攻击；</p>
+<p>6、CRC32 爆破。</p>
+<h3 id="压缩包伪加密">压缩包伪加密
+</h3><p>zip 文件是由 3 部分组成</p>
+<p>压缩源文件数据区+压缩源文件目录区+压缩源文件目录结束标志。</p>
+<p>在压缩源文件数据区有个 2 字节的全局方式位标记，在压缩源文件目录区也有个 2 字节的全局方式位标记，都用以标记是否加密，如下图（搬运）:</p>
+<img src="14.png" style="zoom:150%;" />
+<hr>
+<img src="15.png" style="zoom:120%;" />
+<p>若是没有加密的 zip,两处标记都是 00 00</p>
+<img src="16.png" style="zoom:120%;" />
+<p>加密的 zip 两次都不是 00 00,好像不同版本的压缩软件或是算法,这里的值会不同,我看之前网上多见的是 09 00</p>
+<img src="17.png" style="zoom:120%;" />
+<p>若把未加密的 zip 压缩源文件目录区的全局方式位标记改为 01 00 (或者 09 00),就会被压缩软件认为是已加密,即所谓的伪加密：</p>
+<img src="18.png" style="zoom:120%;" />
+<p>破解伪加密的 zip,只要把压缩源文件目录区的全局方式位标记改为 00 00 即可解压。</p>
+<h3 id="crc32碰撞">CRC32碰撞
+</h3><p>CRC 校验实用程序库 在数据存储和数据通讯领域，为了保证数据的正确，就不得不采用检错的手段。在诸多检错手段中，CRC 是最著名的一种。CRC 的全称是循环冗余校验。</p>
+<p>总之每个文件都有唯一的 CRC32 值，即便数据中一个 bit 发生变化，也会导致 CRC32 值不同。若是知道一段数据的长度和 CRC32 值，便可穷举数据，与其 CRC32 对照，以此达到暴力猜解的目的。但通常只适用于较小文本文件。</p>
+<p>比如这里有一个加密的 rar，直接双击就可以看见其中信息，而且我知道其中全是数字，便可写脚本爆破！</p>
+<p><img src="/p/misc/19.png"
+	width="1390"
+	height="426"
+	srcset="/p/misc/19_hu_31f6912850ad9296.png 480w, /p/misc/19_hu_714da3a109720855.png 1024w"
+	loading="lazy"
+	
+		alt="样例"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="326"
+		data-flex-basis="783px"
+	
+></p>
+<p>自己可用python手搓或者AI写都可以。</p>
+<h3 id="已知明文攻击即crc32-爆破">已知明文攻击即CRC32 爆破
+</h3><p>所谓明文攻击就是已经通过其他手段知道 zip 加密文件中的某些内容，比如在某些网站上发现它的 readme.txt 文件，或者其他文件，这时就可以尝试破解了，例如我今天刚做了一个明文攻击的小题目：</p>
+<p>源文件是：明文攻击.zip,但是一看发现 zip 文件里面有一个之前看到过的 hash.exe，和一些其他加密文件，所以就将已经拥有的 hash.exe 压缩成 zip，注意打包完成后，需要确认二者采用的压缩算法相同。一个简单的判断方法是用 winRAR 打开文件，同一个文件压缩后的体积是否相同。如果基本相同，并且 crc32 也必须相同，可以说明你用的压缩算法是正确的。如果不同，就尝试另一种压缩算法。</p>
+<p>接下来就用神器 archpr 进行明文破解。</p>
+<p>如果得到了加密压缩包中的某个文件，那么就可以通过明文攻击来获取压缩密码：</p>
+<img src="20.png" style="zoom:150%;" />
+<img src="22.png" style="zoom:150%;" />
+<h3 id="直接爆破">直接爆破
+</h3><p>AccentRPR 利用了 GPU 爆破，速度还是比较快的。</p>
+<p>1、暴力：选择密码范围,长度等,由软件组合生成密码进行爆破；</p>
+<p>2、掩码：知道密码中的一部分,只需按规则构造其余部分；</p>
+<p>3、字典:通常是多数用户常用的一些密码集合,导入字典文件用其中的密码进行爆破。</p>
+<p>我还是建议使用上图的ARCHPR。</p>
+<p>文件爆破工具就这么多&hellip;</p>
+<p><img src="/p/misc/21.png"
+	width="865"
+	height="310"
+	srcset="/p/misc/21_hu_61b99e3ced40e17c.png 480w, /p/misc/21_hu_7c6d005245d8315e.png 1024w"
+	loading="lazy"
+	
+		alt="暴力破解工具"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="279"
+		data-flex-basis="669px"
+	
+></p>
+<h2 id="misc总结">MISC总结
+</h2><p>杂项的学习重在广泛学习，重在积累，很多题目的解题思路来的很微妙，要的就是那一种“直觉”、“做题敏感度”那样，比较像抽象数学题一样，思路来源很微妙。</p>
+<p>在这里把我入门MISC杂项的那几份writeup放出来，各位可以看看我的做题思路如何？😄做的差请原谅&hellip;</p>
 
 </section>
 
@@ -771,7 +1296,7 @@ unicode: "ece7"
 
 
         <span>
-            最后更新于 2025-09-02
+            最后更新于 2025-10-09
         </span>
     </section></footer>
 
@@ -815,6 +1340,43 @@ unicode: "ece7"
         <div class="flex article-list--tile">
             
                 
+<article class="">
+    <a href="/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">飞书周报</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/pwn-4/">
+        
+        
+            <div class="article-image">
+                <img src="/p/pwn-4/PWN4.3657bbeb84fdb7f3290e78d3c41b8d4c_hu_d9ba59500c5360b4.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post PWN-4"
+                        
+                        data-hash="md5-Nle764T9t/MpDnjTxBuNTA==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">PWN-4</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
 <article class="has-image">
     <a href="/p/ida%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/">
         
@@ -840,6 +1402,30 @@ unicode: "ece7"
             
                 
 <article class="has-image">
+    <a href="/p/pwn-3/">
+        
+        
+            <div class="article-image">
+                <img src="/p/pwn-3/PWN3.4afa5f5bde601dbc35b64aebcb8c25e3_hu_a61ad70f238c03c4.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post PWN-3"
+                        
+                        data-hash="md5-SvpfW95gHbw1tkrry4wl4w==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">PWN-3</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
     <a href="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/">
         
         
@@ -857,78 +1443,6 @@ unicode: "ece7"
 
         <div class="article-details">
             <h2 class="article-title">CTFshow-入门PWN-writeup</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="has-image">
-    <a href="/p/%E4%BB%8E0-1/">
-        
-        
-            <div class="article-image">
-                <img src="/p/%E4%BB%8E0-1/%E6%88%91%E7%9A%84%E9%A6%96%E6%AC%A1%E7%BA%BF%E4%B8%8B%E8%B5%9B.284910143b10b6a7daa420d3dff302a2_hu_586ce9ddabaf36da.jpg" 
-                        width="250" 
-                        height="150" 
-                        loading="lazy"
-                        alt="Featured image of post 从0-1"
-                        
-                        data-hash="md5-KEkQFDsQtqfapCDT3/MCog==">
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">从0-1</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="has-image">
-    <a href="/p/awd%E6%B0%B4%E5%8F%8B%E8%B5%9B/">
-        
-        
-            <div class="article-image">
-                <img src="/p/awd%E6%B0%B4%E5%8F%8B%E8%B5%9B/awd.ea997f807707c69a201fedb82801556a_hu_c07e85acdb17771f.png" 
-                        width="250" 
-                        height="150" 
-                        loading="lazy"
-                        alt="Featured image of post AWD水友赛"
-                        
-                        data-hash="md5-6pl/gHcHxpogH&#43;24KAFVag==">
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">AWD水友赛</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="has-image">
-    <a href="/p/nssctf-%E4%B8%93%E9%A2%98pwn-writeup/">
-        
-        
-            <div class="article-image">
-                <img src="/p/nssctf-%E4%B8%93%E9%A2%98pwn-writeup/NSSCTF.1c98166412d77e7df01c95595a3b990c_hu_34be2363eb9b4f12.png" 
-                        width="250" 
-                        height="150" 
-                        loading="lazy"
-                        alt="Featured image of post NSSctf-专题PWN-writeup"
-                        
-                        data-hash="md5-HJgWZBLXfn3wHJVZWjuZDA==">
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">NSSctf-专题PWN-writeup</h2>
         </div>
     </a>
 </article>
@@ -1040,11 +1554,17 @@ unicode: "ece7"
 
 
 
+
+
+
+
+
+
         
 <section class="wordcount">
   <div class="wordcount-row">
-    <p>博主发布了11篇文章  ||</p>
-    <p>总共176.25k 字</p>
+    <p>博主发布了14篇文章  ||</p>
+    <p>总共195.82k 字</p>
   </div>
 </section>
         

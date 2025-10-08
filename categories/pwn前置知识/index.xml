@@ -7,6 +7,149 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Expl0rer.Ct</copyright><atom:link href="https://expl0rer.top/categories/pwn%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>PWN-4</title>
+        <link>https://expl0rer.top/p/pwn-4/</link>
+        <pubDate>Sat, 04 Oct 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://expl0rer.top/p/pwn-4/</guid>
+        <description>&lt;img src="https://expl0rer.top/p/pwn-4/PWN4.png" alt="Featured image of post PWN-4" /&gt;&lt;p&gt;[TOC]&lt;/p&gt;
+&lt;p&gt;前言：本期有所借鉴其他博主的讲解资料，内容有所重合，如有侵权随时下架重置。&lt;/p&gt;
+&lt;h2 id=&#34;fmt介绍&#34;&gt;FMT介绍
+&lt;/h2&gt;&lt;p&gt;格式化字符串函数：将计算机内存中表示的数据转化为我们人类可读的字符串格式。&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;函数&lt;/th&gt;
+          &lt;th&gt;介绍&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;printf&lt;/td&gt;
+          &lt;td&gt;输出到stdout&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;fprintf&lt;/td&gt;
+          &lt;td&gt;输出到指定FILE流&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;vprintf&lt;/td&gt;
+          &lt;td&gt;根据参数列表格式化输出道stdout&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;vfprintf&lt;/td&gt;
+          &lt;td&gt;根据参数列表格式输出道指定FILE流&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;sprintf&lt;/td&gt;
+          &lt;td&gt;输出到字符串&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;snprintf&lt;/td&gt;
+          &lt;td&gt;输出到指定字节数到字符串&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;vsprintf&lt;/td&gt;
+          &lt;td&gt;根据参数列表格式化输出到字符串&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;vsnprintf&lt;/td&gt;
+          &lt;td&gt;根据参数列表格式化输出指定字节到字符串&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;setproctitle&lt;/td&gt;
+          &lt;td&gt;设置argv&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;syslog&lt;/td&gt;
+          &lt;td&gt;输出日志&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;err,verr,warn,vwarn等&lt;/td&gt;
+          &lt;td&gt;。。。&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;用printf()为例子，第一个参数就是格式化字符串：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/pwn-4/1.png&#34;
+	width=&#34;664&#34;
+	height=&#34;148&#34;
+	srcset=&#34;https://expl0rer.top/p/pwn-4/1_hu_2ee61263459090f6.png 480w, https://expl0rer.top/p/pwn-4/1_hu_70d7a7b51a9df908.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;448&#34;
+		data-flex-basis=&#34;1076px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;%d ~ 十进制——输出十进制整数&lt;/p&gt;
+&lt;p&gt;%s ~ 字符串——从内存中读取字符串&lt;/p&gt;
+&lt;p&gt;%x ~ 十六进制——输出十六进制数&lt;/p&gt;
+&lt;p&gt;%c ~ 字符——输出字符&lt;/p&gt;
+&lt;p&gt;%p ~ 指针——指针地址&lt;/p&gt;
+&lt;p&gt;%n ~ 到目前为止所写的字符数&lt;/p&gt;&lt;/blockquote&gt;
+&lt;h2 id=&#34;格式化字符串漏洞原理的利用&#34;&gt;格式化字符串漏洞原理的利用
+&lt;/h2&gt;&lt;p&gt;来看一种攻击案例，最简单的攻击方法，只需要输入一串%s就可以&lt;/p&gt;
+&lt;p&gt;%s%s%s%s%s%s%s%s%s%s%s%s%s%s&lt;/p&gt;
+&lt;p&gt;学过C语言都知道，每一个%s，会使printf()从栈上取一个数字，把该数字看做成地址，接着打印出该地址所指向的&lt;strong&gt;内存内容&lt;/strong&gt;，这不就是隔山打牛吗？一个%s就能窃取隔壁的东西，有时这不太可取，万一你获取的数字是非法地址？所以有可数字对应的内容可能不存在，或者这个地址被保护的，那么程序就会因此崩溃或者停滞不前。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;在Linux中，存取无效的指针会引起进程收到&lt;code&gt;SIGSEGV信号&lt;/code&gt;，从而使程序非正常终止并产生核心转储。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;h3 id=&#34;泄露内存案例&#34;&gt;泄露内存（案例）
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#include&lt;/span&gt;&lt;span class=&#34;cpf&#34;&gt;&amp;lt;stdio.h&amp;gt;&lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kt&#34;&gt;char&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;s&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;100&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;];&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;a&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;b&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mh&#34;&gt;0x22222222&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;c&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;scanf&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;%s&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;s&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;printf&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;%08x.%08x.%08x.%s&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;\n&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;b&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;c&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;s&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;printf&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;s&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;编译一下：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;gcc -m32 -fno-stack-protector -no-pie -o exp exp.c
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;在printf函数上面下个断点，然后r运行，输入%08x.%08x.%08x&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/pwn-4/2.png&#34;
+	width=&#34;1853&#34;
+	height=&#34;849&#34;
+	srcset=&#34;https://expl0rer.top/p/pwn-4/2_hu_7a8fa1eeee8c206.png 480w, https://expl0rer.top/p/pwn-4/2_hu_4feb78da34f38335.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;调试参数变量一一对应&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;218&#34;
+		data-flex-basis=&#34;523px&#34;
+	
+&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>IDA使用指南</title>
         <link>https://expl0rer.top/p/ida%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/</link>
         <pubDate>Thu, 02 Oct 2025 00:00:00 +0000</pubDate>
@@ -96,7 +239,8 @@ F2：下断点&lt;/p&gt;
         <pubDate>Sun, 07 Sep 2025 00:00:00 +0000</pubDate>
         
         <guid>https://expl0rer.top/p/pwn-3/</guid>
-        <description>&lt;img src="https://expl0rer.top/p/pwn-3/PWN3.png" alt="Featured image of post PWN-3" /&gt;&lt;p&gt;&lt;strong&gt;前文：以下是我入门PWN的记录，欢迎各位前来观看，小弟领教！&lt;/strong&gt;&lt;/p&gt;
+        <description>&lt;img src="https://expl0rer.top/p/pwn-3/PWN3.png" alt="Featured image of post PWN-3" /&gt;&lt;p&gt;[TOC]&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;前文：以下是我入门PWN的记录，欢迎各位前来观看，小弟领教！&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;在前面的章节中，我们已经粗略的了解了栈相关的知识点：
 ROP、shellcode、栈转移等。&lt;/p&gt;
 &lt;p&gt;内存中还有一块区域叫做堆（heap）。&lt;/p&gt;
@@ -117,7 +261,7 @@ ROP、shellcode、栈转移等。&lt;/p&gt;
 &lt;/h3&gt;&lt;p&gt;堆是真无敌恶心&amp;hellip;.堆的管理机制相比于栈十分复杂，可以算是对我这样0基础的萌新杀手。&lt;/p&gt;
 &lt;p&gt;但是堆的漏洞比栈有更多的形式和利用方式，而且堆漏洞所需要的条件比栈更
 少。
-一般情况下栈溢出起码需要16个字节，也就是至少溢出到返回地址才能利用，但是堆的话只需要一个字节就可完成利用，甚至这个字节可以是个x00,也就是空字节，nullbyte。&lt;/p&gt;
+一般情况下栈溢出起码需要16个字节，也就是至少溢出到返回地址才能利用，但是堆的话只需要一个字节就可完成利用，甚至这个字节可以是个\x00,也就是空字节，nullbyte。&lt;/p&gt;
 &lt;blockquote class=&#34;alert alert-tip&#34;&gt;
     &lt;blockquote&gt;
 &lt;p&gt;栈的话基本都会关闭一两个保护机制，堆的话一般全开。&lt;/p&gt;
@@ -414,7 +558,7 @@ ROP、shellcode、栈转移等。&lt;/p&gt;
 &lt;img src=&#34;9.png&#34; style=&#34;zoom:150%;&#34; /&gt;
 &lt;h3 id=&#34;malloc运行流程&#34;&gt;Malloc运行流程
 &lt;/h3&gt;&lt;p&gt;了解完各种bin之后，现在来看看这：&lt;/p&gt;
-&lt;p&gt;当我们调用malloc时，程序都干了些什么？&lt;/p&gt;
+&lt;p&gt;一、当我们调用malloc时，程序都干了些什么？&lt;/p&gt;
 &lt;p&gt;1、计算真正的堆块的大小（加上堆头部长度、对齐）：&lt;/p&gt;
 &lt;p&gt;判断是否在fastbin范围内：&lt;/p&gt;
 &lt;ul&gt;
@@ -471,7 +615,50 @@ ROP、shellcode、栈转移等。&lt;/p&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-</description>
+&lt;p&gt;二、当我们调用了free时，程序都干了些什么？&lt;/p&gt;
+&lt;p&gt;free的chunk大小属于fastbin吗？&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;是，放进fastbin，至此完成。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;不属于，那就接着判断这个free的chunk是否是mmap分配的。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;是，那就调用munmap回收，完成。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;不是，那就接着判断前一个chunk是否是空闲的。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;是，那就&lt;strong&gt;向前合并&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;不是，接着判断：后一个chunk是topchunk吗？&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;是，那就和topchunk合并，至此完成。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;不是topchunk，那就判断：后一个chunk是free的吗？&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;是，那就&lt;strong&gt;向后合并&lt;/strong&gt;，然后放进unsortedbin，终于完成了。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;堆动态保护机制的小总结&#34;&gt;堆动态保护机制的小总结
+&lt;/h3&gt;&lt;p&gt;我的妈啊，难死我了，堆的内存管理机制比较复杂，多刷刷题吧，受不了了，刚开始就上强度了😫。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;我这里有一个发自内心的疑问：堆的本质是指针指来指去吗？O(∩_∩)O&lt;/p&gt;
+&lt;p&gt;堆的本质可以理解为&lt;strong&gt;通过指针操作管理动态内存的机制&lt;/strong&gt;，但 “指针指来指去” 只是其表现形式之一，更深层的本质是&lt;strong&gt;内存块的分配、释放和复用规则&lt;/strong&gt;，以及攻击者通过破坏规则实现漏洞利用的过程。理解堆的核心在于掌握内存块的组织结构、堆管理器的行为逻辑，而非单纯的指针操作。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;h2 id=&#34;堆的调试方法&#34;&gt;堆的调试方法
+&lt;/h2&gt;</description>
         </item>
         <item>
         <title>PWN-2</title>
@@ -904,7 +1091,7 @@ onegadget通常有变量要求，比如栈中的某个偏移处值必须为0，r
 &lt;p&gt;ROP怎么维护逻辑的?答：通过一系列的pop和ret操作，依靠rsp。&lt;/p&gt;
 &lt;p&gt;溢出字节不够，rop写不完，rsp一条路走到黑，一顿popret操作后跑到了我们溢出控制区域外。&lt;/p&gt;
 &lt;p&gt;问题归纳总结：溢出字节不够只是原因，我们的目的是让rsp在我们能够控制的区域自由飞翔。&lt;/p&gt;
-&lt;h3 id=&#34;栈转移&#34;&gt;栈转移
+&lt;h3 id=&#34;栈转移栈迁移&#34;&gt;栈转移/栈迁移
 &lt;/h3&gt;&lt;p&gt;只要控制rsp一直在我们可控制内容的区域，就可以完成rop。那么，如何控制RSP?其实就是mov rsp XXX 这种效果。有没有mov rsp rax；ret，或者pop rsp；ret这种gadgets呢?理论上应该有的，但是实际情况下极其少见。那么，除了push和pop，还有没有其他常见指令能对rsp值进行更改呢?&lt;/p&gt;
 &lt;p&gt;那就是&lt;em&gt;&lt;strong&gt;leave ret&lt;/strong&gt;&lt;/em&gt;，&lt;code&gt;leave&lt;/code&gt;指令的实际效果就是mov rsprbp; pop rbp；用于恢复栈帧，通常与ret连用。
 这里我们可以看到，leave将rbp的值符给了rsp。

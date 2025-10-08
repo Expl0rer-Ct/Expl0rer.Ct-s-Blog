@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="二进制漏洞与利用，堆">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="二进制漏洞与利用——堆利用">
 <title>PWN-3</title>
 
 <link rel='canonical' href='https://expl0rer.top/p/pwn-3/'>
 
 <link rel="stylesheet" href="/scss/style.min.84f4364fa3a5758ecded3430d054d555b355a8e9efd1baf1e03c18d73802579f.css"><meta property='og:title' content="PWN-3">
-<meta property='og:description' content="二进制漏洞与利用，堆">
+<meta property='og:description' content="二进制漏洞与利用——堆利用">
 <meta property='og:url' content='https://expl0rer.top/p/pwn-3/'>
 <meta property='og:site_name' content='Expl0rer.Ct'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-09-07T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-10-03T18:12:18&#43;00:00'/><meta property='og:image' content='https://expl0rer.top/p/pwn-3/PWN3.png' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-09-07T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-10-08T16:19:55&#43;00:00'/><meta property='og:image' content='https://expl0rer.top/p/pwn-3/PWN3.png' />
 <meta name="twitter:title" content="PWN-3">
-<meta name="twitter:description" content="二进制漏洞与利用，堆"><meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:description" content="二进制漏洞与利用——堆利用"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://expl0rer.top/p/pwn-3/PWN3.png' />
     <link rel="shortcut icon" href="/favicon.ico" />
 <div class="loading">
@@ -734,8 +734,10 @@ unicode: "ece7"
           </ol>
         </li>
         <li><a href="#malloc运行流程">Malloc运行流程</a></li>
+        <li><a href="#堆动态保护机制的小总结">堆动态保护机制的小总结</a></li>
       </ol>
     </li>
+    <li><a href="#堆的调试方法">堆的调试方法</a></li>
   </ol>
 </nav>
         </div>
@@ -774,8 +776,8 @@ unicode: "ece7"
                 CTFpwn
             </a>
         
-            <a href="/categories/pwn%E5%85%A5%E9%97%A8/" style="background-color: #2a9d8f; color: #fff;">
-                PWN入门
+            <a href="/categories/ctf%E5%85%A5%E9%97%A8/" >
+                CTF入门
             </a>
         
     </header>
@@ -788,7 +790,7 @@ unicode: "ece7"
     
         
         <h3 class="article-subtitle">
-            二进制漏洞与利用，堆
+            二进制漏洞与利用——堆利用
         </h3>
         
     </div>
@@ -825,7 +827,8 @@ unicode: "ece7"
     <section class="article-content">
     
     
-    <p><strong>前文：以下是我入门PWN的记录，欢迎各位前来观看，小弟领教！</strong></p>
+    <p>[TOC]</p>
+<p><strong>前文：以下是我入门PWN的记录，欢迎各位前来观看，小弟领教！</strong></p>
 <p>在前面的章节中，我们已经粗略的了解了栈相关的知识点：
 ROP、shellcode、栈转移等。</p>
 <p>内存中还有一块区域叫做堆（heap）。</p>
@@ -846,7 +849,7 @@ ROP、shellcode、栈转移等。</p>
 </h3><p>堆是真无敌恶心&hellip;.堆的管理机制相比于栈十分复杂，可以算是对我这样0基础的萌新杀手。</p>
 <p>但是堆的漏洞比栈有更多的形式和利用方式，而且堆漏洞所需要的条件比栈更
 少。
-一般情况下栈溢出起码需要16个字节，也就是至少溢出到返回地址才能利用，但是堆的话只需要一个字节就可完成利用，甚至这个字节可以是个x00,也就是空字节，nullbyte。</p>
+一般情况下栈溢出起码需要16个字节，也就是至少溢出到返回地址才能利用，但是堆的话只需要一个字节就可完成利用，甚至这个字节可以是个\x00,也就是空字节，nullbyte。</p>
 <blockquote class="alert alert-tip">
     <blockquote>
 <p>栈的话基本都会关闭一两个保护机制，堆的话一般全开。</p>
@@ -1143,7 +1146,7 @@ ROP、shellcode、栈转移等。</p>
 <img src="9.png" style="zoom:150%;" />
 <h3 id="malloc运行流程">Malloc运行流程
 </h3><p>了解完各种bin之后，现在来看看这：</p>
-<p>当我们调用malloc时，程序都干了些什么？</p>
+<p>一、当我们调用malloc时，程序都干了些什么？</p>
 <p>1、计算真正的堆块的大小（加上堆头部长度、对齐）：</p>
 <p>判断是否在fastbin范围内：</p>
 <ul>
@@ -1200,7 +1203,50 @@ ROP、shellcode、栈转移等。</p>
 </ul>
 </li>
 </ul>
-
+<p>二、当我们调用了free时，程序都干了些什么？</p>
+<p>free的chunk大小属于fastbin吗？</p>
+<ul>
+<li>
+<p>是，放进fastbin，至此完成。</p>
+</li>
+<li>
+<p>不属于，那就接着判断这个free的chunk是否是mmap分配的。</p>
+<ul>
+<li>
+<p>是，那就调用munmap回收，完成。</p>
+</li>
+<li>
+<p>不是，那就接着判断前一个chunk是否是空闲的。</p>
+<ul>
+<li>
+<p>是，那就<strong>向前合并</strong></p>
+</li>
+<li>
+<p>不是，接着判断：后一个chunk是topchunk吗？</p>
+<ul>
+<li>
+<p>是，那就和topchunk合并，至此完成。</p>
+</li>
+<li>
+<p>不是topchunk，那就判断：后一个chunk是free的吗？</p>
+<ul>
+<li>是，那就<strong>向后合并</strong>，然后放进unsortedbin，终于完成了。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="堆动态保护机制的小总结">堆动态保护机制的小总结
+</h3><p>我的妈啊，难死我了，堆的内存管理机制比较复杂，多刷刷题吧，受不了了，刚开始就上强度了😫。</p>
+<blockquote>
+<p>我这里有一个发自内心的疑问：堆的本质是指针指来指去吗？O(∩_∩)O</p>
+<p>堆的本质可以理解为<strong>通过指针操作管理动态内存的机制</strong>，但 “指针指来指去” 只是其表现形式之一，更深层的本质是<strong>内存块的分配、释放和复用规则</strong>，以及攻击者通过破坏规则实现漏洞利用的过程。理解堆的核心在于掌握内存块的组织结构、堆管理器的行为逻辑，而非单纯的指针操作。</p></blockquote>
+<h2 id="堆的调试方法">堆的调试方法
+</h2>
 </section>
 
 
@@ -1217,7 +1263,7 @@ ROP、shellcode、栈转移等。</p>
 
 
         <span>
-            最后更新于 2025-10-03
+            最后更新于 2025-10-08
         </span>
     </section></footer>
 
@@ -1259,6 +1305,30 @@ ROP、shellcode、栈转移等。</p>
     <h2 class="section-title">相关文章</h2>
     <div class="related-content">
         <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/pwn-4/">
+        
+        
+            <div class="article-image">
+                <img src="/p/pwn-4/PWN4.3657bbeb84fdb7f3290e78d3c41b8d4c_hu_d9ba59500c5360b4.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post PWN-4"
+                        
+                        data-hash="md5-Nle764T9t/MpDnjTxBuNTA==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">PWN-4</h2>
+        </div>
+    </a>
+</article>
+
             
                 
 <article class="has-image">
@@ -1310,30 +1380,6 @@ ROP、shellcode、栈转移等。</p>
             
                 
 <article class="has-image">
-    <a href="/p/awd%E6%B0%B4%E5%8F%8B%E8%B5%9B/">
-        
-        
-            <div class="article-image">
-                <img src="/p/awd%E6%B0%B4%E5%8F%8B%E8%B5%9B/awd.ea997f807707c69a201fedb82801556a_hu_c07e85acdb17771f.png" 
-                        width="250" 
-                        height="150" 
-                        loading="lazy"
-                        alt="Featured image of post AWD水友赛"
-                        
-                        data-hash="md5-6pl/gHcHxpogH&#43;24KAFVag==">
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">AWD水友赛</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="has-image">
     <a href="/p/ida%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/">
         
         
@@ -1358,23 +1404,23 @@ ROP、shellcode、栈转移等。</p>
             
                 
 <article class="has-image">
-    <a href="/p/nssctf-%E4%B8%93%E9%A2%98pwn-writeup/">
+    <a href="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/">
         
         
             <div class="article-image">
-                <img src="/p/nssctf-%E4%B8%93%E9%A2%98pwn-writeup/NSSCTF.1c98166412d77e7df01c95595a3b990c_hu_34be2363eb9b4f12.png" 
+                <img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/ctfshow.8c2a966268b078c807772be02e985309_hu_9b3814b0af84762b.png" 
                         width="250" 
                         height="150" 
                         loading="lazy"
-                        alt="Featured image of post NSSctf-专题PWN-writeup"
+                        alt="Featured image of post CTFshow-入门PWN-writeup"
                         
-                        data-hash="md5-HJgWZBLXfn3wHJVZWjuZDA==">
+                        data-hash="md5-jCqWYmiweMgHdyvgLphTCQ==">
                 
             </div>
         
 
         <div class="article-details">
-            <h2 class="article-title">NSSctf-专题PWN-writeup</h2>
+            <h2 class="article-title">CTFshow-入门PWN-writeup</h2>
         </div>
     </a>
 </article>
@@ -1486,11 +1532,17 @@ ROP、shellcode、栈转移等。</p>
 
 
 
+
+
+
+
+
+
         
 <section class="wordcount">
   <div class="wordcount-row">
-    <p>博主发布了11篇文章  ||</p>
-    <p>总共176.25k 字</p>
+    <p>博主发布了14篇文章  ||</p>
+    <p>总共195.82k 字</p>
   </div>
 </section>
         

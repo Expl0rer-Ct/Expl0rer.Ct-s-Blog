@@ -1,0 +1,2002 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>CTFmisc on Expl0rer.Ct</title>
+        <link>https://expl0rer.top/categories/ctfmisc/</link>
+        <description>Recent content in CTFmisc on Expl0rer.Ct</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>Expl0rer.Ct</copyright>
+        <lastBuildDate>Wed, 08 Oct 2025 16:19:55 +0000</lastBuildDate><atom:link href="https://expl0rer.top/categories/ctfmisc/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>飞书周报</title>
+        <link>https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/</link>
+        <pubDate>Sun, 05 Oct 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/</guid>
+        <description>&lt;p&gt;[TOC]&lt;/p&gt;
+&lt;p&gt;作者先前入门CTF周报回忆录，有部分题目缺失，希望此WP能帮助到你。&lt;/p&gt;
+&lt;h2 id=&#34;20249-10&#34;&gt;2024.9-10
+&lt;/h2&gt;&lt;h3 id=&#34;西电-moectf2024&#34;&gt;西电-moectf2024
+&lt;/h3&gt;&lt;h4 id=&#34;misc&#34;&gt;MISC
+&lt;/h4&gt;&lt;p&gt;signin:在看了题目背景后起初并无思路，我通过看右边注释安装了“WSRX国内镜像”，启动了在线环境，发现下方出现wsxl，点击复制后，将其粘贴在WSRX国内镜像（如图1），发现它给我转出了一个类似IP地址的号码（如图2），根据题意再将它通过搜索引擎搜索出一个考勤页面，最后依题完成任务得出flag。这题主要重在审题，难度于我不大罗小黑战记：第一次看到是一个表情包，发现它会很短时间跳出一张二维码，我手机扫不到，但我知道我需要将这段动画过程变慢或者暂停，然后通过WSDN提示，得知misc部分工具的功能。我使用puzzlesolve的imagetool功能将小黑分解（如图3），得出了其中二维码。重在观察及工具的运用，难度于我不大*杂项入门指北：打开图片后观察右边的竖线有不同之处&amp;ndash;摩斯密码，翻译即可。*Abnormallap:审题听歌头尾部分确实有卡顿，我开始在音频工具audacity分析这首mav格式的歌，我试着切换它的频谱图，观察发现全图头尾有不同之处（如图3），试着将其拉长得到（图4）一段字符，又根据题目提示moectf{[\da-f-]+}(通过chatgpt解读)阿拉伯数字+小写字母(a-f)以及连字符&amp;quot;-&amp;quot;，即可知道flag。本题重在观察和工具的使用。somany&amp;rsquo;m&amp;rsquo;:这题是让我最抓狂的一题，它没有二进制、十六进制的格式。它有@{}！这些base64、base32所没有的符号，这我只能在puzzlesolve上其它相关工具尝试，最后在frequencycount工具上测出频率排序得到所谓的答案（如图5），没曾想被坑了，再回题干看到题目提示“如果有某几个字符无法判断顺序请按字典序排序”，这才知道（如图6）出现排序问题，P和M倒过来才正确。本题重在观察乱码格式来排除可能，来减少自己寻找工具的麻烦，其次是细心。Find_it:审题+大西安+雄峰+高德地图+幼儿园。重在搜索。*ctfer2077-3：（流量分析）Wireshark和WinHex的配合使用依据我们可以初步得知这段所需流量和http协议有关，我们可以利用wireshark的流量分析功能进行提取，利用它的过滤，筛选出两段流量（如图7），可以发现第一条流量有”upload“，我就选取这段，右键它并选取tcp追踪流，然后提取到（图8），往下滑发现（图9）蓝色字体“secret_zip”初步确定这是个压缩包，我在（图10）发现了504B文件头——压缩包，接下来我通过搜索引擎得知“Hypeertext&amp;hellip;.”是个装有这段流量信息的地方（图11），右键导出分组字节流，另存成bin类型的文件，接下来将其移至winhex工具中查看其16进制，其中不难发现（图12）有504B的文件头在其中，而开头的是不需要的，所以删除504B前面的码。由之前的tcp追踪流（图13）可知，这后面的蓝色字体部分是响应内容，这是需要删除的，图9中画圈中可知那是红色内容的结束部分，通过这里找到文件尾，来到winhex中将响应内容16进制部分（图14）删去。最后将修改后文件保存为zip类型文件即可打开了。&lt;/p&gt;
+&lt;h4 id=&#34;大数据模型应用安全&#34;&gt;大数据模型应用安全
+&lt;/h4&gt;&lt;p&gt;Neuro：通过多次交流关注到“亲口说”、“Vedal：。。。”（如图1），进而从AI那套出flag。并非助手：并非助手：因为不能输入ASCIIPrintable所以直接输出旗帜后flag就出来了。不能出现flag英文就可以。&lt;/p&gt;
+&lt;p&gt;Evil?:让它把flag的一个一个字符说出来就可以。&lt;/p&gt;
+&lt;h4 id=&#34;web&#34;&gt;Web
+&lt;/h4&gt;&lt;p&gt;一、初步认识了爬虫协议——****/robots.txt二、学会通过用搜索引擎查看ctf题目的源代码、简单抓包(例如西电ctf的“弗拉格之地的挑战”&lt;/p&gt;
+&lt;h4 id=&#34;pwn&#34;&gt;Pwn
+&lt;/h4&gt;&lt;p&gt;一、初步会用浏览器搓脚本(如西电ctf的NotEnoughtime)然后应用到题目中&lt;/p&gt;
+&lt;h3 id=&#34;待做事项&#34;&gt;待做事项
+&lt;/h3&gt;&lt;p&gt;一、看看sql注入和密码学原理的解题思路；找下御网杯ctf、西电ctf的wp周报和题；&lt;/p&gt;
+&lt;p&gt;二、pwn的部分题目需写代码，自己不熟悉python的脚本代码，因此后面需要更多地学习python语言及其脚本编写；&lt;/p&gt;
+&lt;p&gt;三、web和pwn题目有点难，做起来没有思路，参考别人的wp也不是很懂，接下来我应该多去学习这类题目的解法和知识点。&lt;/p&gt;
+&lt;h3 id=&#34;学习知识分享&#34;&gt;学习知识分享
+&lt;/h3&gt;&lt;p&gt;kali虚拟机自带nc，所以有网址要用nc链接的话，主机不用下nc了；helloctf_os、kali虚拟机有很多解ctf的工具，所以建议大家直接下载helloctf_os、kali的虚拟机吧。&lt;/p&gt;
+&lt;p&gt;这是我攒了很久的ctf资源，大家可以看看，像文件头有必要记一记，以及”吾爱破解“这个网站有很多汉  化后的ctf工具。各类ctf网站的wp网址等等：&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;%e6%9b%b4%e5%a4%9a%e9%80%86%e5%a4%a9%e8%b5%84%e6%ba%90.doc&#34; &gt;更多逆天资源.doc&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;2024114&#34;&gt;2024.11.4
+&lt;/h2&gt;&lt;h3 id=&#34;buuctf练习场&#34;&gt;Buuctf练习场
+&lt;/h3&gt;&lt;p&gt;题目来自BBUCTF练习场：&lt;a class=&#34;link&#34; href=&#34;https://buuoj.cn/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;BUUCTF在线评测&lt;/a&gt;&amp;mdash;以下题目是本人觉得有代表性的。&lt;/p&gt;
+&lt;h4 id=&#34;misc-1&#34;&gt;MISC
+&lt;/h4&gt;&lt;h5 id=&#34;你竟然赶我走&#34;&gt;你竟然赶我走
+&lt;/h5&gt;&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/1.png&#34;
+	width=&#34;125&#34;
+	height=&#34;126&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/1_hu_4cf4fcec63ac9df0.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/1_hu_f43a8d4b1061c369.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;99&#34;
+		data-flex-basis=&#34;238px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;这题给了个静态jpg图片，第一时间想到隐写，放到winhex里分析，在最后看到这个flag：&lt;/p&gt;
+&lt;img src=&#34;2.png&#34; alt=&#34;winhex&#34; /&gt;
+&lt;p&gt;但这不是好方法，费时间去观察，我们可以直接将这张图片拉到&lt;code&gt;随波逐流&lt;/code&gt;里帮我们分析：&lt;/p&gt;
+&lt;img src=&#34;3.png&#34; alt=&#34;随波逐流&#34; style=&#34;zoom:150%;&#34; /&gt;
+&lt;p&gt;最快得到flag。&lt;/p&gt;
+&lt;h5 id=&#34;二维码&#34;&gt;二维码
+&lt;/h5&gt;&lt;img src=&#34;4.png&#34; style=&#34;zoom:200%;&#34; /&gt;
+&lt;p&gt;看到二维码先扫一扫，然后放到CQR、随波逐流上分析，发现只看到sectet is here的英文，交上去是错的，事情不简单，这个是隐写，直接飞到kali上使用binwalk看看藏了什么：&lt;/p&gt;
+&lt;img src=&#34;5.png&#34; style=&#34;zoom:150%;&#34; /&gt;
+&lt;p&gt;藏了flag。&lt;/p&gt;
+&lt;p&gt;然后我就用刚学的foremost指令进行将这txt抽离：&lt;img src=&#34;6.jpg&#34; style=&#34;zoom:150%;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;抽离出加密压缩包，接着爆破就可以了。&lt;/p&gt;
+&lt;h5 id=&#34;大白&#34;&gt;大白
+&lt;/h5&gt;&lt;p&gt;开局给了这个：&lt;/p&gt;
+&lt;img src=&#34;7.png&#34; alt=&#34;大白&#34; style=&#34;zoom:150%;&#34; /&gt;
+&lt;p&gt;一开始是半身的，想到要恢复比例，可以用随波逐流，随波逐流这个工具可以检测图片原本尺寸并进行修复：进而得到flag。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;8.jpg&#34; alt=&#34;&#34; style=&#34;zoom:150%;&#34; /&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/9.jpg&#34;
+	width=&#34;255&#34;
+	height=&#34;180&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/9_hu_ee24e0bfc99c00b6.jpg 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/9_hu_afa1941b0b2c1a4f.jpg 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;141&#34;
+		data-flex-basis=&#34;340px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h5 id=&#34;wireshark&#34;&gt;wireshark
+&lt;/h5&gt;&lt;p&gt;原题是“黑客通过wireshark抓到管理员登陆网站的一段流量包（管理员的密码即是答案) 注意：得到的 flag 请包上 flag{} 提交”&lt;/p&gt;
+&lt;p&gt;登录&amp;ndash;login、post。&lt;/p&gt;
+&lt;p&gt;先说说post请求吧：是HTTP协议中的一种请求方法，它用于将客户端数据发送到服务器。在Web开发中，POST请求通常用于提交表单数据或上传文件。与GET请求不同，POST请求的数据不会出现在URL中，而是包含在请求体中，这使得POST请求可以发送更大量的数据，并且相对于GET请求来说，具有更高的隐私性。例如，一个发送JSON数据的POST请求可能如下所示：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;OST /api/user HTTP/1.1
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Host: example.com
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Content-Type: application/json
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Content-Length: 123
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&amp;#34;name&amp;#34;: &amp;#34;John Doe&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&amp;#34;email&amp;#34;: &amp;#34;johndoe@example.com&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&amp;#34;age&amp;#34;: 30
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;其实有post请求出现也经常会伴随user、HTTP、api这些关键词。&lt;/p&gt;
+&lt;p&gt;接下回到题目，将流量包放入wireshark工具中分析，用http或者tcp过滤，去找有post请求的一段流量：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/10.png&#34;
+	width=&#34;1623&#34;
+	height=&#34;117&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/10_hu_5397bac9ff5bae2a.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/10_hu_fa31dc716e1c3186.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;1387&#34;
+		data-flex-basis=&#34;3329px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/11.png&#34;
+	width=&#34;406&#34;
+	height=&#34;95&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/11_hu_a3e9d4fc0cfc2e6d.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/11_hu_e1ce726ba7b471ad.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;427&#34;
+		data-flex-basis=&#34;1025px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;类似这样的流量分析还有“被嗅探的流量”。&lt;/p&gt;
+&lt;h5 id=&#34;zip伪加密&#34;&gt;zip伪加密
+&lt;/h5&gt;&lt;p&gt;题目没有任何提示，ziperello破了半天没破成功，随波逐流分析上分析不出来，多半是伪加密了，重点来了！！！！:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/12.png&#34;
+	width=&#34;429&#34;
+	height=&#34;174&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/12_hu_e4f2ca43cd00571e.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/12_hu_47d240f5a66ee81.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;246&#34;
+		data-flex-basis=&#34;591px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;第一个504B所在的行如果出现09多半是伪加密了，而我们只需要将第二个504B的09改成00就可以了。类似的还有“rar”。&lt;/p&gt;
+&lt;h5 id=&#34;lsb&#34;&gt;LSB
+&lt;/h5&gt;&lt;p&gt;kali的binwalk和foremost指令分离不出有用的东西，随波逐流分析不出，看到题目的LSB有特殊含义，去查了查得知这是lsb隐写，现在我们要用stegsolve工具进行分析：&lt;/p&gt;
+&lt;img src=&#34;13.png&#34; style=&#34;zoom:150%;&#34; /&gt;
+&lt;p&gt;进行数据分析后得出：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/14.png&#34;
+	width=&#34;288&#34;
+	height=&#34;223&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/14_hu_83a732945216c4fc.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/14_hu_f50ffd84f8ca6dab.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;129&#34;
+		data-flex-basis=&#34;309px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;我们看到了有png在其中，将其导出为png形式的文件可知是个二维码。&lt;/p&gt;
+&lt;h5 id=&#34;隐藏的钥匙&#34;&gt;隐藏的钥匙
+&lt;/h5&gt;&lt;img src=&#34;15.png&#34; style=&#34;zoom:150%;&#34; /&gt;
+&lt;p&gt;和之前的隐写相比，这次的隐藏隐秘写，在winhex工具中分析16进制时，头和尾部未出现flag，这时我们可以用到winhex的搜索功能：&lt;/p&gt;
+&lt;img src=&#34;16.png&#34; style=&#34;zoom:100%;&#34; /&gt;
+&lt;p&gt;我也没想到有这功能，搜索出来的flag在ANSI ASCLII码的中前段，然后解码即可得到。&lt;/p&gt;
+&lt;h5 id=&#34;数据包中的线索&#34;&gt;数据包中的线索
+&lt;/h5&gt;&lt;p&gt;本题主要是识别base码，base64包含的元素有：小写字母a-z、大写字母A-Z、数字0-9、符号&amp;quot;+&amp;quot;、&amp;quot;/&amp;ldquo;一共64个字符的字符集。&lt;/p&gt;
+&lt;h5 id=&#34;假如给我三天光明&#34;&gt;假如给我三天光明
+&lt;/h5&gt;&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/17.png&#34;
+	width=&#34;196&#34;
+	height=&#34;176&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/17_hu_d6115c60df5289f0.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/17_hu_96f52ed645fadb99.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;111&#34;
+		data-flex-basis=&#34;267px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;这张图片下方有”点“，查了下发现这是盲文，翻译过来是：“kmdonowg”，将其作为密码去解压提取附加的文件时得到一个wav，它听起来是摩斯密码，用audacity工具去分析音频最后得到flag：&lt;/p&gt;
+&lt;img src=&#34;18.png&#34; style=&#34;zoom:150%;&#34; /&gt;
+&lt;h2 id=&#34;2024119&#34;&gt;2024.11.9
+&lt;/h2&gt;&lt;h3 id=&#34;buuctf-misccrypto&#34;&gt;Buuctf-MISC、Crypto
+&lt;/h3&gt;&lt;h4 id=&#34;misc-2&#34;&gt;MISC
+&lt;/h4&gt;&lt;h5 id=&#34;神奇的二维码&#34;&gt;神奇的二维码
+&lt;/h5&gt;&lt;p&gt;base64多重编码：这个是题目&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/19.png&#34;
+	width=&#34;260&#34;
+	height=&#34;260&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/19_hu_3f8c366a6391d8ab.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/19_hu_716dc1ad95a7d191.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;100&#34;
+		data-flex-basis=&#34;240px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;扫进去信息没用，放到010editor也无，那就是隐写了。用kali的binwalk和foremost指令去分离，果真有：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/20.png&#34;
+	width=&#34;690&#34;
+	height=&#34;430&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/20_hu_3422c8e240bfb1b8.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/20_hu_30da35c0a59a5ecd.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;160&#34;
+		data-flex-basis=&#34;385px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;一个全是base64进制码的word文档，还有一个rar加密压缩包，起初想用随波逐流去解码的，没想到超字数了。只能用另外一个新工具：CyperChef。将密文复制到上面进行解码。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/21.jpg&#34;
+	width=&#34;690&#34;
+	height=&#34;357&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/21_hu_3286649f54d05dcc.jpg 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/21_hu_c0e1c4dd30cdc1fe.jpg 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;赛博厨子&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;193&#34;
+		data-flex-basis=&#34;463px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;然后我发现这个是翻译密文的字数上限是比随波逐流工具要高的，而且这个密文还是多重加密，我翻译了快二十次才出结果。接着用这个密码打开rar加密包，发现里面的MP3是摩斯密码，将它拖到audacity进行分析就可以得到flag了。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/22.jpg&#34;
+	width=&#34;690&#34;
+	height=&#34;94&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/22_hu_6b010b51ac2d1b27.jpg 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/22_hu_1b549a72f5dd97be.jpg 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;734&#34;
+		data-flex-basis=&#34;1761px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h5 id=&#34;荷兰宽带数据泄露&#34;&gt;荷兰宽带数据泄露
+&lt;/h5&gt;&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/23.png&#34;
+	width=&#34;114&#34;
+	height=&#34;127&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/23_hu_3c0dcbca402af228.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/23_hu_71957967ba5e52fb.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;bin文件&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;89&#34;
+		data-flex-basis=&#34;215px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;开局直接发我一个二进制bin文件，给随波逐流、010editor分析却没啥有效信息，根据题目所示，提及有关“数据”之类，这时我们需要用到一个工具：&lt;code&gt;routerpassview&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;RouterPassView&lt;/code&gt;：大多数现代路由器允许您备份到一个文件路由器的配置，然后从文件中恢复配置时的需要。路由器的备份文件通常包含了像您的ISP的用户名重要数据/密码，路由器的登录密码，无线网络的关键。如果你失去了这些密码1 /钥匙，但你仍然有你的路由器配置的备份文件，&lt;code&gt;RouterPassView&lt;/code&gt;可以帮助你从你的路由器恢复您丢失密码的文件。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/24.png&#34;
+	width=&#34;690&#34;
+	height=&#34;298&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/24_hu_6b7b43a065c56cea.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/24_hu_5c5935e6a664ac54.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;RouterPassView&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;231&#34;
+		data-flex-basis=&#34;555px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;用routerpassview的查找功能找像username、password、flag等关键词，一个个尝试提交看看。&lt;/p&gt;
+&lt;h4 id=&#34;crypto&#34;&gt;Crypto
+&lt;/h4&gt;&lt;p&gt;所需工具：&lt;code&gt;随波逐流v6.3，RSAtools、(因式分解)yafu-x64&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;重点：需要记住凯撒密码、rabbit密码、栅栏密码，这三类是很难从外表辨别出的，放到随波逐流工具看看有没有flag&lt;/p&gt;
+&lt;h5 id=&#34;解密&#34;&gt;解密
+&lt;/h5&gt;&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/25.png&#34;
+	width=&#34;690&#34;
+	height=&#34;599&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/25_hu_fa99b3e32af057ac.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/25_hu_6e503c0758f6fcca.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;随波逐流&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;115&#34;
+		data-flex-basis=&#34;276px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;将密文粘贴至随波逐流解码工具中，就可以得出flag，这个工具能将大部分密码格式罗列出来，如凯撒密码、base64、base32、栅栏密码等。&lt;/p&gt;
+&lt;h5 id=&#34;md5加密&#34;&gt;MD5加密
+&lt;/h5&gt;&lt;p&gt;e00cf25ad42683b3df678c61f42c6bda&lt;/p&gt;
+&lt;p&gt;这个是md5加密形式，格式一般有字母和数字组成，最重要的是长度为32位，自己可以数数。。。&lt;/p&gt;
+&lt;p&gt;使用MD5解码工具得到：admin1，这就是flag。&lt;/p&gt;
+&lt;h5 id=&#34;url加密&#34;&gt;URl加密
+&lt;/h5&gt;&lt;p&gt;%66%6c%61%67%7b%61%6e%64%20%31%3d%31%7d&lt;/p&gt;
+&lt;p&gt;这个是url加密，用专门的解密工具就可以得到flag，如随波逐流，密文格式一般是两位字符串组成一组，再由%来隔开。&lt;/p&gt;
+&lt;h5 id=&#34;rot加密&#34;&gt;rot加密
+&lt;/h5&gt;&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/26.png&#34;
+	width=&#34;690&#34;
+	height=&#34;769&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/26_hu_e0ca15a9bf0bd6f8.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/26_hu_db6263870410ded6.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;89&#34;
+		data-flex-basis=&#34;215px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;密码在图上边，题目提示是回旋踢，意味着有”回转“，就是重新绕回，这就是rot加密，用工具解码，rot表回转，后面的数字表示偏移位数，比如说s，从s开始到i-j-k，就偏了3次，到z后又回到a，直至到f，刚好13，所以说Rot13解码就是真正的flag。&lt;/p&gt;
+&lt;h5 id=&#34;凯撒密码&#34;&gt;凯撒密码
+&lt;/h5&gt;&lt;p&gt;afZ_r9VYfScOeO_UL^RWUc&lt;/p&gt;
+&lt;p&gt;这个就是凯撒密文了，这种我认为是最恶心的密文了，看不出规律，只能放在随波逐流上看有没有flag在里面，&lt;/p&gt;
+&lt;p&gt;凯撒密码的变化大致是把原文的字母移动一定的位数来实现加密或者解密，比如从A、D开始偏移三位，分别变成D、G了。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/27.jpg&#34;
+	width=&#34;455&#34;
+	height=&#34;364&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/27_hu_224035c5a8e19b3b.jpg 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/27_hu_44fbc3a58bb0a5bd.jpg 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;125&#34;
+		data-flex-basis=&#34;300px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h5 id=&#34;quoted-printable加密&#34;&gt;quoted-printable加密
+&lt;/h5&gt;&lt;p&gt;=E9=82=A3=E4=BD=A0=E4=B9=9F=E5=BE=88=E6=A3=92=E5=93=A6&lt;/p&gt;
+&lt;p&gt;这类密文形式很明显，有等号、大写字母和数字，交给随波逐流吧。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/28.jpg&#34;
+	width=&#34;690&#34;
+	height=&#34;543&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/28_hu_192fcbf764cab81.jpg 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/28_hu_a227df646ee2cad9.jpg 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;127&#34;
+		data-flex-basis=&#34;304px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h5 id=&#34;栅栏加密&#34;&gt;栅栏加密
+&lt;/h5&gt;&lt;p&gt;felhaagv{ewtehtehfilnakgw}&lt;/p&gt;
+&lt;p&gt;这个就很好看了，在网络空间安全导论课上有听到老师将这个栅栏加密，大致是：解密者需要掌握栅栏的排列顺序和每个栏的宽度，然后按照加密过程的逆序逐个提取出明文信息。 这种加密方式虽然较为简单，但具有较好的隐蔽性和可读性。 在一些特定场合下，例如军事或商业机密等需要保护敏感信息的场合，可以使用栅栏密码来确保信息的安全。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/29.jpg&#34;
+	width=&#34;650&#34;
+	height=&#34;558&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/29_hu_3ea31ff9688fe50d.jpg 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/29_hu_6eb333357458a4a8.jpg 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;116&#34;
+		data-flex-basis=&#34;279px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;就13栏符合了。&lt;/p&gt;
+&lt;h5 id=&#34;rabbit加密&#34;&gt;Rabbit加密
+&lt;/h5&gt;&lt;p&gt;U2FsdGVkX1/+ydnDPowGbjjJXhZxm2MP2AgI&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/30.jpg&#34;
+	width=&#34;690&#34;
+	height=&#34;184&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/30_hu_229eed72e252c142.jpg 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/30_hu_7b7ccd15e6235147.jpg 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;375&#34;
+		data-flex-basis=&#34;900px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;这我找不出规律/。。。。只能记了。。&lt;/p&gt;
+&lt;h5 id=&#34;rsa加密&#34;&gt;RSA加密
+&lt;/h5&gt;&lt;p&gt;在一次RSA密钥对生成中，假设p=473398607161，q=4511491，e=17&lt;/p&gt;
+&lt;p&gt;求解出d作为flga提交。&lt;/p&gt;
+&lt;p&gt;这里需要用到RSAtools（不建议手算）&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/31.jpg&#34;
+	width=&#34;690&#34;
+	height=&#34;684&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/31_hu_951a907b2ea05ae.jpg 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/31_hu_30a23ef82208cb35.jpg 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;100&#34;
+		data-flex-basis=&#34;242px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;打开这个工具后可以看到，p、q都是素数，d是私钥，而题目给出了pq了，我们输进去就可以，注意这个e填到工具中的E空栏时，有个hex，需要我们把e=17变成16进制的“11”，接着按下calc：D生成私钥就可以，这就是flag了。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/32.jpg&#34;
+	width=&#34;690&#34;
+	height=&#34;652&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/32_hu_955e0aeefc3321cd.jpg 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/32_hu_1aeefff81907d4d2.jpg 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;105&#34;
+		data-flex-basis=&#34;253px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h5 id=&#34;yafu因式分解与哈希加密&#34;&gt;&lt;strong&gt;yafu因式分解与哈希加密&lt;/strong&gt;
+&lt;/h5&gt;&lt;p&gt;题目：密码学历史中，有两位知名的杰出人物，Alice和Bob。他们的爱情经过置换和轮加密也难以混淆，即使是没有身份认证也可以知根知底。就像在数学王国中的素数一样，孤傲又热情。下面是一个大整数:98554799767,请分解为两个素数，分解后，小的放前面，大的放后面，合成一个新的数字，进行md5的32位小写哈希，提交答案。 注意：得到的 flag 请包上 flag{} 提交&lt;/p&gt;
+&lt;p&gt;这里要分解素数可以用到yafu，下载好yafu-x64并设置好路径后，在桌面打开终端&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/33.jpg&#34;
+	width=&#34;690&#34;
+	height=&#34;355&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/33_hu_7228803a3b261dc8.jpg 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/33_hu_51a8428bc3be8a18.jpg 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;194&#34;
+		data-flex-basis=&#34;466px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;按照题目排列好数字串101999966233后，&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/34.jpg&#34;
+	width=&#34;690&#34;
+	height=&#34;367&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/34_hu_739dd3f13fb8108b.jpg 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/34_hu_3cafe3107d4a41b4.jpg 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;188&#34;
+		data-flex-basis=&#34;451px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;20241116&#34;&gt;2024.11.16
+&lt;/h2&gt;&lt;h3 id=&#34;西电-moectf2024-1&#34;&gt;西电-moectf2024
+&lt;/h3&gt;&lt;h4 id=&#34;完成事项&#34;&gt;完成事项
+&lt;/h4&gt;&lt;p&gt;解决f5隐写、磁盘文件的查看、解决txt零宽隐写、西电MOECTF&lt;/p&gt;
+&lt;h4 id=&#34;misc-3&#34;&gt;MISC
+&lt;/h4&gt;&lt;h5 id=&#34;ctfer2077-2&#34;&gt;ctfer2077-2
+&lt;/h5&gt;&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/35.png&#34;
+	width=&#34;678&#34;
+	height=&#34;839&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/35_hu_416c6980dcd8f358.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/35_hu_9ce7e06416b32a8f.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;80&#34;
+		data-flex-basis=&#34;193px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;这题给的文件有点特殊，电脑没识别出来，但我看了下属性，发现者货大小：4096KB——磁盘内存（2^12，你想想你手机设置里给的最大内存是不是和这有关，都是2的次方？），那就用&lt;code&gt;Veracrypt&lt;/code&gt;去分析吧，&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/36.png&#34;
+	width=&#34;690&#34;
+	height=&#34;597&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/36_hu_44e3c0dbe79cda2b.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/36_hu_514c4a620d88528f.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;115&#34;
+		data-flex-basis=&#34;277px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;这文件果然被识别出来了，现在要密码？题目已经给了那个那啥社会主义的，用来翻译下?  是p@55w0rd&lt;/p&gt;
+&lt;p&gt;然后就此创了个A盘来去打开它，里面还有个txt问我flag在哪，显然还要找，&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/37.jpg&#34;
+	width=&#34;690&#34;
+	height=&#34;328&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/37_hu_38d8a75852a480eb.jpg 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/37_hu_7754901f95cc3032.jpg 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;210&#34;
+		data-flex-basis=&#34;504px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;用NTFS隐藏数据流分析吧，这专门为磁盘分析准备的，&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/38.png&#34;
+	width=&#34;690&#34;
+	height=&#34;353&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/38_hu_86effdfdca875c1e.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/38_hu_af706384b617f8fa.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;195&#34;
+		data-flex-basis=&#34;469px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;还真有，然后我就不会了，后面看了别人wp，发现这是双拼输入法打出来的，flag就是moectf{shuangpinshizheyangdachulaide}，太难了想不出这么诡异的输入法。&lt;/p&gt;
+&lt;h5 id=&#34;ez_f5&#34;&gt;ez_F5
+&lt;/h5&gt;&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/39.png&#34;
+	width=&#34;532&#34;
+	height=&#34;237&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/39_hu_968b25e73f01aa64.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/39_hu_4af609454543e574.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;224&#34;
+		data-flex-basis=&#34;538px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;开局来一个图片，看到题目给的提示，找了下csdn，发现是个F5隐写，在网上下载好F5-stegraphy-master的工具文件包，用终端指令使用文件来解决隐写：&lt;/p&gt;
+&lt;p&gt;cmd&lt;/p&gt;
+&lt;p&gt;cd /d F:\Legion\xxxx\xxxx\F5-steganography-master&lt;/p&gt;
+&lt;p&gt;java Extract (图片绝对路径) -p （密码）&lt;/p&gt;
+&lt;p&gt;在这张图片的属性界面发现了有备注，那是个base32进制，翻译后得到：no——password的短语，可知这就是f5隐写密码了。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/40.jpg&#34;
+	width=&#34;690&#34;
+	height=&#34;215&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/40_hu_a4b770603248e03b.jpg 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/40_hu_2ff4d4daaefdc2c2.jpg 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;320&#34;
+		data-flex-basis=&#34;770px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;还真有，然后再f5隐写文件上的output.txt文本上找到了flag：moectf{F5_15_s0_lntere5t1n9}&lt;/p&gt;
+&lt;h5 id=&#34;小小套娃&#34;&gt;小小套娃
+&lt;/h5&gt;&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/41.png&#34;
+	width=&#34;690&#34;
+	height=&#34;388&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/41_hu_58693806f351a556.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/41_hu_22f1c6a4ed1efc71.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;177&#34;
+		data-flex-basis=&#34;426px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;给了个winrar7z压缩包，里面有张图片，放入随波逐流中，用binwalk、foremost分离出来，发现有一个txt，里面的开头8950，很明显是个png文件&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/42.jpg&#34;
+	width=&#34;687&#34;
+	height=&#34;700&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/42_hu_77ba5409bb8b9f89.jpg 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/42_hu_2228af76efd8d9dd.jpg 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;img&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;98&#34;
+		data-flex-basis=&#34;235px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;内容是：you&amp;rsquo;ve got the zipkey:874jfy37yf37y7，那这个zip密码就是874jfy37yf37y7了，点入nnnext.zip文件发现，里面的next.7z和txt的密码都是874jfy37yf37y7，，而且这个txt内容：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/43.jpg&#34;
+	width=&#34;532&#34;
+	height=&#34;69&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/43_hu_d9e8b0f209f99896.jpg 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/43_hu_d92756c06fc73b04.jpg 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;771&#34;
+		data-flex-basis=&#34;1850px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;有个符号很奇怪，查了查这是长度为零的字符，这不就是零宽隐写吗？用puzzlesolver解码得到：dhufhduh48589&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/44.png&#34;
+	width=&#34;690&#34;
+	height=&#34;607&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/44_hu_b5ac6543befcb1a3.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/44_hu_50335269ce2a4804.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;113&#34;
+		data-flex-basis=&#34;272px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;然后用这个dhufhduh48589密码打开另外一个flag.7z文件，查看里面的txt，&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/45.jpg&#34;
+	width=&#34;153&#34;
+	height=&#34;57&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/45_hu_41f0c0845e2f6f5f.jpg 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/45_hu_cc6063826e3137f8.jpg 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;零宽隐写&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;268&#34;
+		data-flex-basis=&#34;644px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;去翻译下新佛曰吧。。。。。得到flag。&lt;/p&gt;
+&lt;p&gt;来总结下零宽隐写吧：也就是说txt出现零宽时，有可能看不见，也有可能看见两三个字粘在一个格子上，如：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/46.jpg&#34;
+	width=&#34;690&#34;
+	height=&#34;44&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/46_hu_75f6712ae03ea265.jpg 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/46_hu_8343af679738a052.jpg 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;1568&#34;
+		data-flex-basis=&#34;3763px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;零宽空格（zero-width space, ZWSP）用于可能需要换行处。&lt;/p&gt;
+&lt;p&gt;Unicode: U+200B HTML:零宽不连字 (zero-width non-joiner，ZWNJ)放在电子文本的两个字符之间，抑制本来会发生的连字，而是以这两个字符原本的字形来绘制；&lt;/p&gt;
+&lt;p&gt;Unicode: U+200C HTML:零宽连字（zero-width joiner，ZWJ）是一个控制字符，放在某些需要复杂排版语言（如阿拉伯语、印地语）的两个字符之间，使得这两个本不会发生连字的字符产生了连字效果。&lt;/p&gt;
+&lt;h2 id=&#34;20241119&#34;&gt;2024.11.19
+&lt;/h2&gt;&lt;h3 id=&#34;西电newstars-ctf2024&#34;&gt;西电Newstars-ctf2024
+&lt;/h3&gt;&lt;h4 id=&#34;misc-4&#34;&gt;MISC
+&lt;/h4&gt;&lt;h5 id=&#34;week3-bgm坏了吗&#34;&gt;week3 BGM坏了吗？
+&lt;/h5&gt;&lt;p&gt;上来就给我个音频，我也是听了下，还是我喜欢的歌，听到最后莫名其妙有小小的嘟嘟声，我用audacity进行分析，果不其然在音频后段有：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/47.jpg&#34;
+	width=&#34;690&#34;
+	height=&#34;164&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/47_hu_217582a2da45dc95.jpg 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/47_hu_a3a36f9d7d035253.jpg 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;420&#34;
+		data-flex-basis=&#34;1009px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;把这两声道分离，将上部去掉留下部。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/48.jpg&#34;
+	width=&#34;690&#34;
+	height=&#34;305&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/48_hu_e9182008af6cbbe8.jpg 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/48_hu_8101becd14a93315.jpg 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;226&#34;
+		data-flex-basis=&#34;542px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;接着导出mav文件，再听一遍，发现这是拨号声音，但我听不出，我求助csdn，找到了dtmf链接，识别拨号的网址：https://dtmf.netlify.app/&lt;/p&gt;
+&lt;p&gt;将文件放入dtmf上，然后得到一串数字，即为flag：2024093020241103&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/49.png&#34;
+	width=&#34;690&#34;
+	height=&#34;397&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/49_hu_3dc458a9dff042ea.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/49_hu_d7b835e8edb6b4a.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;173&#34;
+		data-flex-basis=&#34;417px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h5 id=&#34;week2-热心助人的小明同学&#34;&gt;week2-热心助人的小明同学
+&lt;/h5&gt;&lt;p&gt;题目：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;链接：https://pan.baidu.com/s/11zaWrYj8s4VicA83GPS3QQ&lt;/li&gt;
+&lt;li&gt;密码：ns24&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;开局给我发了个image.raw,看了看题目提示，应该是内存镜像，要用volatility去分析，只要找出小红的电脑登录密码就好，直接上cmd，用&lt;code&gt;volatility&lt;/code&gt;指令！查看了下系统信息：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/50.jpg&#34;
+	width=&#34;690&#34;
+	height=&#34;207&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/50_hu_65e2592e4ae6bd2e.jpg 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/50_hu_7ebf8362b1ad3109.jpg 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;333&#34;
+		data-flex-basis=&#34;800px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;再列出缓存在内存中的注册表 hivelist：还真有小红！&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/51.jpg&#34;
+	width=&#34;690&#34;
+	height=&#34;454&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/51_hu_9091894e956b6bf6.jpg 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/51_hu_4f95bdb67e60ecbd.jpg 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;151&#34;
+		data-flex-basis=&#34;364px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;列出全部用户名：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/52.jpg&#34;
+	width=&#34;690&#34;
+	height=&#34;102&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/52_hu_b9fc51578ef3db97.jpg 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/52_hu_5b3c96040f323851.jpg 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;676&#34;
+		data-flex-basis=&#34;1623px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;把密码找出来：全是hash（这一步其实可以省略，只不过有些题需要去判断这些hash值对应的明文密码是否是空密码）。。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/53.jpg&#34;
+	width=&#34;690&#34;
+	height=&#34;354&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/53_hu_8349eed1ae5f3c9e.jpg 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/53_hu_dfa435e4714ba2b.jpg 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;194&#34;
+		data-flex-basis=&#34;467px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;最后一步。。。显示明文密码：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/54.jpg&#34;
+	width=&#34;690&#34;
+	height=&#34;174&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/54_hu_68617dddf095ad5f.jpg 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/54_hu_4917ec4951817331.jpg 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;396&#34;
+		data-flex-basis=&#34;951px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;其实做到这里我也很好奇这个上面的H是干嘛用的。这就是密码：ZDFyVDlfdTNlUl9wNHNTdzByRF9IQUNLRVIh&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;这道题对我的感受很深，是我学杂项以来觉得比较值得细学的方向，就是取证方向，它是属于刑侦取证分析行业的，每年会举行奇安信盘古石电子取证大赛、美亚杯、龙信杯等取证赛，也是杂项为数不多的一个痛点。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;h2 id=&#34;20241129&#34;&gt;2024.11.29
+&lt;/h2&gt;&lt;h3 id=&#34;西电newstars-ctf2024-1&#34;&gt;西电Newstars-ctf2024
+&lt;/h3&gt;&lt;h4 id=&#34;完成事项-1&#34;&gt;完成事项
+&lt;/h4&gt;&lt;p&gt;数字取证：进一步学会使用volatility分析取证，FTK、EFDD磁盘取证分析，及其各指令的初步掌握。&lt;/p&gt;
+&lt;p&gt;分别在在kali、windows系统上成功配置python2.7虚拟环境、安装了volatility的python脚本。&lt;/p&gt;
+&lt;h4 id=&#34;misc-5&#34;&gt;MISC
+&lt;/h4&gt;&lt;h5 id=&#34;week4-擅长加密的小明同学&#34;&gt;week4-擅长加密的小明同学
+&lt;/h5&gt;&lt;p&gt;开局给了vhd磁盘文件和raw镜像文件，vhd要密码才能打开。。。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/55.png&#34;
+	width=&#34;690&#34;
+	height=&#34;809&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/55_hu_28e26a66fc57c917.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/55_hu_c31053968f2e7155.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;EFDD&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;85&#34;
+		data-flex-basis=&#34;204px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;选第一个，利用镜像文件vhd的镜像raw文件找密码，&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/56.jpg&#34;
+	width=&#34;690&#34;
+	height=&#34;188&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/56_hu_4d8619514ca41a6a.jpg 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/56_hu_c787cfab250261e9.jpg 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;367&#34;
+		data-flex-basis=&#34;880px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;key：408320-285065-614779-610940-547107-218229-492195-125422，用这个key恢复磁盘。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/57.png&#34;
+	width=&#34;690&#34;
+	height=&#34;340&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/57_hu_7de7b08f365c94f2.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/57_hu_657e40552d973d70.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;重置密码&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;202&#34;
+		data-flex-basis=&#34;487px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;玩套娃，里面的7z文件是加密的，还得找密码。现在只能从chal.raw镜像文件去分析了，现在用kali的volatility取证分析，用python2.7版本的kali终端进行volatility指令，查看镜像文件的进程数据&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;python vol.py -f xxx.raw --profile&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;Win7SP1x64 pslist 
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/58.png&#34;
+	width=&#34;690&#34;
+	height=&#34;494&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/58_hu_c9771d3cf9017dd0.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/58_hu_ec8d9847b835adda.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;139&#34;
+		data-flex-basis=&#34;335px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;这里只能一个个查看这些文件的类型（用ai搜索）发现这个mspaint.exe是个画图软件，这和题目提示有关，用指令提取这里的进程数据出来。导出进程数据，这里的 ‘PID’是3744：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;python vol.py -f xxx.raw --profile&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;Win7SP1x64 memdump -p &lt;span class=&#34;s1&#34;&gt;&amp;#39;PID&amp;#39;&lt;/span&gt; --dump-dir&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;./ 
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;分离出了dmp文件，可以猜到这是和图片有关的原始文件，这里我们用到GIMP图像编辑器。&lt;em&gt;小提示&lt;/em&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;一般正常的内存镜像的话，图像类型我们都选择「RGB 透明」&lt;/em&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;适当调大宽高，能显示多一点内容，但别调太高，小心程序崩了&lt;/em&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;位移看着拉，先拉到感觉有东西显示的位置，感觉差不多这样吧，一般画图就是白的夹依托的感觉&lt;/em&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;调好位移就调宽高，宽和高实际上就是和程序窗口大小有关，所以别太高，主要是宽度，如果和图上一样↘斜，那么你就该调高宽度，箭头一点一点加上去，如果是↗，你就得一点一点减下来，知道看上去正常了，下面是较为正常。&lt;/em&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/59.png&#34;
+	width=&#34;690&#34;
+	height=&#34;293&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/59_hu_76b3a00f062f5ee2.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/59_hu_4e7b357b7b1ab46a.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;GIMP&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;235&#34;
+		data-flex-basis=&#34;565px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;全小写字母&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/60.jpg&#34;
+	width=&#34;690&#34;
+	height=&#34;284&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/60_hu_ef88c449e3139d13.jpg 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/60_hu_9e73a131623b45e9.jpg 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;242&#34;
+		data-flex-basis=&#34;583px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;压缩包密码：rxnifbeiyomezpplugho，最后得到flag。&lt;/p&gt;
+&lt;h2 id=&#34;2025329&#34;&gt;2025.3.29
+&lt;/h2&gt;&lt;h3 id=&#34;西电newstars-ctf2024-2&#34;&gt;西电Newstars-ctf2024
+&lt;/h3&gt;&lt;h4 id=&#34;misc取证专题-week4&#34;&gt;MISC取证专题-week4
+&lt;/h4&gt;&lt;h5 id=&#34;擅长加密的小明同学&#34;&gt;擅长加密的小明同学
+&lt;/h5&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;解压&lt;code&gt;君は加密本当に上手だな.zip&lt;/code&gt;得到内存镜像&lt;code&gt;chal.raw&lt;/code&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;使用&lt;a class=&#34;link&#34; href=&#34;https://www.elcomsoft.com/efdd.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Elcomsoft Forensic Disk Decryptor&lt;/a&gt;来解密磁盘镜像&lt;code&gt;Secret.vhd&lt;/code&gt;，得到BitLocker恢复密钥为&lt;code&gt;142593-710886-423500-433763-213499-455807-632885-152152&lt;/code&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;输入恢复密钥解锁分区，得到加密的&lt;code&gt;flag.7z&lt;/code&gt;压缩包。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;执行&lt;code&gt;python2 vol.py -f chal.raw imageinfo&lt;/code&gt;，得到操作系统为&lt;code&gt;Win7SP1x64&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;执行&lt;code&gt;python2 vol.py -f chal.raw --profile=Win7SP1x64 pslist&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;得到：&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;0xfffffa80192c8b00 mspaint.exe            2804   1844      5      121      1      0 2024-10-12 17:31:28 UTC+0000&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;可知&lt;code&gt;mspaint.exe&lt;/code&gt;进程的PID为2804。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;执行&lt;code&gt;python2 vol.py -f chal.raw --profile=Win7SP1x64 memdump -p 2804 -D ~/Desktop/&lt;/code&gt;，得到&lt;code&gt;2804.dmp&lt;/code&gt;，将其重命名为&lt;code&gt;2804.dmp.data&lt;/code&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;使用&lt;a class=&#34;link&#34; href=&#34;https://www.gimp.org/downloads/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;GIMP&lt;/a&gt;打开&lt;code&gt;2804.dmp.data&lt;/code&gt;，调整参数如下：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;位移：5604782&lt;/li&gt;
+&lt;li&gt;宽度：1728&lt;/li&gt;
+&lt;li&gt;高度：1057&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;垂直翻转就能看到图像：&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/61.png&#34;
+	width=&#34;586&#34;
+	height=&#34;479&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/61_hu_88d63261376b6d96.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/61_hu_ccaa3f14cd8a8154.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;GIMP&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;122&#34;
+		data-flex-basis=&#34;293px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;可得密码为&lt;code&gt;rxnifbeiyomezpplugho&lt;/code&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;输入密码解压&lt;code&gt;flag.7z&lt;/code&gt;，得到&lt;code&gt;flag.txt&lt;/code&gt;：&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Flag{5ZCb44Gv5Y+W6K+B5pys5b2T44Gr5LiK5omL}&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;故flag{5ZCb44Gv5Y+W6K+B5pys5b2T44Gr5LiK5omL}&lt;/p&gt;
+&lt;h3 id=&#34;擅长音游的小明同学&#34;&gt;擅长音游的小明同学
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;在&lt;a class=&#34;link&#34; href=&#34;https://www.exterro.com/ftk-product-downloads&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;FTK Product Downloads&lt;/a&gt;下载 Exterro FTK Imager ，打开&lt;code&gt;chal_fixed.E01&lt;/code&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;观察到&lt;code&gt;C:\Users\Administrator\Desktop\要开始了哟~.txt&lt;/code&gt;内容如下：&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;今天舞萌彩框了好开心啊o(&lt;em&gt;￣▽￣&lt;/em&gt;)ブ&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;我要把这一刻用照片保存下来&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;不过在拍摄rating变化的瞬间总感觉有什么东西藏进照片里了&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;打开也没发现什么异常，但是体积好像变大了一点&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;是错觉吗？&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;于是找到&lt;code&gt;C:\Users\Administrator\Pictures\ColorfulDog.jpg&lt;/code&gt;，使用压缩软件打开并解压，得到&lt;code&gt;secret.txt&lt;/code&gt;提示：&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;听好了听好了听好了听好了听好了听好了听好了：&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;1919年8月10日，世界就此陷落，&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;陷落的世界都将迎来一场漩涡，&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;为这个世界带来有关弗拉格尚未知晓的真相。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;但发掘真相的道路被加诸混沌的历练&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;世界的宽高未被正确丈量&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;当真相被混沌打乱时&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;真相将不复存在&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;也许，在世界的重置和轮回中能找到发现真相的方法……&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;至此，尘埃落定&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;至此，一锤定音&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;#音游# #NewStarcaea #Misc&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;用十六进制编辑器打开&lt;code&gt;ColorfulDog.jpg&lt;/code&gt;，提示我们分辨率为 1280 × 800 。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/62.png&#34;
+	width=&#34;1059&#34;
+	height=&#34;502&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/62_hu_ff0e4070933187e7.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/62_hu_27d5cc668819ff6.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Winhex&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;210&#34;
+		data-flex-basis=&#34;506px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;用 Exterro FTK Imager 挂载&lt;code&gt;chal_fixed.E01&lt;/code&gt;中的分区。&lt;/li&gt;
+&lt;li&gt;打开&lt;a class=&#34;link&#34; href=&#34;https://github.com/Chuyu-Team/Dism-Multi-language&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Dism++&lt;/a&gt;可知系统为 Windows 7 x64 。&lt;/li&gt;
+&lt;li&gt;在 VMware Workstation 中新建虚拟机，分配虚拟磁盘。&lt;/li&gt;
+&lt;li&gt;在&lt;a class=&#34;link&#34; href=&#34;https://www.diskgenius.cn/download.php&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;DiskGenius&lt;/a&gt;中打开创建的虚拟磁盘并分区，将挂载的&lt;code&gt;chal_fixed.E01&lt;/code&gt;中的系统盘&lt;strong&gt;克隆分区&lt;/strong&gt;到虚拟磁盘中。&lt;/li&gt;
+&lt;li&gt;将&lt;a class=&#34;link&#34; href=&#34;https://www.wepe.com.cn/download.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;微PE工具箱&lt;/a&gt;的 ISO 连接到虚拟机，开机先进入 PE ，使用 Dism++ 进行引导修复。&lt;/li&gt;
+&lt;li&gt;修复完成后断开 PE 的 ISO 并重启，此时就可以正常启动系统了。&lt;/li&gt;
+&lt;li&gt;先登录 Guest 用户，修改屏幕分辨率为 1280 × 800 。&lt;/li&gt;
+&lt;li&gt;再注销，登录 Administrator 用户，即可观察到桌面图标的特定位置&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/63.png&#34;
+	width=&#34;1280&#34;
+	height=&#34;800&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/63_hu_957c95d4d5806c86.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/63_hu_33f39c8c8813aaee.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;160&#34;
+		data-flex-basis=&#34;384px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;flag{wowgoodfzforensics}&lt;/p&gt;
+&lt;h2 id=&#34;20254&#34;&gt;2025.4
+&lt;/h2&gt;&lt;h3 id=&#34;完成事项-2&#34;&gt;完成事项
+&lt;/h3&gt;&lt;p&gt;有幸参加了广东省卫生健康网络安全技能大赛&lt;/p&gt;
+&lt;p&gt;线下赛还是比较紧张，毕竟第一次参加。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/%E6%88%91%E7%9A%84%E9%A6%96%E6%AC%A1%E7%BA%BF%E4%B8%8B%E8%B5%9B.jpg&#34;
+	width=&#34;800&#34;
+	height=&#34;507&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/%E6%88%91%E7%9A%84%E9%A6%96%E6%AC%A1%E7%BA%BF%E4%B8%8B%E8%B5%9B_hu_97be23586f3fb6fd.jpg 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/%E6%88%91%E7%9A%84%E9%A6%96%E6%AC%A1%E7%BA%BF%E4%B8%8B%E8%B5%9B_hu_fa6ea4c112fe9c1e.jpg 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;从0-1&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;157&#34;
+		data-flex-basis=&#34;378px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;这周主要是复盘线下培训的知识及错题，题做的少，wp可能比较水，然后看了复盘的线上会议，进一步熟悉了wireshark的过滤器运用。&lt;/p&gt;
+&lt;p&gt;水了几个QQ群搞到了lovelymem的取证工具，备战盘古石赛。&lt;/p&gt;
+&lt;p&gt;稍微理解了下volatility的一些指令：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/64.png&#34;
+	width=&#34;1510&#34;
+	height=&#34;835&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/64_hu_e29816f1cf0e11e1.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/64_hu_630c378a673f414a.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Lovelymem-volatility&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;180&#34;
+		data-flex-basis=&#34;434px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;未完成事项及原因后续如何完成&#34;&gt;未完成事项及原因（后续如何完成）
+&lt;/h3&gt;&lt;p&gt;不是很会蚁剑流量和冰蝎&lt;/p&gt;
+&lt;p&gt;？？用小皮搭个网站后，用bp发送请求缺无响应&lt;/p&gt;
+&lt;h3 id=&#34;下周待做事项&#34;&gt;下周待做事项
+&lt;/h3&gt;&lt;p&gt;准备盘古石比赛搞点取证题入入手&lt;/p&gt;
+&lt;h2 id=&#34;2025425&#34;&gt;2025.4.25
+&lt;/h2&gt;&lt;h3 id=&#34;完成事项-3&#34;&gt;完成事项
+&lt;/h3&gt;&lt;p&gt;打了UCSCctf，还是五味杂陈哈，主要是自己流量分析这块有点弱，然后自己在这周重点复盘流量分析，以下是wp，有一把梭也有手搓。&lt;/p&gt;
+&lt;h4 id=&#34;ucscctf-misc&#34;&gt;UCSCctf-MISC
+&lt;/h4&gt;&lt;h5 id=&#34;three-ucsc&#34;&gt;Three-ucsc
+&lt;/h5&gt;&lt;p&gt;根据题目可知，这三个文件的内容组成一个flag值，盲水印。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;水印加密，开局给了jar，我工具箱也有，方法一，常规脚本使用，使用指令java -jar xxx打开&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/65.png&#34;
+	width=&#34;692&#34;
+	height=&#34;185&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/65_hu_6ecd37a75aac8be1.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/65_hu_928322f322d10b15.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;374&#34;
+		data-flex-basis=&#34;897px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;套，提出来了。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/66.png&#34;
+	width=&#34;692&#34;
+	height=&#34;413&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/66_hu_b0d1b9d6c83b5739.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/66_hu_63da9c642e99032c.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;167&#34;
+		data-flex-basis=&#34;402px&#34;
+	
+&gt;看着模糊，可以用p图调色去变清晰，这里不多解释；&lt;/p&gt;
+&lt;p&gt;方法二：一把梭，直接用山羊puzzlesolver梭&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/67.png&#34;
+	width=&#34;692&#34;
+	height=&#34;513&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/67_hu_fd6546eea4eca17e.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/67_hu_15c188e3d9faeaa.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;134&#34;
+		data-flex-basis=&#34;323px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;原理一样。&lt;/p&gt;
+&lt;h5 id=&#34;usb-ucsc&#34;&gt;USB-ucsc
+&lt;/h5&gt;&lt;p&gt;用wireshark打开这个文件发现是usb流量，可用脚本可用梭。这里直接用NetA去梭：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/68.png&#34;
+	width=&#34;692&#34;
+	height=&#34;409&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/68_hu_8ee4bbfda9efce56.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/68_hu_a9e18b52124e2eee.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;NetA&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;169&#34;
+		data-flex-basis=&#34;406px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;这个工具还是很好用的，跟随波逐流差不多的，名字是NETA，上网搜就可，低版本免费，高版本给钱。&lt;/p&gt;
+&lt;h5 id=&#34;noshark-ucsc&#34;&gt;No.shArk-ucsc
+&lt;/h5&gt;&lt;p&gt;拿到一个流量包，进去除了http，还有dns的，不太对劲。&lt;/p&gt;
+&lt;p&gt;过滤dns看到了很多010110的二进制码：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/69.png&#34;
+	width=&#34;692&#34;
+	height=&#34;354&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/69_hu_ff05f75240c6ac59.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/69_hu_f138b3e52373ab5.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;wireshark&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;195&#34;
+		data-flex-basis=&#34;469px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;在这题我卡住了，后面都是别人的wp：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/70.png&#34;
+	width=&#34;693&#34;
+	height=&#34;472&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/70_hu_1d506396bcc92776.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/70_hu_ad1028bf79729c90.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;146&#34;
+		data-flex-basis=&#34;352px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;用脚本或者其他工具梭都可，这段二进制码可以转成图片，就是二维码：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;解释一下原理吧，为什么这里是二进制编码，因为本质信息传输都是以二进制0和1的形式存在的，传到目的地才会有“翻译”给转译成你看得懂的数据，这里流量传输也是一样，一条流量一条的传输，对应在工具就能看到就是一句一句的传，我们刻意把它们拷贝下来一条条的拼回去就是二维码原始数据了，再转移成图片。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/71.png&#34;
+	width=&#34;693&#34;
+	height=&#34;442&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/71_hu_d53623234740173c.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/71_hu_18bada2582c0edb.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;156&#34;
+		data-flex-basis=&#34;376px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;缺失了定位符，自己搓出也很简单的。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/72.png&#34;
+	width=&#34;692&#34;
+	height=&#34;846&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/72_hu_73d5a89144aab15.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/72_hu_d178d17f2e316e5b.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;QR&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;81&#34;
+		data-flex-basis=&#34;196px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;Qr扫二维码，看起来是密钥&lt;/p&gt;
+&lt;p&gt;Y0U_Fi8d_ItHa@aaHH&lt;/p&gt;
+&lt;p&gt;接着从http下手，看到HTML&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/73.png&#34;
+	width=&#34;478&#34;
+	height=&#34;353&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/73_hu_32c1aec72bc7338d.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/73_hu_f3dcc7b974477e13.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;135&#34;
+		data-flex-basis=&#34;324px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;奇怪的歌。。。。&lt;/p&gt;
+&lt;p&gt;snow隐写本质上其实是html隐写，然后找到一个html文件&lt;/p&gt;
+&lt;p&gt;有密钥有html，那就是snow隐写了。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/74.png&#34;
+	width=&#34;692&#34;
+	height=&#34;339&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/74_hu_ec9ca78863c5df1c.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/74_hu_7d2a5b70975ba1e5.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;204&#34;
+		data-flex-basis=&#34;489px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;11ef-b3b6-a4b1c1c5a2d2}&lt;/p&gt;
+&lt;p&gt;已经找到后半段，还有前半段&lt;/p&gt;
+&lt;p&gt;接着回去看流量：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/75.png&#34;
+	width=&#34;692&#34;
+	height=&#34;177&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/75_hu_359bab1d3f585be5.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/75_hu_abad42d7bc69d168.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;390&#34;
+		data-flex-basis=&#34;938px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;有图片，导出，这个应该是像素偏移的题，用gimp不行（gimp的是单轴偏移），这个是两轴偏移（x，y轴十字偏移）&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/76.png&#34;
+	width=&#34;211&#34;
+	height=&#34;211&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/76_hu_8e20877806f6ae56.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/76_hu_3a134042a4bd8f7f.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;100&#34;
+		data-flex-basis=&#34;240px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/77.png&#34;
+	width=&#34;692&#34;
+	height=&#34;133&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/77_hu_22c06f395ba2c775.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/77_hu_6716f6806f086429.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;520&#34;
+		data-flex-basis=&#34;1248px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;直接梭   密钥是&lt;code&gt;keykeyishere&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;猫脸变换脚本都有的&lt;/p&gt;
+&lt;p&gt;变换出货！！！！flag完毕&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/78.png&#34;
+	width=&#34;692&#34;
+	height=&#34;342&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/78_hu_8d43126b64de70a1.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/78_hu_83373818b9c1cd0f.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;202&#34;
+		data-flex-basis=&#34;485px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/79.png&#34;
+	width=&#34;469&#34;
+	height=&#34;336&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/79_hu_6d0715cad5028f17.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/79_hu_5afec9ad92a6a75f.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;139&#34;
+		data-flex-basis=&#34;335px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h5 id=&#34;小套不是套-ucsc&#34;&gt;小套不是套-ucsc
+&lt;/h5&gt;&lt;p&gt;看到套.zip里面有好多白bin文件，而且用winrar打开查看，字节大小出奇一样！&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/80.png&#34;
+	width=&#34;692&#34;
+	height=&#34;559&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/80_hu_170864892e11a816.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/80_hu_8314dc8274e6892a.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;winrar&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;123&#34;
+		data-flex-basis=&#34;297px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;判断出这是&lt;code&gt;CRC校验碰撞&lt;/code&gt;，字节为4 。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/81.png&#34;
+	width=&#34;691&#34;
+	height=&#34;331&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/81_hu_7bc976f691097e.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/81_hu_b9c0c5bb9ef34be8.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;208&#34;
+		data-flex-basis=&#34;501px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;找到一个密钥 SecretIsY0u    ；；；；；&lt;/p&gt;
+&lt;p&gt;当然，如果用命令去做，要一个个去输入那个CRC32的值，过程比较繁琐，不过在这我用现成脚本梭了，原理都一样，我当时就用命令一个个去填的，太慢了。&lt;/p&gt;
+&lt;p&gt;看回文件夹，有二维码，扫一下得到：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/82.png&#34;
+	width=&#34;692&#34;
+	height=&#34;471&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/82_hu_4ffe465adff1cfc1.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/82_hu_259945cc3b8f27c6.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;146&#34;
+		data-flex-basis=&#34;352px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;密钥是&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;!@#QWE123987&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;用来打开tess.zip，里面有个还有个zip，拖进随波逐流或者看010editor，都可知道是&lt;code&gt;伪加密&lt;/code&gt;的；&lt;/p&gt;
+&lt;p&gt;看回mushroom.jpg，放随波逐流&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/83.png&#34;
+	width=&#34;692&#34;
+	height=&#34;399&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/83_hu_dd7f1f867a04707b.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/83_hu_97875e0839487c14.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;173&#34;
+		data-flex-basis=&#34;416px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;看回010editor，知道jpg文件的16进制码的末尾是FFD9，但这有很多个，再一次确定了这个文件的尾部被人为添加了数据。从此处下手。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/84.png&#34;
+	width=&#34;693&#34;
+	height=&#34;358&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/84_hu_b7cbcb1d5405a32a.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/84_hu_8130ff418e01fe04.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;193&#34;
+		data-flex-basis=&#34;464px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;在上面图片上看到了IHDR，用png来对比，发现确实是图片，加个89504E47&lt;/p&gt;
+&lt;p&gt;导出发现还是损坏，拖进随波逐流分析，还是多了东西，这是&lt;code&gt;oursecret&lt;/code&gt;加密特征&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/85.png&#34;
+	width=&#34;693&#34;
+	height=&#34;281&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/85_hu_a178864b75dc307b.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/85_hu_ea89eb3454c5d0ac.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;246&#34;
+		data-flex-basis=&#34;591px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;来到oursecret工具页面，会用到密钥&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/86.png&#34;
+	width=&#34;692&#34;
+	height=&#34;421&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/86_hu_704204df5354c6c4.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/86_hu_96ccc7aae21644db.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;oursecret&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;164&#34;
+		data-flex-basis=&#34;394px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;flag{6f6bf445-8c9e-11ef-a06b-a4b1c1c5a2d2}&lt;/p&gt;
+&lt;h3 id=&#34;未完全事项及原因&#34;&gt;未完全事项及原因
+&lt;/h3&gt;&lt;p&gt;&lt;code&gt;玩玩pwn。&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&#34;下周待做事项-1&#34;&gt;下周待做事项
+&lt;/h3&gt;&lt;p&gt;备战盘古石、英语四级、校赛ctf、御网杯&lt;/p&gt;
+&lt;h3 id=&#34;本周学习知识的分享&#34;&gt;本周学习知识的分享
+&lt;/h3&gt;&lt;p&gt;打完ucscctf赛事后，我学到了新知识，比如像CRC32碰撞、oursecret的隐写，&lt;/p&gt;
+&lt;p&gt;oursecret隐写：一个文件末尾出现多余内容，且不组成正常文件。基本可判定是此隐写&lt;/p&gt;
+&lt;p&gt;熟悉运用猫脸变换的脚本；&lt;/p&gt;
+&lt;p&gt;重温了snow隐写；&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;我建议各位在平时不要老是使用一把梭的工具，老老实实用wireshark、010这种踏实手搓，理解底层原理再去一把梭抢分。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;h2 id=&#34;202559&#34;&gt;2025.5.9
+&lt;/h2&gt;&lt;h3 id=&#34;完成事项-4&#34;&gt;完成事项
+&lt;/h3&gt;&lt;p&gt;刷了些取证题，刷了didctf2022新生赛、24盘古石初赛，看wp也七七八八啃下了，主要没工具太烦了，取证大师用起来也陌生还限时体验的；顺便加强了下流量取证这方面，https://forensics.didctf.com/challenges以下是我想要分享的一些包含重要知识的例题。&lt;/p&gt;
+&lt;p&gt;经过几天的拷打，熟悉使用了三种盘古石工具和美亚的取证大师。做完了24盘古石初赛的计算机取证和手机取证，熟悉了题目的考察方向。&lt;/p&gt;
+&lt;h3 id=&#34;didctf2022新生赛&#34;&gt;didctf2022新生赛
+&lt;/h3&gt;&lt;p&gt;挑了点有代表性的题来做，作者AK了didctf2022😄。&lt;/p&gt;
+&lt;h4 id=&#34;流量分析&#34;&gt;流量分析
+&lt;/h4&gt;&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/95.png&#34;
+	width=&#34;1619&#34;
+	height=&#34;515&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/95_hu_152358d240c761bf.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/95_hu_ad1f1eb8b7cee9e6.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;314&#34;
+		data-flex-basis=&#34;754px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/87.png&#34;
+	width=&#34;1382&#34;
+	height=&#34;415&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/87_hu_9b995858641800ac.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/87_hu_ca1e29771ad3e3d6.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;333&#34;
+		data-flex-basis=&#34;799px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;这题纯知识点，一开始还想http、tcp、post的过滤的。&lt;/p&gt;
+&lt;p&gt;看了几个私人blog才知道内网是有固定ip开头，内网地址开头10.0、192.168.xxx的开头IP，那我们下一步可以搜索10字节流就可以找到答案了，不过也确实难找，第一次做。dbhost是data base host缩写，译为数据库主机。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/88.png&#34;
+	width=&#34;1159&#34;
+	height=&#34;829&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/88_hu_540dcda27a607fc6.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/88_hu_7345ca96a79ac72f.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;139&#34;
+		data-flex-basis=&#34;335px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h4 id=&#34;内存取证&#34;&gt;内存取证
+&lt;/h4&gt;&lt;p&gt;盘古石2024初赛：计算机取证&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/89.png&#34;
+	width=&#34;1390&#34;
+	height=&#34;596&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/89_hu_4f824593eda1156d.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/89_hu_5e5bc545d2d9dbd8.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;233&#34;
+		data-flex-basis=&#34;559px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;查看内存检材的基本信息，这里考察内存取证，工具很多，一把梭、手搓都可：这里两种都有&lt;/p&gt;
+&lt;p&gt;一把梭：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/90.png&#34;
+	width=&#34;1016&#34;
+	height=&#34;444&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/90_hu_1c1bfb46251ec443.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/90_hu_95545f18d1806c40.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;228&#34;
+		data-flex-basis=&#34;549px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;答案是2024-04-25-22-18，加8因为是北京时间UTC+8：00，而这里是+0：00&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/91.png&#34;
+	width=&#34;447&#34;
+	height=&#34;319&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/91_hu_4352d5358f5f657.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/91_hu_85cb4c3a0150dc85.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;140&#34;
+		data-flex-basis=&#34;336px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;这是个误导点。手搓，就是用volatility指令，这里我用版本vol2.6.1为例：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/92.png&#34;
+	width=&#34;690&#34;
+	height=&#34;375&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/92_hu_5c41543b564bcd11.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/92_hu_4fbfa06c25ca411c.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;184&#34;
+		data-flex-basis=&#34;441px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;下一题&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/93.png&#34;
+	width=&#34;1429&#34;
+	height=&#34;616&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/93_hu_33cf6b5c5241b858.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/93_hu_e3bed8e7d582e9d.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;231&#34;
+		data-flex-basis=&#34;556px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;看navicat.exe进程，用volatility的plist进程指令查看&lt;/p&gt;
+&lt;p&gt;lovelymem一把梭：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/94.png&#34;
+	width=&#34;1449&#34;
+	height=&#34;767&#34;
+	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/94_hu_6a3833d4111f861.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/94_hu_ead1e1d8e1a1a3fe.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;188&#34;
+		data-flex-basis=&#34;453px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;答案是  9336&lt;/p&gt;
+&lt;p&gt;Volatility手搓：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;python vol.py -f &lt;span class=&#34;s1&#34;&gt;&amp;#39;/home/kali/Desktop/memdump.mem&amp;#39;&lt;/span&gt; --profile&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;Win10x64 pslist
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;手搓时间有点长&amp;hellip;用取证大师、火眼的话直接秒杀的。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>MISC</title>
+        <link>https://expl0rer.top/p/misc/</link>
+        <pubDate>Thu, 14 Aug 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://expl0rer.top/p/misc/</guid>
+        <description>&lt;img src="https://expl0rer.top/p/misc/MISC.png" alt="Featured image of post MISC" /&gt;&lt;p&gt;[TOC]&lt;/p&gt;
+&lt;p&gt;前言：拖了很久的MISC它来了，作者入门CTF第一个方向就是选择MISC的，当然它确实好入门，知识研究面不深，重在积累，研究面比较广，但我认为坏处就在这，技术不精，它重在让我了解CTF其它方向的知识，MISC比较适合作为你以后准备转方向的基础。&lt;/p&gt;
+&lt;p&gt;虽说我已经转PWN方向，学了一年的MISC，有幸参加过省级CTF线下赛、盘古石取证杯，于心不忍抛弃这些积累知识点，我就想把我以前学到、积累过的知识点在这里系统地总结起来呈现给大家。&lt;/p&gt;
+&lt;h2 id=&#34;杂项前传介绍&#34;&gt;杂项前传介绍
+&lt;/h2&gt;&lt;p&gt;不多说，杂项就是“杂”，什么东西都有，Miscellaneous 简称 MISC，意思是杂项，混杂的意思。&lt;/p&gt;
+&lt;p&gt;杂项大致有这几种类型：&lt;/p&gt;
+&lt;p&gt;1、隐写：图片（webp、png、jpg、gif）、音频（mp4、mov等）、视频（mp4等）、其它。&lt;/p&gt;
+&lt;p&gt;2、压缩包处理：zip、rar、7z等压缩包密码爆破、解压、拼接。&lt;/p&gt;
+&lt;p&gt;3、流量分析：计算机网络协议、文件传输、USB、WIFI。&lt;/p&gt;
+&lt;p&gt;4、数字取证：日志分析、内存取证分析、文件镜像取证、电子取证。&lt;/p&gt;
+&lt;p&gt;5、脑洞题：说不尽&amp;hellip;，多是送分或者压分、彩蛋题。&lt;/p&gt;
+&lt;p&gt;工具说明：Kali（binwalk、foremost）、010editor或者winhex、winrar、WPS&lt;/p&gt;
+&lt;h2 id=&#34;文件类型识别&#34;&gt;文件类型识别
+&lt;/h2&gt;&lt;p&gt;杂项题目主要是以文件附件作为题目，但是给的文件不一定是有后缀名的，这就需要我们识别这些文件，当然你可以用010editor/winhex等工具查看16进制/ASCII码去辨别特征判断类型，也可用file命令：&lt;/p&gt;
+&lt;p&gt;file命令：&lt;/p&gt;
+&lt;p&gt;file 命令实际上是一个命令行工具，用来查看文件类型。&lt;/p&gt;
+&lt;p&gt;使用方法：&lt;/p&gt;
+&lt;p&gt;将文件复制到 kail 或者带有 file 工具的系统中，使用 file 查看文件。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/misc/1.png&#34;
+	width=&#34;860&#34;
+	height=&#34;60&#34;
+	srcset=&#34;https://expl0rer.top/p/misc/1_hu_506bfb4d0dfab118.png 480w, https://expl0rer.top/p/misc/1_hu_d68b14f577f008ca.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;1433&#34;
+		data-flex-basis=&#34;3440px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;然后将后缀名补上就可以正常打开了。&lt;/p&gt;
+&lt;p&gt;010editor/winhex&lt;/p&gt;
+&lt;p&gt;010Editor 是一款快速且强大的十六进制编辑器。用来编辑二进制文件。有一个友好易于使用的界面，无限次的 undo 和 redo 操作。另外还可以打印 x 十六进制的字节或者以书签的方式标出某些重要的字节。我们可以通过使用 010Editor 查看文件的头部来判断类型。&lt;/p&gt;
+&lt;p&gt;以下是我积累总结出的文件头：&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;文件类型&lt;/th&gt;
+          &lt;th&gt;文件头&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;JPEG(jpg)&lt;/td&gt;
+          &lt;td&gt;FFDSFFE1&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;PNG(png)&lt;/td&gt;
+          &lt;td&gt;89504E47&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;GIF(gif)&lt;/td&gt;
+          &lt;td&gt;47494638&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;TIFF(tif)&lt;/td&gt;
+          &lt;td&gt;49492A00&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Windows Bitmap(bmp)&lt;/td&gt;
+          &lt;td&gt;424DC001&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;ZIP Archive(zip)&lt;/td&gt;
+          &lt;td&gt;504B0304&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;RAR Archive(rar)&lt;/td&gt;
+          &lt;td&gt;52617221&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Adobe Photoshop(psd)&lt;/td&gt;
+          &lt;td&gt;38425053&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Rich Text Format(rtf)&lt;/td&gt;
+          &lt;td&gt;7B5C727466&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;XML(xml)&lt;/td&gt;
+          &lt;td&gt;3C3F786D6C&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Adobe Acrobat(pdf)&lt;/td&gt;
+          &lt;td&gt;255044462D312E&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Wave(wav)&lt;/td&gt;
+          &lt;td&gt;57415645&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;pcap(pcap)&lt;/td&gt;
+          &lt;td&gt;D4C3B2A1&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;HTML(html)&lt;/td&gt;
+          &lt;td&gt;68746D6C3E&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;用010editor举个例子：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/misc/2.png&#34;
+	width=&#34;870&#34;
+	height=&#34;371&#34;
+	srcset=&#34;https://expl0rer.top/p/misc/2_hu_748b12a18589730.png 480w, https://expl0rer.top/p/misc/2_hu_bbeb4fee030f708e.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;234&#34;
+		data-flex-basis=&#34;562px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;blockquote class=&#34;alert alert-note&#34;&gt;
+    &lt;blockquote&gt;
+&lt;p&gt;这里的文件头将贯穿你的MISC生涯，务必牢记这些文件头特征，以备不时之需！&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;h3 id=&#34;文件分离&#34;&gt;文件分离
+&lt;/h3&gt;&lt;p&gt;介绍了文件类型的识别方法了，接下来来讲一下文件分离。&lt;/p&gt;
+&lt;p&gt;文件分离的原因：&lt;/p&gt;
+&lt;p&gt;在 CTF 这个充满脑洞的比赛中，出题人往往会以一些稀奇古怪的出题方式出题，因此你可以常常看见暴打出题人等字眼出现在比赛论坛中。在 CTF 中一个文件中隐藏着另外其他文件的题目是经常有的。这就需要掌握文件分离的技巧来应对。下面介绍几种方法：&lt;/p&gt;
+&lt;h4 id=&#34;binwalk&#34;&gt;Binwalk
+&lt;/h4&gt;&lt;p&gt;工具介绍：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Binwalk&lt;/code&gt; 是一个自动提取文件系统，该工具可以自动完成指定文件的扫描，智能发掘潜藏在文件中所有可疑的文件类型及文件系统。相比于之前介绍的 file 命令行工具来说，file 只能把一个文件识别成一个类型的文件，很难看出是否隐藏着其他的文件，Binwalk 就能很好的完成这项任务。&lt;/p&gt;
+&lt;p&gt;建议在Linux安装，Windows安装不太建议，比较鸡肋而且还会有&lt;code&gt;电脑环境污染&lt;/code&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;后续你从事网安信安行业时，或者此时打CTF尤其是杂项这个方向，工具、脚本、环境配置特别多，一道MISC题用十个工具解答也不惊讶，而且稍不注意下载破解版、私人汉化的工具可能会挂马，导致计算机中毒！！，再者很多工具和环境都是要求Linux系统的，所以建议还是安装一台Kali或者Ubuntu虚拟机系统更好。&lt;/p&gt;
+&lt;p&gt;作者的MISC工具，忒多！！！&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/misc/6.png&#34;
+	width=&#34;860&#34;
+	height=&#34;485&#34;
+	srcset=&#34;https://expl0rer.top/p/misc/6_hu_fc82cdb2a32049c5.png 480w, https://expl0rer.top/p/misc/6_hu_b727bfc520fab572.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;图片隐写&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;177&#34;
+		data-flex-basis=&#34;425px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/misc/7.png&#34;
+	width=&#34;859&#34;
+	height=&#34;315&#34;
+	srcset=&#34;https://expl0rer.top/p/misc/7_hu_45e8d43e6e6269ad.png 480w, https://expl0rer.top/p/misc/7_hu_9ef7df27edf9feb4.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;其它隐写&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;272&#34;
+		data-flex-basis=&#34;654px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/misc/8.png&#34;
+	width=&#34;860&#34;
+	height=&#34;563&#34;
+	srcset=&#34;https://expl0rer.top/p/misc/8_hu_7e9525b56a7fd4d1.png 480w, https://expl0rer.top/p/misc/8_hu_d535684fb68bf709.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;编码解码&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;152&#34;
+		data-flex-basis=&#34;366px&#34;
+	
+&gt;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;binwalk如何安装？自行解决。&lt;/p&gt;
+&lt;p&gt;Binwalk命令分离misc文件（-e全名就是extract缩写）：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;binwalk -e misc
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;若提取成功则会生成一个文件名extracted的目录，目录中存放的就是提取出的文件。&lt;/p&gt;
+&lt;h4 id=&#34;foremost&#34;&gt;Foremost
+&lt;/h4&gt;&lt;p&gt;工具介绍：&lt;/p&gt;
+&lt;p&gt;foremost 该工具通过分析不同类型文件的头、尾和内部数据结构，同镜像文件的数据进行比对，以还原文件。它默认支持 19 种类型文件的恢复。用户还可以通过配置文件扩展支持其他文件类型。&lt;/p&gt;
+&lt;p&gt;有时候 binwalk 无法正确分离出文件，这时候就可以使用 foremost，将目标文件复制到 kali中，在终端中使用命令行进入文件所在文件夹，使用如下命令：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;foremost -o MISC
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;执行成功后会在目标文件的文件目录下生成我们设置的目录，目录有中按照文件类型分离出文件。&lt;/p&gt;
+&lt;h4 id=&#34;手动提取&#34;&gt;手动提取
+&lt;/h4&gt;&lt;p&gt;这个需要掌握！！在之前文件识别中提到这个工具，手动分离文件也可以使用这个工具拖动想要分离的部分。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/misc/3.png&#34;
+	width=&#34;915&#34;
+	height=&#34;605&#34;
+	srcset=&#34;https://expl0rer.top/p/misc/3_hu_8905bcf0983606ee.png 480w, https://expl0rer.top/p/misc/3_hu_559fba73bc43d3c7.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;151&#34;
+		data-flex-basis=&#34;362px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;右键-&amp;gt;选择-&amp;gt;保存选择。然后根据需要分离的文件类型选择后缀名。&lt;/p&gt;
+&lt;h4 id=&#34;文件提取小总结&#34;&gt;文件提取小总结
+&lt;/h4&gt;&lt;p&gt;凡事不要慌，binwalk+foremost 合体！&lt;/p&gt;
+&lt;h2 id=&#34;隐写术&#34;&gt;隐写术
+&lt;/h2&gt;&lt;h3 id=&#34;图片隐写术&#34;&gt;图片隐写术
+&lt;/h3&gt;&lt;p&gt;遇到图片隐写，直接binwalk+foremost连招。&lt;/p&gt;
+&lt;h4 id=&#34;lsb隐写&#34;&gt;LSB隐写
+&lt;/h4&gt;&lt;p&gt;LSB 隐写，也就是最低有效位 (Least Significant Bit)。图片中的像数一般是由三原色组成，由这三种原色可以组成其他各种颜色，例如在 PNG 图片的储存中，每个颜色会有 8bit，LSB 隐写就是修改了像数中的最低的 1bit，写入加密信息，而人眼无法注意到前后的变化。&lt;/p&gt;
+&lt;p&gt;例如此图看起只是六只环保色猪头，但是其中包含了一张隐藏的二维码，我们可以通过工具 Stegsolve.jar 打开此图，然后通过下方的按钮切换到 Gray bits，可以看到左上角出现了隐写在该通道的二维码，扫描二维码即可得到 flag。&lt;/p&gt;
+&lt;p&gt;这里取一张网上的MISC-WP的图例：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/misc/4.png&#34;
+	width=&#34;1055&#34;
+	height=&#34;316&#34;
+	srcset=&#34;https://expl0rer.top/p/misc/4_hu_87c2b19f9fbf3300.png 480w, https://expl0rer.top/p/misc/4_hu_fc76f70d10e912c5.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;333&#34;
+		data-flex-basis=&#34;801px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h4 id=&#34;文件格式缺失gif隐写&#34;&gt;文件格式缺失&amp;amp;GIF隐写
+&lt;/h4&gt;&lt;p&gt;一张名为“此为 gif 图片.gif”的文件，打开发现了报错。&lt;/p&gt;
+&lt;p&gt;我们将其拖入 winhex 中查看。在 CTF 中有的时候会需要我们去修复图片，这对我们对于图片的文件结构要有了解。找到 gif 的文件格式，然后对照破损的文件对其进行修复。我们可以用工具一帧一帧的观察图片，Stegsolve 就带有这种功能。&lt;/p&gt;
+&lt;p&gt;Stegsolve —&amp;gt; Analyse —&amp;gt; Frame Brower&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/misc/5.png&#34;
+	width=&#34;798&#34;
+	height=&#34;264&#34;
+	srcset=&#34;https://expl0rer.top/p/misc/5_hu_316f9e34110d49f7.png 480w, https://expl0rer.top/p/misc/5_hu_67e8ee51d2284bc9.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;stegsolve&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;302&#34;
+		data-flex-basis=&#34;725px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h4 id=&#34;图片隐写查看器stegsolve&#34;&gt;图片隐写查看器——stegsolve
+&lt;/h4&gt;&lt;p&gt;LSB 隐写、一帧一帧的观察图片，都使用到了这个工具：&lt;/p&gt;
+&lt;p&gt;今天做 CTF 隐写术的题偶然发现一隐写图片查看的神器&amp;mdash;&amp;mdash;stegsolve，分享给大家stegsolve 下载地址：http://www.caesum.com/handbook/Stegsolve.jar&lt;/p&gt;
+&lt;p&gt;stegsolve 安装配置：配置好 Java 环境变量（就是需要安装 Java，然后配环境变量，具体的配置过程上网一搜一堆，这里就不赘述）配置好环境之后直接打开就可以使用😄。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/misc/5.png&#34;
+	width=&#34;798&#34;
+	height=&#34;264&#34;
+	srcset=&#34;https://expl0rer.top/p/misc/5_hu_316f9e34110d49f7.png 480w, https://expl0rer.top/p/misc/5_hu_67e8ee51d2284bc9.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;stegsolve&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;302&#34;
+		data-flex-basis=&#34;725px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;上面是软件打开的界面，界面简单。主要供能为 analyse，下面对 Analyse 下面几个功能键作简单介绍：&lt;/p&gt;
+&lt;p&gt;File Format:文件格式，这个主要是查看图片的具体信息；&lt;/p&gt;
+&lt;p&gt;Data Extract:数据抽取，图片中隐藏数据的抽取；&lt;/p&gt;
+&lt;p&gt;Frame Browser:帧浏览器，主要是对 GIF 之类的动图进行分解，动图变成一张张图片，便于查看；&lt;/p&gt;
+&lt;p&gt;Image Combiner:拼图，图片拼接。&lt;/p&gt;
+&lt;h3 id=&#34;音视频隐写术&#34;&gt;音视频隐写术
+&lt;/h3&gt;&lt;p&gt;**音频相关的 CTF 题目主要使用的隐写策略，主要分为 MP3隐写、LSB隐写、波形隐写、频谱隐写等。&lt;/p&gt;
+&lt;p&gt;使用的工具：&lt;/p&gt;
+&lt;p&gt;● Audacity，ocenaudio 音频编辑的工具软件；&lt;/p&gt;
+&lt;p&gt;● Mp3stego 将需要加密的数据压缩加密隐藏在 MP3 文件中；&lt;/p&gt;
+&lt;p&gt;● video to Picture 可以将视频的每帧提转换成图片；&lt;/p&gt;
+&lt;p&gt;● QR Research ctf 中常用的二维码识别软件；&lt;/p&gt;
+&lt;p&gt;● mageMagick 是一个免费的创建、编辑、合成图片的软件。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/misc/9.png&#34;
+	width=&#34;785&#34;
+	height=&#34;336&#34;
+	srcset=&#34;https://expl0rer.top/p/misc/9_hu_3e82b0718561578d.png 480w, https://expl0rer.top/p/misc/9_hu_d71f047ae957f19d.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;摩斯密码表&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;233&#34;
+		data-flex-basis=&#34;560px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/misc/10.png&#34;
+	width=&#34;1265&#34;
+	height=&#34;172&#34;
+	srcset=&#34;https://expl0rer.top/p/misc/10_hu_b0cab265bb022d2c.png 480w, https://expl0rer.top/p/misc/10_hu_948ea8948cc28712.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;频谱隐写的摩斯密码解码&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;735&#34;
+		data-flex-basis=&#34;1765px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;除了摩斯密码还有SSTV等等，可以上网搜。&lt;/p&gt;
+&lt;h4 id=&#34;mp3隐写术&#34;&gt;MP3隐写术
+&lt;/h4&gt;&lt;p&gt;MP3 隐写两种方式：&lt;/p&gt;
+&lt;p&gt;第一种：题目中给了密码了，用 mp3stego 去解密；&lt;/p&gt;
+&lt;p&gt;第二种：如果在题目中没有给 key，而附件只给了一个 MP3，那就有可是用 mp3stego 隐藏的数据，也有可能是在音轨的频谱中隐藏了数据。&lt;/p&gt;
+&lt;p&gt;MP3 隐写主要是使用 Mp3Stego 工具进行隐写，使用方法如下：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;encode -E hidden_text.txt -P pass svega.wavsvega_stego.mp3
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;演示图例暂不提供，详细了解可以自行参考其他大佬的MISC-WP。&lt;/p&gt;
+&lt;h4 id=&#34;频谱隐写&#34;&gt;频谱隐写
+&lt;/h4&gt;&lt;p&gt;频谱隐写：音频中的频谱隐写是将字符串隐藏在频谱中，此类音频通常会有一个较明显的特征，听起来是一段杂音或者比较刺耳。比如这题moectf2025—安全杂项的“捂住一只耳”，我们使用 audacity 打开。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/misc/11.png&#34;
+	width=&#34;1139&#34;
+	height=&#34;679&#34;
+	srcset=&#34;https://expl0rer.top/p/misc/11_hu_76d506a511303b38.png 480w, https://expl0rer.top/p/misc/11_hu_5af3f53bd7d2a07a.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;粒子艺术&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;167&#34;
+		data-flex-basis=&#34;402px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;这道题听起来就不对劲，一只耳有滴滴嘟嘟的电频声。&lt;/p&gt;
+&lt;p&gt;分离并掐头去尾：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/misc/12.png&#34;
+	width=&#34;1910&#34;
+	height=&#34;375&#34;
+	srcset=&#34;https://expl0rer.top/p/misc/12_hu_689f8570f81b78e0.png 480w, https://expl0rer.top/p/misc/12_hu_24457365e9845782.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;509&#34;
+		data-flex-basis=&#34;1222px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;最好我们拿去解密就好了。&lt;/p&gt;
+&lt;p&gt;当然还有另外一种：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/misc/13.png&#34;
+	width=&#34;1259&#34;
+	height=&#34;625&#34;
+	srcset=&#34;https://expl0rer.top/p/misc/13_hu_ff90af01176166f5.png 480w, https://expl0rer.top/p/misc/13_hu_de6f6f95180b0519.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;频谱隐写&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;201&#34;
+		data-flex-basis=&#34;483px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;压缩包解密&#34;&gt;压缩包解密
+&lt;/h2&gt;&lt;p&gt;压缩包有时候给到你时会设置密码不给你打开，也有可能是伪加密也可能是真加密。&lt;/p&gt;
+&lt;p&gt;通用方法：&lt;/p&gt;
+&lt;p&gt;1、用 winhex/010editor 打开，搜索字符 pass 、 key 、ctf、flag等，查看是否有含有压缩包密码；&lt;/p&gt;
+&lt;p&gt;2、如果要爆破：先 0-6 位数字来一遍；&lt;/p&gt;
+&lt;p&gt;3、如果爆破不成功可以根据题意或者社工 猜密码组合。例如某用户名叫王方，密码就有可能是 wangfang123；&lt;/p&gt;
+&lt;p&gt;4、伪加密；&lt;/p&gt;
+&lt;p&gt;5、明文攻击；&lt;/p&gt;
+&lt;p&gt;6、CRC32 爆破。&lt;/p&gt;
+&lt;h3 id=&#34;压缩包伪加密&#34;&gt;压缩包伪加密
+&lt;/h3&gt;&lt;p&gt;zip 文件是由 3 部分组成&lt;/p&gt;
+&lt;p&gt;压缩源文件数据区+压缩源文件目录区+压缩源文件目录结束标志。&lt;/p&gt;
+&lt;p&gt;在压缩源文件数据区有个 2 字节的全局方式位标记，在压缩源文件目录区也有个 2 字节的全局方式位标记，都用以标记是否加密，如下图（搬运）:&lt;/p&gt;
+&lt;img src=&#34;14.png&#34; style=&#34;zoom:150%;&#34; /&gt;
+&lt;hr&gt;
+&lt;img src=&#34;15.png&#34; style=&#34;zoom:120%;&#34; /&gt;
+&lt;p&gt;若是没有加密的 zip,两处标记都是 00 00&lt;/p&gt;
+&lt;img src=&#34;16.png&#34; style=&#34;zoom:120%;&#34; /&gt;
+&lt;p&gt;加密的 zip 两次都不是 00 00,好像不同版本的压缩软件或是算法,这里的值会不同,我看之前网上多见的是 09 00&lt;/p&gt;
+&lt;img src=&#34;17.png&#34; style=&#34;zoom:120%;&#34; /&gt;
+&lt;p&gt;若把未加密的 zip 压缩源文件目录区的全局方式位标记改为 01 00 (或者 09 00),就会被压缩软件认为是已加密,即所谓的伪加密：&lt;/p&gt;
+&lt;img src=&#34;18.png&#34; style=&#34;zoom:120%;&#34; /&gt;
+&lt;p&gt;破解伪加密的 zip,只要把压缩源文件目录区的全局方式位标记改为 00 00 即可解压。&lt;/p&gt;
+&lt;h3 id=&#34;crc32碰撞&#34;&gt;CRC32碰撞
+&lt;/h3&gt;&lt;p&gt;CRC 校验实用程序库 在数据存储和数据通讯领域，为了保证数据的正确，就不得不采用检错的手段。在诸多检错手段中，CRC 是最著名的一种。CRC 的全称是循环冗余校验。&lt;/p&gt;
+&lt;p&gt;总之每个文件都有唯一的 CRC32 值，即便数据中一个 bit 发生变化，也会导致 CRC32 值不同。若是知道一段数据的长度和 CRC32 值，便可穷举数据，与其 CRC32 对照，以此达到暴力猜解的目的。但通常只适用于较小文本文件。&lt;/p&gt;
+&lt;p&gt;比如这里有一个加密的 rar，直接双击就可以看见其中信息，而且我知道其中全是数字，便可写脚本爆破！&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/misc/19.png&#34;
+	width=&#34;1390&#34;
+	height=&#34;426&#34;
+	srcset=&#34;https://expl0rer.top/p/misc/19_hu_31f6912850ad9296.png 480w, https://expl0rer.top/p/misc/19_hu_714da3a109720855.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;样例&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;326&#34;
+		data-flex-basis=&#34;783px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;自己可用python手搓或者AI写都可以。&lt;/p&gt;
+&lt;h3 id=&#34;已知明文攻击即crc32-爆破&#34;&gt;已知明文攻击即CRC32 爆破
+&lt;/h3&gt;&lt;p&gt;所谓明文攻击就是已经通过其他手段知道 zip 加密文件中的某些内容，比如在某些网站上发现它的 readme.txt 文件，或者其他文件，这时就可以尝试破解了，例如我今天刚做了一个明文攻击的小题目：&lt;/p&gt;
+&lt;p&gt;源文件是：明文攻击.zip,但是一看发现 zip 文件里面有一个之前看到过的 hash.exe，和一些其他加密文件，所以就将已经拥有的 hash.exe 压缩成 zip，注意打包完成后，需要确认二者采用的压缩算法相同。一个简单的判断方法是用 winRAR 打开文件，同一个文件压缩后的体积是否相同。如果基本相同，并且 crc32 也必须相同，可以说明你用的压缩算法是正确的。如果不同，就尝试另一种压缩算法。&lt;/p&gt;
+&lt;p&gt;接下来就用神器 archpr 进行明文破解。&lt;/p&gt;
+&lt;p&gt;如果得到了加密压缩包中的某个文件，那么就可以通过明文攻击来获取压缩密码：&lt;/p&gt;
+&lt;img src=&#34;20.png&#34; style=&#34;zoom:150%;&#34; /&gt;
+&lt;img src=&#34;22.png&#34; style=&#34;zoom:150%;&#34; /&gt;
+&lt;h3 id=&#34;直接爆破&#34;&gt;直接爆破
+&lt;/h3&gt;&lt;p&gt;AccentRPR 利用了 GPU 爆破，速度还是比较快的。&lt;/p&gt;
+&lt;p&gt;1、暴力：选择密码范围,长度等,由软件组合生成密码进行爆破；&lt;/p&gt;
+&lt;p&gt;2、掩码：知道密码中的一部分,只需按规则构造其余部分；&lt;/p&gt;
+&lt;p&gt;3、字典:通常是多数用户常用的一些密码集合,导入字典文件用其中的密码进行爆破。&lt;/p&gt;
+&lt;p&gt;我还是建议使用上图的ARCHPR。&lt;/p&gt;
+&lt;p&gt;文件爆破工具就这么多&amp;hellip;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/misc/21.png&#34;
+	width=&#34;865&#34;
+	height=&#34;310&#34;
+	srcset=&#34;https://expl0rer.top/p/misc/21_hu_61b99e3ced40e17c.png 480w, https://expl0rer.top/p/misc/21_hu_7c6d005245d8315e.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;暴力破解工具&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;279&#34;
+		data-flex-basis=&#34;669px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;misc总结&#34;&gt;MISC总结
+&lt;/h2&gt;&lt;p&gt;杂项的学习重在广泛学习，重在积累，很多题目的解题思路来的很微妙，要的就是那一种“直觉”、“做题敏感度”那样，比较像抽象数学题一样，思路来源很微妙。&lt;/p&gt;
+&lt;p&gt;在这里把我入门MISC杂项的那几份writeup放出来，各位可以看看我的做题思路如何？😄做的差请原谅&amp;hellip;&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>
