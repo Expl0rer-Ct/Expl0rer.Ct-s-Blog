@@ -10,7 +10,7 @@
 <meta property='og:description' content="二进制漏洞与利用，PWN入门_wrtieup，会员套餐360题">
 <meta property='og:url' content='https://expl0rer.top/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/'>
 <meta property='og:site_name' content='Expl0rer.Ct'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-08-27T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-10-09T00:18:47&#43;08:00'/><meta property='og:image' content='https://expl0rer.top/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/ctfshow.png' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-08-27T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-10-29T00:51:17&#43;08:00'/><meta property='og:image' content='https://expl0rer.top/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/ctfshow.png' />
 <meta name="twitter:title" content="CTFshow-入门PWN-writeup">
 <meta name="twitter:description" content="二进制漏洞与利用，PWN入门_wrtieup，会员套餐360题"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://expl0rer.top/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/ctfshow.png' />
@@ -628,6 +628,25 @@
             </a>
         </li>
         
+        
+        <li >
+            <a href='/friends-links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友情链接 | Friends Links</span>
+            </a>
+        </li>
+        
         <li class="menu-bottom-section">
             <ol class="menu">
 
@@ -1077,7 +1096,8 @@ unicode: "ece7"
 <p>看到这里有个疑问，为什么system有这么大威力？，这次system里边是一个/bin/sh的软链接，很类似我们的文件地址</p>
 <blockquote class="alert alert-note">
     <blockquote>
-<p><code>system(&quot;/bin/sh&quot;);</code> 是漏洞利用中获取系统 shell 的核心操作，其工作原理涉及<strong>函数调用</strong>、<strong>系统调用</strong>和<strong>进程创建</strong>三个层次，本质是通过标准库函数 <code>system</code> 启动一个 <code>/bin/sh</code> 进程（即命令行解释器），让攻击者获得交互权限。</p></blockquote></blockquote>
+<p><code>system(&quot;/bin/sh&quot;);</code> 是漏洞利用中获取系统 shell 的核心操作，其工作原理涉及<strong>函数调用</strong>、<strong>系统调用</strong>和<strong>进程创建</strong>三个层次，本质是通过标准库函数 <code>system</code> 启动一个 <code>/bin/sh</code> 进程（即命令行解释器），让攻击者获得交互权限。</p>
+</blockquote></blockquote>
 <p><code>system</code> 是 C 标准库（libc）中的函数，原型为：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1089,13 +1109,15 @@ unicode: "ece7"
 </div>
 </div><blockquote class="alert alert-error">
     <blockquote>
-<p>它的功能是<strong>执行参数 <code>command</code> 指向的字符串作为系统命令</strong>，相当于在终端中输入该命令并执行。</p></blockquote></blockquote>
+<p>它的功能是<strong>执行参数 <code>command</code> 指向的字符串作为系统命令</strong>，相当于在终端中输入该命令并执行。</p>
+</blockquote></blockquote>
 <p>system()函数先fork一个子进程，在这个子进程中调用/bin/sh -c来执行command指定的命令。/bin/sh在系统中一般是个软链接，指向dash或者bash等常用的shell，-c选项是告诉shell从字符串command中读取要执行的命令（shell将扩展command中的任何特殊字符）。父进程则调用waitpid()函数来为变成僵尸的子进程收尸，获得其结束状态，然后将这个结束状态返回给system()函数的调用者。</p>
 <blockquote class="alert alert-note">
     <blockquote>
 <p><code>system(&quot;/bin/sh&quot;)</code> 的工作原理可简化为：
 <strong>通过 <code>system</code> 函数创建子进程 → 子进程执行 <code>/bin/sh</code> 程序 → 启动交互式 shell 环境</strong>。</p>
-<p>这也是漏洞利用中最常用的<strong>获取权限</strong>的方式 —— 无论通过栈溢出、ROP 还是 ret2libc，最终目标都是让程序执行这条语句（或等效的系统调用）。</p></blockquote></blockquote>
+<p>这也是漏洞利用中最常用的<strong>获取权限</strong>的方式 —— 无论通过栈溢出、ROP 还是 ret2libc，最终目标都是让程序执行这条语句（或等效的系统调用）。</p>
+</blockquote></blockquote>
 <h3 id="pwn_003">PWN_003
 </h3><p>题目： <a class="link" href="PWN_003" >PWN_003</a> 哪一个函数才能读取flag？</p>
 <p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/9.png"
@@ -1374,7 +1396,8 @@ unicode: "ece7"
 <p>这题开始就有点变样了，“Welcome_to_CTFshow.asm”这文件是一个存放汇编语言的文本文件，需要运行一下转换成像exe这样的可执行文件，在PWN-1讲过elf文件：</p>
 <blockquote class="alert alert-note">
     <blockquote>
-<p>将汇编语言（.asm）文件转换为可执行文件，需要经过<strong>汇编（Assemble）</strong> 和<strong>链接（Link）</strong> 两个核心步骤.</p></blockquote></blockquote>
+<p>将汇编语言（.asm）文件转换为可执行文件，需要经过<strong>汇编（Assemble）</strong> 和<strong>链接（Link）</strong> 两个核心步骤.</p>
+</blockquote></blockquote>
 <p>在Kali/Linux上下载nasm编辑器：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1462,7 +1485,8 @@ unicode: "ece7"
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ld -m elf_i386 -s -o Welcome_to_CTFshow1 Welcome_to_CTFshow.o
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>（Welcome_to_CTFshow1是可执行文件）</p></blockquote>
+</div><p>（Welcome_to_CTFshow1是可执行文件）</p>
+</blockquote>
 <p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/22.png"
 	width="618"
 	height="155"
@@ -2488,7 +2512,8 @@ unicode: "ece7"
 </div>
 </div><blockquote>
 <p>如果之前是打逆向或者强行入门PWN的话，最坐牢的我相信应该是用IDA吧，除了找明文字符串flag外，你学了汇编语言你也看不懂这是啥意思，感觉一小串源代码转换成汇编语言非常长、枯燥，其实UP主也深有体会，在系统性入门后，也初步知道IDA是怎么用的，这里我把下划线“===== S U B R O U T I N E =====”也复制进来了，按我理解这是函数分界，分隔线上方是前一个函数的结尾（通常以<code>retn</code>指令结束，代表函数返回）过了这条线，说明汇编语言在描述的就是另外一个函数了。也就是说这上下分界线是代表囊括着一个函数，例如这ctfshow函数。</p>
-<p>另外我想说的是汇编语言这么长是有道理的，它更像是一种“啰嗦”，它能在每一段代码运行后不断向你汇报地址变化，这种 “啰嗦” 本质上是<strong>对计算机底层操作的直接映射</strong>，这种特性确实让它在跟踪程序运行细节、分析逻辑和排查问题时具有独特优势。</p></blockquote>
+<p>另外我想说的是汇编语言这么长是有道理的，它更像是一种“啰嗦”，它能在每一段代码运行后不断向你汇报地址变化，这种 “啰嗦” 本质上是<strong>对计算机底层操作的直接映射</strong>，这种特性确实让它在跟踪程序运行细节、分析逻辑和排查问题时具有独特优势。</p>
+</blockquote>
 <p>从这里开始就要用pwntools了，这里介绍一下：</p>
 <blockquote class="alert alert-note">
     <blockquote>
@@ -2511,14 +2536,16 @@ unicode: "ece7"
 <h4 id="密码学相关辅助">密码学相关辅助
 </h4><p>在 CTF 中，有时会涉及密码学题目，<code>pwntools</code> 也提供了一些基础的密码学辅助功能，比如常见加密算法的简单实现、编码解码等。</p>
 <h4 id="多线程和异步支持">多线程和异步支持
-</h4><p><code>pwntools</code> 一定程度上支持多线程和异步操作，这在同时与多个目标程序交互，或者需要在等待程序输出的同时执行其他任务时非常有用。</p></blockquote></blockquote>
+</h4><p><code>pwntools</code> 一定程度上支持多线程和异步操作，这在同时与多个目标程序交互，或者需要在等待程序输出的同时执行其他任务时非常有用。</p>
+</blockquote></blockquote>
 <p>所以为啥要学<a class="link" href="https://expl0rer.top/p/python/"  target="_blank" rel="noopener"
     >Python</a>，当然能用<a class="link" href="https://www.doubao.com/chat/?from_logout=1"  target="_blank" rel="noopener"
     >豆包</a>、<a class="link" href="https://www.deepseek.com/"  target="_blank" rel="noopener"
     >DeepSeek</a>之类的AI帮你写代码exp，但你得先了解<a class="link" href="https://expl0rer.top/p/python/"  target="_blank" rel="noopener"
     >Python</a>再让它写才对的，有时会出错，你得有判断力。</p>
 <blockquote>
-<p>这里推荐使用Pycharm、Visual Studio Code；或者你可以在Kali上用终端来运行，这样你在Kali用nc连接靶机时在同一系统运行交互比较方便，当然Pycharm、Visual Studio Code也有终端功能，只不过要配PWN环境稍微麻烦而已，看你习不习惯用Linux系统吧。</p></blockquote>
+<p>这里推荐使用Pycharm、Visual Studio Code；或者你可以在Kali上用终端来运行，这样你在Kali用nc连接靶机时在同一系统运行交互比较方便，当然Pycharm、Visual Studio Code也有终端功能，只不过要配PWN环境稍微麻烦而已，看你习不习惯用Linux系统吧。</p>
+</blockquote>
 <h4 id="题目后续">题目后续：
 </h4><p>讲得比较啰嗦，这里开始分析这段汇编代码（重新粘贴了一遍，和上面一样）：</p>
 <div class="highlight"><div class="chroma">
@@ -2746,7 +2773,8 @@ unicode: "ece7"
 </div>
 </div><blockquote class="alert alert-note">
     <blockquote>
-<p>这 7 行代码通过精准设置寄存器和栈数据，完成了<code>execve</code>系统调用的参数准备，最终实现 “用<code>/bin/sh</code>替换当前进程” 的效果，是 CTF 中获取 shell 的基础手段，逻辑清晰且精简（仅 23 字节）。</p></blockquote></blockquote>
+<p>这 7 行代码通过精准设置寄存器和栈数据，完成了<code>execve</code>系统调用的参数准备，最终实现 “用<code>/bin/sh</code>替换当前进程” 的效果，是 CTF 中获取 shell 的基础手段，逻辑清晰且精简（仅 23 字节）。</p>
+</blockquote></blockquote>
 <h4 id="逐行解析手敲shellcode">逐行解析手敲shellcode
 </h4><p>思路：注入一段能执行/bin/sh的汇编语言代码</p>
 <p>① <code>mov eax, 0xb</code></p>
@@ -2944,7 +2972,8 @@ unicode: "ece7"
 <li><strong>计算关键地址</strong>：根据泄漏出的 <code>libc</code> 函数地址，计算出 <code>system</code> 函数地址和 <code>/bin/sh</code> 字符串在内存中的地址。由于 <code>libc</code> 中函数和字符串的相对位置固定，所以可以通过已知函数地址与偏移量来计算其他关键地址。</li>
 <li><strong>构造 payload</strong>：再次利用栈溢出漏洞，构造合适的 payload。payload 一般包含填充数据（用于填满缓冲区直到覆盖返回地址）、<code>system</code> 函数地址（覆盖返回地址，使程序返回时跳转到 <code>system</code> 函数）、一个无效的返回地址（<code>system</code> 函数执行完后要返回的地址，随便填充一个地址，因为获取到 shell 后通常不会再关注这个返回操作 ）、<code>/bin/sh</code> 字符串的地址（作为 <code>system</code> 函数的参数，这样 <code>system</code> 函数执行时就相当于执行了 <code>system(&quot;/bin/sh&quot;)</code> ，从而打开一个 shell ）。</li>
 <li><strong>发送 payload</strong>：将构造好的 payload 发送给存在漏洞的程序，使程序按照攻击者期望的流程执行，最终获取到一个交互式 shell，达到漏洞利用的目的。</li>
-</ol></blockquote>
+</ol>
+</blockquote>
 <p>checksec一下，发现开了NX保护，也就是说不能用shellcode了。</p>
 <p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/68.png"
 	width="746"
@@ -3043,11 +3072,13 @@ unicode: "ece7"
 <li>读取泄露出的write@got的地址，用 libcSearcher 库查找正确的 libc 版本，再计算偏移。</li>
 <li>计算system函数和/bin/sh字符串的真实地址。</li>
 <li>继续从ctfshow函数里的栈溢出作为入口，跳转到system函数真实地址，同时将/bin/sh作为参数传入，从而拿到权限。</li>
-</ol></blockquote>
+</ol>
+</blockquote>
 <blockquote>
 <p>这里之前我是跳过的，比较难，我做到PWN_044之后才倒回来做的。</p>
 <p>PWN044 的利用逻辑是 “先调用 <code>gets</code> 向 <code>bss</code> 段写入 <code>/bin/sh</code>，再调用 <code>system</code> 执行”（类似文档中 PWN044 的 <code>gets</code> 调用场景）。此时调用 <code>gets</code> 仅需其 “函数入口” 即可完成数据写入，无需知道 <code>gets</code> 在 <code>libc</code> 中的真实地址 —— 直接使用 <code>gets</code> 的 PLT 表地址（<code>p32(gets)</code> 本质是 <code>p32(gets_plt)</code>），就能触发 <code>gets</code> 执行，实现写入 <code>/bin/sh</code> 的目标。这就是为什么在PWN_044是直接是p32(gets)，而在这调用write函数是要分.got和.plt，因为它俩功能都不同。</p>
-<p><code>write_plt</code> 负责 “触发 <code>write</code> 执行”，<code>write_got</code> 负责 “提供待泄露的真实地址”，二者缺一不可，因此必须明确区分。</p></blockquote>
+<p><code>write_plt</code> 负责 “触发 <code>write</code> 执行”，<code>write_got</code> 负责 “提供待泄露的真实地址”，二者缺一不可，因此必须明确区分。</p>
+</blockquote>
 <p><strong>总之：ret2libc 核心逻辑：“泄露地址→计算地址→构造调用”</strong></p>
 <p>exp备注版：</p>
 <div class="highlight"><div class="chroma">
@@ -4132,7 +4163,8 @@ unicode: "ece7"
 <blockquote class="alert alert-error">
     <blockquote>
 <p>gets 读取函数是非常不安全的，容易导致缓冲区溢出漏洞。因为它无法限制输入的长度，可能会超出s 数组的容量，导致覆盖栈上的其他数据或执行任意代码。这也是明显的栈溢出漏洞，s距ebp仅有0x28，而gets不限制输入长度。</p>
-<p>安全性来看一般都会用fgets函数，搭配<strong>FORTIFY 缓冲区边界检查</strong>来提高程序自身安全性。</p></blockquote></blockquote>
+<p>安全性来看一般都会用fgets函数，搭配<strong>FORTIFY 缓冲区边界检查</strong>来提高程序自身安全性。</p>
+</blockquote></blockquote>
 <p>exp：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -4319,7 +4351,8 @@ unicode: "ece7"
 ></p>
 <blockquote class="alert alert-note">
     <blockquote>
-<p>64 位程序调用 <code>system</code> 需考虑堆栈平衡，本质是 <strong>64 位 ABI 对 “栈对齐” 的硬性要求</strong>—— 若不满足，函数执行时访问栈内存会崩溃；而 32 位 ABI 无此要求，仅需调用后清理参数栈即可，因此无需额外关注平衡。</p></blockquote></blockquote>
+<p>64 位程序调用 <code>system</code> 需考虑堆栈平衡，本质是 <strong>64 位 ABI 对 “栈对齐” 的硬性要求</strong>—— 若不满足，函数执行时访问栈内存会崩溃；而 32 位 ABI 无此要求，仅需调用后清理参数栈即可，因此无需额外关注平衡。</p>
+</blockquote></blockquote>
 <p>所以说exp需要考虑到堆栈平衡加上ret返回地址：</p>
 <p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/113.png"
 	width="1198"
@@ -4585,7 +4618,8 @@ unicode: "ece7"
 <ul>
 <li><strong>32 位程序（PWN039）</strong>：32 位程序中，函数参数通过栈传递。在 PWN039 里，<code>system</code>函数地址紧跟在填充数据之后，这是因为溢出后直接覆盖返回地址为<code>system</code>函数地址，让程序执行<code>system</code>函数。在<code>payload = 'a'*(0x12 + 4) + p32(system) + p32(0) + p32(bin_sh)</code>中，<code>'a'*(0x12 + 4)</code>用于填充缓冲区并覆盖原返回地址，<code>p32(system)</code>将返回地址修改为<code>system</code>函数地址 ，<code>p32(0)</code>是为了满足栈结构，作为<code>system</code>函数执行后的返回地址（实际执行中并不重要，可随意填充 4 字节），<code>p32(bin_sh)</code>则是<code>system</code>函数的参数，即<code>/bin/sh</code>字符串的地址。这样的顺序符合 32 位程序通过栈传参和控制程序执行流的特点。</li>
 <li><strong>64 位程序（PWN40）</strong>：64 位程序的函数调用规则有所不同，前 6 个参数优先通过寄存器传递，其中第一个参数存放在<code>rdi</code>寄存器。在 PWN40 中，<code>payload = 'a'*(0xA + 8) + p64(pop_rdi) + p64(bin_sh) + p64(ret) + p64(system)</code> ，<code>'a'*(0xA + 8)</code>用于填充缓冲区和覆盖原返回地址；<code>p64(pop_rdi)</code>将<code>pop_rdi</code>指令地址放入栈中，执行<code>pop_rdi</code>指令时，会把紧跟其后的<code>p64(bin_sh)</code>中的<code>/bin/sh</code>地址弹出到<code>rdi</code>寄存器，作为<code>system</code>函数的第一个参数；<code>p64(ret)</code>用于栈对齐（64 位程序调用函数前需要保证栈 16 字节对齐，<code>ret</code>指令可调整栈指针）；最后<code>p64(system)</code>将<code>system</code>函数地址放入栈中，当程序执行到这里时，会跳转到<code>system</code>函数执行，此时<code>rdi</code>寄存器中已正确设置了参数<code>/bin/sh</code>的地址。</li>
-</ul></blockquote></blockquote>
+</ul>
+</blockquote></blockquote>
 <h3 id="pwn_041">PWN_041
 </h3><h4 id="题目-1">题目：
 </h4><p>32位的 system(); 但是没&quot;/bin/sh&quot; ，好像有其他的可以替代。 <a class="link" href="PWN_041" >PWN_041</a></p>
@@ -4642,7 +4676,8 @@ unicode: "ece7"
 <li>用 <code>sh</code> 会因 <code>$PATH</code> 中找不到 <code>sh</code> 而失败；</li>
 <li>用 <code>/bin/sh</code> 因是绝对路径，不受 <code>$PATH</code> 影响，依然能成功执行。</li>
 </ul>
-<p>PWN 利用中为了「兼容性和稳定性」，即使是 <code>system</code> 函数，也更推荐写 <code>/bin/sh</code> 而非 <code>sh</code>（避免因环境变量异常导致利用失败）。</p></blockquote></blockquote>
+<p>PWN 利用中为了「兼容性和稳定性」，即使是 <code>system</code> 函数，也更推荐写 <code>/bin/sh</code> 而非 <code>sh</code>（避免因环境变量异常导致利用失败）。</p>
+</blockquote></blockquote>
 <p>这里跟进hint函数：</p>
 <p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/125.png"
 	width="838"
@@ -4979,10 +5014,12 @@ unicode: "ece7"
 <p><code>gets</code> 执行完后的总偏移是 44 字节（36+8）。</p>
 <p>后续执行 <code>pop_rdi</code>（8 字节）+ <code>buf2</code> 地址（8 字节）后，总偏移变为 44+8+8=60 字节。</p>
 <p>60 字节 ÷ 16 字节 = 3 余 12？不对 —— 此时调用 <code>system</code> 前，<code>rsp</code> 指向 <code>system</code> 函数的地址，而 <code>60 + 8</code>（<code>system</code> 地址本身）= 68 字节，68 ÷ 16 = 4 余 4？这显然不对。</p>
-<p><strong>正确理解</strong>：不用纠结静态数字，而是要看到 <code>gets</code> 的执行引入了一次 “额外的栈弹出”（8 字节），恰好抵消了部分偏移的 “非对齐量”，使得最终调用 <code>system</code> 时，<code>rsp</code> 刚好落在 16 字节对齐的地址上 —— 这是<em>动态执行</em>中栈自然调整的结果，而非静态计算的总和。</p></blockquote>
+<p><strong>正确理解</strong>：不用纠结静态数字，而是要看到 <code>gets</code> 的执行引入了一次 “额外的栈弹出”（8 字节），恰好抵消了部分偏移的 “非对齐量”，使得最终调用 <code>system</code> 时，<code>rsp</code> 刚好落在 16 字节对齐的地址上 —— 这是<em>动态执行</em>中栈自然调整的结果，而非静态计算的总和。</p>
+</blockquote>
 <blockquote class="alert alert-note">
     <blockquote>
-<p>在 64 位 PWN 题中，“动态对齐” 是否需要加 <code>ret</code>，核心看 <strong>“中间是否有函数执行并自动调整栈指针”</strong>。</p></blockquote></blockquote>
+<p>在 64 位 PWN 题中，“动态对齐” 是否需要加 <code>ret</code>，核心看 <strong>“中间是否有函数执行并自动调整栈指针”</strong>。</p>
+</blockquote></blockquote>
 <p>正确的exp：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -5093,7 +5130,7 @@ unicode: "ece7"
 </span></span><span class="line"><span class="cl"><span class="n">write_got</span> <span class="o">=</span> <span class="n">elf</span><span class="o">.</span><span class="n">got</span><span class="p">[</span><span class="s1">&#39;write&#39;</span><span class="p">]</span>
 </span></span><span class="line"><span class="cl"><span class="n">write_plt</span> <span class="o">=</span> <span class="n">elf</span><span class="o">.</span><span class="n">plt</span><span class="p">[</span><span class="s1">&#39;write&#39;</span><span class="p">]</span>
 </span></span><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">=</span> <span class="n">cyclic</span><span class="p">(</span><span class="mh">0x6b</span><span class="o">+</span><span class="mi">4</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">write_plt</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">main</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">write_got</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s1">&#39;O.o?&#39;</span><span class="p">)</span>  <span class="c1">#等程序发送这字符串蔡发送第一份payload</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s1">&#39;O.o?&#39;</span><span class="p">)</span>  <span class="c1">#等程序发送这字符串再发送第一份payload</span>
 </span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
 </span></span></code></pre></td></tr></table>
 </div>
@@ -5505,7 +5542,8 @@ unicode: "ece7"
 <li>调用 <code>sys_mprotect</code>：这是真正的内核级系统调用（用户态到内核态的桥梁），负责实际执行内存权限修改操作。</li>
 <li>错误处理：<code>sys_mprotect</code> 的返回值若 <code>&gt;= 0xFFFFF001</code>（这是 Unix/Linux 中系统调用错误码的典型范围，通常表示操作失败），则通过 <code>_syscall_error()</code> 处理错误（例如设置 <code>errno</code> 并返回错误码）。</li>
 <li>成功返回：若系统调用成功，直接返回 <code>sys_mprotect</code> 的结果（通常为 0）。</li>
-</ul></blockquote>
+</ul>
+</blockquote>
 <p>这段代码是用户态 <code>mprotect</code> 函数的封装，本质是通过调用内核的 <code>sys_mprotect</code> 系统调用来实现功能，最终目的是：</p>
 <p><strong>允许进程动态修改某段内存的读写执行权限</strong>（例如将只读内存改为可写，或给数据段添加执行权限），常用于内存管理、动态代码加载、漏洞利用等场景。</p>
 <p>简单说，这段代码是用户程序与内核交互的 “中间层”，让开发者可以通过简单的函数调用修改内存权限，而无需直接操作内核接口。</p>
@@ -5629,7 +5667,8 @@ unicode: "ece7"
 <p>其实你可以发现这也是ret2shellcode的其中一种，只不过多加了mprotect函数控制流程罢了。</p>
 <blockquote class="alert alert-note">
     <blockquote>
-<p>整个流程的核心逻辑就是通过栈溢出构建 “函数调用链”，逐步完成 “开权限→写代码→执行代码” 的攻击流程。</p></blockquote></blockquote>
+<p>整个流程的核心逻辑就是通过栈溢出构建 “函数调用链”，逐步完成 “开权限→写代码→执行代码” 的攻击流程。</p>
+</blockquote></blockquote>
 <p>对于这道题而言对我感触比较深，加深我对寄存器、gadget、整个函数调用流程、参数传递过程的理解！如果你觉得很难而跳过，那你就错过了一次PWN入门者的提升机会，博主当时啃这题花了快两天时间，凌晨才写完这题的writeup呢，花点耐心去学，PWNer！</p>
 <h3 id="pwn_050">PWN_050
 </h3><p>题目：好像哪里不一样了；远程libc环境 Ubuntu 18。 <a class="link" href="PWN_050" >PWN_050</a></p>
@@ -5754,7 +5793,8 @@ unicode: "ece7"
 		data-flex-basis="3487px"
 	
 ></p>
-<p>从这可以看到程序本身是不带第二、三个的gadget的，因为我们要利用漏洞去获取flag，而本身程序运行是不用后面俩的gadget的。</p></blockquote>
+<p>从这可以看到程序本身是不带第二、三个的gadget的，因为我们要利用漏洞去获取flag，而本身程序运行是不用后面俩的gadget的。</p>
+</blockquote>
 <p>exp；</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -5909,11 +5949,13 @@ unicode: "ece7"
 <ol>
 <li>它原本是 “偏移量”（相对于 libc 基地址）；</li>
 <li>当你设置 <code>libc.address = libc_base</code> 后，<code>pwntools</code> 自动将 “基地址 + 偏移量” 合并，得到真实地址。</li>
-</ol></blockquote>
+</ol>
+</blockquote>
 <blockquote class="alert alert-note">
     <blockquote>
 <p><code>libc.address</code> 不是一个函数，而是 <code>pwntools</code> 中 <code>ELF</code> 类的一个<strong>属性（attribute）</strong>，用于存储和设置 ELF 文件（这里特指 libc 库）在内存中的基地址。</p>
-<p>当你通过 <code>libc = ELF('libc.so.6')</code> 加载 libc 库后，<code>libc.address</code> 默认值为 <code>0</code>（表示尚未设置基地址）。</p></blockquote></blockquote>
+<p>当你通过 <code>libc = ELF('libc.so.6')</code> 加载 libc 库后，<code>libc.address</code> 默认值为 <code>0</code>（表示尚未设置基地址）。</p>
+</blockquote></blockquote>
 <p>总的来说这题质量不错，耗了我两天空闲时间去攻克。</p>
 <h3 id="pwn_051">PWN_051
 </h3><p>题目：I‘m IronMan； <a class="link" href="PWN_051" >PWN_051</a></p>
@@ -6330,7 +6372,8 @@ unicode: "ece7"
 <blockquote class="alert alert-warn">
     <blockquote>
 <p><strong>发送 payload 的方式（<code>sendline</code> vs <code>send</code>）是关键差异</strong></p>
-<p>之前的题目好像对发送payload的函数并不严格要求，但在这题就必须要求严格了，要用send函数，如果是sendline的话，会在payload后面多加一个换行符\n，因附加换行符破坏栈布局。也会导致一直循环爆破却最终爆破失败。</p></blockquote></blockquote>
+<p>之前的题目好像对发送payload的函数并不严格要求，但在这题就必须要求严格了，要用send函数，如果是sendline的话，会在payload后面多加一个换行符\n，因附加换行符破坏栈布局。也会导致一直循环爆破却最终爆破失败。</p>
+</blockquote></blockquote>
 <h3 id="pwn_054">PWN_054
 </h3><p>题目：再近一点靠近点快被融化； <a class="link" href="PWN_054" >PWN_054</a></p>
 <p>IDA32：</p>
@@ -6447,7 +6490,8 @@ unicode: "ece7"
 <li>再看 <strong>字符串的生成 / 处理函数</strong>（如 <code>fgets</code> 自动补 <code>\x00</code>、<code>strchr</code> 替换生成 <code>\x00</code>）；</li>
 <li>最后看 <strong>后续字符串操作是否正常</strong>（反向验证 <code>\x00</code> 位置合法）。
 三者均指向 <code>\x00</code> 在数组内部时，即可确定该结论。</li>
-</ol></blockquote></blockquote>
+</ol>
+</blockquote></blockquote>
 <p>exp1，得出密码：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -6602,7 +6646,8 @@ unicode: "ece7"
 <ol>
 <li><strong>参数压栈顺序</strong>：函数的参数要按 “从右到左” 的顺序，依次放到栈上；</li>
 <li><strong>返回地址跟着参数</strong>：参数压完后，要压入 “函数执行完后要跳转到的地址”（即下一个函数的地址），最后才是 “当前要调用的函数地址”。</li>
-</ol></blockquote>
+</ol>
+</blockquote>
 <p>现在这些题目需要我们对代码具有一定阅读理解能力，理解代码的运作原理，而不再像新手入门那样无脑套ret2shellcode、ret2libc、脚本了。</p>
 <h3 id="认识32位和64位的shellcode">认识32位和64位的shellcode
 </h3><h3 id="pwn_056">PWN_056
@@ -6757,7 +6802,8 @@ unicode: "ece7"
 </h4><ul>
 <li><code>syscall</code>：是 x86-64 架构下的汇编指令，用于触发 Linux 系统调用（调用操作系统内核提供的功能，如进程退出、文件操作等）。</li>
 <li><code>LINUX -</code> 可能是简化或注释残留，实际有效的指令只有 <code>syscall</code>。系统调用的具体功能由 <code>rax</code> 寄存器的值决定（例如 <code>rax=60</code> 表示 <code>exit</code> 系统调用，用于终止当前进程）。</li>
-</ul></blockquote>
+</ul>
+</blockquote>
 <p>总的来说这俩题是让我们认识shellcode的样子，以便后面使用&hellip;</p>
 <p>exp同上。</p>
 <p>重点还是看汇编：</p>
@@ -7054,7 +7100,8 @@ unicode: "ece7"
 </div>
 </div><p>你会看到为什么是112？不应该是104吗？100字节+ebp本身的4字节，还有8字节哪来的？记住以下规则：</p>
 <blockquote>
-<p>“多填充 8 字节” 并非随意设置，而是<strong>由程序实际栈帧结构决定的</strong>—— 可能是编译器的栈对齐策略，也可能是隐式局部变量占用空间，最终通过调试确认 “只有填充至 112 字节才能覆盖返回地址”。这也符合 PWN 题的通用原则：栈溢出的填充长度需以 “实际调试 / 逆向结果” 为准，而非仅依赖理论计算的 “缓冲区大小 + 旧 EBP”。</p></blockquote>
+<p>“多填充 8 字节” 并非随意设置，而是<strong>由程序实际栈帧结构决定的</strong>—— 可能是编译器的栈对齐策略，也可能是隐式局部变量占用空间，最终通过调试确认 “只有填充至 112 字节才能覆盖返回地址”。这也符合 PWN 题的通用原则：栈溢出的填充长度需以 “实际调试 / 逆向结果” 为准，而非仅依赖理论计算的 “缓冲区大小 + 旧 EBP”。</p>
+</blockquote>
 <p>不过在新版本的Ubuntu虚拟机中就可能会误导你：</p>
 <p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/205.png"
 	width="1010"
@@ -7185,7 +7232,8 @@ unicode: "ece7"
 </div><p>输入流中首先接收数据直到遇到 &lsquo;[&rsquo; 字符为止。接下来再次从输入流中接收数据，直到遇到 &lsquo;]&rsquo; 字符为止，将其保存在变量 v5 中。最后，将变量 v5 解析为一个十六进制的整数，并将其存储回变量 v5 中。</p>
 <p>p64(v5+32)，<strong>将 “v5 地址 + 32 字节” 这个目标地址，打包为 64 位小端序二进制数据，用于覆盖程序的返回地址，最终让程序跳转到该目标地址执行 shellcode</strong></p>
 <blockquote>
-<p>若 v5 是字符串（如<code>'7ffefd78ff20'</code>），Python 无法对字符串进行加法运算，这就是为什么需要<code>v5 = int(v5, 16)</code>的原因。</p></blockquote>
+<p>若 v5 是字符串（如<code>'7ffefd78ff20'</code>），Python 无法对字符串进行加法运算，这就是为什么需要<code>v5 = int(v5, 16)</code>的原因。</p>
+</blockquote>
 <h3 id="pwn_062">PWN_062
 </h3><p>题目：短了一点。 <a class="link" href="PWN_062" >PWN_062</a></p>
 <p>checksec一下：</p>
@@ -7475,7 +7523,8 @@ unicode: "ece7"
 <ol start="6">
 <li><strong><code>offset</code>（r9 寄存器）</strong>：</li>
 </ol>
-<p>文件偏移量，匿名映射时设为<code>0</code>。</p></blockquote>
+<p>文件偏移量，匿名映射时设为<code>0</code>。</p>
+</blockquote>
 <p>这行代码使用 mmap 函数分配一块内存区域，将其起始地址保存在变量 buf 中。 mmap 函数通常用于在内存中分配一块连续的地址空间，并指定相应的权限和属性。</p>
 <p>这里buf用mmap映射了地址，可读可写可执行，直接传入shellcode，((void (*)(void))buf)()。调用了buf，运行shellcode 即可获取shell。</p>
 <p>那我们完全可以用pwntools的shellcraft模块下的shellcode（29字节长度）</p>
@@ -7560,7 +7609,8 @@ unicode: "ece7"
 ></p>
 <blockquote>
 <p><code>cdqe</code>使用eax的最高位拓展rax高32位的所有位 movzx则是按无符号数传送+扩展（16-32） EAX是32位的寄存器，而AX是EAX的低16位,AH是ax的高8位，而AL是ax的低8位大致就是将我们输入的字符串每一位进行比较，如果不在<code>0x60~0x7A</code>这个范围就跳转剩下几个就是跳转的范围。</p>
-<p>意思可能就是从第一个字符开始一直做循环判断，如果每一个字符都在一定区间，结束最后一个字符判断时就能够绕过上面的 loc_11B8 来执行 shellcode 了。</p></blockquote>
+<p>意思可能就是从第一个字符开始一直做循环判断，如果每一个字符都在一定区间，结束最后一个字符判断时就能够绕过上面的 loc_11B8 来执行 shellcode 了。</p>
+</blockquote>
 <p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/222.png"
 	width="1025"
 	height="859"
@@ -7799,7 +7849,8 @@ unicode: "ece7"
 <h3 id="nop-sled空操作雪橇"><strong>nop sled空操作雪橇</strong>
 </h3><blockquote>
 <p><strong>“nop”（No Operation 的缩写）</strong>：是一条汇编指令，在 32 位 x86 架构下，其机器码为<code>0x90</code>。nop 指令执行时，CPU 不进行实际的运算或数据处理操作，仅将程序计数器（如 32 位架构下的 EIP 寄存器）的值增加 1，指向下一条指令，起到占位和使程序流程顺序执行的作用。</p>
-<p><strong>“sled”（雪橇）</strong>：形象地描述了攻击原理。通过在 shellcode 前面填充大量的 nop 指令，形成一个 “指令雪橇”。当程序的执行流被劫持到这个 “雪橇” 区域内的任意位置时，就像雪橇从高处滑下一样，程序会顺着一个个 nop 指令依次执行，最终到达并执行位于 “雪橇” 后方的 shellcode。这一过程可类比为在不确定 shellcode 确切起始地址的情况下，扩大可命中的范围，只要返回地址能落入 nop 指令组成的区域，就能保证 shellcode 被执行。</p></blockquote>
+<p><strong>“sled”（雪橇）</strong>：形象地描述了攻击原理。通过在 shellcode 前面填充大量的 nop 指令，形成一个 “指令雪橇”。当程序的执行流被劫持到这个 “雪橇” 区域内的任意位置时，就像雪橇从高处滑下一样，程序会顺着一个个 nop 指令依次执行，最终到达并执行位于 “雪橇” 后方的 shellcode。这一过程可类比为在不确定 shellcode 确切起始地址的情况下，扩大可命中的范围，只要返回地址能落入 nop 指令组成的区域，就能保证 shellcode 被执行。</p>
+</blockquote>
 <h3 id="pwn_067待定">PWN_067*（待定）
 </h3><p>题目：32bit nop sled； <a class="link" href="PWN_067" >PWN_067</a></p>
 <p>checksec：</p>
@@ -7868,7 +7919,8 @@ unicode: "ece7"
 <p>攻击者通过输入字符串注入攻击代码。在实际的攻击代码前注入很长的 nop 指令（无操作，仅使程序计数器加一）序列，只要程序的控制流指向该序列任意一处，程序计数器逐步加一，直到到达攻击代码的存在的地址，并执行。由于栈地址在一定范围的随机性，攻击者不能够知道攻击代码注入的地址，而要执行攻击代码需要将函数的返回地址更改为攻击代码的地址（可通过缓冲区溢出的方式改写函数返回地址）。所以，只能在一定范围内（栈随机导致攻击代码地址一定范围内随机）枚举攻击代码位置（有依据的猜） 。</p>
 <blockquote>
 <p>不用 nop sled ， 函数返回地址 &mdash;&mdash;-&gt; 攻击代码。</p>
-<p>使用 nop sled ， 函数返回地址 &mdash;&mdash;-&gt; nop 序列（顺序执行） 直到攻击代码地址。</p></blockquote>
+<p>使用 nop sled ， 函数返回地址 &mdash;&mdash;-&gt; nop 序列（顺序执行） 直到攻击代码地址。</p>
+</blockquote>
 <p>为了安全地“绕过”不知道缓冲区的确切开始位置,我们可以：</p>
 <p>1、将 shellcode 填充为以 1336 nop 条指令开头 ( 0x90 )。</p>
 <p>2、使用 的返回值 query_position ，添加 0x2d （如前所述），<strong>然后添加</strong> <strong>668</strong>。</p>
@@ -7992,7 +8044,8 @@ unicode: "ece7"
 <blockquote>
 <p>ASLR（地址空间布局随机化）的核心是让程序的栈、堆、库等内存区域的起始地址每次运行时随机变化（ PWN_061、PWN_062 等题目开启 PIE，本质是 ASLR 的延伸），导致攻击者无法提前确定 shellcode 的精确地址。</p>
 <p>nop sled 的作用是：通过在 shellcode 前填充大量<code>\x90</code>（nop 指令），形成一个 “指令序列区域”—— 只要程序执行流跳转到该区域的<strong>任意位置</strong>，都会顺着 nop 指令顺序执行，最终命中后续的 shellcode。</p>
-<p>从这个角度看，nop sled<strong>可以用于突破 ASLR 带来的地址随机性</strong>，但这并非其唯一用途。</p></blockquote>
+<p>从这个角度看，nop sled<strong>可以用于突破 ASLR 带来的地址随机性</strong>，但这并非其唯一用途。</p>
+</blockquote>
 <p>这题难到我了，对于栈的结构了解不够多，nop、0x2d琢磨很久才明白&hellip;&hellip;等到后续再回来完善一下，如果看不懂就算了。</p>
 <h3 id="pnw_068待定">PNW_068（待定）
 </h3><p>题目：64bit nop sled。 <a class="link" href="PWN_068" >PWN_068</a></p>
@@ -8031,7 +8084,8 @@ unicode: "ece7"
 <p>复习下mmap函数作用，主要用途有三个：</p>
 <p>1、将一个普通文件映射到内存中，通常在需要对文件进行频繁读写时使用，这样用内存读写取代I/O读写，以获得较高的性能；</p>
 <p>2、将特殊文件进行匿名内存映射，可以为关联进程提供共享内存空间；</p>
-<p>3、为无关联的进程提供共享内存空间，一般也是将一个普通文件映射到内存中。</p></blockquote>
+<p>3、为无关联的进程提供共享内存空间，一般也是将一个普通文件映射到内存中。</p>
+</blockquote>
 <p>把从0x123000开始的地址，大小为0x1000的长度，权限改为<code>可写可执行</code>。</p>
 <p>跟进seccomp函数：</p>
 <p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/246.png"
@@ -8076,7 +8130,8 @@ unicode: "ece7"
 <p>ORW通过以下三个系统调用实现：</p>
 <p>open：打开目标文件，获取文件描述符。</p>
 <p>read：通过文件描述符读取文件内容到缓冲区。</p>
-<p>write：将缓冲区的内容写入标准输出。</p></blockquote>
+<p>write：将缓冲区的内容写入标准输出。</p>
+</blockquote>
 <p>跟进ctfshow函数：</p>
 <p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/248.png"
 	width="660"
@@ -8145,7 +8200,8 @@ unicode: "ece7"
 ></p>
 <p>payload = asm(shellcraft.read(0, mmap, 0x100)) 的意思是启动read函数，开启“读取模式”处于待读取状态，等待后面的orw_shellcode的出现，并存到mmap的可读可写区域（2+4）；</p>
 <blockquote>
-<p>最正确理解：执行后因缺少输入数据（orw_shellcode）才进入 “等待状态”。</p></blockquote>
+<p>最正确理解：执行后因缺少输入数据（orw_shellcode）才进入 “等待状态”。</p>
+</blockquote>
 <p>asm(&ldquo;mov rax, 0x123000; jmp rax&rdquo;)的意思是跳到mmap=0x123000区域，也就是指向这个区域，等待后续orw_shellcode注入执行。</p>
 <p>payload = asm(shellcraft.read(0, mmap, 0x100)) + asm(&ldquo;mov rax, 0x123000; jmp rax&rdquo;)加起来不足0x28个字节（0x20+8），让buf刚好充满，以便后续<strong>将 <code>rsp</code> 调整到 <code>buf</code> 缓冲区起始地址</strong>（buf复原）。</p>
 <p>python3的exp：</p>
@@ -8226,10 +8282,12 @@ unicode: "ece7"
 <li><strong>0005 行</strong>：明确禁止 <code>execve</code> 系统调用（编号 <code>0x3b</code>，用于执行新程序），触发时会终止程序。</li>
 <li><strong>0006 行</strong>：允许所有未被上述规则禁止的系统调用（返回 <code>ALLOW</code>）。</li>
 <li><strong>0007 行</strong>：对被禁止的情况，直接终止程序（返回 <code>KILL</code>）。</li>
-</ol></blockquote>
+</ol>
+</blockquote>
 <blockquote class="alert alert-tip">
     <blockquote>
-<p>完全支持**<code>ORW</code>**操作！唯一被禁止的是 <code>execve</code>（执行新程序），但 ORW 操作不依赖它，因此可以正常执行。</p></blockquote></blockquote>
+<p>完全支持**<code>ORW</code>**操作！唯一被禁止的是 <code>execve</code>（执行新程序），但 ORW 操作不依赖它，因此可以正常执行。</p>
+</blockquote></blockquote>
 <p>跟进到is_printable函数：</p>
 <p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/252.png"
 	width="1030"
@@ -8248,7 +8306,8 @@ unicode: "ece7"
 <p>条件是 a1[i] &lt;= 31 || a1[i] == 127。这意味着如果字符的 ASCII 值小于等于 31，或者等于 127，则认为该字符不可打印。</p>
 <blockquote class="alert alert-error">
     <blockquote>
-<p>可以在开头加上\x00 \xc0，做过pwn66，有strlen 的话可以找\x00开头的shellcode，<code>\x00</code> 是 ASCII 码为 0 的字符（也叫 <strong>空字符</strong>），它在 C 语言中唯一的特殊作用是 <strong>标记字符串的结束</strong>。这里的 <code>\x00</code> 只是 “告诉 <code>strlen</code> 停止计算”，没有任何 “赋值” 操作（既不修改寄存器，也不修改内存值）。</p></blockquote></blockquote>
+<p>可以在开头加上\x00 \xc0，做过pwn66，有strlen 的话可以找\x00开头的shellcode，<code>\x00</code> 是 ASCII 码为 0 的字符（也叫 <strong>空字符</strong>），它在 C 语言中唯一的特殊作用是 <strong>标记字符串的结束</strong>。这里的 <code>\x00</code> 只是 “告诉 <code>strlen</code> 停止计算”，没有任何 “赋值” 操作（既不修改寄存器，也不修改内存值）。</p>
+</blockquote></blockquote>
 <p>这波直接不给看main的C伪代码，只能看汇编语言了。</p>
 <p>我的python3的exp（没用到ORW，巧合）：</p>
 <div class="highlight"><div class="chroma">
@@ -8361,7 +8420,8 @@ unicode: "ece7"
 <p>rax：系统调用号（例如，execve的调用号为0x3b）</p>
 <p>rdi：第一个参数</p>
 <p>rsi：第二个参数</p>
-<p>rdx：第三个参数</p></blockquote></blockquote>
+<p>rdx：第三个参数</p>
+</blockquote></blockquote>
 <h3 id="pwn_071">PWN_071
 </h3><p>题目：32位的ret2syscall。 <a class="link" href="PWN_071" >PWN_071</a></p>
 <p>checksec：</p>
@@ -8616,7 +8676,8 @@ unicode: "ece7"
 </div>
 </div><blockquote class="alert alert-warn">
     <blockquote>
-<p>所以说后续看到静态编译一定要多注意偏移量，后续要熟练运用pwngdb动态调试和pwndbg。</p></blockquote></blockquote>
+<p>所以说后续看到静态编译一定要多注意偏移量，后续要熟练运用pwngdb动态调试和pwndbg。</p>
+</blockquote></blockquote>
 <h3 id="pwn_072">PWN_072
 </h3><p>题目：接着练ret2syscall，多系统函数调用。 <a class="link" href="PWN_072" >PWN_072</a></p>
 <p>checksec一下：</p>
@@ -8734,7 +8795,8 @@ unicode: "ece7"
 <li><strong><code>a2</code></strong>：指向用于存储读取数据的缓冲区的地址。也就是说，从文件描述符 <code>a1</code> 所指向的文件中读取的数据，会被存储到 <code>a2</code> 所指向的内存区域中。</li>
 <li><strong><code>a3</code></strong>：表示要读取的字节数，即指定从文件描述符 <code>a1</code> 所指向的文件中读取多少个字节的数据到 <code>a2</code> 所指向的缓冲区中。</li>
 </ul>
-<p>总的来说，<code>read</code> 函数的作用就是从指定的文件描述符所对应的文件中，读取指定字节数的数据到给定的缓冲区中，并且在多线程环境下，对异步取消等情况进行了一定的处理。</p></blockquote></blockquote>
+<p>总的来说，<code>read</code> 函数的作用就是从指定的文件描述符所对应的文件中，读取指定字节数的数据到给定的缓冲区中，并且在多线程环境下，对异步取消等情况进行了一定的处理。</p>
+</blockquote></blockquote>
 <p>想起上一题，我怕有坑，还特定去用pwngdb调了下，发现真有猫腻：</p>
 <p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/276.png"
 	width="1836"
@@ -8796,7 +8858,8 @@ unicode: "ece7"
 </div>
 </div><blockquote>
 <p>执行后，程序会阻塞等待用户输入，此时发送 <code>bin_sh = &quot;/bin/sh\x00&quot;</code>，<code>read</code> 会将该字符串写入 <code>bss</code> 段（<code>0x080eb000</code> 地址处）；</p>
-<p>此时 <code>bss</code> 地址指向的内容就是 <code>&quot;/bin/sh\x00&quot;</code>，满足 <code>execve</code> 对 “命令路径参数” 的要求。</p></blockquote>
+<p>此时 <code>bss</code> 地址指向的内容就是 <code>&quot;/bin/sh\x00&quot;</code>，满足 <code>execve</code> 对 “命令路径参数” 的要求。</p>
+</blockquote>
 <h3 id="pwn_073">PWN_073
 </h3><p>题目：愉快的尝试一下一把梭吧！ <a class="link" href="PWN_073" >PWN_073</a></p>
 <p>checksec：</p>
@@ -9129,7 +9192,8 @@ unicode: "ece7"
 <ul>
 <li>静态编译的程序会将所有依赖的库函数（如 <code>read</code>、<code>write</code>、<code>int 0x80</code> 系统调用入口）打包到自身中，不存在 “动态链接依赖 libc” 的问题，<code>ROPgadget</code> 能从程序自身提取到完整的 ROP 组件（如 <code>pop edx; ret</code>、<code>mov [edx], eax; ret</code>、<code>int 0x80</code> 等），足以构造出调用 <code>execve(&quot;/bin/sh&quot;)</code> 的完整 ROP 链；</li>
 <li>若程序为<strong>动态编译</strong>（依赖外部 libc），且未泄露 libc 基址，<code>ROPgadget</code> 无法获取 libc 内部的 gadget（如 <code>system</code> 地址、<code>/bin/sh</code> 字符串地址），自动生成的 ROP 链会因 “缺少关键组件” 失效，无法直接使用 “一把梭”。</li>
-</ul></blockquote></blockquote>
+</ul>
+</blockquote></blockquote>
 <h3 id="one_"><strong>one_gadget攻击</strong>
 </h3><h3 id="pwn_074">PWN_074
 </h3><p>题目：噢？好像到现在为止还没有了解到one_gadget? <a class="link" href="PWN_074" >PWN_074</a></p>
@@ -9168,7 +9232,8 @@ unicode: "ece7"
 <p>再将 v4 数组的第一个元素的值赋给了数组的第二个元素。继续通过函数指针调用了 v4 数组的第一个元素所指向的函数。这个部分利用函数指针的特性，将其转换为函数并进行调用。</p>
 <blockquote class="alert alert-warn">
     <blockquote>
-<p>使用用户输入来获取函数指针，并通过函数指针调用相应的函数。需要注意的是，这种通过用户输入来获取函数指针并调用函数的做法极有可能会带来安全隐患，因为恶意用户可以输入不安全的函数指针，导致程序出现问题。</p></blockquote></blockquote>
+<p>使用用户输入来获取函数指针，并通过函数指针调用相应的函数。需要注意的是，这种通过用户输入来获取函数指针并调用函数的做法极有可能会带来安全隐患，因为恶意用户可以输入不安全的函数指针，导致程序出现问题。</p>
+</blockquote></blockquote>
 <p>到这里引出下一个攻击手段——one gadget</p>
 <p>one_gadget是libc中存在的一些执行execve(&quot;/bin/sh&quot;, NULL, NULL)的片段，当可以泄露libc地址，并且可以知道libc版本的时候，可以使用此方法来快速控制指令寄存器开启shell。</p>
 <p>相比于system(&quot;/bin/sh&quot;)，这种方式更加方便，不用控制RDI、RSI、RDX等参数。运用于不利构造参数的情况。</p>
@@ -9194,11 +9259,13 @@ unicode: "ece7"
 ></p>
 <p>one_gadget并不总是可以获取shell，它首先要满足一些条件才能执行成功,后面提示就是在调用one_gadget前需要满足的条件。</p>
 <blockquote>
-<p><strong>约束条件满足</strong>：one - gadget 是 libc 中执行<code>execve(&quot;/bin/sh&quot;, NULL, NULL)</code>的代码片段，但需要满足特定约束条件才能执行成功。<code>0x4f2c5</code>的约束条件为<code>rsp &amp; 0xf == 0</code>且<code>rcx == NULL</code> ，<code>0x4f322</code>的约束条件为<code>[rsp + 0x40] == NULL</code> ，<code>0x10a2fc</code>的约束条件为<code>[rsp + 0x70] == NULL</code>。在 PWN074 场景中，程序栈布局使得<code>[rsp + 0x70]</code>天然为 NULL（因为该地址超出当前函数栈帧范围，属于未使用的空闲栈区域，在 Linux 系统中默认填充为 0） ，满足<code>0x10a2fc</code>的约束条件，而其他两个地址的约束条件难以满足。例如，<code>rsp &amp; 0xf == 0</code>要求栈指针低 4 位为 0，在程序未提供调整栈指针对齐的可控途径时，很难实现；同时程序未对<code>rcx</code>寄存器进行控制，<code>rcx</code>大概率不为 NULL，不满足<code>0x4f2c5</code>的条件；<code>[rsp + 0x40]</code>在程序运行时存储有临时数据，无法通过用户输入清空，不满足<code>0x4f322</code>的条件。</p></blockquote>
+<p><strong>约束条件满足</strong>：one - gadget 是 libc 中执行<code>execve(&quot;/bin/sh&quot;, NULL, NULL)</code>的代码片段，但需要满足特定约束条件才能执行成功。<code>0x4f2c5</code>的约束条件为<code>rsp &amp; 0xf == 0</code>且<code>rcx == NULL</code> ，<code>0x4f322</code>的约束条件为<code>[rsp + 0x40] == NULL</code> ，<code>0x10a2fc</code>的约束条件为<code>[rsp + 0x70] == NULL</code>。在 PWN074 场景中，程序栈布局使得<code>[rsp + 0x70]</code>天然为 NULL（因为该地址超出当前函数栈帧范围，属于未使用的空闲栈区域，在 Linux 系统中默认填充为 0） ，满足<code>0x10a2fc</code>的约束条件，而其他两个地址的约束条件难以满足。例如，<code>rsp &amp; 0xf == 0</code>要求栈指针低 4 位为 0，在程序未提供调整栈指针对齐的可控途径时，很难实现；同时程序未对<code>rcx</code>寄存器进行控制，<code>rcx</code>大概率不为 NULL，不满足<code>0x4f2c5</code>的条件；<code>[rsp + 0x40]</code>在程序运行时存储有临时数据，无法通过用户输入清空，不满足<code>0x4f322</code>的条件。</p>
+</blockquote>
 <blockquote class="alert alert-warn">
     <blockquote>
 <p>本题仅仅是一个工具引进使用，具体可以自行调试一下便知。省了很大一部分时间和精力，对于初学者来说，<strong>libc版本是个坑</strong>。因此在训练题型上平台一般弄了几个比较相对固定的libc版本，<strong>实际比赛时libc的版本更加多样复杂</strong>。</p>
-<p>当然，在这里如果不是使用的附带虚拟机，则需要自行去泄漏libc，当然前面经过这么多题的练习，相信这些也是没难度了。</p></blockquote></blockquote>
+<p>当然，在这里如果不是使用的附带虚拟机，则需要自行去泄漏libc，当然前面经过这么多题的练习，相信这些也是没难度了。</p>
+</blockquote></blockquote>
 <p>exp：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -9276,18 +9343,8 @@ unicode: "ece7"
 	
 ></p>
 <p>其实在连靶机进行交互时，无论你输入什么，都是招原样给你打印出来的，主要还是看read、memset函数，况且没开canary保护有站处理漏洞可以利用。</p>
-<p>&laquo;&laquo;&laquo;&lt; HEAD
-在海曙目录还看到了system函数。</p>
-<p>=======</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>191b05fa45e02dc8995178e6a8d2c0c238003afb
-跟进hackerout函数：</p></blockquote></blockquote></blockquote></blockquote></blockquote></blockquote></blockquote>
+<p>还看到了system函数。</p>
+<p>跟进hackerout函数：</p>
 <p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/280.png"
 	width="934"
 	height="443"
@@ -9303,16 +9360,8 @@ unicode: "ece7"
 <p>看到有system函数，不过里边不是binsh，问题不大可以构造出来。</p>
 <p>&laquo;&laquo;&laquo;&lt; HEAD
 看回ctfshow函数的栈溢出漏洞，可以发现s容量是36，但s到ebp距离有0x28=40，加上覆盖ebp本身的4字节，仅 8 字节（44-36=8）溢出空间，无法直接布置<code>system(&quot;/bin/sh&quot;);</code> 所需的 ROP 链（需覆盖返回地址 + 传递参数，至少 12 字节以上），那么这里就应该要想到<code>栈迁移</code>了。</p>
-<h1 id="栈迁移的本质是通过-将原本狭小的栈空间转移到我们可控的大空间那我们就得调用levae汇编指令">栈迁移的本质是<strong>通过 <code>leave</code> 指令改变栈顶指针（esp）的位置</strong>，将原本狭小的栈空间转移到我们可控的大空间。那我们就得调用levae汇编指令
-</h1><p>看回ctfshow函数的栈溢出漏洞，可以发现s容量是36，但s到ebp距离有0x28=40，加上覆盖ebp本身的4字节，也就是说只有8字给到我们放东西，无法进行我们的ROP链构造，那么这里就应该要想到<code>栈迁移</code>了</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>191b05fa45e02dc8995178e6a8d2c0c238003afb</p></blockquote></blockquote></blockquote></blockquote></blockquote></blockquote></blockquote>
+<p>栈迁移的本质是<strong>通过 <code>leave</code> 指令改变栈顶指针（esp）的位置</strong>，将原本狭小的栈空间转移到我们可控的大空间。那我们就得调用levae汇编指令。</p>
+<p>看回ctfshow函数的栈溢出漏洞，可以发现s容量是36，但s到ebp距离有0x28=40，加上覆盖ebp本身的4字节，也就是说只有8字给到我们放东西，无法进行我们的ROP链构造，那么这里就应该要想到<code>栈迁移</code>了</p>
 
 </section>
 
@@ -9330,7 +9379,7 @@ unicode: "ece7"
 
 
         <span>
-            最后更新于 2025-10-09
+            最后更新于 2025-10-29
         </span>
     </section></footer>
 
@@ -9372,6 +9421,30 @@ unicode: "ece7"
     <h2 class="section-title">相关文章</h2>
     <div class="related-content">
         <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/2025%E5%BC%BA%E7%BD%91%E6%9D%AF/">
+        
+        
+            <div class="article-image">
+                <img src="/p/2025%E5%BC%BA%E7%BD%91%E6%9D%AF/QWB-logo.57f578867e8bf9f96693f81b752ff4be_hu_fe2af2939c64f881.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post 2025强网杯"
+                        
+                        data-hash="md5-V/V4hn6L&#43;flmk/gbdS/0vg==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">2025强网杯</h2>
+        </div>
+    </a>
+</article>
+
             
                 
 <article class="has-image">
@@ -9451,43 +9524,19 @@ unicode: "ece7"
         
         
             <div class="article-image">
-                <img src="/p/nssctf-%E4%B8%93%E9%A2%98pwn-writeup/NSSCTF.1c98166412d77e7df01c95595a3b990c_hu_34be2363eb9b4f12.png" 
+                <img src="/p/nssctf-%E4%B8%93%E9%A2%98pwn-writeup/NSSCTF.103f478540d2cc84406207bc3178d3a8_hu_5bee3adc54e4aaef.png" 
                         width="250" 
                         height="150" 
                         loading="lazy"
                         alt="Featured image of post NSSctf-专题PWN-writeup"
                         
-                        data-hash="md5-HJgWZBLXfn3wHJVZWjuZDA==">
+                        data-hash="md5-ED9HhUDSzIRAYge8MXjTqA==">
                 
             </div>
         
 
         <div class="article-details">
             <h2 class="article-title">NSSctf-专题PWN-writeup</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="has-image">
-    <a href="/p/pwn-3/">
-        
-        
-            <div class="article-image">
-                <img src="/p/pwn-3/PWN3.4afa5f5bde601dbc35b64aebcb8c25e3_hu_a61ad70f238c03c4.png" 
-                        width="250" 
-                        height="150" 
-                        loading="lazy"
-                        alt="Featured image of post PWN-3"
-                        
-                        data-hash="md5-SvpfW95gHbw1tkrry4wl4w==">
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">PWN-3</h2>
         </div>
     </a>
 </article>
@@ -9605,11 +9654,15 @@ unicode: "ece7"
 
 
 
+
+
+
+
         
 <section class="wordcount">
   <div class="wordcount-row">
-    <p>博主发布了14篇文章  ||</p>
-    <p>总共195.82k 字</p>
+    <p>博主发布了15篇文章  ||</p>
+    <p>总共212.78k 字</p>
   </div>
 </section>
         

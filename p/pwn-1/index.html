@@ -10,7 +10,7 @@
 <meta property='og:description' content="二进制漏洞与利用，PWN的基础知识、相关Linux命令">
 <meta property='og:url' content='https://expl0rer.top/p/pwn-1/'>
 <meta property='og:site_name' content='Expl0rer.Ct'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-08-21T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-10-08T16:19:55&#43;00:00'/><meta property='og:image' content='https://expl0rer.top/p/pwn-1/PWN.png' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-08-21T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-10-28T16:52:22&#43;00:00'/><meta property='og:image' content='https://expl0rer.top/p/pwn-1/PWN.png' />
 <meta name="twitter:title" content="PWN-1">
 <meta name="twitter:description" content="二进制漏洞与利用，PWN的基础知识、相关Linux命令"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://expl0rer.top/p/pwn-1/PWN.png' />
@@ -628,6 +628,25 @@
             </a>
         </li>
         
+        
+        <li >
+            <a href='/friends-links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友情链接 | Friends Links</span>
+            </a>
+        </li>
+        
         <li class="menu-bottom-section">
             <ol class="menu">
 
@@ -920,7 +939,8 @@ unicode: "ece7"
 ></p>
 <blockquote class="alert alert-error">
     <blockquote>
-<p>PWN入门劝退集&hellip;&hellip;</p></blockquote></blockquote>
+<p>PWN入门劝退集&hellip;&hellip;</p>
+</blockquote></blockquote>
 <h2 id="汇编语言基础">汇编语言基础
 </h2><p>我自己在打ctf逆向和pwn，也时常搞不懂bit和byte，在这里我先把一些计算机内的量词回忆一下：</p>
 <div class="table-wrapper"><table>
@@ -1205,7 +1225,8 @@ unicode: "ece7"
 <p>通过<strong>call</strong>、<strong>jmp</strong>、<strong>ret</strong>这种指令来完成跳转，所以汇编指令代码的执行流并不像高级语言程序一样流程明确。（在学习了C语言的指针这块的知识点，这会让你学汇编比较有利的）</p>
 <blockquote class="alert alert-warn">
     <blockquote>
-<p>汇编指令代码会经常跳转导致可读性差一些，但执行效果是和高级语言（C、Python语言）差不多的。</p></blockquote></blockquote>
+<p>汇编指令代码会经常跳转导致可读性差一些，但执行效果是和高级语言（C、Python语言）差不多的。</p>
+</blockquote></blockquote>
 <p>给点表格太懵了，我列出些例子(assembly&ndash;C)来看看：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1400,7 +1421,8 @@ unicode: "ece7"
 <p>溢出到符号位</p>
 <blockquote class="alert alert-tip">
     <blockquote>
-<p>整数溢出一般配合别的漏洞来使用。</p></blockquote></blockquote>
+<p>整数溢出一般配合别的漏洞来使用。</p>
+</blockquote></blockquote>
 <h3 id="汇编小结">汇编小结
 </h3><p>汇编语言贯穿PWN、Reverse（逆向）的，比较重要。</p>
 <div class="highlight"><div class="chroma">
@@ -1601,7 +1623,8 @@ unicode: "ece7"
 <blockquote class="alert alert-tip">
     <blockquote>
 <p>大端序：高低低高</p>
-<p>小端序：高高低低</p></blockquote></blockquote>
+<p>小端序：高高低低</p>
+</blockquote></blockquote>
 <p>这时我也看不懂，上例子！</p>
 <p>我们以一个数据：0x123456789abcdef；那么0为低地址，7为高地址。</p>
 <p>大端序存储：低位储存到计算机地址高位&hellip;</p>
@@ -1663,7 +1686,8 @@ unicode: "ece7"
 <p>从上面这两种方式比较的话，可以知道，大端序符合人类的阅读习惯；但从存储逻辑、数学运算规律来看，小端序更正常。</p>
 <blockquote class="alert alert-note">
     <blockquote>
-<p>Linux数据存储的格式为<strong>小端序</strong></p></blockquote></blockquote>
+<p>Linux数据存储的格式为<strong>小端序</strong></p>
+</blockquote></blockquote>
 <p>Linux是小端序储存，所以我们以字符串的形式输入一个数字时，要注意格式，比如输入0xdeadbeef这个数字。</p>
 <p>字符串输入就是“\xef\xbe\xad\xde”传入给程序。不过好在有<strong>pwntools</strong>，p32(0xdeadbeef)即可完成自动转换。</p>
 <h3 id="文件描述符">文件描述符
@@ -1682,7 +1706,8 @@ unicode: "ece7"
 <p>等会？这放到机器语言如C语言的话，不就是数组吗？为什么那么麻烦要发明这个栈呢？就是方便一些，一把普通菜刀能切水果、剁骨头，为什么要发明水果刀和大砍刀？原因就是方便。</p>
 <blockquote class="alert alert-note">
     <blockquote>
-<p>栈其实就是一个“阉割版”的数组，只能在一头操作。</p></blockquote></blockquote>
+<p>栈其实就是一个“阉割版”的数组，只能在一头操作。</p>
+</blockquote></blockquote>
 <h4 id="linux种的栈">Linux种的栈
 </h4><p>在linux系统中，系统为每一个进程都安排了一个栈，进程中每一个调用的函数都有自己独立的栈帧。</p>
 <p>在linux系统中，栈是由高地址向低地址<strong>生长</strong>（小端序）。</p>
@@ -1699,7 +1724,8 @@ unicode: "ece7"
 <blockquote class="alert alert-tip">
     <blockquote>
 <p>add rsp 8的8怎么来的？在 x86-64 架构（64 位系统）中：
-寄存器（如 rsp、rax 等）是 64 位（8 字节）的。内存地址也是 64 位的，最小的可寻址单位是字节，但栈操作通常以<strong>8 字节为单位进行对齐</strong>（这是系统调用和函数调用的标准要求）。</p></blockquote></blockquote>
+寄存器（如 rsp、rax 等）是 64 位（8 字节）的。内存地址也是 64 位的，最小的可寻址单位是字节，但栈操作通常以<strong>8 字节为单位进行对齐</strong>（这是系统调用和函数调用的标准要求）。</p>
+</blockquote></blockquote>
 <h3 id="函数调用流程">函数调用流程
 </h3><p>从一个实例出发,main调用func_b, func_b调用func_a。我们从main函数开始，逐步分析栈帧变化:</p>
 <div class="highlight"><div class="chroma">
@@ -1835,7 +1861,8 @@ Rbp用来定位局部变量。</p>
 <p>所以，这些寄存器的赋值操作都是为了严格按照计算机体系结构和编程语言的函数调用规范，实现函数调用、执行和返回过程中的内存管理、数据保护以及程序执行流的正确控制。</p>
 <blockquote class="alert alert-note">
     <blockquote>
-<p>简单说，<code>rsp</code> 是 “动态变化的栈顶指针”，而 <code>rbp</code> 是 “固定不动的栈帧基准”—— 前者负责管理栈的实时状态，后者负责锚定当前栈帧的位置和范围、栈帧的局部变量，二者配合实现了函数调用过程中内存的有序管理。</p></blockquote></blockquote>
+<p>简单说，<code>rsp</code> 是 “动态变化的栈顶指针”，而 <code>rbp</code> 是 “固定不动的栈帧基准”—— 前者负责管理栈的实时状态，后者负责锚定当前栈帧的位置和范围、栈帧的局部变量，二者配合实现了函数调用过程中内存的有序管理。</p>
+</blockquote></blockquote>
 <h3 id="调用约定-1">调用约定
 </h3><p>返回值：一般来说,一个函数的返回值会存储到RAX寄存器。
 X86-64函数的调用约定为：</p>
@@ -2028,7 +2055,8 @@ elf文件的节（section）会被映射进内存中的段（segment），而这
 </table></div>
 <blockquote class="alert alert-note">
     <blockquote>
-<p>In other words，ELF 文件是 “程序的静态载体”（存磁盘），确保程序能从源代码正确转换为可执行文件，并在内存中被正确加载和运行。</p></blockquote></blockquote>
+<p>In other words，ELF 文件是 “程序的静态载体”（存磁盘），确保程序能从源代码正确转换为可执行文件，并在内存中被正确加载和运行。</p>
+</blockquote></blockquote>
 <h3 id="libc">libc
 </h3><p>什么是libc?</p>
 <p>glibc是linux下面C标准库的实现，全称GNU C Library。</p>
@@ -2066,7 +2094,8 @@ elf文件的节（section）会被映射进内存中的段（segment），而这
 ></p>
 <blockquote class="alert alert-note">
     <blockquote>
-<p>Linux基本上所有的程序都依赖libc，所以libc中的函数至关重要。当然CTFpwn也离不开libc：IDA分析libc、源码。</p></blockquote></blockquote>
+<p>Linux基本上所有的程序都依赖libc，所以libc中的函数至关重要。当然CTFpwn也离不开libc：IDA分析libc、源码。</p>
+</blockquote></blockquote>
 <h2 id="延迟绑定机制">延迟绑定机制
 </h2><p>在上章的elf文件，看到了.got和.plt文件，用于动态链接函数地址。</p>
 <h3 id="动态链接库">动态链接库
@@ -2088,7 +2117,8 @@ elf文件的节（section）会被映射进内存中的段（segment），而这
     <blockquote>
 <h4 id="延迟绑定">延迟绑定
 </h4><p>这就是linux的延迟绑定机制，而存放这个地址的小本子就是got表。got表全程是Global Offset Table，也就是<strong>全局偏移量表</strong>。</p>
-<p>在程序运行时，got表初始并不保存库函数的地址，只有在第一次调用过后，程序才将这一地址保存在got表中。</p></blockquote></blockquote>
+<p>在程序运行时，got表初始并不保存库函数的地址，只有在第一次调用过后，程序才将这一地址保存在got表中。</p>
+</blockquote></blockquote>
 <h3 id="plt与got">PLT与GOT
 </h3><p>GOT（Global Offset Table，全局偏移表）：数据段用于地址无关代码的 Linux ELF 文件中确定全局变量和外部函数地址的表。</p>
 <p>PLT（Procedure Linkage Table，程序链接表）： Linux ELF 文件中用于<strong>延迟绑定</strong>的表。</p>
@@ -2103,7 +2133,8 @@ elf文件的节（section）会被映射进内存中的段（segment），而这
 <p>3、**跳回PLT后，执行”准备解析参数“的指令。**plt[printf]的下一条指令是准备动态解析需要的参数：比如把printf对应的符号索引（用于告诉动态链接器 “要解析哪个函数”）压入栈中。这些参数是提前在编译时就写好的，目的是告诉动态链接器 “我要找的是printf，帮我查它的真实地址”。这些参数是提前在编译时就写好的，目的是告诉动态链接器 “我要找的是printf，帮我查它的真实地址”。</p>
 <p>4、**跳向PLT表头（plt[0]），触发动态链接器的解析函数。**准备好参数后，plt[printf]会跳向 PLT 表的 “表头”（plt[0]）。plt[0]里的指令是固定的：先把GOT[0]的地址压栈（GOT[0]存储着动态链接器需要的辅助信息），然后调用动态链接器的核心解析函数（_dl_runtime_resolve）。</p>
 <blockquote>
-<p>？？？这有个疑问，怎么会有函数来帮助外部函数如printf去确定地址呢？其实这个<code>_dl_runtime_resolve</code>函数比较特殊，它是动态链接器的组成部分，是已经预先存在于动态链接器的代码之中的，动态链接器一加载，它的地址就被先解析出来了。</p></blockquote>
+<p>？？？这有个疑问，怎么会有函数来帮助外部函数如printf去确定地址呢？其实这个<code>_dl_runtime_resolve</code>函数比较特殊，它是动态链接器的组成部分，是已经预先存在于动态链接器的代码之中的，动态链接器一加载，它的地址就被先解析出来了。</p>
+</blockquote>
 <p>5、<strong>动态链接器解析出真实地址，写入 GOT 表，完成绑定</strong></p>
 <p>以下是用汇编语言代码来概括这五步流程：</p>
 <div class="highlight"><div class="chroma">
@@ -2126,16 +2157,19 @@ elf文件的节（section）会被映射进内存中的段（segment），而这
 <p>总结：PLT 和 GOT 的协作核心</p>
 <p>PLT 是 “跳板”：负责第一次调用时触发解析流程，后续调用时直接转发到 GOT 中的真实地址。</p>
 <p>GOT 是 “缓存表”：第一次调用时存储 PLT 内的跳转地址（用于触发解析），解析后存储函数真实地址（供后续直接调用）。
-整个机制的目的是 <strong>“延迟解析”</strong>：避免程序启动时解析所有外部函数（耗时），只在第一次调用时解析，平衡启动速度和运行效率。</p></blockquote></blockquote>
+整个机制的目的是 <strong>“延迟解析”</strong>：避免程序启动时解析所有外部函数（耗时），只在第一次调用时解析，平衡启动速度和运行效率。</p>
+</blockquote></blockquote>
 <blockquote class="alert alert-warn">
     <blockquote>
-<p>理解了这个流程，就掌握了动态链接中最核心的 “懒绑定” 机制，这也是 CTFpwn 中 “<strong>PLT 劫持</strong>” 等漏洞利用的基础。</p></blockquote></blockquote>
+<p>理解了这个流程，就掌握了动态链接中最核心的 “懒绑定” 机制，这也是 CTFpwn 中 “<strong>PLT 劫持</strong>” 等漏洞利用的基础。</p>
+</blockquote></blockquote>
 <h2 id="linux安全防护机制">Linux安全防护机制
 </h2><p>栈溢出、指针悬挂、内存地址泄露等Bug会导致程序崩溃，一些攻击者会刻意制造这些漏洞来扰乱程序正常执行，这就是早期PWN的威力。这一章比较重要，几乎贯穿后续栈溢出、堆的题目。</p>
 <h3 id="保护机制">保护机制
 </h3><blockquote class="alert alert-error">
     <blockquote>
-<p>CANARY、NX、ASRL、PIE、RELRO</p></blockquote></blockquote>
+<p>CANARY、NX、ASRL、PIE、RELRO</p>
+</blockquote></blockquote>
 <p>栈的作用为存储函数调用相关信息以及函数的局部变量。</p>
 <p>这些局部变量通常为数组或者输入的缓冲区（buf）。而函数调用相关的信息，主要是返回地址和栈底指针（rbp）。</p>
 <h3 id="canary">CANARY
@@ -2159,15 +2193,18 @@ elf文件的节（section）会被映射进内存中的段（segment），而这
 ></p>
 <blockquote class="alert alert-warn">
     <blockquote>
-<p>由于canary开头字节为x00，所以通常情况下不能被打印出来。</p></blockquote></blockquote>
+<p>由于canary开头字节为x00，所以通常情况下不能被打印出来。</p>
+</blockquote></blockquote>
 <blockquote class="alert alert-note">
     <blockquote>
-<p>通常情况下，程序如果开启了canary保护，大概率说明这道题目不是栈溢出题目了。当然也要具体情况具体分析。</p></blockquote></blockquote>
+<p>通常情况下，程序如果开启了canary保护，大概率说明这道题目不是栈溢出题目了。当然也要具体情况具体分析。</p>
+</blockquote></blockquote>
 <blockquote class="alert alert-error">
     <blockquote>
 <p><strong>绕过方法主要就是修改canary或者泄漏canary</strong>。</p>
 <p>泄漏 canary：利用格式化字符串、栈溢出 + 输出功能等漏洞，读取栈上的 canary 值（注意首字节 \x00 的影响）。</p>
-<p>修改 canary：用泄漏的 canary 值，在栈溢出时覆盖栈上的 canary，使其与原始值（fs:0x28 处）一致，绕过检查。</p></blockquote></blockquote>
+<p>修改 canary：用泄漏的 canary 值，在栈溢出时覆盖栈上的 canary，使其与原始值（fs:0x28 处）一致，绕过检查。</p>
+</blockquote></blockquote>
 <h3 id="nx">NX
 </h3><p>NX意思就是Not Executable，开启这个保护后，程序中的堆、栈、bss段等等可写的段就<em>不可以执行</em>。这就意味着如果开启了NX保护，通常情况下我们就不能执行我们自己编写的shellcode。</p>
 <p>绕过的方式通常是用mprotect函数来改写段的权限，nx保护对于rop或者劫持got表利用方式不影响。</p>
@@ -2178,7 +2215,8 @@ elf文件的节（section）会被映射进内存中的段（segment），而这
 <p>通常来说，CTF中的PWN题与这两个保护打交道的次数最多。</p>
 <blockquote class="alert alert-note">
     <blockquote>
-<p>绕过方式就是泄露函数地址，然后通过函数的偏移来确定基地址。</p></blockquote></blockquote>
+<p>绕过方式就是泄露函数地址，然后通过函数的偏移来确定基地址。</p>
+</blockquote></blockquote>
 <ul>
 <li>
 <p><strong>PIE</strong>：是针对<strong>可执行文件本身</strong>的编译选项。开启后，可执行文件（ELF）会被加载到内存中的随机地址，其内部的代码段、数据段等位置不再是固定值（编译时不指定绝对地址，而是用相对偏移）。
@@ -2258,12 +2296,14 @@ elf文件的节（section）会被映射进内存中的段（segment），而这
 <p>ASLR 是操作系统搞的 “整体大洗牌”：每次程序运行时，系统会把整个内存空间的布局（比如共享库放哪、栈和堆从哪开始）随机换个位置，让攻击者猜不到常用函数（比如 system）或数据的具体地址。
 ASLR 像每次开演唱会时，场馆里的座位区（共享库）、后台（堆）、观众入口（栈）的位置都随机换。</p>
 <p>PIE 是针对单个程序的 “自身随机化”：如果程序编译时开了 PIE，它自己加载到内存时，代码和数据会随机放在一个不确定的位置（而不是固定地址），让攻击者连程序自己的函数、变量在哪都猜不准。
-PIE 像演出团队（程序本身）每次上场时，自己的站位（代码和数据）也随机变。</p></blockquote>
+PIE 像演出团队（程序本身）每次上场时，自己的站位（代码和数据）也随机变。</p>
+</blockquote>
 <h3 id="relro">RELRO
 </h3><p>RELRO（Relocation Read-Only，重定位只读）是一种针对 ELF 文件重定位表的保护机制，核心作用是<strong>限制对 GOT（全局偏移表）等重定位相关区域的修改权限</strong>，防止攻击者通过篡改 GOT 表实现函数劫持（如修改<code>printf</code>的 GOT 条目为<code>system</code>地址）。</p>
 <blockquote>
 <p>这个保护主要针对的是延迟绑定机制，意思就是说got表这种和函数动态链接相关的内存地址，对于用户是只读的。</p>
-<p>开启了这个保护，意味着我们不能<em><strong>劫持</strong></em>got表中的函数指针。</p></blockquote>
+<p>开启了这个保护，意味着我们不能<em><strong>劫持</strong></em>got表中的函数指针。</p>
+</blockquote>
 <p>RELRO 的两种模式及作用:</p>
 <p><strong>Partial RELRO（部分 RELRO）</strong></p>
 <p>仅将 GOT 表的前半部分（.got.plt）设置为只读，后半部分仍可写。
@@ -2320,7 +2360,8 @@ PIE 像演出团队（程序本身）每次上场时，自己的站位（代码�
 </h3><p>初步了解Linux的基本内容，保护层级ring、文件描述符、及Linux计算机内部的<strong>大端小端序</strong>存储形式</p>
 <blockquote>
 <p>大端序：数据高位存储在计算机地址的低位，数据低位存储在地址的高位。</p>
-<p>小端序：数据高位存储在计算机地址的高位，数据低位存储在地址的低位。</p></blockquote>
+<p>小端序：数据高位存储在计算机地址的高位，数据低位存储在地址的低位。</p>
+</blockquote>
 <p>初步认识栈的定义、作用、在PWN所发挥的威力。</p>
 <h3 id="调用约定-2">调用约定
 </h3><p>这里重要的是函数调用流程，重点讲解push、pop、call、ret、jmp等汇编指令的使用效果。</p>
@@ -2450,7 +2491,7 @@ PIE 像演出团队（程序本身）每次上场时，自己的站位（代码�
 
 
         <span>
-            最后更新于 2025-10-08
+            最后更新于 2025-10-28
         </span>
     </section></footer>
 
@@ -2725,11 +2766,15 @@ PIE 像演出团队（程序本身）每次上场时，自己的站位（代码�
 
 
 
+
+
+
+
         
 <section class="wordcount">
   <div class="wordcount-row">
-    <p>博主发布了14篇文章  ||</p>
-    <p>总共195.82k 字</p>
+    <p>博主发布了15篇文章  ||</p>
+    <p>总共212.78k 字</p>
   </div>
 </section>
         

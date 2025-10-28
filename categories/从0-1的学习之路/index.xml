@@ -204,7 +204,8 @@
 &lt;p&gt;RDP是一个多通道的协议，它允许用户通过网络连接到提供微软终端机服务的计算机，并在本地计算机上查看和操作远程计算机的桌面界面。通过RDP，用户可以远程登录到运行Windows操作系统的远程计算机，并像在本地计算机上一样使用远程计算机的资源和应用程序，这个其实类似我们如今todesk、向日葵远程等。&lt;/p&gt;
 &lt;blockquote class=&#34;alert alert-note&#34;&gt;
     &lt;blockquote&gt;
-&lt;p&gt;市面上的远程链接软件如todesk都采用自研的混合传输协议，比较安全，而RDP连接没那么可靠，毕竟连接需要给出用户的密码和用户名，这相对有一定的风险。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;市面上的远程链接软件如todesk都采用自研的混合传输协议，比较安全，而RDP连接没那么可靠，毕竟连接需要给出用户的密码和用户名，这相对有一定的风险。&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/blockquote&gt;
 &lt;p&gt;接下来使用一下RDP（有些家用版windows是没有RDP功能的，一般企业版多数有，主机没有RDP功能的就下两台虚拟机来实操一下咯）（指令在上文）：&lt;/p&gt;
 &lt;p&gt;1、准备一或二台虚拟机win用来远程连接，可以下载两台虚拟机，win7和win 2003，我这里用主机和win7好看些。&lt;/p&gt;
 &lt;p&gt;2、虚拟机/主机需要开启远程服务。&lt;/p&gt;
@@ -281,7 +282,8 @@
 &lt;p&gt;Linux具有良好的安全性。由于其开源性，Linux操作系统可以由全球的开发者社区进行审查和修复漏洞。这使得Linux具备快速响应和更新的能力，以应对不断变化的安全威胁。此外，Linux提供了强大的权限管理和安全工具，帮助管理员保护服务器免受潜在的威胁。&lt;/p&gt;
 &lt;blockquote class=&#34;alert alert-note&#34;&gt;
     &lt;blockquote&gt;
-&lt;p&gt;发行版是指基于开源软件的操作系统的特定版本，经过整合、配置和打包后向用户发布的软件发行形式。它是将开源软件进行定制化和优化的结果，以便用户能够更方便地使用和管理操作系统。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;发行版是指基于开源软件的操作系统的特定版本，经过整合、配置和打包后向用户发布的软件发行形式。它是将开源软件进行定制化和优化的结果，以便用户能够更方便地使用和管理操作系统。&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/blockquote&gt;
 &lt;h4 id=&#34;环境部署&#34;&gt;环境部署
 &lt;/h4&gt;&lt;h5 id=&#34;linux系统环境搭建&#34;&gt;Linux系统环境搭建
 &lt;/h5&gt;&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/14.png&#34;
@@ -523,7 +525,8 @@ $y$j9T$zY1oKFxJlTgP2WcJhzbNl1$xhkUmB8R9fzETc/1kgL/nOPcWFTvhn17clxXCgyFjpC：加�
 &gt;&lt;/p&gt;
 &lt;blockquote class=&#34;alert alert-note&#34;&gt;
     &lt;blockquote&gt;
-&lt;p&gt;在这里可以发现，像change mode、password命令一样，都是些缩写，变成chmod、passwd这样的，很多Kali命令都是会缩写的，很好记。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;在这里可以发现，像change mode、password命令一样，都是些缩写，变成chmod、passwd这样的，很多Kali命令都是会缩写的，很好记。&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/blockquote&gt;
 &lt;h4 id=&#34;linux进程与软件管理&#34;&gt;Linux进程与软件管理
 &lt;/h4&gt;&lt;h5 id=&#34;进程概述&#34;&gt;进程概述
 &lt;/h5&gt;&lt;p&gt;Linux系统进程是指在Linux操作系统中运行的每一个独立的任务或程序实例。每个进程都拥有自己的地址空间、系统资源（如文件句柄和内存）以及一个唯一的进程标识符（PID）。Linux通过进程模型实现了多任务处理和并发执行，允许同时运行多个进程。&lt;/p&gt;
@@ -545,7 +548,8 @@ $y$j9T$zY1oKFxJlTgP2WcJhzbNl1$xhkUmB8R9fzETc/1kgL/nOPcWFTvhn17clxXCgyFjpC：加�
 &gt;&lt;/p&gt;
 &lt;blockquote class=&#34;alert alert-tip&#34;&gt;
     &lt;blockquote&gt;
-&lt;p&gt;当然有时候要用到IP、远程连接这样的话，难免会连接不上，那你可以试着重启，用到ifconfig &amp;lt;网卡比如eth0、eth1这样的&amp;gt; down，这样就把这个网卡关了，然后过一会就再输一次命令，把down换成up，就是开启网卡了。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;当然有时候要用到IP、远程连接这样的话，难免会连接不上，那你可以试着重启，用到ifconfig &amp;lt;网卡比如eth0、eth1这样的&amp;gt; down，这样就把这个网卡关了，然后过一会就再输一次命令，把down换成up，就是开启网卡了。&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/blockquote&gt;
 &lt;p&gt;ps：显示当前终端下运行的进程&lt;/p&gt;
 &lt;p&gt;ps -aux：显示所有用户的所有进程，包括系统进程，提供更详细的进程信息.第二张图可以看到我们刚刚用了ps -aux指令的记录。&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/25.png&#34;
@@ -588,7 +592,8 @@ $y$j9T$zY1oKFxJlTgP2WcJhzbNl1$xhkUmB8R9fzETc/1kgL/nOPcWFTvhn17clxXCgyFjpC：加�
 &lt;p&gt;kill -9 （pid）：强制终止进程（-9 对应信号编号 9，即 SIGKILL 信号，这是一种强制终止信号，具有最高优先级。&lt;/p&gt;
 &lt;blockquote class=&#34;alert alert-error&#34;&gt;
     &lt;blockquote&gt;
-&lt;p&gt;但是我比较建议你用上面的kill（PID），因为通常在进程正常终止（如 kill （PID）发送的 SIGTERM 信号）无效时，才会使用 -9 强制&lt;strong&gt;杀死&lt;/strong&gt;进程，但这种方式可能导致进程正在处理的数据丢失或资源未正常释放，因此需谨慎使用）&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;但是我比较建议你用上面的kill（PID），因为通常在进程正常终止（如 kill （PID）发送的 SIGTERM 信号）无效时，才会使用 -9 强制&lt;strong&gt;杀死&lt;/strong&gt;进程，但这种方式可能导致进程正在处理的数据丢失或资源未正常释放，因此需谨慎使用）&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/blockquote&gt;
 &lt;p&gt;那有个问题来了，服务进程这么多一个个看PID查找忒麻烦啊！那可以用到pidof命令去找到你需要关闭的服务进程的pid。例如要关掉sshd远程连接服务，那我们就用pidof命令去找它的pid：&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/29.png&#34;
 	width=&#34;525&#34;
@@ -611,12 +616,14 @@ $y$j9T$zY1oKFxJlTgP2WcJhzbNl1$xhkUmB8R9fzETc/1kgL/nOPcWFTvhn17clxXCgyFjpC：加�
 &lt;p&gt;安装一个包的命令：apt install xx&lt;/p&gt;
 &lt;blockquote class=&#34;alert alert-warn&#34;&gt;
     &lt;blockquote&gt;
-&lt;p&gt;这里记得要切换root用户，不然会报错，权限不足&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;这里记得要切换root用户，不然会报错，权限不足&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/blockquote&gt;
 &lt;p&gt;&lt;strong&gt;列出所有可更新的软件清单命令：apt update&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;升级软件包：apt upgrade&lt;/strong&gt;&lt;/p&gt;
 &lt;blockquote class=&#34;alert alert-tip&#34;&gt;
     &lt;blockquote&gt;
-&lt;p&gt;在通过Linux进行命令行下载工具时，记得apt update一下噢&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;在通过Linux进行命令行下载工具时，记得apt update一下噢&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/blockquote&gt;
 &lt;p&gt;安装指定的软件命令：apt install &amp;lt;package_name&amp;gt;&lt;/p&gt;
 &lt;p&gt;删除软件包命令：apt remove &amp;lt;package_name&amp;gt;&lt;/p&gt;
 &lt;p&gt;列出所有已安装的包：apt list &amp;ndash;installed&lt;/p&gt;
@@ -654,11 +661,13 @@ $y$j9T$zY1oKFxJlTgP2WcJhzbNl1$xhkUmB8R9fzETc/1kgL/nOPcWFTvhn17clxXCgyFjpC：加�
 &lt;p&gt;Bourne Again Shell（/bin/bash）&lt;/p&gt;
 &lt;p&gt;C Shell（/usr/bin/csh）&lt;/p&gt;
 &lt;p&gt;K Shell（/usr/bin/ksh）&lt;/p&gt;
-&lt;p&gt;Shell for Root（/sbin/sh）&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;Shell for Root（/sbin/sh）&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;由于&lt;strong&gt;bash&lt;/strong&gt;易用与免费，其被广泛使用也是大多数Linux系统的默认Shell。(Kali目前为zsh，兼容bash) /bin/bash&lt;/p&gt;
 &lt;blockquote class=&#34;alert alert-note&#34;&gt;
     &lt;blockquote&gt;
-&lt;p&gt;/bin/bash这个shell适用在轻量级程序，易写好操作。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;/bin/bash这个shell适用在轻量级程序，易写好操作。&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/blockquote&gt;
 &lt;p&gt;接下来拿/bin/bash这个shell举个应用例子：&lt;/p&gt;
 &lt;p&gt;打开Kali终端，然后输入vim指令：&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/32.png&#34;
@@ -677,7 +686,8 @@ $y$j9T$zY1oKFxJlTgP2WcJhzbNl1$xhkUmB8R9fzETc/1kgL/nOPcWFTvhn17clxXCgyFjpC：加�
 &gt;&lt;/p&gt;
 &lt;blockquote class=&#34;alert alert-tip&#34;&gt;
     &lt;blockquote&gt;
-&lt;p&gt;在 Kali Linux 中，&lt;code&gt;vim&lt;/code&gt; 是一个&lt;strong&gt;命令行文本编辑器&lt;/strong&gt;的启动指令，用于创建、打开和编辑文本文件（如配置文件、脚本、代码等）。当然也是用它来编shell脚本的。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;在 Kali Linux 中，&lt;code&gt;vim&lt;/code&gt; 是一个&lt;strong&gt;命令行文本编辑器&lt;/strong&gt;的启动指令，用于创建、打开和编辑文本文件（如配置文件、脚本、代码等）。当然也是用它来编shell脚本的。&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/blockquote&gt;
 &lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/33.png&#34;
 	width=&#34;1035&#34;
 	height=&#34;195&#34;
@@ -839,7 +849,8 @@ $y$j9T$zY1oKFxJlTgP2WcJhzbNl1$xhkUmB8R9fzETc/1kgL/nOPcWFTvhn17clxXCgyFjpC：加�
 &lt;p&gt;这里给大家这些命令，关于详细用法在后续，下一阶段将和burpsuite细讲&amp;hellip;&amp;hellip;&lt;/p&gt;
 &lt;blockquote class=&#34;alert alert-warn&#34;&gt;
     &lt;blockquote&gt;
-&lt;p&gt;法律问题：未经授权对系统进行密码破解是违法行为，仅可在自己拥有或获得明确许可的系统上使用。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;法律问题：未经授权对系统进行密码破解是违法行为，仅可在自己拥有或获得明确许可的系统上使用。&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/blockquote&gt;
 &lt;h2 id=&#34;网络安全基础&#34;&gt;网络安全基础
 &lt;/h2&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;%e8%ae%a1%e7%ae%97%e6%9c%ba%e7%bd%91%e7%bb%9c%e4%bf%9d%e5%a7%86%e7%ba%a7%e8%b5%84%e6%96%99.pdf&#34; &gt;计算机网络保姆级资料&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&#34;计算机网络&#34;&gt;计算机网络
@@ -912,7 +923,8 @@ $y$j9T$zY1oKFxJlTgP2WcJhzbNl1$xhkUmB8R9fzETc/1kgL/nOPcWFTvhn17clxXCgyFjpC：加�
 &lt;/h4&gt;&lt;p&gt;TCP工作机制：三次握手建立连接，四次挥手断开连接。&lt;/p&gt;
 &lt;blockquote class=&#34;alert alert-note&#34;&gt;
     &lt;blockquote&gt;
-&lt;p&gt;TCP(Transmission Control Protocol 传输控制协议)是一种面向连接的、可靠的。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;TCP(Transmission Control Protocol 传输控制协议)是一种面向连接的、可靠的。&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/blockquote&gt;
 &lt;p&gt;UDP协议：&lt;/p&gt;
 &lt;p&gt;用户数据报协议，无连接的、不可靠的、基于数据报的传输层通信协议。&lt;/p&gt;
 &lt;p&gt;用于数据传输控制的协议，对数据的可靠性、安全没有保证，不需要连接就可以发送。&lt;/p&gt;
@@ -1366,7 +1378,8 @@ $y$j9T$zY1oKFxJlTgP2WcJhzbNl1$xhkUmB8R9fzETc/1kgL/nOPcWFTvhn17clxXCgyFjpC：加�
 &lt;/h4&gt;&lt;h3 id=&#34;web前端&#34;&gt;Web前端
 &lt;/h3&gt;&lt;blockquote class=&#34;alert alert-tip&#34;&gt;
     &lt;blockquote&gt;
-&lt;p&gt;本章前端对于网安人来说学习要求不高，能基本读懂代码知道代码大概意思以及前端语言的结构样式就好。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;本章前端对于网安人来说学习要求不高，能基本读懂代码知道代码大概意思以及前端语言的结构样式就好。&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/blockquote&gt;
 &lt;h4 id=&#34;html网页的结构骨架&#34;&gt;HTML：网页的“结构骨架”
 &lt;/h4&gt;&lt;p&gt;HTML全称（hyper text markup language）译为超文本标记语言。&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/64.png&#34;
@@ -1603,10 +1616,12 @@ $y$j9T$zY1oKFxJlTgP2WcJhzbNl1$xhkUmB8R9fzETc/1kgL/nOPcWFTvhn17clxXCgyFjpC：加�
 &lt;li&gt;&lt;strong&gt;CSS&lt;/strong&gt;：咖啡店的 “装修风格”（墙面颜色、灯光亮度、桌椅样式、招牌设计），决定 “看起来好不好看”；&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;JavaScript&lt;/strong&gt;：咖啡店的 “服务功能”（店员响应点单、自动门感应开门、电视播放视频），实现 “用户能做什么交互”。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;三者共同组成了我的博客&amp;hellip;&amp;hellip;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;三者共同组成了我的博客&amp;hellip;&amp;hellip;&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;blockquote class=&#34;alert alert-note&#34;&gt;
     &lt;blockquote&gt;
-&lt;p&gt;没有 HTML，CSS 和 JS 就没有 “作用对象”；没有 CSS，HTML 只是无样式的骨架；没有 JS，网页只是 “静态图片”，无法响应用户操作。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;没有 HTML，CSS 和 JS 就没有 “作用对象”；没有 CSS，HTML 只是无样式的骨架；没有 JS，网页只是 “静态图片”，无法响应用户操作。&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/blockquote&gt;
 &lt;h3 id=&#34;web后端&#34;&gt;Web后端
 &lt;/h3&gt;&lt;p&gt;客户端与服务端交互流程：&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/73.png&#34;
@@ -1681,7 +1696,8 @@ $y$j9T$zY1oKFxJlTgP2WcJhzbNl1$xhkUmB8R9fzETc/1kgL/nOPcWFTvhn17clxXCgyFjpC：加�
 &lt;p&gt;- 变量名是区分大小写的（$y 和 $Y 是两个不同的变量）&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;注意：当赋一个文本值给变量时，需要在文本值两侧加上引号。&lt;/p&gt;
-&lt;p&gt;PHP 语句和 PHP 变量都是区分大小写的。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;PHP 语句和 PHP 变量都是区分大小写的。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h5 id=&#34;php页面输出&#34;&gt;PHP页面输出：
 &lt;/h5&gt;&lt;p&gt;echo——输出单一类型(数值，字符串，布尔)，多个用逗号隔开。&lt;/p&gt;
 &lt;p&gt;print_r()——输出复合类型（数组，对象），一般用于输出&lt;strong&gt;数组&lt;/strong&gt;。&lt;/p&gt;
@@ -1947,7 +1963,8 @@ $y$j9T$zY1oKFxJlTgP2WcJhzbNl1$xhkUmB8R9fzETc/1kgL/nOPcWFTvhn17clxXCgyFjpC：加�
 &lt;blockquote&gt;
 &lt;p&gt;PHP 函数准则：&lt;/p&gt;
 &lt;p&gt;函数的名称应该提示出它的功能;&lt;/p&gt;
-&lt;p&gt;函数名称以字母或下划线开头（不能以数字开头）。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;函数名称以字母或下划线开头（不能以数字开头）。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;示例，下面的函数有两个参数：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -2006,7 +2023,8 @@ $y$j9T$zY1oKFxJlTgP2WcJhzbNl1$xhkUmB8R9fzETc/1kgL/nOPcWFTvhn17clxXCgyFjpC：加�
 &lt;p&gt;require(); php包含文件&lt;/p&gt;
 &lt;p&gt;require_once(); php包含文件&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;serialize() 序列话函数&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;unserialize() 反序列话函数&lt;/strong&gt;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;unserialize() 反序列话函数&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;blockquote class=&#34;alert alert-note&#34;&gt;
     &lt;blockquote&gt;
 &lt;p&gt;这些函数是 PHP 安全的 “高频考点”，几乎所有涉及 PHP 的 CTF Web 题目（如文件包含、反序列化、逻辑漏洞、哈希绕过等）都会用到它们的特性。理解这些函数的工作原理、参数处理方式及潜在漏洞点，是解决 PHP 相关 Web 题目的基础:&lt;/p&gt;
@@ -2014,7 +2032,8 @@ $y$j9T$zY1oKFxJlTgP2WcJhzbNl1$xhkUmB8R9fzETc/1kgL/nOPcWFTvhn17clxXCgyFjpC：加�
 &lt;li&gt;&lt;strong&gt;哈希比较漏洞&lt;/strong&gt;：利用 &lt;code&gt;md5()&lt;/code&gt; 对数组处理返回 &lt;code&gt;null&lt;/code&gt; 的特性（如 &lt;code&gt;md5([]) == md5([])&lt;/code&gt; 为 &lt;code&gt;true&lt;/code&gt;）绕过验证。&lt;/li&gt;
 &lt;li&gt;include()/include_once()/require()/require_once()是 PHP 中&lt;strong&gt;文件包含漏洞&lt;/strong&gt;的直接成因，在 CTF 中极为常见&lt;/li&gt;
 &lt;li&gt;序列化与反序列化函数（&lt;code&gt;serialize()&lt;/code&gt;/&lt;code&gt;unserialize()&lt;/code&gt;）：反序列化漏洞关键&lt;/li&gt;
-&lt;/ul&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;&lt;/blockquote&gt;
 &lt;h5 id=&#34;web基础-1&#34;&gt;Web基础
 &lt;/h5&gt;&lt;h5 id=&#34;php数组&#34;&gt;PHP数组
 &lt;/h5&gt;&lt;p&gt;PHP数组是一种数据结构，用于存储键值对集合，其中每个键可以是整数索引或字符串索引，而值可以是任何类型的数据。&lt;/p&gt;
@@ -2273,7 +2292,8 @@ $y$j9T$zY1oKFxJlTgP2WcJhzbNl1$xhkUmB8R9fzETc/1kgL/nOPcWFTvhn17clxXCgyFjpC：加�
     &lt;blockquote&gt;
 &lt;p&gt;文件上传必要条件&lt;/p&gt;
 &lt;p&gt;（1）method属性：表单提交方式必须为POST&lt;/p&gt;
-&lt;p&gt;（2）enctype属性：form表单属性，主要是规范表单数据的编码方式enctype= &amp;ldquo;multipart/form-data&amp;rdquo;&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;（2）enctype属性：form表单属性，主要是规范表单数据的编码方式enctype= &amp;ldquo;multipart/form-data&amp;rdquo;&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/blockquote&gt;
 &lt;p&gt;$_FILES超级全局变量作用是存储各种与上传文件有关的信息;&lt;/p&gt;
 &lt;p&gt;$_FILES是一个二维数组，数组中共有5项：&lt;/p&gt;
 &lt;blockquote&gt;
@@ -2284,7 +2304,8 @@ $y$j9T$zY1oKFxJlTgP2WcJhzbNl1$xhkUmB8R9fzETc/1kgL/nOPcWFTvhn17clxXCgyFjpC：加�
 &lt;p&gt;上传文件的大小, 以字节为单位，已上传文件的大小，单位为字节。&lt;/p&gt;
 &lt;p&gt;4、$_FILES[&amp;ldquo;userfile&amp;rdquo;][&amp;ldquo;tmp_name&amp;rdquo;]&lt;/p&gt;
 &lt;p&gt;文件上传后在服务器端储存的临时文件名，文件被上传后在服务端储存的临时文件名。&lt;/p&gt;
-&lt;p&gt;5、$_FILES[&amp;ldquo;userfile&amp;rdquo;][&amp;ldquo;error&amp;rdquo;] 文件上传相关的错误代码0 1 2 3 4&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;5、$_FILES[&amp;ldquo;userfile&amp;rdquo;][&amp;ldquo;error&amp;rdquo;] 文件上传相关的错误代码0 1 2 3 4&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
@@ -2377,7 +2398,8 @@ $y$j9T$zY1oKFxJlTgP2WcJhzbNl1$xhkUmB8R9fzETc/1kgL/nOPcWFTvhn17clxXCgyFjpC：加�
 &lt;p&gt;类是抽象的概念，仅仅是模板。用来描述具有相同属性和方法的对象的集合。比如： &amp;ldquo;人&amp;quot;是一个类。&lt;/p&gt;
 &lt;p&gt;对象是类的实例，是某一个具体的事物 ，如 “黄结伟老师”则是具体存在的一个对象&lt;/p&gt;
 &lt;p&gt;例：类：人类（抽象事物）&lt;/p&gt;
-&lt;p&gt;对象： 黄结伟老师、UP主本人（实实在在存在的东西）&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;对象： 黄结伟老师、UP主本人（实实在在存在的东西）&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;&lt;strong&gt;类修饰符&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;public（公有）&lt;/p&gt;
 &lt;p&gt;特性：在任何范围可访问（类内部、⼦类、类外部）&lt;/p&gt;
@@ -2436,7 +2458,8 @@ $y$j9T$zY1oKFxJlTgP2WcJhzbNl1$xhkUmB8R9fzETc/1kgL/nOPcWFTvhn17clxXCgyFjpC：加�
 &lt;/div&gt;&lt;blockquote&gt;
 &lt;p&gt;类可以包含属性（变量）和方法（函数）&lt;/p&gt;
 &lt;p&gt;属性用于存储数据，而方法用于执行操作&lt;/p&gt;
-&lt;p&gt;new关键字直接跟类名来创建对象&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;new关键字直接跟类名来创建对象&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -2600,7 +2623,8 @@ $y$j9T$zY1oKFxJlTgP2WcJhzbNl1$xhkUmB8R9fzETc/1kgL/nOPcWFTvhn17clxXCgyFjpC：加�
 &lt;/h5&gt;&lt;p&gt;php序列化：将PHP数据结构转换为可存储/传输的字符串格式；序列化函数serialize()。&lt;/p&gt;
 &lt;blockquote class=&#34;alert alert-error&#34;&gt;
     &lt;blockquote&gt;
-&lt;p&gt;触发时机：当对象被序列化自动调用。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;触发时机：当对象被序列化自动调用。&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/blockquote&gt;
 &lt;p&gt;功能：该方法可以清理对象，并返回一个包含所有应被序列化的属性名称的数组。如果该方法未返回任何内容，则 NULL 被序列化，并产生一个 E_WARNING级别的错误。&lt;/p&gt;
 &lt;blockquote class=&#34;alert alert-warn&#34;&gt;
     &lt;p&gt;这种方法不接受任何参数!!&lt;/p&gt;&lt;/blockquote&gt;
@@ -2751,9 +2775,317 @@ $y$j9T$zY1oKFxJlTgP2WcJhzbNl1$xhkUmB8R9fzETc/1kgL/nOPcWFTvhn17clxXCgyFjpC：加�
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;它支持数据表的创建、修改、删除以及数据的增删改查等操作。Navicat还提供了可视化的查询构建工具，使得查询操作更加直观和方便。&lt;/p&gt;
-&lt;h3 id=&#34;客户端使用演示&#34;&gt;客户端使用演示
-&lt;/h3&gt;&lt;h4 id=&#34;数据库&#34;&gt;数据库
-&lt;/h4&gt;&lt;p&gt;1、查看所有数据库&lt;/p&gt;
+&lt;p&gt;现在我来做一个粗略的介绍，这个数据库里面的东西的含义，以图形化界面Navicat为例：&lt;/p&gt;
+&lt;p&gt;连接好mysql后，我们看到一个&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/110.png&#34;
+	width=&#34;1121&#34;
+	height=&#34;766&#34;
+	srcset=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/110_hu_a3a529227790b222.png 480w, https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/110_hu_353e1b609210f947.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;146&#34;
+		data-flex-basis=&#34;351px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;大致是这样，有些人数据库比较多，看自己之前是否有涉及到这方面应用可能会下载过一些定西，比如&lt;strong&gt;pikachu&lt;/strong&gt;，我这里都是默认的数据库。&lt;/p&gt;
+&lt;p&gt;查看数据表：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/111.png&#34;
+	width=&#34;1060&#34;
+	height=&#34;780&#34;
+	srcset=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/111_hu_f4f10fecd52a0f3b.png 480w, https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/111_hu_6c2a161ad52d7d80.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;135&#34;
+		data-flex-basis=&#34;326px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;以SCHEMATA为例：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/112.png&#34;
+	width=&#34;1044&#34;
+	height=&#34;718&#34;
+	srcset=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/112_hu_7e4fcacf1a2dbb78.png 480w, https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/112_hu_8707151329073f09.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;145&#34;
+		data-flex-basis=&#34;348px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;可以发现这很像excel表格，有表单有字段数据等，前文介绍了数据库，大概就是这样储存的；再细心发现这好像是上上一张图的一些数据库的名字，这个板块其实储存的是数据库的表名。&lt;/p&gt;
+&lt;p&gt;来，我们看到TABLES这一张表：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/113.png&#34;
+	width=&#34;1920&#34;
+	height=&#34;1011&#34;
+	srcset=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/113_hu_29dfe5f084605280.png 480w, https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/113_hu_ab79f5f9153df924.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;189&#34;
+		data-flex-basis=&#34;455px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;晕了晕了&amp;hellip;&amp;hellip;这么多。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/114.png&#34;
+	width=&#34;1361&#34;
+	height=&#34;774&#34;
+	srcset=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/114_hu_6d3d3f65480ce6ac.png 480w, https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/114_hu_b04639d30d38b18a.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;175&#34;
+		data-flex-basis=&#34;422px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;看到第三列，这其实是数据库表名相关对应的TABLES表；第二列就是名子，在SCHEMATA的表看到。&lt;/p&gt;
+&lt;p&gt;看到COLUMNS：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/115.png&#34;
+	width=&#34;1620&#34;
+	height=&#34;965&#34;
+	srcset=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/115_hu_eed1f362c9049ee8.png 480w, https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/115_hu_4e4afecf88a434c6.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;167&#34;
+		data-flex-basis=&#34;402px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;第二列存放的是数据库名；第三列是存放的是表名；第四列存放的就是跟字段名字相关的名字。&lt;/p&gt;
+&lt;blockquote class=&#34;alert alert-note&#34;&gt;
+    &lt;blockquote&gt;
+&lt;p&gt;幸运的是，如果你能坚持看到这里，不免会像我一样有疑惑：（我为什么要写这Mysql）我为什么要看这段文章，感觉跟CTF、攻防、渗透好像关系不大啊&amp;hellip;当我看回自己这篇文章也会觉得，其实对Mysql等数据库来说，这方面安全也需要多加在意的，这就是数据库安全，你耐心学，去了解这些Mysql等数据库知识，这也是以便你后面进行SQL注入学习、查询打下的一个基础，切忌速通、一把梭！慢工出细活，了解本质才能赢下去。&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;大家只需要多关注一下这三个表：COLUMNS、TABLES、SCHEMATA。其它的表点进去看一下浅浅了解下就好。&lt;/p&gt;
+&lt;p&gt;接下来我们倒回去查看mysql数据库中的user表：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/116.png&#34;
+	width=&#34;1624&#34;
+	height=&#34;829&#34;
+	srcset=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/116_hu_3483c0e643540580.png 480w, https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/116_hu_38ac623fcc95f3d8.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;195&#34;
+		data-flex-basis=&#34;470px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;顺便打开phpstudy，对照一下：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/117.png&#34;
+	width=&#34;990&#34;
+	height=&#34;769&#34;
+	srcset=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/117_hu_ee9ca5ab7099188d.png 480w, https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/117_hu_304b4030f8d9aabe.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;128&#34;
+		data-flex-basis=&#34;308px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;可以看到数据库表上有个root，和我的小皮界面上的root对应上了，我这里没有打开，你自己尝试的话可以发现是有个IP地址在上面，还有主机名，这都是mysql所记录名单下的数据。可以知道user表下存储的就是用户的权限数据、密码、主机名还有IP。&lt;/p&gt;
+&lt;blockquote class=&#34;alert alert-error&#34;&gt;
+    &lt;blockquote&gt;
+&lt;p&gt;这很可怕，意味着在实际情况中，数据库安全做得不到位得话被入侵就意味着数据被泄露。&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;翻到performance_schema数据库：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/118.png&#34;
+	width=&#34;1684&#34;
+	height=&#34;914&#34;
+	srcset=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/118_hu_3037bb9c71e29f90.png 480w, https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/118_hu_e2b3750eb4d0f100.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;184&#34;
+		data-flex-basis=&#34;442px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;这个数据库内容包含得是诊断数据库的问题、报错，语句执行得时间，类似于日志那样的。&lt;/p&gt;
+&lt;p&gt;如果你是打算走&lt;strong&gt;电子取证方向&lt;/strong&gt;的话，这个地方你后面会接触的比较多。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;总结：主要还是关注performance_schema、mysql、information_schema这三个系统数据库。&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;数据库数据类型&#34;&gt;数据库数据类型
+&lt;/h3&gt;&lt;p&gt;是指MySQL数据库中用于定义表的列时可以指定的数据类型，它们决定了列中可以存储什么类型的数据。MySQL支持多种数据类型，每种数据类型都有其特定的用途和限制。&lt;/p&gt;
+&lt;h4 id=&#34;数值类型&#34;&gt;数值类型
+&lt;/h4&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;类型&lt;/th&gt;
+          &lt;th&gt;存储（字节）&lt;/th&gt;
+          &lt;th&gt;有符号数值取值范围&lt;/th&gt;
+          &lt;th&gt;无符号数值取值范围&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;TINYINT&lt;/td&gt;
+          &lt;td&gt;1&lt;/td&gt;
+          &lt;td&gt;-128 ~ 127&lt;/td&gt;
+          &lt;td&gt;0 ~ 255&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;SMALLINT&lt;/td&gt;
+          &lt;td&gt;2&lt;/td&gt;
+          &lt;td&gt;-32768 ~ 32767&lt;/td&gt;
+          &lt;td&gt;0 ~ 65535&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;MEDIUMINT&lt;/td&gt;
+          &lt;td&gt;3&lt;/td&gt;
+          &lt;td&gt;-8388608 ~ 8388607&lt;/td&gt;
+          &lt;td&gt;0 ~ 16777215&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;INT&lt;/td&gt;
+          &lt;td&gt;4&lt;/td&gt;
+          &lt;td&gt;-2147483648 ~ 2147483647&lt;/td&gt;
+          &lt;td&gt;0 ~ 4294967295&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;BIGINT（整数值超过int时使用）&lt;/td&gt;
+          &lt;td&gt;8&lt;/td&gt;
+          &lt;td&gt;-2^63 ~~ (2^63 -1)&lt;/td&gt;
+          &lt;td&gt;0 ~ 2^64-1&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h4 id=&#34;浮点数类型&#34;&gt;浮点数类型
+&lt;/h4&gt;&lt;p&gt;FLOAT：占用4个字节，用于表示单精度浮点数值。&lt;/p&gt;
+&lt;p&gt;DOUBLE：占用8个字节，用于表示双精度浮点数值。（小数点后的数字更多，内存空间也会更多）&lt;/p&gt;
+&lt;p&gt;DECIMAL：用于表示高精度的小数，其精度和计数方法可以指定，以适应特定的需求。（小数点后位更多，一般银行使用的较多）&lt;/p&gt;
+&lt;h4 id=&#34;日期和时间类型&#34;&gt;日期和时间类型
+&lt;/h4&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;类型&lt;/th&gt;
+          &lt;th&gt;大小（bytes）&lt;/th&gt;
+          &lt;th&gt;范围&lt;/th&gt;
+          &lt;th&gt;格式&lt;/th&gt;
+          &lt;th&gt;用途&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;DATE&lt;/td&gt;
+          &lt;td&gt;3&lt;/td&gt;
+          &lt;td&gt;1000-01-01/9999-12-31&lt;/td&gt;
+          &lt;td&gt;YYYY-MM-DD&lt;/td&gt;
+          &lt;td&gt;日期值&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;TIME&lt;/td&gt;
+          &lt;td&gt;3&lt;/td&gt;
+          &lt;td&gt;-838:59:59/838:59:59&lt;/td&gt;
+          &lt;td&gt;HH:MM:SS&lt;/td&gt;
+          &lt;td&gt;时间值或持续时间&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;YEAR&lt;/td&gt;
+          &lt;td&gt;1&lt;/td&gt;
+          &lt;td&gt;1901/2155&lt;/td&gt;
+          &lt;td&gt;YYYY&lt;/td&gt;
+          &lt;td&gt;年份值&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;DATETIME&lt;/td&gt;
+          &lt;td&gt;8&lt;/td&gt;
+          &lt;td&gt;1000-01-01 00:00:00&amp;rsquo; 到 &amp;lsquo;9999-12-31 23:59:59&lt;/td&gt;
+          &lt;td&gt;YYYY-MM-DD&lt;br /&gt;hh:mm:ss&lt;/td&gt;
+          &lt;td&gt;混合日期和时间值&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;TIMESTAMP&lt;/td&gt;
+          &lt;td&gt;4&lt;/td&gt;
+          &lt;td&gt;1970-01-01 00:00:01&amp;rsquo; UTC 到 &amp;lsquo;2038-01-19 03:14:07&lt;/td&gt;
+          &lt;td&gt;YYYY-MM-DD&lt;br /&gt;hh:mm:ss&lt;/td&gt;
+          &lt;td&gt;混合日期和时间值，时间戳&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h4 id=&#34;字符串类型-1&#34;&gt;字符串类型
+&lt;/h4&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;类型&lt;/th&gt;
+          &lt;th&gt;大小&lt;/th&gt;
+          &lt;th&gt;用途&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;CHAR&lt;/td&gt;
+          &lt;td&gt;0-255 bytes&lt;/td&gt;
+          &lt;td&gt;定长字符串&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;VARCHAR&lt;/td&gt;
+          &lt;td&gt;0-65535 bytes&lt;/td&gt;
+          &lt;td&gt;变长字符串&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;TINYBLOB&lt;/td&gt;
+          &lt;td&gt;0-255 bytes&lt;/td&gt;
+          &lt;td&gt;不超过 255 个字符的二进制字符串&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;TINYTEXT&lt;/td&gt;
+          &lt;td&gt;0-255 bytes&lt;/td&gt;
+          &lt;td&gt;短文本字符串&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;BLOB&lt;/td&gt;
+          &lt;td&gt;0-65 535 bytes&lt;/td&gt;
+          &lt;td&gt;二进制形式的长文本数据&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;TEXT&lt;/td&gt;
+          &lt;td&gt;0-65 535 bytes&lt;/td&gt;
+          &lt;td&gt;长文本数据&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;MEDIUMBLOB&lt;/td&gt;
+          &lt;td&gt;0-16 777 215 bytes&lt;/td&gt;
+          &lt;td&gt;二进制形式的中等长度文本数据&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;MEDIUMTEXT&lt;/td&gt;
+          &lt;td&gt;0-16 777 215 bytes&lt;/td&gt;
+          &lt;td&gt;中等长度文本数据&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;LONGBLOB&lt;/td&gt;
+          &lt;td&gt;0-4 294 967 295 bytes&lt;/td&gt;
+          &lt;td&gt;二进制形式的极大文本数据&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;LONGTEXT&lt;/td&gt;
+          &lt;td&gt;0-4 294 967 295 bytes&lt;/td&gt;
+          &lt;td&gt;极大文本数据&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;客户端使用演示终端命令行&#34;&gt;客户端使用演示（终端命令行）
+&lt;/h3&gt;&lt;p&gt;接下来可以用mysql命令去字节实操一下：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/119.png&#34;
+	width=&#34;1479&#34;
+	height=&#34;759&#34;
+	srcset=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/119_hu_8f01e01f0ffa19df.png 480w, https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/119_hu_6d222dfd488e2043.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;194&#34;
+		data-flex-basis=&#34;467px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h4 id=&#34;数据库&#34;&gt;数据库
+&lt;/h4&gt;&lt;p&gt;1、查看所有数据库（分号；别漏）&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -2762,7 +3094,20 @@ $y$j9T$zY1oKFxJlTgP2WcJhzbNl1$xhkUmB8R9fzETc/1kgL/nOPcWFTvhn17clxXCgyFjpC：加�
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-mysql&#34; data-lang=&#34;mysql&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;show&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;databases&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;2、创建自己的数据库&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/120.png&#34;
+	width=&#34;745&#34;
+	height=&#34;250&#34;
+	srcset=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/120_hu_36544b860765760e.png 480w, https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/120_hu_248983a1d8c3cff0.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;298&#34;
+		data-flex-basis=&#34;715px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;可以发现这个正是我们在navicat上看到的界面，只不过这是终端界面比较枯燥。&lt;/p&gt;
+&lt;p&gt;2、创建自己的数据库&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -2915,6 +3260,9 @@ $y$j9T$zY1oKFxJlTgP2WcJhzbNl1$xhkUmB8R9fzETc/1kgL/nOPcWFTvhn17clxXCgyFjpC：加�
 &lt;/div&gt;
 &lt;/div&gt;&lt;h3 id=&#34;可视化客户端&#34;&gt;可视化客户端
 &lt;/h3&gt;&lt;p&gt;前面介绍了通过命令行来创建数据库和数据表，除此之外，还可以借助MySQL图形化工具，而且这种方式更加简单、方便。下面以SQLyog图形化工具为代表展开介绍。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;在前面已经介绍过可视化数据库使用，在此只要粗略过一遍就好。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h4 id=&#34;数据库-1&#34;&gt;数据库
 &lt;/h4&gt;&lt;p&gt;以查看所有数据库的方式登录连接成功后，进入主界面，接下来正式创建数据库。&lt;/p&gt;
 &lt;img src=&#34;89.png&#34; style=&#34;zoom:150%;&#34; /&gt;
@@ -2984,6 +3332,89 @@ $y$j9T$zY1oKFxJlTgP2WcJhzbNl1$xhkUmB8R9fzETc/1kgL/nOPcWFTvhn17clxXCgyFjpC：加�
 &lt;li&gt;本身成对的标点符号必须成对，例如：()，&amp;rsquo;&amp;rsquo;，&amp;quot;&amp;quot;。&lt;/li&gt;
 &lt;li&gt;所有标点符号必须英文状态下半角输入方式下输入。&lt;/li&gt;
 &lt;/ul&gt;
+&lt;h3 id=&#34;ddl&#34;&gt;DDL
+&lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/121.png&#34;
+	width=&#34;791&#34;
+	height=&#34;290&#34;
+	srcset=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/121_hu_d3a735779f1fd557.png 480w, https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/121_hu_d2dc0c54864da855.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;272&#34;
+		data-flex-basis=&#34;654px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;在你创建好数据库后，你肯定是要想有搜索功能的，这时查询功能就体现出来了，以下是终端Mysql的命令：&lt;/p&gt;
+&lt;p&gt;创建表：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;CREATE&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;TABLE&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;修改表：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;ALTER&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;删除表：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;DROP&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;接下来我用navicat来演示：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/122.png&#34;
+	width=&#34;1087&#34;
+	height=&#34;428&#34;
+	srcset=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/122_hu_cb6909de5a562cb6.png 480w, https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/122_hu_5eb9de84941be7b1.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;253&#34;
+		data-flex-basis=&#34;609px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;选择数据库（我以我的Mysql为例）后创建好查询表。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/124.png&#34;
+	width=&#34;719&#34;
+	height=&#34;565&#34;
+	srcset=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/124_hu_a47654810c1dc80f.png 480w, https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/124_hu_817f28651c549415.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;127&#34;
+		data-flex-basis=&#34;305px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;这就是一个面板，很像一些我们经常用的vscode、pycharm那样的编程界面，这里面就是给它编写sql语言的。&lt;/p&gt;
+&lt;p&gt;&amp;hellip;&amp;hellip;至于怎么编写我就不演示了，可以自己试一试，参考&lt;a class=&#34;link&#34; href=&#34;https://expl0rer.top/p/%e7%bd%91%e5%ae%89%e5%ad%a6%e4%b9%a0%e7%ac%ac%e4%b8%80%e9%98%b6%e6%ae%b5/#%e6%95%b0%e6%8d%ae%e5%ba%93&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;SQL语法&lt;/a&gt;编写。&lt;/p&gt;
+&lt;p&gt;写好语句后&lt;code&gt;Ctrl+S&lt;/code&gt;保存，起个名字，我这里是起666：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/123.png&#34;
+	width=&#34;1129&#34;
+	height=&#34;570&#34;
+	srcset=&#34;https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/123_hu_5ac0ce849033b5bb.png 480w, https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/123_hu_735e53d8f5d59cb2.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;198&#34;
+		data-flex-basis=&#34;475px&#34;
+	
+&gt;&lt;/p&gt;
 &lt;h3 id=&#34;dql&#34;&gt;DQL
 &lt;/h3&gt;&lt;p&gt;因为查询语句使用的非常的频繁，所以很多人把查询语句单拎出来一类，DQL（数据查询语言），DR（获取）L。&lt;/p&gt;
 &lt;h4 id=&#34;select语句&#34;&gt;SELECT语句
@@ -5800,7 +6231,8 @@ $y$j9T$zY1oKFxJlTgP2WcJhzbNl1$xhkUmB8R9fzETc/1kgL/nOPcWFTvhn17clxXCgyFjpC：加�
 &lt;p&gt;同学问：是否可以删除salary字段，连同字段和这个字段的数据都是删除&lt;/p&gt;
 &lt;p&gt;可以实现，但是不是用delete，用alter table 表名称 drop column 字段名;&lt;/p&gt;
 &lt;p&gt;同学问：只删除某个单元格的值&lt;/p&gt;
-&lt;p&gt;可以实现，但是不是用delete，用update&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;可以实现，但是不是用delete，用update&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h3 id=&#34;数据库sql语言使用案例&#34;&gt;数据库SQL语言使用案例
 &lt;/h3&gt;&lt;h4 id=&#34;操作数据库&#34;&gt;操作数据库
 &lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;

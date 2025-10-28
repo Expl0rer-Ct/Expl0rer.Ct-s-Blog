@@ -10,7 +10,7 @@
 <meta property='og:description' content="我的学习记录">
 <meta property='og:url' content='https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/'>
 <meta property='og:site_name' content='Expl0rer.Ct'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-07-31T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-10-08T16:19:55&#43;00:00'/><meta property='og:image' content='https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/%E5%B0%81%E9%9D%A2.jpg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-07-31T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-10-28T16:52:23&#43;00:00'/><meta property='og:image' content='https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/%E5%B0%81%E9%9D%A2.jpg' />
 <meta name="twitter:title" content="第一阶段（前置知识）">
 <meta name="twitter:description" content="我的学习记录"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://expl0rer.top/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/%E5%B0%81%E9%9D%A2.jpg' />
@@ -628,6 +628,25 @@
             </a>
         </li>
         
+        
+        <li >
+            <a href='/friends-links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友情链接 | Friends Links</span>
+            </a>
+        </li>
+        
         <li class="menu-bottom-section">
             <ol class="menu">
 
@@ -806,7 +825,15 @@ unicode: "ece7"
           </ol>
         </li>
         <li><a href="#数据库管理工具">数据库管理工具</a></li>
-        <li><a href="#客户端使用演示">客户端使用演示</a>
+        <li><a href="#数据库数据类型">数据库数据类型</a>
+          <ol>
+            <li><a href="#数值类型">数值类型</a></li>
+            <li><a href="#浮点数类型">浮点数类型</a></li>
+            <li><a href="#日期和时间类型">日期和时间类型</a></li>
+            <li><a href="#字符串类型-1">字符串类型</a></li>
+          </ol>
+        </li>
+        <li><a href="#客户端使用演示终端命令行">客户端使用演示（终端命令行）</a>
           <ol>
             <li><a href="#数据库">数据库</a></li>
             <li><a href="#数据表">数据表</a></li>
@@ -826,6 +853,7 @@ unicode: "ece7"
             <li><a href="#mysql脚本中的标点符号">mysql脚本中的标点符号</a></li>
           </ol>
         </li>
+        <li><a href="#ddl">DDL</a></li>
         <li><a href="#dql">DQL</a>
           <ol>
             <li><a href="#select语句">SELECT语句</a></li>
@@ -1184,7 +1212,8 @@ unicode: "ece7"
 <p>RDP是一个多通道的协议，它允许用户通过网络连接到提供微软终端机服务的计算机，并在本地计算机上查看和操作远程计算机的桌面界面。通过RDP，用户可以远程登录到运行Windows操作系统的远程计算机，并像在本地计算机上一样使用远程计算机的资源和应用程序，这个其实类似我们如今todesk、向日葵远程等。</p>
 <blockquote class="alert alert-note">
     <blockquote>
-<p>市面上的远程链接软件如todesk都采用自研的混合传输协议，比较安全，而RDP连接没那么可靠，毕竟连接需要给出用户的密码和用户名，这相对有一定的风险。</p></blockquote></blockquote>
+<p>市面上的远程链接软件如todesk都采用自研的混合传输协议，比较安全，而RDP连接没那么可靠，毕竟连接需要给出用户的密码和用户名，这相对有一定的风险。</p>
+</blockquote></blockquote>
 <p>接下来使用一下RDP（有些家用版windows是没有RDP功能的，一般企业版多数有，主机没有RDP功能的就下两台虚拟机来实操一下咯）（指令在上文）：</p>
 <p>1、准备一或二台虚拟机win用来远程连接，可以下载两台虚拟机，win7和win 2003，我这里用主机和win7好看些。</p>
 <p>2、虚拟机/主机需要开启远程服务。</p>
@@ -1261,7 +1290,8 @@ unicode: "ece7"
 <p>Linux具有良好的安全性。由于其开源性，Linux操作系统可以由全球的开发者社区进行审查和修复漏洞。这使得Linux具备快速响应和更新的能力，以应对不断变化的安全威胁。此外，Linux提供了强大的权限管理和安全工具，帮助管理员保护服务器免受潜在的威胁。</p>
 <blockquote class="alert alert-note">
     <blockquote>
-<p>发行版是指基于开源软件的操作系统的特定版本，经过整合、配置和打包后向用户发布的软件发行形式。它是将开源软件进行定制化和优化的结果，以便用户能够更方便地使用和管理操作系统。</p></blockquote></blockquote>
+<p>发行版是指基于开源软件的操作系统的特定版本，经过整合、配置和打包后向用户发布的软件发行形式。它是将开源软件进行定制化和优化的结果，以便用户能够更方便地使用和管理操作系统。</p>
+</blockquote></blockquote>
 <h4 id="环境部署">环境部署
 </h4><h5 id="linux系统环境搭建">Linux系统环境搭建
 </h5><p><img src="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/14.png"
@@ -1503,7 +1533,8 @@ $y$j9T$zY1oKFxJlTgP2WcJhzbNl1$xhkUmB8R9fzETc/1kgL/nOPcWFTvhn17clxXCgyFjpC：加�
 ></p>
 <blockquote class="alert alert-note">
     <blockquote>
-<p>在这里可以发现，像change mode、password命令一样，都是些缩写，变成chmod、passwd这样的，很多Kali命令都是会缩写的，很好记。</p></blockquote></blockquote>
+<p>在这里可以发现，像change mode、password命令一样，都是些缩写，变成chmod、passwd这样的，很多Kali命令都是会缩写的，很好记。</p>
+</blockquote></blockquote>
 <h4 id="linux进程与软件管理">Linux进程与软件管理
 </h4><h5 id="进程概述">进程概述
 </h5><p>Linux系统进程是指在Linux操作系统中运行的每一个独立的任务或程序实例。每个进程都拥有自己的地址空间、系统资源（如文件句柄和内存）以及一个唯一的进程标识符（PID）。Linux通过进程模型实现了多任务处理和并发执行，允许同时运行多个进程。</p>
@@ -1525,7 +1556,8 @@ $y$j9T$zY1oKFxJlTgP2WcJhzbNl1$xhkUmB8R9fzETc/1kgL/nOPcWFTvhn17clxXCgyFjpC：加�
 ></p>
 <blockquote class="alert alert-tip">
     <blockquote>
-<p>当然有时候要用到IP、远程连接这样的话，难免会连接不上，那你可以试着重启，用到ifconfig &lt;网卡比如eth0、eth1这样的&gt; down，这样就把这个网卡关了，然后过一会就再输一次命令，把down换成up，就是开启网卡了。</p></blockquote></blockquote>
+<p>当然有时候要用到IP、远程连接这样的话，难免会连接不上，那你可以试着重启，用到ifconfig &lt;网卡比如eth0、eth1这样的&gt; down，这样就把这个网卡关了，然后过一会就再输一次命令，把down换成up，就是开启网卡了。</p>
+</blockquote></blockquote>
 <p>ps：显示当前终端下运行的进程</p>
 <p>ps -aux：显示所有用户的所有进程，包括系统进程，提供更详细的进程信息.第二张图可以看到我们刚刚用了ps -aux指令的记录。</p>
 <p><img src="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/25.png"
@@ -1568,7 +1600,8 @@ $y$j9T$zY1oKFxJlTgP2WcJhzbNl1$xhkUmB8R9fzETc/1kgL/nOPcWFTvhn17clxXCgyFjpC：加�
 <p>kill -9 （pid）：强制终止进程（-9 对应信号编号 9，即 SIGKILL 信号，这是一种强制终止信号，具有最高优先级。</p>
 <blockquote class="alert alert-error">
     <blockquote>
-<p>但是我比较建议你用上面的kill（PID），因为通常在进程正常终止（如 kill （PID）发送的 SIGTERM 信号）无效时，才会使用 -9 强制<strong>杀死</strong>进程，但这种方式可能导致进程正在处理的数据丢失或资源未正常释放，因此需谨慎使用）</p></blockquote></blockquote>
+<p>但是我比较建议你用上面的kill（PID），因为通常在进程正常终止（如 kill （PID）发送的 SIGTERM 信号）无效时，才会使用 -9 强制<strong>杀死</strong>进程，但这种方式可能导致进程正在处理的数据丢失或资源未正常释放，因此需谨慎使用）</p>
+</blockquote></blockquote>
 <p>那有个问题来了，服务进程这么多一个个看PID查找忒麻烦啊！那可以用到pidof命令去找到你需要关闭的服务进程的pid。例如要关掉sshd远程连接服务，那我们就用pidof命令去找它的pid：</p>
 <p><img src="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/29.png"
 	width="525"
@@ -1591,12 +1624,14 @@ $y$j9T$zY1oKFxJlTgP2WcJhzbNl1$xhkUmB8R9fzETc/1kgL/nOPcWFTvhn17clxXCgyFjpC：加�
 <p>安装一个包的命令：apt install xx</p>
 <blockquote class="alert alert-warn">
     <blockquote>
-<p>这里记得要切换root用户，不然会报错，权限不足</p></blockquote></blockquote>
+<p>这里记得要切换root用户，不然会报错，权限不足</p>
+</blockquote></blockquote>
 <p><strong>列出所有可更新的软件清单命令：apt update</strong></p>
 <p><strong>升级软件包：apt upgrade</strong></p>
 <blockquote class="alert alert-tip">
     <blockquote>
-<p>在通过Linux进行命令行下载工具时，记得apt update一下噢</p></blockquote></blockquote>
+<p>在通过Linux进行命令行下载工具时，记得apt update一下噢</p>
+</blockquote></blockquote>
 <p>安装指定的软件命令：apt install &lt;package_name&gt;</p>
 <p>删除软件包命令：apt remove &lt;package_name&gt;</p>
 <p>列出所有已安装的包：apt list &ndash;installed</p>
@@ -1634,11 +1669,13 @@ $y$j9T$zY1oKFxJlTgP2WcJhzbNl1$xhkUmB8R9fzETc/1kgL/nOPcWFTvhn17clxXCgyFjpC：加�
 <p>Bourne Again Shell（/bin/bash）</p>
 <p>C Shell（/usr/bin/csh）</p>
 <p>K Shell（/usr/bin/ksh）</p>
-<p>Shell for Root（/sbin/sh）</p></blockquote>
+<p>Shell for Root（/sbin/sh）</p>
+</blockquote>
 <p>由于<strong>bash</strong>易用与免费，其被广泛使用也是大多数Linux系统的默认Shell。(Kali目前为zsh，兼容bash) /bin/bash</p>
 <blockquote class="alert alert-note">
     <blockquote>
-<p>/bin/bash这个shell适用在轻量级程序，易写好操作。</p></blockquote></blockquote>
+<p>/bin/bash这个shell适用在轻量级程序，易写好操作。</p>
+</blockquote></blockquote>
 <p>接下来拿/bin/bash这个shell举个应用例子：</p>
 <p>打开Kali终端，然后输入vim指令：</p>
 <p><img src="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/32.png"
@@ -1657,7 +1694,8 @@ $y$j9T$zY1oKFxJlTgP2WcJhzbNl1$xhkUmB8R9fzETc/1kgL/nOPcWFTvhn17clxXCgyFjpC：加�
 ></p>
 <blockquote class="alert alert-tip">
     <blockquote>
-<p>在 Kali Linux 中，<code>vim</code> 是一个<strong>命令行文本编辑器</strong>的启动指令，用于创建、打开和编辑文本文件（如配置文件、脚本、代码等）。当然也是用它来编shell脚本的。</p></blockquote></blockquote>
+<p>在 Kali Linux 中，<code>vim</code> 是一个<strong>命令行文本编辑器</strong>的启动指令，用于创建、打开和编辑文本文件（如配置文件、脚本、代码等）。当然也是用它来编shell脚本的。</p>
+</blockquote></blockquote>
 <p><img src="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/33.png"
 	width="1035"
 	height="195"
@@ -1819,7 +1857,8 @@ $y$j9T$zY1oKFxJlTgP2WcJhzbNl1$xhkUmB8R9fzETc/1kgL/nOPcWFTvhn17clxXCgyFjpC：加�
 <p>这里给大家这些命令，关于详细用法在后续，下一阶段将和burpsuite细讲&hellip;&hellip;</p>
 <blockquote class="alert alert-warn">
     <blockquote>
-<p>法律问题：未经授权对系统进行密码破解是违法行为，仅可在自己拥有或获得明确许可的系统上使用。</p></blockquote></blockquote>
+<p>法律问题：未经授权对系统进行密码破解是违法行为，仅可在自己拥有或获得明确许可的系统上使用。</p>
+</blockquote></blockquote>
 <h2 id="网络安全基础">网络安全基础
 </h2><p><a class="link" href="%e8%ae%a1%e7%ae%97%e6%9c%ba%e7%bd%91%e7%bb%9c%e4%bf%9d%e5%a7%86%e7%ba%a7%e8%b5%84%e6%96%99.pdf" >计算机网络保姆级资料</a></p>
 <h3 id="计算机网络">计算机网络
@@ -1892,7 +1931,8 @@ $y$j9T$zY1oKFxJlTgP2WcJhzbNl1$xhkUmB8R9fzETc/1kgL/nOPcWFTvhn17clxXCgyFjpC：加�
 </h4><p>TCP工作机制：三次握手建立连接，四次挥手断开连接。</p>
 <blockquote class="alert alert-note">
     <blockquote>
-<p>TCP(Transmission Control Protocol 传输控制协议)是一种面向连接的、可靠的。</p></blockquote></blockquote>
+<p>TCP(Transmission Control Protocol 传输控制协议)是一种面向连接的、可靠的。</p>
+</blockquote></blockquote>
 <p>UDP协议：</p>
 <p>用户数据报协议，无连接的、不可靠的、基于数据报的传输层通信协议。</p>
 <p>用于数据传输控制的协议，对数据的可靠性、安全没有保证，不需要连接就可以发送。</p>
@@ -2346,7 +2386,8 @@ $y$j9T$zY1oKFxJlTgP2WcJhzbNl1$xhkUmB8R9fzETc/1kgL/nOPcWFTvhn17clxXCgyFjpC：加�
 </h4><h3 id="web前端">Web前端
 </h3><blockquote class="alert alert-tip">
     <blockquote>
-<p>本章前端对于网安人来说学习要求不高，能基本读懂代码知道代码大概意思以及前端语言的结构样式就好。</p></blockquote></blockquote>
+<p>本章前端对于网安人来说学习要求不高，能基本读懂代码知道代码大概意思以及前端语言的结构样式就好。</p>
+</blockquote></blockquote>
 <h4 id="html网页的结构骨架">HTML：网页的“结构骨架”
 </h4><p>HTML全称（hyper text markup language）译为超文本标记语言。</p>
 <p><img src="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/64.png"
@@ -2583,10 +2624,12 @@ $y$j9T$zY1oKFxJlTgP2WcJhzbNl1$xhkUmB8R9fzETc/1kgL/nOPcWFTvhn17clxXCgyFjpC：加�
 <li><strong>CSS</strong>：咖啡店的 “装修风格”（墙面颜色、灯光亮度、桌椅样式、招牌设计），决定 “看起来好不好看”；</li>
 <li><strong>JavaScript</strong>：咖啡店的 “服务功能”（店员响应点单、自动门感应开门、电视播放视频），实现 “用户能做什么交互”。</li>
 </ul>
-<p>三者共同组成了我的博客&hellip;&hellip;</p></blockquote>
+<p>三者共同组成了我的博客&hellip;&hellip;</p>
+</blockquote>
 <blockquote class="alert alert-note">
     <blockquote>
-<p>没有 HTML，CSS 和 JS 就没有 “作用对象”；没有 CSS，HTML 只是无样式的骨架；没有 JS，网页只是 “静态图片”，无法响应用户操作。</p></blockquote></blockquote>
+<p>没有 HTML，CSS 和 JS 就没有 “作用对象”；没有 CSS，HTML 只是无样式的骨架；没有 JS，网页只是 “静态图片”，无法响应用户操作。</p>
+</blockquote></blockquote>
 <h3 id="web后端">Web后端
 </h3><p>客户端与服务端交互流程：</p>
 <p><img src="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/73.png"
@@ -2661,7 +2704,8 @@ $y$j9T$zY1oKFxJlTgP2WcJhzbNl1$xhkUmB8R9fzETc/1kgL/nOPcWFTvhn17clxXCgyFjpC：加�
 <p>- 变量名是区分大小写的（$y 和 $Y 是两个不同的变量）</p>
 <blockquote>
 <p>注意：当赋一个文本值给变量时，需要在文本值两侧加上引号。</p>
-<p>PHP 语句和 PHP 变量都是区分大小写的。</p></blockquote>
+<p>PHP 语句和 PHP 变量都是区分大小写的。</p>
+</blockquote>
 <h5 id="php页面输出">PHP页面输出：
 </h5><p>echo——输出单一类型(数值，字符串，布尔)，多个用逗号隔开。</p>
 <p>print_r()——输出复合类型（数组，对象），一般用于输出<strong>数组</strong>。</p>
@@ -2927,7 +2971,8 @@ $y$j9T$zY1oKFxJlTgP2WcJhzbNl1$xhkUmB8R9fzETc/1kgL/nOPcWFTvhn17clxXCgyFjpC：加�
 <blockquote>
 <p>PHP 函数准则：</p>
 <p>函数的名称应该提示出它的功能;</p>
-<p>函数名称以字母或下划线开头（不能以数字开头）。</p></blockquote>
+<p>函数名称以字母或下划线开头（不能以数字开头）。</p>
+</blockquote>
 <p>示例，下面的函数有两个参数：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -2986,7 +3031,8 @@ $y$j9T$zY1oKFxJlTgP2WcJhzbNl1$xhkUmB8R9fzETc/1kgL/nOPcWFTvhn17clxXCgyFjpC：加�
 <p>require(); php包含文件</p>
 <p>require_once(); php包含文件</p>
 <p><strong>serialize() 序列话函数</strong></p>
-<p><strong>unserialize() 反序列话函数</strong></p></blockquote>
+<p><strong>unserialize() 反序列话函数</strong></p>
+</blockquote>
 <blockquote class="alert alert-note">
     <blockquote>
 <p>这些函数是 PHP 安全的 “高频考点”，几乎所有涉及 PHP 的 CTF Web 题目（如文件包含、反序列化、逻辑漏洞、哈希绕过等）都会用到它们的特性。理解这些函数的工作原理、参数处理方式及潜在漏洞点，是解决 PHP 相关 Web 题目的基础:</p>
@@ -2994,7 +3040,8 @@ $y$j9T$zY1oKFxJlTgP2WcJhzbNl1$xhkUmB8R9fzETc/1kgL/nOPcWFTvhn17clxXCgyFjpC：加�
 <li><strong>哈希比较漏洞</strong>：利用 <code>md5()</code> 对数组处理返回 <code>null</code> 的特性（如 <code>md5([]) == md5([])</code> 为 <code>true</code>）绕过验证。</li>
 <li>include()/include_once()/require()/require_once()是 PHP 中<strong>文件包含漏洞</strong>的直接成因，在 CTF 中极为常见</li>
 <li>序列化与反序列化函数（<code>serialize()</code>/<code>unserialize()</code>）：反序列化漏洞关键</li>
-</ul></blockquote></blockquote>
+</ul>
+</blockquote></blockquote>
 <h5 id="web基础-1">Web基础
 </h5><h5 id="php数组">PHP数组
 </h5><p>PHP数组是一种数据结构，用于存储键值对集合，其中每个键可以是整数索引或字符串索引，而值可以是任何类型的数据。</p>
@@ -3253,7 +3300,8 @@ $y$j9T$zY1oKFxJlTgP2WcJhzbNl1$xhkUmB8R9fzETc/1kgL/nOPcWFTvhn17clxXCgyFjpC：加�
     <blockquote>
 <p>文件上传必要条件</p>
 <p>（1）method属性：表单提交方式必须为POST</p>
-<p>（2）enctype属性：form表单属性，主要是规范表单数据的编码方式enctype= &ldquo;multipart/form-data&rdquo;</p></blockquote></blockquote>
+<p>（2）enctype属性：form表单属性，主要是规范表单数据的编码方式enctype= &ldquo;multipart/form-data&rdquo;</p>
+</blockquote></blockquote>
 <p>$_FILES超级全局变量作用是存储各种与上传文件有关的信息;</p>
 <p>$_FILES是一个二维数组，数组中共有5项：</p>
 <blockquote>
@@ -3264,7 +3312,8 @@ $y$j9T$zY1oKFxJlTgP2WcJhzbNl1$xhkUmB8R9fzETc/1kgL/nOPcWFTvhn17clxXCgyFjpC：加�
 <p>上传文件的大小, 以字节为单位，已上传文件的大小，单位为字节。</p>
 <p>4、$_FILES[&ldquo;userfile&rdquo;][&ldquo;tmp_name&rdquo;]</p>
 <p>文件上传后在服务器端储存的临时文件名，文件被上传后在服务端储存的临时文件名。</p>
-<p>5、$_FILES[&ldquo;userfile&rdquo;][&ldquo;error&rdquo;] 文件上传相关的错误代码0 1 2 3 4</p></blockquote>
+<p>5、$_FILES[&ldquo;userfile&rdquo;][&ldquo;error&rdquo;] 文件上传相关的错误代码0 1 2 3 4</p>
+</blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -3357,7 +3406,8 @@ $y$j9T$zY1oKFxJlTgP2WcJhzbNl1$xhkUmB8R9fzETc/1kgL/nOPcWFTvhn17clxXCgyFjpC：加�
 <p>类是抽象的概念，仅仅是模板。用来描述具有相同属性和方法的对象的集合。比如： &ldquo;人&quot;是一个类。</p>
 <p>对象是类的实例，是某一个具体的事物 ，如 “黄结伟老师”则是具体存在的一个对象</p>
 <p>例：类：人类（抽象事物）</p>
-<p>对象： 黄结伟老师、UP主本人（实实在在存在的东西）</p></blockquote>
+<p>对象： 黄结伟老师、UP主本人（实实在在存在的东西）</p>
+</blockquote>
 <p><strong>类修饰符</strong></p>
 <p>public（公有）</p>
 <p>特性：在任何范围可访问（类内部、⼦类、类外部）</p>
@@ -3416,7 +3466,8 @@ $y$j9T$zY1oKFxJlTgP2WcJhzbNl1$xhkUmB8R9fzETc/1kgL/nOPcWFTvhn17clxXCgyFjpC：加�
 </div><blockquote>
 <p>类可以包含属性（变量）和方法（函数）</p>
 <p>属性用于存储数据，而方法用于执行操作</p>
-<p>new关键字直接跟类名来创建对象</p></blockquote>
+<p>new关键字直接跟类名来创建对象</p>
+</blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -3580,7 +3631,8 @@ $y$j9T$zY1oKFxJlTgP2WcJhzbNl1$xhkUmB8R9fzETc/1kgL/nOPcWFTvhn17clxXCgyFjpC：加�
 </h5><p>php序列化：将PHP数据结构转换为可存储/传输的字符串格式；序列化函数serialize()。</p>
 <blockquote class="alert alert-error">
     <blockquote>
-<p>触发时机：当对象被序列化自动调用。</p></blockquote></blockquote>
+<p>触发时机：当对象被序列化自动调用。</p>
+</blockquote></blockquote>
 <p>功能：该方法可以清理对象，并返回一个包含所有应被序列化的属性名称的数组。如果该方法未返回任何内容，则 NULL 被序列化，并产生一个 E_WARNING级别的错误。</p>
 <blockquote class="alert alert-warn">
     <p>这种方法不接受任何参数!!</p></blockquote>
@@ -3731,9 +3783,317 @@ $y$j9T$zY1oKFxJlTgP2WcJhzbNl1$xhkUmB8R9fzETc/1kgL/nOPcWFTvhn17clxXCgyFjpC：加�
 	
 ></p>
 <p>它支持数据表的创建、修改、删除以及数据的增删改查等操作。Navicat还提供了可视化的查询构建工具，使得查询操作更加直观和方便。</p>
-<h3 id="客户端使用演示">客户端使用演示
-</h3><h4 id="数据库">数据库
-</h4><p>1、查看所有数据库</p>
+<p>现在我来做一个粗略的介绍，这个数据库里面的东西的含义，以图形化界面Navicat为例：</p>
+<p>连接好mysql后，我们看到一个</p>
+<p><img src="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/110.png"
+	width="1121"
+	height="766"
+	srcset="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/110_hu_a3a529227790b222.png 480w, /p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/110_hu_353e1b609210f947.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="146"
+		data-flex-basis="351px"
+	
+></p>
+<p>大致是这样，有些人数据库比较多，看自己之前是否有涉及到这方面应用可能会下载过一些定西，比如<strong>pikachu</strong>，我这里都是默认的数据库。</p>
+<p>查看数据表：</p>
+<p><img src="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/111.png"
+	width="1060"
+	height="780"
+	srcset="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/111_hu_f4f10fecd52a0f3b.png 480w, /p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/111_hu_6c2a161ad52d7d80.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="135"
+		data-flex-basis="326px"
+	
+></p>
+<p>以SCHEMATA为例：</p>
+<p><img src="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/112.png"
+	width="1044"
+	height="718"
+	srcset="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/112_hu_7e4fcacf1a2dbb78.png 480w, /p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/112_hu_8707151329073f09.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="145"
+		data-flex-basis="348px"
+	
+></p>
+<p>可以发现这很像excel表格，有表单有字段数据等，前文介绍了数据库，大概就是这样储存的；再细心发现这好像是上上一张图的一些数据库的名字，这个板块其实储存的是数据库的表名。</p>
+<p>来，我们看到TABLES这一张表：</p>
+<p><img src="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/113.png"
+	width="1920"
+	height="1011"
+	srcset="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/113_hu_29dfe5f084605280.png 480w, /p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/113_hu_ab79f5f9153df924.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="189"
+		data-flex-basis="455px"
+	
+></p>
+<p>晕了晕了&hellip;&hellip;这么多。</p>
+<p><img src="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/114.png"
+	width="1361"
+	height="774"
+	srcset="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/114_hu_6d3d3f65480ce6ac.png 480w, /p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/114_hu_b04639d30d38b18a.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="175"
+		data-flex-basis="422px"
+	
+></p>
+<p>看到第三列，这其实是数据库表名相关对应的TABLES表；第二列就是名子，在SCHEMATA的表看到。</p>
+<p>看到COLUMNS：</p>
+<p><img src="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/115.png"
+	width="1620"
+	height="965"
+	srcset="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/115_hu_eed1f362c9049ee8.png 480w, /p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/115_hu_4e4afecf88a434c6.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="167"
+		data-flex-basis="402px"
+	
+></p>
+<p>第二列存放的是数据库名；第三列是存放的是表名；第四列存放的就是跟字段名字相关的名字。</p>
+<blockquote class="alert alert-note">
+    <blockquote>
+<p>幸运的是，如果你能坚持看到这里，不免会像我一样有疑惑：（我为什么要写这Mysql）我为什么要看这段文章，感觉跟CTF、攻防、渗透好像关系不大啊&hellip;当我看回自己这篇文章也会觉得，其实对Mysql等数据库来说，这方面安全也需要多加在意的，这就是数据库安全，你耐心学，去了解这些Mysql等数据库知识，这也是以便你后面进行SQL注入学习、查询打下的一个基础，切忌速通、一把梭！慢工出细活，了解本质才能赢下去。</p>
+</blockquote></blockquote>
+<p>大家只需要多关注一下这三个表：COLUMNS、TABLES、SCHEMATA。其它的表点进去看一下浅浅了解下就好。</p>
+<p>接下来我们倒回去查看mysql数据库中的user表：</p>
+<p><img src="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/116.png"
+	width="1624"
+	height="829"
+	srcset="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/116_hu_3483c0e643540580.png 480w, /p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/116_hu_38ac623fcc95f3d8.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="195"
+		data-flex-basis="470px"
+	
+></p>
+<p>顺便打开phpstudy，对照一下：</p>
+<p><img src="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/117.png"
+	width="990"
+	height="769"
+	srcset="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/117_hu_ee9ca5ab7099188d.png 480w, /p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/117_hu_304b4030f8d9aabe.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="128"
+		data-flex-basis="308px"
+	
+></p>
+<p>可以看到数据库表上有个root，和我的小皮界面上的root对应上了，我这里没有打开，你自己尝试的话可以发现是有个IP地址在上面，还有主机名，这都是mysql所记录名单下的数据。可以知道user表下存储的就是用户的权限数据、密码、主机名还有IP。</p>
+<blockquote class="alert alert-error">
+    <blockquote>
+<p>这很可怕，意味着在实际情况中，数据库安全做得不到位得话被入侵就意味着数据被泄露。</p>
+</blockquote></blockquote>
+<p>翻到performance_schema数据库：</p>
+<p><img src="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/118.png"
+	width="1684"
+	height="914"
+	srcset="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/118_hu_3037bb9c71e29f90.png 480w, /p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/118_hu_e2b3750eb4d0f100.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="184"
+		data-flex-basis="442px"
+	
+></p>
+<p>这个数据库内容包含得是诊断数据库的问题、报错，语句执行得时间，类似于日志那样的。</p>
+<p>如果你是打算走<strong>电子取证方向</strong>的话，这个地方你后面会接触的比较多。</p>
+<p><strong>总结：主要还是关注performance_schema、mysql、information_schema这三个系统数据库。</strong></p>
+<h3 id="数据库数据类型">数据库数据类型
+</h3><p>是指MySQL数据库中用于定义表的列时可以指定的数据类型，它们决定了列中可以存储什么类型的数据。MySQL支持多种数据类型，每种数据类型都有其特定的用途和限制。</p>
+<h4 id="数值类型">数值类型
+</h4><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>类型</th>
+          <th>存储（字节）</th>
+          <th>有符号数值取值范围</th>
+          <th>无符号数值取值范围</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>TINYINT</td>
+          <td>1</td>
+          <td>-128 ~ 127</td>
+          <td>0 ~ 255</td>
+      </tr>
+      <tr>
+          <td>SMALLINT</td>
+          <td>2</td>
+          <td>-32768 ~ 32767</td>
+          <td>0 ~ 65535</td>
+      </tr>
+      <tr>
+          <td>MEDIUMINT</td>
+          <td>3</td>
+          <td>-8388608 ~ 8388607</td>
+          <td>0 ~ 16777215</td>
+      </tr>
+      <tr>
+          <td>INT</td>
+          <td>4</td>
+          <td>-2147483648 ~ 2147483647</td>
+          <td>0 ~ 4294967295</td>
+      </tr>
+      <tr>
+          <td>BIGINT（整数值超过int时使用）</td>
+          <td>8</td>
+          <td>-2^63 ~~ (2^63 -1)</td>
+          <td>0 ~ 2^64-1</td>
+      </tr>
+  </tbody>
+</table></div>
+<h4 id="浮点数类型">浮点数类型
+</h4><p>FLOAT：占用4个字节，用于表示单精度浮点数值。</p>
+<p>DOUBLE：占用8个字节，用于表示双精度浮点数值。（小数点后的数字更多，内存空间也会更多）</p>
+<p>DECIMAL：用于表示高精度的小数，其精度和计数方法可以指定，以适应特定的需求。（小数点后位更多，一般银行使用的较多）</p>
+<h4 id="日期和时间类型">日期和时间类型
+</h4><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>类型</th>
+          <th>大小（bytes）</th>
+          <th>范围</th>
+          <th>格式</th>
+          <th>用途</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>DATE</td>
+          <td>3</td>
+          <td>1000-01-01/9999-12-31</td>
+          <td>YYYY-MM-DD</td>
+          <td>日期值</td>
+      </tr>
+      <tr>
+          <td>TIME</td>
+          <td>3</td>
+          <td>-838:59:59/838:59:59</td>
+          <td>HH:MM:SS</td>
+          <td>时间值或持续时间</td>
+      </tr>
+      <tr>
+          <td>YEAR</td>
+          <td>1</td>
+          <td>1901/2155</td>
+          <td>YYYY</td>
+          <td>年份值</td>
+      </tr>
+      <tr>
+          <td>DATETIME</td>
+          <td>8</td>
+          <td>1000-01-01 00:00:00&rsquo; 到 &lsquo;9999-12-31 23:59:59</td>
+          <td>YYYY-MM-DD<br />hh:mm:ss</td>
+          <td>混合日期和时间值</td>
+      </tr>
+      <tr>
+          <td>TIMESTAMP</td>
+          <td>4</td>
+          <td>1970-01-01 00:00:01&rsquo; UTC 到 &lsquo;2038-01-19 03:14:07</td>
+          <td>YYYY-MM-DD<br />hh:mm:ss</td>
+          <td>混合日期和时间值，时间戳</td>
+      </tr>
+  </tbody>
+</table></div>
+<h4 id="字符串类型-1">字符串类型
+</h4><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>类型</th>
+          <th>大小</th>
+          <th>用途</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>CHAR</td>
+          <td>0-255 bytes</td>
+          <td>定长字符串</td>
+      </tr>
+      <tr>
+          <td>VARCHAR</td>
+          <td>0-65535 bytes</td>
+          <td>变长字符串</td>
+      </tr>
+      <tr>
+          <td>TINYBLOB</td>
+          <td>0-255 bytes</td>
+          <td>不超过 255 个字符的二进制字符串</td>
+      </tr>
+      <tr>
+          <td>TINYTEXT</td>
+          <td>0-255 bytes</td>
+          <td>短文本字符串</td>
+      </tr>
+      <tr>
+          <td>BLOB</td>
+          <td>0-65 535 bytes</td>
+          <td>二进制形式的长文本数据</td>
+      </tr>
+      <tr>
+          <td>TEXT</td>
+          <td>0-65 535 bytes</td>
+          <td>长文本数据</td>
+      </tr>
+      <tr>
+          <td>MEDIUMBLOB</td>
+          <td>0-16 777 215 bytes</td>
+          <td>二进制形式的中等长度文本数据</td>
+      </tr>
+      <tr>
+          <td>MEDIUMTEXT</td>
+          <td>0-16 777 215 bytes</td>
+          <td>中等长度文本数据</td>
+      </tr>
+      <tr>
+          <td>LONGBLOB</td>
+          <td>0-4 294 967 295 bytes</td>
+          <td>二进制形式的极大文本数据</td>
+      </tr>
+      <tr>
+          <td>LONGTEXT</td>
+          <td>0-4 294 967 295 bytes</td>
+          <td>极大文本数据</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="客户端使用演示终端命令行">客户端使用演示（终端命令行）
+</h3><p>接下来可以用mysql命令去字节实操一下：</p>
+<p><img src="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/119.png"
+	width="1479"
+	height="759"
+	srcset="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/119_hu_8f01e01f0ffa19df.png 480w, /p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/119_hu_6d222dfd488e2043.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="194"
+		data-flex-basis="467px"
+	
+></p>
+<h4 id="数据库">数据库
+</h4><p>1、查看所有数据库（分号；别漏）</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -3742,7 +4102,20 @@ $y$j9T$zY1oKFxJlTgP2WcJhzbNl1$xhkUmB8R9fzETc/1kgL/nOPcWFTvhn17clxXCgyFjpC：加�
 <pre tabindex="0" class="chroma"><code class="language-mysql" data-lang="mysql"><span class="line"><span class="cl"><span class="k">show</span><span class="w"> </span><span class="k">databases</span><span class="p">;</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><p>2、创建自己的数据库</p>
+</div><p><img src="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/120.png"
+	width="745"
+	height="250"
+	srcset="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/120_hu_36544b860765760e.png 480w, /p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/120_hu_248983a1d8c3cff0.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="298"
+		data-flex-basis="715px"
+	
+></p>
+<p>可以发现这个正是我们在navicat上看到的界面，只不过这是终端界面比较枯燥。</p>
+<p>2、创建自己的数据库</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -3895,6 +4268,9 @@ $y$j9T$zY1oKFxJlTgP2WcJhzbNl1$xhkUmB8R9fzETc/1kgL/nOPcWFTvhn17clxXCgyFjpC：加�
 </div>
 </div><h3 id="可视化客户端">可视化客户端
 </h3><p>前面介绍了通过命令行来创建数据库和数据表，除此之外，还可以借助MySQL图形化工具，而且这种方式更加简单、方便。下面以SQLyog图形化工具为代表展开介绍。</p>
+<blockquote>
+<p>在前面已经介绍过可视化数据库使用，在此只要粗略过一遍就好。</p>
+</blockquote>
 <h4 id="数据库-1">数据库
 </h4><p>以查看所有数据库的方式登录连接成功后，进入主界面，接下来正式创建数据库。</p>
 <img src="89.png" style="zoom:150%;" />
@@ -3964,6 +4340,89 @@ $y$j9T$zY1oKFxJlTgP2WcJhzbNl1$xhkUmB8R9fzETc/1kgL/nOPcWFTvhn17clxXCgyFjpC：加�
 <li>本身成对的标点符号必须成对，例如：()，&rsquo;&rsquo;，&quot;&quot;。</li>
 <li>所有标点符号必须英文状态下半角输入方式下输入。</li>
 </ul>
+<h3 id="ddl">DDL
+</h3><p><img src="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/121.png"
+	width="791"
+	height="290"
+	srcset="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/121_hu_d3a735779f1fd557.png 480w, /p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/121_hu_d2dc0c54864da855.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="272"
+		data-flex-basis="654px"
+	
+></p>
+<p>在你创建好数据库后，你肯定是要想有搜索功能的，这时查询功能就体现出来了，以下是终端Mysql的命令：</p>
+<p>创建表：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>修改表：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">ALTER</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>删除表：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">DROP</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>接下来我用navicat来演示：</p>
+<p><img src="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/122.png"
+	width="1087"
+	height="428"
+	srcset="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/122_hu_cb6909de5a562cb6.png 480w, /p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/122_hu_5eb9de84941be7b1.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="253"
+		data-flex-basis="609px"
+	
+></p>
+<p>选择数据库（我以我的Mysql为例）后创建好查询表。</p>
+<p><img src="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/124.png"
+	width="719"
+	height="565"
+	srcset="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/124_hu_a47654810c1dc80f.png 480w, /p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/124_hu_817f28651c549415.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="127"
+		data-flex-basis="305px"
+	
+></p>
+<p>这就是一个面板，很像一些我们经常用的vscode、pycharm那样的编程界面，这里面就是给它编写sql语言的。</p>
+<p>&hellip;&hellip;至于怎么编写我就不演示了，可以自己试一试，参考<a class="link" href="https://expl0rer.top/p/%e7%bd%91%e5%ae%89%e5%ad%a6%e4%b9%a0%e7%ac%ac%e4%b8%80%e9%98%b6%e6%ae%b5/#%e6%95%b0%e6%8d%ae%e5%ba%93"  target="_blank" rel="noopener"
+    >SQL语法</a>编写。</p>
+<p>写好语句后<code>Ctrl+S</code>保存，起个名字，我这里是起666：</p>
+<p><img src="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/123.png"
+	width="1129"
+	height="570"
+	srcset="/p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/123_hu_5ac0ce849033b5bb.png 480w, /p/%E7%BD%91%E5%AE%89%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5/123_hu_735e53d8f5d59cb2.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="198"
+		data-flex-basis="475px"
+	
+></p>
 <h3 id="dql">DQL
 </h3><p>因为查询语句使用的非常的频繁，所以很多人把查询语句单拎出来一类，DQL（数据查询语言），DR（获取）L。</p>
 <h4 id="select语句">SELECT语句
@@ -6780,7 +7239,8 @@ $y$j9T$zY1oKFxJlTgP2WcJhzbNl1$xhkUmB8R9fzETc/1kgL/nOPcWFTvhn17clxXCgyFjpC：加�
 <p>同学问：是否可以删除salary字段，连同字段和这个字段的数据都是删除</p>
 <p>可以实现，但是不是用delete，用alter table 表名称 drop column 字段名;</p>
 <p>同学问：只删除某个单元格的值</p>
-<p>可以实现，但是不是用delete，用update</p></blockquote>
+<p>可以实现，但是不是用delete，用update</p>
+</blockquote>
 <h3 id="数据库sql语言使用案例">数据库SQL语言使用案例
 </h3><h4 id="操作数据库">操作数据库
 </h4><div class="highlight"><div class="chroma">
@@ -9093,7 +9553,7 @@ $y$j9T$zY1oKFxJlTgP2WcJhzbNl1$xhkUmB8R9fzETc/1kgL/nOPcWFTvhn17clxXCgyFjpC：加�
 
 
         <span>
-            最后更新于 2025-10-08
+            最后更新于 2025-10-28
         </span>
     </section></footer>
 
@@ -9239,11 +9699,15 @@ $y$j9T$zY1oKFxJlTgP2WcJhzbNl1$xhkUmB8R9fzETc/1kgL/nOPcWFTvhn17clxXCgyFjpC：加�
 
 
 
+
+
+
+
         
 <section class="wordcount">
   <div class="wordcount-row">
-    <p>博主发布了14篇文章  ||</p>
-    <p>总共195.82k 字</p>
+    <p>博主发布了15篇文章  ||</p>
+    <p>总共212.78k 字</p>
   </div>
 </section>
         

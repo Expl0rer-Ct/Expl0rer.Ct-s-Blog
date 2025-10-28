@@ -10,7 +10,7 @@
 <meta property='og:description' content="二进制漏洞与利用——栈利用">
 <meta property='og:url' content='https://expl0rer.top/p/pwn-2/'>
 <meta property='og:site_name' content='Expl0rer.Ct'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-08-25T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-10-08T16:19:55&#43;00:00'/><meta property='og:image' content='https://expl0rer.top/p/pwn-2/PWN2.png' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-08-25T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-10-28T16:52:22&#43;00:00'/><meta property='og:image' content='https://expl0rer.top/p/pwn-2/PWN2.png' />
 <meta name="twitter:title" content="PWN-2">
 <meta name="twitter:description" content="二进制漏洞与利用——栈利用"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://expl0rer.top/p/pwn-2/PWN2.png' />
@@ -628,6 +628,25 @@
             </a>
         </li>
         
+        
+        <li >
+            <a href='/friends-links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友情链接 | Friends Links</span>
+            </a>
+        </li>
+        
         <li class="menu-bottom-section">
             <ol class="menu">
 
@@ -946,7 +965,8 @@ unicode: "ece7"
 <p>调用函数：只需要将rip压栈，即push rip，然后讲rip赋值为被调用函数的起始地址，这一操作被隐性的内置在call指令中。</p>
 <p>被调用函数：push rbp；mov rbp rsp; sub rsp oxxxx。即保存调用函数的rbp指针，将自己的rbp指针指向栈顶，然后开辟栈空间给自己用，此时rbp就
 变成了被调用函数的栈底。</p>
-<p>函数返回：leave；ret；翻译过来就是：mov rsp rbp；pop rbp；pop rip；即恢复栈帧，返回调用函数的返回地址。</p></blockquote>
+<p>函数返回：leave；ret；翻译过来就是：mov rsp rbp；pop rbp；pop rip；即恢复栈帧，返回调用函数的返回地址。</p>
+</blockquote>
 <p>栈溢出的核心是<strong>覆盖程序中 “会被用来决定下一步执行位置” 的数据</strong>，这些数据未必是<code>ret</code>指令读取的 “返回地址”。如果栈中存在被<code>jmp</code>、<code>call</code>等指令使用的 “目标地址”（比如函数指针、跳转表项等），覆盖这些地址同样能实现<strong>控制流劫持</strong>。</p>
 <p>具体来说：<code>ret</code>、<code>jmp</code>、<code>call</code>的共性与差异：</p>
 <ul>
@@ -967,7 +987,8 @@ unicode: "ece7"
 <p>ret2shellcode的思路就是：</p>
 <p>如果程序中存在让用户向一段长度足够的缓冲区中输入数据。我们向其中输入shellcode，将程序劫持到shellcode上即可。当然，这种也是理想情况。</p>
 <blockquote>
-<p><code>ret2shellcode</code>是二进制漏洞利用中的一种常见技术，用于在存在栈溢出等漏洞的程序中获取系统的 shell 权限，从而执行任意命令。<code>ret2shellcode</code>利用这个特性，将返回地址覆盖为一段精心构造的机器码（即 shellcode）的地址，从而返回到攻击者留下的shellcode进行劫持。</p></blockquote>
+<p><code>ret2shellcode</code>是二进制漏洞利用中的一种常见技术，用于在存在栈溢出等漏洞的程序中获取系统的 shell 权限，从而执行任意命令。<code>ret2shellcode</code>利用这个特性，将返回地址覆盖为一段精心构造的机器码（即 shellcode）的地址，从而返回到攻击者留下的shellcode进行劫持。</p>
+</blockquote>
 <h3 id="栈溢出案例ret2shellcode">栈溢出案例：ret2shellcode
 </h3><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1088,7 +1109,8 @@ unicode: "ece7"
 <blockquote>
 <p>函数的<strong>第一个参数</strong>通过 <code>rdi</code> 寄存器传递。因此调用 <code>system(&quot;/bin/sh&quot;)</code> 必须满足：</p>
 <p><code>rdi</code> 寄存器中存放 <code>&quot;/bin/sh&quot;</code> 字符串的地址（<code>0x7ffff79e5aaa</code>）；</p>
-<p>程序跳转到 <code>system</code> 函数的地址（<code>0x7ffff7839410</code>）执行。</p></blockquote>
+<p>程序跳转到 <code>system</code> 函数的地址（<code>0x7ffff7839410</code>）执行。</p>
+</blockquote>
 </li>
 </ol>
 <p>通过栈溢出构造 payload，最终让程序执行 <code>system(&quot;/bin/sh&quot;)</code>，获取 shell。</p>
@@ -1257,7 +1279,8 @@ padding + pop rdi; ret + /bin/sh + system</p>
 	
 ></p>
 <p>这时候，我们可以利用x64下的libc_csu_init 中的gadgets。</p>
-<p>这个函数是用来对libc 进行初始化操作的，而一般的程序都会调用libc函数，所以这个函数一定会存在。</p></blockquote></blockquote>
+<p>这个函数是用来对libc 进行初始化操作的，而一般的程序都会调用libc函数，所以这个函数一定会存在。</p>
+</blockquote></blockquote>
 <p>本章的ROP介绍到这啦。</p>
 <h2 id="rop">ROP++
 </h2><p>通过之前的认识，我们发现ROP形式上把代码片段分散在程序代码中。ROP通过栈来维护整个链的逻辑。
@@ -1355,11 +1378,13 @@ puts(buf)、atoi(buf)、atol(buf)、free(buf)</p>
 <h3 id="第一步查看文件信息checksec看架构保护信息">第一步、查看文件信息（checksec看架构、保护信息）
 </h3><blockquote>
 <p>一般来说，栈题目都会或多或少关闭一些保护。
-如果关了canary，那么大概率是栈题。如果开启了PIE，那么就需要找个地方泄漏地址信息。如果开启了 FULL RELRO，那么思路就不应该是改写got。</p></blockquote>
+如果关了canary，那么大概率是栈题。如果开启了PIE，那么就需要找个地方泄漏地址信息。如果开启了 FULL RELRO，那么思路就不应该是改写got。</p>
+</blockquote>
 <h3 id="第二步理清函数逻辑如何执行">第二步、理清函数逻辑（如何执行？）
 </h3><blockquote>
 <p>直接在linux中运行，丢进ida，静态分析。</p>
-<p>首先把函数名、变量等等搞成自己看得懂的地步。如果有结构体，最好花时间建一个结构体,这样之后分析省事。</p></blockquote>
+<p>首先把函数名、变量等等搞成自己看得懂的地步。如果有结构体，最好花时间建一个结构体,这样之后分析省事。</p>
+</blockquote>
 <h3 id="第三步找到漏洞栈堆gets函数systemexecv">第三步、找到漏洞（栈？堆？gets函数、system、execv）
 </h3><blockquote class="alert alert-warn">
     <blockquote>
@@ -1367,7 +1392,8 @@ puts(buf)、atoi(buf)、atol(buf)、free(buf)</p>
 <p>一般先分析一下危险函数，比如<code>gets</code>、<code>read</code>、<code>write</code>、<code>free</code>、<code>printf</code>等等。
 很多PWN题目会自己封装一个<code>input</code>函数,重点分析一下，看看有没有越界。
 分析的时候也有技巧，通常我们要看看我们的输入数据会被程序如何处理。</p>
-<p>由于pwn多数是<strong>内存破坏漏洞</strong>，所以对于内存拷贝等函数要格外注意。</p></blockquote></blockquote>
+<p>由于pwn多数是<strong>内存破坏漏洞</strong>，所以对于内存拷贝等函数要格外注意。</p>
+</blockquote></blockquote>
 <h3 id="第四步漏洞利用写exppayload">第四步、漏洞利用（写exp、payload）
 </h3><blockquote>
 <p>基本上找到漏洞工作就完成了一半。
@@ -1381,7 +1407,8 @@ puts(buf)、atoi(buf)、atol(buf)、free(buf)</p>
 </h4><p>如果确定是栈题，并且有canary，那么通常考虑泄漏或者修改canary。一般来说，NX都是开启的，没有开启就说明要你执行<code>shellcode</code>了。</p>
 <p>NX对于我们写ROP基本没影响，绕过方法也很简单：<code>mprotect</code></p>
 <h4 id="程序本身的限制">程序本身的限制
-</h4><p>gadget种类少、输入字符有限制、栈溢出字节不够、具体情况具体分析。</p></blockquote>
+</h4><p>gadget种类少、输入字符有限制、栈溢出字节不够、具体情况具体分析。</p>
+</blockquote>
 <h2 id="完结">完结
 </h2><p>栈的讲解就到这，可能内容比较少，概念抽象些，也是怪小生基础不牢理解力不够强😄，还得区看看PWB题加强一下。</p>
 
@@ -1401,7 +1428,7 @@ puts(buf)、atoi(buf)、atol(buf)、free(buf)</p>
 
 
         <span>
-            最后更新于 2025-10-08
+            最后更新于 2025-10-28
         </span>
     </section></footer>
 
@@ -1676,11 +1703,15 @@ puts(buf)、atoi(buf)、atol(buf)、free(buf)</p>
 
 
 
+
+
+
+
         
 <section class="wordcount">
   <div class="wordcount-row">
-    <p>博主发布了14篇文章  ||</p>
-    <p>总共195.82k 字</p>
+    <p>博主发布了15篇文章  ||</p>
+    <p>总共212.78k 字</p>
   </div>
 </section>
         

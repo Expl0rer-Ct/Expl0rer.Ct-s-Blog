@@ -7,7 +7,7 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Expl0rer.Ct</copyright>
-        <lastBuildDate>Wed, 08 Oct 2025 16:19:55 +0000</lastBuildDate><atom:link href="https://expl0rer.top/categories/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Tue, 28 Oct 2025 16:52:23 +0000</lastBuildDate><atom:link href="https://expl0rer.top/categories/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>CTFmisc</title>
         <link>https://expl0rer.top/categories/ctfmisc/</link>
         <pubDate>Sun, 05 Oct 2025 00:00:00 +0000</pubDate>
@@ -78,6 +78,14 @@
         
         <guid>https://expl0rer.top/categories/%E4%BB%8E0-1%E7%9A%84%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF/</guid>
         <description>&lt;img src="https://expl0rer.top/categories/%E4%BB%8E0-1%E7%9A%84%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8.png" alt="Featured image of post 从0-1的学习之路" /&gt;</description>
+        </item>
+        <item>
+        <title>网络安全比赛</title>
+        <link>https://expl0rer.top/categories/%E5%BC%BA%E7%BD%91%E6%9D%AF/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>https://expl0rer.top/categories/%E5%BC%BA%E7%BD%91%E6%9D%AF/</guid>
+        <description>&lt;img src="https://expl0rer.top/categories/%E5%BC%BA%E7%BD%91%E6%9D%AF/QWB-logo.png" alt="Featured image of post 网络安全比赛" /&gt;</description>
         </item>
         
     </channel>

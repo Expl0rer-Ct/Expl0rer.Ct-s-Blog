@@ -7,12 +7,12 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Expl0rer.Ct</copyright>
-        <lastBuildDate>Wed, 08 Oct 2025 16:19:55 +0000</lastBuildDate><atom:link href="https://expl0rer.top/categories/ctf%E5%85%A5%E9%97%A8/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>飞书周报</title>
-        <link>https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/</link>
+        <lastBuildDate>Tue, 28 Oct 2025 16:52:23 +0000</lastBuildDate><atom:link href="https://expl0rer.top/categories/ctf%E5%85%A5%E9%97%A8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>2024年——飞书周报</title>
+        <link>https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/</link>
         <pubDate>Sun, 05 Oct 2025 00:00:00 +0000</pubDate>
         
-        <guid>https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/</guid>
+        <guid>https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/</guid>
         <description>&lt;p&gt;[TOC]&lt;/p&gt;
 &lt;p&gt;作者先前入门CTF周报回忆录，有部分题目缺失，希望此WP能帮助到你。&lt;/p&gt;
 &lt;h2 id=&#34;20249-10&#34;&gt;2024.9-10
@@ -40,10 +40,10 @@
     &gt;BUUCTF在线评测&lt;/a&gt;&amp;mdash;以下题目是本人觉得有代表性的。&lt;/p&gt;
 &lt;h4 id=&#34;misc-1&#34;&gt;MISC
 &lt;/h4&gt;&lt;h5 id=&#34;你竟然赶我走&#34;&gt;你竟然赶我走
-&lt;/h5&gt;&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/1.png&#34;
+&lt;/h5&gt;&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/1.png&#34;
 	width=&#34;125&#34;
 	height=&#34;126&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/1_hu_4cf4fcec63ac9df0.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/1_hu_f43a8d4b1061c369.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/1_hu_4cf4fcec63ac9df0.png 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/1_hu_f43a8d4b1061c369.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -68,10 +68,10 @@
 &lt;/h5&gt;&lt;p&gt;开局给了这个：&lt;/p&gt;
 &lt;img src=&#34;7.png&#34; alt=&#34;大白&#34; style=&#34;zoom:150%;&#34; /&gt;
 &lt;p&gt;一开始是半身的，想到要恢复比例，可以用随波逐流，随波逐流这个工具可以检测图片原本尺寸并进行修复：进而得到flag。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;8.jpg&#34; alt=&#34;&#34; style=&#34;zoom:150%;&#34; /&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/9.jpg&#34;
+&lt;p&gt;&lt;img src=&#34;8.jpg&#34; alt=&#34;&#34; style=&#34;zoom:150%;&#34; /&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/9.jpg&#34;
 	width=&#34;255&#34;
 	height=&#34;180&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/9_hu_ee24e0bfc99c00b6.jpg 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/9_hu_afa1941b0b2c1a4f.jpg 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/9_hu_ee24e0bfc99c00b6.jpg 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/9_hu_afa1941b0b2c1a4f.jpg 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -112,10 +112,10 @@
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;其实有post请求出现也经常会伴随user、HTTP、api这些关键词。&lt;/p&gt;
 &lt;p&gt;接下回到题目，将流量包放入wireshark工具中分析，用http或者tcp过滤，去找有post请求的一段流量：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/10.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/10.png&#34;
 	width=&#34;1623&#34;
 	height=&#34;117&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/10_hu_5397bac9ff5bae2a.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/10_hu_fa31dc716e1c3186.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/10_hu_5397bac9ff5bae2a.png 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/10_hu_fa31dc716e1c3186.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -124,10 +124,10 @@
 		data-flex-basis=&#34;3329px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/11.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/11.png&#34;
 	width=&#34;406&#34;
 	height=&#34;95&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/11_hu_a3e9d4fc0cfc2e6d.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/11_hu_e1ce726ba7b471ad.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/11_hu_a3e9d4fc0cfc2e6d.png 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/11_hu_e1ce726ba7b471ad.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -139,10 +139,10 @@
 &lt;p&gt;类似这样的流量分析还有“被嗅探的流量”。&lt;/p&gt;
 &lt;h5 id=&#34;zip伪加密&#34;&gt;zip伪加密
 &lt;/h5&gt;&lt;p&gt;题目没有任何提示，ziperello破了半天没破成功，随波逐流分析上分析不出来，多半是伪加密了，重点来了！！！！:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/12.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/12.png&#34;
 	width=&#34;429&#34;
 	height=&#34;174&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/12_hu_e4f2ca43cd00571e.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/12_hu_47d240f5a66ee81.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/12_hu_e4f2ca43cd00571e.png 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/12_hu_47d240f5a66ee81.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -156,10 +156,10 @@
 &lt;/h5&gt;&lt;p&gt;kali的binwalk和foremost指令分离不出有用的东西，随波逐流分析不出，看到题目的LSB有特殊含义，去查了查得知这是lsb隐写，现在我们要用stegsolve工具进行分析：&lt;/p&gt;
 &lt;img src=&#34;13.png&#34; style=&#34;zoom:150%;&#34; /&gt;
 &lt;p&gt;进行数据分析后得出：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/14.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/14.png&#34;
 	width=&#34;288&#34;
 	height=&#34;223&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/14_hu_83a732945216c4fc.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/14_hu_f50ffd84f8ca6dab.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/14_hu_83a732945216c4fc.png 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/14_hu_f50ffd84f8ca6dab.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -177,10 +177,10 @@
 &lt;h5 id=&#34;数据包中的线索&#34;&gt;数据包中的线索
 &lt;/h5&gt;&lt;p&gt;本题主要是识别base码，base64包含的元素有：小写字母a-z、大写字母A-Z、数字0-9、符号&amp;quot;+&amp;quot;、&amp;quot;/&amp;ldquo;一共64个字符的字符集。&lt;/p&gt;
 &lt;h5 id=&#34;假如给我三天光明&#34;&gt;假如给我三天光明
-&lt;/h5&gt;&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/17.png&#34;
+&lt;/h5&gt;&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/17.png&#34;
 	width=&#34;196&#34;
 	height=&#34;176&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/17_hu_d6115c60df5289f0.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/17_hu_96f52ed645fadb99.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/17_hu_d6115c60df5289f0.png 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/17_hu_96f52ed645fadb99.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -196,10 +196,10 @@
 &lt;/h3&gt;&lt;h4 id=&#34;misc-2&#34;&gt;MISC
 &lt;/h4&gt;&lt;h5 id=&#34;神奇的二维码&#34;&gt;神奇的二维码
 &lt;/h5&gt;&lt;p&gt;base64多重编码：这个是题目&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/19.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/19.png&#34;
 	width=&#34;260&#34;
 	height=&#34;260&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/19_hu_3f8c366a6391d8ab.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/19_hu_716dc1ad95a7d191.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/19_hu_3f8c366a6391d8ab.png 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/19_hu_716dc1ad95a7d191.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -209,10 +209,10 @@
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;扫进去信息没用，放到010editor也无，那就是隐写了。用kali的binwalk和foremost指令去分离，果真有：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/20.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/20.png&#34;
 	width=&#34;690&#34;
 	height=&#34;430&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/20_hu_3422c8e240bfb1b8.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/20_hu_30da35c0a59a5ecd.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/20_hu_3422c8e240bfb1b8.png 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/20_hu_30da35c0a59a5ecd.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -222,10 +222,10 @@
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;一个全是base64进制码的word文档，还有一个rar加密压缩包，起初想用随波逐流去解码的，没想到超字数了。只能用另外一个新工具：CyperChef。将密文复制到上面进行解码。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/21.jpg&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/21.jpg&#34;
 	width=&#34;690&#34;
 	height=&#34;357&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/21_hu_3286649f54d05dcc.jpg 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/21_hu_c0e1c4dd30cdc1fe.jpg 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/21_hu_3286649f54d05dcc.jpg 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/21_hu_c0e1c4dd30cdc1fe.jpg 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;赛博厨子&#34;
@@ -237,10 +237,10 @@
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;然后我发现这个是翻译密文的字数上限是比随波逐流工具要高的，而且这个密文还是多重加密，我翻译了快二十次才出结果。接着用这个密码打开rar加密包，发现里面的MP3是摩斯密码，将它拖到audacity进行分析就可以得到flag了。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/22.jpg&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/22.jpg&#34;
 	width=&#34;690&#34;
 	height=&#34;94&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/22_hu_6b010b51ac2d1b27.jpg 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/22_hu_1b549a72f5dd97be.jpg 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/22_hu_6b010b51ac2d1b27.jpg 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/22_hu_1b549a72f5dd97be.jpg 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -250,10 +250,10 @@
 	
 &gt;&lt;/p&gt;
 &lt;h5 id=&#34;荷兰宽带数据泄露&#34;&gt;荷兰宽带数据泄露
-&lt;/h5&gt;&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/23.png&#34;
+&lt;/h5&gt;&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/23.png&#34;
 	width=&#34;114&#34;
 	height=&#34;127&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/23_hu_3c0dcbca402af228.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/23_hu_71957967ba5e52fb.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/23_hu_3c0dcbca402af228.png 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/23_hu_71957967ba5e52fb.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;bin文件&#34;
@@ -266,10 +266,10 @@
 &gt;&lt;/p&gt;
 &lt;p&gt;开局直接发我一个二进制bin文件，给随波逐流、010editor分析却没啥有效信息，根据题目所示，提及有关“数据”之类，这时我们需要用到一个工具：&lt;code&gt;routerpassview&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;RouterPassView&lt;/code&gt;：大多数现代路由器允许您备份到一个文件路由器的配置，然后从文件中恢复配置时的需要。路由器的备份文件通常包含了像您的ISP的用户名重要数据/密码，路由器的登录密码，无线网络的关键。如果你失去了这些密码1 /钥匙，但你仍然有你的路由器配置的备份文件，&lt;code&gt;RouterPassView&lt;/code&gt;可以帮助你从你的路由器恢复您丢失密码的文件。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/24.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/24.png&#34;
 	width=&#34;690&#34;
 	height=&#34;298&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/24_hu_6b7b43a065c56cea.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/24_hu_5c5935e6a664ac54.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/24_hu_6b7b43a065c56cea.png 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/24_hu_5c5935e6a664ac54.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;RouterPassView&#34;
@@ -285,10 +285,10 @@
 &lt;/h4&gt;&lt;p&gt;所需工具：&lt;code&gt;随波逐流v6.3，RSAtools、(因式分解)yafu-x64&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;重点：需要记住凯撒密码、rabbit密码、栅栏密码，这三类是很难从外表辨别出的，放到随波逐流工具看看有没有flag&lt;/p&gt;
 &lt;h5 id=&#34;解密&#34;&gt;解密
-&lt;/h5&gt;&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/25.png&#34;
+&lt;/h5&gt;&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/25.png&#34;
 	width=&#34;690&#34;
 	height=&#34;599&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/25_hu_fa99b3e32af057ac.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/25_hu_6e503c0758f6fcca.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/25_hu_fa99b3e32af057ac.png 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/25_hu_6e503c0758f6fcca.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;随波逐流&#34;
@@ -308,10 +308,10 @@
 &lt;/h5&gt;&lt;p&gt;%66%6c%61%67%7b%61%6e%64%20%31%3d%31%7d&lt;/p&gt;
 &lt;p&gt;这个是url加密，用专门的解密工具就可以得到flag，如随波逐流，密文格式一般是两位字符串组成一组，再由%来隔开。&lt;/p&gt;
 &lt;h5 id=&#34;rot加密&#34;&gt;rot加密
-&lt;/h5&gt;&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/26.png&#34;
+&lt;/h5&gt;&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/26.png&#34;
 	width=&#34;690&#34;
 	height=&#34;769&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/26_hu_e0ca15a9bf0bd6f8.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/26_hu_db6263870410ded6.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/26_hu_e0ca15a9bf0bd6f8.png 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/26_hu_db6263870410ded6.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -325,10 +325,10 @@
 &lt;/h5&gt;&lt;p&gt;afZ_r9VYfScOeO_UL^RWUc&lt;/p&gt;
 &lt;p&gt;这个就是凯撒密文了，这种我认为是最恶心的密文了，看不出规律，只能放在随波逐流上看有没有flag在里面，&lt;/p&gt;
 &lt;p&gt;凯撒密码的变化大致是把原文的字母移动一定的位数来实现加密或者解密，比如从A、D开始偏移三位，分别变成D、G了。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/27.jpg&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/27.jpg&#34;
 	width=&#34;455&#34;
 	height=&#34;364&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/27_hu_224035c5a8e19b3b.jpg 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/27_hu_44fbc3a58bb0a5bd.jpg 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/27_hu_224035c5a8e19b3b.jpg 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/27_hu_44fbc3a58bb0a5bd.jpg 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -340,10 +340,10 @@
 &lt;h5 id=&#34;quoted-printable加密&#34;&gt;quoted-printable加密
 &lt;/h5&gt;&lt;p&gt;=E9=82=A3=E4=BD=A0=E4=B9=9F=E5=BE=88=E6=A3=92=E5=93=A6&lt;/p&gt;
 &lt;p&gt;这类密文形式很明显，有等号、大写字母和数字，交给随波逐流吧。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/28.jpg&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/28.jpg&#34;
 	width=&#34;690&#34;
 	height=&#34;543&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/28_hu_192fcbf764cab81.jpg 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/28_hu_a227df646ee2cad9.jpg 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/28_hu_192fcbf764cab81.jpg 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/28_hu_a227df646ee2cad9.jpg 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -355,10 +355,10 @@
 &lt;h5 id=&#34;栅栏加密&#34;&gt;栅栏加密
 &lt;/h5&gt;&lt;p&gt;felhaagv{ewtehtehfilnakgw}&lt;/p&gt;
 &lt;p&gt;这个就很好看了，在网络空间安全导论课上有听到老师将这个栅栏加密，大致是：解密者需要掌握栅栏的排列顺序和每个栏的宽度，然后按照加密过程的逆序逐个提取出明文信息。 这种加密方式虽然较为简单，但具有较好的隐蔽性和可读性。 在一些特定场合下，例如军事或商业机密等需要保护敏感信息的场合，可以使用栅栏密码来确保信息的安全。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/29.jpg&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/29.jpg&#34;
 	width=&#34;650&#34;
 	height=&#34;558&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/29_hu_3ea31ff9688fe50d.jpg 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/29_hu_6eb333357458a4a8.jpg 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/29_hu_3ea31ff9688fe50d.jpg 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/29_hu_6eb333357458a4a8.jpg 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -370,10 +370,10 @@
 &lt;p&gt;就13栏符合了。&lt;/p&gt;
 &lt;h5 id=&#34;rabbit加密&#34;&gt;Rabbit加密
 &lt;/h5&gt;&lt;p&gt;U2FsdGVkX1/+ydnDPowGbjjJXhZxm2MP2AgI&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/30.jpg&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/30.jpg&#34;
 	width=&#34;690&#34;
 	height=&#34;184&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/30_hu_229eed72e252c142.jpg 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/30_hu_7b7ccd15e6235147.jpg 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/30_hu_229eed72e252c142.jpg 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/30_hu_7b7ccd15e6235147.jpg 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -387,10 +387,10 @@
 &lt;/h5&gt;&lt;p&gt;在一次RSA密钥对生成中，假设p=473398607161，q=4511491，e=17&lt;/p&gt;
 &lt;p&gt;求解出d作为flga提交。&lt;/p&gt;
 &lt;p&gt;这里需要用到RSAtools（不建议手算）&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/31.jpg&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/31.jpg&#34;
 	width=&#34;690&#34;
 	height=&#34;684&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/31_hu_951a907b2ea05ae.jpg 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/31_hu_30a23ef82208cb35.jpg 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/31_hu_951a907b2ea05ae.jpg 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/31_hu_30a23ef82208cb35.jpg 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -400,10 +400,10 @@
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;打开这个工具后可以看到，p、q都是素数，d是私钥，而题目给出了pq了，我们输进去就可以，注意这个e填到工具中的E空栏时，有个hex，需要我们把e=17变成16进制的“11”，接着按下calc：D生成私钥就可以，这就是flag了。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/32.jpg&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/32.jpg&#34;
 	width=&#34;690&#34;
 	height=&#34;652&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/32_hu_955e0aeefc3321cd.jpg 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/32_hu_1aeefff81907d4d2.jpg 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/32_hu_955e0aeefc3321cd.jpg 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/32_hu_1aeefff81907d4d2.jpg 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -415,10 +415,10 @@
 &lt;h5 id=&#34;yafu因式分解与哈希加密&#34;&gt;&lt;strong&gt;yafu因式分解与哈希加密&lt;/strong&gt;
 &lt;/h5&gt;&lt;p&gt;题目：密码学历史中，有两位知名的杰出人物，Alice和Bob。他们的爱情经过置换和轮加密也难以混淆，即使是没有身份认证也可以知根知底。就像在数学王国中的素数一样，孤傲又热情。下面是一个大整数:98554799767,请分解为两个素数，分解后，小的放前面，大的放后面，合成一个新的数字，进行md5的32位小写哈希，提交答案。 注意：得到的 flag 请包上 flag{} 提交&lt;/p&gt;
 &lt;p&gt;这里要分解素数可以用到yafu，下载好yafu-x64并设置好路径后，在桌面打开终端&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/33.jpg&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/33.jpg&#34;
 	width=&#34;690&#34;
 	height=&#34;355&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/33_hu_7228803a3b261dc8.jpg 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/33_hu_51a8428bc3be8a18.jpg 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/33_hu_7228803a3b261dc8.jpg 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/33_hu_51a8428bc3be8a18.jpg 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -428,10 +428,10 @@
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;按照题目排列好数字串101999966233后，&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/34.jpg&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/34.jpg&#34;
 	width=&#34;690&#34;
 	height=&#34;367&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/34_hu_739dd3f13fb8108b.jpg 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/34_hu_3cafe3107d4a41b4.jpg 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/34_hu_739dd3f13fb8108b.jpg 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/34_hu_3cafe3107d4a41b4.jpg 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -446,10 +446,10 @@
 &lt;/h4&gt;&lt;p&gt;解决f5隐写、磁盘文件的查看、解决txt零宽隐写、西电MOECTF&lt;/p&gt;
 &lt;h4 id=&#34;misc-3&#34;&gt;MISC
 &lt;/h4&gt;&lt;h5 id=&#34;ctfer2077-2&#34;&gt;ctfer2077-2
-&lt;/h5&gt;&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/35.png&#34;
+&lt;/h5&gt;&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/35.png&#34;
 	width=&#34;678&#34;
 	height=&#34;839&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/35_hu_416c6980dcd8f358.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/35_hu_9ce7e06416b32a8f.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/35_hu_416c6980dcd8f358.png 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/35_hu_9ce7e06416b32a8f.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -459,10 +459,10 @@
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;这题给的文件有点特殊，电脑没识别出来，但我看了下属性，发现者货大小：4096KB——磁盘内存（2^12，你想想你手机设置里给的最大内存是不是和这有关，都是2的次方？），那就用&lt;code&gt;Veracrypt&lt;/code&gt;去分析吧，&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/36.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/36.png&#34;
 	width=&#34;690&#34;
 	height=&#34;597&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/36_hu_44e3c0dbe79cda2b.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/36_hu_514c4a620d88528f.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/36_hu_44e3c0dbe79cda2b.png 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/36_hu_514c4a620d88528f.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -473,10 +473,10 @@
 &gt;&lt;/p&gt;
 &lt;p&gt;这文件果然被识别出来了，现在要密码？题目已经给了那个那啥社会主义的，用来翻译下?  是p@55w0rd&lt;/p&gt;
 &lt;p&gt;然后就此创了个A盘来去打开它，里面还有个txt问我flag在哪，显然还要找，&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/37.jpg&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/37.jpg&#34;
 	width=&#34;690&#34;
 	height=&#34;328&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/37_hu_38d8a75852a480eb.jpg 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/37_hu_7754901f95cc3032.jpg 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/37_hu_38d8a75852a480eb.jpg 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/37_hu_7754901f95cc3032.jpg 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -486,10 +486,10 @@
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;用NTFS隐藏数据流分析吧，这专门为磁盘分析准备的，&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/38.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/38.png&#34;
 	width=&#34;690&#34;
 	height=&#34;353&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/38_hu_86effdfdca875c1e.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/38_hu_af706384b617f8fa.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/38_hu_86effdfdca875c1e.png 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/38_hu_af706384b617f8fa.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -500,10 +500,10 @@
 &gt;&lt;/p&gt;
 &lt;p&gt;还真有，然后我就不会了，后面看了别人wp，发现这是双拼输入法打出来的，flag就是moectf{shuangpinshizheyangdachulaide}，太难了想不出这么诡异的输入法。&lt;/p&gt;
 &lt;h5 id=&#34;ez_f5&#34;&gt;ez_F5
-&lt;/h5&gt;&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/39.png&#34;
+&lt;/h5&gt;&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/39.png&#34;
 	width=&#34;532&#34;
 	height=&#34;237&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/39_hu_968b25e73f01aa64.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/39_hu_4af609454543e574.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/39_hu_968b25e73f01aa64.png 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/39_hu_4af609454543e574.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -517,10 +517,10 @@
 &lt;p&gt;cd /d F:\Legion\xxxx\xxxx\F5-steganography-master&lt;/p&gt;
 &lt;p&gt;java Extract (图片绝对路径) -p （密码）&lt;/p&gt;
 &lt;p&gt;在这张图片的属性界面发现了有备注，那是个base32进制，翻译后得到：no——password的短语，可知这就是f5隐写密码了。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/40.jpg&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/40.jpg&#34;
 	width=&#34;690&#34;
 	height=&#34;215&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/40_hu_a4b770603248e03b.jpg 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/40_hu_2ff4d4daaefdc2c2.jpg 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/40_hu_a4b770603248e03b.jpg 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/40_hu_2ff4d4daaefdc2c2.jpg 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -531,10 +531,10 @@
 &gt;&lt;/p&gt;
 &lt;p&gt;还真有，然后再f5隐写文件上的output.txt文本上找到了flag：moectf{F5_15_s0_lntere5t1n9}&lt;/p&gt;
 &lt;h5 id=&#34;小小套娃&#34;&gt;小小套娃
-&lt;/h5&gt;&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/41.png&#34;
+&lt;/h5&gt;&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/41.png&#34;
 	width=&#34;690&#34;
 	height=&#34;388&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/41_hu_58693806f351a556.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/41_hu_22f1c6a4ed1efc71.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/41_hu_58693806f351a556.png 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/41_hu_22f1c6a4ed1efc71.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -544,10 +544,10 @@
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;给了个winrar7z压缩包，里面有张图片，放入随波逐流中，用binwalk、foremost分离出来，发现有一个txt，里面的开头8950，很明显是个png文件&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/42.jpg&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/42.jpg&#34;
 	width=&#34;687&#34;
 	height=&#34;700&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/42_hu_77ba5409bb8b9f89.jpg 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/42_hu_2228af76efd8d9dd.jpg 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/42_hu_77ba5409bb8b9f89.jpg 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/42_hu_2228af76efd8d9dd.jpg 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;img&#34;
@@ -559,10 +559,10 @@
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;内容是：you&amp;rsquo;ve got the zipkey:874jfy37yf37y7，那这个zip密码就是874jfy37yf37y7了，点入nnnext.zip文件发现，里面的next.7z和txt的密码都是874jfy37yf37y7，，而且这个txt内容：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/43.jpg&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/43.jpg&#34;
 	width=&#34;532&#34;
 	height=&#34;69&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/43_hu_d9e8b0f209f99896.jpg 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/43_hu_d92756c06fc73b04.jpg 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/43_hu_d9e8b0f209f99896.jpg 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/43_hu_d92756c06fc73b04.jpg 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -572,10 +572,10 @@
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;有个符号很奇怪，查了查这是长度为零的字符，这不就是零宽隐写吗？用puzzlesolver解码得到：dhufhduh48589&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/44.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/44.png&#34;
 	width=&#34;690&#34;
 	height=&#34;607&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/44_hu_b5ac6543befcb1a3.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/44_hu_50335269ce2a4804.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/44_hu_b5ac6543befcb1a3.png 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/44_hu_50335269ce2a4804.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -585,10 +585,10 @@
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;然后用这个dhufhduh48589密码打开另外一个flag.7z文件，查看里面的txt，&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/45.jpg&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/45.jpg&#34;
 	width=&#34;153&#34;
 	height=&#34;57&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/45_hu_41f0c0845e2f6f5f.jpg 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/45_hu_cc6063826e3137f8.jpg 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/45_hu_41f0c0845e2f6f5f.jpg 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/45_hu_cc6063826e3137f8.jpg 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;零宽隐写&#34;
@@ -601,10 +601,10 @@
 &gt;&lt;/p&gt;
 &lt;p&gt;去翻译下新佛曰吧。。。。。得到flag。&lt;/p&gt;
 &lt;p&gt;来总结下零宽隐写吧：也就是说txt出现零宽时，有可能看不见，也有可能看见两三个字粘在一个格子上，如：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/46.jpg&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/46.jpg&#34;
 	width=&#34;690&#34;
 	height=&#34;44&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/46_hu_75f6712ae03ea265.jpg 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/46_hu_8343af679738a052.jpg 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/46_hu_75f6712ae03ea265.jpg 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/46_hu_8343af679738a052.jpg 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -621,10 +621,10 @@
 &lt;/h3&gt;&lt;h4 id=&#34;misc-4&#34;&gt;MISC
 &lt;/h4&gt;&lt;h5 id=&#34;week3-bgm坏了吗&#34;&gt;week3 BGM坏了吗？
 &lt;/h5&gt;&lt;p&gt;上来就给我个音频，我也是听了下，还是我喜欢的歌，听到最后莫名其妙有小小的嘟嘟声，我用audacity进行分析，果不其然在音频后段有：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/47.jpg&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/47.jpg&#34;
 	width=&#34;690&#34;
 	height=&#34;164&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/47_hu_217582a2da45dc95.jpg 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/47_hu_a3a36f9d7d035253.jpg 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/47_hu_217582a2da45dc95.jpg 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/47_hu_a3a36f9d7d035253.jpg 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -634,10 +634,10 @@
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;把这两声道分离，将上部去掉留下部。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/48.jpg&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/48.jpg&#34;
 	width=&#34;690&#34;
 	height=&#34;305&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/48_hu_e9182008af6cbbe8.jpg 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/48_hu_8101becd14a93315.jpg 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/48_hu_e9182008af6cbbe8.jpg 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/48_hu_8101becd14a93315.jpg 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -648,10 +648,10 @@
 &gt;&lt;/p&gt;
 &lt;p&gt;接着导出mav文件，再听一遍，发现这是拨号声音，但我听不出，我求助csdn，找到了dtmf链接，识别拨号的网址：https://dtmf.netlify.app/&lt;/p&gt;
 &lt;p&gt;将文件放入dtmf上，然后得到一串数字，即为flag：2024093020241103&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/49.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/49.png&#34;
 	width=&#34;690&#34;
 	height=&#34;397&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/49_hu_3dc458a9dff042ea.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/49_hu_d7b835e8edb6b4a.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/49_hu_3dc458a9dff042ea.png 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/49_hu_d7b835e8edb6b4a.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -667,10 +667,10 @@
 &lt;li&gt;密码：ns24&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;开局给我发了个image.raw,看了看题目提示，应该是内存镜像，要用volatility去分析，只要找出小红的电脑登录密码就好，直接上cmd，用&lt;code&gt;volatility&lt;/code&gt;指令！查看了下系统信息：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/50.jpg&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/50.jpg&#34;
 	width=&#34;690&#34;
 	height=&#34;207&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/50_hu_65e2592e4ae6bd2e.jpg 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/50_hu_7ebf8362b1ad3109.jpg 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/50_hu_65e2592e4ae6bd2e.jpg 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/50_hu_7ebf8362b1ad3109.jpg 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -680,10 +680,10 @@
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;再列出缓存在内存中的注册表 hivelist：还真有小红！&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/51.jpg&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/51.jpg&#34;
 	width=&#34;690&#34;
 	height=&#34;454&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/51_hu_9091894e956b6bf6.jpg 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/51_hu_4f95bdb67e60ecbd.jpg 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/51_hu_9091894e956b6bf6.jpg 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/51_hu_4f95bdb67e60ecbd.jpg 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -693,10 +693,10 @@
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;列出全部用户名：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/52.jpg&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/52.jpg&#34;
 	width=&#34;690&#34;
 	height=&#34;102&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/52_hu_b9fc51578ef3db97.jpg 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/52_hu_5b3c96040f323851.jpg 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/52_hu_b9fc51578ef3db97.jpg 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/52_hu_5b3c96040f323851.jpg 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -706,10 +706,10 @@
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;把密码找出来：全是hash（这一步其实可以省略，只不过有些题需要去判断这些hash值对应的明文密码是否是空密码）。。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/53.jpg&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/53.jpg&#34;
 	width=&#34;690&#34;
 	height=&#34;354&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/53_hu_8349eed1ae5f3c9e.jpg 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/53_hu_dfa435e4714ba2b.jpg 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/53_hu_8349eed1ae5f3c9e.jpg 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/53_hu_dfa435e4714ba2b.jpg 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -719,10 +719,10 @@
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;最后一步。。。显示明文密码：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/54.jpg&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/54.jpg&#34;
 	width=&#34;690&#34;
 	height=&#34;174&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/54_hu_68617dddf095ad5f.jpg 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/54_hu_4917ec4951817331.jpg 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/54_hu_68617dddf095ad5f.jpg 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/54_hu_4917ec4951817331.jpg 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -733,7 +733,8 @@
 &gt;&lt;/p&gt;
 &lt;p&gt;其实做到这里我也很好奇这个上面的H是干嘛用的。这就是密码：ZDFyVDlfdTNlUl9wNHNTdzByRF9IQUNLRVIh&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;这道题对我的感受很深，是我学杂项以来觉得比较值得细学的方向，就是取证方向，它是属于刑侦取证分析行业的，每年会举行奇安信盘古石电子取证大赛、美亚杯、龙信杯等取证赛，也是杂项为数不多的一个痛点。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;这道题对我的感受很深，是我学杂项以来觉得比较值得细学的方向，就是取证方向，它是属于刑侦取证分析行业的，每年会举行奇安信盘古石电子取证大赛、美亚杯、龙信杯等取证赛，也是杂项为数不多的一个痛点。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h2 id=&#34;20241129&#34;&gt;2024.11.29
 &lt;/h2&gt;&lt;h3 id=&#34;西电newstars-ctf2024-1&#34;&gt;西电Newstars-ctf2024
 &lt;/h3&gt;&lt;h4 id=&#34;完成事项-1&#34;&gt;完成事项
@@ -742,10 +743,10 @@
 &lt;h4 id=&#34;misc-5&#34;&gt;MISC
 &lt;/h4&gt;&lt;h5 id=&#34;week4-擅长加密的小明同学&#34;&gt;week4-擅长加密的小明同学
 &lt;/h5&gt;&lt;p&gt;开局给了vhd磁盘文件和raw镜像文件，vhd要密码才能打开。。。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/55.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/55.png&#34;
 	width=&#34;690&#34;
 	height=&#34;809&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/55_hu_28e26a66fc57c917.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/55_hu_c31053968f2e7155.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/55_hu_28e26a66fc57c917.png 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/55_hu_c31053968f2e7155.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;EFDD&#34;
@@ -757,10 +758,10 @@
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;选第一个，利用镜像文件vhd的镜像raw文件找密码，&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/56.jpg&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/56.jpg&#34;
 	width=&#34;690&#34;
 	height=&#34;188&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/56_hu_4d8619514ca41a6a.jpg 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/56_hu_c787cfab250261e9.jpg 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/56_hu_4d8619514ca41a6a.jpg 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/56_hu_c787cfab250261e9.jpg 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -770,10 +771,10 @@
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;key：408320-285065-614779-610940-547107-218229-492195-125422，用这个key恢复磁盘。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/57.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/57.png&#34;
 	width=&#34;690&#34;
 	height=&#34;340&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/57_hu_7de7b08f365c94f2.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/57_hu_657e40552d973d70.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/57_hu_7de7b08f365c94f2.png 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/57_hu_657e40552d973d70.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;重置密码&#34;
@@ -793,10 +794,10 @@
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;python vol.py -f xxx.raw --profile&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;Win7SP1x64 pslist 
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/58.png&#34;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/58.png&#34;
 	width=&#34;690&#34;
 	height=&#34;494&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/58_hu_c9771d3cf9017dd0.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/58_hu_ec8d9847b835adda.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/58_hu_c9771d3cf9017dd0.png 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/58_hu_ec8d9847b835adda.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -829,10 +830,10 @@
 &lt;p&gt;&lt;em&gt;调好位移就调宽高，宽和高实际上就是和程序窗口大小有关，所以别太高，主要是宽度，如果和图上一样↘斜，那么你就该调高宽度，箭头一点一点加上去，如果是↗，你就得一点一点减下来，知道看上去正常了，下面是较为正常。&lt;/em&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/59.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/59.png&#34;
 	width=&#34;690&#34;
 	height=&#34;293&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/59_hu_76b3a00f062f5ee2.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/59_hu_4e7b357b7b1ab46a.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/59_hu_76b3a00f062f5ee2.png 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/59_hu_4e7b357b7b1ab46a.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;GIMP&#34;
@@ -844,10 +845,10 @@
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;全小写字母&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/60.jpg&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/60.jpg&#34;
 	width=&#34;690&#34;
 	height=&#34;284&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/60_hu_ef88c449e3139d13.jpg 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/60_hu_9e73a131623b45e9.jpg 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/60_hu_ef88c449e3139d13.jpg 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/60_hu_9e73a131623b45e9.jpg 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -901,10 +902,10 @@
 &lt;p&gt;垂直翻转就能看到图像：&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/61.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/61.png&#34;
 	width=&#34;586&#34;
 	height=&#34;479&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/61_hu_88d63261376b6d96.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/61_hu_ccaa3f14cd8a8154.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/61_hu_88d63261376b6d96.png 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/61_hu_ccaa3f14cd8a8154.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;GIMP&#34;
@@ -994,10 +995,10 @@
 &lt;p&gt;用十六进制编辑器打开&lt;code&gt;ColorfulDog.jpg&lt;/code&gt;，提示我们分辨率为 1280 × 800 。&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/62.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/62.png&#34;
 	width=&#34;1059&#34;
 	height=&#34;502&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/62_hu_ff0e4070933187e7.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/62_hu_27d5cc668819ff6.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/62_hu_ff0e4070933187e7.png 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/62_hu_27d5cc668819ff6.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Winhex&#34;
@@ -1021,10 +1022,10 @@
 &lt;li&gt;先登录 Guest 用户，修改屏幕分辨率为 1280 × 800 。&lt;/li&gt;
 &lt;li&gt;再注销，登录 Administrator 用户，即可观察到桌面图标的特定位置&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/63.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/63.png&#34;
 	width=&#34;1280&#34;
 	height=&#34;800&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/63_hu_957c95d4d5806c86.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/63_hu_33f39c8c8813aaee.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/63_hu_957c95d4d5806c86.png 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/63_hu_33f39c8c8813aaee.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -1038,10 +1039,10 @@
 &lt;/h2&gt;&lt;h3 id=&#34;完成事项-2&#34;&gt;完成事项
 &lt;/h3&gt;&lt;p&gt;有幸参加了广东省卫生健康网络安全技能大赛&lt;/p&gt;
 &lt;p&gt;线下赛还是比较紧张，毕竟第一次参加。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/%E6%88%91%E7%9A%84%E9%A6%96%E6%AC%A1%E7%BA%BF%E4%B8%8B%E8%B5%9B.jpg&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/%E6%88%91%E7%9A%84%E9%A6%96%E6%AC%A1%E7%BA%BF%E4%B8%8B%E8%B5%9B.jpg&#34;
 	width=&#34;800&#34;
 	height=&#34;507&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/%E6%88%91%E7%9A%84%E9%A6%96%E6%AC%A1%E7%BA%BF%E4%B8%8B%E8%B5%9B_hu_97be23586f3fb6fd.jpg 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/%E6%88%91%E7%9A%84%E9%A6%96%E6%AC%A1%E7%BA%BF%E4%B8%8B%E8%B5%9B_hu_fa6ea4c112fe9c1e.jpg 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/%E6%88%91%E7%9A%84%E9%A6%96%E6%AC%A1%E7%BA%BF%E4%B8%8B%E8%B5%9B_hu_97be23586f3fb6fd.jpg 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/%E6%88%91%E7%9A%84%E9%A6%96%E6%AC%A1%E7%BA%BF%E4%B8%8B%E8%B5%9B_hu_fa6ea4c112fe9c1e.jpg 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;从0-1&#34;
@@ -1055,10 +1056,10 @@
 &lt;p&gt;这周主要是复盘线下培训的知识及错题，题做的少，wp可能比较水，然后看了复盘的线上会议，进一步熟悉了wireshark的过滤器运用。&lt;/p&gt;
 &lt;p&gt;水了几个QQ群搞到了lovelymem的取证工具，备战盘古石赛。&lt;/p&gt;
 &lt;p&gt;稍微理解了下volatility的一些指令：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/64.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/64.png&#34;
 	width=&#34;1510&#34;
 	height=&#34;835&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/64_hu_e29816f1cf0e11e1.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/64_hu_630c378a673f414a.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/64_hu_e29816f1cf0e11e1.png 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/64_hu_630c378a673f414a.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Lovelymem-volatility&#34;
@@ -1083,10 +1084,10 @@
 &lt;ol&gt;
 &lt;li&gt;水印加密，开局给了jar，我工具箱也有，方法一，常规脚本使用，使用指令java -jar xxx打开&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/65.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/65.png&#34;
 	width=&#34;692&#34;
 	height=&#34;185&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/65_hu_6ecd37a75aac8be1.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/65_hu_928322f322d10b15.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/65_hu_6ecd37a75aac8be1.png 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/65_hu_928322f322d10b15.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -1096,10 +1097,10 @@
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;套，提出来了。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/66.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/66.png&#34;
 	width=&#34;692&#34;
 	height=&#34;413&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/66_hu_b0d1b9d6c83b5739.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/66_hu_63da9c642e99032c.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/66_hu_b0d1b9d6c83b5739.png 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/66_hu_63da9c642e99032c.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -1109,10 +1110,10 @@
 	
 &gt;看着模糊，可以用p图调色去变清晰，这里不多解释；&lt;/p&gt;
 &lt;p&gt;方法二：一把梭，直接用山羊puzzlesolver梭&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/67.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/67.png&#34;
 	width=&#34;692&#34;
 	height=&#34;513&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/67_hu_fd6546eea4eca17e.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/67_hu_15c188e3d9faeaa.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/67_hu_fd6546eea4eca17e.png 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/67_hu_15c188e3d9faeaa.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -1124,10 +1125,10 @@
 &lt;p&gt;原理一样。&lt;/p&gt;
 &lt;h5 id=&#34;usb-ucsc&#34;&gt;USB-ucsc
 &lt;/h5&gt;&lt;p&gt;用wireshark打开这个文件发现是usb流量，可用脚本可用梭。这里直接用NetA去梭：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/68.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/68.png&#34;
 	width=&#34;692&#34;
 	height=&#34;409&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/68_hu_8ee4bbfda9efce56.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/68_hu_a9e18b52124e2eee.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/68_hu_8ee4bbfda9efce56.png 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/68_hu_a9e18b52124e2eee.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;NetA&#34;
@@ -1142,10 +1143,10 @@
 &lt;h5 id=&#34;noshark-ucsc&#34;&gt;No.shArk-ucsc
 &lt;/h5&gt;&lt;p&gt;拿到一个流量包，进去除了http，还有dns的，不太对劲。&lt;/p&gt;
 &lt;p&gt;过滤dns看到了很多010110的二进制码：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/69.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/69.png&#34;
 	width=&#34;692&#34;
 	height=&#34;354&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/69_hu_ff05f75240c6ac59.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/69_hu_f138b3e52373ab5.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/69_hu_ff05f75240c6ac59.png 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/69_hu_f138b3e52373ab5.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;wireshark&#34;
@@ -1157,10 +1158,10 @@
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;在这题我卡住了，后面都是别人的wp：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/70.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/70.png&#34;
 	width=&#34;693&#34;
 	height=&#34;472&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/70_hu_1d506396bcc92776.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/70_hu_ad1028bf79729c90.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/70_hu_1d506396bcc92776.png 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/70_hu_ad1028bf79729c90.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -1171,11 +1172,12 @@
 &gt;&lt;/p&gt;
 &lt;p&gt;用脚本或者其他工具梭都可，这段二进制码可以转成图片，就是二维码：&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;解释一下原理吧，为什么这里是二进制编码，因为本质信息传输都是以二进制0和1的形式存在的，传到目的地才会有“翻译”给转译成你看得懂的数据，这里流量传输也是一样，一条流量一条的传输，对应在工具就能看到就是一句一句的传，我们刻意把它们拷贝下来一条条的拼回去就是二维码原始数据了，再转移成图片。&lt;/p&gt;&lt;/blockquote&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/71.png&#34;
+&lt;p&gt;解释一下原理吧，为什么这里是二进制编码，因为本质信息传输都是以二进制0和1的形式存在的，传到目的地才会有“翻译”给转译成你看得懂的数据，这里流量传输也是一样，一条流量一条的传输，对应在工具就能看到就是一句一句的传，我们刻意把它们拷贝下来一条条的拼回去就是二维码原始数据了，再转移成图片。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/71.png&#34;
 	width=&#34;693&#34;
 	height=&#34;442&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/71_hu_d53623234740173c.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/71_hu_18bada2582c0edb.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/71_hu_d53623234740173c.png 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/71_hu_18bada2582c0edb.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -1185,10 +1187,10 @@
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;缺失了定位符，自己搓出也很简单的。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/72.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/72.png&#34;
 	width=&#34;692&#34;
 	height=&#34;846&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/72_hu_73d5a89144aab15.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/72_hu_d178d17f2e316e5b.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/72_hu_73d5a89144aab15.png 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/72_hu_d178d17f2e316e5b.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;QR&#34;
@@ -1202,10 +1204,10 @@
 &lt;p&gt;Qr扫二维码，看起来是密钥&lt;/p&gt;
 &lt;p&gt;Y0U_Fi8d_ItHa@aaHH&lt;/p&gt;
 &lt;p&gt;接着从http下手，看到HTML&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/73.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/73.png&#34;
 	width=&#34;478&#34;
 	height=&#34;353&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/73_hu_32c1aec72bc7338d.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/73_hu_f3dcc7b974477e13.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/73_hu_32c1aec72bc7338d.png 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/73_hu_f3dcc7b974477e13.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -1217,10 +1219,10 @@
 &lt;p&gt;奇怪的歌。。。。&lt;/p&gt;
 &lt;p&gt;snow隐写本质上其实是html隐写，然后找到一个html文件&lt;/p&gt;
 &lt;p&gt;有密钥有html，那就是snow隐写了。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/74.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/74.png&#34;
 	width=&#34;692&#34;
 	height=&#34;339&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/74_hu_ec9ca78863c5df1c.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/74_hu_7d2a5b70975ba1e5.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/74_hu_ec9ca78863c5df1c.png 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/74_hu_7d2a5b70975ba1e5.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -1232,10 +1234,10 @@
 &lt;p&gt;11ef-b3b6-a4b1c1c5a2d2}&lt;/p&gt;
 &lt;p&gt;已经找到后半段，还有前半段&lt;/p&gt;
 &lt;p&gt;接着回去看流量：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/75.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/75.png&#34;
 	width=&#34;692&#34;
 	height=&#34;177&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/75_hu_359bab1d3f585be5.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/75_hu_abad42d7bc69d168.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/75_hu_359bab1d3f585be5.png 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/75_hu_abad42d7bc69d168.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -1245,10 +1247,10 @@
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;有图片，导出，这个应该是像素偏移的题，用gimp不行（gimp的是单轴偏移），这个是两轴偏移（x，y轴十字偏移）&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/76.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/76.png&#34;
 	width=&#34;211&#34;
 	height=&#34;211&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/76_hu_8e20877806f6ae56.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/76_hu_3a134042a4bd8f7f.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/76_hu_8e20877806f6ae56.png 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/76_hu_3a134042a4bd8f7f.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -1257,10 +1259,10 @@
 		data-flex-basis=&#34;240px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/77.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/77.png&#34;
 	width=&#34;692&#34;
 	height=&#34;133&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/77_hu_22c06f395ba2c775.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/77_hu_6716f6806f086429.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/77_hu_22c06f395ba2c775.png 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/77_hu_6716f6806f086429.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -1272,10 +1274,10 @@
 &lt;p&gt;直接梭   密钥是&lt;code&gt;keykeyishere&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;猫脸变换脚本都有的&lt;/p&gt;
 &lt;p&gt;变换出货！！！！flag完毕&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/78.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/78.png&#34;
 	width=&#34;692&#34;
 	height=&#34;342&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/78_hu_8d43126b64de70a1.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/78_hu_83373818b9c1cd0f.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/78_hu_8d43126b64de70a1.png 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/78_hu_83373818b9c1cd0f.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -1284,10 +1286,10 @@
 		data-flex-basis=&#34;485px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/79.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/79.png&#34;
 	width=&#34;469&#34;
 	height=&#34;336&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/79_hu_6d0715cad5028f17.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/79_hu_5afec9ad92a6a75f.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/79_hu_6d0715cad5028f17.png 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/79_hu_5afec9ad92a6a75f.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -1298,10 +1300,10 @@
 &gt;&lt;/p&gt;
 &lt;h5 id=&#34;小套不是套-ucsc&#34;&gt;小套不是套-ucsc
 &lt;/h5&gt;&lt;p&gt;看到套.zip里面有好多白bin文件，而且用winrar打开查看，字节大小出奇一样！&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/80.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/80.png&#34;
 	width=&#34;692&#34;
 	height=&#34;559&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/80_hu_170864892e11a816.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/80_hu_8314dc8274e6892a.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/80_hu_170864892e11a816.png 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/80_hu_8314dc8274e6892a.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;winrar&#34;
@@ -1313,10 +1315,10 @@
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;判断出这是&lt;code&gt;CRC校验碰撞&lt;/code&gt;，字节为4 。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/81.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/81.png&#34;
 	width=&#34;691&#34;
 	height=&#34;331&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/81_hu_7bc976f691097e.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/81_hu_b9c0c5bb9ef34be8.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/81_hu_7bc976f691097e.png 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/81_hu_b9c0c5bb9ef34be8.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -1328,10 +1330,10 @@
 &lt;p&gt;找到一个密钥 SecretIsY0u    ；；；；；&lt;/p&gt;
 &lt;p&gt;当然，如果用命令去做，要一个个去输入那个CRC32的值，过程比较繁琐，不过在这我用现成脚本梭了，原理都一样，我当时就用命令一个个去填的，太慢了。&lt;/p&gt;
 &lt;p&gt;看回文件夹，有二维码，扫一下得到：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/82.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/82.png&#34;
 	width=&#34;692&#34;
 	height=&#34;471&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/82_hu_4ffe465adff1cfc1.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/82_hu_259945cc3b8f27c6.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/82_hu_4ffe465adff1cfc1.png 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/82_hu_259945cc3b8f27c6.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -1344,10 +1346,10 @@
 &lt;p&gt;&lt;code&gt;!@#QWE123987&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;用来打开tess.zip，里面有个还有个zip，拖进随波逐流或者看010editor，都可知道是&lt;code&gt;伪加密&lt;/code&gt;的；&lt;/p&gt;
 &lt;p&gt;看回mushroom.jpg，放随波逐流&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/83.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/83.png&#34;
 	width=&#34;692&#34;
 	height=&#34;399&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/83_hu_dd7f1f867a04707b.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/83_hu_97875e0839487c14.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/83_hu_dd7f1f867a04707b.png 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/83_hu_97875e0839487c14.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -1357,10 +1359,10 @@
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;看回010editor，知道jpg文件的16进制码的末尾是FFD9，但这有很多个，再一次确定了这个文件的尾部被人为添加了数据。从此处下手。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/84.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/84.png&#34;
 	width=&#34;693&#34;
 	height=&#34;358&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/84_hu_b7cbcb1d5405a32a.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/84_hu_8130ff418e01fe04.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/84_hu_b7cbcb1d5405a32a.png 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/84_hu_8130ff418e01fe04.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -1371,10 +1373,10 @@
 &gt;&lt;/p&gt;
 &lt;p&gt;在上面图片上看到了IHDR，用png来对比，发现确实是图片，加个89504E47&lt;/p&gt;
 &lt;p&gt;导出发现还是损坏，拖进随波逐流分析，还是多了东西，这是&lt;code&gt;oursecret&lt;/code&gt;加密特征&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/85.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/85.png&#34;
 	width=&#34;693&#34;
 	height=&#34;281&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/85_hu_a178864b75dc307b.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/85_hu_ea89eb3454c5d0ac.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/85_hu_a178864b75dc307b.png 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/85_hu_ea89eb3454c5d0ac.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -1384,10 +1386,10 @@
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;来到oursecret工具页面，会用到密钥&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/86.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/86.png&#34;
 	width=&#34;692&#34;
 	height=&#34;421&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/86_hu_704204df5354c6c4.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/86_hu_96ccc7aae21644db.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/86_hu_704204df5354c6c4.png 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/86_hu_96ccc7aae21644db.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;oursecret&#34;
@@ -1409,7 +1411,8 @@
 &lt;p&gt;熟悉运用猫脸变换的脚本；&lt;/p&gt;
 &lt;p&gt;重温了snow隐写；&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;我建议各位在平时不要老是使用一把梭的工具，老老实实用wireshark、010这种踏实手搓，理解底层原理再去一把梭抢分。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;我建议各位在平时不要老是使用一把梭的工具，老老实实用wireshark、010这种踏实手搓，理解底层原理再去一把梭抢分。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h2 id=&#34;202559&#34;&gt;2025.5.9
 &lt;/h2&gt;&lt;h3 id=&#34;完成事项-4&#34;&gt;完成事项
 &lt;/h3&gt;&lt;p&gt;刷了些取证题，刷了didctf2022新生赛、24盘古石初赛，看wp也七七八八啃下了，主要没工具太烦了，取证大师用起来也陌生还限时体验的；顺便加强了下流量取证这方面，https://forensics.didctf.com/challenges以下是我想要分享的一些包含重要知识的例题。&lt;/p&gt;
@@ -1417,10 +1420,10 @@
 &lt;h3 id=&#34;didctf2022新生赛&#34;&gt;didctf2022新生赛
 &lt;/h3&gt;&lt;p&gt;挑了点有代表性的题来做，作者AK了didctf2022😄。&lt;/p&gt;
 &lt;h4 id=&#34;流量分析&#34;&gt;流量分析
-&lt;/h4&gt;&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/95.png&#34;
+&lt;/h4&gt;&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/95.png&#34;
 	width=&#34;1619&#34;
 	height=&#34;515&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/95_hu_152358d240c761bf.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/95_hu_ad1f1eb8b7cee9e6.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/95_hu_152358d240c761bf.png 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/95_hu_ad1f1eb8b7cee9e6.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -1429,10 +1432,10 @@
 		data-flex-basis=&#34;754px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/87.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/87.png&#34;
 	width=&#34;1382&#34;
 	height=&#34;415&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/87_hu_9b995858641800ac.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/87_hu_ca1e29771ad3e3d6.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/87_hu_9b995858641800ac.png 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/87_hu_ca1e29771ad3e3d6.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -1443,10 +1446,10 @@
 &gt;&lt;/p&gt;
 &lt;p&gt;这题纯知识点，一开始还想http、tcp、post的过滤的。&lt;/p&gt;
 &lt;p&gt;看了几个私人blog才知道内网是有固定ip开头，内网地址开头10.0、192.168.xxx的开头IP，那我们下一步可以搜索10字节流就可以找到答案了，不过也确实难找，第一次做。dbhost是data base host缩写，译为数据库主机。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/88.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/88.png&#34;
 	width=&#34;1159&#34;
 	height=&#34;829&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/88_hu_540dcda27a607fc6.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/88_hu_7345ca96a79ac72f.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/88_hu_540dcda27a607fc6.png 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/88_hu_7345ca96a79ac72f.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -1457,10 +1460,10 @@
 &gt;&lt;/p&gt;
 &lt;h4 id=&#34;内存取证&#34;&gt;内存取证
 &lt;/h4&gt;&lt;p&gt;盘古石2024初赛：计算机取证&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/89.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/89.png&#34;
 	width=&#34;1390&#34;
 	height=&#34;596&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/89_hu_4f824593eda1156d.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/89_hu_5e5bc545d2d9dbd8.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/89_hu_4f824593eda1156d.png 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/89_hu_5e5bc545d2d9dbd8.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -1471,10 +1474,10 @@
 &gt;&lt;/p&gt;
 &lt;p&gt;查看内存检材的基本信息，这里考察内存取证，工具很多，一把梭、手搓都可：这里两种都有&lt;/p&gt;
 &lt;p&gt;一把梭：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/90.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/90.png&#34;
 	width=&#34;1016&#34;
 	height=&#34;444&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/90_hu_1c1bfb46251ec443.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/90_hu_95545f18d1806c40.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/90_hu_1c1bfb46251ec443.png 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/90_hu_95545f18d1806c40.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -1484,10 +1487,10 @@
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;答案是2024-04-25-22-18，加8因为是北京时间UTC+8：00，而这里是+0：00&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/91.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/91.png&#34;
 	width=&#34;447&#34;
 	height=&#34;319&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/91_hu_4352d5358f5f657.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/91_hu_85cb4c3a0150dc85.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/91_hu_4352d5358f5f657.png 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/91_hu_85cb4c3a0150dc85.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -1497,10 +1500,10 @@
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;这是个误导点。手搓，就是用volatility指令，这里我用版本vol2.6.1为例：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/92.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/92.png&#34;
 	width=&#34;690&#34;
 	height=&#34;375&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/92_hu_5c41543b564bcd11.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/92_hu_4fbfa06c25ca411c.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/92_hu_5c41543b564bcd11.png 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/92_hu_4fbfa06c25ca411c.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -1510,10 +1513,10 @@
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;下一题&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/93.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/93.png&#34;
 	width=&#34;1429&#34;
 	height=&#34;616&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/93_hu_33cf6b5c5241b858.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/93_hu_e3bed8e7d582e9d.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/93_hu_33cf6b5c5241b858.png 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/93_hu_e3bed8e7d582e9d.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -1524,10 +1527,10 @@
 &gt;&lt;/p&gt;
 &lt;p&gt;看navicat.exe进程，用volatility的plist进程指令查看&lt;/p&gt;
 &lt;p&gt;lovelymem一把梭：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/94.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/94.png&#34;
 	width=&#34;1449&#34;
 	height=&#34;767&#34;
-	srcset=&#34;https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/94_hu_6a3833d4111f861.png 480w, https://expl0rer.top/p/%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/94_hu_ead1e1d8e1a1a3fe.png 1024w&#34;
+	srcset=&#34;https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/94_hu_6a3833d4111f861.png 480w, https://expl0rer.top/p/2024%E5%B9%B4%E9%A3%9E%E4%B9%A6%E5%91%A8%E6%8A%A5/94_hu_ead1e1d8e1a1a3fe.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -1632,13 +1635,15 @@
 &lt;p&gt;%x ~ 十六进制——输出十六进制数&lt;/p&gt;
 &lt;p&gt;%c ~ 字符——输出字符&lt;/p&gt;
 &lt;p&gt;%p ~ 指针——指针地址&lt;/p&gt;
-&lt;p&gt;%n ~ 到目前为止所写的字符数&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;%n ~ 到目前为止所写的字符数&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h2 id=&#34;格式化字符串漏洞原理的利用&#34;&gt;格式化字符串漏洞原理的利用
 &lt;/h2&gt;&lt;p&gt;来看一种攻击案例，最简单的攻击方法，只需要输入一串%s就可以&lt;/p&gt;
 &lt;p&gt;%s%s%s%s%s%s%s%s%s%s%s%s%s%s&lt;/p&gt;
 &lt;p&gt;学过C语言都知道，每一个%s，会使printf()从栈上取一个数字，把该数字看做成地址，接着打印出该地址所指向的&lt;strong&gt;内存内容&lt;/strong&gt;，这不就是隔山打牛吗？一个%s就能窃取隔壁的东西，有时这不太可取，万一你获取的数字是非法地址？所以有可数字对应的内容可能不存在，或者这个地址被保护的，那么程序就会因此崩溃或者停滞不前。&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;在Linux中，存取无效的指针会引起进程收到&lt;code&gt;SIGSEGV信号&lt;/code&gt;，从而使程序非正常终止并产生核心转储。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;在Linux中，存取无效的指针会引起进程收到&lt;code&gt;SIGSEGV信号&lt;/code&gt;，从而使程序非正常终止并产生核心转储。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h3 id=&#34;泄露内存案例&#34;&gt;泄露内存（案例）
 &lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -1790,7 +1795,8 @@ ROP、shellcode、栈转移等。&lt;/p&gt;
 &lt;p&gt;接下来的一整章的内容，我们就来讲堆。&lt;/p&gt;
 &lt;blockquote class=&#34;alert alert-tip&#34;&gt;
     &lt;blockquote&gt;
-&lt;p&gt;堆章节比较抽象，我还刻意加了很多图，但依旧比栈章节要更加抽象&amp;hellip;，以至于作者也学的迷迷糊糊，看不懂的欢迎来评论区讨论。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;堆章节比较抽象，我还刻意加了很多图，但依旧比栈章节要更加抽象&amp;hellip;，以至于作者也学的迷迷糊糊，看不懂的欢迎来评论区讨论。&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/blockquote&gt;
 &lt;h2 id=&#34;linux动态内存管理机制&#34;&gt;Linux动态内存管理机制
 &lt;/h2&gt;&lt;p&gt;什么是堆？+&lt;/p&gt;
 &lt;p&gt;堆是程序用于分配动态内存的一段内存区域。
@@ -1808,7 +1814,8 @@ ROP、shellcode、栈转移等。&lt;/p&gt;
 &lt;blockquote class=&#34;alert alert-tip&#34;&gt;
     &lt;blockquote&gt;
 &lt;p&gt;栈的话基本都会关闭一两个保护机制，堆的话一般全开。&lt;/p&gt;
-&lt;p&gt;CTFpwn的主流是堆利用。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;CTFpwn的主流是堆利用。&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/blockquote&gt;
 &lt;h4 id=&#34;堆块介绍&#34;&gt;堆块介绍
 &lt;/h4&gt;&lt;h5 id=&#34;chunk&#34;&gt;chunk
 &lt;/h5&gt;&lt;p&gt;在了解ptmalloc的内存管理机制前，我们先了解一下堆块在内存中的存储形式。在内存中，堆是以一个个堆块构成的,这些堆块称之为chunk。&lt;/p&gt;
@@ -1831,14 +1838,16 @@ ROP、shellcode、栈转移等。&lt;/p&gt;
 &lt;p&gt;prev_size和size字段分别代表一个chunk对的大小，大小都是8字节，两个一共16字节，称之为chunk的头部字段。后面的user data区域是用户可以输入数据的地方。&lt;/p&gt;
 &lt;p&gt;chunk的大小8字节对齐，所以说对于分配器来说，0x80、0x81、0x82大小的堆块都是一样的，都为0x80大小。&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;可能你举得有点懵，但这是一种简化表述，核心是&lt;strong&gt;堆块大小必须满足 8 字节对齐&lt;/strong&gt;，所以分配器会把不满足的大小调整到最近的 8 字节对齐的大小，这样就会出现多个请求大小对应同一个实际分配大小的情况。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;可能你举得有点懵，但这是一种简化表述，核心是&lt;strong&gt;堆块大小必须满足 8 字节对齐&lt;/strong&gt;，所以分配器会把不满足的大小调整到最近的 8 字节对齐的大小，这样就会出现多个请求大小对应同一个实际分配大小的情况。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;为了节省空间，将size的最低三个bit设置为三个标志位。&lt;/p&gt;
 &lt;blockquote class=&#34;alert alert-note&#34;&gt;
     &lt;blockquote&gt;
 &lt;p&gt;从高到低分别为&lt;code&gt;non_main_arena&lt;/code&gt;、&lt;code&gt;is_mmap&lt;/code&gt;、&lt;code&gt;prev_inuse&lt;/code&gt;，这里分别解释一下：&lt;/p&gt;
 &lt;p&gt;non_main_arena用来记录当前chunk是否不属于主线程,1表示不属于，0表示属于。&lt;/p&gt;
 &lt;p&gt;is_mmap表示当前chunk是否由mmap分配的，1表示属于，0表示不属于。&lt;/p&gt;
-&lt;p&gt;prev_inuse用来表示前面紧邻的那个chunk是否正在使用，0表示前面的chunk已经被释放，1表示正在被用户使用。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;prev_inuse用来表示前面紧邻的那个chunk是否正在使用，0表示前面的chunk已经被释放，1表示正在被用户使用。&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/blockquote&gt;
 &lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/pwn-3/1.png&#34;
 	width=&#34;600&#34;
 	height=&#34;699&#34;
@@ -1955,7 +1964,8 @@ ROP、shellcode、栈转移等。&lt;/p&gt;
 &lt;p&gt;For instace，当前堆块是空闲的，若后一个堆块的 &lt;code&gt;prev_inuse = 0&lt;/code&gt;（说明后一个堆块认为 “前一个堆块（即当前堆块）是空闲的”），则可以进行向后合并。&lt;/p&gt;
 &lt;p&gt;2、可见，“向后合并” 的核心是&lt;strong&gt;后一个堆块的 &lt;code&gt;prev_inuse&lt;/code&gt; 标志&lt;/strong&gt;，而非当前堆块的 &lt;code&gt;prev_inuse&lt;/code&gt;。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;考虑到相对关系，简单来说对于当前你要讨论的堆头部来说，它的prev_inuse=0时，它本身就应该和前面的chunk合并。&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;而“向后合并” 的触发条件是后一个堆块的 prev_inuse = 0（表示后一个堆块允许与前一个堆块 —— 即当前堆块 —— 合并）。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;而“向后合并” 的触发条件是后一个堆块的 prev_inuse = 0（表示后一个堆块允许与前一个堆块 —— 即当前堆块 —— 合并）。&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/blockquote&gt;
 &lt;h3 id=&#34;结构体&#34;&gt;结构体
 &lt;/h3&gt;&lt;p&gt;&lt;code&gt;aren&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;是一块结构体，用于管理bins。主线程创建的arena称之为main_arena,其他的叫threadarena。&lt;/p&gt;
@@ -2097,7 +2107,8 @@ ROP、shellcode、栈转移等。&lt;/p&gt;
 &lt;/div&gt;&lt;h4 id=&#34;largebin&#34;&gt;Largebin
 &lt;/h4&gt;&lt;p&gt;管理large chunk，63个双向链表，FIFO。同一个双线链表中chunk大小可以不一样，但是在一定范围内，bins大小从小到大排列。&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;在此我们先不学习larbin attack的相关内容，所以看看就行，了解一下。比较少遇见Largebin的相关题。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;在此我们先不学习larbin attack的相关内容，所以看看就行，了解一下。比较少遇见Largebin的相关题。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;img src=&#34;9.png&#34; style=&#34;zoom:150%;&#34; /&gt;
 &lt;h3 id=&#34;malloc运行流程&#34;&gt;Malloc运行流程
 &lt;/h3&gt;&lt;p&gt;了解完各种bin之后，现在来看看这：&lt;/p&gt;
@@ -2199,7 +2210,8 @@ ROP、shellcode、栈转移等。&lt;/p&gt;
 &lt;/h3&gt;&lt;p&gt;我的妈啊，难死我了，堆的内存管理机制比较复杂，多刷刷题吧，受不了了，刚开始就上强度了😫。&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;我这里有一个发自内心的疑问：堆的本质是指针指来指去吗？O(∩_∩)O&lt;/p&gt;
-&lt;p&gt;堆的本质可以理解为&lt;strong&gt;通过指针操作管理动态内存的机制&lt;/strong&gt;，但 “指针指来指去” 只是其表现形式之一，更深层的本质是&lt;strong&gt;内存块的分配、释放和复用规则&lt;/strong&gt;，以及攻击者通过破坏规则实现漏洞利用的过程。理解堆的核心在于掌握内存块的组织结构、堆管理器的行为逻辑，而非单纯的指针操作。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;堆的本质可以理解为&lt;strong&gt;通过指针操作管理动态内存的机制&lt;/strong&gt;，但 “指针指来指去” 只是其表现形式之一，更深层的本质是&lt;strong&gt;内存块的分配、释放和复用规则&lt;/strong&gt;，以及攻击者通过破坏规则实现漏洞利用的过程。理解堆的核心在于掌握内存块的组织结构、堆管理器的行为逻辑，而非单纯的指针操作。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h2 id=&#34;堆的调试方法&#34;&gt;堆的调试方法
 &lt;/h2&gt;</description>
         </item>
@@ -2343,7 +2355,8 @@ ROP、shellcode、栈转移等。&lt;/p&gt;
 &lt;p&gt;看到这里有个疑问，为什么system有这么大威力？，这次system里边是一个/bin/sh的软链接，很类似我们的文件地址&lt;/p&gt;
 &lt;blockquote class=&#34;alert alert-note&#34;&gt;
     &lt;blockquote&gt;
-&lt;p&gt;&lt;code&gt;system(&amp;quot;/bin/sh&amp;quot;);&lt;/code&gt; 是漏洞利用中获取系统 shell 的核心操作，其工作原理涉及&lt;strong&gt;函数调用&lt;/strong&gt;、&lt;strong&gt;系统调用&lt;/strong&gt;和&lt;strong&gt;进程创建&lt;/strong&gt;三个层次，本质是通过标准库函数 &lt;code&gt;system&lt;/code&gt; 启动一个 &lt;code&gt;/bin/sh&lt;/code&gt; 进程（即命令行解释器），让攻击者获得交互权限。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;&lt;code&gt;system(&amp;quot;/bin/sh&amp;quot;);&lt;/code&gt; 是漏洞利用中获取系统 shell 的核心操作，其工作原理涉及&lt;strong&gt;函数调用&lt;/strong&gt;、&lt;strong&gt;系统调用&lt;/strong&gt;和&lt;strong&gt;进程创建&lt;/strong&gt;三个层次，本质是通过标准库函数 &lt;code&gt;system&lt;/code&gt; 启动一个 &lt;code&gt;/bin/sh&lt;/code&gt; 进程（即命令行解释器），让攻击者获得交互权限。&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/blockquote&gt;
 &lt;p&gt;&lt;code&gt;system&lt;/code&gt; 是 C 标准库（libc）中的函数，原型为：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -2355,13 +2368,15 @@ ROP、shellcode、栈转移等。&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;blockquote class=&#34;alert alert-error&#34;&gt;
     &lt;blockquote&gt;
-&lt;p&gt;它的功能是&lt;strong&gt;执行参数 &lt;code&gt;command&lt;/code&gt; 指向的字符串作为系统命令&lt;/strong&gt;，相当于在终端中输入该命令并执行。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;它的功能是&lt;strong&gt;执行参数 &lt;code&gt;command&lt;/code&gt; 指向的字符串作为系统命令&lt;/strong&gt;，相当于在终端中输入该命令并执行。&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/blockquote&gt;
 &lt;p&gt;system()函数先fork一个子进程，在这个子进程中调用/bin/sh -c来执行command指定的命令。/bin/sh在系统中一般是个软链接，指向dash或者bash等常用的shell，-c选项是告诉shell从字符串command中读取要执行的命令（shell将扩展command中的任何特殊字符）。父进程则调用waitpid()函数来为变成僵尸的子进程收尸，获得其结束状态，然后将这个结束状态返回给system()函数的调用者。&lt;/p&gt;
 &lt;blockquote class=&#34;alert alert-note&#34;&gt;
     &lt;blockquote&gt;
 &lt;p&gt;&lt;code&gt;system(&amp;quot;/bin/sh&amp;quot;)&lt;/code&gt; 的工作原理可简化为：
 &lt;strong&gt;通过 &lt;code&gt;system&lt;/code&gt; 函数创建子进程 → 子进程执行 &lt;code&gt;/bin/sh&lt;/code&gt; 程序 → 启动交互式 shell 环境&lt;/strong&gt;。&lt;/p&gt;
-&lt;p&gt;这也是漏洞利用中最常用的&lt;strong&gt;获取权限&lt;/strong&gt;的方式 —— 无论通过栈溢出、ROP 还是 ret2libc，最终目标都是让程序执行这条语句（或等效的系统调用）。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;这也是漏洞利用中最常用的&lt;strong&gt;获取权限&lt;/strong&gt;的方式 —— 无论通过栈溢出、ROP 还是 ret2libc，最终目标都是让程序执行这条语句（或等效的系统调用）。&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/blockquote&gt;
 &lt;h3 id=&#34;pwn_003&#34;&gt;PWN_003
 &lt;/h3&gt;&lt;p&gt;题目： &lt;a class=&#34;link&#34; href=&#34;PWN_003&#34; &gt;PWN_003&lt;/a&gt; 哪一个函数才能读取flag？&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/9.png&#34;
@@ -2640,7 +2655,8 @@ ROP、shellcode、栈转移等。&lt;/p&gt;
 &lt;p&gt;这题开始就有点变样了，“Welcome_to_CTFshow.asm”这文件是一个存放汇编语言的文本文件，需要运行一下转换成像exe这样的可执行文件，在PWN-1讲过elf文件：&lt;/p&gt;
 &lt;blockquote class=&#34;alert alert-note&#34;&gt;
     &lt;blockquote&gt;
-&lt;p&gt;将汇编语言（.asm）文件转换为可执行文件，需要经过&lt;strong&gt;汇编（Assemble）&lt;/strong&gt; 和&lt;strong&gt;链接（Link）&lt;/strong&gt; 两个核心步骤.&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;将汇编语言（.asm）文件转换为可执行文件，需要经过&lt;strong&gt;汇编（Assemble）&lt;/strong&gt; 和&lt;strong&gt;链接（Link）&lt;/strong&gt; 两个核心步骤.&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/blockquote&gt;
 &lt;p&gt;在Kali/Linux上下载nasm编辑器：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -2728,7 +2744,8 @@ ROP、shellcode、栈转移等。&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;ld -m elf_i386 -s -o Welcome_to_CTFshow1 Welcome_to_CTFshow.o
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;（Welcome_to_CTFshow1是可执行文件）&lt;/p&gt;&lt;/blockquote&gt;
+&lt;/div&gt;&lt;p&gt;（Welcome_to_CTFshow1是可执行文件）&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/22.png&#34;
 	width=&#34;618&#34;
 	height=&#34;155&#34;
@@ -3754,7 +3771,8 @@ ROP、shellcode、栈转移等。&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;blockquote&gt;
 &lt;p&gt;如果之前是打逆向或者强行入门PWN的话，最坐牢的我相信应该是用IDA吧，除了找明文字符串flag外，你学了汇编语言你也看不懂这是啥意思，感觉一小串源代码转换成汇编语言非常长、枯燥，其实UP主也深有体会，在系统性入门后，也初步知道IDA是怎么用的，这里我把下划线“===== S U B R O U T I N E =====”也复制进来了，按我理解这是函数分界，分隔线上方是前一个函数的结尾（通常以&lt;code&gt;retn&lt;/code&gt;指令结束，代表函数返回）过了这条线，说明汇编语言在描述的就是另外一个函数了。也就是说这上下分界线是代表囊括着一个函数，例如这ctfshow函数。&lt;/p&gt;
-&lt;p&gt;另外我想说的是汇编语言这么长是有道理的，它更像是一种“啰嗦”，它能在每一段代码运行后不断向你汇报地址变化，这种 “啰嗦” 本质上是&lt;strong&gt;对计算机底层操作的直接映射&lt;/strong&gt;，这种特性确实让它在跟踪程序运行细节、分析逻辑和排查问题时具有独特优势。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;另外我想说的是汇编语言这么长是有道理的，它更像是一种“啰嗦”，它能在每一段代码运行后不断向你汇报地址变化，这种 “啰嗦” 本质上是&lt;strong&gt;对计算机底层操作的直接映射&lt;/strong&gt;，这种特性确实让它在跟踪程序运行细节、分析逻辑和排查问题时具有独特优势。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;从这里开始就要用pwntools了，这里介绍一下：&lt;/p&gt;
 &lt;blockquote class=&#34;alert alert-note&#34;&gt;
     &lt;blockquote&gt;
@@ -3777,14 +3795,16 @@ ROP、shellcode、栈转移等。&lt;/p&gt;
 &lt;h4 id=&#34;密码学相关辅助&#34;&gt;密码学相关辅助
 &lt;/h4&gt;&lt;p&gt;在 CTF 中，有时会涉及密码学题目，&lt;code&gt;pwntools&lt;/code&gt; 也提供了一些基础的密码学辅助功能，比如常见加密算法的简单实现、编码解码等。&lt;/p&gt;
 &lt;h4 id=&#34;多线程和异步支持&#34;&gt;多线程和异步支持
-&lt;/h4&gt;&lt;p&gt;&lt;code&gt;pwntools&lt;/code&gt; 一定程度上支持多线程和异步操作，这在同时与多个目标程序交互，或者需要在等待程序输出的同时执行其他任务时非常有用。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;/h4&gt;&lt;p&gt;&lt;code&gt;pwntools&lt;/code&gt; 一定程度上支持多线程和异步操作，这在同时与多个目标程序交互，或者需要在等待程序输出的同时执行其他任务时非常有用。&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/blockquote&gt;
 &lt;p&gt;所以为啥要学&lt;a class=&#34;link&#34; href=&#34;https://expl0rer.top/p/python/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Python&lt;/a&gt;，当然能用&lt;a class=&#34;link&#34; href=&#34;https://www.doubao.com/chat/?from_logout=1&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;豆包&lt;/a&gt;、&lt;a class=&#34;link&#34; href=&#34;https://www.deepseek.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;DeepSeek&lt;/a&gt;之类的AI帮你写代码exp，但你得先了解&lt;a class=&#34;link&#34; href=&#34;https://expl0rer.top/p/python/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Python&lt;/a&gt;再让它写才对的，有时会出错，你得有判断力。&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;这里推荐使用Pycharm、Visual Studio Code；或者你可以在Kali上用终端来运行，这样你在Kali用nc连接靶机时在同一系统运行交互比较方便，当然Pycharm、Visual Studio Code也有终端功能，只不过要配PWN环境稍微麻烦而已，看你习不习惯用Linux系统吧。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;这里推荐使用Pycharm、Visual Studio Code；或者你可以在Kali上用终端来运行，这样你在Kali用nc连接靶机时在同一系统运行交互比较方便，当然Pycharm、Visual Studio Code也有终端功能，只不过要配PWN环境稍微麻烦而已，看你习不习惯用Linux系统吧。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h4 id=&#34;题目后续&#34;&gt;题目后续：
 &lt;/h4&gt;&lt;p&gt;讲得比较啰嗦，这里开始分析这段汇编代码（重新粘贴了一遍，和上面一样）：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -4012,7 +4032,8 @@ ROP、shellcode、栈转移等。&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;blockquote class=&#34;alert alert-note&#34;&gt;
     &lt;blockquote&gt;
-&lt;p&gt;这 7 行代码通过精准设置寄存器和栈数据，完成了&lt;code&gt;execve&lt;/code&gt;系统调用的参数准备，最终实现 “用&lt;code&gt;/bin/sh&lt;/code&gt;替换当前进程” 的效果，是 CTF 中获取 shell 的基础手段，逻辑清晰且精简（仅 23 字节）。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;这 7 行代码通过精准设置寄存器和栈数据，完成了&lt;code&gt;execve&lt;/code&gt;系统调用的参数准备，最终实现 “用&lt;code&gt;/bin/sh&lt;/code&gt;替换当前进程” 的效果，是 CTF 中获取 shell 的基础手段，逻辑清晰且精简（仅 23 字节）。&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/blockquote&gt;
 &lt;h4 id=&#34;逐行解析手敲shellcode&#34;&gt;逐行解析手敲shellcode
 &lt;/h4&gt;&lt;p&gt;思路：注入一段能执行/bin/sh的汇编语言代码&lt;/p&gt;
 &lt;p&gt;① &lt;code&gt;mov eax, 0xb&lt;/code&gt;&lt;/p&gt;
@@ -4210,7 +4231,8 @@ ROP、shellcode、栈转移等。&lt;/p&gt;
 &lt;li&gt;&lt;strong&gt;计算关键地址&lt;/strong&gt;：根据泄漏出的 &lt;code&gt;libc&lt;/code&gt; 函数地址，计算出 &lt;code&gt;system&lt;/code&gt; 函数地址和 &lt;code&gt;/bin/sh&lt;/code&gt; 字符串在内存中的地址。由于 &lt;code&gt;libc&lt;/code&gt; 中函数和字符串的相对位置固定，所以可以通过已知函数地址与偏移量来计算其他关键地址。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;构造 payload&lt;/strong&gt;：再次利用栈溢出漏洞，构造合适的 payload。payload 一般包含填充数据（用于填满缓冲区直到覆盖返回地址）、&lt;code&gt;system&lt;/code&gt; 函数地址（覆盖返回地址，使程序返回时跳转到 &lt;code&gt;system&lt;/code&gt; 函数）、一个无效的返回地址（&lt;code&gt;system&lt;/code&gt; 函数执行完后要返回的地址，随便填充一个地址，因为获取到 shell 后通常不会再关注这个返回操作 ）、&lt;code&gt;/bin/sh&lt;/code&gt; 字符串的地址（作为 &lt;code&gt;system&lt;/code&gt; 函数的参数，这样 &lt;code&gt;system&lt;/code&gt; 函数执行时就相当于执行了 &lt;code&gt;system(&amp;quot;/bin/sh&amp;quot;)&lt;/code&gt; ，从而打开一个 shell ）。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;发送 payload&lt;/strong&gt;：将构造好的 payload 发送给存在漏洞的程序，使程序按照攻击者期望的流程执行，最终获取到一个交互式 shell，达到漏洞利用的目的。&lt;/li&gt;
-&lt;/ol&gt;&lt;/blockquote&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;checksec一下，发现开了NX保护，也就是说不能用shellcode了。&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/68.png&#34;
 	width=&#34;746&#34;
@@ -4309,11 +4331,13 @@ ROP、shellcode、栈转移等。&lt;/p&gt;
 &lt;li&gt;读取泄露出的write@got的地址，用 libcSearcher 库查找正确的 libc 版本，再计算偏移。&lt;/li&gt;
 &lt;li&gt;计算system函数和/bin/sh字符串的真实地址。&lt;/li&gt;
 &lt;li&gt;继续从ctfshow函数里的栈溢出作为入口，跳转到system函数真实地址，同时将/bin/sh作为参数传入，从而拿到权限。&lt;/li&gt;
-&lt;/ol&gt;&lt;/blockquote&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;blockquote&gt;
 &lt;p&gt;这里之前我是跳过的，比较难，我做到PWN_044之后才倒回来做的。&lt;/p&gt;
 &lt;p&gt;PWN044 的利用逻辑是 “先调用 &lt;code&gt;gets&lt;/code&gt; 向 &lt;code&gt;bss&lt;/code&gt; 段写入 &lt;code&gt;/bin/sh&lt;/code&gt;，再调用 &lt;code&gt;system&lt;/code&gt; 执行”（类似文档中 PWN044 的 &lt;code&gt;gets&lt;/code&gt; 调用场景）。此时调用 &lt;code&gt;gets&lt;/code&gt; 仅需其 “函数入口” 即可完成数据写入，无需知道 &lt;code&gt;gets&lt;/code&gt; 在 &lt;code&gt;libc&lt;/code&gt; 中的真实地址 —— 直接使用 &lt;code&gt;gets&lt;/code&gt; 的 PLT 表地址（&lt;code&gt;p32(gets)&lt;/code&gt; 本质是 &lt;code&gt;p32(gets_plt)&lt;/code&gt;），就能触发 &lt;code&gt;gets&lt;/code&gt; 执行，实现写入 &lt;code&gt;/bin/sh&lt;/code&gt; 的目标。这就是为什么在PWN_044是直接是p32(gets)，而在这调用write函数是要分.got和.plt，因为它俩功能都不同。&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;write_plt&lt;/code&gt; 负责 “触发 &lt;code&gt;write&lt;/code&gt; 执行”，&lt;code&gt;write_got&lt;/code&gt; 负责 “提供待泄露的真实地址”，二者缺一不可，因此必须明确区分。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;&lt;code&gt;write_plt&lt;/code&gt; 负责 “触发 &lt;code&gt;write&lt;/code&gt; 执行”，&lt;code&gt;write_got&lt;/code&gt; 负责 “提供待泄露的真实地址”，二者缺一不可，因此必须明确区分。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;&lt;strong&gt;总之：ret2libc 核心逻辑：“泄露地址→计算地址→构造调用”&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;exp备注版：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -5398,7 +5422,8 @@ ROP、shellcode、栈转移等。&lt;/p&gt;
 &lt;blockquote class=&#34;alert alert-error&#34;&gt;
     &lt;blockquote&gt;
 &lt;p&gt;gets 读取函数是非常不安全的，容易导致缓冲区溢出漏洞。因为它无法限制输入的长度，可能会超出s 数组的容量，导致覆盖栈上的其他数据或执行任意代码。这也是明显的栈溢出漏洞，s距ebp仅有0x28，而gets不限制输入长度。&lt;/p&gt;
-&lt;p&gt;安全性来看一般都会用fgets函数，搭配&lt;strong&gt;FORTIFY 缓冲区边界检查&lt;/strong&gt;来提高程序自身安全性。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;安全性来看一般都会用fgets函数，搭配&lt;strong&gt;FORTIFY 缓冲区边界检查&lt;/strong&gt;来提高程序自身安全性。&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/blockquote&gt;
 &lt;p&gt;exp：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -5585,7 +5610,8 @@ ROP、shellcode、栈转移等。&lt;/p&gt;
 &gt;&lt;/p&gt;
 &lt;blockquote class=&#34;alert alert-note&#34;&gt;
     &lt;blockquote&gt;
-&lt;p&gt;64 位程序调用 &lt;code&gt;system&lt;/code&gt; 需考虑堆栈平衡，本质是 &lt;strong&gt;64 位 ABI 对 “栈对齐” 的硬性要求&lt;/strong&gt;—— 若不满足，函数执行时访问栈内存会崩溃；而 32 位 ABI 无此要求，仅需调用后清理参数栈即可，因此无需额外关注平衡。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;64 位程序调用 &lt;code&gt;system&lt;/code&gt; 需考虑堆栈平衡，本质是 &lt;strong&gt;64 位 ABI 对 “栈对齐” 的硬性要求&lt;/strong&gt;—— 若不满足，函数执行时访问栈内存会崩溃；而 32 位 ABI 无此要求，仅需调用后清理参数栈即可，因此无需额外关注平衡。&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/blockquote&gt;
 &lt;p&gt;所以说exp需要考虑到堆栈平衡加上ret返回地址：&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/113.png&#34;
 	width=&#34;1198&#34;
@@ -5851,7 +5877,8 @@ ROP、shellcode、栈转移等。&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;32 位程序（PWN039）&lt;/strong&gt;：32 位程序中，函数参数通过栈传递。在 PWN039 里，&lt;code&gt;system&lt;/code&gt;函数地址紧跟在填充数据之后，这是因为溢出后直接覆盖返回地址为&lt;code&gt;system&lt;/code&gt;函数地址，让程序执行&lt;code&gt;system&lt;/code&gt;函数。在&lt;code&gt;payload = &#39;a&#39;*(0x12 + 4) + p32(system) + p32(0) + p32(bin_sh)&lt;/code&gt;中，&lt;code&gt;&#39;a&#39;*(0x12 + 4)&lt;/code&gt;用于填充缓冲区并覆盖原返回地址，&lt;code&gt;p32(system)&lt;/code&gt;将返回地址修改为&lt;code&gt;system&lt;/code&gt;函数地址 ，&lt;code&gt;p32(0)&lt;/code&gt;是为了满足栈结构，作为&lt;code&gt;system&lt;/code&gt;函数执行后的返回地址（实际执行中并不重要，可随意填充 4 字节），&lt;code&gt;p32(bin_sh)&lt;/code&gt;则是&lt;code&gt;system&lt;/code&gt;函数的参数，即&lt;code&gt;/bin/sh&lt;/code&gt;字符串的地址。这样的顺序符合 32 位程序通过栈传参和控制程序执行流的特点。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;64 位程序（PWN40）&lt;/strong&gt;：64 位程序的函数调用规则有所不同，前 6 个参数优先通过寄存器传递，其中第一个参数存放在&lt;code&gt;rdi&lt;/code&gt;寄存器。在 PWN40 中，&lt;code&gt;payload = &#39;a&#39;*(0xA + 8) + p64(pop_rdi) + p64(bin_sh) + p64(ret) + p64(system)&lt;/code&gt; ，&lt;code&gt;&#39;a&#39;*(0xA + 8)&lt;/code&gt;用于填充缓冲区和覆盖原返回地址；&lt;code&gt;p64(pop_rdi)&lt;/code&gt;将&lt;code&gt;pop_rdi&lt;/code&gt;指令地址放入栈中，执行&lt;code&gt;pop_rdi&lt;/code&gt;指令时，会把紧跟其后的&lt;code&gt;p64(bin_sh)&lt;/code&gt;中的&lt;code&gt;/bin/sh&lt;/code&gt;地址弹出到&lt;code&gt;rdi&lt;/code&gt;寄存器，作为&lt;code&gt;system&lt;/code&gt;函数的第一个参数；&lt;code&gt;p64(ret)&lt;/code&gt;用于栈对齐（64 位程序调用函数前需要保证栈 16 字节对齐，&lt;code&gt;ret&lt;/code&gt;指令可调整栈指针）；最后&lt;code&gt;p64(system)&lt;/code&gt;将&lt;code&gt;system&lt;/code&gt;函数地址放入栈中，当程序执行到这里时，会跳转到&lt;code&gt;system&lt;/code&gt;函数执行，此时&lt;code&gt;rdi&lt;/code&gt;寄存器中已正确设置了参数&lt;code&gt;/bin/sh&lt;/code&gt;的地址。&lt;/li&gt;
-&lt;/ul&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;&lt;/blockquote&gt;
 &lt;h3 id=&#34;pwn_041&#34;&gt;PWN_041
 &lt;/h3&gt;&lt;h4 id=&#34;题目-1&#34;&gt;题目：
 &lt;/h4&gt;&lt;p&gt;32位的 system(); 但是没&amp;quot;/bin/sh&amp;quot; ，好像有其他的可以替代。 &lt;a class=&#34;link&#34; href=&#34;PWN_041&#34; &gt;PWN_041&lt;/a&gt;&lt;/p&gt;
@@ -5908,7 +5935,8 @@ ROP、shellcode、栈转移等。&lt;/p&gt;
 &lt;li&gt;用 &lt;code&gt;sh&lt;/code&gt; 会因 &lt;code&gt;$PATH&lt;/code&gt; 中找不到 &lt;code&gt;sh&lt;/code&gt; 而失败；&lt;/li&gt;
 &lt;li&gt;用 &lt;code&gt;/bin/sh&lt;/code&gt; 因是绝对路径，不受 &lt;code&gt;$PATH&lt;/code&gt; 影响，依然能成功执行。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;PWN 利用中为了「兼容性和稳定性」，即使是 &lt;code&gt;system&lt;/code&gt; 函数，也更推荐写 &lt;code&gt;/bin/sh&lt;/code&gt; 而非 &lt;code&gt;sh&lt;/code&gt;（避免因环境变量异常导致利用失败）。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;PWN 利用中为了「兼容性和稳定性」，即使是 &lt;code&gt;system&lt;/code&gt; 函数，也更推荐写 &lt;code&gt;/bin/sh&lt;/code&gt; 而非 &lt;code&gt;sh&lt;/code&gt;（避免因环境变量异常导致利用失败）。&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/blockquote&gt;
 &lt;p&gt;这里跟进hint函数：&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/125.png&#34;
 	width=&#34;838&#34;
@@ -6245,10 +6273,12 @@ ROP、shellcode、栈转移等。&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;gets&lt;/code&gt; 执行完后的总偏移是 44 字节（36+8）。&lt;/p&gt;
 &lt;p&gt;后续执行 &lt;code&gt;pop_rdi&lt;/code&gt;（8 字节）+ &lt;code&gt;buf2&lt;/code&gt; 地址（8 字节）后，总偏移变为 44+8+8=60 字节。&lt;/p&gt;
 &lt;p&gt;60 字节 ÷ 16 字节 = 3 余 12？不对 —— 此时调用 &lt;code&gt;system&lt;/code&gt; 前，&lt;code&gt;rsp&lt;/code&gt; 指向 &lt;code&gt;system&lt;/code&gt; 函数的地址，而 &lt;code&gt;60 + 8&lt;/code&gt;（&lt;code&gt;system&lt;/code&gt; 地址本身）= 68 字节，68 ÷ 16 = 4 余 4？这显然不对。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;正确理解&lt;/strong&gt;：不用纠结静态数字，而是要看到 &lt;code&gt;gets&lt;/code&gt; 的执行引入了一次 “额外的栈弹出”（8 字节），恰好抵消了部分偏移的 “非对齐量”，使得最终调用 &lt;code&gt;system&lt;/code&gt; 时，&lt;code&gt;rsp&lt;/code&gt; 刚好落在 16 字节对齐的地址上 —— 这是&lt;em&gt;动态执行&lt;/em&gt;中栈自然调整的结果，而非静态计算的总和。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;正确理解&lt;/strong&gt;：不用纠结静态数字，而是要看到 &lt;code&gt;gets&lt;/code&gt; 的执行引入了一次 “额外的栈弹出”（8 字节），恰好抵消了部分偏移的 “非对齐量”，使得最终调用 &lt;code&gt;system&lt;/code&gt; 时，&lt;code&gt;rsp&lt;/code&gt; 刚好落在 16 字节对齐的地址上 —— 这是&lt;em&gt;动态执行&lt;/em&gt;中栈自然调整的结果，而非静态计算的总和。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;blockquote class=&#34;alert alert-note&#34;&gt;
     &lt;blockquote&gt;
-&lt;p&gt;在 64 位 PWN 题中，“动态对齐” 是否需要加 &lt;code&gt;ret&lt;/code&gt;，核心看 &lt;strong&gt;“中间是否有函数执行并自动调整栈指针”&lt;/strong&gt;。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;在 64 位 PWN 题中，“动态对齐” 是否需要加 &lt;code&gt;ret&lt;/code&gt;，核心看 &lt;strong&gt;“中间是否有函数执行并自动调整栈指针”&lt;/strong&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/blockquote&gt;
 &lt;p&gt;正确的exp：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -6359,7 +6389,7 @@ ROP、shellcode、栈转移等。&lt;/p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;write_got&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;elf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;got&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;write&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;write_plt&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;elf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;plt&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;write&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;payload&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;cyclic&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mh&#34;&gt;0x6b&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;p32&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;write_plt&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;p32&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;p32&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;p32&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;write_got&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;p32&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;io&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;recvuntil&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;O.o?&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;#等程序发送这字符串蔡发送第一份payload&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;io&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;recvuntil&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;O.o?&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;#等程序发送这字符串再发送第一份payload&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;io&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;sendline&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;payload&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
@@ -6771,7 +6801,8 @@ ROP、shellcode、栈转移等。&lt;/p&gt;
 &lt;li&gt;调用 &lt;code&gt;sys_mprotect&lt;/code&gt;：这是真正的内核级系统调用（用户态到内核态的桥梁），负责实际执行内存权限修改操作。&lt;/li&gt;
 &lt;li&gt;错误处理：&lt;code&gt;sys_mprotect&lt;/code&gt; 的返回值若 &lt;code&gt;&amp;gt;= 0xFFFFF001&lt;/code&gt;（这是 Unix/Linux 中系统调用错误码的典型范围，通常表示操作失败），则通过 &lt;code&gt;_syscall_error()&lt;/code&gt; 处理错误（例如设置 &lt;code&gt;errno&lt;/code&gt; 并返回错误码）。&lt;/li&gt;
 &lt;li&gt;成功返回：若系统调用成功，直接返回 &lt;code&gt;sys_mprotect&lt;/code&gt; 的结果（通常为 0）。&lt;/li&gt;
-&lt;/ul&gt;&lt;/blockquote&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;这段代码是用户态 &lt;code&gt;mprotect&lt;/code&gt; 函数的封装，本质是通过调用内核的 &lt;code&gt;sys_mprotect&lt;/code&gt; 系统调用来实现功能，最终目的是：&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;允许进程动态修改某段内存的读写执行权限&lt;/strong&gt;（例如将只读内存改为可写，或给数据段添加执行权限），常用于内存管理、动态代码加载、漏洞利用等场景。&lt;/p&gt;
 &lt;p&gt;简单说，这段代码是用户程序与内核交互的 “中间层”，让开发者可以通过简单的函数调用修改内存权限，而无需直接操作内核接口。&lt;/p&gt;
@@ -6895,7 +6926,8 @@ ROP、shellcode、栈转移等。&lt;/p&gt;
 &lt;p&gt;其实你可以发现这也是ret2shellcode的其中一种，只不过多加了mprotect函数控制流程罢了。&lt;/p&gt;
 &lt;blockquote class=&#34;alert alert-note&#34;&gt;
     &lt;blockquote&gt;
-&lt;p&gt;整个流程的核心逻辑就是通过栈溢出构建 “函数调用链”，逐步完成 “开权限→写代码→执行代码” 的攻击流程。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;整个流程的核心逻辑就是通过栈溢出构建 “函数调用链”，逐步完成 “开权限→写代码→执行代码” 的攻击流程。&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/blockquote&gt;
 &lt;p&gt;对于这道题而言对我感触比较深，加深我对寄存器、gadget、整个函数调用流程、参数传递过程的理解！如果你觉得很难而跳过，那你就错过了一次PWN入门者的提升机会，博主当时啃这题花了快两天时间，凌晨才写完这题的writeup呢，花点耐心去学，PWNer！&lt;/p&gt;
 &lt;h3 id=&#34;pwn_050&#34;&gt;PWN_050
 &lt;/h3&gt;&lt;p&gt;题目：好像哪里不一样了；远程libc环境 Ubuntu 18。 &lt;a class=&#34;link&#34; href=&#34;PWN_050&#34; &gt;PWN_050&lt;/a&gt;&lt;/p&gt;
@@ -7020,7 +7052,8 @@ ROP、shellcode、栈转移等。&lt;/p&gt;
 		data-flex-basis=&#34;3487px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;从这可以看到程序本身是不带第二、三个的gadget的，因为我们要利用漏洞去获取flag，而本身程序运行是不用后面俩的gadget的。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;从这可以看到程序本身是不带第二、三个的gadget的，因为我们要利用漏洞去获取flag，而本身程序运行是不用后面俩的gadget的。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;exp；&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -7175,11 +7208,13 @@ ROP、shellcode、栈转移等。&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;它原本是 “偏移量”（相对于 libc 基地址）；&lt;/li&gt;
 &lt;li&gt;当你设置 &lt;code&gt;libc.address = libc_base&lt;/code&gt; 后，&lt;code&gt;pwntools&lt;/code&gt; 自动将 “基地址 + 偏移量” 合并，得到真实地址。&lt;/li&gt;
-&lt;/ol&gt;&lt;/blockquote&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;blockquote class=&#34;alert alert-note&#34;&gt;
     &lt;blockquote&gt;
 &lt;p&gt;&lt;code&gt;libc.address&lt;/code&gt; 不是一个函数，而是 &lt;code&gt;pwntools&lt;/code&gt; 中 &lt;code&gt;ELF&lt;/code&gt; 类的一个&lt;strong&gt;属性（attribute）&lt;/strong&gt;，用于存储和设置 ELF 文件（这里特指 libc 库）在内存中的基地址。&lt;/p&gt;
-&lt;p&gt;当你通过 &lt;code&gt;libc = ELF(&#39;libc.so.6&#39;)&lt;/code&gt; 加载 libc 库后，&lt;code&gt;libc.address&lt;/code&gt; 默认值为 &lt;code&gt;0&lt;/code&gt;（表示尚未设置基地址）。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;当你通过 &lt;code&gt;libc = ELF(&#39;libc.so.6&#39;)&lt;/code&gt; 加载 libc 库后，&lt;code&gt;libc.address&lt;/code&gt; 默认值为 &lt;code&gt;0&lt;/code&gt;（表示尚未设置基地址）。&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/blockquote&gt;
 &lt;p&gt;总的来说这题质量不错，耗了我两天空闲时间去攻克。&lt;/p&gt;
 &lt;h3 id=&#34;pwn_051&#34;&gt;PWN_051
 &lt;/h3&gt;&lt;p&gt;题目：I‘m IronMan； &lt;a class=&#34;link&#34; href=&#34;PWN_051&#34; &gt;PWN_051&lt;/a&gt;&lt;/p&gt;
@@ -7596,7 +7631,8 @@ ROP、shellcode、栈转移等。&lt;/p&gt;
 &lt;blockquote class=&#34;alert alert-warn&#34;&gt;
     &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;发送 payload 的方式（&lt;code&gt;sendline&lt;/code&gt; vs &lt;code&gt;send&lt;/code&gt;）是关键差异&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;之前的题目好像对发送payload的函数并不严格要求，但在这题就必须要求严格了，要用send函数，如果是sendline的话，会在payload后面多加一个换行符\n，因附加换行符破坏栈布局。也会导致一直循环爆破却最终爆破失败。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;之前的题目好像对发送payload的函数并不严格要求，但在这题就必须要求严格了，要用send函数，如果是sendline的话，会在payload后面多加一个换行符\n，因附加换行符破坏栈布局。也会导致一直循环爆破却最终爆破失败。&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/blockquote&gt;
 &lt;h3 id=&#34;pwn_054&#34;&gt;PWN_054
 &lt;/h3&gt;&lt;p&gt;题目：再近一点靠近点快被融化； &lt;a class=&#34;link&#34; href=&#34;PWN_054&#34; &gt;PWN_054&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;IDA32：&lt;/p&gt;
@@ -7713,7 +7749,8 @@ ROP、shellcode、栈转移等。&lt;/p&gt;
 &lt;li&gt;再看 &lt;strong&gt;字符串的生成 / 处理函数&lt;/strong&gt;（如 &lt;code&gt;fgets&lt;/code&gt; 自动补 &lt;code&gt;\x00&lt;/code&gt;、&lt;code&gt;strchr&lt;/code&gt; 替换生成 &lt;code&gt;\x00&lt;/code&gt;）；&lt;/li&gt;
 &lt;li&gt;最后看 &lt;strong&gt;后续字符串操作是否正常&lt;/strong&gt;（反向验证 &lt;code&gt;\x00&lt;/code&gt; 位置合法）。
 三者均指向 &lt;code&gt;\x00&lt;/code&gt; 在数组内部时，即可确定该结论。&lt;/li&gt;
-&lt;/ol&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;&lt;/blockquote&gt;
 &lt;p&gt;exp1，得出密码：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -7868,7 +7905,8 @@ ROP、shellcode、栈转移等。&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;strong&gt;参数压栈顺序&lt;/strong&gt;：函数的参数要按 “从右到左” 的顺序，依次放到栈上；&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;返回地址跟着参数&lt;/strong&gt;：参数压完后，要压入 “函数执行完后要跳转到的地址”（即下一个函数的地址），最后才是 “当前要调用的函数地址”。&lt;/li&gt;
-&lt;/ol&gt;&lt;/blockquote&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;现在这些题目需要我们对代码具有一定阅读理解能力，理解代码的运作原理，而不再像新手入门那样无脑套ret2shellcode、ret2libc、脚本了。&lt;/p&gt;
 &lt;h3 id=&#34;认识32位和64位的shellcode&#34;&gt;认识32位和64位的shellcode
 &lt;/h3&gt;&lt;h3 id=&#34;pwn_056&#34;&gt;PWN_056
@@ -8023,7 +8061,8 @@ ROP、shellcode、栈转移等。&lt;/p&gt;
 &lt;/h4&gt;&lt;ul&gt;
 &lt;li&gt;&lt;code&gt;syscall&lt;/code&gt;：是 x86-64 架构下的汇编指令，用于触发 Linux 系统调用（调用操作系统内核提供的功能，如进程退出、文件操作等）。&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;LINUX -&lt;/code&gt; 可能是简化或注释残留，实际有效的指令只有 &lt;code&gt;syscall&lt;/code&gt;。系统调用的具体功能由 &lt;code&gt;rax&lt;/code&gt; 寄存器的值决定（例如 &lt;code&gt;rax=60&lt;/code&gt; 表示 &lt;code&gt;exit&lt;/code&gt; 系统调用，用于终止当前进程）。&lt;/li&gt;
-&lt;/ul&gt;&lt;/blockquote&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;总的来说这俩题是让我们认识shellcode的样子，以便后面使用&amp;hellip;&lt;/p&gt;
 &lt;p&gt;exp同上。&lt;/p&gt;
 &lt;p&gt;重点还是看汇编：&lt;/p&gt;
@@ -8320,7 +8359,8 @@ ROP、shellcode、栈转移等。&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;你会看到为什么是112？不应该是104吗？100字节+ebp本身的4字节，还有8字节哪来的？记住以下规则：&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;“多填充 8 字节” 并非随意设置，而是&lt;strong&gt;由程序实际栈帧结构决定的&lt;/strong&gt;—— 可能是编译器的栈对齐策略，也可能是隐式局部变量占用空间，最终通过调试确认 “只有填充至 112 字节才能覆盖返回地址”。这也符合 PWN 题的通用原则：栈溢出的填充长度需以 “实际调试 / 逆向结果” 为准，而非仅依赖理论计算的 “缓冲区大小 + 旧 EBP”。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;“多填充 8 字节” 并非随意设置，而是&lt;strong&gt;由程序实际栈帧结构决定的&lt;/strong&gt;—— 可能是编译器的栈对齐策略，也可能是隐式局部变量占用空间，最终通过调试确认 “只有填充至 112 字节才能覆盖返回地址”。这也符合 PWN 题的通用原则：栈溢出的填充长度需以 “实际调试 / 逆向结果” 为准，而非仅依赖理论计算的 “缓冲区大小 + 旧 EBP”。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;不过在新版本的Ubuntu虚拟机中就可能会误导你：&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/205.png&#34;
 	width=&#34;1010&#34;
@@ -8451,7 +8491,8 @@ ROP、shellcode、栈转移等。&lt;/p&gt;
 &lt;/div&gt;&lt;p&gt;输入流中首先接收数据直到遇到 &amp;lsquo;[&amp;rsquo; 字符为止。接下来再次从输入流中接收数据，直到遇到 &amp;lsquo;]&amp;rsquo; 字符为止，将其保存在变量 v5 中。最后，将变量 v5 解析为一个十六进制的整数，并将其存储回变量 v5 中。&lt;/p&gt;
 &lt;p&gt;p64(v5+32)，&lt;strong&gt;将 “v5 地址 + 32 字节” 这个目标地址，打包为 64 位小端序二进制数据，用于覆盖程序的返回地址，最终让程序跳转到该目标地址执行 shellcode&lt;/strong&gt;&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;若 v5 是字符串（如&lt;code&gt;&#39;7ffefd78ff20&#39;&lt;/code&gt;），Python 无法对字符串进行加法运算，这就是为什么需要&lt;code&gt;v5 = int(v5, 16)&lt;/code&gt;的原因。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;若 v5 是字符串（如&lt;code&gt;&#39;7ffefd78ff20&#39;&lt;/code&gt;），Python 无法对字符串进行加法运算，这就是为什么需要&lt;code&gt;v5 = int(v5, 16)&lt;/code&gt;的原因。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h3 id=&#34;pwn_062&#34;&gt;PWN_062
 &lt;/h3&gt;&lt;p&gt;题目：短了一点。 &lt;a class=&#34;link&#34; href=&#34;PWN_062&#34; &gt;PWN_062&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;checksec一下：&lt;/p&gt;
@@ -8741,7 +8782,8 @@ ROP、shellcode、栈转移等。&lt;/p&gt;
 &lt;ol start=&#34;6&#34;&gt;
 &lt;li&gt;&lt;strong&gt;&lt;code&gt;offset&lt;/code&gt;（r9 寄存器）&lt;/strong&gt;：&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;文件偏移量，匿名映射时设为&lt;code&gt;0&lt;/code&gt;。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;文件偏移量，匿名映射时设为&lt;code&gt;0&lt;/code&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;这行代码使用 mmap 函数分配一块内存区域，将其起始地址保存在变量 buf 中。 mmap 函数通常用于在内存中分配一块连续的地址空间，并指定相应的权限和属性。&lt;/p&gt;
 &lt;p&gt;这里buf用mmap映射了地址，可读可写可执行，直接传入shellcode，((void (*)(void))buf)()。调用了buf，运行shellcode 即可获取shell。&lt;/p&gt;
 &lt;p&gt;那我们完全可以用pwntools的shellcraft模块下的shellcode（29字节长度）&lt;/p&gt;
@@ -8826,7 +8868,8 @@ ROP、shellcode、栈转移等。&lt;/p&gt;
 &gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;code&gt;cdqe&lt;/code&gt;使用eax的最高位拓展rax高32位的所有位 movzx则是按无符号数传送+扩展（16-32） EAX是32位的寄存器，而AX是EAX的低16位,AH是ax的高8位，而AL是ax的低8位大致就是将我们输入的字符串每一位进行比较，如果不在&lt;code&gt;0x60~0x7A&lt;/code&gt;这个范围就跳转剩下几个就是跳转的范围。&lt;/p&gt;
-&lt;p&gt;意思可能就是从第一个字符开始一直做循环判断，如果每一个字符都在一定区间，结束最后一个字符判断时就能够绕过上面的 loc_11B8 来执行 shellcode 了。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;意思可能就是从第一个字符开始一直做循环判断，如果每一个字符都在一定区间，结束最后一个字符判断时就能够绕过上面的 loc_11B8 来执行 shellcode 了。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/222.png&#34;
 	width=&#34;1025&#34;
 	height=&#34;859&#34;
@@ -9065,7 +9108,8 @@ ROP、shellcode、栈转移等。&lt;/p&gt;
 &lt;h3 id=&#34;nop-sled空操作雪橇&#34;&gt;&lt;strong&gt;nop sled空操作雪橇&lt;/strong&gt;
 &lt;/h3&gt;&lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;“nop”（No Operation 的缩写）&lt;/strong&gt;：是一条汇编指令，在 32 位 x86 架构下，其机器码为&lt;code&gt;0x90&lt;/code&gt;。nop 指令执行时，CPU 不进行实际的运算或数据处理操作，仅将程序计数器（如 32 位架构下的 EIP 寄存器）的值增加 1，指向下一条指令，起到占位和使程序流程顺序执行的作用。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;“sled”（雪橇）&lt;/strong&gt;：形象地描述了攻击原理。通过在 shellcode 前面填充大量的 nop 指令，形成一个 “指令雪橇”。当程序的执行流被劫持到这个 “雪橇” 区域内的任意位置时，就像雪橇从高处滑下一样，程序会顺着一个个 nop 指令依次执行，最终到达并执行位于 “雪橇” 后方的 shellcode。这一过程可类比为在不确定 shellcode 确切起始地址的情况下，扩大可命中的范围，只要返回地址能落入 nop 指令组成的区域，就能保证 shellcode 被执行。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;“sled”（雪橇）&lt;/strong&gt;：形象地描述了攻击原理。通过在 shellcode 前面填充大量的 nop 指令，形成一个 “指令雪橇”。当程序的执行流被劫持到这个 “雪橇” 区域内的任意位置时，就像雪橇从高处滑下一样，程序会顺着一个个 nop 指令依次执行，最终到达并执行位于 “雪橇” 后方的 shellcode。这一过程可类比为在不确定 shellcode 确切起始地址的情况下，扩大可命中的范围，只要返回地址能落入 nop 指令组成的区域，就能保证 shellcode 被执行。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h3 id=&#34;pwn_067待定&#34;&gt;PWN_067*（待定）
 &lt;/h3&gt;&lt;p&gt;题目：32bit nop sled； &lt;a class=&#34;link&#34; href=&#34;PWN_067&#34; &gt;PWN_067&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;checksec：&lt;/p&gt;
@@ -9134,7 +9178,8 @@ ROP、shellcode、栈转移等。&lt;/p&gt;
 &lt;p&gt;攻击者通过输入字符串注入攻击代码。在实际的攻击代码前注入很长的 nop 指令（无操作，仅使程序计数器加一）序列，只要程序的控制流指向该序列任意一处，程序计数器逐步加一，直到到达攻击代码的存在的地址，并执行。由于栈地址在一定范围的随机性，攻击者不能够知道攻击代码注入的地址，而要执行攻击代码需要将函数的返回地址更改为攻击代码的地址（可通过缓冲区溢出的方式改写函数返回地址）。所以，只能在一定范围内（栈随机导致攻击代码地址一定范围内随机）枚举攻击代码位置（有依据的猜） 。&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;不用 nop sled ， 函数返回地址 &amp;mdash;&amp;mdash;-&amp;gt; 攻击代码。&lt;/p&gt;
-&lt;p&gt;使用 nop sled ， 函数返回地址 &amp;mdash;&amp;mdash;-&amp;gt; nop 序列（顺序执行） 直到攻击代码地址。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;使用 nop sled ， 函数返回地址 &amp;mdash;&amp;mdash;-&amp;gt; nop 序列（顺序执行） 直到攻击代码地址。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;为了安全地“绕过”不知道缓冲区的确切开始位置,我们可以：&lt;/p&gt;
 &lt;p&gt;1、将 shellcode 填充为以 1336 nop 条指令开头 ( 0x90 )。&lt;/p&gt;
 &lt;p&gt;2、使用 的返回值 query_position ，添加 0x2d （如前所述），&lt;strong&gt;然后添加&lt;/strong&gt; &lt;strong&gt;668&lt;/strong&gt;。&lt;/p&gt;
@@ -9258,7 +9303,8 @@ ROP、shellcode、栈转移等。&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;ASLR（地址空间布局随机化）的核心是让程序的栈、堆、库等内存区域的起始地址每次运行时随机变化（ PWN_061、PWN_062 等题目开启 PIE，本质是 ASLR 的延伸），导致攻击者无法提前确定 shellcode 的精确地址。&lt;/p&gt;
 &lt;p&gt;nop sled 的作用是：通过在 shellcode 前填充大量&lt;code&gt;\x90&lt;/code&gt;（nop 指令），形成一个 “指令序列区域”—— 只要程序执行流跳转到该区域的&lt;strong&gt;任意位置&lt;/strong&gt;，都会顺着 nop 指令顺序执行，最终命中后续的 shellcode。&lt;/p&gt;
-&lt;p&gt;从这个角度看，nop sled&lt;strong&gt;可以用于突破 ASLR 带来的地址随机性&lt;/strong&gt;，但这并非其唯一用途。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;从这个角度看，nop sled&lt;strong&gt;可以用于突破 ASLR 带来的地址随机性&lt;/strong&gt;，但这并非其唯一用途。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;这题难到我了，对于栈的结构了解不够多，nop、0x2d琢磨很久才明白&amp;hellip;&amp;hellip;等到后续再回来完善一下，如果看不懂就算了。&lt;/p&gt;
 &lt;h3 id=&#34;pnw_068待定&#34;&gt;PNW_068（待定）
 &lt;/h3&gt;&lt;p&gt;题目：64bit nop sled。 &lt;a class=&#34;link&#34; href=&#34;PWN_068&#34; &gt;PWN_068&lt;/a&gt;&lt;/p&gt;
@@ -9297,7 +9343,8 @@ ROP、shellcode、栈转移等。&lt;/p&gt;
 &lt;p&gt;复习下mmap函数作用，主要用途有三个：&lt;/p&gt;
 &lt;p&gt;1、将一个普通文件映射到内存中，通常在需要对文件进行频繁读写时使用，这样用内存读写取代I/O读写，以获得较高的性能；&lt;/p&gt;
 &lt;p&gt;2、将特殊文件进行匿名内存映射，可以为关联进程提供共享内存空间；&lt;/p&gt;
-&lt;p&gt;3、为无关联的进程提供共享内存空间，一般也是将一个普通文件映射到内存中。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;3、为无关联的进程提供共享内存空间，一般也是将一个普通文件映射到内存中。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;把从0x123000开始的地址，大小为0x1000的长度，权限改为&lt;code&gt;可写可执行&lt;/code&gt;。&lt;/p&gt;
 &lt;p&gt;跟进seccomp函数：&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/246.png&#34;
@@ -9342,7 +9389,8 @@ ROP、shellcode、栈转移等。&lt;/p&gt;
 &lt;p&gt;ORW通过以下三个系统调用实现：&lt;/p&gt;
 &lt;p&gt;open：打开目标文件，获取文件描述符。&lt;/p&gt;
 &lt;p&gt;read：通过文件描述符读取文件内容到缓冲区。&lt;/p&gt;
-&lt;p&gt;write：将缓冲区的内容写入标准输出。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;write：将缓冲区的内容写入标准输出。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;跟进ctfshow函数：&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/248.png&#34;
 	width=&#34;660&#34;
@@ -9411,7 +9459,8 @@ ROP、shellcode、栈转移等。&lt;/p&gt;
 &gt;&lt;/p&gt;
 &lt;p&gt;payload = asm(shellcraft.read(0, mmap, 0x100)) 的意思是启动read函数，开启“读取模式”处于待读取状态，等待后面的orw_shellcode的出现，并存到mmap的可读可写区域（2+4）；&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;最正确理解：执行后因缺少输入数据（orw_shellcode）才进入 “等待状态”。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;最正确理解：执行后因缺少输入数据（orw_shellcode）才进入 “等待状态”。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;asm(&amp;ldquo;mov rax, 0x123000; jmp rax&amp;rdquo;)的意思是跳到mmap=0x123000区域，也就是指向这个区域，等待后续orw_shellcode注入执行。&lt;/p&gt;
 &lt;p&gt;payload = asm(shellcraft.read(0, mmap, 0x100)) + asm(&amp;ldquo;mov rax, 0x123000; jmp rax&amp;rdquo;)加起来不足0x28个字节（0x20+8），让buf刚好充满，以便后续&lt;strong&gt;将 &lt;code&gt;rsp&lt;/code&gt; 调整到 &lt;code&gt;buf&lt;/code&gt; 缓冲区起始地址&lt;/strong&gt;（buf复原）。&lt;/p&gt;
 &lt;p&gt;python3的exp：&lt;/p&gt;
@@ -9492,10 +9541,12 @@ ROP、shellcode、栈转移等。&lt;/p&gt;
 &lt;li&gt;&lt;strong&gt;0005 行&lt;/strong&gt;：明确禁止 &lt;code&gt;execve&lt;/code&gt; 系统调用（编号 &lt;code&gt;0x3b&lt;/code&gt;，用于执行新程序），触发时会终止程序。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;0006 行&lt;/strong&gt;：允许所有未被上述规则禁止的系统调用（返回 &lt;code&gt;ALLOW&lt;/code&gt;）。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;0007 行&lt;/strong&gt;：对被禁止的情况，直接终止程序（返回 &lt;code&gt;KILL&lt;/code&gt;）。&lt;/li&gt;
-&lt;/ol&gt;&lt;/blockquote&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;blockquote class=&#34;alert alert-tip&#34;&gt;
     &lt;blockquote&gt;
-&lt;p&gt;完全支持**&lt;code&gt;ORW&lt;/code&gt;**操作！唯一被禁止的是 &lt;code&gt;execve&lt;/code&gt;（执行新程序），但 ORW 操作不依赖它，因此可以正常执行。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;完全支持**&lt;code&gt;ORW&lt;/code&gt;**操作！唯一被禁止的是 &lt;code&gt;execve&lt;/code&gt;（执行新程序），但 ORW 操作不依赖它，因此可以正常执行。&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/blockquote&gt;
 &lt;p&gt;跟进到is_printable函数：&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/252.png&#34;
 	width=&#34;1030&#34;
@@ -9514,7 +9565,8 @@ ROP、shellcode、栈转移等。&lt;/p&gt;
 &lt;p&gt;条件是 a1[i] &amp;lt;= 31 || a1[i] == 127。这意味着如果字符的 ASCII 值小于等于 31，或者等于 127，则认为该字符不可打印。&lt;/p&gt;
 &lt;blockquote class=&#34;alert alert-error&#34;&gt;
     &lt;blockquote&gt;
-&lt;p&gt;可以在开头加上\x00 \xc0，做过pwn66，有strlen 的话可以找\x00开头的shellcode，&lt;code&gt;\x00&lt;/code&gt; 是 ASCII 码为 0 的字符（也叫 &lt;strong&gt;空字符&lt;/strong&gt;），它在 C 语言中唯一的特殊作用是 &lt;strong&gt;标记字符串的结束&lt;/strong&gt;。这里的 &lt;code&gt;\x00&lt;/code&gt; 只是 “告诉 &lt;code&gt;strlen&lt;/code&gt; 停止计算”，没有任何 “赋值” 操作（既不修改寄存器，也不修改内存值）。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;可以在开头加上\x00 \xc0，做过pwn66，有strlen 的话可以找\x00开头的shellcode，&lt;code&gt;\x00&lt;/code&gt; 是 ASCII 码为 0 的字符（也叫 &lt;strong&gt;空字符&lt;/strong&gt;），它在 C 语言中唯一的特殊作用是 &lt;strong&gt;标记字符串的结束&lt;/strong&gt;。这里的 &lt;code&gt;\x00&lt;/code&gt; 只是 “告诉 &lt;code&gt;strlen&lt;/code&gt; 停止计算”，没有任何 “赋值” 操作（既不修改寄存器，也不修改内存值）。&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/blockquote&gt;
 &lt;p&gt;这波直接不给看main的C伪代码，只能看汇编语言了。&lt;/p&gt;
 &lt;p&gt;我的python3的exp（没用到ORW，巧合）：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -9627,7 +9679,8 @@ ROP、shellcode、栈转移等。&lt;/p&gt;
 &lt;p&gt;rax：系统调用号（例如，execve的调用号为0x3b）&lt;/p&gt;
 &lt;p&gt;rdi：第一个参数&lt;/p&gt;
 &lt;p&gt;rsi：第二个参数&lt;/p&gt;
-&lt;p&gt;rdx：第三个参数&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;rdx：第三个参数&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/blockquote&gt;
 &lt;h3 id=&#34;pwn_071&#34;&gt;PWN_071
 &lt;/h3&gt;&lt;p&gt;题目：32位的ret2syscall。 &lt;a class=&#34;link&#34; href=&#34;PWN_071&#34; &gt;PWN_071&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;checksec：&lt;/p&gt;
@@ -9882,7 +9935,8 @@ ROP、shellcode、栈转移等。&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;blockquote class=&#34;alert alert-warn&#34;&gt;
     &lt;blockquote&gt;
-&lt;p&gt;所以说后续看到静态编译一定要多注意偏移量，后续要熟练运用pwngdb动态调试和pwndbg。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;所以说后续看到静态编译一定要多注意偏移量，后续要熟练运用pwngdb动态调试和pwndbg。&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/blockquote&gt;
 &lt;h3 id=&#34;pwn_072&#34;&gt;PWN_072
 &lt;/h3&gt;&lt;p&gt;题目：接着练ret2syscall，多系统函数调用。 &lt;a class=&#34;link&#34; href=&#34;PWN_072&#34; &gt;PWN_072&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;checksec一下：&lt;/p&gt;
@@ -10000,7 +10054,8 @@ ROP、shellcode、栈转移等。&lt;/p&gt;
 &lt;li&gt;&lt;strong&gt;&lt;code&gt;a2&lt;/code&gt;&lt;/strong&gt;：指向用于存储读取数据的缓冲区的地址。也就是说，从文件描述符 &lt;code&gt;a1&lt;/code&gt; 所指向的文件中读取的数据，会被存储到 &lt;code&gt;a2&lt;/code&gt; 所指向的内存区域中。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;&lt;code&gt;a3&lt;/code&gt;&lt;/strong&gt;：表示要读取的字节数，即指定从文件描述符 &lt;code&gt;a1&lt;/code&gt; 所指向的文件中读取多少个字节的数据到 &lt;code&gt;a2&lt;/code&gt; 所指向的缓冲区中。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;总的来说，&lt;code&gt;read&lt;/code&gt; 函数的作用就是从指定的文件描述符所对应的文件中，读取指定字节数的数据到给定的缓冲区中，并且在多线程环境下，对异步取消等情况进行了一定的处理。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;总的来说，&lt;code&gt;read&lt;/code&gt; 函数的作用就是从指定的文件描述符所对应的文件中，读取指定字节数的数据到给定的缓冲区中，并且在多线程环境下，对异步取消等情况进行了一定的处理。&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/blockquote&gt;
 &lt;p&gt;想起上一题，我怕有坑，还特定去用pwngdb调了下，发现真有猫腻：&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/276.png&#34;
 	width=&#34;1836&#34;
@@ -10062,7 +10117,8 @@ ROP、shellcode、栈转移等。&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;blockquote&gt;
 &lt;p&gt;执行后，程序会阻塞等待用户输入，此时发送 &lt;code&gt;bin_sh = &amp;quot;/bin/sh\x00&amp;quot;&lt;/code&gt;，&lt;code&gt;read&lt;/code&gt; 会将该字符串写入 &lt;code&gt;bss&lt;/code&gt; 段（&lt;code&gt;0x080eb000&lt;/code&gt; 地址处）；&lt;/p&gt;
-&lt;p&gt;此时 &lt;code&gt;bss&lt;/code&gt; 地址指向的内容就是 &lt;code&gt;&amp;quot;/bin/sh\x00&amp;quot;&lt;/code&gt;，满足 &lt;code&gt;execve&lt;/code&gt; 对 “命令路径参数” 的要求。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;此时 &lt;code&gt;bss&lt;/code&gt; 地址指向的内容就是 &lt;code&gt;&amp;quot;/bin/sh\x00&amp;quot;&lt;/code&gt;，满足 &lt;code&gt;execve&lt;/code&gt; 对 “命令路径参数” 的要求。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h3 id=&#34;pwn_073&#34;&gt;PWN_073
 &lt;/h3&gt;&lt;p&gt;题目：愉快的尝试一下一把梭吧！ &lt;a class=&#34;link&#34; href=&#34;PWN_073&#34; &gt;PWN_073&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;checksec：&lt;/p&gt;
@@ -10395,7 +10451,8 @@ ROP、shellcode、栈转移等。&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;静态编译的程序会将所有依赖的库函数（如 &lt;code&gt;read&lt;/code&gt;、&lt;code&gt;write&lt;/code&gt;、&lt;code&gt;int 0x80&lt;/code&gt; 系统调用入口）打包到自身中，不存在 “动态链接依赖 libc” 的问题，&lt;code&gt;ROPgadget&lt;/code&gt; 能从程序自身提取到完整的 ROP 组件（如 &lt;code&gt;pop edx; ret&lt;/code&gt;、&lt;code&gt;mov [edx], eax; ret&lt;/code&gt;、&lt;code&gt;int 0x80&lt;/code&gt; 等），足以构造出调用 &lt;code&gt;execve(&amp;quot;/bin/sh&amp;quot;)&lt;/code&gt; 的完整 ROP 链；&lt;/li&gt;
 &lt;li&gt;若程序为&lt;strong&gt;动态编译&lt;/strong&gt;（依赖外部 libc），且未泄露 libc 基址，&lt;code&gt;ROPgadget&lt;/code&gt; 无法获取 libc 内部的 gadget（如 &lt;code&gt;system&lt;/code&gt; 地址、&lt;code&gt;/bin/sh&lt;/code&gt; 字符串地址），自动生成的 ROP 链会因 “缺少关键组件” 失效，无法直接使用 “一把梭”。&lt;/li&gt;
-&lt;/ul&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;&lt;/blockquote&gt;
 &lt;h3 id=&#34;one_&#34;&gt;&lt;strong&gt;one_gadget攻击&lt;/strong&gt;
 &lt;/h3&gt;&lt;h3 id=&#34;pwn_074&#34;&gt;PWN_074
 &lt;/h3&gt;&lt;p&gt;题目：噢？好像到现在为止还没有了解到one_gadget? &lt;a class=&#34;link&#34; href=&#34;PWN_074&#34; &gt;PWN_074&lt;/a&gt;&lt;/p&gt;
@@ -10434,7 +10491,8 @@ ROP、shellcode、栈转移等。&lt;/p&gt;
 &lt;p&gt;再将 v4 数组的第一个元素的值赋给了数组的第二个元素。继续通过函数指针调用了 v4 数组的第一个元素所指向的函数。这个部分利用函数指针的特性，将其转换为函数并进行调用。&lt;/p&gt;
 &lt;blockquote class=&#34;alert alert-warn&#34;&gt;
     &lt;blockquote&gt;
-&lt;p&gt;使用用户输入来获取函数指针，并通过函数指针调用相应的函数。需要注意的是，这种通过用户输入来获取函数指针并调用函数的做法极有可能会带来安全隐患，因为恶意用户可以输入不安全的函数指针，导致程序出现问题。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;使用用户输入来获取函数指针，并通过函数指针调用相应的函数。需要注意的是，这种通过用户输入来获取函数指针并调用函数的做法极有可能会带来安全隐患，因为恶意用户可以输入不安全的函数指针，导致程序出现问题。&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/blockquote&gt;
 &lt;p&gt;到这里引出下一个攻击手段——one gadget&lt;/p&gt;
 &lt;p&gt;one_gadget是libc中存在的一些执行execve(&amp;quot;/bin/sh&amp;quot;, NULL, NULL)的片段，当可以泄露libc地址，并且可以知道libc版本的时候，可以使用此方法来快速控制指令寄存器开启shell。&lt;/p&gt;
 &lt;p&gt;相比于system(&amp;quot;/bin/sh&amp;quot;)，这种方式更加方便，不用控制RDI、RSI、RDX等参数。运用于不利构造参数的情况。&lt;/p&gt;
@@ -10460,11 +10518,13 @@ ROP、shellcode、栈转移等。&lt;/p&gt;
 &gt;&lt;/p&gt;
 &lt;p&gt;one_gadget并不总是可以获取shell，它首先要满足一些条件才能执行成功,后面提示就是在调用one_gadget前需要满足的条件。&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;约束条件满足&lt;/strong&gt;：one - gadget 是 libc 中执行&lt;code&gt;execve(&amp;quot;/bin/sh&amp;quot;, NULL, NULL)&lt;/code&gt;的代码片段，但需要满足特定约束条件才能执行成功。&lt;code&gt;0x4f2c5&lt;/code&gt;的约束条件为&lt;code&gt;rsp &amp;amp; 0xf == 0&lt;/code&gt;且&lt;code&gt;rcx == NULL&lt;/code&gt; ，&lt;code&gt;0x4f322&lt;/code&gt;的约束条件为&lt;code&gt;[rsp + 0x40] == NULL&lt;/code&gt; ，&lt;code&gt;0x10a2fc&lt;/code&gt;的约束条件为&lt;code&gt;[rsp + 0x70] == NULL&lt;/code&gt;。在 PWN074 场景中，程序栈布局使得&lt;code&gt;[rsp + 0x70]&lt;/code&gt;天然为 NULL（因为该地址超出当前函数栈帧范围，属于未使用的空闲栈区域，在 Linux 系统中默认填充为 0） ，满足&lt;code&gt;0x10a2fc&lt;/code&gt;的约束条件，而其他两个地址的约束条件难以满足。例如，&lt;code&gt;rsp &amp;amp; 0xf == 0&lt;/code&gt;要求栈指针低 4 位为 0，在程序未提供调整栈指针对齐的可控途径时，很难实现；同时程序未对&lt;code&gt;rcx&lt;/code&gt;寄存器进行控制，&lt;code&gt;rcx&lt;/code&gt;大概率不为 NULL，不满足&lt;code&gt;0x4f2c5&lt;/code&gt;的条件；&lt;code&gt;[rsp + 0x40]&lt;/code&gt;在程序运行时存储有临时数据，无法通过用户输入清空，不满足&lt;code&gt;0x4f322&lt;/code&gt;的条件。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;约束条件满足&lt;/strong&gt;：one - gadget 是 libc 中执行&lt;code&gt;execve(&amp;quot;/bin/sh&amp;quot;, NULL, NULL)&lt;/code&gt;的代码片段，但需要满足特定约束条件才能执行成功。&lt;code&gt;0x4f2c5&lt;/code&gt;的约束条件为&lt;code&gt;rsp &amp;amp; 0xf == 0&lt;/code&gt;且&lt;code&gt;rcx == NULL&lt;/code&gt; ，&lt;code&gt;0x4f322&lt;/code&gt;的约束条件为&lt;code&gt;[rsp + 0x40] == NULL&lt;/code&gt; ，&lt;code&gt;0x10a2fc&lt;/code&gt;的约束条件为&lt;code&gt;[rsp + 0x70] == NULL&lt;/code&gt;。在 PWN074 场景中，程序栈布局使得&lt;code&gt;[rsp + 0x70]&lt;/code&gt;天然为 NULL（因为该地址超出当前函数栈帧范围，属于未使用的空闲栈区域，在 Linux 系统中默认填充为 0） ，满足&lt;code&gt;0x10a2fc&lt;/code&gt;的约束条件，而其他两个地址的约束条件难以满足。例如，&lt;code&gt;rsp &amp;amp; 0xf == 0&lt;/code&gt;要求栈指针低 4 位为 0，在程序未提供调整栈指针对齐的可控途径时，很难实现；同时程序未对&lt;code&gt;rcx&lt;/code&gt;寄存器进行控制，&lt;code&gt;rcx&lt;/code&gt;大概率不为 NULL，不满足&lt;code&gt;0x4f2c5&lt;/code&gt;的条件；&lt;code&gt;[rsp + 0x40]&lt;/code&gt;在程序运行时存储有临时数据，无法通过用户输入清空，不满足&lt;code&gt;0x4f322&lt;/code&gt;的条件。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;blockquote class=&#34;alert alert-warn&#34;&gt;
     &lt;blockquote&gt;
 &lt;p&gt;本题仅仅是一个工具引进使用，具体可以自行调试一下便知。省了很大一部分时间和精力，对于初学者来说，&lt;strong&gt;libc版本是个坑&lt;/strong&gt;。因此在训练题型上平台一般弄了几个比较相对固定的libc版本，&lt;strong&gt;实际比赛时libc的版本更加多样复杂&lt;/strong&gt;。&lt;/p&gt;
-&lt;p&gt;当然，在这里如果不是使用的附带虚拟机，则需要自行去泄漏libc，当然前面经过这么多题的练习，相信这些也是没难度了。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;当然，在这里如果不是使用的附带虚拟机，则需要自行去泄漏libc，当然前面经过这么多题的练习，相信这些也是没难度了。&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/blockquote&gt;
 &lt;p&gt;exp：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -10542,18 +10602,8 @@ ROP、shellcode、栈转移等。&lt;/p&gt;
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;其实在连靶机进行交互时，无论你输入什么，都是招原样给你打印出来的，主要还是看read、memset函数，况且没开canary保护有站处理漏洞可以利用。&lt;/p&gt;
-&lt;p&gt;&amp;laquo;&amp;laquo;&amp;laquo;&amp;lt; HEAD
-在海曙目录还看到了system函数。&lt;/p&gt;
-&lt;p&gt;=======&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;blockquote&gt;
-&lt;blockquote&gt;
-&lt;blockquote&gt;
-&lt;blockquote&gt;
-&lt;blockquote&gt;
-&lt;blockquote&gt;
-&lt;p&gt;191b05fa45e02dc8995178e6a8d2c0c238003afb
-跟进hackerout函数：&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;还看到了system函数。&lt;/p&gt;
+&lt;p&gt;跟进hackerout函数：&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/280.png&#34;
 	width=&#34;934&#34;
 	height=&#34;443&#34;
@@ -10569,16 +10619,8 @@ ROP、shellcode、栈转移等。&lt;/p&gt;
 &lt;p&gt;看到有system函数，不过里边不是binsh，问题不大可以构造出来。&lt;/p&gt;
 &lt;p&gt;&amp;laquo;&amp;laquo;&amp;laquo;&amp;lt; HEAD
 看回ctfshow函数的栈溢出漏洞，可以发现s容量是36，但s到ebp距离有0x28=40，加上覆盖ebp本身的4字节，仅 8 字节（44-36=8）溢出空间，无法直接布置&lt;code&gt;system(&amp;quot;/bin/sh&amp;quot;);&lt;/code&gt; 所需的 ROP 链（需覆盖返回地址 + 传递参数，至少 12 字节以上），那么这里就应该要想到&lt;code&gt;栈迁移&lt;/code&gt;了。&lt;/p&gt;
-&lt;h1 id=&#34;栈迁移的本质是通过-将原本狭小的栈空间转移到我们可控的大空间那我们就得调用levae汇编指令&#34;&gt;栈迁移的本质是&lt;strong&gt;通过 &lt;code&gt;leave&lt;/code&gt; 指令改变栈顶指针（esp）的位置&lt;/strong&gt;，将原本狭小的栈空间转移到我们可控的大空间。那我们就得调用levae汇编指令
-&lt;/h1&gt;&lt;p&gt;看回ctfshow函数的栈溢出漏洞，可以发现s容量是36，但s到ebp距离有0x28=40，加上覆盖ebp本身的4字节，也就是说只有8字给到我们放东西，无法进行我们的ROP链构造，那么这里就应该要想到&lt;code&gt;栈迁移&lt;/code&gt;了&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;blockquote&gt;
-&lt;blockquote&gt;
-&lt;blockquote&gt;
-&lt;blockquote&gt;
-&lt;blockquote&gt;
-&lt;blockquote&gt;
-&lt;p&gt;191b05fa45e02dc8995178e6a8d2c0c238003afb&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;栈迁移的本质是&lt;strong&gt;通过 &lt;code&gt;leave&lt;/code&gt; 指令改变栈顶指针（esp）的位置&lt;/strong&gt;，将原本狭小的栈空间转移到我们可控的大空间。那我们就得调用levae汇编指令。&lt;/p&gt;
+&lt;p&gt;看回ctfshow函数的栈溢出漏洞，可以发现s容量是36，但s到ebp距离有0x28=40，加上覆盖ebp本身的4字节，也就是说只有8字给到我们放东西，无法进行我们的ROP链构造，那么这里就应该要想到&lt;code&gt;栈迁移&lt;/code&gt;了&lt;/p&gt;
 </description>
         </item>
         <item>
@@ -10685,7 +10727,8 @@ ROP、shellcode、栈转移等。&lt;/p&gt;
 &lt;p&gt;调用函数：只需要将rip压栈，即push rip，然后讲rip赋值为被调用函数的起始地址，这一操作被隐性的内置在call指令中。&lt;/p&gt;
 &lt;p&gt;被调用函数：push rbp；mov rbp rsp; sub rsp oxxxx。即保存调用函数的rbp指针，将自己的rbp指针指向栈顶，然后开辟栈空间给自己用，此时rbp就
 变成了被调用函数的栈底。&lt;/p&gt;
-&lt;p&gt;函数返回：leave；ret；翻译过来就是：mov rsp rbp；pop rbp；pop rip；即恢复栈帧，返回调用函数的返回地址。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;函数返回：leave；ret；翻译过来就是：mov rsp rbp；pop rbp；pop rip；即恢复栈帧，返回调用函数的返回地址。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;栈溢出的核心是&lt;strong&gt;覆盖程序中 “会被用来决定下一步执行位置” 的数据&lt;/strong&gt;，这些数据未必是&lt;code&gt;ret&lt;/code&gt;指令读取的 “返回地址”。如果栈中存在被&lt;code&gt;jmp&lt;/code&gt;、&lt;code&gt;call&lt;/code&gt;等指令使用的 “目标地址”（比如函数指针、跳转表项等），覆盖这些地址同样能实现&lt;strong&gt;控制流劫持&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;具体来说：&lt;code&gt;ret&lt;/code&gt;、&lt;code&gt;jmp&lt;/code&gt;、&lt;code&gt;call&lt;/code&gt;的共性与差异：&lt;/p&gt;
 &lt;ul&gt;
@@ -10706,7 +10749,8 @@ ROP、shellcode、栈转移等。&lt;/p&gt;
 &lt;p&gt;ret2shellcode的思路就是：&lt;/p&gt;
 &lt;p&gt;如果程序中存在让用户向一段长度足够的缓冲区中输入数据。我们向其中输入shellcode，将程序劫持到shellcode上即可。当然，这种也是理想情况。&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;&lt;code&gt;ret2shellcode&lt;/code&gt;是二进制漏洞利用中的一种常见技术，用于在存在栈溢出等漏洞的程序中获取系统的 shell 权限，从而执行任意命令。&lt;code&gt;ret2shellcode&lt;/code&gt;利用这个特性，将返回地址覆盖为一段精心构造的机器码（即 shellcode）的地址，从而返回到攻击者留下的shellcode进行劫持。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;&lt;code&gt;ret2shellcode&lt;/code&gt;是二进制漏洞利用中的一种常见技术，用于在存在栈溢出等漏洞的程序中获取系统的 shell 权限，从而执行任意命令。&lt;code&gt;ret2shellcode&lt;/code&gt;利用这个特性，将返回地址覆盖为一段精心构造的机器码（即 shellcode）的地址，从而返回到攻击者留下的shellcode进行劫持。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h3 id=&#34;栈溢出案例ret2shellcode&#34;&gt;栈溢出案例：ret2shellcode
 &lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -10827,7 +10871,8 @@ ROP、shellcode、栈转移等。&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;函数的&lt;strong&gt;第一个参数&lt;/strong&gt;通过 &lt;code&gt;rdi&lt;/code&gt; 寄存器传递。因此调用 &lt;code&gt;system(&amp;quot;/bin/sh&amp;quot;)&lt;/code&gt; 必须满足：&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;rdi&lt;/code&gt; 寄存器中存放 &lt;code&gt;&amp;quot;/bin/sh&amp;quot;&lt;/code&gt; 字符串的地址（&lt;code&gt;0x7ffff79e5aaa&lt;/code&gt;）；&lt;/p&gt;
-&lt;p&gt;程序跳转到 &lt;code&gt;system&lt;/code&gt; 函数的地址（&lt;code&gt;0x7ffff7839410&lt;/code&gt;）执行。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;程序跳转到 &lt;code&gt;system&lt;/code&gt; 函数的地址（&lt;code&gt;0x7ffff7839410&lt;/code&gt;）执行。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;通过栈溢出构造 payload，最终让程序执行 &lt;code&gt;system(&amp;quot;/bin/sh&amp;quot;)&lt;/code&gt;，获取 shell。&lt;/p&gt;
@@ -10996,7 +11041,8 @@ padding + pop rdi; ret + /bin/sh + system&lt;/p&gt;
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;这时候，我们可以利用x64下的libc_csu_init 中的gadgets。&lt;/p&gt;
-&lt;p&gt;这个函数是用来对libc 进行初始化操作的，而一般的程序都会调用libc函数，所以这个函数一定会存在。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;这个函数是用来对libc 进行初始化操作的，而一般的程序都会调用libc函数，所以这个函数一定会存在。&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/blockquote&gt;
 &lt;p&gt;本章的ROP介绍到这啦。&lt;/p&gt;
 &lt;h2 id=&#34;rop&#34;&gt;ROP++
 &lt;/h2&gt;&lt;p&gt;通过之前的认识，我们发现ROP形式上把代码片段分散在程序代码中。ROP通过栈来维护整个链的逻辑。
@@ -11094,11 +11140,13 @@ puts(buf)、atoi(buf)、atol(buf)、free(buf)&lt;/p&gt;
 &lt;h3 id=&#34;第一步查看文件信息checksec看架构保护信息&#34;&gt;第一步、查看文件信息（checksec看架构、保护信息）
 &lt;/h3&gt;&lt;blockquote&gt;
 &lt;p&gt;一般来说，栈题目都会或多或少关闭一些保护。
-如果关了canary，那么大概率是栈题。如果开启了PIE，那么就需要找个地方泄漏地址信息。如果开启了 FULL RELRO，那么思路就不应该是改写got。&lt;/p&gt;&lt;/blockquote&gt;
+如果关了canary，那么大概率是栈题。如果开启了PIE，那么就需要找个地方泄漏地址信息。如果开启了 FULL RELRO，那么思路就不应该是改写got。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h3 id=&#34;第二步理清函数逻辑如何执行&#34;&gt;第二步、理清函数逻辑（如何执行？）
 &lt;/h3&gt;&lt;blockquote&gt;
 &lt;p&gt;直接在linux中运行，丢进ida，静态分析。&lt;/p&gt;
-&lt;p&gt;首先把函数名、变量等等搞成自己看得懂的地步。如果有结构体，最好花时间建一个结构体,这样之后分析省事。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;首先把函数名、变量等等搞成自己看得懂的地步。如果有结构体，最好花时间建一个结构体,这样之后分析省事。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h3 id=&#34;第三步找到漏洞栈堆gets函数systemexecv&#34;&gt;第三步、找到漏洞（栈？堆？gets函数、system、execv）
 &lt;/h3&gt;&lt;blockquote class=&#34;alert alert-warn&#34;&gt;
     &lt;blockquote&gt;
@@ -11106,7 +11154,8 @@ puts(buf)、atoi(buf)、atol(buf)、free(buf)&lt;/p&gt;
 &lt;p&gt;一般先分析一下危险函数，比如&lt;code&gt;gets&lt;/code&gt;、&lt;code&gt;read&lt;/code&gt;、&lt;code&gt;write&lt;/code&gt;、&lt;code&gt;free&lt;/code&gt;、&lt;code&gt;printf&lt;/code&gt;等等。
 很多PWN题目会自己封装一个&lt;code&gt;input&lt;/code&gt;函数,重点分析一下，看看有没有越界。
 分析的时候也有技巧，通常我们要看看我们的输入数据会被程序如何处理。&lt;/p&gt;
-&lt;p&gt;由于pwn多数是&lt;strong&gt;内存破坏漏洞&lt;/strong&gt;，所以对于内存拷贝等函数要格外注意。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;由于pwn多数是&lt;strong&gt;内存破坏漏洞&lt;/strong&gt;，所以对于内存拷贝等函数要格外注意。&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/blockquote&gt;
 &lt;h3 id=&#34;第四步漏洞利用写exppayload&#34;&gt;第四步、漏洞利用（写exp、payload）
 &lt;/h3&gt;&lt;blockquote&gt;
 &lt;p&gt;基本上找到漏洞工作就完成了一半。
@@ -11120,7 +11169,8 @@ puts(buf)、atoi(buf)、atol(buf)、free(buf)&lt;/p&gt;
 &lt;/h4&gt;&lt;p&gt;如果确定是栈题，并且有canary，那么通常考虑泄漏或者修改canary。一般来说，NX都是开启的，没有开启就说明要你执行&lt;code&gt;shellcode&lt;/code&gt;了。&lt;/p&gt;
 &lt;p&gt;NX对于我们写ROP基本没影响，绕过方法也很简单：&lt;code&gt;mprotect&lt;/code&gt;&lt;/p&gt;
 &lt;h4 id=&#34;程序本身的限制&#34;&gt;程序本身的限制
-&lt;/h4&gt;&lt;p&gt;gadget种类少、输入字符有限制、栈溢出字节不够、具体情况具体分析。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;/h4&gt;&lt;p&gt;gadget种类少、输入字符有限制、栈溢出字节不够、具体情况具体分析。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h2 id=&#34;完结&#34;&gt;完结
 &lt;/h2&gt;&lt;p&gt;栈的讲解就到这，可能内容比较少，概念抽象些，也是怪小生基础不牢理解力不够强😄，还得区看看PWB题加强一下。&lt;/p&gt;
 </description>
@@ -11174,7 +11224,8 @@ puts(buf)、atoi(buf)、atol(buf)、free(buf)&lt;/p&gt;
 &gt;&lt;/p&gt;
 &lt;blockquote class=&#34;alert alert-error&#34;&gt;
     &lt;blockquote&gt;
-&lt;p&gt;PWN入门劝退集&amp;hellip;&amp;hellip;&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;PWN入门劝退集&amp;hellip;&amp;hellip;&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/blockquote&gt;
 &lt;h2 id=&#34;汇编语言基础&#34;&gt;汇编语言基础
 &lt;/h2&gt;&lt;p&gt;我自己在打ctf逆向和pwn，也时常搞不懂bit和byte，在这里我先把一些计算机内的量词回忆一下：&lt;/p&gt;
 &lt;table&gt;
@@ -11459,7 +11510,8 @@ puts(buf)、atoi(buf)、atol(buf)、free(buf)&lt;/p&gt;
 &lt;p&gt;通过&lt;strong&gt;call&lt;/strong&gt;、&lt;strong&gt;jmp&lt;/strong&gt;、&lt;strong&gt;ret&lt;/strong&gt;这种指令来完成跳转，所以汇编指令代码的执行流并不像高级语言程序一样流程明确。（在学习了C语言的指针这块的知识点，这会让你学汇编比较有利的）&lt;/p&gt;
 &lt;blockquote class=&#34;alert alert-warn&#34;&gt;
     &lt;blockquote&gt;
-&lt;p&gt;汇编指令代码会经常跳转导致可读性差一些，但执行效果是和高级语言（C、Python语言）差不多的。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;汇编指令代码会经常跳转导致可读性差一些，但执行效果是和高级语言（C、Python语言）差不多的。&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/blockquote&gt;
 &lt;p&gt;给点表格太懵了，我列出些例子(assembly&amp;ndash;C)来看看：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -11654,7 +11706,8 @@ puts(buf)、atoi(buf)、atol(buf)、free(buf)&lt;/p&gt;
 &lt;p&gt;溢出到符号位&lt;/p&gt;
 &lt;blockquote class=&#34;alert alert-tip&#34;&gt;
     &lt;blockquote&gt;
-&lt;p&gt;整数溢出一般配合别的漏洞来使用。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;整数溢出一般配合别的漏洞来使用。&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/blockquote&gt;
 &lt;h3 id=&#34;汇编小结&#34;&gt;汇编小结
 &lt;/h3&gt;&lt;p&gt;汇编语言贯穿PWN、Reverse（逆向）的，比较重要。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -11855,7 +11908,8 @@ puts(buf)、atoi(buf)、atol(buf)、free(buf)&lt;/p&gt;
 &lt;blockquote class=&#34;alert alert-tip&#34;&gt;
     &lt;blockquote&gt;
 &lt;p&gt;大端序：高低低高&lt;/p&gt;
-&lt;p&gt;小端序：高高低低&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;小端序：高高低低&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/blockquote&gt;
 &lt;p&gt;这时我也看不懂，上例子！&lt;/p&gt;
 &lt;p&gt;我们以一个数据：0x123456789abcdef；那么0为低地址，7为高地址。&lt;/p&gt;
 &lt;p&gt;大端序存储：低位储存到计算机地址高位&amp;hellip;&lt;/p&gt;
@@ -11917,7 +11971,8 @@ puts(buf)、atoi(buf)、atol(buf)、free(buf)&lt;/p&gt;
 &lt;p&gt;从上面这两种方式比较的话，可以知道，大端序符合人类的阅读习惯；但从存储逻辑、数学运算规律来看，小端序更正常。&lt;/p&gt;
 &lt;blockquote class=&#34;alert alert-note&#34;&gt;
     &lt;blockquote&gt;
-&lt;p&gt;Linux数据存储的格式为&lt;strong&gt;小端序&lt;/strong&gt;&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;Linux数据存储的格式为&lt;strong&gt;小端序&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/blockquote&gt;
 &lt;p&gt;Linux是小端序储存，所以我们以字符串的形式输入一个数字时，要注意格式，比如输入0xdeadbeef这个数字。&lt;/p&gt;
 &lt;p&gt;字符串输入就是“\xef\xbe\xad\xde”传入给程序。不过好在有&lt;strong&gt;pwntools&lt;/strong&gt;，p32(0xdeadbeef)即可完成自动转换。&lt;/p&gt;
 &lt;h3 id=&#34;文件描述符&#34;&gt;文件描述符
@@ -11936,7 +11991,8 @@ puts(buf)、atoi(buf)、atol(buf)、free(buf)&lt;/p&gt;
 &lt;p&gt;等会？这放到机器语言如C语言的话，不就是数组吗？为什么那么麻烦要发明这个栈呢？就是方便一些，一把普通菜刀能切水果、剁骨头，为什么要发明水果刀和大砍刀？原因就是方便。&lt;/p&gt;
 &lt;blockquote class=&#34;alert alert-note&#34;&gt;
     &lt;blockquote&gt;
-&lt;p&gt;栈其实就是一个“阉割版”的数组，只能在一头操作。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;栈其实就是一个“阉割版”的数组，只能在一头操作。&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/blockquote&gt;
 &lt;h4 id=&#34;linux种的栈&#34;&gt;Linux种的栈
 &lt;/h4&gt;&lt;p&gt;在linux系统中，系统为每一个进程都安排了一个栈，进程中每一个调用的函数都有自己独立的栈帧。&lt;/p&gt;
 &lt;p&gt;在linux系统中，栈是由高地址向低地址&lt;strong&gt;生长&lt;/strong&gt;（小端序）。&lt;/p&gt;
@@ -11953,7 +12009,8 @@ puts(buf)、atoi(buf)、atol(buf)、free(buf)&lt;/p&gt;
 &lt;blockquote class=&#34;alert alert-tip&#34;&gt;
     &lt;blockquote&gt;
 &lt;p&gt;add rsp 8的8怎么来的？在 x86-64 架构（64 位系统）中：
-寄存器（如 rsp、rax 等）是 64 位（8 字节）的。内存地址也是 64 位的，最小的可寻址单位是字节，但栈操作通常以&lt;strong&gt;8 字节为单位进行对齐&lt;/strong&gt;（这是系统调用和函数调用的标准要求）。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+寄存器（如 rsp、rax 等）是 64 位（8 字节）的。内存地址也是 64 位的，最小的可寻址单位是字节，但栈操作通常以&lt;strong&gt;8 字节为单位进行对齐&lt;/strong&gt;（这是系统调用和函数调用的标准要求）。&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/blockquote&gt;
 &lt;h3 id=&#34;函数调用流程&#34;&gt;函数调用流程
 &lt;/h3&gt;&lt;p&gt;从一个实例出发,main调用func_b, func_b调用func_a。我们从main函数开始，逐步分析栈帧变化:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -12089,7 +12146,8 @@ Rbp用来定位局部变量。&lt;/p&gt;
 &lt;p&gt;所以，这些寄存器的赋值操作都是为了严格按照计算机体系结构和编程语言的函数调用规范，实现函数调用、执行和返回过程中的内存管理、数据保护以及程序执行流的正确控制。&lt;/p&gt;
 &lt;blockquote class=&#34;alert alert-note&#34;&gt;
     &lt;blockquote&gt;
-&lt;p&gt;简单说，&lt;code&gt;rsp&lt;/code&gt; 是 “动态变化的栈顶指针”，而 &lt;code&gt;rbp&lt;/code&gt; 是 “固定不动的栈帧基准”—— 前者负责管理栈的实时状态，后者负责锚定当前栈帧的位置和范围、栈帧的局部变量，二者配合实现了函数调用过程中内存的有序管理。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;简单说，&lt;code&gt;rsp&lt;/code&gt; 是 “动态变化的栈顶指针”，而 &lt;code&gt;rbp&lt;/code&gt; 是 “固定不动的栈帧基准”—— 前者负责管理栈的实时状态，后者负责锚定当前栈帧的位置和范围、栈帧的局部变量，二者配合实现了函数调用过程中内存的有序管理。&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/blockquote&gt;
 &lt;h3 id=&#34;调用约定-1&#34;&gt;调用约定
 &lt;/h3&gt;&lt;p&gt;返回值：一般来说,一个函数的返回值会存储到RAX寄存器。
 X86-64函数的调用约定为：&lt;/p&gt;
@@ -12282,7 +12340,8 @@ elf文件的节（section）会被映射进内存中的段（segment），而这
 &lt;/table&gt;
 &lt;blockquote class=&#34;alert alert-note&#34;&gt;
     &lt;blockquote&gt;
-&lt;p&gt;In other words，ELF 文件是 “程序的静态载体”（存磁盘），确保程序能从源代码正确转换为可执行文件，并在内存中被正确加载和运行。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;In other words，ELF 文件是 “程序的静态载体”（存磁盘），确保程序能从源代码正确转换为可执行文件，并在内存中被正确加载和运行。&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/blockquote&gt;
 &lt;h3 id=&#34;libc&#34;&gt;libc
 &lt;/h3&gt;&lt;p&gt;什么是libc?&lt;/p&gt;
 &lt;p&gt;glibc是linux下面C标准库的实现，全称GNU C Library。&lt;/p&gt;
@@ -12320,7 +12379,8 @@ elf文件的节（section）会被映射进内存中的段（segment），而这
 &gt;&lt;/p&gt;
 &lt;blockquote class=&#34;alert alert-note&#34;&gt;
     &lt;blockquote&gt;
-&lt;p&gt;Linux基本上所有的程序都依赖libc，所以libc中的函数至关重要。当然CTFpwn也离不开libc：IDA分析libc、源码。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;Linux基本上所有的程序都依赖libc，所以libc中的函数至关重要。当然CTFpwn也离不开libc：IDA分析libc、源码。&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/blockquote&gt;
 &lt;h2 id=&#34;延迟绑定机制&#34;&gt;延迟绑定机制
 &lt;/h2&gt;&lt;p&gt;在上章的elf文件，看到了.got和.plt文件，用于动态链接函数地址。&lt;/p&gt;
 &lt;h3 id=&#34;动态链接库&#34;&gt;动态链接库
@@ -12342,7 +12402,8 @@ elf文件的节（section）会被映射进内存中的段（segment），而这
     &lt;blockquote&gt;
 &lt;h4 id=&#34;延迟绑定&#34;&gt;延迟绑定
 &lt;/h4&gt;&lt;p&gt;这就是linux的延迟绑定机制，而存放这个地址的小本子就是got表。got表全程是Global Offset Table，也就是&lt;strong&gt;全局偏移量表&lt;/strong&gt;。&lt;/p&gt;
-&lt;p&gt;在程序运行时，got表初始并不保存库函数的地址，只有在第一次调用过后，程序才将这一地址保存在got表中。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;在程序运行时，got表初始并不保存库函数的地址，只有在第一次调用过后，程序才将这一地址保存在got表中。&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/blockquote&gt;
 &lt;h3 id=&#34;plt与got&#34;&gt;PLT与GOT
 &lt;/h3&gt;&lt;p&gt;GOT（Global Offset Table，全局偏移表）：数据段用于地址无关代码的 Linux ELF 文件中确定全局变量和外部函数地址的表。&lt;/p&gt;
 &lt;p&gt;PLT（Procedure Linkage Table，程序链接表）： Linux ELF 文件中用于&lt;strong&gt;延迟绑定&lt;/strong&gt;的表。&lt;/p&gt;
@@ -12357,7 +12418,8 @@ elf文件的节（section）会被映射进内存中的段（segment），而这
 &lt;p&gt;3、**跳回PLT后，执行”准备解析参数“的指令。**plt[printf]的下一条指令是准备动态解析需要的参数：比如把printf对应的符号索引（用于告诉动态链接器 “要解析哪个函数”）压入栈中。这些参数是提前在编译时就写好的，目的是告诉动态链接器 “我要找的是printf，帮我查它的真实地址”。这些参数是提前在编译时就写好的，目的是告诉动态链接器 “我要找的是printf，帮我查它的真实地址”。&lt;/p&gt;
 &lt;p&gt;4、**跳向PLT表头（plt[0]），触发动态链接器的解析函数。**准备好参数后，plt[printf]会跳向 PLT 表的 “表头”（plt[0]）。plt[0]里的指令是固定的：先把GOT[0]的地址压栈（GOT[0]存储着动态链接器需要的辅助信息），然后调用动态链接器的核心解析函数（_dl_runtime_resolve）。&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;？？？这有个疑问，怎么会有函数来帮助外部函数如printf去确定地址呢？其实这个&lt;code&gt;_dl_runtime_resolve&lt;/code&gt;函数比较特殊，它是动态链接器的组成部分，是已经预先存在于动态链接器的代码之中的，动态链接器一加载，它的地址就被先解析出来了。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;？？？这有个疑问，怎么会有函数来帮助外部函数如printf去确定地址呢？其实这个&lt;code&gt;_dl_runtime_resolve&lt;/code&gt;函数比较特殊，它是动态链接器的组成部分，是已经预先存在于动态链接器的代码之中的，动态链接器一加载，它的地址就被先解析出来了。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;5、&lt;strong&gt;动态链接器解析出真实地址，写入 GOT 表，完成绑定&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;以下是用汇编语言代码来概括这五步流程：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -12380,16 +12442,19 @@ elf文件的节（section）会被映射进内存中的段（segment），而这
 &lt;p&gt;总结：PLT 和 GOT 的协作核心&lt;/p&gt;
 &lt;p&gt;PLT 是 “跳板”：负责第一次调用时触发解析流程，后续调用时直接转发到 GOT 中的真实地址。&lt;/p&gt;
 &lt;p&gt;GOT 是 “缓存表”：第一次调用时存储 PLT 内的跳转地址（用于触发解析），解析后存储函数真实地址（供后续直接调用）。
-整个机制的目的是 &lt;strong&gt;“延迟解析”&lt;/strong&gt;：避免程序启动时解析所有外部函数（耗时），只在第一次调用时解析，平衡启动速度和运行效率。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+整个机制的目的是 &lt;strong&gt;“延迟解析”&lt;/strong&gt;：避免程序启动时解析所有外部函数（耗时），只在第一次调用时解析，平衡启动速度和运行效率。&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/blockquote&gt;
 &lt;blockquote class=&#34;alert alert-warn&#34;&gt;
     &lt;blockquote&gt;
-&lt;p&gt;理解了这个流程，就掌握了动态链接中最核心的 “懒绑定” 机制，这也是 CTFpwn 中 “&lt;strong&gt;PLT 劫持&lt;/strong&gt;” 等漏洞利用的基础。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;理解了这个流程，就掌握了动态链接中最核心的 “懒绑定” 机制，这也是 CTFpwn 中 “&lt;strong&gt;PLT 劫持&lt;/strong&gt;” 等漏洞利用的基础。&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/blockquote&gt;
 &lt;h2 id=&#34;linux安全防护机制&#34;&gt;Linux安全防护机制
 &lt;/h2&gt;&lt;p&gt;栈溢出、指针悬挂、内存地址泄露等Bug会导致程序崩溃，一些攻击者会刻意制造这些漏洞来扰乱程序正常执行，这就是早期PWN的威力。这一章比较重要，几乎贯穿后续栈溢出、堆的题目。&lt;/p&gt;
 &lt;h3 id=&#34;保护机制&#34;&gt;保护机制
 &lt;/h3&gt;&lt;blockquote class=&#34;alert alert-error&#34;&gt;
     &lt;blockquote&gt;
-&lt;p&gt;CANARY、NX、ASRL、PIE、RELRO&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;CANARY、NX、ASRL、PIE、RELRO&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/blockquote&gt;
 &lt;p&gt;栈的作用为存储函数调用相关信息以及函数的局部变量。&lt;/p&gt;
 &lt;p&gt;这些局部变量通常为数组或者输入的缓冲区（buf）。而函数调用相关的信息，主要是返回地址和栈底指针（rbp）。&lt;/p&gt;
 &lt;h3 id=&#34;canary&#34;&gt;CANARY
@@ -12413,15 +12478,18 @@ elf文件的节（section）会被映射进内存中的段（segment），而这
 &gt;&lt;/p&gt;
 &lt;blockquote class=&#34;alert alert-warn&#34;&gt;
     &lt;blockquote&gt;
-&lt;p&gt;由于canary开头字节为x00，所以通常情况下不能被打印出来。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;由于canary开头字节为x00，所以通常情况下不能被打印出来。&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/blockquote&gt;
 &lt;blockquote class=&#34;alert alert-note&#34;&gt;
     &lt;blockquote&gt;
-&lt;p&gt;通常情况下，程序如果开启了canary保护，大概率说明这道题目不是栈溢出题目了。当然也要具体情况具体分析。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;通常情况下，程序如果开启了canary保护，大概率说明这道题目不是栈溢出题目了。当然也要具体情况具体分析。&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/blockquote&gt;
 &lt;blockquote class=&#34;alert alert-error&#34;&gt;
     &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;绕过方法主要就是修改canary或者泄漏canary&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;泄漏 canary：利用格式化字符串、栈溢出 + 输出功能等漏洞，读取栈上的 canary 值（注意首字节 \x00 的影响）。&lt;/p&gt;
-&lt;p&gt;修改 canary：用泄漏的 canary 值，在栈溢出时覆盖栈上的 canary，使其与原始值（fs:0x28 处）一致，绕过检查。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;修改 canary：用泄漏的 canary 值，在栈溢出时覆盖栈上的 canary，使其与原始值（fs:0x28 处）一致，绕过检查。&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/blockquote&gt;
 &lt;h3 id=&#34;nx&#34;&gt;NX
 &lt;/h3&gt;&lt;p&gt;NX意思就是Not Executable，开启这个保护后，程序中的堆、栈、bss段等等可写的段就&lt;em&gt;不可以执行&lt;/em&gt;。这就意味着如果开启了NX保护，通常情况下我们就不能执行我们自己编写的shellcode。&lt;/p&gt;
 &lt;p&gt;绕过的方式通常是用mprotect函数来改写段的权限，nx保护对于rop或者劫持got表利用方式不影响。&lt;/p&gt;
@@ -12432,7 +12500,8 @@ elf文件的节（section）会被映射进内存中的段（segment），而这
 &lt;p&gt;通常来说，CTF中的PWN题与这两个保护打交道的次数最多。&lt;/p&gt;
 &lt;blockquote class=&#34;alert alert-note&#34;&gt;
     &lt;blockquote&gt;
-&lt;p&gt;绕过方式就是泄露函数地址，然后通过函数的偏移来确定基地址。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;绕过方式就是泄露函数地址，然后通过函数的偏移来确定基地址。&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/blockquote&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;PIE&lt;/strong&gt;：是针对&lt;strong&gt;可执行文件本身&lt;/strong&gt;的编译选项。开启后，可执行文件（ELF）会被加载到内存中的随机地址，其内部的代码段、数据段等位置不再是固定值（编译时不指定绝对地址，而是用相对偏移）。
@@ -12512,12 +12581,14 @@ elf文件的节（section）会被映射进内存中的段（segment），而这
 &lt;p&gt;ASLR 是操作系统搞的 “整体大洗牌”：每次程序运行时，系统会把整个内存空间的布局（比如共享库放哪、栈和堆从哪开始）随机换个位置，让攻击者猜不到常用函数（比如 system）或数据的具体地址。
 ASLR 像每次开演唱会时，场馆里的座位区（共享库）、后台（堆）、观众入口（栈）的位置都随机换。&lt;/p&gt;
 &lt;p&gt;PIE 是针对单个程序的 “自身随机化”：如果程序编译时开了 PIE，它自己加载到内存时，代码和数据会随机放在一个不确定的位置（而不是固定地址），让攻击者连程序自己的函数、变量在哪都猜不准。
-PIE 像演出团队（程序本身）每次上场时，自己的站位（代码和数据）也随机变。&lt;/p&gt;&lt;/blockquote&gt;
+PIE 像演出团队（程序本身）每次上场时，自己的站位（代码和数据）也随机变。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h3 id=&#34;relro&#34;&gt;RELRO
 &lt;/h3&gt;&lt;p&gt;RELRO（Relocation Read-Only，重定位只读）是一种针对 ELF 文件重定位表的保护机制，核心作用是&lt;strong&gt;限制对 GOT（全局偏移表）等重定位相关区域的修改权限&lt;/strong&gt;，防止攻击者通过篡改 GOT 表实现函数劫持（如修改&lt;code&gt;printf&lt;/code&gt;的 GOT 条目为&lt;code&gt;system&lt;/code&gt;地址）。&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;这个保护主要针对的是延迟绑定机制，意思就是说got表这种和函数动态链接相关的内存地址，对于用户是只读的。&lt;/p&gt;
-&lt;p&gt;开启了这个保护，意味着我们不能&lt;em&gt;&lt;strong&gt;劫持&lt;/strong&gt;&lt;/em&gt;got表中的函数指针。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;开启了这个保护，意味着我们不能&lt;em&gt;&lt;strong&gt;劫持&lt;/strong&gt;&lt;/em&gt;got表中的函数指针。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;RELRO 的两种模式及作用:&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Partial RELRO（部分 RELRO）&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;仅将 GOT 表的前半部分（.got.plt）设置为只读，后半部分仍可写。
@@ -12574,7 +12645,8 @@ PIE 像演出团队（程序本身）每次上场时，自己的站位（代码�
 &lt;/h3&gt;&lt;p&gt;初步了解Linux的基本内容，保护层级ring、文件描述符、及Linux计算机内部的&lt;strong&gt;大端小端序&lt;/strong&gt;存储形式&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;大端序：数据高位存储在计算机地址的低位，数据低位存储在地址的高位。&lt;/p&gt;
-&lt;p&gt;小端序：数据高位存储在计算机地址的高位，数据低位存储在地址的低位。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;小端序：数据高位存储在计算机地址的高位，数据低位存储在地址的低位。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;初步认识栈的定义、作用、在PWN所发挥的威力。&lt;/p&gt;
 &lt;h3 id=&#34;调用约定-2&#34;&gt;调用约定
 &lt;/h3&gt;&lt;p&gt;这里重要的是函数调用流程，重点讲解push、pop、call、ret、jmp等汇编指令的使用效果。&lt;/p&gt;
@@ -12810,7 +12882,8 @@ PIE 像演出团队（程序本身）每次上场时，自己的站位（代码�
 &gt;&lt;/p&gt;
 &lt;blockquote class=&#34;alert alert-note&#34;&gt;
     &lt;blockquote&gt;
-&lt;p&gt;这里的文件头将贯穿你的MISC生涯，务必牢记这些文件头特征，以备不时之需！&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;这里的文件头将贯穿你的MISC生涯，务必牢记这些文件头特征，以备不时之需！&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/blockquote&gt;
 &lt;h3 id=&#34;文件分离&#34;&gt;文件分离
 &lt;/h3&gt;&lt;p&gt;介绍了文件类型的识别方法了，接下来来讲一下文件分离。&lt;/p&gt;
 &lt;p&gt;文件分离的原因：&lt;/p&gt;
@@ -12863,7 +12936,8 @@ PIE 像演出团队（程序本身）每次上场时，自己的站位（代码�
 		data-flex-grow=&#34;152&#34;
 		data-flex-basis=&#34;366px&#34;
 	
-&gt;&lt;/p&gt;&lt;/blockquote&gt;
+&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;binwalk如何安装？自行解决。&lt;/p&gt;
 &lt;p&gt;Binwalk命令分离misc文件（-e全名就是extract缩写）：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
