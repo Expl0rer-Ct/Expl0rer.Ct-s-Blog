@@ -1,0 +1,1916 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="让Expl0rer带你进入二进制世界的 “搞事指南”：PWN小白の溢出魔法教程">
+<title>给PWN新手的溢出魔法入门手册</title>
+
+<link rel='canonical' href='https://expl0rer.top/p/%E7%BB%99pwn%E6%96%B0%E6%89%8B%E7%9A%84%E6%BA%A2%E5%87%BA%E9%AD%94%E6%B3%95%E5%85%A5%E9%97%A8%E6%89%8B%E5%86%8C/'>
+
+<link rel="stylesheet" href="/scss/style.min.84f4364fa3a5758ecded3430d054d555b355a8e9efd1baf1e03c18d73802579f.css"><meta property='og:title' content="给PWN新手的溢出魔法入门手册">
+<meta property='og:description' content="让Expl0rer带你进入二进制世界的 “搞事指南”：PWN小白の溢出魔法教程">
+<meta property='og:url' content='https://expl0rer.top/p/%E7%BB%99pwn%E6%96%B0%E6%89%8B%E7%9A%84%E6%BA%A2%E5%87%BA%E9%AD%94%E6%B3%95%E5%85%A5%E9%97%A8%E6%89%8B%E5%86%8C/'>
+<meta property='og:site_name' content='Expl0rer.Ct'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-11-07T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-11-07T13:10:05&#43;00:00'/><meta property='og:image' content='https://expl0rer.top/p/%E7%BB%99pwn%E6%96%B0%E6%89%8B%E7%9A%84%E6%BA%A2%E5%87%BA%E9%AD%94%E6%B3%95%E5%85%A5%E9%97%A8%E6%89%8B%E5%86%8C/PWN%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97.png' />
+<meta name="twitter:title" content="给PWN新手的溢出魔法入门手册">
+<meta name="twitter:description" content="让Expl0rer带你进入二进制世界的 “搞事指南”：PWN小白の溢出魔法教程"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://expl0rer.top/p/%E7%BB%99pwn%E6%96%B0%E6%89%8B%E7%9A%84%E6%BA%A2%E5%87%BA%E9%AD%94%E6%B3%95%E5%85%A5%E9%97%A8%E6%89%8B%E5%86%8C/PWN%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97.png' />
+    <link rel="shortcut icon" href="/favicon.ico" />
+<div class="loading">
+     
+    <div id="ghost">
+        <div id="red">
+            <div id="pupil"></div>
+            <div id="pupil1"></div>
+            <div id="eye"></div>
+            <div id="eye1"></div>
+            <div id="top0"></div>
+            <div id="top1"></div>
+            <div id="top2"></div>
+            <div id="top3"></div>
+            <div id="top4"></div>
+            <div id="st0"></div>
+            <div id="st1"></div>
+            <div id="st2"></div>
+            <div id="st3"></div>
+            <div id="st4"></div>
+            <div id="st5"></div>
+            <div id="an1"></div>
+            <div id="an2"></div>
+            <div id="an3"></div>
+            <div id="an4"></div>
+            <div id="an5"></div>
+            <div id="an6"></div>
+            <div id="an7"></div>
+            <div id="an8"></div>
+            <div id="an9"></div>
+            <div id="an10"></div>
+            <div id="an11"></div>
+            <div id="an12"></div>
+            <div id="an13"></div>
+            <div id="an14"></div>
+            <div id="an15"></div>
+            <div id="an16"></div>
+            <div id="an17"></div>
+            <div id="an18"></div>
+        </div>
+        <div id="shadow"></div>
+    </div>
+</div>
+
+<style>
+    .loading {
+        position: fixed;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 99;
+        background-color: #f5f5fa;
+        transition: opacity 0.5s ease;
+    }
+	
+      
+#ghost {
+  position: relative;
+  scale: 0.8;
+}
+
+#red {
+  animation: upNDown infinite 1s;
+  position: relative;
+  width: 140px;
+  height: 140px;
+  display: grid;
+  grid-template-columns: repeat(14, 1fr);
+  grid-template-rows: repeat(14, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  grid-template-areas:
+    "a1  a2  a3  a4  a5  top0  top0  top0  top0  a10 a11 a12 a13 a14"
+    "b1  b2  b3  top1 top1 top1 top1 top1 top1 top1 top1 b12 b13 b14"
+    "c1 c2 top2 top2 top2 top2 top2 top2 top2 top2 top2 top2 c13 c14"
+    "d1 top3 top3 top3 top3 top3 top3 top3 top3 top3 top3 top3 top3 d14"
+    "e1 top3 top3 top3 top3 top3 top3 top3 top3 top3 top3 top3 top3 e14"
+    "f1 top3 top3 top3 top3 top3 top3 top3 top3 top3 top3 top3 top3 f14"
+    "top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4"
+    "top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4"
+    "top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4"
+    "top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4"
+    "top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4"
+    "top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4"
+    "st0 st0 an4 st1 an7 st2 an10 an10 st3 an13 st4 an16 st5 st5"
+    "an1 an2 an3 an5 an6 an8 an9 an9 an11 an12 an14 an15 an17 an18";
+}
+
+@keyframes upNDown {
+  0%,
+  49% {
+    transform: translateY(0px);
+  }
+  50%,
+  100% {
+    transform: translateY(-10px);
+  }
+}
+
+#top0,
+#top1,
+#top2,
+#top3,
+#top4,
+#st0,
+#st1,
+#st2,
+#st3,
+#st4,
+#st5 {
+  background-color: red;
+}
+
+#top0 {
+  grid-area: top0;
+}
+
+#top1 {
+  grid-area: top1;
+}
+
+#top2 {
+  grid-area: top2;
+}
+
+#top3 {
+  grid-area: top3;
+}
+
+#top4 {
+  grid-area: top4;
+}
+
+#st0 {
+  grid-area: st0;
+}
+
+#st1 {
+  grid-area: st1;
+}
+
+#st2 {
+  grid-area: st2;
+}
+
+#st3 {
+  grid-area: st3;
+}
+
+#st4 {
+  grid-area: st4;
+}
+
+#st5 {
+  grid-area: st5;
+}
+
+#an1 {
+  grid-area: an1;
+  animation: flicker0 infinite 1s;
+}
+
+#an18 {
+  grid-area: an18;
+  animation: flicker0 infinite 1s;
+}
+
+#an2 {
+  grid-area: an2;
+  animation: flicker1 infinite 1s;
+}
+
+#an17 {
+  grid-area: an17;
+  animation: flicker1 infinite 1s;
+}
+
+#an3 {
+  grid-area: an3;
+  animation: flicker1 infinite 1s;
+}
+
+#an16 {
+  grid-area: an16;
+  animation: flicker1 infinite 1s;
+}
+
+#an4 {
+  grid-area: an4;
+  animation: flicker1 infinite 1s;
+}
+
+#an15 {
+  grid-area: an15;
+  animation: flicker1 infinite 1s;
+}
+
+#an6 {
+  grid-area: an6;
+  animation: flicker0 infinite 1s;
+}
+
+#an12 {
+  grid-area: an12;
+  animation: flicker0 infinite 1s;
+}
+
+#an7 {
+  grid-area: an7;
+  animation: flicker0 infinite 1s;
+}
+
+#an13 {
+  grid-area: an13;
+  animation: flicker0 infinite 1s;
+}
+
+#an9 {
+  grid-area: an9;
+  animation: flicker1 infinite 1s;
+}
+
+#an10 {
+  grid-area: an10;
+  animation: flicker1 infinite 1s;
+}
+
+#an8 {
+  grid-area: an8;
+  animation: flicker0 infinite 1s;
+}
+
+#an11 {
+  grid-area: an11;
+  animation: flicker0 infinite 1s;
+}
+
+@keyframes flicker0 {
+  0%,
+  49% {
+    background-color: red;
+  }
+  50%,
+  100% {
+    background-color: transparent;
+  }
+}
+
+@keyframes flicker1 {
+  0%,
+  49% {
+    background-color: transparent;
+  }
+  50%,
+  100% {
+    background-color: red;
+  }
+}
+
+#eye {
+  width: 40px;
+  height: 50px;
+  position: absolute;
+  top: 30px;
+  left: 10px;
+}
+
+#eye::before {
+  content: "";
+  background-color: white;
+  width: 20px;
+  height: 50px;
+  transform: translateX(10px);
+  display: block;
+  position: absolute;
+}
+
+#eye::after {
+  content: "";
+  background-color: white;
+  width: 40px;
+  height: 30px;
+  transform: translateY(10px);
+  display: block;
+  position: absolute;
+}
+
+#eye1 {
+  width: 40px;
+  height: 50px;
+  position: absolute;
+  top: 30px;
+  right: 30px;
+}
+
+#eye1::before {
+  content: "";
+  background-color: white;
+  width: 20px;
+  height: 50px;
+  transform: translateX(10px);
+  display: block;
+  position: absolute;
+}
+
+#eye1::after {
+  content: "";
+  background-color: white;
+  width: 40px;
+  height: 30px;
+  transform: translateY(10px);
+  display: block;
+  position: absolute;
+}
+
+#pupil {
+  width: 20px;
+  height: 20px;
+  background-color: blue;
+  position: absolute;
+  top: 50px;
+  left: 10px;
+  z-index: 1;
+  animation: eyesMovement infinite 6s;
+}
+
+#pupil1 {
+  width: 20px;
+  height: 20px;
+  background-color: blue;
+  position: absolute;
+  top: 50px;
+  right: 50px;
+  z-index: 1;
+  animation: eyesMovement infinite 6s;
+}
+
+@keyframes eyesMovement {
+  0%,
+  49% {
+    transform: translateX(0px);
+  }
+  50%,
+  99% {
+    transform: translateX(10px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}
+
+#shadow {
+  background-color: black;
+  width: 140px;
+  height: 140px;
+  position: absolute;
+  border-radius: 50%;
+  transform: rotateX(80deg);
+  filter: blur(20px);
+  top: 80%;
+  animation: shadowMovement infinite 1s;
+}
+
+@keyframes shadowMovement {
+  0%,
+  49% {
+    opacity: 0.5;
+  }
+  50%,
+  100% {
+    opacity: 0.2;
+  }
+}
+
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.pjax/2.0.1/jquery.pjax.min.js"></script>
+
+<script>	
+    function initLoading() {
+        let loading = document.querySelector(".loading");
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            setTimeout(() => {
+                loading.style.opacity = "0";
+                
+                setTimeout(() => {
+                    loading.style.display = "none";
+                }, 500);
+            }, 500); 
+        });
+    }
+
+    initLoading();
+</script>
+
+
+<link
+  rel="stylesheet"
+  href="https://cdn-font.hyperos.mi.com/font/css?family=MiSans:400:Chinese_Simplify,Latin&display=swap"
+/>
+
+
+
+<link rel="stylesheet" href="https://npm.elemecdn.com/lxgw-wenkai-screen-webfont@1.7.0/lxgwwenkaigbscreen.css" />
+
+<link rel="stylesheet" href="https://npm.elemecdn.com/lxgw-wenkai-screen-webfont@1.7.0/lxgwwenkaigbscreenr.css" />
+
+<link rel="stylesheet" href="https://npm.elemecdn.com/lxgw-wenkai-screen-webfont@1.7.0/lxgwwenkaiscreen.css" />
+
+<link rel="stylesheet" href="https://npm.elemecdn.com/lxgw-wenkai-screen-webfont@1.7.0/lxgwwenkaiscreenr.css" />
+
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_1a3c99934e119e1b.png" width="300"
+                            height="268" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🫡</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Expl0rer.Ct</a></h1>
+            <h2 class="site-description">吾将上下而求索</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://space.bilibili.com/695179979?spm_id_from=333.40138.0.0'
+                        target="_blank"
+                        title="Bilibili"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-brand-bilibili"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 10a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v6a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4v-6z" /><path d="M8 3l2 3" /><path d="M16 3l-2 3" /><path d="M9 13v-2" /><path d="M15 11v2" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://github.com/Expl0rer-Ct'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页 | Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E-about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于 | About</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档 | Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索 | Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E6%8A%80%E6%9C%AF%E9%93%BE%E6%8E%A5-links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>技术链接 | Links</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/friends-links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友情链接 | Friends Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <!--
+tags: [temperature, hot, wheater, thermometer, forecast]
+category: Weather
+version: "1.73"
+unicode: "f236"
+-->
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="32"
+  height="32"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="#ff9500"
+  stroke-width="1"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  class="icon-tabler-sun-high"
+>
+  <path d="M14.828 14.828a4 4 0 1 0 -5.656 -5.656a4 4 0 0 0 5.656 5.656z" />
+  <path d="M6.343 17.657l-1.414 1.414" />
+  <path d="M6.343 6.343l-1.414 -1.414" />
+  <path d="M17.657 6.343l1.414 -1.414" />
+  <path d="M17.657 17.657l1.414 1.414" />
+  <path d="M4 12h-2" />
+  <path d="M12 4v-2" />
+  <path d="M20 12h2" />
+  <path d="M12 20v2" />
+</svg>
+
+                        <!--
+tags: [night, dark mode]
+category: Weather
+version: "1.21"
+unicode: "ece7"
+-->
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="32"
+  height="32"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="#8d6e63"
+  stroke-width="1"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  class="icon-tabler-moon-stars"
+>
+  <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+  <path d="M17 4a2 2 0 0 0 2 2a2 2 0 0 0 -2 2a2 2 0 0 0 -2 -2a2 2 0 0 0 2 -2" />
+  <path d="M19 11h2m-1 -1v2" />
+</svg>
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#欢迎来到pwn的世界">欢迎来到PWN的世界</a></li>
+    <li><a href="#前置声明">前置声明</a></li>
+    <li><a href="#数据转换">数据转换</a></li>
+    <li><a href="#编程语言">编程语言</a>
+      <ol>
+        <li><a href="#c语言">C语言</a></li>
+        <li><a href="#python">Python</a></li>
+      </ol>
+    </li>
+    <li><a href="#环境搭建">环境搭建</a>
+      <ol>
+        <li><a href="#编程环境">编程环境</a></li>
+        <li><a href="#虚拟机配置">虚拟机配置</a></li>
+        <li><a href="#pwn环境搭建">PWN环境搭建</a></li>
+      </ol>
+    </li>
+    <li><a href="#linux操作">Linux操作</a>
+      <ol>
+        <li><a href="#编译">编译</a></li>
+        <li><a href="#汇编">汇编</a></li>
+      </ol>
+    </li>
+    <li><a href="#学习路线">学习路线</a></li>
+    <li><a href="#ida使用">IDA使用</a></li>
+    <li><a href="#gdbpwndbg">GDB+pwndbg</a></li>
+    <li><a href="#pwntools">Pwntools</a></li>
+    <li><a href="#互联网时代的到来">互联网时代的到来</a></li>
+    <li><a href="#普遍漏洞利用">普遍漏洞利用</a></li>
+    <li><a href="#linux安全机制">Linux安全机制</a></li>
+    <li><a href="#知识输出">知识输出</a></li>
+    <li><a href="#总结">总结</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/%E7%BB%99pwn%E6%96%B0%E6%89%8B%E7%9A%84%E6%BA%A2%E5%87%BA%E9%AD%94%E6%B3%95%E5%85%A5%E9%97%A8%E6%89%8B%E5%86%8C/">
+                <img src="/p/%E7%BB%99pwn%E6%96%B0%E6%89%8B%E7%9A%84%E6%BA%A2%E5%87%BA%E9%AD%94%E6%B3%95%E5%85%A5%E9%97%A8%E6%89%8B%E5%86%8C/PWN%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97_hu_a33b5dc0928c1976.png"
+                        srcset="/p/%E7%BB%99pwn%E6%96%B0%E6%89%8B%E7%9A%84%E6%BA%A2%E5%87%BA%E9%AD%94%E6%B3%95%E5%85%A5%E9%97%A8%E6%89%8B%E5%86%8C/PWN%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97_hu_a33b5dc0928c1976.png 800w, /p/%E7%BB%99pwn%E6%96%B0%E6%89%8B%E7%9A%84%E6%BA%A2%E5%87%BA%E9%AD%94%E6%B3%95%E5%85%A5%E9%97%A8%E6%89%8B%E5%86%8C/PWN%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97_hu_f01d94282fbe56c2.png 1600w"
+                        width="800" 
+                        height="418" 
+                        loading="lazy"
+                        alt="Featured image of post 给PWN新手的溢出魔法入门手册" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/pwn%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86/" style="background-color: #2a9d8f; color: #fff;">
+                PWN前置知识
+            </a>
+        
+            <a href="/categories/ctfpwn/" style="background-color: #2a9d8f; color: #fff;">
+                CTFpwn
+            </a>
+        
+            <a href="/categories/ctf%E5%85%A5%E9%97%A8/" >
+                CTF入门
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/%E7%BB%99pwn%E6%96%B0%E6%89%8B%E7%9A%84%E6%BA%A2%E5%87%BA%E9%AD%94%E6%B3%95%E5%85%A5%E9%97%A8%E6%89%8B%E5%86%8C/">给PWN新手的溢出魔法入门手册</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            让Expl0rer带你进入二进制世界的 “搞事指南”：PWN小白の溢出魔法教程
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2025-11-07</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>[TOC]</p>
+<p>前言：本文章有借鉴各大OJ、CTF平台等的资源图鉴，有部分内容相似，如有问题本人愿意下架整改，谢谢。</p>
+<h2 id="欢迎来到pwn的世界">欢迎来到PWN的世界
+</h2><p>欢迎来到PWN的世界，这里遍地都是二进制寄存器和栈堆在陪伴着你😄</p>
+<p>PWN（读作“砰”，拟声词）一词起源于网络游戏社区，原本表示成功入侵了计算机系统，在CTF 中则是一种题目方向：通过构造恶意输入达到泄漏信息甚至劫持几乎整个系统（getshell）的目的。其实在 CTF 比赛发展初期，赛题通常只与二进制安全相关，因此PWN 是 CTF 领域最原始的方向。在这里，你能深入计算机系统最底层，感受纯粹的计算机科学，感受底层的计算机逻辑&hellip;.
+</p>
+$$
+PWN => 逆向工程+漏洞挖掘+漏洞利用 =>系统劫持
+$$<p>
+接下来，Expl0rer将和愿意入门PWN的同学一同学习，有问题随时在评论区及QQ交流讨论，<code>In this article, I'll help you figure out what PWN is, why to learn it, and how to go about it.</code></p>
+<p>希望你能坚持下去。</p>
+<h2 id="前置声明">前置声明
+</h2><p>我大一是CTF全栈😄，对其他方向也颇有了解，对我而言PWN的前置知识非常多，很多人选择等老师讲完课再去学，我认为这是一个很大的错误，老师只会带你去认识、入门这门课，对于你学PWN来说，所需的前置知识储备差距还是很大的，况且如汇编语言和计算机组成原理这些一般都在大二下学期、大三学习的，那时候已经晚了。既然你已经决定要学PWN了，所以我强烈建议要提前自学这些PWN前置知识。</p>
+<p>从开始入门PWN到拿到你的第一个专属flag还需要一段时间，但请耐心沉淀，你的付出一定会迎来回报！</p>
+<h2 id="数据转换">数据转换
+</h2><p>在PWN的学习中，我们经常需要和如二进制、十六进制、寄存器等的这些底层数据打交道，因此PWN属于<strong>二进制（binary）安全</strong>，为什么要说是“二进制”？因为计算机只认识和只会处理二进制信息。与我们日常使用的十进制“逢十进一”不同，“逢二进一”的二进制世界只有“0”和“1”。一位二进制信息称为比特（bit），8 比特为 1 字节（byte），字节通常是计算机处理信息的最小单位，计算机中的信息通常是连续的字节。我们人类所输入给计算机的任何信息如文字、图像、音视频等都可被编码转换为数字信息（二进制比特流）进行处理，需要输出时再解码为原形式。</p>
+<p>不同进制间可相互转换，你需要熟悉进制转换方式，其中最重要的是<strong>二进制、十进制、十六进制</strong>间的转换。</p>
+<p>等你输入信息给计算机后，就轮到计算机本身去存储这个数据了，怎么存？为了方便数据类型转换和运算，计算机存储数字信息时，数字再内存中的高低位与人类阅读的高低位相反（从左到右、从上到下逐字阅读），这种数据存储方式称为“<strong>小端序存储</strong>”，当然你还需要知道<strong>大端序</strong>，这类知识其实归根于计算机基础中，在网上你可以搜索到这些相关资源，我在这并不多细分讲解，我只会列出方向给你去寻找并学习&hellip;</p>
+<h2 id="编程语言">编程语言
+</h2><p>既然PWN和逆向程序逻辑有关，我们还需要反推程序运行逻辑并得出“源代码”，此外我们应该先会正向写出一般的程序吧😄。刚入门的你可能懵懵的啥也不懂，那你需要去了解这些，对于PWN学习初期，我们一般面对的是<code>Linux环境下的C语言</code>，再者就是C++咯</p>
+<blockquote class="alert alert-note">
+    </blockquote>
+<h3 id="c语言">C语言
+</h3><p>C语言几乎是每一所高校的工科学生所学的第一门编程语言，C语言运行速度快，历史悠久，很多程序以及新生编程语言如C++都是基于C语言诞生的，大多数PWN题目的程序都由C语言编写，大多数逆向工具如<strong>IDApro</strong>的逆向出的语言都是类似C语言的<strong>伪代码</strong></p>
+<p><img src="/p/%E7%BB%99pwn%E6%96%B0%E6%89%8B%E7%9A%84%E6%BA%A2%E5%87%BA%E9%AD%94%E6%B3%95%E5%85%A5%E9%97%A8%E6%89%8B%E5%86%8C/1.png"
+	width="1920"
+	height="820"
+	srcset="/p/%E7%BB%99pwn%E6%96%B0%E6%89%8B%E7%9A%84%E6%BA%A2%E5%87%BA%E9%AD%94%E6%B3%95%E5%85%A5%E9%97%A8%E6%89%8B%E5%86%8C/1_hu_63deddd07f195ecc.png 480w, /p/%E7%BB%99pwn%E6%96%B0%E6%89%8B%E7%9A%84%E6%BA%A2%E5%87%BA%E9%AD%94%E6%B3%95%E5%85%A5%E9%97%A8%E6%89%8B%E5%86%8C/1_hu_c8f8ec6ad1a963f6.png 1024w"
+	loading="lazy"
+	
+		alt="IDA界面与C伪代码"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="234"
+		data-flex-basis="561px"
+	
+></p>
+<p>你需要系统学习C语言，书籍推荐《C Primer Plus》（作者此前用过，好评！），当然学校统一买了其它教材也能凑合用，或者你可以上网找课程也可以如<code>B站大学</code></p>
+<p>当前想速成的你可以去关注C语言中的基础数据类型（int、longlong、unsigned int&hellip;）、流程控制（if、else、while、for&hellip;）、函数（scanf、puts、gets、strcmp、<strong>system</strong>、execve、mmap&hellip;）、<strong>指针</strong>、位操作。</p>
+<p>C 语言能很好地和汇编语言（详见下文“编译与汇编”）对应，学习两者时应相互结合，理解等效的 C 语句和汇编指令。</p>
+<blockquote class="alert alert-tip">
+    <blockquote>
+<p>等到我们PWN后期深入学习时，就需要额外学习C++甚至其他语言了，毕竟程序语言很多，可不止C和C++，甚至还有Java等等。</p>
+</blockquote></blockquote>
+<h3 id="python">Python
+</h3><p><a class="link" href="https://expl0rer.top/p/python/"  target="_blank" rel="noopener"
+    >Python</a>专为PWN的exp编写而生：为了能编写漏洞利用脚本，你需要学习Python语言。<a class="link" href="https://expl0rer.top/p/python/"  target="_blank" rel="noopener"
+    >Python</a>语言极易上手，配置好Python环境后还需要安装<strong>pwntools</strong>等PWN所需的库。</p>
+<h2 id="环境搭建">环境搭建
+</h2><h3 id="编程环境">编程环境
+</h3><p>说完上面的语言介绍，我们需要配置一些编程环境，这里我推荐是<strong>Pycharm</strong>和<strong>Visual Studio Code</strong>，vscode安装在虚拟机上，然后Pycharm和vscode可以安装在主机上，方便你后续学习编程语言。</p>
+<h3 id="虚拟机配置">虚拟机配置
+</h3><p>Linux是一种开源的Unix操作系统，因其性能功耗低等的优势如今被常用于服务器，但我们日常使用的PC操作系统是Windows系统。为了和题目所在的编译环境兼容少出bug以及避免环境污染主机（CTF工具很多，放在主机不太好），我们需要配置一台Linux系统的虚拟机，这里推荐安装Ubuntu虚拟机（当然之前有配置好Kali也勉强可以）或使用docker，网上教程很多，自行寻找。</p>
+<h3 id="pwn环境搭建">PWN环境搭建
+</h3><p>安装好Linux环境后，还需要继续搭建配置PWN的环境，这里有一篇文章值得你去读：</p>
+<ul>
+<li><a class="link" href="https://ctf-wiki.org/pwn/linux/user-mode/environment/#ctf-pwn"  target="_blank" rel="noopener"
+    >Environment - CTF Wiki</a></li>
+</ul>
+<p>也可以看看CSDN上的歪插YX大佬的博客文章：</p>
+<ul>
+<li><a class="link" href="https://blog.csdn.net/j284886202/article/details/134931709"  target="_blank" rel="noopener"
+    >★pwn 22.04环境搭建保姆级教程★_pwn环境搭建</a></li>
+</ul>
+<p>总之你至少需要：</p>
+<ul>
+<li>Linux的Python环境+pwntools</li>
+<li>逆向分析工具如IDA</li>
+<li>Linux的动态调试器如<strong>GDB+<code>pwndbg</code></strong></li>
+<li>checksec、one_gadget、seccomp-tools、LibcSearcher、ropper</li>
+</ul>
+<p>一个PWN的标准解题思路大概是：</p>
+<ol>
+<li>用<code>checksec</code> 检查保护机制（详见可以看我的文章：<a class="link" href="https://expl0rer.top/p/pwn-1/#linux%e5%ae%89%e5%85%a8%e9%98%b2%e6%8a%a4%e6%9c%ba%e5%88%b6"  target="_blank" rel="noopener"
+    >PWN-1_Linux保护机制</a>）</li>
+<li>用逆向分析工具（如IDA）反汇编编译挖掘漏洞</li>
+<li>使用GDB+pwndbg调试确认漏洞细节</li>
+<li>用Python+pwntools编写利用脚本</li>
+</ol>
+<blockquote class="alert alert-note">
+    <blockquote>
+<p>libc 和 ld 分别是 Linux C 标准库和动态链接器。我们用 C 语言编写程序时经常调用一些“从天而降”的函数（printf、scanf&hellip;），它们其实就在 libc（通常为 GNU 提供的glibc）里，ld 则搭起你的程序和这些函数间的“桥梁”。Linux 系统中几乎所有软件都需要用到它们！</p>
+</blockquote></blockquote>
+<h2 id="linux操作">Linux操作
+</h2><p>既然PWN需要在Linux-Ubuntu中操作，那么在解题过程难免会使用Linux的一些操作指令，那么你应该直到<code>cd、ls、chmod、file、cat、grep、strings</code>等基础指令以及管道、重定向概念，在此期间你会接触到计算机组成原理的部分知识，详见可以看看我的文章<a class="link" href="https://expl0rer.top/p/pwn-1/"  target="_blank" rel="noopener"
+    >PWN-1</a></p>
+<blockquote class="alert alert-note">
+    <blockquote>
+<p>在计算机领域，“shell”是一种计算机程序，它将操作系统的服务提供给人类用户或其他程序，在 Linux 中通常指命令行界面。</p>
+</blockquote></blockquote>
+<p>对于 PWN，一个很重要且必要的命令行工具是Netcat（nc 命令），它能用来连接 Pwn 题目的在线环境。Netcat 是一个强大的多功能网络工具，目前你只需要知道一种用法：<code>nc &lt;ip&gt; [端口]</code></p>
+<p>到这里你已经初步了解并接触PWN了，你还需要直到一些Linux常用的系统调用（syscall）——open、read、write、mmap、execve等和文件描述符fd（file descriptor）的概念：<strong>stdin-0、stdout-1&hellip;</strong>，此外你需要知道Linux程序运行所经历的过程（动态链接、got、got.plt表的调用，栈堆变化等等）。</p>
+<p>我要晕了/(ㄒoㄒ)/~~&hellip;.看看我的文章<a class="link" href="https://expl0rer.top/p/pwn-1/"  target="_blank" rel="noopener"
+    >PWN-1</a>，我总结了一些。</p>
+<h3 id="编译">编译
+</h3><p>看到这里累死了，你或许会能看懂C语言了，但不止于此哦，我们必须要熟悉程序编译过程和基本的汇编语句，就是说我们需要学习汇编语言。你需要了解ELF文件格式，了解<code>预处理-&gt;编译-&gt;汇编-&gt;链接（静态or动态）</code>的过程、进程虚拟内存空间（栈、BSS段、数据段、代码段TEXT、data段、rodata等等）。<code>理解调用栈结构及其增长方向与数据存储增长方向相反是PWN前期学习的一大重点。</code></p>
+<h3 id="汇编">汇编
+</h3><p>对于汇编语句，平时的PWN程序一般是x86 CPU指令集（本文默认amd64位），32位和64位的汇编语言还是有差别的，但大致相同，至少要看懂<code>mov、lea、add、sub、xor、call、ret、jmp、cmp、pop、nop、push</code>等，这是一大难点哦。</p>
+<p>另外一大难点就是CPU寄存器，认识下64位的rsp、rip、rbp、rax这些，以及32位的esp、ebp、eip等。重点认识有特殊用途的寄存器。</p>
+<p>在做 Pwn 题时，有时你需要先在适当位置填入 shellcode（用于获取 shell 的汇编码）再劫持控制流（详见下文）至此处以执行。你需要知道计算机在汇编层面是如何调用函数的。具体而言，你需要知道并牢记 amd64 System V ABI <strong>函数调用规约</strong>：调用函数时的部分参数通过寄存器（rdi、rsi、rdx、rcx、r8、r9）传递其余通过栈传递，32 位系统直接通过栈传递参数（从右至左入栈）；函数返回值也由寄存器（rax）传递。除了函数调用，你还需要知道 syscall 的系统调用号与参数的传递方式（rax&hellip;），这与函数调用类似。（总之：善用搜索引擎）</p>
+<h2 id="学习路线">学习路线
+</h2><p>初步了解完PWN了，要开始了吗？前者知识可以看看我的文章—<a class="link" href="https://expl0rer.top/categories/pwn%e5%89%8d%e7%bd%ae%e7%9f%a5%e8%af%86/"  target="_blank" rel="noopener"
+    >PWN 前置知识 - Expl0rer.Ct</a>，最好边学边做。学习PWN一定不能一直看书，这样思维会固化，需要随时应用，学一个知识点做一道题，光看完所有知识只会让你望而却步，反而会被庞大的前置知识劝退、打击自信心，学习重在反馈，这样才会有继续学习下去的动力，我的建议是多看师傅们博客的文章和writeup（赛后复盘），多做题，不懂就去查询或者问虚心请教师傅（行业通称）。</p>
+<blockquote>
+<p>建议看在线资源或者博客文章，书籍信息一般具有滞后性，当然也不反对看各大战队出版的具有总结性的书籍。</p>
+</blockquote>
+<p>作者也是厚脸皮去找大佬请教的，</p>
+<p>基本上来看，入门PWN大致是配置好环境就开始学习编程语言——C、Python，了解并学会使用反汇编器如IDA，接着进一步能看懂C伪代码，然后学习汇编语言，熟练使用Linux命令行操作命令，接下来学习PWN的前置知识，可以参考我的文章<a class="link" href="https://expl0rer.top/categories/pwn%e5%89%8d%e7%bd%ae%e7%9f%a5%e8%af%86/"  target="_blank" rel="noopener"
+    >PWN 前置知识 - Expl0rer.Ct</a>中的PWN-1、PWN-2、PWN-3、PWN-4等（正在更新ing&hellip;）。边学边刷题，我这里以ctfshow-PWN入门这套题为例（付费），buuctf也行，还有很多刷题网站，可以了解我的博客<a class="link" href="https://expl0rer.top/%e6%8a%80%e6%9c%af%e9%93%be%e6%8e%a5-links/"  target="_blank" rel="noopener"
+    >技术链接 | Links</a></p>
+<h2 id="ida使用">IDA使用
+</h2><p>常用的快捷键有以下：</p>
+<ol>
+<li>g跳转到指定地址。</li>
+<li>a将数据转换成字符串。</li>
+<li>shift+F12打开字符串窗口，可以找出所有字符串。</li>
+<li>ctrl+w保存IDA数据库，保留你当前的工作痕迹，下次打开时就从当前进度继续逆向基础上继续啦。</li>
+<li>n更改变量名，方便记名和识别关键函数。</li>
+<li>/在伪代码界面下写下注释。</li>
+</ol>
+<p>更多IDA快捷键可以了解<a class="link" href="https://expl0rer.top/p/ida%e4%bd%bf%e7%94%a8%e6%8c%87%e5%8d%97/"  target="_blank" rel="noopener"
+    >IDA 使用指南</a>。</p>
+<h2 id="gdbpwndbg">GDB+pwndbg
+</h2><p>随着PWN的进阶，不能局限于IDA静态分析程序了，接下来就是调试了，调试能更好帮助我们了解这个程序的执行流程，那我们需要必备的<code>gdb调试器</code>，它能动态地帮助我们了解当前程序运行的细节（如真实的缓冲区大小、寄存器地址等）</p>
+<p><img src="/p/%E7%BB%99pwn%E6%96%B0%E6%89%8B%E7%9A%84%E6%BA%A2%E5%87%BA%E9%AD%94%E6%B3%95%E5%85%A5%E9%97%A8%E6%89%8B%E5%86%8C/2.png"
+	width="1844"
+	height="680"
+	srcset="/p/%E7%BB%99pwn%E6%96%B0%E6%89%8B%E7%9A%84%E6%BA%A2%E5%87%BA%E9%AD%94%E6%B3%95%E5%85%A5%E9%97%A8%E6%89%8B%E5%86%8C/2_hu_723e5fc8721dfe54.png 480w, /p/%E7%BB%99pwn%E6%96%B0%E6%89%8B%E7%9A%84%E6%BA%A2%E5%87%BA%E9%AD%94%E6%B3%95%E5%85%A5%E9%97%A8%E6%89%8B%E5%86%8C/2_hu_871ebfdf20cb6050.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="271"
+		data-flex-basis="650px"
+	
+></p>
+<ol>
+<li>
+<p>start GDB会寻找程序的入口并下断点，然后执行到该断点。</p>
+</li>
+<li>
+<p>run 简写为r，运行程序，与start的区别是，run 之后将一直执行到程序的结束或者断点，通过 run abc，可以以 abc 为参数运行。</p>
+</li>
+<li>
+<p>next 简写为 n，源代码级别的调试，运行下一行代码。</p>
+</li>
+<li>
+<p>nexti 简写为 ni，汇编指令级别的调试，运行下一个指令。</p>
+</li>
+<li>
+<p>step 简写为 s，下一行代码，当遇到函数的时候会步入函数。</p>
+</li>
+<li>
+<p>stepi 简写为 si，下一行指令，当遇到函数的时候会步入函数。</p>
+</li>
+<li>
+<p>info register 简写为 i r，查看当前寄存器信息。</p>
+</li>
+<li>
+<p>disassemble 简写为 disass，反汇编所给地址或寄存器中所给地址处的指令如disass $rip，查看当前 rip 处的指令，disass 0x40112b，查看地址 0x40112b 处的指令。</p>
+</li>
+<li>
+<p>break 简写为 b，下断点，可以通过 info b 查看当前下的所有断点，以及通过 b*$rebase(&lt;offset&gt;) 通过相对程序基址的偏移下断点（当找不到入口信息，无法start 的时候，常通过这个进行下断点）</p>
+</li>
+<li>
+<p>vmmap 查看程序的地址映射</p>
+</li>
+<li>
+<p>checksec pwndbg 中集成了 pwntools 的一些命令，checksec 就是其中一个，查看可执行文件的保护机制。</p>
+</li>
+<li>
+<p>cyclic 同样是 pwntools 的一个命令，能产生不重复的模式字符串，常用于确定栈偏移，如 cyclic 15 能产生“aaaaaaaabaaaaaa”。</p>
+</li>
+<li>
+<p>quit 简写为 q，退出当前调试。</p>
+</li>
+<li>
+<p>crtl + c 中断被调试的程序，举个例子，比如当前程序跑到了 read，阻塞在了接收输出的时候，此时可以通过 crtl + c 中断程序的运行，此时你可以查看程序中断时的寄存器、栈、内存、调用栈等状态。</p>
+</li>
+<li>
+<p>TAB 进行命令的补全。</p>
+</li>
+<li>
+<p>aslr on/off 开启或者关闭 ASLR（见下文），下一次运生效。</p>
+</li>
+<li>
+<p>stack 查看当前栈的信息。</p>
+</li>
+<li>
+<p>x 通过x/i打印指令，x/s 打印字符串，x/x 打印十六进制数等。这个的参数比较多，建议自行查阅资料来了解。</p>
+</li>
+<li>
+<p>tele 是 pwntools 提供的一个命令，可以自动解析该地址处的内容及引用，但是它解释指令的时候不一定正确，反汇编指令仍推荐 x/i。</p>
+</li>
+</ol>
+<h2 id="pwntools">Pwntools
+</h2><p>看到这里你配置好pwntools了吗？这是一个强大的Python库，它能够进行自动程序交互，有sendline、recvuntil、remote、connect等函数代替我们和程序进行交互（尤其在无法用键盘正常输入不可见字符以及”二进制“信息时，优势显现）。我推荐你学习一下 pwn college 中的<a class="link" href="https://pwn.college/pwntools~9b09c9dc/pwntools/"  target="_blank" rel="noopener"
+    >pwntools模块</a></p>
+<p>这里给大家看看<strong>pwntools</strong>结合<strong>pwndbg</strong>如何进行调试，在脚本中指定用<strong>context</strong>。</p>
+<p>64位：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="p">(</span><span class="n">arch</span> <span class="o">=</span> <span class="s1">&#39;amd64&#39;</span><span class="p">,</span> <span class="n">os</span> <span class="o">=</span> <span class="s1">&#39;linux&#39;</span><span class="p">,</span> <span class="n">log_level</span> <span class="o">=</span> <span class="s1">&#39;debug&#39;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>32位：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="p">(</span><span class="n">arch</span> <span class="o">=</span> <span class="s1">&#39;i386&#39;</span><span class="p">,</span> <span class="n">os</span> <span class="o">=</span> <span class="s1">&#39;linux&#39;</span><span class="p">,</span> <span class="n">log_level</span> <span class="o">=</span> <span class="s1">&#39;debug&#39;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>之后需要指定终端，这个设置告诉 pwntools 启动一个 <strong>新终端窗口/tab/pane</strong> 来运行 GDB，而以下是几种常见的终端。（选用）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1">#wsl</span>
+</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="o">.</span><span class="n">terminal</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;wt.exe&#39;</span><span class="p">,</span><span class="s1">&#39;wsl&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#tmux</span>
+</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="o">.</span><span class="n">terminal</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;tmux&#39;</span><span class="p">,</span><span class="s1">&#39;splitw&#39;</span><span class="p">,</span><span class="s1">&#39;-h&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#konsole</span>
+</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="o">.</span><span class="n">terminal</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;konsole&#39;</span><span class="p">,</span> <span class="s1">&#39;-e&#39;</span><span class="p">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>总之pwntools很大，慢慢学！</p>
+<p>在编写exp难免需要一边调试一边修改，就需要用gdb调试，在脚本中通过 gdb.debug() 或者gdb.attach(&lt;process&gt;) 启动 gdb，两者的区别是，前者是从头启动程序，并自动 attach 到 GDB，而后者是attach 到已有进程进行调试，需要在 attach 之前通过process(&lt;path&gt;) 启动程序。</p>
+<blockquote class="alert alert-tip">
+    <blockquote>
+<p>当你成功入门PWN并能学会独立编写exp时再看到这里，我想说<code>recv()</code>和<code>send(...)</code>很方便，但我强烈建议使用recvuntil(&hellip;)和sendafter(&hellip;)或者sendlineafter(&hellip;)，就是为了exp的严谨和衔接性，以免各种本地和远程环境不符的情况。sendafter、sendlineafter等这类函数的首个接收参数的(&ldquo;接收的字符&rdquo;,payload)，接受的字符不宜过长，也别忘了<code>\n</code>，pwntools库函数的参数和返回值类型通常为 <strong>bytes</strong>，传入字符串字面量时应在前加上 b 标记（例如 b&rsquo;I am Expl0rer!!&rsquo; ），使其成为 bytes（python2不会强调要求，python3会强调要求且有可能报错）</p>
+</blockquote></blockquote>
+<h2 id="互联网时代的到来">互联网时代的到来
+</h2><p>当前，AI赋能时代，AI几乎无所不能了，我们的父辈都需要通过图书馆查阅相关书籍，现在的我们只需要通过搜索引擎或者AI检索，技术存在壁垒这是铁一般的事实，AI的崛起，让你身边有了许许多多的百科全书式的虚拟老师，如DeepSeek、豆包、ChatGPT，虽然AI大模型在当前仍有一些缺陷不是什么情况都是百分百给出正确的答案，但是对于大多数的问题，ta都能给出一个正确的答案还有分析过程，善用AI能够帮助你快速的学习和补漏，但不是让你完全依赖AI，ta只是一个辅助工具，自己动手才会进步！</p>
+<p><img src="/p/%E7%BB%99pwn%E6%96%B0%E6%89%8B%E7%9A%84%E6%BA%A2%E5%87%BA%E9%AD%94%E6%B3%95%E5%85%A5%E9%97%A8%E6%89%8B%E5%86%8C/3.png"
+	width="1510"
+	height="795"
+	srcset="/p/%E7%BB%99pwn%E6%96%B0%E6%89%8B%E7%9A%84%E6%BA%A2%E5%87%BA%E9%AD%94%E6%B3%95%E5%85%A5%E9%97%A8%E6%89%8B%E5%86%8C/3_hu_c809a87adfe13c2.png 480w, /p/%E7%BB%99pwn%E6%96%B0%E6%89%8B%E7%9A%84%E6%BA%A2%E5%87%BA%E9%AD%94%E6%B3%95%E5%85%A5%E9%97%A8%E6%89%8B%E5%86%8C/3_hu_ff0a37ac00112147.png 1024w"
+	loading="lazy"
+	
+		alt="豆包"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="189"
+		data-flex-basis="455px"
+	
+></p>
+<p><img src="/p/%E7%BB%99pwn%E6%96%B0%E6%89%8B%E7%9A%84%E6%BA%A2%E5%87%BA%E9%AD%94%E6%B3%95%E5%85%A5%E9%97%A8%E6%89%8B%E5%86%8C/4.png"
+	width="1845"
+	height="790"
+	srcset="/p/%E7%BB%99pwn%E6%96%B0%E6%89%8B%E7%9A%84%E6%BA%A2%E5%87%BA%E9%AD%94%E6%B3%95%E5%85%A5%E9%97%A8%E6%89%8B%E5%86%8C/4_hu_5950d82779f010f1.png 480w, /p/%E7%BB%99pwn%E6%96%B0%E6%89%8B%E7%9A%84%E6%BA%A2%E5%87%BA%E9%AD%94%E6%B3%95%E5%85%A5%E9%97%A8%E6%89%8B%E5%86%8C/4_hu_b8b00163c5c48959.png 1024w"
+	loading="lazy"
+	
+		alt="DeepSeek"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="233"
+		data-flex-basis="560px"
+	
+></p>
+<p>请记住，如果AI没用好就会成为一把剑🗡反噬你，但是你能用好AI那ta就是一把能帮你斩下险阻的最锋利的🗡！</p>
+<h2 id="普遍漏洞利用">普遍漏洞利用
+</h2><ul>
+<li>
+<p><strong>整数溢出</strong>——数学世界整数有无穷多，但由于内存限制，计算机中补码表示的“整数”有上下限。通过输入超大数字溢出或者利用有符号整数（负数）强转为无符号整数可以构造超大数字，从而绕过检查或越界写入。</p>
+</li>
+<li>
+<p><strong>栈缓冲区溢出</strong>——最经典的漏洞，通过越界写入修改函数返回地址或栈指针从而实现劫持控制流和栈迁移（篡改栈基址 <strong>rbp/ebp</strong>）</p>
+</li>
+<li>
+<p><strong>ROP（返回导向编程）攻击链构造</strong>——这是PWN的一个需要重点突破的攻击手法，也就是ret2xxxx：ret2text、ret2libc、ret2syscall、ret2system、ret2、ret2shellcode、ret2csu、SROP等，这也是栈缓冲区溢出的主要目的。</p>
+<p>进阶：通过<code>ropper</code>、<code>ROPgadget</code>等工具寻找该pwn程序中gadgtes，结合溢出漏洞去构造调用链控制程序执行流甚至能执行几乎任何行为（通常<code>open</code>、<code>read</code>、<code>write</code>）。</p>
+</li>
+</ul>
+<h2 id="linux安全机制">Linux安全机制
+</h2><p>我们需要熟悉这些保护机制的原理以及性质作用：</p>
+<ul>
+<li><strong>NX（No execute）</strong>——无法简单地布置shellcode。</li>
+<li><strong>Canary（金丝雀）</strong>——检查缓冲区是否溢出，如有溢出立刻终止程序运行。</li>
+<li><strong>ASLR/PIE</strong>——地址随机化保护，使攻击者难以预测程序的内存结构，增加攻击难度。</li>
+<li><strong>RELRO</strong>——通过将动态链接程序的全局偏移量表（GOT）在程序启动后设置为只读，防止通过修改其中数据结构进行攻击。</li>
+<li><strong>Seccomp</strong>——沙箱保护机制，可以限制程序使用的<strong>syscall</strong>。</li>
+<li>CFI（IBT / SHSTK）—— 控制流完整性保护，可以阻止 ROP 攻击，抑制 COP、JOP 攻击。</li>
+</ul>
+<h2 id="知识输出">知识输出
+</h2><p>PWN是一个庞大的方向，对于枯燥的寄存器、gadgte、栈堆漏洞利用、内核kernel等等都是一个个难啃的硬骨头，俗话说<code>基础不牢，地动山摇</code>，我们需要时常巩固自己的知识体系，WP是有必要写的，复盘自己的学习情况，再用自己的描述去表达出来记录在WP中，当然可以学作者这样开个博客，把这些文章放上去，给别人看，达成互相技术交流，别人请教你的同时不仅提升了自己的自信心，还进行了知识输出巩固了自己的知识理解。</p>
+<p>写博客和WP我建议用Markdown，它是一种<strong>轻量级标记语言</strong>，用于编写格式简单、易读，我们在学习中通常需要保留学习痕迹或者记录笔记，最重要的，编写 Writeup 通常也采用 Markdown，因此这里推荐使用一些 Markdown 编辑器进行编写，如 Typora 和 Notion 等，上手之后非常方便。</p>
+<h2 id="总结">总结
+</h2><p>感谢你读到这里，PWN真是一个很难入门的方向，冗长的前置知识，漫长的打地基过程，光是前置知识就够劝退很多同学啦，等你逐步入门了并学到中阶PWN，这时以后的方向学习就靠你了，可以是Iot、物联网安全、车联网1安全、工控等等都和PWN二进制安全相关的，但以后你可能还要学习CTF的RE逆向方向，毕竟：
+</p>
+$$
+PWN => 逆向工程+漏洞挖掘+漏洞利用 =>系统劫持
+$$<p>
+逆向知识还是需要的，只不过当前阶段重在漏洞利用挖掘这方面，当你打爆靶机的那一刻，整个世界都是属于你！❀😄</p>
+<p>我们的努力都不会白费，历尽千帆，我们终将顶峰相见！至此致敬一路上带我入门、一起相互交流的UU和学长学姐😘</p>
+<p>我的博客有很多资源，入门PWN的知识体系我总结的七七八八了，您要不嫌弃可以去看看，感兴趣可以一起来交流吧！</p>
+<p>本文借鉴参考了XDCTF-PWN的入门指南文章及各大CTFwiki</p>
+<p>作者：Expl0rer.Ct</p>
+<p>时间：2025.11.07</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    <section class="article-lastmod">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <span>
+            最后更新于 2025-11-07
+        </span>
+    </section></footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+	const mainArticleElement = document.querySelector(".main-article");
+        renderMathInElement(mainArticleElement, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/2025bjtuctf-pwn/">
+        
+        
+            <div class="article-image">
+                <img src="/p/2025bjtuctf-pwn/BJTUCTF.90f5cd42e21881be44253e37d54b6795_hu_13bcc8b29ab9b122.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post 2025BJTUCTF-PWN"
+                        
+                        data-hash="md5-kPXNQuIYgb5EJT431UtnlQ==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">2025BJTUCTF-PWN</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/pwn-4/">
+        
+        
+            <div class="article-image">
+                <img src="/p/pwn-4/PWN4.3657bbeb84fdb7f3290e78d3c41b8d4c_hu_d9ba59500c5360b4.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post PWN-4"
+                        
+                        data-hash="md5-Nle764T9t/MpDnjTxBuNTA==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">PWN-4</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/pwn-3/">
+        
+        
+            <div class="article-image">
+                <img src="/p/pwn-3/PWN3.4afa5f5bde601dbc35b64aebcb8c25e3_hu_a61ad70f238c03c4.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post PWN-3"
+                        
+                        data-hash="md5-SvpfW95gHbw1tkrry4wl4w==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">PWN-3</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/pwn-2/">
+        
+        
+            <div class="article-image">
+                <img src="/p/pwn-2/PWN2.ec0b8de7542727a390b799ae24c64af8_hu_ed10e985448522e2.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post PWN-2"
+                        
+                        data-hash="md5-7AuN51QnJ6OQt5muJMZK&#43;A==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">PWN-2</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/pwn-1/">
+        
+        
+            <div class="article-image">
+                <img src="/p/pwn-1/PWN.f98719505e350e475520e79f81d73a1d_hu_fb4f51a67c6d3b57.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post PWN-1"
+                        
+                        data-hash="md5-&#43;YcZUF41DkdVIOefgdc6HQ==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">PWN-1</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <script
+    src="https://giscus.app/client.js"
+    data-repo="Expl0rer-Ct/Expl0rer.Ct-s-Blog"
+    data-repo-id="R_kgDOPd0X7g"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOPd0X7s4CuMr6"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="light"
+    data-lang="en"
+    data-loading=""
+    crossorigin="anonymous"
+    async
+></script>
+<script>
+    function setGiscusTheme(theme) {
+        let giscus = document.querySelector("iframe.giscus-frame");
+        if (giscus) {
+            giscus.contentWindow.postMessage(
+                {
+                    giscus: {
+                        setConfig: {
+                            theme: theme,
+                        },
+                    },
+                },
+                "https://giscus.app"
+            );
+        }
+    }
+
+    (function () {
+        addEventListener("message", (e) => {
+            if (event.origin !== "https://giscus.app") return;
+            handler();
+        });
+        window.addEventListener("onColorSchemeChange", handler);
+
+        function handler() {
+            if (document.documentElement.dataset.scheme === "light") {
+                setGiscusTheme('light');
+            } else {
+                setGiscusTheme('dark');
+            }
+        }
+    })();
+</script>
+
+    
+
+    
+<script defer src="https://events.vercount.one/js"></script>
+<footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2025 Expl0rer.Ct
+    </section>
+    
+    <section class="powerby">
+        
+
+
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+<section class="wordcount">
+  <div class="wordcount-row">
+    <p>博主发布了19篇文章  ||</p>
+    <p>总共252.62k 字</p>
+  </div>
+</section>
+        
+  
+
+
+<a>总访客数: </a><span id='busuanzi_value_site_uv'>别急在加载中了...</span> <a> | </a> <a>总访问量: </a><span id='busuanzi_value_site_pv'>加载中...</span></br>
+
+
+
+<div class="site-uptime-container">
+  <span id="timeDate" class="site-uptime-text">载入天数...</span>
+  <span id="times" class="site-uptime-text">载入时分秒...</span>
+</div>
+
+<script language="javascript"> 
+    var now = new Date();
+    function createtime(){
+        now.setTime(now.getTime()+250); 
+        var grt= new Date("2025/08/01 00:00:00"); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24;
+        dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum);
+        hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;}
+        minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes);
+        if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds);
+        if(String(snum).length ==1 ){snum = "0" + snum;}
+
+        document.getElementById("timeDate").innerHTML = "本站已稳定运行"+dnum+" 天 ";document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"
+    }
+    setInterval("createtime()",250); 
+</script> 
+
+<script>
+    (function(u, c) {
+      var d = document, t = 'script', o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function(e) { c(e); }); }
+      s.parentNode.insertBefore(o, s);
+    })('//cdn.bootcss.com/pangu/4.0.7/pangu.min.js', function() {
+      pangu.spacingPage();
+    });
+</script>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdnjs.cloudflare.com/ajax/libs/node-vibrant/3.1.6/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script><script type="text/javascript" src="/ts/custom.89d9bb2c3c071ae8a261f67661c22b84ef67ba7b7a885dabd2bbd9ebef84ed40.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+
+<head>
+  
+  <link rel="preconnect" href="https://fonts.font.im" crossorigin>
+  <link 
+    href="https://fonts.font.im/css?family=PT+Sans" 
+    rel="stylesheet"
+    media="print" 
+    onload="this.media='all'"
+    id="font-cn"
+  >
+  
+  
+  <link 
+    href="https://fonts.googleapis.com/css2?family=PT+Sans" 
+    rel="stylesheet"
+    media="print" 
+    onload="this.media='all'"
+    id="font-en"
+    disabled
+  >
+  
+  <script>
+    
+    document.querySelector('#font-cn').addEventListener('load', function() {
+      document.querySelector('#font-en').disabled = true;
+    }).addEventListener('error', function() {
+      document.querySelector('#font-en').disabled = false;
+      document.querySelector('#font-en').media = 'all';
+    });
+  </script>
+  
+  <noscript>
+    <link 
+      href="https://fonts.font.im/css?family=PT+Sans" 
+      rel="stylesheet"
+    >
+  </noscript>
+</head>
+
+<style>
+    #TableOfContents > ul ul,
+    #TableOfContents > ul ol,
+    #TableOfContents > ol ul,
+    #TableOfContents > ol ol {
+        display: none;
+    }
+    #TableOfContents > ul .open,
+    #TableOfContents > ol .open {
+        display: block;
+    }
+</style>
+
+<script>
+    function initTocHide() {
+        let toc = document.querySelector(".widget--toc");
+        if (!toc) {
+            return;
+        }
+        window.addEventListener('scroll', function() {
+            let openUl = document.querySelectorAll(".open");
+            if (openUl.length > 0) {
+              openUl.forEach((ul) => {
+                ul.classList.remove("open")
+              })
+            }
+            let currentLi = document.querySelector(".active-class");
+            if (!currentLi) {
+                return
+            }
+            if (currentLi.children.length > 1) {
+                currentLi.children[1].classList.add("open")
+            }
+            let ul = currentLi.parentElement;
+            do {
+                ul.classList.add("open");
+                const parent = ul.parentElement;
+                ul = parent ? parent.parentElement : null;
+            } while (ul && (ul.localName === 'ul' || ul.localName === 'ol'))
+        });
+    }
+    initTocHide()
+</script>
+
+
+<style>
+    #backTopBtn {
+        display: none;
+        position: fixed;
+        bottom: 30px;
+        z-index: 99;
+        cursor: pointer;
+        width: 30px;
+        height: 30px;
+        background-image: url(https://expl0rer.top/icons/backTop.svg);
+    }
+</style>
+
+<script>
+    function initScrollTop() {
+        let rightSideBar = document.querySelector(".right-sidebar");
+        if (!rightSideBar) {
+            return;
+        }
+        let btn = document.createElement("div");
+        btn.id = "backTopBtn";
+        btn.onclick = backToTop
+        rightSideBar.appendChild(btn)
+        window.addEventListener('scroll', function() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                btn.style.display = "block";
+            } else {
+                btn.style.display = "none";
+            }
+        });
+    }
+
+    function backToTop(){
+        window.scrollTo({ top: 0, behavior: "smooth" })
+    }
+
+    initScrollTop();
+</script>
+
+
+<style>
+    .highlight {
+        max-height: 400px;
+        overflow: hidden;
+    }
+
+    .code-show {
+        max-height: none !important;
+    }
+
+    .code-more-box {
+        width: 100%;
+        padding-top: 78px;
+        background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0)), to(#fff));
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1;
+    }
+
+    .code-more-btn {
+        display: block;
+        margin: auto;
+        width: 44px;
+        height: 22px;
+        background: #f0f0f5;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        padding-top: 6px;
+        cursor: pointer;
+    }
+
+    .code-more-img {
+        cursor: pointer !important;
+        display: block;
+        margin: auto;
+        width: 22px;
+        height: 16px;
+    }
+</style>
+
+<script>
+  function initCodeMoreBox() {
+    let codeBlocks = document.querySelectorAll(".highlight");
+    if (!codeBlocks) {
+      return;
+    }
+    codeBlocks.forEach(codeBlock => {
+      if (codeBlock.scrollHeight <= codeBlock.clientHeight) {
+        return;
+      }
+      let codeMoreBox = document.createElement('div');
+      codeMoreBox.classList.add('code-more-box');
+      let codeMoreBtn = document.createElement('span');
+      codeMoreBtn.classList.add('code-more-btn');
+      codeMoreBtn.addEventListener('click', () => {
+        codeBlock.classList.add('code-show');
+        codeMoreBox.style.display = 'none';
+        window.dispatchEvent(new Event('resize'))
+      })
+      let img = document.createElement('img');
+      img.classList.add('code-more-img');
+      img.src = "https:\/\/expl0rer.top\/icons\/codeMore.png"
+      codeMoreBtn.appendChild(img);
+      codeMoreBox.appendChild(codeMoreBtn);
+      codeBlock.appendChild(codeMoreBox)
+    })
+  }
+  
+  initCodeMoreBox();
+</script>
+
+
+
+
+
+
+<script>
+    function showHideView() {
+        let viewCounts = document.querySelectorAll("#viewCount");
+        if (viewCounts) {
+            let article =  document.querySelector(".article-page");
+            if (!article) {
+                viewCounts.forEach(ele => {
+                    ele.style.display = 'none';
+                });
+            }
+        }
+    }
+    
+    showHideView();
+</script>
+
+<script src="https://npm.elemecdn.com/nprogress@0.2.0/nprogress.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://npm.elemecdn.com/nprogress@0.2.0/nprogress.css" crossorigin="anonymous" />
+<script>
+    NProgress.start();
+    document.addEventListener("readystatechange", () => {
+        if (document.readyState === "interactive") NProgress.inc(0.8);
+        if (document.readyState === "complete") NProgress.done();
+    });
+</script>
+
+
+<script>
+    var pjax = new pjax({
+        selectors: [
+            ".main-container"
+        ]
+    })
+
+</script>
+
+<script>
+    pjax._handleResponse = pjax.handleResponse;
+    pjax.handleResponse = function(responseText, request, href, options) {
+        if (request.responseText.match("<html")) {
+            if (responseText) {
+                let newDom = new DOMParser().parseFromString(responseText, 'text/html');
+                let bodyClass = newDom.body.className;
+                document.body.setAttribute("class", bodyClass)
+            }
+            pjax._handleResponse(responseText, request, href, options);
+        } else {
+        }
+    }
+</script>
+
+
+
+<script>
+    document.addEventListener('pjax:complete', () => {
+        if (window.Stack && typeof window.Stack.init === 'function') {
+            window.Stack.init();
+        }
+    })
+</script>
+
+<div id="particles-js"></div>
+
+<script src="https://expl0rer.top/background/particles.min.js"></script>
+<script>
+  particlesJS.load('particles-js', "https:\/\/expl0rer.top\/background\/particlesjs-config.json", function() {
+    console.log('particles.js loaded - callback');
+  });
+</script>
+
+<style>
+  #particles-js {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: -1;
+  }
+</style>
+
+
+<script src="https://expl0rer.top/background/sakura.js"></script>
+
+    </body>
+</html>

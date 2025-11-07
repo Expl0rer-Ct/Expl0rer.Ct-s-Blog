@@ -7,6 +7,330 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Expl0rer.Ct</copyright><atom:link href="https://expl0rer.top/categories/ctfpwn/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>给PWN新手的溢出魔法入门手册</title>
+        <link>https://expl0rer.top/p/%E7%BB%99pwn%E6%96%B0%E6%89%8B%E7%9A%84%E6%BA%A2%E5%87%BA%E9%AD%94%E6%B3%95%E5%85%A5%E9%97%A8%E6%89%8B%E5%86%8C/</link>
+        <pubDate>Fri, 07 Nov 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://expl0rer.top/p/%E7%BB%99pwn%E6%96%B0%E6%89%8B%E7%9A%84%E6%BA%A2%E5%87%BA%E9%AD%94%E6%B3%95%E5%85%A5%E9%97%A8%E6%89%8B%E5%86%8C/</guid>
+        <description>&lt;img src="https://expl0rer.top/p/%E7%BB%99pwn%E6%96%B0%E6%89%8B%E7%9A%84%E6%BA%A2%E5%87%BA%E9%AD%94%E6%B3%95%E5%85%A5%E9%97%A8%E6%89%8B%E5%86%8C/PWN%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97.png" alt="Featured image of post 给PWN新手的溢出魔法入门手册" /&gt;&lt;p&gt;[TOC]&lt;/p&gt;
+&lt;p&gt;前言：本文章有借鉴各大OJ、CTF平台等的资源图鉴，有部分内容相似，如有问题本人愿意下架整改，谢谢。&lt;/p&gt;
+&lt;h2 id=&#34;欢迎来到pwn的世界&#34;&gt;欢迎来到PWN的世界
+&lt;/h2&gt;&lt;p&gt;欢迎来到PWN的世界，这里遍地都是二进制寄存器和栈堆在陪伴着你😄&lt;/p&gt;
+&lt;p&gt;PWN（读作“砰”，拟声词）一词起源于网络游戏社区，原本表示成功入侵了计算机系统，在CTF 中则是一种题目方向：通过构造恶意输入达到泄漏信息甚至劫持几乎整个系统（getshell）的目的。其实在 CTF 比赛发展初期，赛题通常只与二进制安全相关，因此PWN 是 CTF 领域最原始的方向。在这里，你能深入计算机系统最底层，感受纯粹的计算机科学，感受底层的计算机逻辑&amp;hellip;.
+&lt;/p&gt;
+$$
+PWN =&gt; 逆向工程+漏洞挖掘+漏洞利用 =&gt;系统劫持
+$$&lt;p&gt;
+接下来，Expl0rer将和愿意入门PWN的同学一同学习，有问题随时在评论区及QQ交流讨论，&lt;code&gt;In this article, I&#39;ll help you figure out what PWN is, why to learn it, and how to go about it.&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;希望你能坚持下去。&lt;/p&gt;
+&lt;h2 id=&#34;前置声明&#34;&gt;前置声明
+&lt;/h2&gt;&lt;p&gt;我大一是CTF全栈😄，对其他方向也颇有了解，对我而言PWN的前置知识非常多，很多人选择等老师讲完课再去学，我认为这是一个很大的错误，老师只会带你去认识、入门这门课，对于你学PWN来说，所需的前置知识储备差距还是很大的，况且如汇编语言和计算机组成原理这些一般都在大二下学期、大三学习的，那时候已经晚了。既然你已经决定要学PWN了，所以我强烈建议要提前自学这些PWN前置知识。&lt;/p&gt;
+&lt;p&gt;从开始入门PWN到拿到你的第一个专属flag还需要一段时间，但请耐心沉淀，你的付出一定会迎来回报！&lt;/p&gt;
+&lt;h2 id=&#34;数据转换&#34;&gt;数据转换
+&lt;/h2&gt;&lt;p&gt;在PWN的学习中，我们经常需要和如二进制、十六进制、寄存器等的这些底层数据打交道，因此PWN属于&lt;strong&gt;二进制（binary）安全&lt;/strong&gt;，为什么要说是“二进制”？因为计算机只认识和只会处理二进制信息。与我们日常使用的十进制“逢十进一”不同，“逢二进一”的二进制世界只有“0”和“1”。一位二进制信息称为比特（bit），8 比特为 1 字节（byte），字节通常是计算机处理信息的最小单位，计算机中的信息通常是连续的字节。我们人类所输入给计算机的任何信息如文字、图像、音视频等都可被编码转换为数字信息（二进制比特流）进行处理，需要输出时再解码为原形式。&lt;/p&gt;
+&lt;p&gt;不同进制间可相互转换，你需要熟悉进制转换方式，其中最重要的是&lt;strong&gt;二进制、十进制、十六进制&lt;/strong&gt;间的转换。&lt;/p&gt;
+&lt;p&gt;等你输入信息给计算机后，就轮到计算机本身去存储这个数据了，怎么存？为了方便数据类型转换和运算，计算机存储数字信息时，数字再内存中的高低位与人类阅读的高低位相反（从左到右、从上到下逐字阅读），这种数据存储方式称为“&lt;strong&gt;小端序存储&lt;/strong&gt;”，当然你还需要知道&lt;strong&gt;大端序&lt;/strong&gt;，这类知识其实归根于计算机基础中，在网上你可以搜索到这些相关资源，我在这并不多细分讲解，我只会列出方向给你去寻找并学习&amp;hellip;&lt;/p&gt;
+&lt;h2 id=&#34;编程语言&#34;&gt;编程语言
+&lt;/h2&gt;&lt;p&gt;既然PWN和逆向程序逻辑有关，我们还需要反推程序运行逻辑并得出“源代码”，此外我们应该先会正向写出一般的程序吧😄。刚入门的你可能懵懵的啥也不懂，那你需要去了解这些，对于PWN学习初期，我们一般面对的是&lt;code&gt;Linux环境下的C语言&lt;/code&gt;，再者就是C++咯&lt;/p&gt;
+&lt;blockquote class=&#34;alert alert-note&#34;&gt;
+    &lt;/blockquote&gt;
+&lt;h3 id=&#34;c语言&#34;&gt;C语言
+&lt;/h3&gt;&lt;p&gt;C语言几乎是每一所高校的工科学生所学的第一门编程语言，C语言运行速度快，历史悠久，很多程序以及新生编程语言如C++都是基于C语言诞生的，大多数PWN题目的程序都由C语言编写，大多数逆向工具如&lt;strong&gt;IDApro&lt;/strong&gt;的逆向出的语言都是类似C语言的&lt;strong&gt;伪代码&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BB%99pwn%E6%96%B0%E6%89%8B%E7%9A%84%E6%BA%A2%E5%87%BA%E9%AD%94%E6%B3%95%E5%85%A5%E9%97%A8%E6%89%8B%E5%86%8C/1.png&#34;
+	width=&#34;1920&#34;
+	height=&#34;820&#34;
+	srcset=&#34;https://expl0rer.top/p/%E7%BB%99pwn%E6%96%B0%E6%89%8B%E7%9A%84%E6%BA%A2%E5%87%BA%E9%AD%94%E6%B3%95%E5%85%A5%E9%97%A8%E6%89%8B%E5%86%8C/1_hu_63deddd07f195ecc.png 480w, https://expl0rer.top/p/%E7%BB%99pwn%E6%96%B0%E6%89%8B%E7%9A%84%E6%BA%A2%E5%87%BA%E9%AD%94%E6%B3%95%E5%85%A5%E9%97%A8%E6%89%8B%E5%86%8C/1_hu_c8f8ec6ad1a963f6.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;IDA界面与C伪代码&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;234&#34;
+		data-flex-basis=&#34;561px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;你需要系统学习C语言，书籍推荐《C Primer Plus》（作者此前用过，好评！），当然学校统一买了其它教材也能凑合用，或者你可以上网找课程也可以如&lt;code&gt;B站大学&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;当前想速成的你可以去关注C语言中的基础数据类型（int、longlong、unsigned int&amp;hellip;）、流程控制（if、else、while、for&amp;hellip;）、函数（scanf、puts、gets、strcmp、&lt;strong&gt;system&lt;/strong&gt;、execve、mmap&amp;hellip;）、&lt;strong&gt;指针&lt;/strong&gt;、位操作。&lt;/p&gt;
+&lt;p&gt;C 语言能很好地和汇编语言（详见下文“编译与汇编”）对应，学习两者时应相互结合，理解等效的 C 语句和汇编指令。&lt;/p&gt;
+&lt;blockquote class=&#34;alert alert-tip&#34;&gt;
+    &lt;blockquote&gt;
+&lt;p&gt;等到我们PWN后期深入学习时，就需要额外学习C++甚至其他语言了，毕竟程序语言很多，可不止C和C++，甚至还有Java等等。&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;h3 id=&#34;python&#34;&gt;Python
+&lt;/h3&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://expl0rer.top/p/python/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Python&lt;/a&gt;专为PWN的exp编写而生：为了能编写漏洞利用脚本，你需要学习Python语言。&lt;a class=&#34;link&#34; href=&#34;https://expl0rer.top/p/python/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Python&lt;/a&gt;语言极易上手，配置好Python环境后还需要安装&lt;strong&gt;pwntools&lt;/strong&gt;等PWN所需的库。&lt;/p&gt;
+&lt;h2 id=&#34;环境搭建&#34;&gt;环境搭建
+&lt;/h2&gt;&lt;h3 id=&#34;编程环境&#34;&gt;编程环境
+&lt;/h3&gt;&lt;p&gt;说完上面的语言介绍，我们需要配置一些编程环境，这里我推荐是&lt;strong&gt;Pycharm&lt;/strong&gt;和&lt;strong&gt;Visual Studio Code&lt;/strong&gt;，vscode安装在虚拟机上，然后Pycharm和vscode可以安装在主机上，方便你后续学习编程语言。&lt;/p&gt;
+&lt;h3 id=&#34;虚拟机配置&#34;&gt;虚拟机配置
+&lt;/h3&gt;&lt;p&gt;Linux是一种开源的Unix操作系统，因其性能功耗低等的优势如今被常用于服务器，但我们日常使用的PC操作系统是Windows系统。为了和题目所在的编译环境兼容少出bug以及避免环境污染主机（CTF工具很多，放在主机不太好），我们需要配置一台Linux系统的虚拟机，这里推荐安装Ubuntu虚拟机（当然之前有配置好Kali也勉强可以）或使用docker，网上教程很多，自行寻找。&lt;/p&gt;
+&lt;h3 id=&#34;pwn环境搭建&#34;&gt;PWN环境搭建
+&lt;/h3&gt;&lt;p&gt;安装好Linux环境后，还需要继续搭建配置PWN的环境，这里有一篇文章值得你去读：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://ctf-wiki.org/pwn/linux/user-mode/environment/#ctf-pwn&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Environment - CTF Wiki&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;也可以看看CSDN上的歪插YX大佬的博客文章：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/j284886202/article/details/134931709&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;★pwn 22.04环境搭建保姆级教程★_pwn环境搭建&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;总之你至少需要：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Linux的Python环境+pwntools&lt;/li&gt;
+&lt;li&gt;逆向分析工具如IDA&lt;/li&gt;
+&lt;li&gt;Linux的动态调试器如&lt;strong&gt;GDB+&lt;code&gt;pwndbg&lt;/code&gt;&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;checksec、one_gadget、seccomp-tools、LibcSearcher、ropper&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;一个PWN的标准解题思路大概是：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;用&lt;code&gt;checksec&lt;/code&gt; 检查保护机制（详见可以看我的文章：&lt;a class=&#34;link&#34; href=&#34;https://expl0rer.top/p/pwn-1/#linux%e5%ae%89%e5%85%a8%e9%98%b2%e6%8a%a4%e6%9c%ba%e5%88%b6&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;PWN-1_Linux保护机制&lt;/a&gt;）&lt;/li&gt;
+&lt;li&gt;用逆向分析工具（如IDA）反汇编编译挖掘漏洞&lt;/li&gt;
+&lt;li&gt;使用GDB+pwndbg调试确认漏洞细节&lt;/li&gt;
+&lt;li&gt;用Python+pwntools编写利用脚本&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote class=&#34;alert alert-note&#34;&gt;
+    &lt;blockquote&gt;
+&lt;p&gt;libc 和 ld 分别是 Linux C 标准库和动态链接器。我们用 C 语言编写程序时经常调用一些“从天而降”的函数（printf、scanf&amp;hellip;），它们其实就在 libc（通常为 GNU 提供的glibc）里，ld 则搭起你的程序和这些函数间的“桥梁”。Linux 系统中几乎所有软件都需要用到它们！&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;h2 id=&#34;linux操作&#34;&gt;Linux操作
+&lt;/h2&gt;&lt;p&gt;既然PWN需要在Linux-Ubuntu中操作，那么在解题过程难免会使用Linux的一些操作指令，那么你应该直到&lt;code&gt;cd、ls、chmod、file、cat、grep、strings&lt;/code&gt;等基础指令以及管道、重定向概念，在此期间你会接触到计算机组成原理的部分知识，详见可以看看我的文章&lt;a class=&#34;link&#34; href=&#34;https://expl0rer.top/p/pwn-1/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;PWN-1&lt;/a&gt;&lt;/p&gt;
+&lt;blockquote class=&#34;alert alert-note&#34;&gt;
+    &lt;blockquote&gt;
+&lt;p&gt;在计算机领域，“shell”是一种计算机程序，它将操作系统的服务提供给人类用户或其他程序，在 Linux 中通常指命令行界面。&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;对于 PWN，一个很重要且必要的命令行工具是Netcat（nc 命令），它能用来连接 Pwn 题目的在线环境。Netcat 是一个强大的多功能网络工具，目前你只需要知道一种用法：&lt;code&gt;nc &amp;lt;ip&amp;gt; [端口]&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;到这里你已经初步了解并接触PWN了，你还需要直到一些Linux常用的系统调用（syscall）——open、read、write、mmap、execve等和文件描述符fd（file descriptor）的概念：&lt;strong&gt;stdin-0、stdout-1&amp;hellip;&lt;/strong&gt;，此外你需要知道Linux程序运行所经历的过程（动态链接、got、got.plt表的调用，栈堆变化等等）。&lt;/p&gt;
+&lt;p&gt;我要晕了/(ㄒoㄒ)/~~&amp;hellip;.看看我的文章&lt;a class=&#34;link&#34; href=&#34;https://expl0rer.top/p/pwn-1/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;PWN-1&lt;/a&gt;，我总结了一些。&lt;/p&gt;
+&lt;h3 id=&#34;编译&#34;&gt;编译
+&lt;/h3&gt;&lt;p&gt;看到这里累死了，你或许会能看懂C语言了，但不止于此哦，我们必须要熟悉程序编译过程和基本的汇编语句，就是说我们需要学习汇编语言。你需要了解ELF文件格式，了解&lt;code&gt;预处理-&amp;gt;编译-&amp;gt;汇编-&amp;gt;链接（静态or动态）&lt;/code&gt;的过程、进程虚拟内存空间（栈、BSS段、数据段、代码段TEXT、data段、rodata等等）。&lt;code&gt;理解调用栈结构及其增长方向与数据存储增长方向相反是PWN前期学习的一大重点。&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&#34;汇编&#34;&gt;汇编
+&lt;/h3&gt;&lt;p&gt;对于汇编语句，平时的PWN程序一般是x86 CPU指令集（本文默认amd64位），32位和64位的汇编语言还是有差别的，但大致相同，至少要看懂&lt;code&gt;mov、lea、add、sub、xor、call、ret、jmp、cmp、pop、nop、push&lt;/code&gt;等，这是一大难点哦。&lt;/p&gt;
+&lt;p&gt;另外一大难点就是CPU寄存器，认识下64位的rsp、rip、rbp、rax这些，以及32位的esp、ebp、eip等。重点认识有特殊用途的寄存器。&lt;/p&gt;
+&lt;p&gt;在做 Pwn 题时，有时你需要先在适当位置填入 shellcode（用于获取 shell 的汇编码）再劫持控制流（详见下文）至此处以执行。你需要知道计算机在汇编层面是如何调用函数的。具体而言，你需要知道并牢记 amd64 System V ABI &lt;strong&gt;函数调用规约&lt;/strong&gt;：调用函数时的部分参数通过寄存器（rdi、rsi、rdx、rcx、r8、r9）传递其余通过栈传递，32 位系统直接通过栈传递参数（从右至左入栈）；函数返回值也由寄存器（rax）传递。除了函数调用，你还需要知道 syscall 的系统调用号与参数的传递方式（rax&amp;hellip;），这与函数调用类似。（总之：善用搜索引擎）&lt;/p&gt;
+&lt;h2 id=&#34;学习路线&#34;&gt;学习路线
+&lt;/h2&gt;&lt;p&gt;初步了解完PWN了，要开始了吗？前者知识可以看看我的文章—&lt;a class=&#34;link&#34; href=&#34;https://expl0rer.top/categories/pwn%e5%89%8d%e7%bd%ae%e7%9f%a5%e8%af%86/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;PWN 前置知识 - Expl0rer.Ct&lt;/a&gt;，最好边学边做。学习PWN一定不能一直看书，这样思维会固化，需要随时应用，学一个知识点做一道题，光看完所有知识只会让你望而却步，反而会被庞大的前置知识劝退、打击自信心，学习重在反馈，这样才会有继续学习下去的动力，我的建议是多看师傅们博客的文章和writeup（赛后复盘），多做题，不懂就去查询或者问虚心请教师傅（行业通称）。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;建议看在线资源或者博客文章，书籍信息一般具有滞后性，当然也不反对看各大战队出版的具有总结性的书籍。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;作者也是厚脸皮去找大佬请教的，&lt;/p&gt;
+&lt;p&gt;基本上来看，入门PWN大致是配置好环境就开始学习编程语言——C、Python，了解并学会使用反汇编器如IDA，接着进一步能看懂C伪代码，然后学习汇编语言，熟练使用Linux命令行操作命令，接下来学习PWN的前置知识，可以参考我的文章&lt;a class=&#34;link&#34; href=&#34;https://expl0rer.top/categories/pwn%e5%89%8d%e7%bd%ae%e7%9f%a5%e8%af%86/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;PWN 前置知识 - Expl0rer.Ct&lt;/a&gt;中的PWN-1、PWN-2、PWN-3、PWN-4等（正在更新ing&amp;hellip;）。边学边刷题，我这里以ctfshow-PWN入门这套题为例（付费），buuctf也行，还有很多刷题网站，可以了解我的博客&lt;a class=&#34;link&#34; href=&#34;https://expl0rer.top/%e6%8a%80%e6%9c%af%e9%93%be%e6%8e%a5-links/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;技术链接 | Links&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;ida使用&#34;&gt;IDA使用
+&lt;/h2&gt;&lt;p&gt;常用的快捷键有以下：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;g跳转到指定地址。&lt;/li&gt;
+&lt;li&gt;a将数据转换成字符串。&lt;/li&gt;
+&lt;li&gt;shift+F12打开字符串窗口，可以找出所有字符串。&lt;/li&gt;
+&lt;li&gt;ctrl+w保存IDA数据库，保留你当前的工作痕迹，下次打开时就从当前进度继续逆向基础上继续啦。&lt;/li&gt;
+&lt;li&gt;n更改变量名，方便记名和识别关键函数。&lt;/li&gt;
+&lt;li&gt;/在伪代码界面下写下注释。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;更多IDA快捷键可以了解&lt;a class=&#34;link&#34; href=&#34;https://expl0rer.top/p/ida%e4%bd%bf%e7%94%a8%e6%8c%87%e5%8d%97/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;IDA 使用指南&lt;/a&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;gdbpwndbg&#34;&gt;GDB+pwndbg
+&lt;/h2&gt;&lt;p&gt;随着PWN的进阶，不能局限于IDA静态分析程序了，接下来就是调试了，调试能更好帮助我们了解这个程序的执行流程，那我们需要必备的&lt;code&gt;gdb调试器&lt;/code&gt;，它能动态地帮助我们了解当前程序运行的细节（如真实的缓冲区大小、寄存器地址等）&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BB%99pwn%E6%96%B0%E6%89%8B%E7%9A%84%E6%BA%A2%E5%87%BA%E9%AD%94%E6%B3%95%E5%85%A5%E9%97%A8%E6%89%8B%E5%86%8C/2.png&#34;
+	width=&#34;1844&#34;
+	height=&#34;680&#34;
+	srcset=&#34;https://expl0rer.top/p/%E7%BB%99pwn%E6%96%B0%E6%89%8B%E7%9A%84%E6%BA%A2%E5%87%BA%E9%AD%94%E6%B3%95%E5%85%A5%E9%97%A8%E6%89%8B%E5%86%8C/2_hu_723e5fc8721dfe54.png 480w, https://expl0rer.top/p/%E7%BB%99pwn%E6%96%B0%E6%89%8B%E7%9A%84%E6%BA%A2%E5%87%BA%E9%AD%94%E6%B3%95%E5%85%A5%E9%97%A8%E6%89%8B%E5%86%8C/2_hu_871ebfdf20cb6050.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;271&#34;
+		data-flex-basis=&#34;650px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;start GDB会寻找程序的入口并下断点，然后执行到该断点。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;run 简写为r，运行程序，与start的区别是，run 之后将一直执行到程序的结束或者断点，通过 run abc，可以以 abc 为参数运行。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;next 简写为 n，源代码级别的调试，运行下一行代码。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;nexti 简写为 ni，汇编指令级别的调试，运行下一个指令。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;step 简写为 s，下一行代码，当遇到函数的时候会步入函数。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;stepi 简写为 si，下一行指令，当遇到函数的时候会步入函数。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;info register 简写为 i r，查看当前寄存器信息。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;disassemble 简写为 disass，反汇编所给地址或寄存器中所给地址处的指令如disass $rip，查看当前 rip 处的指令，disass 0x40112b，查看地址 0x40112b 处的指令。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;break 简写为 b，下断点，可以通过 info b 查看当前下的所有断点，以及通过 b*$rebase(&amp;lt;offset&amp;gt;) 通过相对程序基址的偏移下断点（当找不到入口信息，无法start 的时候，常通过这个进行下断点）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;vmmap 查看程序的地址映射&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;checksec pwndbg 中集成了 pwntools 的一些命令，checksec 就是其中一个，查看可执行文件的保护机制。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;cyclic 同样是 pwntools 的一个命令，能产生不重复的模式字符串，常用于确定栈偏移，如 cyclic 15 能产生“aaaaaaaabaaaaaa”。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;quit 简写为 q，退出当前调试。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;crtl + c 中断被调试的程序，举个例子，比如当前程序跑到了 read，阻塞在了接收输出的时候，此时可以通过 crtl + c 中断程序的运行，此时你可以查看程序中断时的寄存器、栈、内存、调用栈等状态。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;TAB 进行命令的补全。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;aslr on/off 开启或者关闭 ASLR（见下文），下一次运生效。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;stack 查看当前栈的信息。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;x 通过x/i打印指令，x/s 打印字符串，x/x 打印十六进制数等。这个的参数比较多，建议自行查阅资料来了解。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;tele 是 pwntools 提供的一个命令，可以自动解析该地址处的内容及引用，但是它解释指令的时候不一定正确，反汇编指令仍推荐 x/i。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;pwntools&#34;&gt;Pwntools
+&lt;/h2&gt;&lt;p&gt;看到这里你配置好pwntools了吗？这是一个强大的Python库，它能够进行自动程序交互，有sendline、recvuntil、remote、connect等函数代替我们和程序进行交互（尤其在无法用键盘正常输入不可见字符以及”二进制“信息时，优势显现）。我推荐你学习一下 pwn college 中的&lt;a class=&#34;link&#34; href=&#34;https://pwn.college/pwntools~9b09c9dc/pwntools/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;pwntools模块&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;这里给大家看看&lt;strong&gt;pwntools&lt;/strong&gt;结合&lt;strong&gt;pwndbg&lt;/strong&gt;如何进行调试，在脚本中指定用&lt;strong&gt;context&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;64位：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;from&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;pwn&lt;/span&gt; &lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;context&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;arch&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;amd64&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;os&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;linux&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;log_level&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;debug&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;32位：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;from&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;pwn&lt;/span&gt; &lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;context&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;arch&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;i386&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;os&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;linux&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;log_level&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;debug&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;之后需要指定终端，这个设置告诉 pwntools 启动一个 &lt;strong&gt;新终端窗口/tab/pane&lt;/strong&gt; 来运行 GDB，而以下是几种常见的终端。（选用）&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;#wsl&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;context&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;terminal&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;wt.exe&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;wsl&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;#tmux&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;context&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;terminal&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;tmux&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;splitw&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;-h&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;#konsole&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;context&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;terminal&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;konsole&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;-e&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;总之pwntools很大，慢慢学！&lt;/p&gt;
+&lt;p&gt;在编写exp难免需要一边调试一边修改，就需要用gdb调试，在脚本中通过 gdb.debug() 或者gdb.attach(&amp;lt;process&amp;gt;) 启动 gdb，两者的区别是，前者是从头启动程序，并自动 attach 到 GDB，而后者是attach 到已有进程进行调试，需要在 attach 之前通过process(&amp;lt;path&amp;gt;) 启动程序。&lt;/p&gt;
+&lt;blockquote class=&#34;alert alert-tip&#34;&gt;
+    &lt;blockquote&gt;
+&lt;p&gt;当你成功入门PWN并能学会独立编写exp时再看到这里，我想说&lt;code&gt;recv()&lt;/code&gt;和&lt;code&gt;send(...)&lt;/code&gt;很方便，但我强烈建议使用recvuntil(&amp;hellip;)和sendafter(&amp;hellip;)或者sendlineafter(&amp;hellip;)，就是为了exp的严谨和衔接性，以免各种本地和远程环境不符的情况。sendafter、sendlineafter等这类函数的首个接收参数的(&amp;ldquo;接收的字符&amp;rdquo;,payload)，接受的字符不宜过长，也别忘了&lt;code&gt;\n&lt;/code&gt;，pwntools库函数的参数和返回值类型通常为 &lt;strong&gt;bytes&lt;/strong&gt;，传入字符串字面量时应在前加上 b 标记（例如 b&amp;rsquo;I am Expl0rer!!&amp;rsquo; ），使其成为 bytes（python2不会强调要求，python3会强调要求且有可能报错）&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;h2 id=&#34;互联网时代的到来&#34;&gt;互联网时代的到来
+&lt;/h2&gt;&lt;p&gt;当前，AI赋能时代，AI几乎无所不能了，我们的父辈都需要通过图书馆查阅相关书籍，现在的我们只需要通过搜索引擎或者AI检索，技术存在壁垒这是铁一般的事实，AI的崛起，让你身边有了许许多多的百科全书式的虚拟老师，如DeepSeek、豆包、ChatGPT，虽然AI大模型在当前仍有一些缺陷不是什么情况都是百分百给出正确的答案，但是对于大多数的问题，ta都能给出一个正确的答案还有分析过程，善用AI能够帮助你快速的学习和补漏，但不是让你完全依赖AI，ta只是一个辅助工具，自己动手才会进步！&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BB%99pwn%E6%96%B0%E6%89%8B%E7%9A%84%E6%BA%A2%E5%87%BA%E9%AD%94%E6%B3%95%E5%85%A5%E9%97%A8%E6%89%8B%E5%86%8C/3.png&#34;
+	width=&#34;1510&#34;
+	height=&#34;795&#34;
+	srcset=&#34;https://expl0rer.top/p/%E7%BB%99pwn%E6%96%B0%E6%89%8B%E7%9A%84%E6%BA%A2%E5%87%BA%E9%AD%94%E6%B3%95%E5%85%A5%E9%97%A8%E6%89%8B%E5%86%8C/3_hu_c809a87adfe13c2.png 480w, https://expl0rer.top/p/%E7%BB%99pwn%E6%96%B0%E6%89%8B%E7%9A%84%E6%BA%A2%E5%87%BA%E9%AD%94%E6%B3%95%E5%85%A5%E9%97%A8%E6%89%8B%E5%86%8C/3_hu_ff0a37ac00112147.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;豆包&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;189&#34;
+		data-flex-basis=&#34;455px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BB%99pwn%E6%96%B0%E6%89%8B%E7%9A%84%E6%BA%A2%E5%87%BA%E9%AD%94%E6%B3%95%E5%85%A5%E9%97%A8%E6%89%8B%E5%86%8C/4.png&#34;
+	width=&#34;1845&#34;
+	height=&#34;790&#34;
+	srcset=&#34;https://expl0rer.top/p/%E7%BB%99pwn%E6%96%B0%E6%89%8B%E7%9A%84%E6%BA%A2%E5%87%BA%E9%AD%94%E6%B3%95%E5%85%A5%E9%97%A8%E6%89%8B%E5%86%8C/4_hu_5950d82779f010f1.png 480w, https://expl0rer.top/p/%E7%BB%99pwn%E6%96%B0%E6%89%8B%E7%9A%84%E6%BA%A2%E5%87%BA%E9%AD%94%E6%B3%95%E5%85%A5%E9%97%A8%E6%89%8B%E5%86%8C/4_hu_b8b00163c5c48959.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;DeepSeek&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;233&#34;
+		data-flex-basis=&#34;560px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;请记住，如果AI没用好就会成为一把剑🗡反噬你，但是你能用好AI那ta就是一把能帮你斩下险阻的最锋利的🗡！&lt;/p&gt;
+&lt;h2 id=&#34;普遍漏洞利用&#34;&gt;普遍漏洞利用
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;整数溢出&lt;/strong&gt;——数学世界整数有无穷多，但由于内存限制，计算机中补码表示的“整数”有上下限。通过输入超大数字溢出或者利用有符号整数（负数）强转为无符号整数可以构造超大数字，从而绕过检查或越界写入。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;栈缓冲区溢出&lt;/strong&gt;——最经典的漏洞，通过越界写入修改函数返回地址或栈指针从而实现劫持控制流和栈迁移（篡改栈基址 &lt;strong&gt;rbp/ebp&lt;/strong&gt;）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;ROP（返回导向编程）攻击链构造&lt;/strong&gt;——这是PWN的一个需要重点突破的攻击手法，也就是ret2xxxx：ret2text、ret2libc、ret2syscall、ret2system、ret2、ret2shellcode、ret2csu、SROP等，这也是栈缓冲区溢出的主要目的。&lt;/p&gt;
+&lt;p&gt;进阶：通过&lt;code&gt;ropper&lt;/code&gt;、&lt;code&gt;ROPgadget&lt;/code&gt;等工具寻找该pwn程序中gadgtes，结合溢出漏洞去构造调用链控制程序执行流甚至能执行几乎任何行为（通常&lt;code&gt;open&lt;/code&gt;、&lt;code&gt;read&lt;/code&gt;、&lt;code&gt;write&lt;/code&gt;）。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;linux安全机制&#34;&gt;Linux安全机制
+&lt;/h2&gt;&lt;p&gt;我们需要熟悉这些保护机制的原理以及性质作用：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;NX（No execute）&lt;/strong&gt;——无法简单地布置shellcode。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Canary（金丝雀）&lt;/strong&gt;——检查缓冲区是否溢出，如有溢出立刻终止程序运行。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;ASLR/PIE&lt;/strong&gt;——地址随机化保护，使攻击者难以预测程序的内存结构，增加攻击难度。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;RELRO&lt;/strong&gt;——通过将动态链接程序的全局偏移量表（GOT）在程序启动后设置为只读，防止通过修改其中数据结构进行攻击。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Seccomp&lt;/strong&gt;——沙箱保护机制，可以限制程序使用的&lt;strong&gt;syscall&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;CFI（IBT / SHSTK）—— 控制流完整性保护，可以阻止 ROP 攻击，抑制 COP、JOP 攻击。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;知识输出&#34;&gt;知识输出
+&lt;/h2&gt;&lt;p&gt;PWN是一个庞大的方向，对于枯燥的寄存器、gadgte、栈堆漏洞利用、内核kernel等等都是一个个难啃的硬骨头，俗话说&lt;code&gt;基础不牢，地动山摇&lt;/code&gt;，我们需要时常巩固自己的知识体系，WP是有必要写的，复盘自己的学习情况，再用自己的描述去表达出来记录在WP中，当然可以学作者这样开个博客，把这些文章放上去，给别人看，达成互相技术交流，别人请教你的同时不仅提升了自己的自信心，还进行了知识输出巩固了自己的知识理解。&lt;/p&gt;
+&lt;p&gt;写博客和WP我建议用Markdown，它是一种&lt;strong&gt;轻量级标记语言&lt;/strong&gt;，用于编写格式简单、易读，我们在学习中通常需要保留学习痕迹或者记录笔记，最重要的，编写 Writeup 通常也采用 Markdown，因此这里推荐使用一些 Markdown 编辑器进行编写，如 Typora 和 Notion 等，上手之后非常方便。&lt;/p&gt;
+&lt;h2 id=&#34;总结&#34;&gt;总结
+&lt;/h2&gt;&lt;p&gt;感谢你读到这里，PWN真是一个很难入门的方向，冗长的前置知识，漫长的打地基过程，光是前置知识就够劝退很多同学啦，等你逐步入门了并学到中阶PWN，这时以后的方向学习就靠你了，可以是Iot、物联网安全、车联网1安全、工控等等都和PWN二进制安全相关的，但以后你可能还要学习CTF的RE逆向方向，毕竟：
+&lt;/p&gt;
+$$
+PWN =&gt; 逆向工程+漏洞挖掘+漏洞利用 =&gt;系统劫持
+$$&lt;p&gt;
+逆向知识还是需要的，只不过当前阶段重在漏洞利用挖掘这方面，当你打爆靶机的那一刻，整个世界都是属于你！❀😄&lt;/p&gt;
+&lt;p&gt;我们的努力都不会白费，历尽千帆，我们终将顶峰相见！至此致敬一路上带我入门、一起相互交流的UU和学长学姐😘&lt;/p&gt;
+&lt;p&gt;我的博客有很多资源，入门PWN的知识体系我总结的七七八八了，您要不嫌弃可以去看看，感兴趣可以一起来交流吧！&lt;/p&gt;
+&lt;p&gt;本文借鉴参考了XDCTF-PWN的入门指南文章及各大CTFwiki&lt;/p&gt;
+&lt;p&gt;作者：Expl0rer.Ct&lt;/p&gt;
+&lt;p&gt;时间：2025.11.07&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>Moectf_2025</title>
         <link>https://expl0rer.top/p/moectf_2025/</link>
         <pubDate>Mon, 03 Nov 2025 00:00:00 +0000</pubDate>
@@ -4340,6 +4664,7 @@ moectf{sfdh8334r784jfx_sdjjuhreubc}&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;在Linux中，存取无效的指针会引起进程收到&lt;code&gt;SIGSEGV信号&lt;/code&gt;，从而使程序非正常终止并产生核心转储。&lt;/p&gt;
 &lt;/blockquote&gt;
+&lt;p&gt;用人话说就是：格式化字符串函数就是将计算机内存中表示的数据转化成我们人类可读的字符串格式。&lt;/p&gt;
 &lt;h3 id=&#34;泄露内存案例&#34;&gt;泄露内存（案例）
 &lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
