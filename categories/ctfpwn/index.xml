@@ -33,7 +33,9 @@ $$&lt;p&gt;
 &lt;h2 id=&#34;编程语言&#34;&gt;编程语言
 &lt;/h2&gt;&lt;p&gt;既然PWN和逆向程序逻辑有关，我们还需要反推程序运行逻辑并得出“源代码”，此外我们应该先会正向写出一般的程序吧😄。刚入门的你可能懵懵的啥也不懂，那你需要去了解这些，对于PWN学习初期，我们一般面对的是&lt;code&gt;Linux环境下的C语言&lt;/code&gt;，再者就是C++咯&lt;/p&gt;
 &lt;blockquote class=&#34;alert alert-note&#34;&gt;
-    &lt;/blockquote&gt;
+    &lt;blockquote&gt;
+&lt;p&gt;时代科技在不停更迭，人这一辈子都在不断学习，光停留在我以及其他大佬所讲述的“干货”是不够的，&lt;strong&gt;你需要学会“善用搜索引擎”（学会使用AI大模型）&lt;/strong&gt;，可以使用edge、谷歌、火狐等。&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/blockquote&gt;
 &lt;h3 id=&#34;c语言&#34;&gt;C语言
 &lt;/h3&gt;&lt;p&gt;C语言几乎是每一所高校的工科学生所学的第一门编程语言，C语言运行速度快，历史悠久，很多程序以及新生编程语言如C++都是基于C语言诞生的，大多数PWN题目的程序都由C语言编写，大多数逆向工具如&lt;strong&gt;IDApro&lt;/strong&gt;的逆向出的语言都是类似C语言的&lt;strong&gt;伪代码&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://expl0rer.top/p/%E7%BB%99pwn%E6%96%B0%E6%89%8B%E7%9A%84%E6%BA%A2%E5%87%BA%E9%AD%94%E6%B3%95%E5%85%A5%E9%97%A8%E6%89%8B%E5%86%8C/1.png&#34;
