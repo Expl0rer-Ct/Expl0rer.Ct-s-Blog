@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="二进制漏洞与利用——格式化字符串漏洞">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="二进制漏洞与利用——堆利用">
 <title>PWN-4</title>
 
 <link rel='canonical' href='https://expl0rer.top/p/pwn-4/'>
 
 <link rel="stylesheet" href="/scss/style.min.84f4364fa3a5758ecded3430d054d555b355a8e9efd1baf1e03c18d73802579f.css"><meta property='og:title' content="PWN-4">
-<meta property='og:description' content="二进制漏洞与利用——格式化字符串漏洞">
+<meta property='og:description' content="二进制漏洞与利用——堆利用">
 <meta property='og:url' content='https://expl0rer.top/p/pwn-4/'>
 <meta property='og:site_name' content='Expl0rer.Ct'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-10-04T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-11-07T13:13:31&#43;00:00'/><meta property='og:image' content='https://expl0rer.top/p/pwn-4/PWN4.png' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-11-10T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-11-11T10:22:24&#43;00:00'/><meta property='og:image' content='https://expl0rer.top/p/pwn-4/PWN4.png' />
 <meta name="twitter:title" content="PWN-4">
-<meta name="twitter:description" content="二进制漏洞与利用——格式化字符串漏洞"><meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:description" content="二进制漏洞与利用——堆利用"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://expl0rer.top/p/pwn-4/PWN4.png' />
     <link rel="shortcut icon" href="/favicon.ico" />
 <div class="loading">
@@ -734,12 +734,29 @@ unicode: "ece7"
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#fmt介绍">FMT介绍</a></li>
-    <li><a href="#格式化字符串漏洞原理的利用">格式化字符串漏洞原理的利用</a>
+    <li><a href="#linux动态内存管理机制">Linux动态内存管理机制</a>
       <ol>
-        <li><a href="#泄露内存案例">泄露内存（案例）</a></li>
+        <li><a href="#堆的内存管理机制">堆的内存管理机制</a>
+          <ol>
+            <li><a href="#堆块介绍">堆块介绍</a></li>
+          </ol>
+        </li>
+        <li><a href="#堆块的管理">堆块的管理</a></li>
+        <li><a href="#堆块的合并操作">堆块的合并操作</a></li>
+        <li><a href="#结构体">结构体</a></li>
+        <li><a href="#各种内存块介绍">各种内存块介绍</a>
+          <ol>
+            <li><a href="#fastbin">Fastbin</a></li>
+            <li><a href="#unsortedbin">Unsortedbin</a></li>
+            <li><a href="#smallbin">Smallbin</a></li>
+            <li><a href="#largebin">Largebin</a></li>
+          </ol>
+        </li>
+        <li><a href="#malloc运行流程">Malloc运行流程</a></li>
+        <li><a href="#堆动态保护机制的小总结">堆动态保护机制的小总结</a></li>
       </ol>
     </li>
+    <li><a href="#堆的调试方法">堆的调试方法</a></li>
   </ol>
 </nav>
         </div>
@@ -755,8 +772,8 @@ unicode: "ece7"
     <header class="article-header">
         <div class="article-image">
             <a href="/p/pwn-4/">
-                <img src="/p/pwn-4/PWN4_hu_15c00fd5ce78fdcb.png"
-                        srcset="/p/pwn-4/PWN4_hu_15c00fd5ce78fdcb.png 800w, /p/pwn-4/PWN4_hu_e8141183c0993e41.png 1600w"
+                <img src="/p/pwn-4/PWN4_hu_817e5a93f218a6e2.png"
+                        srcset="/p/pwn-4/PWN4_hu_817e5a93f218a6e2.png 800w, /p/pwn-4/PWN4_hu_22548379e62858b4.png 1600w"
                         width="800" 
                         height="450" 
                         loading="lazy"
@@ -792,7 +809,7 @@ unicode: "ece7"
     
         
         <h3 class="article-subtitle">
-            二进制漏洞与利用——格式化字符串漏洞
+            二进制漏洞与利用——堆利用
         </h3>
         
     </div>
@@ -813,7 +830,7 @@ unicode: "ece7"
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2025-10-04</time>
+                <time class="article-time--published">2025-11-10</time>
             </div>
         
 
@@ -830,94 +847,188 @@ unicode: "ece7"
     
     
     <p>[TOC]</p>
-<p>前言：本期有所借鉴其他博主的讲解资料，内容有所重合，如有侵权随时下架重置。</p>
-<h2 id="fmt介绍">FMT介绍
-</h2><p>格式化字符串函数：将计算机内存中表示的数据转化为我们人类可读的字符串格式。</p>
-<div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>函数</th>
-          <th>介绍</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>printf</td>
-          <td>输出到stdout</td>
-      </tr>
-      <tr>
-          <td>fprintf</td>
-          <td>输出到指定FILE流</td>
-      </tr>
-      <tr>
-          <td>vprintf</td>
-          <td>根据参数列表格式化输出道stdout</td>
-      </tr>
-      <tr>
-          <td>vfprintf</td>
-          <td>根据参数列表格式输出道指定FILE流</td>
-      </tr>
-      <tr>
-          <td>sprintf</td>
-          <td>输出到字符串</td>
-      </tr>
-      <tr>
-          <td>snprintf</td>
-          <td>输出到指定字节数到字符串</td>
-      </tr>
-      <tr>
-          <td>vsprintf</td>
-          <td>根据参数列表格式化输出到字符串</td>
-      </tr>
-      <tr>
-          <td>vsnprintf</td>
-          <td>根据参数列表格式化输出指定字节到字符串</td>
-      </tr>
-      <tr>
-          <td>setproctitle</td>
-          <td>设置argv</td>
-      </tr>
-      <tr>
-          <td>syslog</td>
-          <td>输出日志</td>
-      </tr>
-      <tr>
-          <td>err,verr,warn,vwarn等</td>
-          <td>。。。</td>
-      </tr>
-  </tbody>
-</table></div>
-<p>用printf()为例子，第一个参数就是格式化字符串：</p>
+<p><strong>前文：以下是我入门PWN的记录，欢迎各位前来观看，小弟领教！</strong></p>
+<p>在前面的章节中，我们已经粗略的了解了栈相关的知识点：
+ROP、shellcode、栈转移等。</p>
+<p>内存中还有一块区域叫做堆（heap）。</p>
+<p>接下来的一整章的内容，我们就来讲堆。</p>
+<blockquote class="alert alert-tip">
+    <blockquote>
+<p>堆章节比较抽象，我还刻意加了很多图，但依旧比栈章节要更加抽象&hellip;，以至于作者也学的迷迷糊糊，看不懂的欢迎来评论区讨论。</p>
+</blockquote></blockquote>
+<h2 id="linux动态内存管理机制">Linux动态内存管理机制
+</h2><p>什么是堆？+</p>
+<p>堆是程序用于分配动态内存的一段内存区域。
+他独立的存在于内存中，介于程序内存 基地址和libc地址之间，<strong>从低地址向高地址生长</strong>，与用户打交道最多。</p>
+<p>带你举个例子理解动态分配内存：</p>
+<p>开一个统计表格，每人最多输入的最大内存长度是4096个字节，按照以往惯性思维去分配的话，你是不是应该每人都在之前填表时就已经分好了内存给他们了，但不是每个人都能用完这4096个字节的，有些人只输入一个字节，那就意味着就有4095个字节的内存区域被浪费，如果每个人都这样做或输入少于最大字节长度的内存的数据，是不是浪费更多？</p>
+<p>对于这种现象的下一步应该是回收，怎么回收？</p>
+<p>那么，有没有一种方法，能让程序根据用户所需要的内存长度大小来分配内存呢？并且不需要我们管理内存呢？有的，在libc中，我们可以通过<code>malloc(size)</code>来给用户分配一段长度为size的内存，通过<code>free(ptr)</code>来释放这段内存区域。
+这些数据，被统一的存放在了堆中，维护这些数据的运行机制在glibc中，称之为<code>ptmalloc</code>。</p>
+<h3 id="堆的内存管理机制">堆的内存管理机制
+</h3><p>堆是真无敌恶心&hellip;.堆的管理机制相比于栈十分复杂，可以算是对我这样0基础的萌新杀手。</p>
+<p>但是堆的漏洞比栈有更多的形式和利用方式，而且堆漏洞所需要的条件比栈更
+少。
+一般情况下栈溢出起码需要16个字节，也就是至少溢出到返回地址才能利用，但是堆的话只需要一个字节就可完成利用，甚至这个字节可以是个\x00,也就是空字节，nullbyte。</p>
+<blockquote class="alert alert-tip">
+    <blockquote>
+<p>栈的话基本都会关闭一两个保护机制，堆的话一般全开。</p>
+<p>CTFpwn的主流是堆利用。</p>
+</blockquote></blockquote>
+<h4 id="堆块介绍">堆块介绍
+</h4><h5 id="chunk">chunk
+</h5><p>在了解ptmalloc的内存管理机制前，我们先了解一下堆块在内存中的存储形式。在内存中，堆是以一个个堆块构成的,这些堆块称之为chunk。</p>
+<p>在64位系统中，堆块的大小是8字节对齐的,也就是说，我们申请一个15字节长度的堆块，实际到我们手中的用户可控的数据区域大小为16字节。</p>
+<p>但是在管理中，一个堆块除了用户数据区外，还有头部字段，头部字段的长度为16字节。同时在64位系统中，一个堆块最小长度为32字节（包括头部），也就是说，我们分配一个1字节的堆块，他的实际长度是32字节。</p>
 <p><img src="/p/pwn-4/1.png"
-	width="664"
-	height="148"
-	srcset="/p/pwn-4/1_hu_2ee61263459090f6.png 480w, /p/pwn-4/1_hu_70d7a7b51a9df908.png 1024w"
+	width="600"
+	height="699"
+	srcset="/p/pwn-4/1_hu_c6a945343d5e6bd0.png 480w, /p/pwn-4/1_hu_edfe0fe933bf2d3e.png 1024w"
+	loading="lazy"
+	
+		alt="堆块结构图"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="85"
+		data-flex-basis="206px"
+	
+></p>
+<p>prev_size和size字段分别代表一个chunk对的大小，大小都是8字节，两个一共16字节，称之为chunk的头部字段。后面的user data区域是用户可以输入数据的地方。</p>
+<p>chunk的大小8字节对齐，所以说对于分配器来说，0x80、0x81、0x82大小的堆块都是一样的，都为0x80大小。</p>
+<blockquote>
+<p>可能你举得有点懵，但这是一种简化表述，核心是<strong>堆块大小必须满足 8 字节对齐</strong>，所以分配器会把不满足的大小调整到最近的 8 字节对齐的大小，这样就会出现多个请求大小对应同一个实际分配大小的情况。</p>
+</blockquote>
+<p>为了节省空间，将size的最低三个bit设置为三个标志位。</p>
+<blockquote class="alert alert-note">
+    <blockquote>
+<p>从高到低分别为<code>non_main_arena</code>、<code>is_mmap</code>、<code>prev_inuse</code>，这里分别解释一下：</p>
+<p>non_main_arena用来记录当前chunk是否不属于主线程,1表示不属于，0表示属于。</p>
+<p>is_mmap表示当前chunk是否由mmap分配的，1表示属于，0表示不属于。</p>
+<p>prev_inuse用来表示前面紧邻的那个chunk是否正在使用，0表示前面的chunk已经被释放，1表示正在被用户使用。</p>
+</blockquote></blockquote>
+<p><img src="/p/pwn-4/1.png"
+	width="600"
+	height="699"
+	srcset="/p/pwn-4/1_hu_c6a945343d5e6bd0.png 480w, /p/pwn-4/1_hu_edfe0fe933bf2d3e.png 1024w"
 	loading="lazy"
 	
 	
 		class="gallery-image" 
-		data-flex-grow="448"
-		data-flex-basis="1076px"
+		data-flex-grow="85"
+		data-flex-basis="206px"
 	
 ></p>
-<blockquote>
-<p>%d ~ 十进制——输出十进制整数</p>
-<p>%s ~ 字符串——从内存中读取字符串</p>
-<p>%x ~ 十六进制——输出十六进制数</p>
-<p>%c ~ 字符——输出字符</p>
-<p>%p ~ 指针——指针地址</p>
-<p>%n ~ 到目前为止所写的字符数</p>
-</blockquote>
-<h2 id="格式化字符串漏洞原理的利用">格式化字符串漏洞原理的利用
-</h2><p>来看一种攻击案例，最简单的攻击方法，只需要输入一串%s就可以</p>
-<p>%s%s%s%s%s%s%s%s%s%s%s%s%s%s</p>
-<p>学过C语言都知道，每一个%s，会使printf()从栈上取一个数字，把该数字看做成地址，接着打印出该地址所指向的<strong>内存内容</strong>，这不就是隔山打牛吗？一个%s就能窃取隔壁的东西，有时这不太可取，万一你获取的数字是非法地址？所以有可数字对应的内容可能不存在，或者这个地址被保护的，那么程序就会因此崩溃或者停滞不前。</p>
-<blockquote>
-<p>在Linux中，存取无效的指针会引起进程收到<code>SIGSEGV信号</code>，从而使程序非正常终止并产生核心转储。</p>
-</blockquote>
-<p>用人话说就是：格式化字符串函数就是将计算机内存中表示的数据转化成我们人类可读的字符串格式。</p>
-<h3 id="泄露内存案例">泄露内存（案例）
-</h3><div class="highlight"><div class="chroma">
+<p>prevsize记录前面一个chunk的大小。这里注意，<strong>prevsize只有在前面的chunk被free掉的时候才生效</strong>，也就是说，只有在prev_inuse为0的时候，系统才把prev_size字段当作prevsize。</p>
+<p>那么其他时候这个字段有用吗？没用的话不就浪费了八个字节？</p>
+<p>有用的！如果chunk正在被使用，那么他会把下一个chunk的prevsize字段当作userdata。充分利用空间。</p>
+<p>也就是说，如果我们申请一个0x80长度大小的区域，系统实际给我们0×90大小（0x10头部），如果我们申请0x88大小的区域，系统同样也会给我们0x90大小的区域（算头部），剩下的8字节，使用nextchunk的prevsize区域。因为，只有当一个chunk被释放的时候，nextchunk的prevsize才真正代表前一个chunk的大小，所以就这么设计了。</p>
+<hr>
+<h5 id="topchunk">topchunk
+</h5><p>topchunk是一个特殊的chunk，类似于bss字段未被分配的内存一样，比较原始的。</p>
+<p>最开始时，程序的堆还未被使用，整个的堆区域属于一个很大的堆块叫做topchunk。当已经被使用的空间不够时，程序就会从topchunk中分割一块出来个程序使用。</p>
+<h3 id="堆块的管理">堆块的管理
+</h3><p>为了保证程序的快速运行，而且方便系统内存管理，所以ptmalloc将释放后的堆块根据其大小分成不同的bin。</p>
+<p>fastbin：大小范围从0x20-0×80</p>
+<p>smallbin：大小范围：0×90-0x400</p>
+<p>Large bin：大小范围：0x410以上</p>
+<p>unsortedbin：未被归类的bin，临时存储用，存放的堆块大小不一定多大，后续详细介绍。</p>
+<p>chunk被free之后如图：</p>
+<p><img src="/p/pwn-4/2.png"
+	width="608"
+	height="706"
+	srcset="/p/pwn-4/2_hu_9e37b4c47dc91d38.png 480w, /p/pwn-4/2_hu_3d5602cb30b1dc73.png 1024w"
+	loading="lazy"
+	
+		alt="堆释放示意图"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="86"
+		data-flex-basis="206px"
+	
+></p>
+<p>由于chunk被free了，所以按常理说用户不应该能够访问到这个chunk。于是乎在userdata区域存放一些用于管理内存的指针信息。</p>
+<p>fastbin：单链表结构，只会用到fd这个指针；</p>
+<p>small &amp;unsortedbin：双向链表结构，fd和bk都用；</p>
+<p>largebin：双向链表，fd、bk都用，同时还会用fd nextsize和bk nextsize。</p>
+<h3 id="堆块的合并操作">堆块的合并操作
+</h3><p>如果我们free掉一个堆块，（可能）会触发向前合并和向后合并。</p>
+<p><img src="/p/pwn-4/2.png"
+	width="608"
+	height="706"
+	srcset="/p/pwn-4/2_hu_9e37b4c47dc91d38.png 480w, /p/pwn-4/2_hu_3d5602cb30b1dc73.png 1024w"
+	loading="lazy"
+	
+		alt="堆"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="86"
+		data-flex-basis="206px"
+	
+></p>
+<p>向前合并：检查当前chunk的prev inuse位，如果为0，则根据当前chunk的prev size找到prev chunk的头，两个堆块合并；</p>
+<p>向后合并：检查当前chunk的next next chunk的prev inuse位（因为一个堆块的状态由他后面chunk的prev inuse位决定，所以确定next chunk的状态需要检查next next chunk的prev inuse位，怎么找? size就行），然后根据next chunk的状态决定是否合并。</p>
+<p>变化示意图：</p>
+<p><img src="/p/pwn-4/3.png"
+	width="549"
+	height="690"
+	srcset="/p/pwn-4/3_hu_3e940d845dbc5926.png 480w, /p/pwn-4/3_hu_312b3e9f07d6e5d2.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="79"
+		data-flex-basis="190px"
+	
+></p>
+<hr>
+<p><img src="/p/pwn-4/4.png"
+	width="514"
+	height="700"
+	srcset="/p/pwn-4/4_hu_4c5c79d1e71a5cc8.png 480w, /p/pwn-4/4_hu_394cc2401ee65f45.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="73"
+		data-flex-basis="176px"
+	
+></p>
+<hr>
+<p><img src="/p/pwn-4/5.png"
+	width="435"
+	height="701"
+	srcset="/p/pwn-4/5_hu_6f7258d5a1b19d23.png 480w, /p/pwn-4/5_hu_4f4b1d7c5324c890.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="62"
+		data-flex-basis="148px"
+	
+></p>
+<hr>
+<p>这四张图看得有点懵？说人话就是prev_inuse=0说明前面chunk被释放了，呃身体都没了你要头有什么用？我的话过重了&hellip;身体（chunk）被释放free没了应该头也跟着一起灰飞烟灭！！一起消失掉，和其它堆合并。（<strong>先向前合并再考虑向后合并</strong>）</p>
+<blockquote class="alert alert-note">
+    <blockquote>
+<p>“合并” 的关系</p>
+<p>向前合并（关键关联 <code>prev_inuse = 0</code>）</p>
+<p>若当前堆块的 <code>prev_inuse = 0</code> 时，说明<strong>前一个堆块是空闲的</strong>。此时，当前堆块可以：</p>
+<p>1、读取前一个堆块的头部信息（通过当前堆块的 <code>prev_size</code> 字段，获取前一个堆块的大小）。</p>
+<p>2、将 “当前堆块” 与 “前一个空闲堆块” 合并，形成一个更大的空闲堆块，减少内存碎片。</p>
+<p>向后合并（与 <code>prev_inuse</code> 无直接关联）</p>
+<p>1、“向后合并” 是指<strong>当前空闲堆块</strong>与<strong>后一个相邻的空闲堆块</strong>合并，其判断条件是：<strong>后一个堆块是否为空闲</strong>（通过检查后一个堆块的 <code>prev_inuse</code> 标志）。</p>
+<p>For instace，当前堆块是空闲的，若后一个堆块的 <code>prev_inuse = 0</code>（说明后一个堆块认为 “前一个堆块（即当前堆块）是空闲的”），则可以进行向后合并。</p>
+<p>2、可见，“向后合并” 的核心是<strong>后一个堆块的 <code>prev_inuse</code> 标志</strong>，而非当前堆块的 <code>prev_inuse</code>。</p>
+<p><strong>考虑到相对关系，简单来说对于当前你要讨论的堆头部来说，它的prev_inuse=0时，它本身就应该和前面的chunk合并。</strong></p>
+<p>而“向后合并” 的触发条件是后一个堆块的 prev_inuse = 0（表示后一个堆块允许与前一个堆块 —— 即当前堆块 —— 合并）。</p>
+</blockquote></blockquote>
+<h3 id="结构体">结构体
+</h3><p><code>aren</code></p>
+<p>是一块结构体，用于管理bins。主线程创建的arena称之为main_arena,其他的叫threadarena。</p>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -929,45 +1040,239 @@ unicode: "ece7"
 </span><span class="lnt"> 8
 </span><span class="lnt"> 9
 </span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">struct</span> <span class="n">malloc</span> <span class="n">state</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">char</span> <span class="n">s</span><span class="p">[</span><span class="mi">100</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mh">0x22222222</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="nf">scanf</span><span class="p">(</span><span class="s">&#34;%s&#34;</span><span class="p">,</span> <span class="n">s</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;%08x.%08x.%08x.%s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">s</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="cm">/* Serialize access.*/</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">mutex_t</span> <span class="n">mutex</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">flags</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="cm">/*Fastbins*/</span>
+</span></span><span class="line"><span class="cl">	<span class="n">mfastbinptr</span> <span class="n">fastbinsY</span><span class="p">[</span><span class="n">NFASTBINS</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">	<span class="cm">/* Base of the topmost chunk -- not otherwise kept in a bin*/</span>
+</span></span><span class="line"><span class="cl">	<span class="n">mchunkptr</span> <span class="n">top</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="cm">/* The remainder from the most recent split of a small request */</span>
+</span></span><span class="line"><span class="cl">	<span class="n">mchunkptr</span> <span class="n">last</span> <span class="n">remainder</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="cm">/*Nromal bins packed as described above*/</span>
+</span></span><span class="line"><span class="cl">	<span class="n">mchunkptr</span> <span class="n">bins</span><span class="p">[</span><span class="n">NBINS</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">2</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="cm">/*Bitmap of bins*/</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">binmap</span><span class="p">[</span><span class="n">BINMAPSIZE</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="cm">/*Linked list*/</span>
+</span></span><span class="line"><span class="cl">	<span class="k">struct</span> <span class="n">malloc</span> <span class="n">state</span> <span class="o">*</span><span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="cm">/*Linked list for free arenas.*/</span>
+</span></span><span class="line"><span class="cl">	<span class="k">struct</span> <span class="n">malloc</span> <span class="n">state</span> <span class="o">*</span><span class="n">next_free</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="cm">/* Memory allocated from the system in this arena.*/</span>
+</span></span><span class="line"><span class="cl">	<span class="n">INTERNAL_SIZE_T_system_mem</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">INTERNAL_SIZE_T_max_system_mem</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span><span class="err">；</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>编译一下：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">gcc -m32 -fno-stack-protector -no-pie -o exp exp.c
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>在printf函数上面下个断点，然后r运行，输入%08x.%08x.%08x</p>
-<p><img src="/p/pwn-4/2.png"
-	width="1853"
-	height="849"
-	srcset="/p/pwn-4/2_hu_7a8fa1eeee8c206.png 480w, /p/pwn-4/2_hu_4feb78da34f38335.png 1024w"
+</div><h3 id="各种内存块介绍">各种内存块介绍
+</h3><p>各种bins：</p>
+<p><img src="/p/pwn-4/6.png"
+	width="1170"
+	height="530"
+	srcset="/p/pwn-4/6_hu_356d3d1f41d3a343.png 480w, /p/pwn-4/6_hu_681cc24595ccc945.png 1024w"
 	loading="lazy"
-	
-		alt="调试参数变量一一对应"
 	
 	
 		class="gallery-image" 
-		data-flex-grow="218"
-		data-flex-basis="523px"
+		data-flex-grow="220"
+		data-flex-basis="529px"
 	
 ></p>
-
+<h4 id="fastbin">Fastbin
+</h4><p>管理fastbin free chunk，单链表结构，FILO（最后一个进入fastbin链表的，会被放在头部）总共有十个fastbin链表，每个链表中fastbin的size一样，<code>0x10</code>递增。</p>
+<p>大小属于fastbin的chunk被free掉时，不会改变next chunk的prev inuse位，也就是说不会被合并。</p>
+<img src="7.png" alt="Fastbin" style="zoom:175%;" />
+<h4 id="unsortedbin">Unsortedbin
+</h4><p><strong>管理unsorted chunk，只有一个双向链
+表</strong>。所有大小大于fastbin的chunk都会先被暂
+时放入unsortedbin中，链表中的chunk大小不一样。</p>
+<p><img src="/p/pwn-4/8.png"
+	width="505"
+	height="680"
+	srcset="/p/pwn-4/8_hu_ede4dba4e4677942.png 480w, /p/pwn-4/8_hu_77246d469abdf9c8.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="74"
+		data-flex-basis="178px"
+	
+></p>
+<p>*<strong>注意：这里的指向箭头比较多</strong></p>
+<h4 id="smallbin">Smallbin
+</h4><p>管理small chunk，由62个双向链表组成，
+每个链表中的chunk大小一样，大小以0x10递
+增。长得和unsortedbin差不多的。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">+-------------------+      +-------------------+      +-------------------+
+</span></span><span class="line"><span class="cl">|     smallbin      | &lt;--&gt; |   free chunk 1    | &lt;--&gt; |   free chunk 2    | &lt;--&gt; ...
+</span></span><span class="line"><span class="cl">|  (size = 0x20)    |      |                   |      |                   |
+</span></span><span class="line"><span class="cl">+-------------------+      +-------------------+      +-------------------+
+</span></span><span class="line"><span class="cl">         |
+</span></span><span class="line"><span class="cl">         v
+</span></span><span class="line"><span class="cl">+-------------------+      +-------------------+      +-------------------+
+</span></span><span class="line"><span class="cl">|     smallbin      | &lt;--&gt; |   free chunk 1    | &lt;--&gt; |   free chunk 2    | &lt;--&gt; ...
+</span></span><span class="line"><span class="cl">|  (size = 0x30)    |      |                   |      |                   |
+</span></span><span class="line"><span class="cl">+-------------------+      +-------------------+      +-------------------+
+</span></span><span class="line"><span class="cl">         |
+</span></span><span class="line"><span class="cl">         v
+</span></span><span class="line"><span class="cl">       ... (更多 smallbin，大小递增)
+</span></span><span class="line"><span class="cl">         |
+</span></span><span class="line"><span class="cl">         v
+</span></span><span class="line"><span class="cl">+-------------------+      +-------------------+      +-------------------+
+</span></span><span class="line"><span class="cl">|     smallbin      | &lt;--&gt; |   free chunk 1    | &lt;--&gt; |   free chunk 2    | &lt;--&gt; ...
+</span></span><span class="line"><span class="cl">|  (size = 0x3F0)   |      |                   |      |                   |
+</span></span><span class="line"><span class="cl">+-------------------+      +-------------------+      +-------------------+
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="largebin">Largebin
+</h4><p>管理large chunk，63个双向链表，FIFO。同一个双线链表中chunk大小可以不一样，但是在一定范围内，bins大小从小到大排列。</p>
+<blockquote>
+<p>在此我们先不学习larbin attack的相关内容，所以看看就行，了解一下。比较少遇见Largebin的相关题。</p>
+</blockquote>
+<img src="9.png" style="zoom:150%;" />
+<h3 id="malloc运行流程">Malloc运行流程
+</h3><p>了解完各种bin之后，现在来看看这：</p>
+<p>一、当我们调用malloc时，程序都干了些什么？</p>
+<p>1、计算真正的堆块的大小（加上堆头部长度、对齐）：</p>
+<p>判断是否在fastbin范围内：</p>
+<ul>
+<li>
+<p>确定在，检查对应大小的bin链表中有无chunk。</p>
+<ul>
+<li>有，那就分配给用户，至此完成。</li>
+</ul>
+</li>
+<li>
+<p>如果不在fastbin范围内，或者没用chunk可用。（两者满足一个或者都满足的话）</p>
+<ul>
+<li>
+<p>继续判断是否在smallbin范围内：</p>
+<ul>
+<li>在smallbin范围内，检查对应大小的bin链表中有无chunk。
+<ul>
+<li>有chunk，那就取出来给程序，至此完成。</li>
+</ul>
+</li>
+<li>不在smallbin范围内，或者smallbin里面也没有chunk。这时候跳到unsortedbin的检查。</li>
+</ul>
+</li>
+<li>
+<p>unsortedbin中有无chunk？</p>
+<ul>
+<li>
+<p>有，从尾部取出第一个chunk，看看大小是否满足需求。</p>
+<ul>
+<li>满足，切分后大小是否大于<strong>minsize</strong>？
+<ul>
+<li>大于，再切分块，返回给用户，剩下的块放进unsortedbin。</li>
+<li>小于或等于minsize，直接返回给用户，完成。</li>
+</ul>
+</li>
+<li>不满足大小需求，把这个块放入smallbin / largebin对应的链表中，继续遍历下一个块。</li>
+</ul>
+</li>
+<li>
+<p>没。unsortedbin的所有块都不满足，那此时就判断是否在largebin范围。</p>
+<ul>
+<li>是，检查对应的bin链表中有无符合的chunk。
+<ul>
+<li>有符合的，找到满足需求最小的chunk，切分块返回，剩下的放进unsortedbin中。</li>
+</ul>
+</li>
+<li>不在，那就再次遍历smallbin / largebin找best fit的chunk。</li>
+<li>我去？还是没用，那就从<code>topchunk</code>中切割。</li>
+<li>？？搞什么鬼？？topchunk也不够？那就<code>mmap</code>系统调用</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>二、当我们调用了free时，程序都干了些什么？</p>
+<p>free的chunk大小属于fastbin吗？</p>
+<ul>
+<li>
+<p>是，放进fastbin，至此完成。</p>
+</li>
+<li>
+<p>不属于，那就接着判断这个free的chunk是否是mmap分配的。</p>
+<ul>
+<li>
+<p>是，那就调用munmap回收，完成。</p>
+</li>
+<li>
+<p>不是，那就接着判断前一个chunk是否是空闲的。</p>
+<ul>
+<li>
+<p>是，那就<strong>向前合并</strong></p>
+</li>
+<li>
+<p>不是，接着判断：后一个chunk是topchunk吗？</p>
+<ul>
+<li>
+<p>是，那就和topchunk合并，至此完成。</p>
+</li>
+<li>
+<p>不是topchunk，那就判断：后一个chunk是free的吗？</p>
+<ul>
+<li>是，那就<strong>向后合并</strong>，然后放进unsortedbin，终于完成了。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="堆动态保护机制的小总结">堆动态保护机制的小总结
+</h3><p>我的妈啊，难死我了，堆的内存管理机制比较复杂，多刷刷题吧，受不了了，刚开始就上强度了😫。</p>
+<blockquote>
+<p>我这里有一个发自内心的疑问：堆的本质是指针指来指去吗？O(∩_∩)O</p>
+<p>堆的本质可以理解为<strong>通过指针操作管理动态内存的机制</strong>，但 “指针指来指去” 只是其表现形式之一，更深层的本质是<strong>内存块的分配、释放和复用规则</strong>，以及攻击者通过破坏规则实现漏洞利用的过程。理解堆的核心在于掌握内存块的组织结构、堆管理器的行为逻辑，而非单纯的指针操作。</p>
+</blockquote>
+<h2 id="堆的调试方法">堆的调试方法
+</h2>
 </section>
 
 
@@ -984,7 +1289,7 @@ unicode: "ece7"
 
 
         <span>
-            最后更新于 2025-11-07
+            最后更新于 2025-11-11
         </span>
     </section></footer>
 
@@ -1029,71 +1334,47 @@ unicode: "ece7"
             
                 
 <article class="has-image">
-    <a href="/p/%E7%BB%99pwn%E6%96%B0%E6%89%8B%E7%9A%84%E6%BA%A2%E5%87%BA%E9%AD%94%E6%B3%95%E5%85%A5%E9%97%A8%E6%89%8B%E5%86%8C/">
-        
-        
-            <div class="article-image">
-                <img src="/p/%E7%BB%99pwn%E6%96%B0%E6%89%8B%E7%9A%84%E6%BA%A2%E5%87%BA%E9%AD%94%E6%B3%95%E5%85%A5%E9%97%A8%E6%89%8B%E5%86%8C/PWN%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97.ee96c3422d2fcb13da9514744e2762a2_hu_179631d5777f326f.png" 
-                        width="250" 
-                        height="150" 
-                        loading="lazy"
-                        alt="Featured image of post 给PWN新手的溢出魔法入门手册"
-                        
-                        data-hash="md5-7pbDQi0vyxPalRR0Tidiog==">
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">给PWN新手的溢出魔法入门手册</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="has-image">
-    <a href="/p/2025bjtuctf-pwn/">
-        
-        
-            <div class="article-image">
-                <img src="/p/2025bjtuctf-pwn/BJTUCTF.90f5cd42e21881be44253e37d54b6795_hu_13bcc8b29ab9b122.png" 
-                        width="250" 
-                        height="150" 
-                        loading="lazy"
-                        alt="Featured image of post 2025BJTUCTF-PWN"
-                        
-                        data-hash="md5-kPXNQuIYgb5EJT431UtnlQ==">
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">2025BJTUCTF-PWN</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="has-image">
     <a href="/p/pwn-3/">
         
         
             <div class="article-image">
-                <img src="/p/pwn-3/PWN3.4afa5f5bde601dbc35b64aebcb8c25e3_hu_a61ad70f238c03c4.png" 
+                <img src="/p/pwn-3/PWN3.3657bbeb84fdb7f3290e78d3c41b8d4c_hu_d9ba59500c5360b4.png" 
                         width="250" 
                         height="150" 
                         loading="lazy"
                         alt="Featured image of post PWN-3"
                         
-                        data-hash="md5-SvpfW95gHbw1tkrry4wl4w==">
+                        data-hash="md5-Nle764T9t/MpDnjTxBuNTA==">
                 
             </div>
         
 
         <div class="article-details">
             <h2 class="article-title">PWN-3</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/%E7%BB%99pwn%E6%96%B0%E6%89%8B%E7%9A%84%E6%BA%A2%E5%87%BA%E9%AD%94%E6%B3%95%E5%85%A5%E9%97%A8%E6%89%8B%E5%86%8C/">
+        
+        
+            <div class="article-image">
+                <img src="/p/%E7%BB%99pwn%E6%96%B0%E6%89%8B%E7%9A%84%E6%BA%A2%E5%87%BA%E9%AD%94%E6%B3%95%E5%85%A5%E9%97%A8%E6%89%8B%E5%86%8C/PWN%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97.4c7e57113df2cad9ff15c86e749215fe_hu_f04fdb455264b7b2.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post 给PWN新手的溢出魔法入门手册"
+                        
+                        data-hash="md5-TH5XET3yytn/FchudJIV/g==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">给PWN新手的溢出魔法入门手册</h2>
         </div>
     </a>
 </article>
@@ -1142,6 +1423,30 @@ unicode: "ece7"
 
         <div class="article-details">
             <h2 class="article-title">PWN-1</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/ida%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/">
+        
+        
+            <div class="article-image">
+                <img src="/p/ida%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/IDA.24e86f15c02689113058084231ff68da_hu_6a8de3be4381c8e4.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post IDA使用指南"
+                        
+                        data-hash="md5-JOhvFcAmiREwWAhCMf9o2g==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">IDA使用指南</h2>
         </div>
     </a>
 </article>
@@ -1269,13 +1574,11 @@ unicode: "ece7"
 
 
 
-
-
         
 <section class="wordcount">
   <div class="wordcount-row">
-    <p>博主发布了19篇文章  ||</p>
-    <p>总共252.71k 字</p>
+    <p>博主发布了18篇文章  ||</p>
+    <p>总共255.51k 字</p>
   </div>
 </section>
         

