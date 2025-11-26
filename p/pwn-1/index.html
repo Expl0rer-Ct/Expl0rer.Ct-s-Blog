@@ -10,7 +10,7 @@
 <meta property='og:description' content="二进制漏洞与利用，PWN的基础知识、相关Linux命令">
 <meta property='og:url' content='https://expl0rer.top/p/pwn-1/'>
 <meta property='og:site_name' content='Expl0rer.Ct'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-08-21T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-11-11T10:22:24&#43;00:00'/><meta property='og:image' content='https://expl0rer.top/p/pwn-1/PWN.png' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-08-21T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-11-26T19:22:57&#43;00:00'/><meta property='og:image' content='https://expl0rer.top/p/pwn-1/PWN.png' />
 <meta name="twitter:title" content="PWN-1">
 <meta name="twitter:description" content="二进制漏洞与利用，PWN的基础知识、相关Linux命令"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://expl0rer.top/p/pwn-1/PWN.png' />
@@ -1781,17 +1781,17 @@ main函数要调用func b，main只需要call func b，
 <p>mov rbp rsp；将栈底指针指向现在的栈顶。</p>
 <p>sub rsp xxx；开辟被调用函数的栈帧，此时上一步的rbp就指向栈帧的底。</p>
 <p><img src="/p/pwn-1/2.png"
-	width="420"
-	height="654"
-	srcset="/p/pwn-1/2_hu_1c5004a635f7b9a.png 480w, /p/pwn-1/2_hu_4c5071a9706d750a.png 1024w"
+	width="746"
+	height="736"
+	srcset="/p/pwn-1/2_hu_4184e86759709f4b.png 480w, /p/pwn-1/2_hu_5ec7db94c9e9a74a.png 1024w"
 	loading="lazy"
 	
 		alt="程序运行时内存中栈帧（stack frame）的组织方式"
 	
 	
 		class="gallery-image" 
-		data-flex-grow="64"
-		data-flex-basis="154px"
+		data-flex-grow="101"
+		data-flex-basis="243px"
 	
 ></p>
 <p>图很明了了吧。但我起初一看，为什么int a =2所在地址要高于fun_b函数？不是funb函数要先比int a=2先执行吗？</p>
@@ -1804,15 +1804,15 @@ Rsp永远指向当前<strong>栈的顶部</strong>（Rsp在哪和栈顶在哪关
 Rbp用来定位局部变量。</p>
 <p>接着，再往下运行程序，调用func_a函数。</p>
 <p><img src="/p/pwn-1/3.png"
-	width="528"
-	height="810"
-	srcset="/p/pwn-1/3_hu_9a324d1379c9fdbc.png 480w, /p/pwn-1/3_hu_1191a96fcc708a5e.png 1024w"
+	width="506"
+	height="718"
+	srcset="/p/pwn-1/3_hu_71e7893d0b7d2d3a.png 480w, /p/pwn-1/3_hu_f9e9465ab79a5f97.png 1024w"
 	loading="lazy"
 	
 	
 		class="gallery-image" 
-		data-flex-grow="65"
-		data-flex-basis="156px"
+		data-flex-grow="70"
+		data-flex-basis="169px"
 	
 ></p>
 <p>那这里的每一个栈帧就代表我之前所说的薯片啦，一片片被拿出来，一个个运行。</p>
@@ -1825,29 +1825,29 @@ Rbp用来定位局部变量。</p>
 <p>实际效果就是：mov rsp rbp； poprbp； pop eip；
 此时我们观察程序执行完func_a时的栈帧，如下图：</p>
 <p><img src="/p/pwn-1/4.png"
-	width="495"
-	height="805"
-	srcset="/p/pwn-1/4_hu_2cb24e1acdfb25b3.png 480w, /p/pwn-1/4_hu_2c5470e10b698a3a.png 1024w"
+	width="529"
+	height="718"
+	srcset="/p/pwn-1/4_hu_131f89e941632add.png 480w, /p/pwn-1/4_hu_bbbd9f7d744807f0.png 1024w"
 	loading="lazy"
 	
 	
 		class="gallery-image" 
-		data-flex-grow="61"
-		data-flex-basis="147px"
+		data-flex-grow="73"
+		data-flex-basis="176px"
 	
 ></p>
 <p>可以说，与之前的func_b未调用func_a前的栈帧对比，是一模一样，说明已经恢复了栈帧。唯一不同之处在于此时程序的rip已经指向了c=1后面一条指令，说明func_a已经执行完毕。</p>
 <p>以此类推，func_b执行完毕返回后，栈布局如下图：</p>
 <p><img src="/p/pwn-1/5.png"
-	width="455"
-	height="785"
-	srcset="/p/pwn-1/5_hu_99c9a90146c07cce.png 480w, /p/pwn-1/5_hu_929fb098a281dce3.png 1024w"
+	width="487"
+	height="718"
+	srcset="/p/pwn-1/5_hu_82c461dc9c2878dc.png 480w, /p/pwn-1/5_hu_ff735b1173cc6fb8.png 1024w"
 	loading="lazy"
 	
 	
 		class="gallery-image" 
-		data-flex-grow="57"
-		data-flex-basis="139px"
+		data-flex-grow="67"
+		data-flex-basis="162px"
 	
 ></p>
 <p>在这之后，main函数继续执行此时布局变回开始执行程序时的栈布局，直到结束。至此，函数的调用返回执行流程结束。</p>
@@ -2016,15 +2016,15 @@ X86-64函数的调用约定为：</p>
 elf文件的节（section）会被映射进内存中的段（segment），而这一映射过程遵循的机制是根据各个节的权限来进行映射的。</p>
 <p>换句话说，可读可写的节被映射入一个段，只读的节被映射入一个段。</p>
 <p><img src="/p/pwn-1/9.png"
-	width="1100"
-	height="560"
-	srcset="/p/pwn-1/9_hu_6bae07d610db5804.png 480w, /p/pwn-1/9_hu_66c8193d78b0595a.png 1024w"
+	width="1146"
+	height="718"
+	srcset="/p/pwn-1/9_hu_4471287a2a305b44.png 480w, /p/pwn-1/9_hu_30aa4b82089eacee.png 1024w"
 	loading="lazy"
 	
 	
 		class="gallery-image" 
-		data-flex-grow="196"
-		data-flex-basis="471px"
+		data-flex-grow="159"
+		data-flex-basis="383px"
 	
 ></p>
 <p>单个elf文件内部多个节被合并映射入一个段，此时就标志着elf文件被启动运行了。</p>
@@ -2491,7 +2491,7 @@ PIE 像演出团队（程序本身）每次上场时，自己的站位（代码�
 
 
         <span>
-            最后更新于 2025-11-11
+            最后更新于 2025-11-26
         </span>
     </section></footer>
 
@@ -2536,15 +2536,15 @@ PIE 像演出团队（程序本身）每次上场时，自己的站位（代码�
             
                 
 <article class="has-image">
-    <a href="/p/pwn-4/">
+    <a href="/p/pwn-6/">
         
         
             <div class="article-image">
-                <img src="/p/pwn-4/PWN4.4afa5f5bde601dbc35b64aebcb8c25e3_hu_a61ad70f238c03c4.png" 
+                <img src="/p/pwn-6/PWN6.4afa5f5bde601dbc35b64aebcb8c25e3_hu_a61ad70f238c03c4.png" 
                         width="250" 
                         height="150" 
                         loading="lazy"
-                        alt="Featured image of post PWN-4"
+                        alt="Featured image of post PWN-6"
                         
                         data-hash="md5-SvpfW95gHbw1tkrry4wl4w==">
                 
@@ -2552,7 +2552,74 @@ PIE 像演出团队（程序本身）每次上场时，自己的站位（代码�
         
 
         <div class="article-details">
+            <h2 class="article-title">PWN-6</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/2025bjtuctf-pwn/">
+        
+        
+            <div class="article-image">
+                <img src="/p/2025bjtuctf-pwn/BJTUCTF.90f5cd42e21881be44253e37d54b6795_hu_13bcc8b29ab9b122.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post 2025BJTUCTF-PWN"
+                        
+                        data-hash="md5-kPXNQuIYgb5EJT431UtnlQ==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">2025BJTUCTF-PWN</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/pwn-4/">
+        
+        
+            <div class="article-image">
+                <img src="/p/pwn-4/PWN4.039bba6854d55d814eda5d84e9c52391_hu_1ec51b34ddcc39a6.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post PWN-4"
+                        
+                        data-hash="md5-A5u6aFTVXYFO2l2E6cUjkQ==">
+                
+            </div>
+        
+
+        <div class="article-details">
             <h2 class="article-title">PWN-4</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/pwn-5/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/PWN5.png" loading="lazy" data-key="" data-hash="/PWN5.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">PWN-5</h2>
         </div>
     </a>
 </article>
@@ -2577,78 +2644,6 @@ PIE 像演出团队（程序本身）每次上场时，自己的站位（代码�
 
         <div class="article-details">
             <h2 class="article-title">PWN-3</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="has-image">
-    <a href="/p/%E7%BB%99pwn%E6%96%B0%E6%89%8B%E7%9A%84%E6%BA%A2%E5%87%BA%E9%AD%94%E6%B3%95%E5%85%A5%E9%97%A8%E6%89%8B%E5%86%8C/">
-        
-        
-            <div class="article-image">
-                <img src="/p/%E7%BB%99pwn%E6%96%B0%E6%89%8B%E7%9A%84%E6%BA%A2%E5%87%BA%E9%AD%94%E6%B3%95%E5%85%A5%E9%97%A8%E6%89%8B%E5%86%8C/PWN%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97.4c7e57113df2cad9ff15c86e749215fe_hu_f04fdb455264b7b2.png" 
-                        width="250" 
-                        height="150" 
-                        loading="lazy"
-                        alt="Featured image of post 给PWN新手的溢出魔法入门手册"
-                        
-                        data-hash="md5-TH5XET3yytn/FchudJIV/g==">
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">给PWN新手的溢出魔法入门手册</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="has-image">
-    <a href="/p/pwn-2/">
-        
-        
-            <div class="article-image">
-                <img src="/p/pwn-2/PWN2.ec0b8de7542727a390b799ae24c64af8_hu_ed10e985448522e2.png" 
-                        width="250" 
-                        height="150" 
-                        loading="lazy"
-                        alt="Featured image of post PWN-2"
-                        
-                        data-hash="md5-7AuN51QnJ6OQt5muJMZK&#43;A==">
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">PWN-2</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="has-image">
-    <a href="/p/ida%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/">
-        
-        
-            <div class="article-image">
-                <img src="/p/ida%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/IDA.24e86f15c02689113058084231ff68da_hu_6a8de3be4381c8e4.png" 
-                        width="250" 
-                        height="150" 
-                        loading="lazy"
-                        alt="Featured image of post IDA使用指南"
-                        
-                        data-hash="md5-JOhvFcAmiREwWAhCMf9o2g==">
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">IDA使用指南</h2>
         </div>
     </a>
 </article>
@@ -2776,11 +2771,17 @@ PIE 像演出团队（程序本身）每次上场时，自己的站位（代码�
 
 
 
+
+
+
+
+
+
         
 <section class="wordcount">
   <div class="wordcount-row">
-    <p>博主发布了18篇文章  ||</p>
-    <p>总共255.51k 字</p>
+    <p>博主发布了21篇文章  ||</p>
+    <p>总共280.14k 字</p>
   </div>
 </section>
         

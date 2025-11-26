@@ -10,7 +10,7 @@
 <meta property='og:description' content="让Expl0rer带你进入二进制世界的 “搞事指南”：PWN小白の溢出魔法教程">
 <meta property='og:url' content='https://expl0rer.top/p/%E7%BB%99pwn%E6%96%B0%E6%89%8B%E7%9A%84%E6%BA%A2%E5%87%BA%E9%AD%94%E6%B3%95%E5%85%A5%E9%97%A8%E6%89%8B%E5%86%8C/'>
 <meta property='og:site_name' content='Expl0rer.Ct'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-11-07T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-11-11T10:22:24&#43;00:00'/><meta property='og:image' content='https://expl0rer.top/p/%E7%BB%99pwn%E6%96%B0%E6%89%8B%E7%9A%84%E6%BA%A2%E5%87%BA%E9%AD%94%E6%B3%95%E5%85%A5%E9%97%A8%E6%89%8B%E5%86%8C/PWN%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97.png' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-11-07T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-11-26T19:22:57&#43;00:00'/><meta property='og:image' content='https://expl0rer.top/p/%E7%BB%99pwn%E6%96%B0%E6%89%8B%E7%9A%84%E6%BA%A2%E5%87%BA%E9%AD%94%E6%B3%95%E5%85%A5%E9%97%A8%E6%89%8B%E5%86%8C/PWN%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97.png' />
 <meta name="twitter:title" content="给PWN新手的溢出魔法入门手册">
 <meta name="twitter:description" content="让Expl0rer带你进入二进制世界的 “搞事指南”：PWN小白の溢出魔法教程"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://expl0rer.top/p/%E7%BB%99pwn%E6%96%B0%E6%89%8B%E7%9A%84%E6%BA%A2%E5%87%BA%E9%AD%94%E6%B3%95%E5%85%A5%E9%97%A8%E6%89%8B%E5%86%8C/PWN%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97.png' />
@@ -958,7 +958,7 @@ $$<p>
 <p>另外一大难点就是CPU寄存器，认识下64位的rsp、rip、rbp、rax这些，以及32位的esp、ebp、eip等。重点认识有特殊用途的寄存器。</p>
 <p>在做 Pwn 题时，有时你需要先在适当位置填入 shellcode（用于获取 shell 的汇编码）再劫持控制流（详见下文）至此处以执行。你需要知道计算机在汇编层面是如何调用函数的。具体而言，你需要知道并牢记 amd64 System V ABI <strong>函数调用规约</strong>：调用函数时的部分参数通过寄存器（rdi、rsi、rdx、rcx、r8、r9）传递其余通过栈传递，32 位系统直接通过栈传递参数（从右至左入栈）；函数返回值也由寄存器（rax）传递。除了函数调用，你还需要知道 syscall 的系统调用号与参数的传递方式（rax&hellip;），这与函数调用类似。（总之：善用搜索引擎）</p>
 <h2 id="学习路线">学习路线
-</h2><p>初步了解完PWN了，要开始了吗？前者知识可以看看我的文章—<a class="link" href="https://expl0rer.top/categories/pwn%e5%89%8d%e7%bd%ae%e7%9f%a5%e8%af%86/"  target="_blank" rel="noopener"
+</h2><p>初步了解完PWN了，要开始了吗？前置知识可以看看我的文章—<a class="link" href="https://expl0rer.top/categories/pwn%e5%89%8d%e7%bd%ae%e7%9f%a5%e8%af%86/"  target="_blank" rel="noopener"
     >PWN 前置知识 - Expl0rer.Ct</a>，最好边学边做。学习PWN一定不能一直看书，这样思维会固化，需要随时应用，学一个知识点做一道题，光看完所有知识只会让你望而却步，反而会被庞大的前置知识劝退、打击自信心，学习重在反馈，这样才会有继续学习下去的动力，我的建议是多看师傅们博客的文章和writeup（赛后复盘），多做题，不懂就去查询或者问虚心请教师傅（行业通称）。</p>
 <blockquote>
 <p>建议看在线资源或者博客文章，书籍信息一般具有滞后性，当然也不反对看各大战队出版的具有总结性的书籍。</p>
@@ -1053,7 +1053,7 @@ $$<p>
 </li>
 </ol>
 <h2 id="pwntools">Pwntools
-</h2><p>看到这里你配置好pwntools了吗？这是一个强大的Python库，它能够进行自动程序交互，有sendline、recvuntil、remote、connect等函数代替我们和程序进行交互（尤其在无法用键盘正常输入不可见字符以及”二进制“信息时，优势显现）。我推荐你学习一下 pwn college 中的<a class="link" href="https://pwn.college/pwntools~9b09c9dc/pwntools/"  target="_blank" rel="noopener"
+</h2><p>看到这里你配置好pwntools了吗？这是一个强大的Python库，它能够进行自动程序交互，有sendline、recvuntil、remote、connect等函数代替我们和程序进行交互（尤其在无法用键盘正常输入不可见字符以及“二进制”信息时，优势显现）。我推荐你学习一下 pwn college 中的<a class="link" href="https://pwn.college/pwntools~9b09c9dc/pwntools/"  target="_blank" rel="noopener"
     >pwntools模块</a></p>
 <p>这里给大家看看<strong>pwntools</strong>结合<strong>pwndbg</strong>如何进行调试，在脚本中指定用<strong>context</strong>。</p>
 <p>64位：</p>
@@ -1101,7 +1101,7 @@ $$<p>
 <p>在编写exp难免需要一边调试一边修改，就需要用gdb调试，在脚本中通过 gdb.debug() 或者gdb.attach(&lt;process&gt;) 启动 gdb，两者的区别是，前者是从头启动程序，并自动 attach 到 GDB，而后者是attach 到已有进程进行调试，需要在 attach 之前通过process(&lt;path&gt;) 启动程序。</p>
 <blockquote class="alert alert-tip">
     <blockquote>
-<p>当你成功入门PWN并能学会独立编写exp时再看到这里，我想说<code>recv()</code>和<code>send(...)</code>很方便，但我强烈建议使用recvuntil(&hellip;)和sendafter(&hellip;)或者sendlineafter(&hellip;)，就是为了exp的严谨和衔接性，以免各种本地和远程环境不符的情况。sendafter、sendlineafter等这类函数的首个接收参数的(&ldquo;接收的字符&rdquo;,payload)，接受的字符不宜过长，也别忘了<code>\n</code>，pwntools库函数的参数和返回值类型通常为 <strong>bytes</strong>，传入字符串字面量时应在前加上 b 标记（例如 b&rsquo;I am Expl0rer!!&rsquo; ），使其成为 bytes（python2不会强调要求，python3会强调要求且有可能报错）</p>
+<p>当你成功入门PWN并能学会独立编写exp时再看到这里，我想说<code>recv()</code>和<code>send(...)</code>很方便，但我强烈建议使用recvuntil(&hellip;)和sendafter(&hellip;)或者sendlineafter(&hellip;)，就是为了exp的严谨和衔接性，以免各种本地和远程环境不符的情况。sendafter、sendlineafter等这类函数的首个接收参数的(&ldquo;接收的字符&rdquo;,payload)，接受的字符不宜过长，也别忘了<code>\n</code>，pwntools库函数的参数和返回值类型通常为 <strong>bytes</strong>，传入字符串字面量时应在前加上 b 标记（例如 b&quot;I am Expl0rer!!&quot; ），使其成为 bytes（python2不会强调要求，python3会强调要求且有可能报错）</p>
 </blockquote></blockquote>
 <h2 id="互联网时代的到来">互联网时代的到来
 </h2><p>当前，AI赋能时代，AI几乎无所不能了，我们的父辈都需要通过图书馆查阅相关书籍，现在的我们只需要通过搜索引擎或者AI检索，技术存在壁垒这是铁一般的事实，AI的崛起，让你身边有了许许多多的百科全书式的虚拟老师，如DeepSeek、豆包、ChatGPT，虽然AI大模型在当前仍有一些缺陷不是什么情况都是百分百给出正确的答案，但是对于大多数的问题，ta都能给出一个正确的答案还有分析过程，善用AI能够帮助你快速的学习和补漏，但不是让你完全依赖AI，ta只是一个辅助工具，自己动手才会进步！</p>
@@ -1122,7 +1122,7 @@ $$<p>
 <p><img src="/p/%E7%BB%99pwn%E6%96%B0%E6%89%8B%E7%9A%84%E6%BA%A2%E5%87%BA%E9%AD%94%E6%B3%95%E5%85%A5%E9%97%A8%E6%89%8B%E5%86%8C/4.png"
 	width="1845"
 	height="790"
-	srcset="/p/%E7%BB%99pwn%E6%96%B0%E6%89%8B%E7%9A%84%E6%BA%A2%E5%87%BA%E9%AD%94%E6%B3%95%E5%85%A5%E9%97%A8%E6%89%8B%E5%86%8C/4_hu_5950d82779f010f1.png 480w, /p/%E7%BB%99pwn%E6%96%B0%E6%89%8B%E7%9A%84%E6%BA%A2%E5%87%BA%E9%AD%94%E6%B3%95%E5%85%A5%E9%97%A8%E6%89%8B%E5%86%8C/4_hu_b8b00163c5c48959.png 1024w"
+	srcset="/p/%E7%BB%99pwn%E6%96%B0%E6%89%8B%E7%9A%84%E6%BA%A2%E5%87%BA%E9%AD%94%E6%B3%95%E5%85%A5%E9%97%A8%E6%89%8B%E5%86%8C/4_hu_c20268265f926af8.png 480w, /p/%E7%BB%99pwn%E6%96%B0%E6%89%8B%E7%9A%84%E6%BA%A2%E5%87%BA%E9%AD%94%E6%B3%95%E5%85%A5%E9%97%A8%E6%89%8B%E5%86%8C/4_hu_d1d74005934b11c7.png 1024w"
 	loading="lazy"
 	
 		alt="DeepSeek"
@@ -1161,7 +1161,7 @@ $$<p>
 </h2><p>PWN是一个庞大的方向，对于枯燥的寄存器、gadget、栈堆漏洞利用、内核kernel等等都是一个个难啃的硬骨头，俗话说<code>基础不牢，地动山摇</code>，我们需要时常巩固自己的知识体系，WP是有必要写的，复盘自己的学习情况，再用自己的描述去表达出来记录在WP中，当然可以学作者这样开个博客，把这些文章放上去，给别人看，达成互相技术交流，别人请教你的同时不仅提升了自己的自信心，还进行了知识输出巩固了自己的知识理解。</p>
 <p>写博客和WP我建议用Markdown，它是一种<strong>轻量级标记语言</strong>，用于编写格式简单、易读，我们在学习中通常需要保留学习痕迹或者记录笔记，最重要的，编写 Writeup 通常也采用 Markdown，因此这里推荐使用一些 Markdown 编辑器进行编写，如 Typora 和 Notion 等，上手之后非常方便。</p>
 <h2 id="总结">总结
-</h2><p>感谢你读到这里，PWN真是一个很难入门的方向，冗长的前置知识，漫长的打地基过程，光是前置知识就够劝退很多同学啦，等你逐步入门了并学到中阶PWN，这时以后的方向学习就靠你了，可以是Iot、物联网安全、车联网1安全、工控等等都和PWN二进制安全相关的，但以后你可能还要学习CTF的RE逆向方向，毕竟：
+</h2><p>感谢你读到这里，PWN真是一个很难入门的方向，冗长的前置知识，漫长的打地基过程，光是前置知识就够劝退很多同学啦，等你逐步入门了并学到中阶PWN，这时以后的方向学习就靠你了，可以是Iot、物联网安全、车联网安全、工控等等都和PWN二进制安全相关的，但以后你可能还要学习CTF的RE逆向方向，毕竟：
 </p>
 $$
 PWN => 逆向工程+漏洞挖掘+漏洞利用 =>系统劫持
@@ -1189,7 +1189,7 @@ $$<p>
 
 
         <span>
-            最后更新于 2025-11-11
+            最后更新于 2025-11-26
         </span>
     </section></footer>
 
@@ -1234,15 +1234,15 @@ $$<p>
             
                 
 <article class="has-image">
-    <a href="/p/pwn-4/">
+    <a href="/p/pwn-6/">
         
         
             <div class="article-image">
-                <img src="/p/pwn-4/PWN4.4afa5f5bde601dbc35b64aebcb8c25e3_hu_a61ad70f238c03c4.png" 
+                <img src="/p/pwn-6/PWN6.4afa5f5bde601dbc35b64aebcb8c25e3_hu_a61ad70f238c03c4.png" 
                         width="250" 
                         height="150" 
                         loading="lazy"
-                        alt="Featured image of post PWN-4"
+                        alt="Featured image of post PWN-6"
                         
                         data-hash="md5-SvpfW95gHbw1tkrry4wl4w==">
                 
@@ -1250,7 +1250,74 @@ $$<p>
         
 
         <div class="article-details">
+            <h2 class="article-title">PWN-6</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/2025bjtuctf-pwn/">
+        
+        
+            <div class="article-image">
+                <img src="/p/2025bjtuctf-pwn/BJTUCTF.90f5cd42e21881be44253e37d54b6795_hu_13bcc8b29ab9b122.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post 2025BJTUCTF-PWN"
+                        
+                        data-hash="md5-kPXNQuIYgb5EJT431UtnlQ==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">2025BJTUCTF-PWN</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/pwn-4/">
+        
+        
+            <div class="article-image">
+                <img src="/p/pwn-4/PWN4.039bba6854d55d814eda5d84e9c52391_hu_1ec51b34ddcc39a6.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post PWN-4"
+                        
+                        data-hash="md5-A5u6aFTVXYFO2l2E6cUjkQ==">
+                
+            </div>
+        
+
+        <div class="article-details">
             <h2 class="article-title">PWN-4</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/pwn-5/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/PWN5.png" loading="lazy" data-key="" data-hash="/PWN5.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">PWN-5</h2>
         </div>
     </a>
 </article>
@@ -1275,78 +1342,6 @@ $$<p>
 
         <div class="article-details">
             <h2 class="article-title">PWN-3</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="has-image">
-    <a href="/p/pwn-2/">
-        
-        
-            <div class="article-image">
-                <img src="/p/pwn-2/PWN2.ec0b8de7542727a390b799ae24c64af8_hu_ed10e985448522e2.png" 
-                        width="250" 
-                        height="150" 
-                        loading="lazy"
-                        alt="Featured image of post PWN-2"
-                        
-                        data-hash="md5-7AuN51QnJ6OQt5muJMZK&#43;A==">
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">PWN-2</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="has-image">
-    <a href="/p/pwn-1/">
-        
-        
-            <div class="article-image">
-                <img src="/p/pwn-1/PWN.f98719505e350e475520e79f81d73a1d_hu_fb4f51a67c6d3b57.png" 
-                        width="250" 
-                        height="150" 
-                        loading="lazy"
-                        alt="Featured image of post PWN-1"
-                        
-                        data-hash="md5-&#43;YcZUF41DkdVIOefgdc6HQ==">
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">PWN-1</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="has-image">
-    <a href="/p/ida%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/">
-        
-        
-            <div class="article-image">
-                <img src="/p/ida%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/IDA.24e86f15c02689113058084231ff68da_hu_6a8de3be4381c8e4.png" 
-                        width="250" 
-                        height="150" 
-                        loading="lazy"
-                        alt="Featured image of post IDA使用指南"
-                        
-                        data-hash="md5-JOhvFcAmiREwWAhCMf9o2g==">
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">IDA使用指南</h2>
         </div>
     </a>
 </article>
@@ -1474,11 +1469,17 @@ $$<p>
 
 
 
+
+
+
+
+
+
         
 <section class="wordcount">
   <div class="wordcount-row">
-    <p>博主发布了18篇文章  ||</p>
-    <p>总共255.51k 字</p>
+    <p>博主发布了21篇文章  ||</p>
+    <p>总共280.14k 字</p>
   </div>
 </section>
         

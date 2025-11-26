@@ -10,7 +10,7 @@
 <meta property='og:description' content="二进制漏洞与利用——栈利用">
 <meta property='og:url' content='https://expl0rer.top/p/pwn-2/'>
 <meta property='og:site_name' content='Expl0rer.Ct'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-08-25T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-11-11T10:22:24&#43;00:00'/><meta property='og:image' content='https://expl0rer.top/p/pwn-2/PWN2.png' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-08-25T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-11-26T19:22:57&#43;00:00'/><meta property='og:image' content='https://expl0rer.top/p/pwn-2/PWN2.png' />
 <meta name="twitter:title" content="PWN-2">
 <meta name="twitter:description" content="二进制漏洞与利用——栈利用"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://expl0rer.top/p/pwn-2/PWN2.png' />
@@ -944,17 +944,17 @@ unicode: "ece7"
 <p><em>buf的长度为80，但是却读入了200长度。</em>（栈溢出）</p>
 <p>分析程序运行至a时的栈帧、栈中存放buf和返回地址等等信息：
 <img src="/p/pwn-2/1.png"
-	width="413"
-	height="840"
-	srcset="/p/pwn-2/1_hu_2535d359c272f0be.png 480w, /p/pwn-2/1_hu_de5df19999eb436.png 1024w"
+	width="568"
+	height="816"
+	srcset="/p/pwn-2/1_hu_b7ffd3b8c66da2f5.png 480w, /p/pwn-2/1_hu_823d9a670e10ad9b.png 1024w"
 	loading="lazy"
 	
 		alt="buf的长度为80，紧邻b函数的rbp指针和返回地址"
 	
 	
 		class="gallery-image" 
-		data-flex-grow="49"
-		data-flex-basis="118px"
+		data-flex-grow="69"
+		data-flex-basis="167px"
 	
 ></p>
 <p>输入200长度造成栈溢出，超出的 120 字节会向上覆盖栈中更高地址的内容如ret（因为栈向下生长，越界写会向高地址蔓延）。</p>
@@ -983,7 +983,7 @@ unicode: "ece7"
 <p>通常来说，CTF比赛中只需要开启命令行后读flag(cat flag）。</p>
 <h2 id="基本栈溢出">基本栈溢出
 </h2><p>如果程序中没有system这样的代码出现，怎么办？我们可以自己写shellcode！</p>
-<p>**<code>shellcode</code>**就是一段可以独立开启shell的一段汇编代码。</p>
+<p><code>shellcode</code>就是一段可以独立开启shell的一段汇编代码。</p>
 <p>ret2shellcode的思路就是：</p>
 <p>如果程序中存在让用户向一段长度足够的缓冲区中输入数据。我们向其中输入shellcode，将程序劫持到shellcode上即可。当然，这种也是理想情况。</p>
 <blockquote>
@@ -1428,7 +1428,7 @@ puts(buf)、atoi(buf)、atol(buf)、free(buf)</p>
 
 
         <span>
-            最后更新于 2025-11-11
+            最后更新于 2025-11-26
         </span>
     </section></footer>
 
@@ -1473,15 +1473,15 @@ puts(buf)、atoi(buf)、atol(buf)、free(buf)</p>
             
                 
 <article class="has-image">
-    <a href="/p/pwn-4/">
+    <a href="/p/pwn-6/">
         
         
             <div class="article-image">
-                <img src="/p/pwn-4/PWN4.4afa5f5bde601dbc35b64aebcb8c25e3_hu_a61ad70f238c03c4.png" 
+                <img src="/p/pwn-6/PWN6.4afa5f5bde601dbc35b64aebcb8c25e3_hu_a61ad70f238c03c4.png" 
                         width="250" 
                         height="150" 
                         loading="lazy"
-                        alt="Featured image of post PWN-4"
+                        alt="Featured image of post PWN-6"
                         
                         data-hash="md5-SvpfW95gHbw1tkrry4wl4w==">
                 
@@ -1489,7 +1489,74 @@ puts(buf)、atoi(buf)、atol(buf)、free(buf)</p>
         
 
         <div class="article-details">
+            <h2 class="article-title">PWN-6</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/2025bjtuctf-pwn/">
+        
+        
+            <div class="article-image">
+                <img src="/p/2025bjtuctf-pwn/BJTUCTF.90f5cd42e21881be44253e37d54b6795_hu_13bcc8b29ab9b122.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post 2025BJTUCTF-PWN"
+                        
+                        data-hash="md5-kPXNQuIYgb5EJT431UtnlQ==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">2025BJTUCTF-PWN</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/pwn-4/">
+        
+        
+            <div class="article-image">
+                <img src="/p/pwn-4/PWN4.039bba6854d55d814eda5d84e9c52391_hu_1ec51b34ddcc39a6.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post PWN-4"
+                        
+                        data-hash="md5-A5u6aFTVXYFO2l2E6cUjkQ==">
+                
+            </div>
+        
+
+        <div class="article-details">
             <h2 class="article-title">PWN-4</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/pwn-5/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/PWN5.png" loading="lazy" data-key="" data-hash="/PWN5.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">PWN-5</h2>
         </div>
     </a>
 </article>
@@ -1514,78 +1581,6 @@ puts(buf)、atoi(buf)、atol(buf)、free(buf)</p>
 
         <div class="article-details">
             <h2 class="article-title">PWN-3</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="has-image">
-    <a href="/p/%E7%BB%99pwn%E6%96%B0%E6%89%8B%E7%9A%84%E6%BA%A2%E5%87%BA%E9%AD%94%E6%B3%95%E5%85%A5%E9%97%A8%E6%89%8B%E5%86%8C/">
-        
-        
-            <div class="article-image">
-                <img src="/p/%E7%BB%99pwn%E6%96%B0%E6%89%8B%E7%9A%84%E6%BA%A2%E5%87%BA%E9%AD%94%E6%B3%95%E5%85%A5%E9%97%A8%E6%89%8B%E5%86%8C/PWN%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97.4c7e57113df2cad9ff15c86e749215fe_hu_f04fdb455264b7b2.png" 
-                        width="250" 
-                        height="150" 
-                        loading="lazy"
-                        alt="Featured image of post 给PWN新手的溢出魔法入门手册"
-                        
-                        data-hash="md5-TH5XET3yytn/FchudJIV/g==">
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">给PWN新手的溢出魔法入门手册</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="has-image">
-    <a href="/p/pwn-1/">
-        
-        
-            <div class="article-image">
-                <img src="/p/pwn-1/PWN.f98719505e350e475520e79f81d73a1d_hu_fb4f51a67c6d3b57.png" 
-                        width="250" 
-                        height="150" 
-                        loading="lazy"
-                        alt="Featured image of post PWN-1"
-                        
-                        data-hash="md5-&#43;YcZUF41DkdVIOefgdc6HQ==">
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">PWN-1</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="has-image">
-    <a href="/p/ida%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/">
-        
-        
-            <div class="article-image">
-                <img src="/p/ida%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/IDA.24e86f15c02689113058084231ff68da_hu_6a8de3be4381c8e4.png" 
-                        width="250" 
-                        height="150" 
-                        loading="lazy"
-                        alt="Featured image of post IDA使用指南"
-                        
-                        data-hash="md5-JOhvFcAmiREwWAhCMf9o2g==">
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">IDA使用指南</h2>
         </div>
     </a>
 </article>
@@ -1713,11 +1708,17 @@ puts(buf)、atoi(buf)、atol(buf)、free(buf)</p>
 
 
 
+
+
+
+
+
+
         
 <section class="wordcount">
   <div class="wordcount-row">
-    <p>博主发布了18篇文章  ||</p>
-    <p>总共255.51k 字</p>
+    <p>博主发布了21篇文章  ||</p>
+    <p>总共280.14k 字</p>
   </div>
 </section>
         
