@@ -438,7 +438,36 @@ ROP、shellcode、栈转移等。&lt;/p&gt;
 &lt;p&gt;堆的本质可以理解为&lt;strong&gt;通过指针操作管理动态内存的机制&lt;/strong&gt;，但 “指针指来指去” 只是其表现形式之一，更深层的本质是&lt;strong&gt;内存块的分配、释放和复用规则&lt;/strong&gt;，以及攻击者通过破坏规则实现漏洞利用的过程。理解堆的核心在于掌握内存块的组织结构、堆管理器的行为逻辑，而非单纯的指针操作。&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h2 id=&#34;堆的调试方法&#34;&gt;堆的调试方法
-&lt;/h2&gt;</description>
+&lt;/h2&gt;&lt;p&gt;这里以ctfshow-PWN入门的135-140为例子给大家调试看看&amp;hellip;&lt;/p&gt;
+&lt;h2 id=&#34;uaf&#34;&gt;UAF
+&lt;/h2&gt;&lt;h3 id=&#34;介绍&#34;&gt;介绍
+&lt;/h3&gt;&lt;p&gt;UAF全称Use After Free，即释放后利用。&lt;/p&gt;
+&lt;p&gt;开发者的角度看，一块内存如果被释放，按照逻辑不应该被用户访问到；如果用户访问到了释放后的内存区域，这种情况就称之为UAF。&lt;/p&gt;
+&lt;p&gt;在堆的利用中，核心就是构造UAF，因为释放后的堆块中会存储一些链表指针信息用于指向空闲内存。&lt;/p&gt;
+&lt;p&gt;如果我们能够控制这些指针，通过精心的内存布局，就可以达到AAW（任意内存地址&lt;strong&gt;写&lt;/strong&gt;）。&lt;/p&gt;
+&lt;p&gt;如果栈方面的漏洞的核心是覆盖返回地址然后直接劫持控制流的话，那么堆漏洞的核心就是构造UAF（类似栈，栈漏洞的核心就是构造栈溢出）。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;如果能够利用堆漏洞来进行利用,那么他一定需要UAF，反之，若没有UAF，那么堆漏洞没用。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;为什么？&lt;/p&gt;
+&lt;p&gt;在之前的学习过程中，我们知道一个chunk中有不同的字段。当这个chunk被分配给用户时，有用的字段就只有size、prevsize。而当这个chunk被free时，用户数据区域就会存储一些指针信息，如fd、bk等等。&lt;/p&gt;
+&lt;p&gt;在正常逻辑下设计者认为，一个已经被释放的堆块不应该能够被用户访问到，但是如果存在指针悬挂或者溢出等等问题时，这些问题就会间接的导致用户能够访问并且控制已经被释放的堆块的内容，这种漏洞形式就被称之为UAF。&lt;/p&gt;
+&lt;h3 id=&#34;uaf的成因&#34;&gt;UAF的成因
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;堆溢出&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;指针悬挂&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;overlap&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&amp;hellip;&amp;hellip;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;uaf对漏洞利用的作用&#34;&gt;UAF对漏洞利用的作用
+&lt;/h3&gt;&lt;p&gt;一个bin链表是通过指针方式连接。就拿最简单的fastbin来举例：
+fastbin只存储fastbin最前面的一个free的chunk，每次要用的时候直接拿出头部chunk，然后根据头部chunk的fd来寻找下一个chunk。&lt;/p&gt;
+&lt;p&gt;如果我们有UAF,那么我们是不是可以利用UAF来修改fd字段为target,然后再次分配内存时，target是不是就会被分配给用户。&lt;/p&gt;
+&lt;p&gt;本来程序限定的逻辑是用户只能被分配到堆的内存区域，用户只能在这一块区域为所欲为。现在用户只要指明一个target。利用UAF，程序就会把target分配给用户，用户是不是就可以任意内存地址访问、任意内存地址写了呢？&lt;/p&gt;
+&lt;p&gt;有了任意内存地址读写后，就可以修改一些内存地址，比如got、hook指针，栈等等，就可以控制执行流，进而getshell。&lt;/p&gt;
+&lt;p&gt;这么一描述，感觉UAF很容易构造出来，堆漏洞似乎很容易利用，看起来像栈溢出——溢出覆盖返回地址，从而劫持进程。&lt;/p&gt;
+&lt;p&gt;我想说的是，glibc版本在不断更迭，堆管理器、检查机制也随着迭代更新，堆的漏洞利用没有上述说的这么简单了，即使在glibc-2.23，也有很多check检查（类似canary、PIE这般的保护机制），到现在Ubuntu24.04的glibc-2.39更多了/(ㄒoㄒ)/~~。&lt;/p&gt;
+&lt;p&gt;多数的PWN题目不会直接给你个UAF，因为太简单了，就算直接给也会有很多限制条件，难以利用。而且，就算有了uaf，堆的分配机制也不是那么简单粗暴，他也会对一些字段进行检查，也算是一些内置的安全机制。&lt;/p&gt;
+&lt;p&gt;在后续的堆相关内容的章节里，大多数内容都是建立在UAF的条件上进行利用，或者就是如何构造UAF上做文章。&lt;/p&gt;
+</description>
         </item>
         <item>
         <title>2025BJTUCTF-PWN</title>
